@@ -10,7 +10,7 @@ import { PatientModule } from "./patient/patient.module";
 import { AdminLayoutModule } from "./admin/admin-layout.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ErrorpageComponent } from "./errorpage/errorpage.component";
-// import { MapsComponent } from "./maps/maps.component";
+import { MapsComponent } from "./maps/maps.component";
 import {
   SocialLoginModule,
   AuthServiceConfig,
@@ -64,7 +64,7 @@ export function provideConfig() {
     FontAwesomeModule,
     SocialLoginModule
   ],
-  declarations: [AppComponent, ErrorpageComponent],
+  declarations: [AppComponent, ErrorpageComponent,MapsComponent],
   providers: [
     {
       provide: AuthServiceConfig,
