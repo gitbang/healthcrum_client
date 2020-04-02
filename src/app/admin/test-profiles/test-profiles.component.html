@@ -1,0 +1,252 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-info">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active text-white" href="#test-rofile" data-toggle="tab">
+                      <i class="material-icons">code</i> All Test Profiles
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#add-test-profile" data-toggle="tab">
+                      <i class="material-icons">add</i> Add New Test Profile
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="test-rofiles">
+                <table class="table">
+                  <thead class="text-warning text-center">
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Tests</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody class="text-center">
+                    <tr *ngFor="let profile of profileTest;index as i">
+                      <td>{{i+1}}</td>
+                      <td>{{profile.name}}</td>
+                      <td>
+                        <mat-chip-list style="justify-content: center;display: flex;">
+                          <mat-chip *ngFor="let test of profile.indivisualTests">
+                            {{test.name}}
+                          </mat-chip>
+                        </mat-chip-list>
+                      </td>
+                      <td>
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                          class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="add-test-profile">
+
+                <div class="container-fluid">
+                  <form class="form">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Test Profile Name</label>
+                            <input type="text" id="test_name" class="form-control" [(ngModel)]="test_name"
+                              name="test_name" required>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">When get tested ? </label>
+                            <textarea class="form-control" rows="4" required [(ngModel)]="when" name="when"></textarea>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Why Get Tested ? </label>
+                            <textarea class="form-control" rows="4" required [(ngModel)]="why" name="why"></textarea>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">What will be tested ? </label>
+                            <textarea class="form-control" rows="4" [(ngModel)]="what" name="what"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-md-4" style="align-self: center;">
+                          <b for="Sample" class="mr-3">Sample Required ?</b>
+                          <mat-radio-group aria-label="Sample">
+                            <mat-radio-button class="mat-primary" name="yes" value="1" (click)="sampleRequiredYes()">Yes
+                            </mat-radio-button>
+                            <mat-radio-button class="mat-primary" name="no" value="2" (click)="sampleRequiredNo()">No
+                            </mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                        <div class="col-md-4" *ngIf="sample_required">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Sample Of ? </label>
+                            <textarea class="form-control" rows="2" [(ngModel)]="sample" name="sample"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-md-4">
+                          <b for="Fasting" class="mr-3">Fasting Required ?</b>
+                          <mat-radio-group aria-label="Fasting">
+                            <mat-radio-button class="mat-primary" name="yes" value="1" (click)="changeFastingYes()">Yes
+                            </mat-radio-button>
+                            <mat-radio-button class="mat-primary" name="no" value="2" (click)="changeFastingNo()">No
+                            </mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+
+                        <div *ngIf="fasting" class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Times (in Hrs.)</label>
+                            <input type="num" id="fname" class="form-control" [(ngModel)]="fasting_time"
+                              name="fasting_time">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-lg-6">
+
+                          <div class="row ml-1">
+                            <div class="mt-1 mr-3">
+                              <p>Recommended For ?</p>
+                            </div>
+                            <mat-checkbox class="mr-2" [(ngModel)]="male" name="male">Male</mat-checkbox>
+                            <mat-checkbox class="mr-2" [(ngModel)]="female" name="female">Female</mat-checkbox>
+                            <mat-checkbox class="mr-2" [(ngModel)]="kids" name="kids">Kids</mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Recommended Age</label>
+                            <input type="text" class="form-control" [(ngModel)]="recommended_age"
+                              name="recommended_age">
+                          </div>
+                        </div>
+
+                        <div class="col-lg-8 col-md-8">
+                          <div class="row">
+                            <div class="col-md-3"><label class="bmd-label-floating">Reporting Time</label></div>
+                            <div class="col-md-4">
+                              <div class="form-group bmd-form-group">
+                                <input type="time" class="form-control" [(ngModel)]="reporting_from"
+                                  name="reporting_from">
+                              </div>
+                            </div>
+                            <div class="col-md-1">
+                              <p>To</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group bmd-form-group">
+                                <input type="time" class="form-control" [(ngModel)]="reporting_to" name="reporting_to">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr class="clear-fix">
+
+                      <div class="row">
+                        <div class="col-md-2 drag-title">
+                          <h5>Drag drop single test into profile test</h5>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="row">
+                            <div class="test-container">
+                              <h4>Single Test</h4>
+                              <mat-chip-list cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" name="todo"
+                                [cdkDropListConnectedTo]="[doneList]" class="test-list"
+                                (cdkDropListDropped)="drop($event)">
+                                <!-- < aria-label="Fish selection" class="test-box"> -->
+                                <mat-chip *ngFor="let item of todo" cdkDrag>{{item.name}}</mat-chip>
+                                <!-- <div  >{{item.name}}</div> -->
+                              </mat-chip-list>
+                            </div>
+
+                            <div class="test-container">
+                              <h4>Profile Tests</h4>
+                              <mat-chip-list cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" name="done"
+                                [cdkDropListConnectedTo]="[todoList]" class="test-list"
+                                (cdkDropListDropped)="drop($event)">
+                                <mat-chip *ngFor="let item of done" cdkDrag>{{item.name}}</mat-chip>
+                              </mat-chip-list>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr>
+                      <div class="row mt-4">
+                        <div class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">MRP</label>
+                            <input type="number" class="form-control" [(ngModel)]="mrp" name="mrp">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Offer Price</label>
+                            <input type="number" class="form-control" [(ngModel)]="offer_price" name="offer_price">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Healthcrum Price</label>
+                            <input type="number" class="form-control" [(ngModel)]="healthcrum_price"
+                              name="healthcrum_price">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center justify-content-center">
+                      <button (click)="saveProfileTest()" class="btn btn-info">Add Test Profile</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

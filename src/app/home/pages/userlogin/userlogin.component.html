@@ -1,0 +1,74 @@
+<main>
+  <div class="bg_color_2">
+    <div class="container margin_60_35">
+      <div id="login-2">
+        <h1>Please login to Healthcrum!</h1>
+        <form>
+          <div class="box_form clearfix">
+            <div class="box_login">
+
+              <!-- (click)="signInWithGoogle()" -->
+              <button (click)="signInWithGoogle()" class="btn btn-social btn-google w-75 mb-3">
+                <span>
+                  <fa-icon [icon]="google" class="fa-google-icon"></fa-icon>
+                </span> <span>Sign in with Google</span></button>
+              <button (click)="signInWithFB()" class="btn btn-social btn-facebook w-75">
+                <span>
+                  <fa-icon [icon]="fb" class="fa-facebook-icon"></fa-icon>
+                </span> <span>Sign in with Facebook</span></button>
+
+            </div>
+            <div class="box_login last">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="userid / email / phone number"
+                  [(ngModel)]="user_email" name="user_email">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Your password" [(ngModel)]="user_pass"
+                  name="user_pass" id="password">
+                <a href="#" class="forgot" data-toggle="modal" data-target="#forgotModal"><small>Forgot
+                    password?</small></a>
+              </div>
+              <div class="form-group">
+                <input class="btn btn-info" type="submit" value="Login" (click)="loginLocal()">
+              </div>
+            </div>
+          </div>
+        </form>
+        <p class="text-center link_bright">Do not have an account yet? <a routerLink="/signup"><strong>Register
+              now!</strong></a></p>
+      </div>
+      <!-- /login -->
+    </div>
+  </div>
+</main>
+<!-- Modal -->
+<div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="card-title text-white" id="forgotModalLabel">Get Password Reset Link</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="col">
+            <input type="email" class="form-control" placeholder="Email Address" required>
+          </div>
+          <div class="col">
+            <button (click)="sendResetLink()" class="btn btn-primary btn-round">
+              <i class="material-icons">send</i> Send
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>

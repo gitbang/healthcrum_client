@@ -1,0 +1,301 @@
+<main>
+  <div class="bg_color_2">
+    <div class="container margin_60_35">
+      <!-- <div id="login">
+        <h1>Signup to Healthcrum!</h1>
+        <form>
+          <div class="box_form clearfix">
+            <div class="box_login">
+              <h4><b>Signup using</b> </h4>
+              <hr>
+              (click)="signInWithGoogle()"
+              <button class="btn btn-social btn-google w-75 mb-3">
+                <span>
+                  <fa-icon [icon]="google" class="fa-google-icon"></fa-icon>
+                </span> <span>Sign up with Google</span></button>
+              <button class="btn btn-social btn-facebook w-75">
+                <span>
+                  <fa-icon [icon]="fb" class="fa-facebook-icon"></fa-icon>
+                </span> <span>Sign up with Facebook</span></button>
+
+            </div>
+            <div class="box_login last">
+              <h4><b>Signup using Email</b></h4>
+              <hr>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Full name" [(ngModel)]="user_name" name="user_name"
+                  id="fname" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="user_email"
+                  name="user_email" id="email" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" class="form-control" placeholder="Phone Number" [(ngModel)]="user_mob" name="user_mob"
+                  id="mob" required>
+              </div>
+              <div class="form-group bmd-form-group">
+                <label for="exampleInput1" class="bmd-label-floating">With Floating Label</label>
+                <input type="email" class="form-control" id="exampleInput1">
+                <span class="bmd-help">We'll never share your email with anyone else.</span>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control validate valid" placeholder="Your password"
+                  [(ngModel)]="user_pass" name="user_pass" id="password" required>
+
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="confirm password" [(ngModel)]="user_cpass"
+                  name="user_cpass" id="cpassword" id="cpass" required>
+              </div>
+
+              <div class="form-group">
+                <input class="btn btn-info" type="submit" value="Signup" (click)="signupUser()">
+              </div>
+            </div>
+          </div>
+        </form>
+        <p class="text-center link_bright">Alredy have an account ? <a routerLink="/login"><strong>Login
+              now!</strong></a></p>
+      </div> -->
+      <!-- /login -->
+      <div class="main main-raised m-auto">
+        <div class="row m-0">
+          <!-- <div class="col-md-12 ml-auto mr-auto">
+            <h2 class="text-center title">Join Healthcrum</h2>
+
+            <form class="contact-form">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Your Name</label>
+                    <input type="email" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Your Email</label>
+                    <input type="email" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group bmd-form-group">
+                <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
+                <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-4 ml-auto mr-auto text-center">
+                  <button class="btn btn-primary btn-raised">
+                    Send Message
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div> -->
+          <div class="card card-login m-0">
+            <form class="form" method="" action="">
+              <div class="card-header card-header-green text-center p-2">
+                <h3 class="card-title py-1">Join Healthcrum</h3>
+                <div class="social-pane">
+                  <div class="row justify-content-center">
+                    <div class="col-md-4">
+                      <button class="btn btn-social btn-google mb-3" style="width:100%">
+                        <span>
+                          <fa-icon [icon]="google" class="fa-google-icon"></fa-icon>
+                        </span> <span>Sign up with Google</span></button>
+                    </div>
+                    <div class="col-md-4">
+                      <button class="btn btn-social btn-facebook mb-3" style="width:100%">
+                        <span>
+                          <fa-icon [icon]="fb" class="fa-google-icon"></fa-icon>
+                        </span> <span>Sign up with Facebook</span></button>
+                    </div>
+                  </div>
+
+                </div>
+                <h4 class="text-white text-center m-0">Or</h4>
+              </div>
+
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating">Full Name</label>
+                      <input type="text" id="fname" class="form-control" [(ngModel)]="user_name" name="user_name"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating">Email Address</label>
+                      <input type="email" id="email" class="form-control" [(ngModel)]="user_email" name="user_email"
+                        required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating">Phone Numer</label>
+                      <input type="tel" id="mob" maxlength="10" class="form-control" [(ngModel)]="user_mob"
+                        name="user_mob" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group">
+                      <!-- <label class="bmd-label-floating">Select Gender</label> -->
+                      <!-- <select  [(ngModel)]="user_gender" name="user_gender" required id="gender">
+                        <option selected>Select your Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select> -->
+                      <select id="gender" class="custom-select" [(ngModel)]="user_gender" name="user_gender" required
+                        id="gender">
+                        <option selected value="none" disabled>Select your Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <!-- <div class="col-lg-6 col-md-6 col-sm-3">
+
+                    <select class="form-control" [(ngModel)]="user_gender" name="user_gender" required id="gender"
+                      data-style="select-with-transition" title="Select Gender">
+                      <option class="bs-title-option" value="">Select Gender</option>
+                      <option disabled="" selected="">Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div> -->
+
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating">Pasword</label>
+                      <input type="password" id="pass" class="form-control" [(ngModel)]="user_pass" name="user_pass"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group">
+                      <label class="bmd-label-floating">Confirm Password</label>
+                      <input type="password" id="cpass" class="form-control" [(ngModel)]="user_cpass" name="user_cpass"
+                        required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group bmd-form-group is-filled">
+                      <label class="label-control bmd-label-static">Date of Birth</label>
+                      <input type="date" class="form-control datepicker" value="10/10/2016">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+
+                  </div>
+                </div>
+
+                <div class="row" style="align-items: center;background: #f8fbfd;">
+                  <div class="col-md-6 text-center">
+                    <h4>Signup As</h4>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserPatient()">
+                          <i>
+                            <fa-icon [icon]="patient"></fa-icon>
+                          </i> Patient
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserCompany()">
+                          <i>
+                            <fa-icon [icon]="company"></fa-icon>
+                          </i> Company
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserDoctor()">
+                          <i>
+                            <fa-icon [icon]="doctor"></fa-icon>
+                          </i> Doctor
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" (click)="showAgree()">
+                          <span class="form-check-sign">
+                            <span class="check"></span>
+                          </span>
+                          <b>Agree to </b><a href="#">terms and conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="py-4 px-5">
+                <div class="row" style="align-items: center;">
+                  <div class="col-md-6">
+                    <button class="btn  btn-info" (click)="signupUser()">Signup Now</button>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Already have account ? <a href="#">Login now</a> </h4>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- Modal -->
+<div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="card-title text-white" id="forgotModalLabel">Get Password Reset Link</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="col">
+            <input type="email" class="form-control" placeholder="Email Address" required>
+          </div>
+          <div class="col">
+            <button (click)="sendResetLink()" class="btn btn-primary btn-round">
+              <i class="material-icons">send</i> Send
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>

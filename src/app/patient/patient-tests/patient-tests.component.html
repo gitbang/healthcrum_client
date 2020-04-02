@@ -1,0 +1,49 @@
+<div style="margin-top: 7em;" class="appoint container-fluid">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-icon card-header-rose">
+        <div class="card-icon">
+          <i class="material-icons">assignment</i>
+        </div>
+        <h4 class="card-title "> Regular Table with Colors</h4>
+      </div>
+      <div class="card-body table-full-width">
+        <div class="table-responsive" id="report">
+          <table class="table text-center table-striped">
+            <caption>Test Reports</caption>
+            <thead class="thead-info">
+              <tr>
+                <th> ID </th>
+                <th> Test Name </th>
+                <th> Doctor Name </th>
+                <th> Test Status </th>
+                <th> Test Results </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let test of lists;index as i" [id]="i">
+                <td> {{i+1}} </td>
+                <td> {{test.test}} </td>
+                <td> Dr. Lal </td>
+                <td>
+                  <fa-icon *ngIf="test.icon == 'purple'" [icon]="angry" size="2x" class="text-primary"></fa-icon>
+                  <fa-icon *ngIf="test.icon == 'angry'" [icon]="angry" size="2x" class="text-danger"></fa-icon>
+                  <fa-icon *ngIf="test.icon == 'sad'" [icon]="sad" size="2x" class="text-warning"></fa-icon>
+                  <fa-icon *ngIf="test.icon == 'smile'" [icon]="smile" size="2x" class="text-success"></fa-icon>
+                </td>
+                <td>
+                  <div style="height:220px">
+                    <canvas baseChart [datasets]="barChartData[i]" [labels]="barChartLabels[0]"
+                      [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                      [chartType]="barChartType" (chartClick)="chartClicked($event,i)">
+                    </canvas>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

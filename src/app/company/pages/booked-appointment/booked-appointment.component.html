@@ -1,0 +1,233 @@
+<div class="appoint container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">insert_invitation</i>
+              </div>
+              <h4 class="card-title">Booking Start Date</h4>
+            </div>
+            <div class="card-body ">
+              <mat-form-field style="width:100%">
+                <mat-label>From</mat-label>
+                <input matInput [matDatepicker]="picker_start">
+                <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
+                <mat-datepicker #picker_start></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">insert_invitation</i>
+              </div>
+              <h4 class="card-title">Booking End Date</h4>
+            </div>
+            <div class="card-body ">
+              <mat-form-field style="width:100%">
+                <mat-label>To</mat-label>
+                <input matInput [matDatepicker]="picker_end">
+                <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
+                <mat-datepicker #picker_end></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row" style="align-items: center;height:100%">
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-white btn-round btn-just-icon btn-lg">
+                <i class="material-icons">search</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-danger btn-round btn-just-icon">
+                <i class="material-icons">clear</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-success card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="card-title ">Booked List</h4>
+            </div>
+            <div class="col-md-6">
+              <form class="navbar-form">
+                <span class="bmd-form-group">
+                  <div class="input-group no-border">
+                    <input type="text" value="" class="form-control" placeholder="Search...">
+                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                      <i class="material-icons">search</i>
+                      <div class="ripple-container"></div>
+                    </button>
+                  </div>
+                </span>
+              </form>
+
+            </div>
+          </div>
+
+          <button style="margin-top: 1em;" class="btn btn-info" routerLink="/company/appointment">Add New
+            Booking</button>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    S No.
+                  </th>
+                  <th>
+                    HealthCrum <br> Id
+                  </th>
+                  <th>
+                    Branch
+                  </th>
+                  <th>
+                    Emp. <br> Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Contact
+                  </th>
+                  <th>
+                    Gender
+                  </th>
+                  <th>
+                    Age
+                  </th>
+                  <th>
+                    Emp <br> Id
+                  </th>
+                  <th>
+                    Dept.
+                  </th>
+                  <th>
+                    Pkg
+                  </th>
+                  <th>
+                    Booking <br> Date
+                  </th>
+                  <th>
+                    Request <br> date
+                  </th>
+                  <th>
+                    Appoint. <br> Date
+                  </th>
+                  <th>
+                    Diagnostic <br> Centre
+                  </th>
+                  <th>
+                    Location
+                  </th>
+                  <th>
+                    HRA <br>Status
+                  </th>
+                  <th>
+                    Checkup <br>Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    11be45
+                  </td>
+                  <td>
+                    IDXXX
+                  </td>
+                  <td>
+                    branch
+                  </td>
+                  <td>
+                    Name
+                  </td>
+                  <td>
+                    abc@gmail.com
+                  </td>
+                  <td class="">
+                    9800XXXXX
+                  </td>
+                  <td class="">
+                    Male
+                  </td>
+                  <td class="">
+                    111XXX
+                  </td>
+                  <td class="">
+                    id
+                  </td>
+                  <td class="">
+                    DEPTXXX
+                  </td>
+                  <td class="">
+                    ABC
+                  </td>
+                  <td class="">
+                    date
+                  </td>
+                  <td class="">
+                    date
+                  </td>
+                  <td class="">
+                    date
+                  </td>
+                  <td class="">
+                    Centre
+                  </td>
+                  <td class="">
+                    Location
+                  </td>
+                  <td class="">
+                    Pending
+                  </td>
+                  <td class="">
+                    Checkup Pending
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <ul class="pagination pagination-primary mt-3">
+            <li class="page-item">
+              <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link disabled" href="#"><i class="material-icons">chevron_right</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

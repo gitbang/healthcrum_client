@@ -1,0 +1,224 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-info">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active text-white" href="#Tests" data-toggle="tab">
+                      <i class="material-icons">code</i> All Packages
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#add-Test" data-toggle="tab">
+                      <i class="material-icons">add</i> Add New Package
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="Tests">
+                <table class="table">
+                  <thead class="text-warning text-center">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Profile includes</th>
+                    <th>Tests includes</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody class="text-center">
+                    <tr *ngFor="let package of packages;index as i">
+                      <td>{{i + 1}}</td>
+                      <td>{{package.name}}</td>
+                      <td>
+                        <mat-chip-list style="justify-content: center;display: flex;">
+                          <mat-chip *ngFor="let test of package.profileTests">
+                            {{test.name}}
+                          </mat-chip>
+                        </mat-chip-list>
+                      </td>
+                      <td>
+                        <mat-chip-list style="justify-content: center;display: flex;">
+                          <mat-chip *ngFor="let test of package.indivisualTests">
+                            {{test.name}}
+                          </mat-chip>
+                        </mat-chip-list>
+                      </td>
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                          class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="add-Test">
+                <div class="container-fluid">
+                  <form class="form" method="" action="">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Package Name</label>
+                            <input type="text" id="fname" class="form-control" [(ngModel)]="test_name" name="test_name">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-lg-6">
+                          <div class="row ml-1">
+                            <div class="mt-1 mr-3">
+                              <p>Recommended For ?</p>
+                            </div>
+                            <mat-checkbox class="mr-2" [(ngModel)]="male" name="male">Male</mat-checkbox>
+                            <mat-checkbox class="mr-2" [(ngModel)]="female" name="female">Female</mat-checkbox>
+                            <mat-checkbox class="mr-2" [(ngModel)]="kids" name="kids">Kids</mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Recommended Age</label>
+                            <input type="text" class="form-control" [(ngModel)]="recommended_age"
+                              name="recommended_age">
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                          <div class="row">
+                            <div class="col-md-3"><label class="bmd-label-floating">Reporting Time</label></div>
+                            <div class="col-md-4">
+                              <div class="form-group bmd-form-group">
+                                <input type="time" class="form-control" [(ngModel)]="reporting_from"
+                                  name="reporting_from">
+                              </div>
+                            </div>
+                            <div class="col-md-1">
+                              <p>To</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group bmd-form-group">
+                                <input type="time" class="form-control" [(ngModel)]="reporting_to" name="reporting_to">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-md-2 drag-title">
+                          <h5>Enter Profile Name to add</h5>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="row">
+                            <mat-form-field class="example-chip-list">
+                              <mat-chip-list #chipList aria-label="Profile selection">
+                                <mat-chip *ngFor="let profile of profiles" [selectable]="selectable"
+                                  [removable]="removable" (removed)="remove(profile)">
+                                  {{profile}}
+                                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Profile Tests" #profileInput [formControl]="profileCtrl"
+                                  [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                  (matChipInputTokenEnd)="add($event)">
+                              </mat-chip-list>
+                              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                <mat-option *ngFor="let profile of filteredProfiles | async" [value]="profile">
+                                  {{profile}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+
+                      <div class="row">
+                        <div class="col-md-2 drag-title">
+                          <h5>Enter Test name to add</h5>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="row">
+                            <mat-form-field class="example-chip-list">
+                              <mat-chip-list #testList aria-label="Test selection">
+                                <mat-chip *ngFor="let test of tests" [selectable]="selectable" [removable]="removable"
+                                  (removed)="removeTest(test)">
+                                  {{test}}
+                                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Tests" #testInput [formControl]="testCtrl"
+                                  [matAutocomplete]="testAuto" [matChipInputFor]="testList"
+                                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                  (matChipInputTokenEnd)="addTest($event)">
+                              </mat-chip-list>
+                              <mat-autocomplete #testAuto="matAutocomplete" (optionSelected)="selectedTest($event)">
+                                <mat-option *ngFor="let test of filteredTests | async" [value]="test">
+                                  {{test}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr>
+                      <div class="row mt-4">
+                        <div class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">MRP</label>
+                            <input type="number" class="form-control" [(ngModel)]="mrp" name="mrp">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Offer Price</label>
+                            <input type="number" class="form-control" [(ngModel)]="offer_price" name="offer_price">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">Healthcrum Price</label>
+                            <input type="number" class="form-control" [(ngModel)]="healthcrum_price"
+                              name="healthcrum_price">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                      <button class="btn btn-primary btn-round" (click)="savePackage()">Save Package</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

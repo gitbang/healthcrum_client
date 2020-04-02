@@ -1,0 +1,144 @@
+<div class="appoint container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-icon">
+          <div class="card-icon shad ">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title ">Upcoming Appointments</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Appointment No.</th>
+                  <th>Patient Name</th>
+                  <th>Patient's Location</th>
+                  <th>Appointment Date</th>
+                  <th>Appoint. Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let appoint of newAppointment;index as i">
+                  <td>{{appoint.appoint_id}}</td>
+                  <td>{{appoint.patient_name}}</td>
+                  <td>{{appoint.location}}</td>
+                  <td>{{appoint.date}}</td>
+                  <td>{{appoint.time}}</td>
+                  <td class="td-actions">
+                    <button mat-raised-button type="button" matTooltip="Approve" [matTooltipPosition]="'above'"
+                      class="btn btn-success btn-link btn-sm btn-just-icon" (click)="showNotification('top','right',2)">
+                      <i class="material-icons">done</i>
+                    </button>
+                    <button mat-raised-button type="button" matTooltip="cancel" [matTooltipPosition]="'above'"
+                      class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="showNotification('top','right',4)">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <button mat-raised-button type="button" matTooltip="view" [matTooltipPosition]="'above'"
+                      class="btn btn-info btn-link btn-sm btn-just-icon" (click)="showNotification('top','right',1)">
+                      <i class="material-icons">visibility</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-icon">
+          <div class="card-icon shad ">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title ">Confirmed Appointments</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Appointment No.</th>
+                  <th>Patient Name</th>
+                  <th>Patient's Location</th>
+                  <th>Appointment Date</th>
+                  <th>Appoint. Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let appoint of confirmedAppointment;index as i">
+                  <td>{{appoint.appoint_id}}</td>
+                  <td>{{appoint.patient_name}}</td>
+                  <td>{{appoint.location}}</td>
+                  <td>{{appoint.date}}</td>
+                  <td>{{appoint.time}}</td>
+                  <td class="td-actions">
+                    <button mat-raised-button type="button" matTooltip="remove" [matTooltipPosition]="'above'"
+                      class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <button mat-raised-button type="button" matTooltip="view" [matTooltipPosition]="'above'"
+                      class="btn btn-info btn-link btn-sm btn-just-icon">
+                      <i class="material-icons">visibility</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-icon">
+          <div class="card-icon shad ">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title ">Past Appointments</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Appointment No.</th>
+                  <th>Patient Name</th>
+                  <th>Patient's Location</th>
+                  <th>Appointment Date</th>
+                  <th>Appoint. Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let appoint of pastAppointment;index as i">
+                  <td>{{appoint.appoint_id}}</td>
+                  <td>{{appoint.patient_name}}</td>
+                  <td>{{appoint.location}}</td>
+                  <td>{{appoint.date}}</td>
+                  <td>{{appoint.time}}</td>
+                  <td class="td-actions">
+                    <button mat-raised-button type="button" matTooltip="remove" [matTooltipPosition]="'above'"
+                      class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <button mat-raised-button type="button" matTooltip="view" [matTooltipPosition]="'above'"
+                      class="btn btn-info btn-link btn-sm btn-just-icon">
+                      <i class="material-icons">visibility</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

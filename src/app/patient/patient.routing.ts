@@ -1,0 +1,27 @@
+import { Routes } from "@angular/router";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { PatientApponitmentsComponent } from "./patient-apponitments/patient-apponitments.component";
+import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
+import { PatientTestsComponent } from "./patient-tests/patient-tests.component";
+import { PatientreportsComponent } from "./patientreports/patientreports.component";
+import { HealthStatusComponent } from "./health-status/health-status.component";
+import { PatientPerscriptionComponent } from "./patient-perscription/patient-perscription.component";
+import { PatientOrdersComponent } from "./patient-orders/patient-orders.component";
+import { PatientServicesComponent } from "./patient-services/patient-services.component";
+import { PatientFeedbackComponent } from "./patient-feedback/patient-feedback.component";
+import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.component";
+import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
+export const PatientRoutes: Routes = [
+  { path: "dashboard", component: DashboardComponent },
+  { path: "appointment", component: PatientApponitmentsComponent },
+  { path: "profile", component: PatientProfileComponent },
+  { path: "tests", component: PatientTestsComponent },
+  { path: "reports", component: PatientreportsComponent },
+  { path: "orders", component: PatientOrdersComponent },
+  { path: "feedback", component: PatientFeedbackComponent },
+  { path: "eligible-service", component: PatientServicesComponent },
+  { path: "persciptions", component: PatientPerscriptionComponent },
+  { path: "health-status", component: HealthStatusComponent },
+  { path: "hra-report-fill", component: HraStoryBoardComponent },
+  { path: "view-doctor/:id", component: ViewDoctorComponent }
+];

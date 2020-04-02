@@ -1,0 +1,230 @@
+<div class="appoint container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">
+                  <fa-icon [icon]="faBranch"></fa-icon>
+                </i>
+              </div>
+              <h4 class="card-title">Branch</h4>
+            </div>
+            <div class="card-body ">
+
+              <mat-label>Select Branches</mat-label>
+              <mat-select [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">
+                  <fa-icon [icon]="package"></fa-icon>
+                </i>
+              </div>
+              <h4 class="card-title">Packages</h4>
+            </div>
+            <div class="card-body ">
+              <mat-label>Select Packages</mat-label>
+              <mat-select [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">
+                  <fa-icon [icon]="faCity"></fa-icon>
+                </i>
+              </div>
+              <h4 class="card-title">City</h4>
+            </div>
+            <div class="card-body ">
+              <mat-label>Select Cities</mat-label>
+              <mat-select [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">
+                  <fa-icon [icon]="faHospital"></fa-icon>
+                </i>
+              </div>
+              <h4 class="card-title">Diagonostic-Centre</h4>
+            </div>
+            <div class="card-body ">
+              <mat-label>Select Diagonostic center</mat-label>
+              <mat-select [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">insert_invitation</i>
+              </div>
+              <h4 class="card-title">Date</h4>
+            </div>
+            <div class="card-body ">
+              <mat-form-field style="width:100%">
+                <mat-label>Appointment date</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card ">
+            <div class="card-header card-header-warning card-header-text">
+              <div class="card-icon">
+                <i class="material-icons">timer_on</i>
+              </div>
+              <h4 class="card-title">Time</h4>
+            </div>
+            <div class="card-body md-form">
+              <div class=" bmd-form-group is-filled">
+
+                <input placeholder="Selected time" type="time" min="09:00" max="18:00" required
+                  style="width: 100%;text-align: center;letter-spacing: 10px;border: none;border-bottom: 1px solid #b5b5b5">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-5 text-center">
+      <button class="btn btn-warning">Book Appointment</button>
+    </div>
+    <div class="col-md-12">
+      <hr>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-icon">
+          <div class="card-icon card-header-info">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title ">Booking</h4>
+
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    S No.
+                  </th>
+                  <th>
+                    Employee Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Contact
+                  </th>
+                  <th>
+                    Age
+                  </th>
+                  <th>
+                    Gender
+                  </th>
+                  <th>
+                    D.O.B
+                  </th>
+                  <th>
+                    Employee ID
+                  </th>
+                  <th>
+                    Dept
+                  </th>
+                  <th>
+                    Branch
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    11be45
+                  </td>
+                  <td>
+                    Dakota Rice
+                  </td>
+                  <td>
+                    abc@gmail.com
+                  </td>
+                  <td>
+                    9800XXXXX
+                  </td>
+                  <td>
+                    34
+                  </td>
+                  <td class="">
+                    Male
+                  </td>
+                  <td class="">
+                    12/06/20XX
+                  </td>
+                  <td class="">
+                    111XXX
+                  </td>
+                  <td class="">
+                    Medicine
+                  </td>
+                  <td class="">
+                    Branch Name
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="pagination pagination-primary">
+              <li class="page-item">
+                <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link disabled" href="#"><i class="material-icons">chevron_right</i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

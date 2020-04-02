@@ -1,0 +1,315 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-info">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active text-white" href="#Labs" data-toggle="tab">
+                      <i class="material-icons">
+                        <fa-icon [icon]="doc_icon"></fa-icon>
+                      </i> Registred Doctors
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#add-Lab" data-toggle="tab">
+                      <i class="material-icons">
+                        <fa-icon [icon]="doc_add"></fa-icon>
+                      </i> Register New Doctor
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="Labs">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">
+                          <fa-icon [icon]="doc_icon"></fa-icon>
+                        </i>
+                      </div>
+                      <h4 class="card-title">Doctors</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="text-center">#</th>
+                              <th>Name</th>
+                              <th>Speciality</th>
+                              <th>Experience</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1023</td>
+                              <td>Dr. Test Doctor</td>
+                              <td>Dentist</td>
+                              <td>8 year</td>
+                              <td class="td-actions text-right">
+                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                                <button mat-raised-button type="button" matTooltip="Remove"
+                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">close</i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>1023</td>
+                              <td>Dr. Test Doctor</td>
+                              <td>Dentist</td>
+                              <td>4.5 year</td>
+                              <td class="td-actions text-right">
+                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                                <button mat-raised-button type="button" matTooltip="Remove Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">close</i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>1023</td>
+                              <td>Dr. Test Doctor</td>
+                              <td>Dentist</td>
+                              <td>5 year</td>
+                              <td class="td-actions text-right">
+                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                                <button mat-raised-button type="button" matTooltip="Remove Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">close</i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>1023</td>
+                              <td>Dr. Test Doctor</td>
+                              <td>Dentist</td>
+                              <td>4 year</td>
+                              <td class="td-actions text-right">
+                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                                <button mat-raised-button type="button" matTooltip="Remove Doctor"
+                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">close</i>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane" id="add-Lab">
+                <div class="container-fluid">
+                  <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+
+                    <ng-wizard-step [title]="'Step 1'" [description]="'Personal Informations'">
+                      <div class="container mt-3">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="fileinput text-center fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-new thumbnail">
+                                <img src="../../../assets/img/image_placeholder.png" alt="profile_img">
+                              </div>
+                              <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                              <div>
+                                <span class="btn btn-info btn-round btn-file">
+                                  <span class="fileinput-new">Doctor Image</span>
+                                  <span class="fileinput-exists">Change</span>
+                                  <input type="hidden" value="" name="."><input type="file" name="doctor_image">
+                                  <div class="ripple-container"></div>
+                                </span>
+                                <a href="#" class="btn btn-danger btn-round fileinput-exists"
+                                  data-dismiss="fileinput"><i class="fa fa-times"></i> Remove<div
+                                    class="ripple-container">
+                                    <div class="ripple-decorator ripple-on ripple-out"
+                                      style="left: 43.4125px; top: 30.9875px; background-color: rgb(255, 255, 255); transform: scale(15.5094);">
+                                    </div>
+                                  </div></a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="row">
+                              <div class="col">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>First Name</mat-label>
+                                  <input matInput placeholder="First Name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Last Name</mat-label>
+                                  <input matInput placeholder="Last Name">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Select Gender</mat-label>
+                                  <mat-select>
+                                    <mat-option *ngFor="let gender of genderList" [value]="gender">{{gender}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">
+                                    <fa-icon [icon]="doc_icon"></fa-icon>
+                                  </i>
+                                </span>
+                              </div>
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Address</mat-label>
+                                <input matInput placeholder="About Doctor">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-wizard-step>
+
+                    <ng-wizard-step [title]="'Step 2'" [description]="'Qualification and Experience'">
+                      <span>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Doctor Qualification</mat-label>
+                              <input matInput placeholder="Doctor Qualification">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>About Doctor</mat-label>
+                              <input matInput placeholder="Doctor Qualification">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                      </span>
+                    </ng-wizard-step>
+
+                    <ng-wizard-step [title]="'Step 3'" [description]="'Speciality and Avaibility'">
+                      <span>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Doctor Speciality</mat-label>
+                              <input matInput placeholder="Doctor Speciality">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Doctor From</mat-label>
+                              <input matInput placeholder="Doctor From">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-md-2">
+                            <h5>Available Time</h5>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="form-group bmd-form-group">
+                              <input type="time" class="form-control" [(ngModel)]="reporting_from"
+                                name="reporting_from">
+                            </div>
+                          </div>
+                          <div class="col-md-1">To</div>
+                          <div class="col-md-2">
+                            <div class="form-group bmd-form-group">
+                              <input type="time" class="form-control" [(ngModel)]="reporting_from" name="reporting_to">
+                            </div>
+                          </div>
+                        </div>
+                      </span>
+                    </ng-wizard-step>
+
+                    <ng-wizard-step [title]="'Step 4'" [description]="'Account Details'">
+                      <div class="container mt-3">
+                        <h5 class="text-info">Account Credentials</h5>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Doctor Email ID</mat-label>
+                              <input matInput placeholder="Email ID">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Contact Number</mat-label>
+                              <input matInput placeholder="Contact Number" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4">
+                            <mat-form-field>
+                              <mat-label>password</mat-label>
+                              <input matInput [type]="phide ? 'password' : 'text'">
+                              <button mat-icon-button matSuffix (click)="phide = !phide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{phide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4 col-md-4">
+                            <mat-form-field>
+                              <mat-label>confirm password</mat-label>
+                              <input matInput [type]="hide ? 'password' : 'text'">
+                              <button mat-icon-button matSuffix (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-wizard-step>
+                  </ng-wizard>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

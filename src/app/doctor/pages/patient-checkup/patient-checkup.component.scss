@@ -1,0 +1,44 @@
+.first_box {
+  margin-left: 50%;
+  margin-top: 320px;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: auto;
+  text-align: center;
+}
+
+.full_width {
+  width: 100%;
+}
+.list-group-horizontal {
+  flex-direction: row !important;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.7rem;
+}
+
+.border-row {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e4e3e3;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.list-group-item:hover {
+  border: 2px solid #e2e2e2;
+  box-shadow: 0 0 4px 1px #858585;
+}
+.list-group-item.active {
+  border: 2px solid #e2e2e2;
+  box-shadow: 0 0 4px 1px #a1a1a1;
+}
+.mat-expansion-panel-content .mat-expansion-panel-body {
+  padding: 0 18px 16px !important;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.chip_form_field {
+  width: 100%;
+}

@@ -1,0 +1,116 @@
+<div class="appoint container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header card-header-primary card-header-icon">
+          <div class="card-icon shad ">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title">Corporate Employee Results</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class=" col-md-3">
+              <div class="dropdown bootstrap-select show-tick dropup">
+                <mat-form-field>
+                  <mat-label>Select Branches</mat-label>
+                  <mat-select [formControl]="toppings" multiple>
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- <select class="selectpicker"
+                  data-style="select-with-transition" multiple="" title="Filter By" data-size="4" tabindex="-98">
+                  <option disabled=""> Multiple Options</option>
+                  <option value="2">Package Wise</option>
+                  <option value="3">Department Wise</option>
+                  <option value="4">Disease Wise</option>
+                  <option value="4">Service Wise</option>
+                </select> -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dropdown bootstrap-select show-tick dropup">
+                <mat-form-field>
+                  <mat-label>Select Branches</mat-label>
+                  <mat-select [formControl]="toppings" multiple>
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- <select class="selectpicker"
+                  data-style="select-with-transition" multiple="" title="Select" data-size="4" tabindex="-98">
+                  <option disabled=""> Multiple Options</option>
+                  <option value="2">Package Wise</option>
+                  <option value="3">Department Wise</option>
+                  <option value="4">Disease Wise</option>
+                  <option value="4">Service Wise</option>
+                </select> -->
+              </div>
+            </div>
+
+            <div class=" col-md-3">
+              <div class="dropdown bootstrap-select show-tick dropup">
+                <mat-form-field>
+                  <mat-label>Select Branches</mat-label>
+                  <mat-select [formControl]="toppings" multiple>
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- <select class="selectpicker"
+                  data-style="select-with-transition" multiple="" title="Gender" data-size="4" tabindex="-98">
+                  <option disabled="">--Select--</option>
+                  <option value="2">Male</option>
+                  <option value="3">Female</option>
+                  <option value="4">Donot Want to specify</option>
+                </select> -->
+              </div>
+            </div>
+            <div class="col-md-12 mt-3">
+              <span>Age:</span><br /><br />
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Below 35</mat-radio-button>
+                <mat-radio-button value="2">35 - 40</mat-radio-button>
+                <mat-radio-button value="3">41 - 45</mat-radio-button>
+                <mat-radio-button value="4">46 - 50</mat-radio-button>
+                <mat-radio-button value="5">Above 50</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <button class="btn btn-primary" onclick="getElementById('Emp-Chart').removeClass('Empchart')"
+                id="filter-Empchart">Filter</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card card-chart" data-count="0">
+        <div class="card-header card-header-warning">
+          <div class="ct-chart" id="dailySalesChart"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-actions">
+            <button type="button" class="btn btn-danger btn-link fix-broken-card">
+              <i class="material-icons">build</i> Fix Header!
+            </button>
+            <button type="button" class="btn btn-info btn-link" rel="tooltip" data-placement="bottom" title=""
+              data-original-title="Refresh">
+              <i class="material-icons">refresh</i>
+            </button>
+          </div>
+          <h4 class="card-title">Overall Body Progress Report</h4>
+          <p class="card-category">Progress in Health since last month</p>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons">access_time</i> updated 10 min ago
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
