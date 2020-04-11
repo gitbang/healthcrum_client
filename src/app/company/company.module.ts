@@ -24,6 +24,7 @@ import { EmployeeTrackingComponent } from "./pages/employee-tracking/employee-tr
 import { HealthAnalysisComponent } from "./pages/health-analysis/health-analysis.component";
 import { HealthStatusComponent } from "./pages/health-status/health-status.component";
 import { BookedAppointmentComponent } from "./pages/booked-appointment/booked-appointment.component";
+import { DataTablesModule } from "angular-datatables";
 import {
   MatButtonModule,
   MatInputModule,
@@ -81,7 +82,8 @@ import {
     MatNativeDateModule,
     MatRadioModule,
     MatStepperModule,
-    MatTableModule
+    MatTableModule,
+    DataTablesModule
   ]
 })
 export class CompanyModule {}

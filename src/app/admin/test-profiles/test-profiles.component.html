@@ -183,33 +183,11 @@
                       <hr class="clear-fix">
 
                       <div class="row">
-                        <div class="col-md-2 drag-title">
-                          <h5>Drag drop single test into profile test</h5>
+                        <div class="col-md-12">
+                          <h5>Add Single test to profile</h5>
+                          <input type="text">
                         </div>
-                        <div class="col-md-10">
-                          <div class="row">
-                            <div class="test-container">
-                              <h4>Single Test</h4>
-                              <mat-chip-list cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" name="todo"
-                                [cdkDropListConnectedTo]="[doneList]" class="test-list"
-                                (cdkDropListDropped)="drop($event)">
-                                <!-- < aria-label="Fish selection" class="test-box"> -->
-                                <mat-chip *ngFor="let item of todo" cdkDrag>{{item.name}}</mat-chip>
-                                <!-- <div  >{{item.name}}</div> -->
-                              </mat-chip-list>
-                            </div>
 
-                            <div class="test-container">
-                              <h4>Profile Tests</h4>
-                              <mat-chip-list cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" name="done"
-                                [cdkDropListConnectedTo]="[todoList]" class="test-list"
-                                (cdkDropListDropped)="drop($event)">
-                                <mat-chip *ngFor="let item of done" cdkDrag>{{item.name}}</mat-chip>
-                              </mat-chip-list>
-                            </div>
-
-                          </div>
-                        </div>
                       </div>
 
                       <hr>

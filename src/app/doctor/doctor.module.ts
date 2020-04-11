@@ -44,6 +44,7 @@ import {
   MatChipsModule,
   MatAutocompleteModule
 } from "@angular/material";
+import { DataTablesModule } from "angular-datatables";
 import { ChartsModule } from "ng2-charts";
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { ChartsModule } from "ng2-charts";
     MatProgressBarModule,
     ChartsModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    DataTablesModule
   ]
 })
 export class DoctorModule {}

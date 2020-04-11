@@ -15,7 +15,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TestsComponent } from "./tests/tests.component";
 import { NgWizardModule, NgWizardConfig, THEME } from "ng-wizard";
 import { TestProfilesComponent } from "./test-profiles/test-profiles.component";
-import { DragDropModule } from "@angular/cdk/drag-drop";
+import { DataTablesModule } from "angular-datatables";
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.dots
 };
@@ -56,7 +56,6 @@ import { AdminLayoutComponent } from "./admin-layout.component";
     MatSelectModule,
     MatTooltipModule,
     FontAwesomeModule,
-    DragDropModule,
     MatDatepickerModule,
     MatBadgeModule,
     MatCommonModule,
@@ -68,6 +67,7 @@ import { AdminLayoutComponent } from "./admin-layout.component";
     MatIconModule,
     MatChipsModule,
     MatAutocompleteModule,
+    DataTablesModule,
     NgWizardModule.forRoot(ngWizardConfig)
   ],
   declarations: [

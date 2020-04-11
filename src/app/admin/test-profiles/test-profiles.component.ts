@@ -1,16 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem
-} from "@angular/cdk/drag-drop";
+
 import { HttpClient } from "@angular/common/http";
 import { AdminService } from "app/services/admin.service";
 import Swal from "sweetalert2";
 @Component({
   selector: "app-test-profiles",
   templateUrl: "./test-profiles.component.html",
-  styleUrls: ["./test-profiles.component.scss"]
+  styleUrls: ["./test-profiles.component.scss"],
 })
 export class TestProfilesComponent implements OnInit {
   user_name: String;
@@ -45,28 +41,11 @@ export class TestProfilesComponent implements OnInit {
     this.getProfileTestList();
     this.adminService.getTestList().subscribe((res: any) => {
       if (res.success) {
-        res.data.forEach(element => {
+        res.data.forEach((element) => {
           this.todo.push(element);
         });
       }
     });
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
   }
 
   changeFastingYes() {
@@ -85,7 +64,7 @@ export class TestProfilesComponent implements OnInit {
   getProfileTestList() {
     this.adminService.getProfileTest().subscribe((res: any) => {
       if (res.success) {
-        res.data.forEach(element => {
+        res.data.forEach((element) => {
           this.profileTest.push(element);
         });
       }
@@ -95,7 +74,7 @@ export class TestProfilesComponent implements OnInit {
   saveProfileTest() {
     if (this.validateForm()) {
       let test_ids = [];
-      this.done.forEach(el => {
+      this.done.forEach((el) => {
         test_ids.push(el._id);
       });
       let data = {
@@ -109,32 +88,32 @@ export class TestProfilesComponent implements OnInit {
         recommended_for: [
           this.male ? "Male" : "",
           this.female ? "Female" : "",
-          this.kids ? "Kids" : ""
+          this.kids ? "Kids" : "",
         ],
         reportingTime: {
           from: this.reporting_from,
-          to: this.reporting_to
+          to: this.reporting_to,
         },
         tests: test_ids,
         mrp: this.mrp,
         offerPrice: this.offer_price,
-        healthcrumPrice: this.healthcrum_price
+        healthcrumPrice: this.healthcrum_price,
       };
 
-      this.adminService.saveProfileTest(data).subscribe(res => {
+      this.adminService.saveProfileTest(data).subscribe((res) => {
         if (res.success) {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Profile test has been saved",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         } else {
           Swal.fire({
             icon: "error",
             title: "Error!",
-            text: res.msg ? res.msg : "Something went wrong"
+            text: res.msg ? res.msg : "Something went wrong",
           });
         }
       });

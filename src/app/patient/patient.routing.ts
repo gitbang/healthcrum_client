@@ -11,12 +11,14 @@ import { PatientServicesComponent } from "./patient-services/patient-services.co
 import { PatientFeedbackComponent } from "./patient-feedback/patient-feedback.component";
 import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.component";
 import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
+import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
 export const PatientRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "appointment", component: PatientApponitmentsComponent },
   { path: "profile", component: PatientProfileComponent },
   { path: "tests", component: PatientTestsComponent },
   { path: "reports", component: PatientreportsComponent },
+  { path: "ehr", component: PatientEhrComponent },
   { path: "orders", component: PatientOrdersComponent },
   { path: "feedback", component: PatientFeedbackComponent },
   { path: "eligible-service", component: PatientServicesComponent },

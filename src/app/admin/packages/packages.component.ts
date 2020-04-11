@@ -3,24 +3,19 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import {
   MatAutocompleteSelectedEvent,
-  MatAutocomplete
+  MatAutocomplete,
 } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem
-} from "@angular/cdk/drag-drop";
 import { AdminService } from "app/services/admin.service";
 import Swal from "sweetalert2";
 
 @Component({
   selector: "app-packages",
   templateUrl: "./packages.component.html",
-  styleUrls: ["./packages.component.scss"]
+  styleUrls: ["./packages.component.scss"],
 })
 export class PackagesComponent implements OnInit {
   //profile tests autocomplete
@@ -85,7 +80,7 @@ export class PackagesComponent implements OnInit {
   ngOnInit() {
     this.adminService.getPackages().subscribe((res: any) => {
       if (res.success) {
-        res.data.forEach(element => {
+        res.data.forEach((element) => {
           this.packages.push(element);
         });
       }
@@ -94,7 +89,7 @@ export class PackagesComponent implements OnInit {
     this.getProfileTestList();
     this.adminService.getTestList().subscribe((res: any) => {
       if (res.success) {
-        res.data.forEach(element => {
+        res.data.forEach((element) => {
           this.stodo.push(element);
           this.allTests.push(element.name);
         });
@@ -158,21 +153,21 @@ export class PackagesComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.allProfiles.filter(
-      profile => profile.toLowerCase().indexOf(filterValue) === 0
+      (profile) => profile.toLowerCase().indexOf(filterValue) === 0
     );
   }
 
   private _filterTest(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.allTests.filter(
-      test => test.toLowerCase().indexOf(filterValue) === 0
+      (test) => test.toLowerCase().indexOf(filterValue) === 0
     );
   }
 
   getProfileTestList() {
     this.adminService.getProfileTest().subscribe((res: any) => {
       if (res.success) {
-        res.data.forEach(element => {
+        res.data.forEach((element) => {
           this.todo.push(element);
           this.allProfiles.push(element.name);
         });
@@ -180,48 +175,14 @@ export class PackagesComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
-
-  sdrop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
-
   savePackage() {
     if (this.validateForm()) {
       let test_ids = [];
       let profile_ids = [];
-      this.done.forEach(el => {
+      this.done.forEach((el) => {
         profile_ids.push(el._id);
       });
-      this.sdone.forEach(el => {
+      this.sdone.forEach((el) => {
         test_ids.push(el._id);
       });
       let data = {
@@ -233,33 +194,33 @@ export class PackagesComponent implements OnInit {
         recommended_for: [
           this.male ? "Male" : "",
           this.female ? "Female" : "",
-          this.kids ? "Kids" : ""
+          this.kids ? "Kids" : "",
         ],
         reportingTime: {
           from: this.reporting_from,
-          to: this.reporting_to
+          to: this.reporting_to,
         },
         tests: test_ids,
         profileTests: profile_ids,
         mrp: this.mrp,
         offerPrice: this.offer_price,
-        healthcrumPrice: this.healthcrum_price
+        healthcrumPrice: this.healthcrum_price,
       };
 
-      this.adminService.savePackage(data).subscribe(res => {
+      this.adminService.savePackage(data).subscribe((res) => {
         if (res.success) {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Package has been created successfully!",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         } else {
           Swal.fire({
             icon: "error",
             title: "Error!",
-            text: res.msg ? res.msg : "Something went wrong"
+            text: res.msg ? res.msg : "Something went wrong",
           });
         }
       });

@@ -21,6 +21,8 @@ import { PatientServicesComponent } from "./patient-services/patient-services.co
 import { PatientFeedbackComponent } from "./patient-feedback/patient-feedback.component";
 import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.component";
 import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
+import { GaugeChartModule } from "angular-gauge-chart";
+import { DataTablesModule } from "angular-datatables";
 import {
   MatButtonModule,
   MatInputModule,
@@ -34,9 +36,11 @@ import {
   MatNativeDateModule,
   MatRadioModule,
   MatStepperModule,
-  MatTableModule
+  MatTableModule,
+  MatCardModule,
 } from "@angular/material";
 import { ChartsModule } from "ng2-charts";
+import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ import { ChartsModule } from "ng2-charts";
     PatientServicesComponent,
     PatientFeedbackComponent,
     HraStoryBoardComponent,
-    ViewDoctorComponent
+    ViewDoctorComponent,
+    PatientEhrComponent,
   ],
   imports: [
     CommonModule,
@@ -77,7 +82,10 @@ import { ChartsModule } from "ng2-charts";
     MatRadioModule,
     MatStepperModule,
     MatTableModule,
-    ChartsModule
-  ]
+    ChartsModule,
+    DataTablesModule,
+    GaugeChartModule,
+    MatCardModule,
+  ],
 })
 export class PatientModule {}
