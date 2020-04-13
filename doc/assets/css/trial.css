@@ -1,0 +1,47 @@
+.cn-menu1 {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+}
+
+.cn-menu2 {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+}
+
+.cn-menu3 {
+  position: absolute;
+  left: 60%;
+  top: 50%;
+}
+
+.cn-menu4 {
+  position: absolute;
+  left: 80%;
+  top: 50%;
+}
+
+.rect-icon {
+  background: #fff;
+  display: inline-block !important;
+}
+
+.circle-icon {
+  background: #20ccd8;
+  display: inline-block !important;
+  border-radius: 50%;
+}
+
+.my-icon {
+  /* background: url("./images/circular-menu.png"); */
+}
+.icon1 {
+  background-position: 0 0;
+}
+.icon2 {
+  background-position: 0 -56px;
+}
+.icon3 {
+  background-position: 0 -116px;
+}

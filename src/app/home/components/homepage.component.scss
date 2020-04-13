@@ -1,0 +1,24 @@
+@media only screen and (min-width: 991px) {
+  li.active {
+    background: #26c6da;
+    border-radius: 52px;
+    width: 85px;
+    height: 25px;
+    padding: 2px 0px;
+    text-align: center;
+  }
+  li.active a {
+    color: #ffffff;
+  }
+}
+@media only screen and (max-width: 991px) {
+  li.active {
+    background: #26c6da;
+    border-radius: none;
+    width: auto;
+    height: auto;
+  }
+  li.active a {
+    color: #ffffff;
+  }
+}

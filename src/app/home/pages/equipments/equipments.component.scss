@@ -1,0 +1,24 @@
+.element {
+  display: flex;
+  flex-wrap: wrap;
+}
+.doc-card:hover {
+  box-shadow: 0 0 4px 1px #d1d1d1;
+  padding: 6px;
+  transition: ease-out 0.3s;
+  cursor: pointer;
+}
+.top-title {
+  width: fit-content;
+  background: #15c9d1;
+  padding: 5px 20px;
+  color: #fff;
+  box-shadow: 0px 6px 6px 0px #c7c5c5;
+}
+.card .card-header.card-header-image img {
+  height: 200px;
+  object-fit: contain;
+}
+.product-box {
+  border-bottom: 2px solid #e8e8e8;
+}

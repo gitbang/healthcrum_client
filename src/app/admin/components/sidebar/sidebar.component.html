@@ -1,0 +1,284 @@
+<div class="logo">
+    <a href="/admin" class="simple-text logo-mini">
+        <img src="/assets/img/logo.jpg" style="width:30px;height:30px" />
+    </a>
+    <a href="/admin" class="simple-text logo-normal">
+        Healthcrum
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <div *ngIf="isMobileMenu()">
+        <form class="navbar-form">
+            <span class="bmd-form-group">
+                <div class="input-group no-border">
+                    <input type="text" value="" class="form-control" placeholder="Search...">
+                    <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                        <i class="material-icons">search</i>
+                        <div class="ripple-container"></div>
+                    </button>
+                </div>
+            </span>
+        </form>
+        <ul class="nav navbar-nav nav-mobile-menu">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                    <i class="material-icons">dashboard</i>
+                    <p>
+                        <span class="d-lg-none d-md-block">Stats</span>
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">notifications</i>
+                    <span class="notification">5</span>
+                    <p>
+                        <span class="d-lg-none d-md-block">Some Actions</span>
+                    </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                    <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                    <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                    <a class="dropdown-item" href="#">Another Notification</a>
+                    <a class="dropdown-item" href="#">Another One</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                    <i class="material-icons">person</i>
+                    <p>
+                        <span class="d-lg-none d-md-block">Account</span>
+
+                    </p>
+                    <b class="caret"></b>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="user">
+        <div class="photo">
+            <img src="/assets/img/avatar.png" />
+        </div>
+        <div class="user-info">
+            <a data-toggle="collapse" href="#collapseExample" class="username">
+                <span>
+                    Administrator
+                    <b class="caret"></b>
+                </span>
+            </a>
+            <div class="collapse" id="collapseExample" routerLinkActive="show">
+                <ul class="nav">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/user-profile">
+                            <span class="sidebar-mini"> <i class="material-icons">add_a_photo</i> </span>
+                            <span class="sidebar-normal"> My Profile </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="sidebar-mini"> <i class="material-icons">edit</i> </span>
+                            <span class="sidebar-normal"> Edit Profile </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="sidebar-mini"> <i class="material-icons">settings</i> </span>
+                            <span class="sidebar-normal"> Settings </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <ul class="nav">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a class="nav-link" routerLink="/admin">
+                <i class="material-icons">dashboard</i>
+                <p> Dashboard </p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" data-toggle="collapse" href="#vendorsLink">
+                <i>
+                    <fa-icon [icon]="faBezierCurve"></fa-icon>
+                </i>
+                <p> Vendors
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="vendorsLink" routerLinkActive="show">
+                <ul class="nav">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/hospitals">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="faHospital"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Hospitals </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/labs">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="faFlask"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Labs </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/doctors">
+                <i>
+                    <fa-icon [icon]="faUserMd"></fa-icon>
+                </i>
+                <p> Doctors </p>
+            </a>
+        </li>
+        <!-- <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/packages">
+                <i>
+                    <fa-icon [icon]="faBoxOpen"></fa-icon>
+                </i>
+                <p> Packages </p>
+            </a>
+        </li> -->
+        <!-- <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/tests">
+                <i>
+                    <fa-icon [icon]="faVials"></fa-icon>
+                </i>
+                <p> Tests </p>
+            </a>
+        </li> -->
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" data-toggle="collapse" href="#testLink">
+                <i>
+                    <fa-icon [icon]="faVials"></fa-icon>
+                </i>
+                <p> Tests
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="testLink" routerLinkActive="show">
+                <ul class="nav">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/tests">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="parameter"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Single Test </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/test-profiles">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="profiles"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Profiles </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/packages">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="package"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Packages </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" data-toggle="collapse" href="#medecinesLink">
+                <i>
+                    <fa-icon [icon]="medecines"></fa-icon>
+                </i>
+                <p> Medecines
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="medecinesLink" routerLinkActive="show">
+                <ul class="nav">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/medecines">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="parameter"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Medecines Inventry </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-medecines">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Purchased Medecines </span>
+                        </a>
+                    </li>
+
+                    <!-- <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/packages">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="package"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Sold Medecines </span>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" data-toggle="collapse" href="#equipmentsLink">
+                <i>
+                    <fa-icon [icon]="crutch"></fa-icon>
+                </i>
+                <p> Equpments
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse" id="equipmentsLink" routerLinkActive="show">
+                <ul class="nav">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/equipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="parameter"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Equpments Inventry </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Purchased Equpments </span>
+                        </a>
+                    </li>
+
+                    <!-- <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/packages">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="package"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Sold Equpments </span>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </li>
+        <!-- <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/medecines">
+                <i>
+                    <fa-icon [icon]="faUserMd"></fa-icon>
+                </i>
+                <p> Medecines </p>
+            </a>
+        </li> -->
+
+    </ul>
+</div>

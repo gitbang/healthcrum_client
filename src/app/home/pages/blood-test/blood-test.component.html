@@ -1,0 +1,94 @@
+<main>
+  <div class="container-fluid p-3">
+
+    <h3 class="test-heading">Blood Test</h3>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-3">
+
+        <div class="card justify-content-center pt-4 pb-4">
+          <h5 class="text-center">Filter result</h5>
+          <hr>
+          <div class="col-12 text-center">
+            <mat-form-field class="example-full-width">
+              <mat-label>Select State</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let state of stateList" [value]="state">{{state}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center">
+            <mat-form-field class="example-full-width">
+              <mat-label>Select City</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let city of cityList" [value]="city">{{city}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center">
+            <mat-form-field class="example-full-width">
+              <mat-label>Select Locality</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let location of locationList" [value]="location">{{location}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mt-3">
+            <button class="btn btn-warning">Apply</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-8 col-lg-9">
+        <div class="row">
+          <div class="col-12">
+            <div class="row" id="container">
+              <div class="col-md-3 doc-card" *ngFor="let i of items" (click)="viewDoctor(i)">
+                <div class="card card-product card-plain no-shadow" data-colored-shadow="false">
+                  <div class="card-header card-header-image">
+                    <a href="#">
+                      <img src="../../../../assets/img/image_placeholder.png" alt="...">
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <a href="#">
+                      <h4 class="card-title">Doctor Name</h4>
+                    </a>
+                    <p class="description">
+                      Impeccably tailored in Italy from lightweight navy wool.
+                    </p>
+                  </div>
+                  <div class="card-footer justify-content-between">
+                    <div class="price-container">
+                      <span class="price"> Fee: ₹ {{ i*100 }}</span>
+                    </div>
+                    <!-- <button class="btn btn-rose btn-link btn-fab btn-fab-mini btn-round pull-right" rel="tooltip"
+                      title="" data-placement="left" data-original-title="Remove from wishlist">
+                      <i class="material-icons">favorite</i>
+                    </button> -->
+                  </div>
+                </div> <!-- end card -->
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col-12 text-center">
+
+                <button *ngIf="isNext" (click)="showPrev()" rel="tooltip" class="btn btn-rose mr-3 btn-round"
+                  data-original-title="go back" title="go back">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                </button>
+                <button (click)="showNext()" rel="tooltip" class="btn btn-rose btn-round"
+                  data-original-title="go forward" title="go forward">
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

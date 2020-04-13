@@ -1,0 +1,368 @@
+<div class="appoint container-fluid">
+  <div *ngIf="!success" class="first_box">
+    <div class="row">
+
+      <div class="col-md-12">
+        <mat-form-field [class]="full_width">
+          <mat-label>Patient Secret Code</mat-label>
+          <input matInput [(ngModel)]="code" required>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-info" (click)="checkCode()">Get Access
+          <mat-progress-bar mode="indeterminate" *ngIf="proccess"></mat-progress-bar>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="success" class="row">
+    <div class="col-md-12 p-3">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="../../../../assets//img/avatar.png">
+        </div>
+        <div class="col-md-6">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar style="background:#00bb77"></div>
+              <mat-card-title>Amar Verma</mat-card-title>
+              <mat-card-subtitle>Blood Test</mat-card-subtitle>
+            </mat-card-header>
+            <div class="mat-card-image" style="overflow-y:auto;"></div>
+
+            <mat-card-content>
+              <b>Problems: </b>
+              <p>
+                problem 1, problem 2 , problem3 , etc.
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>DETAILS</button>
+              <button mat-button (click)="showPrescription()">PRESCRPTIONS</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <div class="col-md-3">
+          <div style="display:flex;flex-direction: column;">
+            <button class="btn btn-info mb-2" data-toggle="modal" data-target="#showEMR"> View
+              EHR </button>
+            <button class="btn btn-warning mb-2" (click)="undo()">View HRA </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <div class="container">
+        <div class="row bg-info text-white mb-3 text-center p-2 " style="box-shadow: -1px 2px 5px 2px #d3d3d3;">
+          <div class="col-md-2">Name</div>
+          <div class="col-md-1">Range</div>
+          <div class="col-md-2">Test Result</div>
+          <div class="col-md-4">Test Status</div>
+          <div class="col-md-2">Risk</div>
+          <div class="col-md-1">Status</div>
+        </div>
+
+        <div *ngFor="let data of dataSource;index as i">
+          <div class="row text-center border-row" *ngIf="!data.isProfile">
+            <div class="col-md-2 mt-1">{{data.name}}</div>
+            <div class="col-md-1 mt-1">{{data.range}}</div>
+            <div class="col-md-2 mt-1">
+              <mat-form-field class="example-full-width">
+                <mat-label>Test Result</mat-label>
+                <input matInput matInput placeholder="test result" [(ngModel)]="data.result"
+                  (keyup)="setStatusByInput(i)">
+              </mat-form-field>
+
+            </div>
+            <div class="col-md-4 mt-1">
+              <ul class="list-group list-group-horizontal">
+                <li [ngClass]="data.status == 1 ?'active':''" class="list-group-item bg-primary"
+                  (click)="setStatus(i,1)">
+                  High</li>
+                <li [ngClass]="data.status == 2 ?'active':''" class="list-group-item bg-danger"
+                  (click)="setStatus(i,2)">
+                  Medium</li>
+                <li [ngClass]="data.status == 3 ?'active':''" class="list-group-item bg-warning"
+                  (click)="setStatus(i,3)">
+                  Low</li>
+                <li [ngClass]="data.status == 4 ?'active':''" class="list-group-item bg-success"
+                  (click)="setStatus(i,4)">
+                  OK</li>
+              </ul>
+            </div>
+            <div class="col-md-2 mt-1">
+              <button class="btn btn-danger btn-sm" (click)="save()"> Reset </button>
+              <button class="btn btn-success btn-sm" (click)="undo()">Save </button>
+            </div>
+            <div class="col-md-1 mt-1">
+              <p class="text-danger" style="align-self:center;margin:0;font-size:0.8rem">Not Saved</p>
+            </div>
+          </div>
+
+          <!-- <div class="row" *ngIf="data.isProfile">
+            <div style="width:100%">
+              <ul class="nav">
+                <li class="nav-item bg-grey" style="width:100%;cursor: pointer; " (click)="changeDrawable(i)"
+                  data-toggle="collapse" href="#checkupLink">
+                  <a class="nav-link" style="display:flex;align-items: center;">
+                    <i class="material-icons" *ngIf="data.isExpanded">expand_less
+                    </i>
+                    <i class="material-icons" *ngIf="!data.isExpanded">expand_more
+                    </i>
+                    <span> {{data.name}}
+                    </span>
+                  </a>
+                  <div class="col-12 collapse" id="checkupLink">
+
+                    <div class="row text-center border-row" *ngFor="let data of data.data;index as j">
+                      <div class="col-md-2 mt-1">{{data.name}}</div>
+                      <div class="col-md-1 mt-1">{{data.range}}</div>
+                      <div class="col-md-2 mt-1"><input matInput placeholder="test result" [(ngModel)]="data.result"
+                          (keyup)="setProfileStatusByInput(i,j)">
+                      </div>
+                      <div class="col-md-4 mt-1">
+                        <ul class="list-group list-group-horizontal">
+                          <li [ngClass]="data.status == 1 ?'active':''" class="list-group-item bg-primary"
+                            (click)="setProfileStatus(i,j,1)">
+                            High</li>
+                          <li [ngClass]="data.status == 2 ?'active':''" class="list-group-item bg-danger"
+                            (click)="setProfileStatus(i,j,2)">
+                            Medium</li>
+                          <li [ngClass]="data.status == 3 ?'active':''" class="list-group-item bg-warning"
+                            (click)="setProfileStatus(i,j,3)">
+                            Low</li>
+                          <li [ngClass]="data.status == 4 ?'active':''" class="list-group-item bg-success"
+                            (click)="setProfileStatus(i,j,4)">
+                            OK</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-2 mt-1">
+                        <button class="btn btn-danger btn-sm" (click)="save()"> Reset </button>
+                        <button class="btn btn-success btn-sm" (click)="undo()">Save </button>
+                      </div>
+                      <div class="col-md-1 mt-1">
+                        <p class="text-danger" style="align-self:center;margin:0;font-size:0.8rem">Not Saved</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div> -->
+
+          <div class="row" *ngIf="data.isProfile">
+            <div class="col-12 p-0">
+              <mat-accordion class="example-headers-align">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header style="height:40px;background: #eaeaea;">
+                    <mat-panel-title>
+                      {{data.name}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="row text-center border-row" *ngFor="let data of data.data;index as j">
+                    <div class="col-md-2 mt-1">{{data.name}}</div>
+                    <div class="col-md-1 mt-1">{{data.range}}</div>
+                    <div class="col-md-2 mt-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Test Result</mat-label>
+                        <input matInput matInput [(ngModel)]="data.result" (keyup)="setProfileStatusByInput(i,j)">
+                      </mat-form-field>
+
+                    </div>
+                    <div class="col-md-4 mt-1">
+                      <ul class="list-group list-group-horizontal">
+                        <li [ngClass]="data.status == 1 ?'active':''" class="list-group-item bg-primary"
+                          (click)="setProfileStatus(i,j,1)">
+                          High</li>
+                        <li [ngClass]="data.status == 2 ?'active':''" class="list-group-item bg-danger"
+                          (click)="setProfileStatus(i,j,2)">
+                          Medium</li>
+                        <li [ngClass]="data.status == 3 ?'active':''" class="list-group-item bg-warning"
+                          (click)="setProfileStatus(i,j,3)">
+                          Low</li>
+                        <li [ngClass]="data.status == 4 ?'active':''" class="list-group-item bg-success"
+                          (click)="setProfileStatus(i,j,4)">
+                          OK</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-2 mt-1">
+                      <button class="btn btn-danger btn-sm" (click)="save()"> Reset </button>
+                      <button class="btn btn-success btn-sm" (click)="undo()">Save </button>
+                    </div>
+                    <div class="col-md-1 mt-1">
+                      <p class="text-danger" style="align-self:center;margin:0;font-size:0.8rem">Not Saved</p>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-5">
+      <span>Condition : </span>
+      <mat-radio-group aria-label="Condition :">
+        <mat-radio-button value="1">Safe</mat-radio-button>
+        <mat-radio-button value="2">Need Attention</mat-radio-button>
+        <mat-radio-button value="3">Border Line</mat-radio-button>
+        <mat-radio-button value="4">Danger</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="col-md-4 mt-3">
+      <mat-form-field class="chip_form_field">
+        <mat-chip-list #chipList1 aria-label="Packages selection">
+          <mat-chip *ngFor="let package of packages" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(package)">
+            {{package}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Suggests Package" #packagesInput [formControl]="packagesCtrl" [matAutocomplete]="auto"
+            [matChipInputFor]="chipList1" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let packages of filteredPackages | async" [value]="packages">
+            {{packages}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 mt-3">
+      <mat-form-field class="chip_form_field">
+        <mat-chip-list #chipList2 aria-label="Medical selection">
+          <mat-chip *ngFor="let medical of medicals" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(medical)">
+            {{medical}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Recommend Medical Equip." #medicalInput [formControl]="medicalCtrl"
+            [matAutocomplete]="mauto" [matChipInputFor]="chipList2" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #mauto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let medical of filteredMedicals | async" [value]="medical">
+            {{medical}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 mt-3">
+      <mat-form-field class="chip_form_field">
+        <mat-chip-list #chipList3 aria-label="Doctor selection">
+          <mat-chip *ngFor="let doctor of doctors" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(doctor)">
+            {{doctor}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Doctor Consulant" #doctorInput [formControl]="doctorCtrl" [matAutocomplete]="dauto"
+            [matChipInputFor]="chipList3" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #dauto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let doctor of filteredDoctors | async" [value]="doctor">
+            {{doctor}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 mt-3">
+      <mat-form-field class="chip_form_field">
+        <mat-chip-list #chipList4 aria-label="Vaccination selection">
+          <mat-chip *ngFor="let vaccine of vaccines" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(vaccine)">
+            {{vaccine}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Need Vaccination ?" #vaccineInput [formControl]="vaccineCtrl" [matAutocomplete]="vauto"
+            [matChipInputFor]="chipList4" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #vauto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let vaccine of filteredVeccines | async" [value]="vaccine">
+            {{vaccine}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-md-4 mt-3">
+      <mat-form-field class="chip_form_field">
+        <mat-chip-list #chipList5 aria-label="Suggest Wellness">
+          <mat-chip *ngFor="let wellnes of wellness" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(wellnes)">
+            {{wellnes}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Suggest Wellness" #wellnessInput [formControl]="wellnessCtrl" [matAutocomplete]="wauto"
+            [matChipInputFor]="chipList5" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #wauto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let wellnes of filteredWellness | async" [value]="wellnes">
+            {{wellnes}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Classic Modal -->
+<div class="modal fade" id="showEMR" tabindex="-1" role="dialog" style="overflow-x:auto;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="table-responsive" id="report">
+          <table class="table text-center table-striped">
+            <caption>Test Reports</caption>
+            <thead class="thead-info">
+              <tr>
+                <th> ID </th>
+                <th> Test Name </th>
+                <th> Doctor Name </th>
+                <th> Test Status </th>
+                <th> Test Results </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let test of lists;index as i" [id]="i">
+                <td> {{i+1}} </td>
+                <td> {{test.test}} </td>
+                <td> Dr. Lal </td>
+                <td>
+                  <fa-icon *ngIf="test.icon == 'purple'" [icon]="angry" size="2x" class="text-primary"></fa-icon>
+                  <fa-icon *ngIf="test.icon == 'angry'" [icon]="angry" size="2x" class="text-danger"></fa-icon>
+                  <fa-icon *ngIf="test.icon == 'sad'" [icon]="sad" size="2x" class="text-warning"></fa-icon>
+                  <fa-icon *ngIf="test.icon == 'smile'" [icon]="smile" size="2x" class="text-success"></fa-icon>
+                </td>
+                <td>
+                  <div style="height:160px;width: 280px;">
+                    <canvas baseChart [datasets]="barChartData[i]" [labels]="barChartLabels[0]"
+                      [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                      [chartType]="barChartType" (chartClick)="chartClicked($event,i)">
+                    </canvas>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--  End Modal -->

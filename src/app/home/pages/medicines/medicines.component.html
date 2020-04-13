@@ -1,0 +1,145 @@
+<main>
+  <div class="container-fluid p-4">
+
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-3">
+
+        <div class="row card justify-content-center pt-4 pb-4">
+          <h5 class="text-center">Filter result</h5>
+          <hr>
+          <div class="col-12 text-center">
+            <h5>Medecine Type</h5>
+            <mat-checkbox class="mr-4" [(ngModel)]="tablets">Tablets</mat-checkbox>
+            <mat-checkbox class="mr-4" [(ngModel)]="capsules">Capsules</mat-checkbox>
+            <mat-checkbox class="mr-4" [(ngModel)]="syrups">Syrups</mat-checkbox>
+            <mat-checkbox class="mr-4" [(ngModel)]="others">Others</mat-checkbox>
+
+          </div>
+          <div class="col-12 text-center">
+            <!-- <mat-form-field class="example-full-width">
+              <mat-label>Select City</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let city of cityList" [value]="city">{{city}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+          </div>
+          <div class="col-12 text-center">
+            <mat-form-field class="example-full-width">
+              <mat-label>Search medecine by name</mat-label>
+              <input matInput placeholder="medecine name">
+            </mat-form-field>
+          </div>
+          <div class="col-12 text-center mt-3">
+            <button class="btn btn-warning">Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-8 col-lg-9">
+        <div class="row bg-white">
+          <div class="col-12">
+            <p class="m-0 top-title">Tablets</p>
+          </div>
+          <div class="col-12 element" [ngClass]="tablets ? 'display-in-block' : 'display-in-line'">
+
+            <div class="col-md-2" *ngFor="let i of items">
+              <div *ngIf="i<7" class="card card-product card-plain no-shadow doc-card" (click)="goToMedecine(1)">
+                <div class="card-header card-header-image">
+                  <a href="#">
+                    <img src="../../../../assets/img/tablet.png" alt="...">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <p class="m-0">Paracetamol</p>
+                  <span class="description">
+                    10 pcs.
+                  </span>
+                </div>
+                <div class="card-footer justify-content-between">
+                  <div class="price-container">
+                    <span> ₹ 800</span>
+                  </div>
+                </div>
+              </div> <!-- end card -->
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div class="row bg-white mt-2 mb-2">
+          <div class="col-12">
+            <p class="m-0 top-title">Capsules</p>
+          </div>
+          <div class="col-12 element" [ngClass]="capsules ? 'display-in-block' : 'display-in-line'">
+            <div class="col-md-2" *ngFor="let i of items">
+              <div class="card card-product card-plain no-shadow doc-card" (click)="goToMedecine(2)">
+                <div class="card-header card-header-image">
+                  <a href="#">
+                    <img src="../../../../assets/img/capsule.png" alt="...">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <p class="m-0">Protien A</p>
+                  <span class="description">
+                    20 pcs.
+                  </span>
+                </div>
+                <div class="card-footer justify-content-between">
+                  <div class="price-container">
+                    <span> ₹ 1200</span>
+                  </div>
+                </div>
+              </div> <!-- end card -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row bg-white">
+          <div class="col-12">
+            <p class="m-0 top-title">Syrups</p>
+          </div>
+          <div class="col-12 element" [ngClass]="syrups ? 'display-in-block' : 'display-in-line'">
+            <div class="col-md-2" *ngFor="let i of items">
+              <div class="card card-product card-plain no-shadow doc-card" (click)="goToMedecine(3)">
+                <div class="card-header card-header-image">
+                  <a href="#">
+                    <img src="../../../../assets/img/syrup.png" alt="...">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <p class="m-0">Cystone</p>
+                  <span class="description">
+                    1 pcs.
+                  </span>
+                </div>
+                <div class="card-footer justify-content-between">
+                  <div class="price-container">
+                    <span> ₹ 250</span>
+                  </div>
+                </div>
+              </div> <!-- end card -->
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-3 ml-auto mr-auto mb-3 mt-3">
+            <div style="display:flex">
+              <button *ngIf="isNext" rel="tooltip" class="btn btn-rose mr-3 btn-round" data-original-title="go back"
+                title="go back">
+                <i class="material-icons" (click)="goPrev">keyboard_arrow_left</i>
+              </button>
+              <button rel="tooltip" class="btn btn-rose btn-round" data-original-title="go forward" title="go forward">
+                <i class="material-icons" (click)="goNext">keyboard_arrow_right</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

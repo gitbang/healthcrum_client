@@ -1,0 +1,249 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">assignment</i>
+        </div>
+        <h4 class="card-title ">Employee Test Appointment</h4>
+        <button class="btn btn-success" data-target="#add_emp" data-toggle="modal">Add New Employee</button>
+        <button class="btn ane btn-info">Add Employee (CSV)</button>
+        <div style="margin-left: auto;" class="col-md-4">
+          <form class="navbar-form">
+            <span class="bmd-form-group">
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control" placeholder="Search Employee..">
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
+              </div>
+            </span>
+          </form>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-responsive">
+            <thead class=" text-primary">
+              <tr>
+                <th>
+                  S No.
+                </th>
+                <th>
+                  Employee Name
+                </th>
+                <th>
+                  Email
+                </th>
+                <th>
+                  Contact
+                </th>
+                <th>
+                  Age
+                </th>
+                <th>
+                  Gender
+                </th>
+                <th>
+                  D.O.B
+                </th>
+                <th>
+                  Employee ID
+                </th>
+                <th>
+                  Dept
+                </th>
+                <th>
+                  Branch
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="empDetails">
+              <tr *ngFor="let emp of empDetails; index as i;">
+
+                <td>
+                  {{(page_no-1)*10+i}}
+                </td>
+                <td>
+                  {{emp.name}}
+                </td>
+                <td>
+                  {{emp.email}}
+                </td>
+                <td>
+                  {{emp.phone}}
+                </td>
+                <td>
+                  34
+                </td>
+                <td class="">
+                  {{emp.gender}}
+                </td>
+                <td class="">
+                  {{emp.dob}}
+                </td>
+                <td class="">
+                  111XXX
+                </td>
+                <td class="">
+                  Medicine
+                </td>
+                <td class="">
+                  Branch Name
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="pagination pagination-primary" *ngIf="empDetails">
+            <li class="page-item">
+              <a class="page-link"><i class="material-icons">chevron_left</i></a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link"><i class="material-icons">chevron_right</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="add_emp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-signup" role="document">
+    <div class="modal-content">
+      <div class="card card-signup card-plain">
+        <div class="modal-header">
+          <h5 class="modal-title card-title">Register Employee</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+
+          <div class="separator"></div>
+          <div class="test">
+            <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Employee Personal Info</ng-template>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Employee Name" formControlName="firstCtrl" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Employee Email-id</mat-label>
+                        <input matInput placeholder="Employee Email-id" [errorStateMatcher]="matcher" name="email"
+                          formControlName="firstCtrl" required>
+                        <mat-error *ngIf="firstFormGroup.hasError('email') && !firstFormGroup.hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="firstFormGroup.hasError('required')">
+                          Email is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Contact Number</mat-label>
+                        <input matInput type="tel" placeholder="Contact Number" formControlName="firstCtrl" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Select Gender</mat-label>
+                        <mat-select formControlName="firstCtrl" multiple>
+                          <mat-option *ngFor="let gender of genderList" [value]="gender">{{gender}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Date of birth</mat-label>
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Contact Number</mat-label>
+                        <input matInput type="tel" placeholder="Contact Number" formControlName="firstCtrl" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Employee Details</ng-template>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Employee Name" formControlName="secondCtrl" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Employee Email-id</mat-label>
+                        <input matInput placeholder="Employee Email-id" [errorStateMatcher]="matcher" name="email"
+                          formControlName="secondCtrl" required>
+                        <mat-error *ngIf="secondFormGroup.hasError('email') && !secondFormGroup.hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="secondFormGroup.hasError('required')">
+                          Email is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-label>Contact Number</mat-label>
+                        <input matInput type="tel" placeholder="Contact Number" formControlName="secondCtrl" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p>You are now done.</p>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+              </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

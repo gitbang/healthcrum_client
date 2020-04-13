@@ -1,0 +1,166 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-primary">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active text-white" href="#Labs" data-toggle="tab">
+                      <i class="material-icons">code</i> Registred Labs
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#add-Lab" data-toggle="tab">
+                      <i class="material-icons">add</i> Add New Lab
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="Labs">
+                <table class="table">
+                  <thead class="text-warning">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Speciality</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2023</td>
+                      <td>Dummy Clinic</td>
+                      <td>Dental clinic</td>
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                          class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2023</td>
+                      <td>Dummy Clinic</td>
+                      <td>Blood Test</td>
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                          class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2023</td>
+                      <td>Dummy Clinic</td>
+                      <td>Health Chekup</td>
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                          class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2023</td>
+                      <td>Dummy Clinic</td>
+                      <td>X-ray,ECG etc.</td>
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                          class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="add-Lab">
+                <div class="container-fluid">
+                  <form class="form" method="" action="">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6">
+
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="material-icons">face</i>
+                              </span>
+                              <input type="text" class="form-control" placeholder="First Name...">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="material-icons">email</i>
+                              </span>
+                              <input type="text" class="form-control" placeholder="Email...">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon">
+                                <i class="material-icons">lock_outline</i>
+                              </span>
+                              <input type="password" placeholder="Password..." class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                      <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
