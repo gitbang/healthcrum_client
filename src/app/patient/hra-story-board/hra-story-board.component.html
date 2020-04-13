@@ -13,45 +13,51 @@
         <div class="container mt-4">
           <div class="row">
             <div class="col-12">
-              <h4>Question : {{ current }} of {{total}}</h4>
+              <h4 *ngIf="current <= total">Question : {{ current }} of {{total}}</h4>
 
               <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 m-auto">
                   <div class="card mb-4">
-                    <div class="row ">
-                      <div class="col-12  text-center">
-                        <h4> <em>Question : </em> {{currentQuestion.question}} ?</h4>
-                        <br>
-                      </div>
-                    </div>
-                        <!--
-                        <div class="row justify-content-center">
-                          <button [ngClass]="question.ans == 1 ? 'active':''" class="btn btn-success btn-link"
-                            (click)="setYes(i)">Yes</button>
-                          <button [ngClass]=" question.ans == 0 ? 'active':''" class="btn btn-danger btn-link"
-                            (click)="setNo(i)">No</button>
+                    <div *ngIf="current <= total">
+                      <div class="row ">
+                        <div class="col-12  text-center">
+                          <h4> <em>Question : </em> {{currentQuestion.question}} ?</h4>
+                          <br>
                         </div>
-                        -->
-                    <div class="row ">
-                      <div class="col-6 m-auto text-center">  
-                        <div class=" row mt-3 mb-3">
-                          <div *ngFor="let opt of currentQuestion.optionsAre" class="col-6 m-auto text-center">
+                      </div>
+                          <!--
+                          <div class="row justify-content-center">
+                            <button [ngClass]="question.ans == 1 ? 'active':''" class="btn btn-success btn-link"
+                              (click)="setYes(i)">Yes</button>
+                            <button [ngClass]=" question.ans == 0 ? 'active':''" class="btn btn-danger btn-link"
+                              (click)="setNo(i)">No</button>
+                          </div>
+                          -->
+                      <div class="row ">
+                        <div class="col-6 m-auto text-center">  
+                          <div class=" row mt-3 mb-3">
+                            <div *ngFor="let opt of currentQuestion.optionsAre" class=" m-auto text-center">
 
-                            <button  class="btn  mt-3 btn-sm mr-4" mat-raised-button color="warn" 
-                            (click)="submit(opt.option, opt.value)">{{opt.option}}</button>
-                            
+                              <button  class="btn  mt-3 mr-4 m btn-sm mr-4" (click)="submit(opt.option, opt.value)" 
+                              mat-button [class.mat-raised-button]="selectCondition(opt.option)" color="warn" 
+                               mat-stroked-button>{{opt.option}}</button>
+                              
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row mt-5 mb-3">
-                      <div class="col-6 m-auto text-center">
-                        <button *ngIf="current != 1" class="btn btn-info btn-sm mr-4"
-                          (click)="goBack(i)">Previous</button>
-                        <button *ngIf="showNext" class="btn btn-info btn-sm" (click)="next(i)">Next</button>
-                        <button *ngIf="current == total" class="btn btn-warning btn-sm"
-                          (click)="submit()">Submit</button>
+                      <div class="row mt-5 mb-3"> 
+                        <div class=" m-auto text-center">
+                          <button *ngIf="current != 1" class="btn btn-info btn-sm"
+                            (click)="goBack(current)">Previous</button>
+                          <button *ngIf="showNext" class="btn btn-info btn-sm" (click)="next(i)">Next</button>
+                          <button *ngIf="current == total" class="btn btn-warning btn-sm"
+                            (click)="submit()">Submit</button>
+                        </div>
                       </div>
+                    </div>
+                    <div *ngIf="current > total">
+                      <h3>Your response is saved</h3>
                     </div>
                   </div>
                 </div>

@@ -93,48 +93,83 @@ export class HraStoryBoardComponent implements OnInit {
     })
   }
   currentQuestion = {
-
+    _id : '',           // main question _id
+    mainans : '',
+    mainScore : '',
+    subquestion : [{
+        subAns : '',
+        value : Number
+    }]
   };
-  index = -1;
+  index = 0;
   total 
   current = 1
   fromUser = [{
-   /* questionId : '',           // main question _id
+    questionId : '',           // main question _id
     mainans : '',
     mainScore : '',
     subquestion : [{
         subAns : String,
         value : Number
-    }]*/
+    }]
   }]
   organiseQuestions () {
-    this.index = this.index + 1; 
-    this.current = this.index + 1
     this.currentQuestion = this.questions[this.index];
     console.log(this.currentQuestion);
   }
-  
+  goBack(i){
+    console.log(i);
+    this.index = this.index  - 1; 
+    this.current = this.index + 1
+    this.currentQuestion = this.questions[this.index];
+    console.log(this.currentQuestion);
+  } 
+  selectCondition(value) {
+    console.log("select condition")
+    console.log(value);
+    console.log(this.fromUser)
+      if(!this.fromUser[this.index]) {
+        console.log("if executed");
+        return false;
+      }
+      else if(this.fromUser[this.index].mainans == value){
+        console.log("else executed")
+        return true;
+      }
+      else return false;
+       // else{
+    //   if(valu)
+    // }
+  }
+
   submit(ans, value){
-    var temp  = {
-      questionId : ans._id,
-      mainans : ans.option,
-      mainScore : ans.value
+   var temp  = { 
+      questionId : this.currentQuestion._id,
+      mainans : ans,
+      mainScore : value,
+      subquestion : []
     }
-    console.log(ans);  
-    console.log(ans.option);
-    console.log(this.questions[this.index].condition);
-    this.fromUser.push(temp)
+    this.fromUser[this.index] = temp;
+    console.log(this.fromUser)
+    console.log("temp ", temp)
+    this.index = this.index + 1; 
+    this.current = this.index + 1
+    //console.log(ans);  
+    //console.log(value);
+    
+    //console.log(this.questions[this.index].condition);
+    //this.fromUser.push(temp)
     // if(this.questions[this.index].subQuestion != false && this.questions[this.index].condition == ans.option) {
     //   this.subquestion(temp);
     // }
-      if(this.index == this.questions.length - 1) {
-        this.service.saveAns(this.fromUser).subscribe((response)=>{
-          console.log(response)
-        });
-      }
-      else {
-        this.organiseQuestions();
-      }
+    if(this.index <  this.questions.length - 1) {
+      this.organiseQuestions();
+    }
+    /*
+    else {
+      this.service.saveAns(this.fromUser).subscribe((response)=>{
+        console.log(response)
+      });
+    } */
   }
-
 }
