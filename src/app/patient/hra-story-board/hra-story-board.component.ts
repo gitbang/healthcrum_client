@@ -83,9 +83,13 @@ export class HraStoryBoardComponent implements OnInit {
 
   constructor( private router: Router, private service : PatientService) { }
 
+  category_array = ['Life Style', 'Physical Health','General Health',  'Dietary Habits', 
+                      'Occupational Wellness', 'Stress Assessment','Family History',
+                      'Senior Citizen Assessment' ,'Maternity Risk Assessment']
+  category_index = 0;
   questions : any
   ngOnInit() {
-    this.service.getQuestions().subscribe((questions : any)=>{
+    this.service.getQuestions(this.category_array[this.category_index ]).subscribe((questions : any)=>{
       console.log(questions);
       this.questions = questions;
       this.organiseQuestions();
@@ -102,21 +106,25 @@ export class HraStoryBoardComponent implements OnInit {
     }]
   };
   index = 0;
-  total 
-  current = 1
+  total; 
+  subTotal;
+  subIndex = 0;
+  current = 1;
+  control = "main";
   fromUser = [{
     questionId : '',           // main question _id
     mainans : '',
     mainScore : '',
     subquestion : [{
-        subAns : String,
-        value : Number
+        subAns : '',
+        value : ''        
     }]
   }]
   organiseQuestions () {
     this.currentQuestion = this.questions[this.index];
-    console.log(this.currentQuestion);
+   
   }
+
   goBack(i){
     console.log(i);
     this.index = this.index  - 1; 
@@ -124,52 +132,89 @@ export class HraStoryBoardComponent implements OnInit {
     this.currentQuestion = this.questions[this.index];
     console.log(this.currentQuestion);
   } 
+
+
   selectCondition(value) {
-    console.log("select condition")
-    console.log(value);
-    console.log(this.fromUser)
       if(!this.fromUser[this.index]) {
-        console.log("if executed");
         return false;
       }
       else if(this.fromUser[this.index].mainans == value){
-        console.log("else executed")
         return true;
       }
       else return false;
-       // else{
-    //   if(valu)
-    // }
   }
 
-  submit(ans, value){
-   var temp  = { 
-      questionId : this.currentQuestion._id,
-      mainans : ans,
-      mainScore : value,
-      subquestion : []
+  executeSubQuestion(subans = '', subvalue = 0){
+    console.log("ans and value are");
+    console.log(subans, subvalue);
+    var temp = {
+      subAns : subans,
+      value : subvalue.toString()
     }
-    this.fromUser[this.index] = temp;
-    console.log(this.fromUser)
-    console.log("temp ", temp)
+    this.fromUser[this.index].subquestion[this.subIndex] = temp;
+    if(this.subIndex >= this.questions[this.index].subQuestionAre.length) {
+      
+    }
+    else if(this.subIndex > 0){
+      this.control = "main";
+      this.normalFlow();
+
+    }
+  }
+
+  normalFlow(){
+    console.log("contiue");
     this.index = this.index + 1; 
-    this.current = this.index + 1
-    //console.log(ans);  
-    //console.log(value);
-    
-    //console.log(this.questions[this.index].condition);
-    //this.fromUser.push(temp)
-    // if(this.questions[this.index].subQuestion != false && this.questions[this.index].condition == ans.option) {
-    //   this.subquestion(temp);
-    // }
-    if(this.index <  this.questions.length - 1) {
+    this.current = this.index + 1;  
+    console.log("index is " , this.index);
+    console.log("question length : ", this.questions.length)
+    if(this.index <  this.questions.length) {
       this.organiseQuestions();
     }
-    /*
-    else {
+    else if(this.category_index < this.category_array.length) {
+      // save api should add here
+      this.category_index++;
+      this.service.getQuestions(this.category_array[this.category_index]).subscribe((questions : any)=>{
+        console.log(questions);
+        this.questions = questions;
+        this.index = 0; 
+        this.fromUser.length = 0;
+        this.fromUser = [];
+        this.current = this.index + 1;
+        this.total = this.questions.length;
+        this.organiseQuestions();
+      })
+    
+    }
+    else{
       this.service.saveAns(this.fromUser).subscribe((response)=>{
         console.log(response)
-      });
-    } */
+      })
+    }
+  }
+
+  async submit(ans, value){
+    // if(this.control == "subquestion") {
+    //    this.executeSubQuestion(ans, value) 
+    // }
+    //else { 
+      var temp  = { 
+        questionId : this.currentQuestion._id,
+        mainans : ans,
+        mainScore : value,
+        subquestion : []
+      }
+      this.fromUser[this.index] = temp;
+      if(this.questions[this.index].subQuestion == true && false) {
+        this.subTotal = this.questions[this.index].subQuestionAre.length;
+        //this.control = "subquestion";
+        this.currentQuestion = this.questions[this.index].subQuestionAre[this.subIndex];
+        console.log(this.currentQuestion);
+        //this.executeSubQuestion()
+      }
+      else {
+        this.normalFlow();
+      }     
+    //}
   }
 }

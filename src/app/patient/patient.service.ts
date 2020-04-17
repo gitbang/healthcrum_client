@@ -15,9 +15,10 @@ export class PatientService {
     return this.http.get<any>(this.url + category)
   }*/
 
-  getQuestions(){
+  getQuestions(category : string){
+    console.log(category)
     console.log("service reached")
-    return this.http.get('http://localhost:3000/patient/hra-questions')
+    return this.http.get('http://localhost:3000/patient/hra-questions/' + category )
   }
   saveAns(ans) {
     console.log("reached")
