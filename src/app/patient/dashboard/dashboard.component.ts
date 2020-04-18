@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   angry = faAngry;
   smile = faSmile;
   sad = faFlushed;
+  public picker1;
+  public picker2;
 
   public lists: any[] = [
     { test: "Blood Test1", icon: "angry", class: "bg-danger" },

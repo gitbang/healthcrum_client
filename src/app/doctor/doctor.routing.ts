@@ -8,6 +8,7 @@ import { AppointmentComponent } from "./pages/appointment/appointment.component"
 import { RecommendComponent } from "./pages/recommend/recommend.component";
 import { ServiceComponent } from "./pages/service/service.component";
 import { PatientCheckupComponent } from "./pages/patient-checkup/patient-checkup.component";
+import { EPrescriptionComponent } from "./pages/e-prescription/e-prescription.component";
 
 export const DoctorRoutes: Routes = [
   { path: "", component: DashboardComponent },
@@ -18,5 +19,6 @@ export const DoctorRoutes: Routes = [
   { path: "order", component: OdersComponent },
   { path: "recommend", component: RecommendComponent },
   { path: "patient-checkup", component: PatientCheckupComponent },
-  { path: "service", component: ServiceComponent }
+  { path: "service", component: ServiceComponent },
+  { path: "e-prescription", component: EPrescriptionComponent },
 ];

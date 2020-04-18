@@ -51,3 +51,35 @@ mat-card-content.mat-card-content p {
     left: 28%;
   }
 }
+
+mat-form-field {
+  margin-right: 12px;
+}
+.disease-result-list li {
+  font-size: 0.6rem;
+}
+.disease-box {
+  min-height: 40px;
+  background: #f4f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 3px 0px #6c757d;
+}
+.zone-box {
+  overflow: auto;
+}
+i:hover {
+  cursor: pointer;
+}
+.border-zone-card1 {
+  background: linear-gradient(45deg, transparent, purple);
+}
+.border-zone-card2 {
+  background: linear-gradient(240deg, transparent, #ffd400);
+}
+
+.safe-zone-card {
+  background: linear-gradient(120deg, transparent, #00ff4e);
+}
+.danger-zone-card {
+  background: linear-gradient(336deg, transparent, #ff003b);
+}

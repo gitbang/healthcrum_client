@@ -46,6 +46,7 @@ import {
 } from "@angular/material";
 import { DataTablesModule } from "angular-datatables";
 import { ChartsModule } from "ng2-charts";
+import { EPrescriptionComponent } from './pages/e-prescription/e-prescription.component';
 @NgModule({
   declarations: [
     DoctorComponent,
@@ -59,7 +60,8 @@ import { ChartsModule } from "ng2-charts";
     AppointmentComponent,
     RecommendComponent,
     ServiceComponent,
-    PatientCheckupComponent
+    PatientCheckupComponent,
+    EPrescriptionComponent
   ],
   imports: [
     CommonModule,

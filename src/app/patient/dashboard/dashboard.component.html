@@ -64,7 +64,7 @@
 
 
 
-  <div class="row mt-2">
+  <div class="row mt-3 mb-3">
     <div class="col-md-3">
       <div class="dd">
         <p class="txt-rotate">{{ name }}</p>
@@ -75,11 +75,103 @@
     </div>
     <div class="col-md-5">
       <div class="middle-box">
-        <div class="danger-zone">
-          <mat-chip selected class="bg-danger">
-            Disease
-            <!-- <mat-icon style="position:absolute;right:20px">home</mat-icon> -->
-          </mat-chip>
+        <div class="row">
+          <div class="col-md-6 p-0">
+            <mat-card style="min-height:180px" class="zone-card danger-zone-card">
+              <div class="danger-zone disease-box">
+                <div class="disease-box mb-1">
+                  <div class="row p-1">
+                    <div class="col-9">
+                      <p class="m-0"><b>Disease Name</b></p>
+                      <ul class="m-0 disease-result-list">
+                        <li>2016 - green</li>
+                        <li>2017 - red</li>
+                      </ul>
+                    </div>
+                    <div class="col-3 " style="align-self: center;">
+                      <i class="material-icons text-danger" data-toggle="tooltip" data-placement="top"
+                        title="test Graph detail will be here">info</i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div class="col-md-6 p-0">
+            <mat-card style="min-height:180px" class="zone-card border-zone-card1">
+
+              <div class="disease-box mb-1">
+                <div class="row p-1">
+                  <div class="col-9">
+                    <p class="m-0"><b>Disease Name</b></p>
+                    <ul class="m-0 disease-result-list">
+                      <li>2016 - green</li>
+                      <li>2017 - red</li>
+                    </ul>
+                  </div>
+                  <div class="col-3 " style="align-self: center;">
+                    <i class="material-icons text-primary" data-toggle="tooltip" data-placement="top"
+                      title="test Graph detail will be here">info</i>
+                  </div>
+                </div>
+              </div>
+
+            </mat-card>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 p-0">
+            <mat-card style="min-height:180px" class="zone-card border-zone-card2">
+
+              <div class="disease-box mb-1">
+                <div class="row p-1">
+                  <div class="col-9">
+                    <p class="m-0"><b>Disease Name</b></p>
+
+                  </div>
+                  <div class="col-3 " style="align-self: center;">
+                    <i class="material-icons text-warning" data-toggle="tooltip" data-placement="top"
+                      title="test Graph detail will be here">info</i>
+                  </div>
+                </div>
+              </div>
+
+            </mat-card>
+          </div>
+          <div class="col-md-6 p-0">
+            <mat-card style="min-height:180px" class="zone-card safe-zone-card">
+              <div class="disease-box mb-1">
+                <div class="row p-1">
+                  <div class="col-9">
+                    <p class="m-0"><b>Disease B</b></p>
+                    <ul class="m-0 disease-result-list">
+                      <li>2016 - green</li>
+                      <li>2017 - red</li>
+                    </ul>
+                  </div>
+                  <div class="col-3 " style="align-self: center;">
+                    <i class="material-icons text-success" data-toggle="tooltip" data-placement="top"
+                      title="test Graph detail will be here">info</i>
+                  </div>
+                </div>
+              </div>
+              <div class="disease-box mb-1">
+                <div class="row p-1">
+                  <div class="col-9">
+                    <p class="m-0"><b>Disease A</b></p>
+                    <ul class="m-0 disease-result-list">
+                      <li>2016 - green</li>
+                      <li>2017 - red</li>
+                    </ul>
+                  </div>
+                  <div class="col-3 " style="align-self: center;">
+                    <i class="material-icons text-success" data-toggle="tooltip" data-placement="top"
+                      title="test Graph detail will be here">info</i>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +183,7 @@
         <mat-card-header>
           <mat-card-title>Reccommendation</mat-card-title>
         </mat-card-header>
+        <hr class="m-0">
         <mat-card-content>
           <ol type="1" style="list-style: decimal;margin-left: 5px;">
             <li>Hba1c</li>
@@ -195,6 +288,54 @@
         </table>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-primary">
+        Previous Investigation
+      </button>
+      <button class="btn btn-info">
+        Last Investigation
+      </button>
+      <button class="btn btn-success">
+        Last 1 week Investigation
+      </button>
+      <button class="btn btn-warning">
+        LAst 10 Month Investigation
+      </button>
+      <button class="btn btn-secondery">
+        Last 6 month Investigation
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Custom</mat-card-title>
+        </mat-card-header>
+        <hr class="m-0">
+        <mat-card-content>
+          <mat-form-field color="accent">
+            <mat-label>Inverstigation From</mat-label>
+            <input matInput [matDatepicker]="picker1">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <mat-label>Inverstigation To</mat-label>
+            <input matInput [matDatepicker]="picker2">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-footer>
+          <button class="ml-2 btn btn-info">Search</button>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+
   </div>
 </div>
 

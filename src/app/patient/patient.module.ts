@@ -38,6 +38,7 @@ import {
   MatStepperModule,
   MatTableModule,
   MatCardModule,
+  MatChipsModule,
 } from "@angular/material";
 import { ChartsModule } from "ng2-charts";
 import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
@@ -86,6 +87,7 @@ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
     DataTablesModule,
     GaugeChartModule,
     MatCardModule,
+    MatChipsModule,
   ],
 })
 export class PatientModule {}
