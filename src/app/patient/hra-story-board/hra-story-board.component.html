@@ -16,9 +16,15 @@
               <h4 *ngIf="current <= total">Question : {{ current }} of {{total}}</h4>
               
               <div class="row">
+                  <h3 class="col-lg-3 col-md-5 col-xs-12 ">{{category_array[category_index]}} : </h3>
+                  <h3 *ngIf="control =='main'" class="col-5">Main Question</h3>
+                  <h3 *ngIf="control == 'subquestion'" class="col-5">Subquestion </h3>
+              
+              </div>
+              <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 m-auto">
                   <div >
-                    <h3>{{category_array[category_index]}}</h3>
+                    
                   </div>
                   <div class="card mb-4">
                     <div *ngIf="current <= total">
@@ -59,7 +65,7 @@
                       </div>
                     </div>
                     <div *ngIf="current > total">
-                      <h3>Your response is saved</h3>
+                      <h3>Your response is saved </h3>
                     </div>
                   </div>
                 </div>
