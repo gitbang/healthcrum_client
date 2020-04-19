@@ -12,75 +12,6 @@ import {PatientService} from  '../patient.service'
 })
 export class HraStoryBoardComponent implements OnInit {
   
-  /*
-  current: number = 1;
-  total: number;
-  showNext: boolean = false;
-  questions: any = [
-    { question: "Question1", isMCQ: true, ans: -1 },
-    { question: "Question2", isMCQ: true, ans: -1 },
-    { question: "Question3", isMCQ: true, ans: -1 },
-    { question: "Question4", isMCQ: true, ans: -1 },
-    { question: "Question5", isMCQ: true, ans: -1 }
-  ];
-  constructor(private router: Router, private service : PatientService) {}
-
-  ngOnInit() {
-    this.total = this.questions.length;
-  }
-
-  setYes(index) {
-    this.questions[index].ans = 1;
-    if (index < this.total - 1) {
-      this.current++;
-    }
-    if (this.current == this.total) {
-      this.showNext = false;
-    }
-  }
-  setNo(index) {
-    this.questions[index].ans = 0;
-    if (index < this.total - 1) {
-      this.current++;
-    }
-  }
-  goBack(index) {
-    if (this.current <= 1) {
-      return;
-    } else {
-      this.current--;
-      this.showNext = true;
-    }
-  }
-  submit() {
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Your information has been saved!",
-      showConfirmButton: false,
-      timer: 1500
-    });
-    setTimeout(() => {
-      this.router.navigate(["/patient/dashboard"]);
-    }, 2234);
-  }
-  next(i) {
-    this.current++;
-    if (this.current > this.total - 1) {
-      this.showNext = false;
-    }
-  }
-
-
-  // get question from database .. a a ..
-  getQuestion(category){
-    //console.log(category)
-    this.service.getQuestion(category).subscribe((result : any)=>{
-      console.log(result)
-    });
-  }  */
-  //===============================================================================================//
-
   constructor( private router: Router, private service : PatientService) { }
 
   category_array = ['Life Style', 'Physical Health','General Health',  'Dietary Habits', 
@@ -185,15 +116,15 @@ export class HraStoryBoardComponent implements OnInit {
         console.log(response)
       })
       this.category_index++;
-     /* this.service.getQuestions(this.category_array[this.category_index]).subscribe((questions : any)=>{
-        this.questions = questions;
-        this.index = 0; 
-        this.fromUser.length = 0;
-        this.fromUser = [];
-        this.current = this.index + 1;
-        this.total = this.questions.length;
-        this.organiseQuestions();
-      })*/
+    //  this.service.getQuestions(this.category_array[this.category_index]).subscribe((questions : any)=>{
+    //     this.questions = questions;
+    //     this.index = 0; 
+    //     this.fromUser.length = 0;
+    //     this.fromUser = [];
+    //     this.current = this.index + 1;
+    //     this.total = this.questions.length;
+    //     this.organiseQuestions();
+    //   })
     }
     else{
        
@@ -229,6 +160,7 @@ export class HraStoryBoardComponent implements OnInit {
         this.currentQuestion = this.questions[this.index].subQuestionAre[this.subIndex];
       }
       else {
+        this.fromUser[this.index].subquestion = [];
         this.normalFlow();
       }     
     }
