@@ -46,11 +46,18 @@
                         <div class="col-6 m-auto text-center">  
                           <div class=" row mt-3 mb-3">
                             <div *ngFor="let opt of currentQuestion.optionsAre" class=" m-auto text-center">
-
-                              <button  class="btn  mt-3 mr-2 m btn-sm " (click)="submit(opt.option, opt.value)" 
-                                mat-button [class.mat-raised-button]="selectCondition(opt.option)" color="warn" 
-                                mat-stroked-button>{{opt.option}}</button>
+                              <div *ngIf="currentQuestion.optionsAre.length > 1">
+                                <button  class="btn  mt-3 mr-2 m btn-sm " (click)="submit(opt.option, opt.value)" 
+                                  mat-button [class.mat-raised-button]="selectCondition(opt.option)" color="warn" 
+                                  mat-stroked-button>{{opt.option}}</button>
+                              </div>
+                              <div *ngIf="currentQuestion.optionsAre.length == 1" >
+                                <input placeholder="Enter Your Answer" type="text" #userinput>
+                                <button (click) = "submit(userinput.value, opt.value)" class="btn btn-danger btn-sm">
+                                   Submit</button>
+                              </div>
                             </div>
+                            
                           </div>
                         </div>
                       </div>
