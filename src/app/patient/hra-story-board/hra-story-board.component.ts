@@ -17,7 +17,7 @@ export class HraStoryBoardComponent implements OnInit {
   category_array = ['Life Style', 'Physical Health','General Health',  'Dietary Habits', 
                       'Occupational Wellness', 'Stress Assessment','Family History',
                       'Senior Citizen Assessment' ,'Maternity Risk Assessment']
-  category_index = 2;
+  category_index = 0;
   questions : any
   ngOnInit() {
     this.service.getQuestions(this.category_array[this.category_index ]).subscribe((questions : any)=>{
@@ -37,7 +37,7 @@ export class HraStoryBoardComponent implements OnInit {
         value : Number
     }]
   };
-  index = 13;
+  index = 0;
   total; 
   subTotal;
   subIndex = 0;
@@ -52,17 +52,39 @@ export class HraStoryBoardComponent implements OnInit {
         value : ''        
     }]
   }]
+  
   organiseQuestions () {
     //console.log("organised data reached");
     this.currentQuestion = this.questions[this.index];
   }
 
   goBack(i){
-    this.index = this.index  - 1; 
-    this.current = this.index + 1;
-    this.currentQuestion = this.questions[this.index];
-    this.control = 'main';
-  } 
+    if(this.control == "subquestion") {
+      if(this.subIndex > 0) {
+        this.subIndex = this.subIndex - 1;
+        this.currentQuestion = this.questions[this.index].subQuestionAre[this.subIndex];
+      } 
+      else{
+        this.currentQuestion = this.questions[this.index];
+        this.control = "main";
+      }
+    }
+    else if(this.control == "main") {
+      if(this.fromUser[this.index - 1].subquestion.length != 0){ 
+        this.index = this.index - 1
+        this.subIndex = this.questions[this.index].subQuestionAre.length - 1;
+        this.currentQuestion = this.questions[this.index].subQuestionAre[this.subIndex];
+        this.control = "subquestion";
+      }
+      else{
+        this.index = this.index  - 1;     
+        this.currentQuestion = this.questions[this.index];
+        this.control = 'main';  
+      }
+    }
+    this.current = this.index + 1;  
+  }
+
   selectCondition(value) {
     if(this.control == "main") {
       if(!this.fromUser[this.index]) {
@@ -85,14 +107,11 @@ export class HraStoryBoardComponent implements OnInit {
   }
 
   executeSubQuestion(subans = '', subvalue = 0){
-    console.log()
     var temp = {
       subAns : subans,
       value : (!subvalue) ? "0" : subvalue.toString()
     }
-    console.log(temp);
     this.fromUser[this.index].subquestion[this.subIndex] = temp;
-    console.log(this.fromUser);
     this.subIndex++;
     if(this.subIndex < this.questions[this.index].subQuestionAre.length) {
       this.currentQuestion = this.questions[this.index].subQuestionAre[this.subIndex]
@@ -107,18 +126,15 @@ export class HraStoryBoardComponent implements OnInit {
   normalFlow(){
     this.index = this.index + 1; 
     this.current = this.index + 1; 
-    //console.log("this from user")
-    console.log(this.fromUser);
     if(this.index <  this.questions.length) {
       this.organiseQuestions();
     }
     else if(this.category_index < this.category_array.length) {
-      //console.log("save api add here")
       this.service.saveAns(this.fromUser).subscribe((response)=>{
         console.log(response)
       })
       this.category_index++;
-     this.service.getQuestions(this.category_array[this.category_index]).subscribe((questions : any)=>{
+      this.service.getQuestions(this.category_array[this.category_index]).subscribe((questions : any)=>{
         this.questions = questions;
         this.index = 0; 
         this.fromUser.length = 0;
@@ -128,9 +144,6 @@ export class HraStoryBoardComponent implements OnInit {
         this.organiseQuestions();
       })
     }
-    else{
-       
-    }
   }
 
   async submit(ans, value){
@@ -138,25 +151,19 @@ export class HraStoryBoardComponent implements OnInit {
        this.executeSubQuestion(ans, value) 
     }
     else { 
-      //console.log("new question");
       var temp  = { 
         questionId : this.currentQuestion._id,
         mainans : ans,
         mainScore : value,
         subquestion : []
       }
-      //console.log("from user");
-      console.log(this.fromUser);
       if(!this.fromUser[this.index] || this.fromUser.length == 1) {
-        console.log("first times");
         this.fromUser[this.index] = temp;
       }
       else{
         this.fromUser[this.index].mainans = ans;
         this.fromUser[this.index].mainScore = value;
-      }
-      //console.log("current question" , this.currentQuestion)
-     
+      }     
       if(this.questions[this.index].subQuestion == true) {
         if(this.currentQuestion.condition == ans || (ans != "no" && this.currentQuestion.condition == "!no")){
           this.subTotal = this.questions[this.index].subQuestionAre.length;
@@ -164,12 +171,11 @@ export class HraStoryBoardComponent implements OnInit {
           this.currentQuestion = this.questions[this.index].subQuestionAre[this.subIndex];
         }
         else{
-          console.log("subquestion condition false");
+          this.fromUser[this.index].subquestion = [];
           this.normalFlow();
         }
       }
       else {
-        console.log("no subquestion")
         this.fromUser[this.index].subquestion = [];
         this.normalFlow();
       }     

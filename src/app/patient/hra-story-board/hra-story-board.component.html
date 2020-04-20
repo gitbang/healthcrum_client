@@ -63,7 +63,7 @@
                       </div>
                       <div class="row mt-5 mb-3"> 
                         <div class=" m-auto text-center">
-                          <button *ngIf="current != 1" class="btn btn-info btn-sm"
+                          <button *ngIf="current != 1 || control == 'subquestion'" class="btn btn-info btn-sm"
                             (click)="goBack(current)">Previous</button>
                           <button *ngIf="showNext" class="btn btn-info btn-sm" (click)="next(i)">Next</button>
                           <button *ngIf="current == total" class="btn btn-warning btn-sm"
@@ -87,10 +87,3 @@
     </div>
   </div>
 </div>
-
-<!--
-<button (click)="getQuestion('lifestyle')"> life style</button>
-<button (click)="getQuestion('generalHealth')"> General Health</button>
-<button (click)="getQuestion('physicalHealth')"> physical health</button>
-
--->
