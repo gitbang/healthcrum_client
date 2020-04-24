@@ -1,16 +1,16 @@
-<div class="appoint container-fluid">
-  <div class="row hra-details pt-4 pb-4"  >
-    <div class="col-md-2">
+<div class="appoint container-fluid main-container">
+  <div class="row hra-details pb-4">
+    <div class="col-md-2 col-sm-4 mt-4">
       <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
-          <mat-card-title >Allergy</mat-card-title>
+          <mat-card-title>Allergy</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p> Medical, Food</p>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 mt-4">
       <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Family History</mat-card-title>
@@ -20,7 +20,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 mt-4">
       <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Profession</mat-card-title>
@@ -30,7 +30,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 mt-4">
       <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Any Major History</mat-card-title>
@@ -40,7 +40,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 mt-4 ">
       <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Stress</mat-card-title>
@@ -50,7 +50,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-4 mt-4">
       <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Insurance</mat-card-title>
@@ -62,19 +62,24 @@
     </div>
   </div>
 
-  <div class="row"> 
-    <div class="col-12">
-      <div class="card-chart"> 
-        <div class="card-body">
-          <div class="chart-area">
-            <canvas id="linegraph" #lineChart>{{chart}}</canvas>
+
+<div class="row ">
+  <div class="col-12  ">
+    <div class="card-chart">
+      <div class="card-body" >
+        <div class="chart-area">
+          <div>
+            <div >
+              <canvas baseChart id="linechart" class="bg-dark">
+              </canvas>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
+</div>
+<!--
 
   <div class="row mt-3 mb-3">
     <div class="col-md-3">
@@ -208,6 +213,8 @@
       </mat-card>
     </div>
   </div>
+
+
 
   <div class="row mt-2">
     <div class="col-md-3">
@@ -349,7 +356,48 @@
     </div>
 
   </div>
+-->
+  <div class="row">
+    <div class="table pt-4 col-lg-5 col-sm-12" >
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Test Done</th>
+          <th>Value</th>
+          <th>Zone</th>
+          <th>Normal Zone</th>
+          <th>Comparison</th>
+        </tr>
+
+        <tr *ngFor="let test of lists;index as i" [id]="i">
+          <td> {{i+1}} </td>
+          <td> {{test.test}} </td>
+          <td> 80 </td>
+          <td>
+            <fa-icon *ngIf="test.icon == 'purple'" [icon]="angry" size="2x" class="text-primary"></fa-icon>
+            <fa-icon *ngIf="test.icon == 'angry'" [icon]="angry" size="2x" class="text-danger"></fa-icon>
+            <fa-icon *ngIf="test.icon == 'sad'" [icon]="sad" size="2x" class="text-warning"></fa-icon>
+            <fa-icon *ngIf="test.icon == 'smile'" [icon]="smile" size="2x" class="text-success"></fa-icon>
+          </td>
+          <td> 100-120 </td>
+          <td> <button class="btn btn-xs btn-danger">See Result</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="barchart col-sm-8 col-lg-5  pt-4">
+      <div class="card-chart">
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas baseChart id="sidebarchart" class="bg-dark"> </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 <div class="tooltip bs-tooltip-top" role="tooltip">
   <div class="arrow"></div>

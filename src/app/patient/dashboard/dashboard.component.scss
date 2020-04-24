@@ -84,10 +84,9 @@ i:hover {
   background: linear-gradient(336deg, transparent, #ff003b);
 }
 
-
-
-/* by me */
-
 .hra-details {
-  background-image: linear-gradient(darkred , red);
+  background-image: linear-gradient(darkred,red);
+}
+.main-container {
+  background-image: linear-gradient(rgba(0, 0, 100, 0.4), rgba(0,0,100,0));
 }
