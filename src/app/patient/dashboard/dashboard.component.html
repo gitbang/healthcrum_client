@@ -1,9 +1,9 @@
 <div class="appoint container-fluid">
-  <div class="row">
+  <div class="row hra-details pt-4 pb-4"  >
     <div class="col-md-2">
-      <mat-card class="example-card mat-card {{top_status.red}}" style="height:100%">
+      <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
-          <mat-card-title>Allergy</mat-card-title>
+          <mat-card-title >Allergy</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p> Medical, Food</p>
@@ -11,7 +11,7 @@
       </mat-card>
     </div>
     <div class="col-md-2">
-      <mat-card class="example-card mat-card {{top_status.green}}" style="height:100%">
+      <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Family History</mat-card-title>
         </mat-card-header>
@@ -21,7 +21,7 @@
       </mat-card>
     </div>
     <div class="col-md-2">
-      <mat-card class="example-card mat-card {{top_status.gy}}" style="height:100%">
+      <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Profession</mat-card-title>
         </mat-card-header>
@@ -31,7 +31,7 @@
       </mat-card>
     </div>
     <div class="col-md-2">
-      <mat-card class="example-card mat-card {{top_status.yellow}}" style="height:100%">
+      <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Any Major History</mat-card-title>
         </mat-card-header>
@@ -41,7 +41,7 @@
       </mat-card>
     </div>
     <div class="col-md-2">
-      <mat-card class="example-card mat-card {{top_status.ry}}" style="height:100%">
+      <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Stress</mat-card-title>
         </mat-card-header>
@@ -51,7 +51,7 @@
       </mat-card>
     </div>
     <div class="col-md-2">
-      <mat-card class="example-card mat-card {{top_status.red}}" style="height:100%">
+      <mat-card class="example-card mat-card " style="height:100%">
         <mat-card-header>
           <mat-card-title>Insurance</mat-card-title>
         </mat-card-header>
@@ -59,6 +59,18 @@
           <p>Name Type, Number</p>
         </mat-card-content>
       </mat-card>
+    </div>
+  </div>
+
+  <div class="row"> 
+    <div class="col-12">
+      <div class="card-chart"> 
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="linegraph" #lineChart>{{chart}}</canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

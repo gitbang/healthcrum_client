@@ -23,6 +23,9 @@ import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.compon
 import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
 import { GaugeChartModule } from "angular-gauge-chart";
 import { DataTablesModule } from "angular-datatables";
+
+
+
 import {
   MatButtonModule,
   MatInputModule,

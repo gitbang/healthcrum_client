@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Label } from "ng2-charts";
@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import { faAngry, faFlushed, faSmile } from "@fortawesome/free-solid-svg-icons";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+
+
+import{ Chart} from 'chart.js'
 
 @Component({
   selector: "app-dashboard",
@@ -88,7 +91,21 @@ export class DashboardComponent implements OnInit {
   };
   constructor() {}
 
+  // lets start
+  @ViewChild ('lineChart', {static : false}) private chartRef;
+  chart : any;
+  ctx = <HTMLCanvasElement> document.getElementById('linegraph')
   ngOnInit() {
+    this.chart = new Chart(this.chartRef.nativeElement, {
+      type : 'line',
+      data : {
+        labels : ["a", "b", "c"],
+        datasets : {
+          data : [],
+
+        }
+      }
+    })
     this.getTestResults();
   }
 
