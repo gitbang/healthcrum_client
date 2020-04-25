@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PatientRoutes } from "./patient.routing";
@@ -39,6 +39,7 @@ import {
   MatTableModule,
   MatCardModule,
   MatChipsModule,
+  MatAutocompleteModule
 } from "@angular/material";
 import { ChartsModule } from "ng2-charts";
 import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
@@ -88,6 +89,10 @@ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
     GaugeChartModule,
     MatCardModule,
     MatChipsModule,
+    MatAutocompleteModule
   ],
+  providers: [
+    DatePipe
+  ]
 })
 export class PatientModule {}

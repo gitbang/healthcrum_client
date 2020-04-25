@@ -1,11 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
+import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Label } from "ng2-charts";
 import Swal from "sweetalert2";
 import { faAngry, faFlushed, faSmile } from "@fortawesome/free-solid-svg-icons";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
+import { color } from "html2canvas/dist/types/css/types/color";
+
 
 @Component({
   selector: "app-dashboard",
@@ -86,12 +89,18 @@ export class DashboardComponent implements OnInit {
     rangeLabel: ["0", "20", "40", "60", "80", "100"],
     needleStartValue: 0,
   };
+
   constructor() {}
+
+  ele = <HTMLCanvasElement> document.getElementById("linegraph")
+  
 
   ngOnInit() {
     this.getTestResults();
+    this.bigLineChart();  
+    this.sideBargraph();
   }
-
+  
   public getTestResults() {
     let i = 0;
     this.lists.forEach((el) => {
@@ -144,5 +153,131 @@ export class DashboardComponent implements OnInit {
     else if (num < 90 && num >= 70) return "angry";
     else if (num <= 100 && num >= 90) return "purple";
     else return "purple";
+  }
+  // 
+  bigLineChart() {
+    var canvas : any = document.getElementById("linechart");
+    var ctxL = canvas.getContext("2d");  
+    var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
+
+    // gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
+
+    // gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
+
+    gradientFill.addColorStop(0, "rgba(255, 53, 0, 1)");
+
+    gradientFill.addColorStop(1, "rgba(255, 53, 0, 0)");
+    var myLineChart = new Chart(ctxL, {
+      type: 'line',
+      data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [
+          {
+            label: "User Active",
+            data: [0, 65, 45, 65, 35, 65, 0],
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#AD35BA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+          } 
+        ]
+      },
+      options: {
+        responsive: true,
+        aspectRatio : 3,
+        scales: {
+          xAxes: [{
+               gridLines: {
+                    display: false
+               },
+               ticks : {
+                 autoSkip : false,
+                 minRotation : 30 ,
+                 maxRotation : 30,
+                 fontColor : "white"
+               }
+            }],
+          yAxes: [{
+              gridLines: {
+                display:false
+              },
+              ticks : {
+                fontColor : "white"
+              }     
+            }]
+          }
+      }
+    });
+  }
+
+
+  sideBargraph(){
+    var canvas : any = document.getElementById("sidebarchart");
+    var ctxL = canvas.getContext("2d");  
+    var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
+
+    // gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
+
+    // gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
+
+    gradientFill.addColorStop(0, "rgba(255, 0, 0, 1)");
+
+    gradientFill.addColorStop(1, "rgba(255, 0, 0, 0.1)");
+
+    var myLineChart = new Chart(ctxL, {
+      type: 'bar',
+      data: {
+        labels: ["Life-Style", "Physical", "Emotional", "Social", "Overall"],
+        datasets: [
+          {
+            label: "Pysical",
+            data: [0, 1, 2, 3],
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#AD35BA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+          }
+        ]
+      },
+      options: {
+        responsive: true, 
+        aspectRatio : 0.8,
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            },
+            ticks : {
+              autoSkip : false,
+              fontColor : "white"
+            },
+            scaleLabel : {
+              display : true,
+              labelString : "Health ",
+              fontColor : "white"
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true
+            },
+            ticks : {
+              fontColor : "white"
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Percentage (%)',
+              fontColor : 'white'
+            }
+          }]
+        }
+      }
+    });
   }
 }
