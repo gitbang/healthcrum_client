@@ -47,6 +47,8 @@ import {
 import { DataTablesModule } from "angular-datatables";
 import { ChartsModule } from "ng2-charts";
 import { EPrescriptionComponent } from './pages/e-prescription/e-prescription.component';
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [
     DoctorComponent,
@@ -94,7 +96,8 @@ import { EPrescriptionComponent } from './pages/e-prescription/e-prescription.co
     ChartsModule,
     MatChipsModule,
     MatAutocompleteModule,
-    DataTablesModule
+    DataTablesModule,
+    SharedModule
   ]
 })
 export class DoctorModule {}

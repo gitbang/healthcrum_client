@@ -23,7 +23,7 @@ import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.compon
 import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
 import { GaugeChartModule } from "angular-gauge-chart";
 import { DataTablesModule } from "angular-datatables";
-
+import { SharedModule } from '../shared/shared.module';
 
 
 import {
@@ -66,6 +66,7 @@ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
     HraStoryBoardComponent,
     ViewDoctorComponent,
     PatientEhrComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -92,7 +93,8 @@ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
     GaugeChartModule,
     MatCardModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    SharedModule
   ],
   providers: [
     DatePipe

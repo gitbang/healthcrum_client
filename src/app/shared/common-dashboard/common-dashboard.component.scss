@@ -1,0 +1,92 @@
+.mat-card-header .mat-card-title {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .txt-rotate {
+    //   transform: rotate(-90deg);
+    margin: 0;
+    position: absolute;
+    left: 35%;
+    top: 75%;
+    transform: translate(-50%, -75%);
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .dd {
+    transform: rotate(90deg);
+    margin-left: -63%;
+    margin-top: 42%;
+  }
+  
+  mat-card-content.mat-card-content p {
+    font-size: 12px;
+  }
+  
+  .green {
+    background: #0dac54;
+    color: #fff;
+  }
+  .green-yellow {
+    background: #4caa05;
+    color: #fff;
+  }
+  
+  .yellow {
+    background: #c9d50a;
+    color: #fff;
+  }
+  .yello-red {
+    background: #d5970a;
+    color: #fff;
+  }
+  .red {
+    background: #d5390a;
+    color: #fff;
+  }
+  
+  @media screen and (max-width: 786px) {
+    p.txt-rotate {
+      left: 28%;
+    }
+  }
+  
+  mat-form-field {
+    margin-right: 12px;
+  }
+  .disease-result-list li {
+    font-size: 0.6rem;
+  }
+  .disease-box {
+    min-height: 40px;
+    background: #f4f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 3px 0px #6c757d;
+  }
+  .zone-box {
+    overflow: auto;
+  }
+  i:hover {
+    cursor: pointer;
+  }
+  .border-zone-card1 {
+    background: linear-gradient(45deg, transparent, purple);
+  }
+  .border-zone-card2 {
+    background: linear-gradient(240deg, transparent, #ffd400);
+  }
+  
+  .safe-zone-card {
+    background: linear-gradient(120deg, transparent, #00ff4e);
+  }
+  .danger-zone-card {
+    background: linear-gradient(336deg, transparent, #ff003b);
+  }
+  
+  .hra-details {
+    background-image: linear-gradient(darkred,red);
+  }
+  .main-container {
+    background-image: linear-gradient(rgba(0, 0, 100, 0.4), rgba(0,0,100,0));
+  }
