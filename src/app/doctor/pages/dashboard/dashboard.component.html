@@ -1,2 +1,135 @@
+<div class="master appoint container-fluid main-container">
+    <div class="row hra-details pb-4">
+        <div class="col-md-2 col-sm-4 mt-4">
+            <mat-card class="example-card mat-card " style="height:100%">
+                <mat-card-header>
+                    <mat-card-title >Last Consultant</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class="col-md-2 col-sm-4 mt-4">
+            <mat-card class="example-card mat-card " style="height:100%">
+                <mat-card-header>
+                     <mat-card-title>Investigation</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class="col-md-2 col-sm-4 mt-4">
+            <mat-card class="example-card mat-card " style="height:100%">
+                <mat-card-header>
+                    <mat-card-title >Condition / Symptemic</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class="col-md-2 col-sm-4 mt-4">
+            <mat-card class="example-card mat-card " style="height:100%">
+                <mat-card-header>
+                    <mat-card-title>Medications</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
 
-<app-common-dashboard></app-common-dashboard>
+    <!--
+
+    <div class="middle-table">
+        <div class="row middle-table-body">
+            <div class="col-3">
+            </div >
+            <div class="col-7">
+                <label></label>
+            </div>
+            <div class="col-2 ">
+                <h4>Remark</h4>
+            </div>    
+        </div>    
+        <div class="row middle-table-body">
+            <div class="col-3">
+                <h4>Finding</h4>
+            </div >
+            <div class="col-7">
+                <label></label>
+            </div>
+            <div class="col-2 ">
+            </div>    
+        </div>
+        <div class="row middle-table-body">
+            <div class="col-3">
+                <h4>Finding</h4>
+            </div >
+            <div class="col-7">
+                <label></label>
+            </div>
+            <div class="col-2 ">
+            </div>    
+        </div>
+        <div class="row middle-table-body">
+            <div class="col-3">
+                <h4>Recommendation</h4>
+            </div >
+            <div class="col-7">
+                <label></label>
+            </div>
+            <div class="col-2 ">
+            </div>    
+        </div>
+    </div>
+
+    -->
+
+    <div class="middle-table">
+        <table class="mid-table">
+            <tr class="color row">
+                <th class="col-2"></th>
+                <th class="col-5"></th>
+                <th class="col-2">remarks</th>
+            </tr>
+            <tr class="row">
+                <td class="color col-2">Problems</td>
+                <td class="col-5">problem description</td>
+                <td class="col-2"></td>
+            </tr>
+            <tr class="row">
+                <td class="color col-2">Symptoms</td>
+                <td class="col-5">describe symbtoms</td>
+                <td class="col-2"></td>
+            </tr>
+            <tr class="row">
+                <td class="color col-2">Finding</td>
+                <td class="col-5">your finding</td>
+                <td class="col-2"></td>
+            </tr>
+            <tr class="row">
+                <td class="color col-2">Recommendation</td>
+                <td class="col-5">further Recommendation</td>
+                <td class="col-2"></td>
+            </tr>
+        </table>    
+    </div>
+
+
+    <div class="patint-details">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let person of persons">
+                    <td>{{ person.id }}</td>
+                    <td>{{ person.firstName }}</td>
+                    <td>{{ person.lastName }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="userDashboard">
+        <app-common-dashboard></app-common-dashboard>
+    </div>
+
+</div>
