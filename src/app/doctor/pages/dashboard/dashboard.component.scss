@@ -10,6 +10,29 @@ font-size: small;
 
 }
 
-.color {
-    background-image: linear-gradient( yellow, white);
+
+
+tr:nth-child(odd){background-color: #f2f2f2}
+
+th {
+  background-color: #00BCD4;
+  color: white;
+}
+td{
+    padding-top: 2%;;
+}   
+
+.example-full-width {
+  width: 80%;
+}
+
+mat-sidenav-container {
+  height: 80%;
+}
+mat-sidenav, mat-sidenav-container {
+  padding : 16;
+}
+mat-sidenav{
+  //background-color : lightcoral;
+  width: 200px;
 }

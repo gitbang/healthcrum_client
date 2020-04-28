@@ -1,135 +1,148 @@
-<div class="master appoint container-fluid main-container">
-    <div class="row hra-details pb-4">
-        <div class="col-md-2 col-sm-4 mt-4">
-            <mat-card class="example-card mat-card " style="height:100%">
-                <mat-card-header>
-                    <mat-card-title >Last Consultant</mat-card-title>
-                </mat-card-header>
-            </mat-card>
-        </div>
-        <div class="col-md-2 col-sm-4 mt-4">
-            <mat-card class="example-card mat-card " style="height:100%">
-                <mat-card-header>
-                     <mat-card-title>Investigation</mat-card-title>
-                </mat-card-header>
-            </mat-card>
-        </div>
-        <div class="col-md-2 col-sm-4 mt-4">
-            <mat-card class="example-card mat-card " style="height:100%">
-                <mat-card-header>
-                    <mat-card-title >Condition / Symptemic</mat-card-title>
-                </mat-card-header>
-            </mat-card>
-        </div>
-        <div class="col-md-2 col-sm-4 mt-4">
-            <mat-card class="example-card mat-card " style="height:100%">
-                <mat-card-header>
-                    <mat-card-title>Medications</mat-card-title>
-                </mat-card-header>
-            </mat-card>
-        </div>
+ <div class="row hra-details pb-4">
+    <div class="col-md-2 col-sm-4 mt-4 " >
+        <mat-card class="example-card mat-card " style="height:100%">
+            <mat-card-header>
+                <mat-card-title >Last Consultant</mat-card-title>
+            </mat-card-header>
+        </mat-card>
     </div>
-
-    <!--
-
-    <div class="middle-table">
-        <div class="row middle-table-body">
-            <div class="col-3">
-            </div >
-            <div class="col-7">
-                <label></label>
-            </div>
-            <div class="col-2 ">
-                <h4>Remark</h4>
-            </div>    
-        </div>    
-        <div class="row middle-table-body">
-            <div class="col-3">
-                <h4>Finding</h4>
-            </div >
-            <div class="col-7">
-                <label></label>
-            </div>
-            <div class="col-2 ">
-            </div>    
-        </div>
-        <div class="row middle-table-body">
-            <div class="col-3">
-                <h4>Finding</h4>
-            </div >
-            <div class="col-7">
-                <label></label>
-            </div>
-            <div class="col-2 ">
-            </div>    
-        </div>
-        <div class="row middle-table-body">
-            <div class="col-3">
-                <h4>Recommendation</h4>
-            </div >
-            <div class="col-7">
-                <label></label>
-            </div>
-            <div class="col-2 ">
-            </div>    
-        </div>
+    <div class="col-md-2 col-sm-4 mt-4">
+        <mat-card class="example-card mat-card " style="height:100%">
+            <mat-card-header>
+                    <mat-card-title>Investigation</mat-card-title>
+            </mat-card-header>
+        </mat-card>
     </div>
-
-    -->
-
-    <div class="middle-table">
-        <table class="mid-table">
-            <tr class="color row">
-                <th class="col-2"></th>
-                <th class="col-5"></th>
-                <th class="col-2">remarks</th>
-            </tr>
-            <tr class="row">
-                <td class="color col-2">Problems</td>
-                <td class="col-5">problem description</td>
-                <td class="col-2"></td>
-            </tr>
-            <tr class="row">
-                <td class="color col-2">Symptoms</td>
-                <td class="col-5">describe symbtoms</td>
-                <td class="col-2"></td>
-            </tr>
-            <tr class="row">
-                <td class="color col-2">Finding</td>
-                <td class="col-5">your finding</td>
-                <td class="col-2"></td>
-            </tr>
-            <tr class="row">
-                <td class="color col-2">Recommendation</td>
-                <td class="col-5">further Recommendation</td>
-                <td class="col-2"></td>
-            </tr>
-        </table>    
+    <div class="col-md-2 col-sm-4 mt-4">
+        <mat-card class="example-card mat-card " style="height:100%">
+            <mat-card-header>
+                <mat-card-title >Condition / Symptemic</mat-card-title>
+            </mat-card-header>
+        </mat-card>
     </div>
-
-
-    <div class="patint-details">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let person of persons">
-                    <td>{{ person.id }}</td>
-                    <td>{{ person.firstName }}</td>
-                    <td>{{ person.lastName }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-md-2 col-sm-4 mt-4">
+        <mat-card class="example-card mat-card " style="height:100%">
+            <mat-card-header>
+                <mat-card-title>Medications</mat-card-title>
+            </mat-card-header>
+        </mat-card>
     </div>
-
-
-    <div class="userDashboard">
-        <app-common-dashboard></app-common-dashboard>
+    <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
+        <mat-card class="example-card mat-card " style="height:100%" (click)="showprofile()">
+            <mat-card-header>
+                <mat-card-title>EHR</mat-card-title>
+            </mat-card-header>
+        </mat-card>
     </div>
-
+    <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
+        <mat-card class="example-card mat-card " style="height:100%" (click)="priscription()">
+            <mat-card-header>
+                <mat-card-title>E- Priscription</mat-card-title>
+            </mat-card-header>
+        </mat-card>
+    </div>
 </div>
+
+<mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="showPriscribtion" position="end">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Prevent Disease</mat-panel-title>
+                </mat-expansion-panel-header>
+                 <mat-panel-description>
+                        Here describe all disease from major to minor
+                    </mat-panel-description>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Prevent Medicine</mat-panel-title>
+                </mat-expansion-panel-header>
+                 <mat-panel-description>
+                        Here describe all current medicine
+                    </mat-panel-description>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Allergy</mat-panel-title>
+                </mat-expansion-panel-header>
+                 <mat-panel-description>
+                        Here describe the alergy here
+                    </mat-panel-description>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Others</mat-panel-title>
+                </mat-expansion-panel-header>
+                 <mat-panel-description>
+                        Any other aspect describe
+                    </mat-panel-description>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-sidenav>
+    <div class="master appoint container-fluid main-container">
+        <div  style= "position : relative">
+            <div class="middle-table mt-5" >
+                <table class="mid-table" style="width :100%">
+                    <tr class="color row">
+                        <th class="col-2 col-lg-3"></th>
+                        <th class="col-7 col-lg-6"></th>
+                        <th class="col-3 col-lg-3 ">Remarks</th>
+                    </tr>
+                    <tr class="row">
+                        <td class="color col-2">Problems</td>
+                        <td class="col-7">
+                            <mat-form-field class="example-full-width">
+                                <input matInput >
+                            </mat-form-field>
+                        </td>
+                        <td class="col-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput >
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="color col-2">Symptoms</td>
+                        <td class="col-7">
+                            <mat-form-field class="example-full-width">
+                                <input matInput >
+                            </mat-form-field>
+                        </td>
+                        <td class="col-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput >
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="color col-2">Finding</td>
+                        <td class="col-7">
+                            <mat-form-field class="example-full-width">
+                                <input matInput >
+                            </mat-form-field>
+                        </td>
+                        <td class="col-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput width="100%">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="color col-2">Recom- mendation</td>
+                        <td class="col-7">
+                            <mat-form-field class="example-full-width">
+                                <input matInput width="100%">
+                            </mat-form-field>
+                        </td>
+                        <td class="col-3">
+                            <mat-form-field class="example-full-width">
+                                <input matInput >
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>    
+            </div>
+        </div>
+    </div>
+</mat-sidenav-container>

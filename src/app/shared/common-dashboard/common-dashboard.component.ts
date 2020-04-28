@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,  AfterViewInit, ElementRef, ViewChild } from "@angular/core";
 import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Label } from "ng2-charts";
@@ -154,10 +154,11 @@ export class CommonDashboardComponent implements OnInit {
     else if (num <= 100 && num >= 90) return "purple";
     else return "purple";
   }
-  // 
+  //
+  @ViewChild('biglinechart',{static: true}) lineElement: ElementRef;
+
   bigLineChart() {
-    var canvas : any = document.getElementById("linechart");
-    var ctxL = canvas.getContext("2d");  
+    var ctxL = this.lineElement.nativeElement.getContext("2d");  
     var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
 
     // gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
@@ -213,10 +214,9 @@ export class CommonDashboardComponent implements OnInit {
     });
   }
 
-
+  @ViewChild('sidebarchart',{static: true}) barElement: ElementRef;
   sideBargraph(){
-    var canvas : any = document.getElementById("sidebarchart");
-    var ctxL = canvas.getContext("2d");  
+   var ctxL = this.barElement.nativeElement.getContext("2d");  
     var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
 
     // gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");

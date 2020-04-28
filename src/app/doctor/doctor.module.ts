@@ -42,7 +42,9 @@ import {
   MatExpansionModule,
   MatProgressBarModule,
   MatChipsModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatDialogModule ,
+  MatSidenavModule
 } from "@angular/material";
 import { DataTablesModule } from "angular-datatables";
 import { ChartsModule } from "ng2-charts";
@@ -97,7 +99,9 @@ import { SharedModule } from '../shared/shared.module';
     MatChipsModule,
     MatAutocompleteModule,
     DataTablesModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule,
+    MatSidenavModule
   ]
 })
 export class DoctorModule {}

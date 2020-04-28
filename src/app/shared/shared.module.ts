@@ -45,6 +45,7 @@ import { ChartsModule } from "ng2-charts";
   MatAutocompleteModule,
   FontAwesomeModule
   ],
+  entryComponents:[CommonDashboardComponent],
   exports :[
     CommonDashboardComponent
   ]
