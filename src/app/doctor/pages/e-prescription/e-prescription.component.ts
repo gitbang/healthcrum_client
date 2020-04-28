@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
+import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 
 
 @Component({
@@ -11,14 +12,18 @@ import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-das
 export class EPrescriptionComponent implements OnInit {
   //tabBackground = "primary";
   public showPriscribtion = false;
+  public analysis;
+  public userZone : string[] = ["Red", "Purple", "Yellow", "Green"]
   constructor(private dialog : MatDialog) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.analysis = false
+  }
 
   showprofile(){
     console.log("profile reached")
     const dialogRef  = this.dialog.open(CommonDashboardComponent, {  
-      height : '80%'
+      height : '80%',
     })
     
     dialogRef.afterClosed().subscribe(result => {
@@ -29,5 +34,9 @@ export class EPrescriptionComponent implements OnInit {
   priscription(){
     console.log("priscription reached")
     this.showPriscribtion = !this.showPriscribtion
+  }
+  analysisPart(){
+    console.log("analysis");
+    this.analysis = true
   }
 }

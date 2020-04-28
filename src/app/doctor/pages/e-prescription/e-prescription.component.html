@@ -421,7 +421,7 @@
    
 </mat-sidenav-container>
 
-  <div class="mt-4">
+  <div class="mt-4 recommendation-bottom">
     <label>
       <h4>Recommendation For patient</h4>
     </label>
@@ -457,24 +457,49 @@
       
     </div>
     <div class="row mt-2">
-        <div class="col-2 mt-3">
-          Investigation
-        </div>
-        <div class="col-4">
-          <mat-form-field>
-            <mat-label>Investigation</mat-label>
-            <input matInput class="example-full-width">
-          </mat-form-field>
-        </div>
-        <div class="col-2 mt-2">
-          <b>Other Recommendation</b>
-        </div>
-        <div class="col-4">
-          <mat-form-field>
-            <mat-label>Recommendation</mat-label>
-            <input matInput class="example-full-width">
-          </mat-form-field>
-        </div>
+      <div class="col-2 mt-3">
+        Investigation
       </div>
+      <div class="col-4">
+        <mat-form-field>
+          <mat-label>Investigation</mat-label>
+          <input matInput class="example-full-width">
+        </mat-form-field>
+      </div>
+      <div class="col-2 mt-2">
+        <b>Other Recommendation</b>
+      </div>
+      <div class="col-4">
+        <mat-form-field>
+          <mat-label>Recommendation</mat-label>
+          <input matInput class="example-full-width">
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button class="btn btn-primary">Submit</button>
+    </div>
   </div>
+  
+  <div class="analysis-menu mt-4">
+    <div class="analysis  row">
+      <div>
+        <button class="btn btn-success" mat-raised-button (click)="analysisPart()">Analysis</button>
+      </div>
+    </div>
+
+    <div *ngIf = "analysis == true" class="row">
+      <div class="col-12">
+        <mat-tab-group #tabRef>
+          <mat-tab label ="Red" color="red"></mat-tab>
+          <mat-tab label = "Purpul"></mat-tab>
+          <mat-tab label = "Yellow"></mat-tab>
+          <mat-tab label = "Green"></mat-tab>
+        </mat-tab-group>
+      </div>
+      <div  *ngIf = "analysis == true " class="col-12 ml-2" >
+        <h3></h3>
+      </div>
+    </div>
+  </div>1
 </div>
