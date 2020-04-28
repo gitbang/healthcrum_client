@@ -67,7 +67,11 @@ export function provideConfig() {
     SocialLoginModule,
     ChartsModule
   ],
-  declarations: [AppComponent, ErrorpageComponent,MapsComponent],
+  declarations: [
+    AppComponent,
+    ErrorpageComponent,
+    MapsComponent
+  ],
   providers: [
     {
       provide: AuthServiceConfig,
