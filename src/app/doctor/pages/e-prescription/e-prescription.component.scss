@@ -1,6 +1,46 @@
-.nav-tabs .nav-item .nav-link {
-  color: #fff !important;
-}
-.example-full-width {
-  width: 100%;
-}
+// .nav-tabs .nav-item .nav-link {
+//   color: #fff !important;
+// }
+// .example-full-width {
+//   width: 100%;
+// }
+
+
+
+.hra-details {
+  background-image: linear-gradient(#00BCD4, white);
+  }
+  
+  
+  .mat-card-title{
+  text-align: center;
+  font-size: small;
+  
+  }
+  
+  
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+  
+  th {
+    background-color: #00BCD4;
+    color: white;
+  }
+  td{
+      padding-top: 2%;;
+  }   
+  
+  .example-full-width {
+    width: 80%;
+  }
+  
+  mat-sidenav-container {
+    height: 100%;
+  }
+  mat-sidenav, mat-sidenav-container {
+    padding : 16;
+  }
+  mat-sidenav{
+    //background-color : lightcoral;
+    width: 200px;
+  }
