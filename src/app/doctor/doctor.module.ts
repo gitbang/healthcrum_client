@@ -50,6 +50,7 @@ import { DataTablesModule } from "angular-datatables";
 import { ChartsModule } from "ng2-charts";
 import { EPrescriptionComponent } from './pages/e-prescription/e-prescription.component';
 import { SharedModule } from '../shared/shared.module';
+import { InvestigationComponent } from './pages/e-prescription/investigation/investigation.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { SharedModule } from '../shared/shared.module';
     RecommendComponent,
     ServiceComponent,
     PatientCheckupComponent,
-    EPrescriptionComponent
+    EPrescriptionComponent,
+    InvestigationComponent
   ],
   imports: [
     CommonModule,

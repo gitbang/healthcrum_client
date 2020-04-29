@@ -232,9 +232,7 @@
 -->
 <div class="container-fluid">
 
-<div >
-
- <div class="row hra-details pb-4">
+  <div class="row hra-details pb-4">
     <div class="col-md-2 col-sm-4 mt-4 " >
         <mat-card class="example-card mat-card " style="height:100%">
             <mat-card-header>
@@ -243,7 +241,7 @@
         </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
-        <mat-card class="example-card mat-card " style="height:100%">
+        <mat-card class="example-card mat-card " style="height:100%" (click)="investigation()">
             <mat-card-header>
                     <mat-card-title>Investigation</mat-card-title>
             </mat-card-header>
@@ -271,234 +269,304 @@
         </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
-        <mat-card class="example-card mat-card " style="height:100%" (click)="priscription()">
+        <mat-card class="example-card mat-card " style="height:100%" >
             <mat-card-header>
                 <mat-card-title>E- Priscription</mat-card-title>
             </mat-card-header>
         </mat-card>
     </div>
-</div>
-
-<mat-sidenav-container>
-    <mat-sidenav mode="side" [(opened)]="showPriscribtion" position="end">
-        <mat-accordion>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Prevent Disease</mat-panel-title>
-                </mat-expansion-panel-header>
-                 <mat-panel-description>
-                        Here describe all disease from major to minor
-                    </mat-panel-description>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Prevent Medicine</mat-panel-title>
-                </mat-expansion-panel-header>
-                 <mat-panel-description>
-                        Here describe all current medicine
-                    </mat-panel-description>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Allergy</mat-panel-title>
-                </mat-expansion-panel-header>
-                 <mat-panel-description>
-                        Here describe the alergy here
-                    </mat-panel-description>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Others</mat-panel-title>
-                </mat-expansion-panel-header>
-                 <mat-panel-description>
-                        Any other aspect describe
-                    </mat-panel-description>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </mat-sidenav>
-    <div class="master appoint container-fluid main-container">
-        <div class="row mt-3" >
-          <div class="col-3 ml-0" >
-            <mat-accordion >
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                      <mat-panel-title>Prevent Disease</mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <mat-panel-description>
-                          Here describe all disease from major to minor
-                      </mat-panel-description>
-              </mat-expansion-panel>
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                      <mat-panel-title>Prevent Medicine</mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <mat-panel-description>
-                          Here describe all current medicine
-                      </mat-panel-description>
-              </mat-expansion-panel>
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                      <mat-panel-title>Allergy</mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <mat-panel-description>
-                          Here describe the alergy here
-                      </mat-panel-description>
-              </mat-expansion-panel>
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                      <mat-panel-title>Others</mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <mat-panel-description>
-                          Any other aspect describe
-                      </mat-panel-description>
-              </mat-expansion-panel>
-            </mat-accordion>
-          </div>
-            <div class="middle-table  col-8 ml-1"  >
-                <table class="mid-table" style="width :100%">
-                    <tr class="color row">
-                        <th class="col-2 col-lg-3"></th>
-                        <th class="col-7 col-lg-6"></th>
-                        <th class="col-3 col-lg-3 ">Remarks</th>
-                    </tr>
-                    <tr class="row">
-                        <td class="color col-2">Problems</td>
-                        <td class="col-7">
-                            <mat-form-field class="example-full-width">
-                                <input matInput >
-                            </mat-form-field>
-                        </td>
-                        <td class="col-3">
-                            <mat-form-field class="example-full-width">
-                                <input matInput >
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr class="row">
-                        <td class="color col-2">Symptoms</td>
-                        <td class="col-7">
-                            <mat-form-field class="example-full-width">
-                                <input matInput >
-                            </mat-form-field>
-                        </td>
-                        <td class="col-3">
-                            <mat-form-field class="example-full-width">
-                                <input matInput >
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr class="row">
-                        <td class="color col-2">Finding</td>
-                        <td class="col-7">
-                            <mat-form-field class="example-full-width">
-                                <input matInput >
-                            </mat-form-field>
-                        </td>
-                        <td class="col-3">
-                            <mat-form-field class="example-full-width">
-                                <input matInput width="100%">
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr class="row">
-                        <td class="color col-2">Recom- mendation</td>
-                        <td class="col-7">
-                            <mat-form-field class="example-full-width">
-                                <input matInput width="100%">
-                            </mat-form-field>
-                        </td>
-                        <td class="col-3">
-                            <mat-form-field class="example-full-width">
-                                <input matInput >
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>    
-            </div>
-        </div>
-    </div>
-
-   
-</mat-sidenav-container>
-
-  <div class="mt-4 recommendation-bottom">
-    <label>
-      <h4>Recommendation For patient</h4>
-    </label>
-    <div class="row mt-2">
-      <div class="col-2 mt-3" >
-        Medication
-      </div>
-      <div class="col-2 ml-3">
-        <mat-form-field>
-          <mat-label>Medicine</mat-label>
-          <input matInput class="example-full-width">
-        </mat-form-field>
-      </div>
-      <div class="col-2 ml-3">
-        <mat-form-field>
-          <mat-label>Dose</mat-label>
-          <input matInput class="example-full-width">
-        </mat-form-field>
-      </div>  
-      <div class="col-2 ml-3">
-        <mat-form-field>
-          <mat-label class="example-full-width">Timing</mat-label>
-          <input matInput>
-        </mat-form-field>
-      </div>
-      <div class="col-2 ml-3">
-        <mat-form-field>
-          <mat-label>Duration</mat-label>
-          <input matInput class="example-full-width">
-        </mat-form-field>
-      </div>
-     
-      
-    </div>
-    <div class="row mt-2">
-      <div class="col-2 mt-3">
-        Investigation
-      </div>
-      <div class="col-4">
-        <mat-form-field>
-          <mat-label>Investigation</mat-label>
-          <input matInput class="example-full-width">
-        </mat-form-field>
-      </div>
-      <div class="col-2 mt-2">
-        <b>Other Recommendation</b>
-      </div>
-      <div class="col-4">
-        <mat-form-field>
-          <mat-label>Recommendation</mat-label>
-          <input matInput class="example-full-width">
-        </mat-form-field>
-      </div>
-    </div>
-    <div>
-      <button mat-raised-button class="btn btn-primary">Submit</button>
-    </div>
   </div>
+
+  <mat-sidenav-container>
+      <mat-sidenav mode="side" [(opened)]="showPriscribtion" position="end">
+        
+          <app-investigation></app-investigation>
+      </mat-sidenav>
+      <div class="master appoint container-fluid main-container">
+          <div class="row mt-3" >
+            <div class="col-3 ml-0" >
+              <mat-accordion >
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Prevent Disease</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                            Here describe all disease from major to minor
+                        </mat-panel-description>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Prevent Medicine</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                            Here describe all current medicine
+                        </mat-panel-description>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Allergy</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                            Here describe the alergy here
+                        </mat-panel-description>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Others</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                            Any other aspect describe
+                        </mat-panel-description>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+              <div class="middle-table  col-8 ml-1"  >
+                  <table class="mid-table" style="width :100%">
+                      <tr class="color row">
+                          <th class="col-2 col-lg-3"></th>
+                          <th class="col-7 col-lg-6"></th>
+                          <th class="col-3 col-lg-3 ">Remarks</th>
+                      </tr>
+                      <tr class="row">
+                          <td class="color col-2">Problems</td>
+                          <td class="col-7">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput >
+                              </mat-form-field>
+                          </td>
+                          <td class="col-3">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput >
+                              </mat-form-field>
+                          </td>
+                      </tr>
+                      <tr class="row">
+                          <td class="color col-2">Symptoms</td>
+                          <td class="col-7">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput >
+                              </mat-form-field>
+                          </td>
+                          <td class="col-3">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput >
+                              </mat-form-field>
+                          </td>
+                      </tr>
+                      <tr class="row">
+                          <td class="color col-2">Finding</td>
+                          <td class="col-7">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput >
+                              </mat-form-field>
+                          </td>
+                          <td class="col-3">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput width="100%">
+                              </mat-form-field>
+                          </td>
+                      </tr>
+                      <tr class="row">
+                          <td class="color col-2">Recom- mendation</td>
+                          <td class="col-7">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput width="100%">
+                              </mat-form-field>
+                          </td>
+                          <td class="col-3">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput >
+                              </mat-form-field>
+                          </td>
+                      </tr>
+                  </table>    
+              </div>
+          </div>
+      </div>
+
+    
   
-  <div class="analysis-menu mt-4">
-    <div class="analysis  row">
+    <div class="mt-4 recommendation-bottom">
+      <label>
+        <h4>Recommendation For patient</h4>
+      </label>
+      <div class="row mt-2">
+        <div class="col-2 mt-3" >
+          Medication
+        </div>
+        <div class="col-2 ml-3">
+          <mat-form-field>
+            <mat-label>Medicine</mat-label>
+            <input matInput class="example-full-width">
+          </mat-form-field>
+        </div>
+        <div class="col-2 ml-3">
+          <mat-form-field>
+            <mat-label>Dose</mat-label>
+            <input matInput class="example-full-width">
+          </mat-form-field>
+        </div>  
+        <div class="col-2 ml-3">
+          <mat-form-field>
+            <mat-label class="example-full-width">Timing</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-2 ml-3">
+          <mat-form-field>
+            <mat-label>Duration</mat-label>
+            <input matInput class="example-full-width">
+          </mat-form-field>
+        </div>
+      
+        
+      </div>
+      <div class="row mt-2">
+        <div class="col-2 mt-3">
+          Investigation
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <mat-label>Investigation</mat-label>
+            <input matInput class="example-full-width">
+          </mat-form-field>
+        </div>
+        <div class="col-2 mt-2">
+          <b>Other Recommend- ation</b>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <mat-label>Recommendation</mat-label>
+            <input matInput class="example-full-width">
+          </mat-form-field>
+        </div>
+      </div>
       <div>
-        <button class="btn btn-success" mat-raised-button (click)="analysisPart()">Analysis</button>
+        <button mat-raised-button class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </mat-sidenav-container>
+
+  <div class="analysis-menu mt-4">
+    <div></div>
+    <div class="analysis-button  row">
+      <div>
+        <button class="btn btn-success" mat-raised-button (click)="analysisPart()">Select Zone for User</button>
       </div>
     </div>
 
-    <div *ngIf = "analysis == true" class="row">
-      <div class="col-12">
-        <mat-tab-group #tabRef>
-          <mat-tab label ="Red" color="red"></mat-tab>
+    <div  class="analysis-tab">
+      <div class=" row ml-5  zone-select">
+        <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)">
+           <mat-tab label="None"></mat-tab>
+          <mat-tab label ="Red" ></mat-tab>
           <mat-tab label = "Purpul"></mat-tab>
           <mat-tab label = "Yellow"></mat-tab>
           <mat-tab label = "Green"></mat-tab>
+        
         </mat-tab-group>
       </div>
-      <div  *ngIf = "analysis == true " class="col-12 ml-2" >
+
+      
+        <!-- comment for HR
+          <div >
+            <div class="analysis-investigation row mt-3">
+              <div class="col-2 mt-3">
+                <label>Investigation : </label>
+              </div>
+              <div class="col-10">
+                <div class="row">
+                  <div *ngFor = "let element of analysisInvestigation" class="col-2">
+                    <button class="btn " mat-raised-button> {{element}} </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis-lra row mt-3">
+              <div class="col-2 mt-3">
+                <label>LRA : </label>
+              </div>
+              <div class="col-10">
+                <div class="row">
+                  <div *ngFor = "let element of analysisLRA" class="col-2">
+                    <button class="btn" mat-raised-button> {{element}} </button> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="analysis-recommendation row mt-3">
+              <div class="col-2 mt-3">
+                <label>Recommendation : </label>
+              </div>
+              <div class="col-10">
+                <div class="row">
+                  <div *ngFor = "let element of analysisLRA" class="col-2">
+                    <button class="btn" mat-raised-button> {{element}} </button> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        -->
+    </div>
+
+    
+  </div>
+
+  <div class="analysis-menu">
+    <div *ngIf="analysis == true">
+      <div class="mt-4" >
+        <div class="ml-2" style="text-content : center">
+          <label>Reason to put in {{userZone}}</label>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <mat-card class="example-card mat-card " style="height:100%" (click)="analysisSection('investigation')">
+              <mat-card-header>
+                  <mat-card-title >Investigation</mat-card-title>
+              </mat-card-header>
+            </mat-card>
+          </div>
+          <div class="col-4">
+            <mat-card class="example-card mat-card " style="height:100%" (click)="analysisSection('lra')">
+              <mat-card-header>
+                  <mat-card-title >LRA</mat-card-title>
+              </mat-card-header>
+            </mat-card>
+          </div>
+          <div class="col-4">
+            <mat-card class="example-card mat-card " style="height:100%" (click)="analysisSection('recommendation')">
+              <mat-card-header>
+                  <mat-card-title >Recommendation</mat-card-title>
+              </mat-card-header>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 ml-4" *ngIf="analysisPort == 'lra'">
+        <div class="col-10 ml-4" >
+          <mat-card class="example-card mat-card " style="height:100%" >
+            <mat-card-header>
+              <mat-card-title class="row">LRA Details</mat-card-title>
+              
+
+              <div class="row">
+           <!-- <div *ngFor="let category of lraFromOfUser | keyvalue">
+                    <div>
+                      <button (click)="check(category)">click</button>
+                    </div>
+                  </div>
+                </div>
+                -->
+                <div *ngFor="let key of objectKeys(lraFromOfUser)r ">
+                    <mat-checkbox> {{key}} : {{lraFromOfUser[key]}}</mat-checkbox>
+                </div>
+              </div>
+            </mat-card-header>
+          </mat-card>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</div>  

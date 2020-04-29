@@ -41,9 +41,14 @@
     padding : 16;
   }
   mat-sidenav{
-     width: 200px;
+     width: 400px;
   }
 
-  .recommendation-bottom{
+  .recommendation-bottom, .analysis-menu{
     background-color: #FAFAFA;
+  }
+
+  .row{
+    margin: 0;
+    padding: 0;
   }

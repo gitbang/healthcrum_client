@@ -161,10 +161,6 @@ export class CommonDashboardComponent implements OnInit {
     var ctxL = this.lineElement.nativeElement.getContext("2d");  
     var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
 
-    // gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
-
-    // gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
-
     gradientFill.addColorStop(0, "rgba(255, 53, 0, 1)");
 
     gradientFill.addColorStop(1, "rgba(255, 53, 0, 0)");
