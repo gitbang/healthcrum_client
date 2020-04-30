@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
+import {FormBuilder} from '@angular/forms';
 
 
 @Component({
@@ -11,6 +12,18 @@ import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 })
 export class EPrescriptionComponent implements OnInit {
   //tabBackground = "primary";
+  
+  
+  constructor(private dialog : MatDialog, private fb : FormBuilder) {}
+
+  ngOnInit() {
+    this.analysis = false
+  }
+
+  objectKeys = Object.keys;
+
+  public userZone : string
+
   public showPriscribtion = false;
   public analysis;
   public userZones : string[] = ["Red", "Purple", "Yellow", "Green"]
@@ -20,16 +33,53 @@ export class EPrescriptionComponent implements OnInit {
   public investigationCheckbox : any;
   
   public lraFromOfUser =  { "Family History" : '15'}
+  public lraFromOfUser1 = [
+     { "Family History" : '15'},
+     { "Dietry " : '15'},
+     { "Physical" : '15'},
+     { "Family Background" : '15'},
+    ]
+
+    // form builder of this page
+    
+    formFirst = this.fb.group({
+      problem : this.fb.group({
+        description : [''],
+        remarks : ['']
+      }),
+      symptoms : this.fb.group({
+        description : [''],
+        remarks : ['']
+      }),
+      finding: this.fb.group({
+        description : [''],
+        remarks : ['']
+      }),
+      recommendation : this.fb.group({
+        description : [''],
+        remarks : ['']
+      }),
+    })
+
+    formSecond = this.fb.group({
+      medication : this.fb.group({
+        medicine : [''],
+        dose : [''],
+        timing : [''],
+        duration : ['']
+      }),
+      investigation : [''],
+      recommendation : ['']
+    })
   
-
-  objectKeys = Object.keys;
-
-  public userZone : string
-  constructor(private dialog : MatDialog) {}
-
-  ngOnInit() {
-    this.analysis = false
-  }
+    // form builder ends
+  
+    submit(){
+      console.log("submit clicked");
+      console.log(this.formFirst.value);
+      console.log(this.formSecond)
+    }
+  
 
   showprofile(){
     console.log("profile reached")
@@ -72,7 +122,6 @@ export class EPrescriptionComponent implements OnInit {
     this.analysisPort = section;
     console.log(this.analysisPort)
   }
-
   check(temp :any){
     console.log(temp.value.property )
   }
