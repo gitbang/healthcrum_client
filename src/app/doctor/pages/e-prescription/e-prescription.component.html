@@ -460,17 +460,34 @@
     </div>
 
     <div  class="analysis-tab">
-      <div class=" row ml-5  zone-select">
-        <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)">
-           <mat-tab label="None"></mat-tab>
+      <div class=" row ml-5  zone-select mt-3">
+      
+      
+        <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)"
+          [color]="getInkColor(tabRef._indexToSelect)"
+        >
+          <mat-tab label="None" ></mat-tab>
           <mat-tab label ="Red" ></mat-tab>
           <mat-tab label = "Purpul"></mat-tab>
           <mat-tab label = "Yellow"></mat-tab>
           <mat-tab label = "Green"></mat-tab>
-        
         </mat-tab-group>
-      </div>
+        
+      <!--
 
+        <mat-button-toggle-group name="patientZone" aria-label="Font Style" #togglegroup="matButtonToggleGroup" border='0' (change)="togglefun($event)">
+          <mat-button-toggle value="red" class="ml-4"
+           [ngStyle]="{'background-color' :  togglegroup.value == 'red' ? 'red' : none}">Red</mat-button-toggle>
+          <mat-button-toggle value="purple" class="ml-4"
+          [ngStyle]="{'background-color' :  togglegroup.value == 'purple' ? 'purple' : none}">purple</mat-button-toggle>
+          <mat-button-toggle value="yellow" class="ml-4" 
+          [ngStyle]="{'background-color' :  togglegroup.value == 'yellow' ? 'yellow' : none}">yellow</mat-button-toggle>
+          <mat-button-toggle value="green" class="ml-4" 
+          [ngStyle]="{'background-color' :  togglegroup.value == 'green' ? 'green' : none}">green</mat-button-toggle>
+      </mat-button-toggle-group>
+      -->
+      </div>
+      
       
         <!-- comment for HR
           <div >
@@ -521,9 +538,9 @@
     <div *ngIf="analysis == true">
       <div class="mt-4" >
         <div class="ml-2" style="text-content : center">
-          <label>Reason to put in {{userZone}}</label>
+          <button class="btn btn-primary" mat-raised-button>Reason to put in {{userZone}}</button>
         </div>
-        <div class="row">
+        <div class="row mt-3">
           <div class="col-4">
             <mat-card class="example-card mat-card " style="height:100%" (click)="analysisSection('investigation')">
               <mat-card-header>
@@ -552,15 +569,17 @@
         <div class="col-10 ml-4" >
           <mat-card class="example-card mat-card " style="height:100%" >
             <mat-card-header>
-              <mat-card-title class="row">LRA Details</mat-card-title>
+              <mat-card-title class="row mat-display-3">LRA Details : </mat-card-title>
               
-
-              <div class="row">
-                <div *ngFor="let category of lraFromOfUser1 ">
+              <div class="row mt-3">
+                <div *ngFor="let category of lraFromOfUser1" class=" ml-2">
                   <div *ngFor="let key of objectKeys(category)">
-                    <mat-checkbox> {{key}} : {{category[key]}}</mat-checkbox>
+                    <mat-checkbox labelPosition="before" (change)="checkCheckBoxvalue(key, $event.checked)"> {{key}} : {{category[key]}}</mat-checkbox>
                   </div>
                 </div>    
+              </div>
+              <div>
+                <button (click)="submitreason()">Submit Reason</button>
               </div>
             </mat-card-header>
           </mat-card>

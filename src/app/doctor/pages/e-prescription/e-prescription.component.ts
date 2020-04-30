@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormArray, FormControl} from '@angular/forms';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class EPrescriptionComponent implements OnInit {
      { "Physical" : '15'},
      { "Family Background" : '15'},
     ]
-
+    @ViewChild('togglegroup', {static : false}) toggle : ElementRef
     // form builder of this page
     
     formFirst = this.fb.group({
@@ -74,12 +74,34 @@ export class EPrescriptionComponent implements OnInit {
   
     // form builder ends
   
-    submit(){
-      console.log("submit clicked");
-      console.log(this.formFirst.value);
-      console.log(this.formSecond)
+  submit(){
+    console.log("submit clicked");
+    console.log(this.formFirst.value);
+    console.log(this.formSecond)
+    console.log(this.toggle.nativeElement.value)
+  }
+  togglefun(event) {
+    console.log(event);
+    this.userZone = event.value;
+  }
+
+  getbackgroungcolor(color : string) {
+  }
+  getInkColor(tabRef){
+    // if(tabRef == 0) {
+    //   return 'primary'
+    // }
+    // else if(tabRef == 1) {
+    //   return 'accent'
+    // }
+    switch(tabRef){
+      case 0 : return 'primary';
+      case 1 : return 'accent';
+      case 2 : return 'warn';
+      case 3 : return '';
+      case 4 : return 'green';
     }
-  
+  }
 
   showprofile(){
     console.log("profile reached")
@@ -106,6 +128,7 @@ export class EPrescriptionComponent implements OnInit {
     console.log(event);
     if(event.index == 0) {
       this.analysis = false;
+      this.analysisPort = "none"
     }  
     else{
       this.userZone = event.tab.textLabel;
@@ -125,4 +148,55 @@ export class EPrescriptionComponent implements OnInit {
   check(temp :any){
     console.log(temp.value.property )
   }
+  
+  myForm = this.fb.group({
+    lracheckbox: this.fb.array([''])
+  });
+  
+  formReson = this.fb.group({
+    lra  : this.fb.array([])
+  })
+
+  formReasonObj = {
+    lra : [],
+    investigation : [],
+    recommendation : []
+  }
+  checkCheckBoxvalue(key , event){
+    
+    if(event == true) {
+      this.formReasonObj.lra.push(key)
+    }
+    else{
+      this.formReasonObj.lra = this.formReasonObj.lra.filter((x)=> x!= key)
+    }
+    console.log(this.formReasonObj)
+    /*
+    //console.log(key, event)
+    const formarray = this.fb.array([
+      new FormControl('akash')
+    ])
+    //console.log("before", formarray.value)
+    formarray.push(new FormControl(key))
+    // //console.log("after", formarray.value)
+    // this.myForm5.controls['lra'].value.push(key)
+    // console.log(this.myForm5.controls['lra'].value)
+    if(event == true) {
+      this.formReson.controls['lra'].value.push(key)
+    }
+    else{
+      //this.formReson.controls['lra'] = this.formReson.controls['lra'].value.filter((x)=> x!= key)
+      let temp = this.formReson.controls['lra'].value.filter((x)=> x!= key);
+      this.formReson.controls['lra'].value.setValue(temp) 
+    }
+    console.log(this.formReson.controls['lra'])
+    */
+    
+  }
+  submitreason(){
+    console.log(this.formReasonObj)
+    //console.log("form array", this.formReson['lra'].value)
+    //this.formReson.controls['lra'].setValue(this.checkbox)
+  }
+
 }

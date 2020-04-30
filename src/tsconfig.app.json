@@ -7,6 +7,10 @@
     "types": []
   },
   "exclude": ["test.ts", "**/*.spec.ts"],
+  "lib": [
+    "dom",
+    "es7"
+  ],
   "paths": {
     "@angular/*": ["../node_modules/@angular/*"]
   }

@@ -9,46 +9,61 @@
 
 .hra-details {
   background-image: linear-gradient(#00BCD4, white);
-  }
-  
-  
-  .mat-card-title{
-  text-align: center;
-  font-size: small;
-  
-  }
-  
-  
-  
-  tr:nth-child(even){background-color: #f2f2f2}
-  
-  th {
-    background-color: #00BCD4;
-    color: white;
-  }
-  td{
-      padding-top: 2%;;
-  }   
-  
-  .example-full-width {
-    width: 80%;
-  }
-  
-  mat-sidenav-container {
-    height: 100%;
-  }
-  mat-sidenav, mat-sidenav-container {
-    padding : 16;
-  }
-  mat-sidenav{
-     width: 400px;
-  }
+}
+.mat-card-title{
+text-align: center;
+font-size: small;
+}
+tr:nth-child(even){background-color: #f2f2f2}
 
-  .recommendation-bottom, .analysis-menu{
-    background-color: #FAFAFA;
-  }
+th {
+  background-color: #00BCD4;
+  color: white;
+}
+td{
+    padding-top: 2%;;
+}   
 
-  .row{
-    margin: 0;
-    padding: 0;
-  }
+.example-full-width {
+  width: 80%;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+mat-sidenav, mat-sidenav-container {
+  padding : 16;
+}
+mat-sidenav{
+    width: 400px;
+}
+
+.recommendation-bottom, .analysis-menu{
+  background-color: #FAFAFA;
+}
+
+.row{
+  margin: 0;
+  padding: 0;
+}
+// .mat-button-toggle{
+//   color: "red";
+//   font-size: xx-large;
+// }
+// .mat-button-toggle-checked {
+
+//   background-color: blue;
+// }
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background: yellow;
+  height: 10px;
+} 
+
+.zone-part-label{
+  font-size: x-large;
+  color: dark;
+}
+.mat-display-3 {
+  font-size: larger;
+}
