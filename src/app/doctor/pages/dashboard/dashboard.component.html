@@ -152,3 +152,64 @@
 </mat-sidenav-container>
 
 </div>
+
+<form [formGroup]="formSecond">
+        <label>
+          <h4>Recommendation For patient</h4>
+          <button>ADD more</button>
+        </label>
+        <div class="row mt-2" formGroupName="medication">
+          <div class="col-2 mt-3" >
+            Medication
+          </div>
+          <div class="col-2 ml-3">
+            <mat-form-field>
+              <mat-label>Medicine</mat-label>
+              <input matInput class="example-full-width" formControlName='medicine'>
+            </mat-form-field>
+          </div>
+          <div class="col-2 ml-3">
+            <mat-form-field>
+              <mat-label>Dose</mat-label>
+              <input matInput class="example-full-width" formControlName='dose'>
+            </mat-form-field>
+          </div>  
+          <div class="col-2 ml-3">
+            <mat-form-field>
+              <mat-label class="example-full-width">Timing</mat-label>
+              <input matInput formControlName='timing'>
+            </mat-form-field>
+          </div>
+          <div class="col-2 ml-3">
+            <mat-form-field>
+              <mat-label>Duration</mat-label>
+              <input matInput class="example-full-width" formControlName='duration'>
+            </mat-form-field>
+          </div>
+        
+          
+        </div>
+        <div class="row mt-2">
+          <div class="col-2 mt-3">
+            Investigation
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Investigation</mat-label>
+              <input matInput class="example-full-width" formControlName='investigation'>
+            </mat-form-field>
+          </div>
+          <div class="col-2 mt-2">
+            <b>Other Recommend- ation</b>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-label>Recommendation</mat-label>
+              <input matInput class="example-full-width" formControlName='recommendation'>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button mat-raised-button class="btn btn-primary" (click)="submit()">Submit</button>
+        </div>
+      </form>

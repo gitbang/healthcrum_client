@@ -12,9 +12,29 @@ export interface samedoctor {
 
 const list1 : samedoctor[] = [
   { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Malhotra', symptoms : "b", problems : "minor", diagnosis : "good healthy", recommendation : "have food" },
+  { date : new Date(), doctor : 'Verma', symptoms : "others", problems : "all fine", diagnosis : " good", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Sharma', symptoms : "almost none", problems : "minor", diagnosis : "healthy", recommendation : "have vegetables" },
   { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Malhotra', symptoms : "b", problems : "minor", diagnosis : "good healthy", recommendation : "have food" },
+  { date : new Date(), doctor : 'Verma', symptoms : "others", problems : "all fine", diagnosis : " good", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Sharma', symptoms : "almost none", problems : "minor", diagnosis : "healthy", recommendation : "have vegetables" },
   { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
-  { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" }
+  { date : new Date(), doctor : 'Malhotra', symptoms : "b", problems : "minor", diagnosis : "good healthy", recommendation : "have food" },
+  { date : new Date(), doctor : 'Verma', symptoms : "others", problems : "all fine", diagnosis : " good", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Sharma', symptoms : "almost none", problems : "minor", diagnosis : "healthy", recommendation : "have vegetables" },
+  { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Malhotra', symptoms : "b", problems : "minor", diagnosis : "good healthy", recommendation : "have food" },
+  { date : new Date(), doctor : 'Verma', symptoms : "others", problems : "all fine", diagnosis : " good", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Sharma', symptoms : "almost none", problems : "minor", diagnosis : "healthy", recommendation : "have vegetables" },
+  { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Malhotra', symptoms : "b", problems : "minor", diagnosis : "good healthy", recommendation : "have food" },
+  { date : new Date(), doctor : 'Verma', symptoms : "others", problems : "all fine", diagnosis : " good", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Sharma', symptoms : "almost none", problems : "minor", diagnosis : "healthy", recommendation : "have vegetables" },
+  { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Malhotra', symptoms : "b", problems : "minor", diagnosis : "good healthy", recommendation : "have food" },
+  { date : new Date(), doctor : 'Verma', symptoms : "others", problems : "all fine", diagnosis : " good", recommendation : "have balance diet" },
+  { date : new Date(), doctor : 'Sharma', symptoms : "almost none", problems : "minor", diagnosis : "healthy", recommendation : "have vegetables" },
 ]
 
 @Component({

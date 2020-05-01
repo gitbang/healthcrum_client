@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
-import {FormBuilder, FormArray, FormControl} from '@angular/forms';
+import {FormBuilder, FormArray, FormControl, FormGroup} from '@angular/forms';
 import {LastConsultantComponent} from './last-consultant/last-consultant.component'
 // import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component
 
@@ -35,56 +35,112 @@ export class EPrescriptionComponent implements OnInit {
   
   public lraFromOfUser =  { "Family History" : '15'}
   public lraFromOfUser1 = [
-     { "Family History" : '15'},
-     { "Dietry " : '15'},
-     { "Physical" : '15'},
-     { "Family Background" : '15'},
+     { "Family History" : '20'},
+     { "Dietry " : '25'},
+     { "Physical" : '26'},
+     { "Family Background" : '50'},
+  ]
+
+  public userdetail = {
+    "Physical" : [
+      {
+        "Question" : "Do you exercise ?",
+        "Zone" : "Red",
+        "ans" : "No"
+      },
+      {
+        "Question" : "Do you drink alcohol?",
+        "Zone" : "Red",
+        "ans" : "yes"
+      },
+      {
+        "Question" : "Do you smoke ?",
+        "Zone" : "Green",
+        "ans" : "No"
+      }
     ]
-    @ViewChild('togglegroup', {static : false}) toggle : ElementRef
+  }
+
+  @ViewChild('togglegroup', {static : false}) toggle : ElementRef
     // form builder of this page
     
-    formFirst = this.fb.group({
-      problem : this.fb.group({
-        description : [''],
-        remarks : ['']
-      }),
-      symptoms : this.fb.group({
-        description : [''],
-        remarks : ['']
-      }),
-      finding: this.fb.group({
-        description : [''],
-        remarks : ['']
-      }),
-      recommendation : this.fb.group({
-        description : [''],
-        remarks : ['']
-      }),
-    })
+  formFirst = this.fb.group({
+    problem : this.fb.group({
+      description : [''],
+      remarks : ['']
+    }),
+    symptoms : this.fb.group({
+      description : [''],
+      remarks : ['']
+    }),
+    finding: this.fb.group({
+      description : [''],
+      remarks : ['']
+    }),
+    recommendation : this.fb.group({
+      description : [''],
+      remarks : ['']
+    }),
+  })
 
-    formSecond = this.fb.group({
-      medication : this.fb.group({
-        medicine : [''],
-        dose : [''],
-        timing : [''],
-        duration : ['']
-      }),
-      investigation : [''],
-      recommendation : ['']
+  formSecond = this.fb.group({
+    medication : this.fb.group({
+      medicine : [''],
+      dose : [''],
+      timing : [''],
+      duration : ['']
+    }),
+    investigation : [''],
+    recommendation : ['']
+  })
+
+  // dynamic form second
+
+  formSecond2 = this.fb.group({
+    medication : this.fb.array([
+      this.addmedicine()
+    ]),
+    investigation : [''],
+    recommendation : ['']
+  })
+
+  addmedicineButtonClick(): void {
+    (<FormArray>this.formSecond2.get('medication')).push(this.addmedicine())
+    console.log(this.formSecond2.value)
+  }
+
+  removeMedicineClick(i : number) : void {
+    (<FormArray>this.formSecond2.get('medication')).removeAt(i);
+  }
+  addmedicine() : FormGroup{
+    return this.fb.group({
+      medicine : [''],
+      dose : [''],
+      timing : [''],
+      duration : ['']
     })
-  
+  }
+    // dynamic form second ends
+
+
     // form builder ends
   
   submit(){
     console.log("submit clicked");
-    console.log(this.formFirst.value);
-    console.log(this.formSecond)
-    console.log(this.toggle.nativeElement.value)
+    console.log("first form",this.formFirst);
+    console.log("second form",this.formSecond);
+    console.log("dynamic form",this.formSecond2);
+    
   }
   togglefun(event) {
     console.log(event);
     this.userZone = event.value;
   }
+
+  /*
+  for the color change of ink bar
+
+  [color]="getInkColor(tabRef._indexToSelect)
   getInkColor(tabRef){
     switch(tabRef){
       case 0 : return 'primary';
@@ -93,7 +149,7 @@ export class EPrescriptionComponent implements OnInit {
       case 3 : return '';
       case 4 : return 'green';
     }
-  }
+  }*/
 
   showprofile(){
     console.log("profile reached")
@@ -200,5 +256,13 @@ export class EPrescriptionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog box closed`);
     })
+  }
+
+  checkzone(value){
+    console.log(value)
+    if(value < 20 ) {
+    
+    }
+    return true
   }
 }

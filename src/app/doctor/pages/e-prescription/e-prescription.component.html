@@ -1,235 +1,4 @@
-<!--
 
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card card-nav-tabs card-plain">
-        <div class="card-header card-header-info">
-          <div class="nav-tabs-navigation" style="float:right;">
-            <div class="nav-tabs-wrapper">
-              <ul class="nav nav-tabs" data-tabs="tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#tab1" data-toggle="tab">Last Consultation</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#tab2" data-toggle="tab">Investigation</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#tab3" data-toggle="tab">Condition/Symptemic</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#tab4" data-toggle="tab">Meditations</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#tab5" data-toggle="tab">EHR</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="card-body py-5">
-          <div class="row">
-            <div class="col-md-3">
-              <mat-card>
-                <div id="accordion" role="tablist">
-                  <div class="card card-collapse">
-                    <div class="card-header" role="tab" id="headingOne">
-                      <h5 class="mb-0">
-                        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          Present Disease
-                          <i class="material-icons">keyboard_arrow_down</i>
-                        </a>
-                      </h5>
-                    </div>
-
-                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
-                      data-parent="#accordion">
-                      <div class="card-body">
-                        <ul class="ml-3">
-                          <li>Disease A</li>
-                          <li>Disease B</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card card-collapse">
-                    <div class="card-header" role="tab" id="headingTwo">
-                      <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false"
-                          aria-controls="collapseTwo">
-                          Present Meditation
-                          <i class="material-icons">keyboard_arrow_down</i>
-                        </a>
-                      </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo"
-                      data-parent="#accordion">
-                      <div class="card-body">
-                        <ul class="ml-3">
-                          <li>Meditation one</li>
-                          <li>Meditation two</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card card-collapse">
-                    <div class="card-header" role="tab" id="headingThree">
-                      <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false"
-                          aria-controls="collapseThree">
-                          Allergy
-                          <i class="material-icons">keyboard_arrow_down</i>
-                        </a>
-                      </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree"
-                      data-parent="#accordion">
-                      <div class="card-body">
-                        <ul class="ml-3">
-                          <li>Allergy 1</li>
-                          <li>Allergy 2</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card card-collapse">
-                    <div class="card-header" role="tab" id="headingFour">
-                      <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false"
-                          aria-controls="collapseFour">
-                          Other
-                          <i class="material-icons">keyboard_arrow_down</i>
-                        </a>
-                      </h5>
-                    </div>
-                    <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour"
-                      data-parent="#accordion">
-                      <div class="card-body">
-                        <ul class="ml-3">
-                          <li>Others issue</li>
-                          <li>some more issue</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </mat-card>
-            </div>
-            <div class="col-md-5">
-              <table class="table text-center table-bordered">
-                <thead>
-                  <th></th>
-                  <th></th>
-                  <th>Remark</th>
-                </thead>
-                <tbody>
-                  <td><b>Problem</b></td>
-                  <td>
-                    <mat-form-field class="example-full-width">
-
-                      <input matInput>
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    <mat-form-field>
-                      <input matInput>
-                    </mat-form-field>
-                  </td>
-                  <tr>
-                    <td><b>Symptom</b></td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-
-                        <input matInput>
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field>
-                        <input matInput>
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><b>Finding</b></td>
-                    <td>
-                      <mat-form-field class="example-full-width">
-
-                        <input matInput>
-                      </mat-form-field>
-                    </td>
-                    <td>
-                      <mat-form-field>
-                        <input matInput>
-                      </mat-form-field>
-                    </td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md-4">
-              <div class="tab-content text-center">
-
-                <div class="tab-pane active" id="tab1">
-                  <p>I think that&#x2019;s a responsibility that I have, to push possibilities, to show people, this is
-                    the
-                    level that things could be at. So when you get something that has the name Kanye West on it,
-                    it&#x2019;s
-                    supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up
-                    being
-                    worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-                </div>
-                <div class="tab-pane" id="tab2">
-                  <p> I will be the leader of a company that ends up being worth billions of dollars, because I got the
-                    answers. I understand culture. I am the nucleus. I think that&#x2019;s a responsibility that I have,
-                    to
-                    push possibilities, to show people, this is the level that things could be at. I think that&#x2019;s
-                    a
-                    responsibility that I have, to push possibilities, to show people, this is the level that things
-                    could
-                    be at. </p>
-                </div>
-                <div class="tab-pane" id="tab3">
-                  <p> I think that&#x2019;s a responsibility that I have, to push possibilities, to show people, this is
-                    the
-                    level that things could be at. I will be the leader of a company that ends up being worth billions
-                    of
-                    dollars, because I got the answers. I understand culture. I am the nucleus. I think that&#x2019;s a
-                    responsibility that I have, to push possibilities, to show people, this is the level that things
-                    could
-                    be at.</p>
-                </div>
-                <div class="tab-pane" id="tab4">
-                  <p> I think that&#x2019;s a responsibility that I have, to push possibilities, to show people, this is
-                    the
-                    level that things could be at. I will be the leader of a company that ends up being worth billions
-                    of
-                    dollars, because I got the answers. I understand culture. I am the nucleus. I think that&#x2019;s a
-                    responsibility that I have, to push possibilities, to show people, this is the level that things
-                    could
-                    be at.</p>
-                </div>
-                <div class="tab-pane" id="tab5">
-                  <p> I think that&#x2019;s a responsibility that I have, to push possibilities, to show people, this is
-                    the
-                    level that things could be at. I will be the leader of a company that ends up being worth billions
-                    of
-                    dollars, because I got the answers. I understand culture. I am the nucleus. I think that&#x2019;s a
-                    responsibility that I have, to push possibilities, to show people, this is the level that things
-                    could
-                    be at.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
--->
 <div class="container-fluid">
 
   <div class="row hra-details pb-4">
@@ -386,43 +155,55 @@
           </div>
       </div>
 
-    
-    
     <div class="mt-4 recommendation-bottom">
-      <form [formGroup]="formSecond">
-        <label>
-          <h4>Recommendation For patient</h4>
-        </label>
-        <div class="row mt-2" formGroupName="medication">
-          <div class="col-2 mt-3" >
-            Medication
+      <form [formGroup]="formSecond2">
+        <div class="row"> 
+          <div class="col-10">
+            <label>
+              <h4>Recommendation For patient</h4>
+            </label>
           </div>
-          <div class="col-2 ml-3">
-            <mat-form-field>
-              <mat-label>Medicine</mat-label>
-              <input matInput class="example-full-width" formControlName='medicine'>
-            </mat-form-field>
+          <div >
+            <button class="btn btn-warning btn-sm" (click)="addmedicineButtonClick()">Add</button>
           </div>
-          <div class="col-2 ml-3">
-            <mat-form-field>
-              <mat-label>Dose</mat-label>
-              <input matInput class="example-full-width" formControlName='dose'>
-            </mat-form-field>
-          </div>  
-          <div class="col-2 ml-3">
-            <mat-form-field>
-              <mat-label class="example-full-width">Timing</mat-label>
-              <input matInput formControlName='timing'>
-            </mat-form-field>
+        </div>
+        <div formArrayName="medication">
+          <div *ngFor = "let element of formSecond2.get('medication').controls; let i = index">
+            <div class="row mt-2" [formGroupName]= "i">
+              <div class="col-2 mt-3" >
+                Medication
+              </div>
+              <div class="col-2 ml-3">
+                <mat-form-field>
+                  <mat-label>Medicine</mat-label>
+                  <input matInput class="example-full-width" formControlName='medicine'>
+                </mat-form-field>
+              </div>
+              <div class="col-2 ml-3">
+                <mat-form-field>
+                  <mat-label>Dose</mat-label>
+                  <input matInput class="example-full-width" formControlName='dose'>
+                </mat-form-field>
+              </div>  
+              <div class="col-2 ml-3">
+                <mat-form-field>
+                  <mat-label class="example-full-width">Timing</mat-label>
+                  <input matInput formControlName='timing'>
+                </mat-form-field>
+              </div>
+              <div class="col-2 ml-3">
+                <mat-form-field>
+                  <mat-label>Duration</mat-label>
+                  <input matInput class="example-full-width" formControlName='duration'>
+                </mat-form-field>
+              </div>
+              <div *ngIf="formSecond2.get('medication').length > 1">
+                <button class="btn btn-danger btn-sm pull-right" title="Delete" (click)="removeMedicineClick(i)" >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="col-2 ml-3">
-            <mat-form-field>
-              <mat-label>Duration</mat-label>
-              <input matInput class="example-full-width" formControlName='duration'>
-            </mat-form-field>
-          </div>
-        
-          
         </div>
         <div class="row mt-2">
           <div class="col-2 mt-3">
@@ -452,93 +233,34 @@
   </mat-sidenav-container>
 
   <div class="analysis-menu mt-4">
-    <div></div>
+    
     <div class="analysis-button  row">
       <div>
-        <button class="btn btn-success" mat-raised-button (click)="analysisPart()">Select Zone for User</button>
+        <button class="btn btn-info" mat-raised-button (click)="analysisPart()">Select Zone for User</button>
       </div>
     </div>
 
     <div  class="analysis-tab">
       <div class=" row ml-5  zone-select mt-3">
-      
-      
-        <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)"
-          [color]="getInkColor(tabRef._indexToSelect)"
-        >
+        <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)">
           <mat-tab label="None" ></mat-tab>
           <mat-tab label ="Red" ></mat-tab>
           <mat-tab label = "Purpul"></mat-tab>
           <mat-tab label = "Yellow"></mat-tab>
           <mat-tab label = "Green"></mat-tab>
-        </mat-tab-group>
-        
-      <!--
-
-        <mat-button-toggle-group name="patientZone" aria-label="Font Style" #togglegroup="matButtonToggleGroup" border='0' (change)="togglefun($event)">
-          <mat-button-toggle value="red" class="ml-4"
-           [ngStyle]="{'background-color' :  togglegroup.value == 'red' ? 'red' : none}">Red</mat-button-toggle>
-          <mat-button-toggle value="purple" class="ml-4"
-          [ngStyle]="{'background-color' :  togglegroup.value == 'purple' ? 'purple' : none}">purple</mat-button-toggle>
-          <mat-button-toggle value="yellow" class="ml-4" 
-          [ngStyle]="{'background-color' :  togglegroup.value == 'yellow' ? 'yellow' : none}">yellow</mat-button-toggle>
-          <mat-button-toggle value="green" class="ml-4" 
-          [ngStyle]="{'background-color' :  togglegroup.value == 'green' ? 'green' : none}">green</mat-button-toggle>
-      </mat-button-toggle-group>
-      -->
+        </mat-tab-group> 
       </div>
-      
-      
-        <!-- comment for HR
-          <div >
-            <div class="analysis-investigation row mt-3">
-              <div class="col-2 mt-3">
-                <label>Investigation : </label>
-              </div>
-              <div class="col-10">
-                <div class="row">
-                  <div *ngFor = "let element of analysisInvestigation" class="col-2">
-                    <button class="btn " mat-raised-button> {{element}} </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="analysis-lra row mt-3">
-              <div class="col-2 mt-3">
-                <label>LRA : </label>
-              </div>
-              <div class="col-10">
-                <div class="row">
-                  <div *ngFor = "let element of analysisLRA" class="col-2">
-                    <button class="btn" mat-raised-button> {{element}} </button> 
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="analysis-recommendation row mt-3">
-              <div class="col-2 mt-3">
-                <label>Recommendation : </label>
-              </div>
-              <div class="col-10">
-                <div class="row">
-                  <div *ngFor = "let element of analysisLRA" class="col-2">
-                    <button class="btn" mat-raised-button> {{element}} </button> 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        -->
     </div>
 
     
   </div>
 
   <div class="analysis-menu zone-part-bottom">
+   
     <div *ngIf="analysis == true">
       <div class="mt-4" >
         <div class="ml-2" style="text-content : center">
-          <button class="btn btn-primary" mat-raised-button>Reason to put in {{userZone}}</button>
+          <button class="btn " [ngClass] = 'userZone == "Red" ? "btn-danger" : (userZone =="Green" ? "btn-success" : (userZone == "Yellow" ? "btn-warning" : "btn-primary")) ' mat-raised-button>Reason to put in {{userZone}}</button>
         </div>
         <div class="row mt-3">
           <div class="col-4">
@@ -586,5 +308,25 @@
         </div>
       </div>
     </div>
+
+    <div class="row mt-4 ml-4" *ngIf="analysisPort == 'lra'">
+        <div class="col-10 ml-4" >
+
+          <mat-card class="example-card mat-card "  >
+          
+              <div class="row">
+                <div class="col-12">
+                  <mat-card-title class="mat-display-3 ml-2">LRA Details : </mat-card-title>
+                </div>
+              </div>
+            <mat-card-content>
+              <div class="row">
+                
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
   </div>
 </div>  
