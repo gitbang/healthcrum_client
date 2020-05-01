@@ -44,13 +44,16 @@ import {
   MatChipsModule,
   MatAutocompleteModule,
   MatDialogModule ,
-  MatSidenavModule
+  MatSidenavModule,
+  MatToolbarModule,
+  MatPaginatorModule
 } from "@angular/material";
 import { DataTablesModule } from "angular-datatables";
 import { ChartsModule } from "ng2-charts";
 import { EPrescriptionComponent } from './pages/e-prescription/e-prescription.component';
 import { SharedModule } from '../shared/shared.module';
 import { InvestigationComponent } from './pages/e-prescription/investigation/investigation.component';
+import { LastConsultantComponent } from './pages/e-prescription/last-consultant/last-consultant.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,11 @@ import { InvestigationComponent } from './pages/e-prescription/investigation/inv
     ServiceComponent,
     PatientCheckupComponent,
     EPrescriptionComponent,
-    InvestigationComponent
+    InvestigationComponent,
+    LastConsultantComponent
+  ],
+  entryComponents: [
+    LastConsultantComponent
   ],
   imports: [
     CommonModule,
@@ -103,7 +110,9 @@ import { InvestigationComponent } from './pages/e-prescription/investigation/inv
     DataTablesModule,
     SharedModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatToolbarModule,
+    MatPaginatorModule
   ]
 })
 export class DoctorModule {}

@@ -234,7 +234,7 @@
 
   <div class="row hra-details pb-4">
     <div class="col-md-2 col-sm-4 mt-4 " >
-        <mat-card class="example-card mat-card " style="height:100%">
+        <mat-card class="example-card mat-card " style="height:100%" (click)="showlastconsultant()">
             <mat-card-header>
                 <mat-card-title >Last Consultant</mat-card-title>
             </mat-card-header>
@@ -567,7 +567,7 @@
 
       <div class="row mt-4 ml-4" *ngIf="analysisPort == 'lra'">
         <div class="col-10 ml-4" >
-          <mat-card class="example-card mat-card " style="height:100%" >
+          <mat-card class="example-card mat-card "  >
             <mat-card-header>
               <mat-card-title class="row mat-display-3">LRA Details : </mat-card-title>
               

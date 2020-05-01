@@ -3,7 +3,8 @@ import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 import {FormBuilder, FormArray, FormControl} from '@angular/forms';
-
+import {LastConsultantComponent} from './last-consultant/last-consultant.component'
+// import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component
 
 @Component({
   selector: "app-e-prescription",
@@ -84,16 +85,7 @@ export class EPrescriptionComponent implements OnInit {
     console.log(event);
     this.userZone = event.value;
   }
-
-  getbackgroungcolor(color : string) {
-  }
   getInkColor(tabRef){
-    // if(tabRef == 0) {
-    //   return 'primary'
-    // }
-    // else if(tabRef == 1) {
-    //   return 'accent'
-    // }
     switch(tabRef){
       case 0 : return 'primary';
       case 1 : return 'accent';
@@ -199,4 +191,14 @@ export class EPrescriptionComponent implements OnInit {
     //this.formReson.controls['lra'].setValue(this.checkbox)
   }
 
+  showlastconsultant(){
+    console.log("last consultant reached")
+    const dialogRef  = this.dialog.open(LastConsultantComponent, {  
+      height : '80%',
+    })
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog box closed`);
+    })
+  }
 }
