@@ -4,6 +4,7 @@ import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-das
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 import {FormBuilder, FormArray, FormControl, FormGroup} from '@angular/forms';
 import {LastConsultantComponent} from './last-consultant/last-consultant.component'
+import { AnalysisComponent } from "./analysis/analysis.component";
 // import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component
 
 @Component({
@@ -83,16 +84,16 @@ export class EPrescriptionComponent implements OnInit {
     }),
   })
 
-  formSecond = this.fb.group({
-    medication : this.fb.group({
-      medicine : [''],
-      dose : [''],
-      timing : [''],
-      duration : ['']
-    }),
-    investigation : [''],
-    recommendation : ['']
-  })
+  // formSecond = this.fb.group({
+  //   medication : this.fb.group({
+  //     medicine : [''],
+  //     dose : [''],
+  //     timing : [''],
+  //     duration : ['']
+  //   }),
+  //   investigation : [''],
+  //   recommendation : ['']
+  // })
 
   // dynamic form second
 
@@ -122,13 +123,11 @@ export class EPrescriptionComponent implements OnInit {
   }
     // dynamic form second ends
 
-
     // form builder ends
   
   submit(){
     console.log("submit clicked");
     console.log("first form",this.formFirst);
-    console.log("second form",this.formSecond);
     console.log("dynamic form",this.formSecond2);
     
   }
@@ -136,20 +135,6 @@ export class EPrescriptionComponent implements OnInit {
     console.log(event);
     this.userZone = event.value;
   }
-
-  /*
-  for the color change of ink bar
-
-  [color]="getInkColor(tabRef._indexToSelect)
-  getInkColor(tabRef){
-    switch(tabRef){
-      case 0 : return 'primary';
-      case 1 : return 'accent';
-      case 2 : return 'warn';
-      case 3 : return '';
-      case 4 : return 'green';
-    }
-  }*/
 
   showprofile(){
     console.log("profile reached")
@@ -168,10 +153,11 @@ export class EPrescriptionComponent implements OnInit {
   }
   analysisPart(){
     console.log("analysis");
+    this.analysis = true
   }
   onTabChanges(event){
     
-    this.analysis = true;
+    //this.analysis = true;
     
     console.log(event);
     if(event.index == 0) {
@@ -180,6 +166,13 @@ export class EPrescriptionComponent implements OnInit {
     }  
     else{
       this.userZone = event.tab.textLabel;
+      const dialogRef = this.dialog.open(AnalysisComponent, {
+        height : '80%',
+        width : "500px",
+        data : {
+          zone : this.userZone
+        }
+      })
     }
   }
   checkBoxValueChange(event){
@@ -219,27 +212,6 @@ export class EPrescriptionComponent implements OnInit {
       this.formReasonObj.lra = this.formReasonObj.lra.filter((x)=> x!= key)
     }
     console.log(this.formReasonObj)
-    /*
-    //console.log(key, event)
-    const formarray = this.fb.array([
-      new FormControl('akash')
-    ])
-    //console.log("before", formarray.value)
-    formarray.push(new FormControl(key))
-    // //console.log("after", formarray.value)
-    // this.myForm5.controls['lra'].value.push(key)
-    // console.log(this.myForm5.controls['lra'].value)
-    if(event == true) {
-      this.formReson.controls['lra'].value.push(key)
-    }
-    else{
-      //this.formReson.controls['lra'] = this.formReson.controls['lra'].value.filter((x)=> x!= key)
-      let temp = this.formReson.controls['lra'].value.filter((x)=> x!= key);
-      this.formReson.controls['lra'].value.setValue(temp) 
-    }
-    console.log(this.formReson.controls['lra'])
-    */
-    
   }
   submitreason(){
     console.log(this.formReasonObj)

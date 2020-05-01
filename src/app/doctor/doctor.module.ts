@@ -54,6 +54,7 @@ import { EPrescriptionComponent } from './pages/e-prescription/e-prescription.co
 import { SharedModule } from '../shared/shared.module';
 import { InvestigationComponent } from './pages/e-prescription/investigation/investigation.component';
 import { LastConsultantComponent } from './pages/e-prescription/last-consultant/last-consultant.component';
+import { AnalysisComponent } from './pages/e-prescription/analysis/analysis.component';
 
 @NgModule({
   declarations: [
@@ -71,10 +72,12 @@ import { LastConsultantComponent } from './pages/e-prescription/last-consultant/
     PatientCheckupComponent,
     EPrescriptionComponent,
     InvestigationComponent,
-    LastConsultantComponent
+    LastConsultantComponent,
+    AnalysisComponent
   ],
   entryComponents: [
-    LastConsultantComponent
+    LastConsultantComponent,
+    AnalysisComponent
   ],
   imports: [
     CommonModule,

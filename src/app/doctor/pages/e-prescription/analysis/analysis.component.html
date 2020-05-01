@@ -1,0 +1,22 @@
+
+
+<div class="ml-2" style="text-content : center" class="row mat-elevation-z8">
+  <button class="col-12 btn " [ngClass] = 'userZone == "Red" ? "btn-danger" : (userZone =="Green" ? "btn-success" : (userZone == "Yellow" ? "btn-warning" : "btn-primary")) ' mat-raised-button>Reason to put in {{userZone}}</button>
+</div>
+
+
+<div class="row mt-4">
+  <div class="col-3">
+    <nav class="nav flex-column">
+      <a class="nav-link active" (click)="getdetails('lifestyle')" class="btn btn-primary btn-sm">Life Style</a>
+      <a class="nav-link" (click)="getdetails('physical')" class="btn btn-primary btn-sm">Physical</a>
+      <a class="nav-link" (click)="getdetails('family')" class="btn btn-primary btn-sm">Family</a>
+      <a class="nav-link" (click)="getdetails('others')" class="btn btn-primary btn-sm">Others</a>
+    </nav>
+  </div>
+  <div class="col-7">
+    <div *ngFor='let value of currentdata'> 
+      <mat-checkbox labelPosition="before">{{value.question}}  {{value.ans}}</mat-checkbox>
+    </div>
+  </div>
+</div>

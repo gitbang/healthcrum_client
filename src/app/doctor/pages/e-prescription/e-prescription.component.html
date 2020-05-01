@@ -240,7 +240,7 @@
       </div>
     </div>
 
-    <div  class="analysis-tab">
+    <div  class="analysis-tab"  >
       <div class=" row ml-5  zone-select mt-3">
         <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)">
           <mat-tab label="None" ></mat-tab>
@@ -307,26 +307,7 @@
           </mat-card>
         </div>
       </div>
+      
     </div>
-
-    <div class="row mt-4 ml-4" *ngIf="analysisPort == 'lra'">
-        <div class="col-10 ml-4" >
-
-          <mat-card class="example-card mat-card "  >
-          
-              <div class="row">
-                <div class="col-12">
-                  <mat-card-title class="mat-display-3 ml-2">LRA Details : </mat-card-title>
-                </div>
-              </div>
-            <mat-card-content>
-              <div class="row">
-                
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-
   </div>
 </div>  
