@@ -23,9 +23,14 @@ export class EPrescriptionComponent implements OnInit {
   }
 
   objectKeys = Object.keys;
+  @ViewChild('analysisZone', {static : true}) zonearea : ElementRef
+
+  moveToZone() {
+    //this.zonearea.nativeElement.scrollIntoView
+    this.zonearea.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
+  }
 
   public userZone : string
-
   public showPriscribtion = false;
   public analysis;
   public userZones : string[] = ["Red", "Purple", "Yellow", "Green"]
@@ -218,6 +223,7 @@ export class EPrescriptionComponent implements OnInit {
     //this.formReson.controls['lra'].setValue(this.checkbox)
   }
   */
+  
   showlastconsultant(){
     console.log("last consultant reached")
     const dialogRef  = this.dialog.open(LastConsultantComponent, {  
