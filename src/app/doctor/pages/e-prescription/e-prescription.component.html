@@ -3,11 +3,11 @@
 
   <div class="row hra-details pb-4">
     <div class="col-md-2 col-sm-4 mt-4 " >
-        <mat-card class="example-card mat-card " style="height:100%" (click)="showlastconsultant()">
-            <mat-card-header>
-                <mat-card-title >Last Consultant</mat-card-title>
-            </mat-card-header>
-        </mat-card>
+      <mat-card class="example-card mat-card " style="height:100%" (click)="showlastconsultant()">
+          <mat-card-header>
+              <mat-card-title >Last Consultant</mat-card-title>
+          </mat-card-header>
+      </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
         <mat-card class="example-card mat-card " style="height:100%" (click)="investigation()">
@@ -17,32 +17,33 @@
         </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
-        <mat-card class="example-card mat-card " style="height:100%">
-            <mat-card-header>
-                <mat-card-title >Condition / Symptemic</mat-card-title>
-            </mat-card-header>
-        </mat-card>
+      <mat-card class="example-card mat-card " style="height:100%">
+          <mat-card-header>
+              <mat-card-title >Condition / Symptemic</mat-card-title>
+          </mat-card-header>
+      </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
+      <mat-card class="example-card mat-card " style="height:100%">
+          <mat-card-header>
+              <mat-card-title>Medications</mat-card-title>
+          </mat-card-header>
+      </mat-card>
+    </div>
+    <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
+      <mat-card class="example-card mat-card " style="height:100%" (click)="showprofile()">
+          <mat-card-header>
+              <mat-card-title>EHR</mat-card-title>
+          </mat-card-header>
+      </mat-card>
+    </div>
+    <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
         <mat-card class="example-card mat-card " style="height:100%">
             <mat-card-header>
-                <mat-card-title>Medications</mat-card-title>
+                <mat-card-title>Analysis</mat-card-title>
             </mat-card-header>
         </mat-card>
-    </div>
-    <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
-        <mat-card class="example-card mat-card " style="height:100%" (click)="showprofile()">
-            <mat-card-header>
-                <mat-card-title>EHR</mat-card-title>
-            </mat-card-header>
-        </mat-card>
-    </div>
-    <div class="col-md-2 col-sm-4 mt-4" mat-icon-button>
-        <mat-card class="example-card mat-card " style="height:100%" >
-            <mat-card-header>
-                <mat-card-title>E- Priscription</mat-card-title>
-            </mat-card-header>
-        </mat-card>
+      
     </div>
   </div>
 
@@ -240,7 +241,7 @@
       </div>
     </div>
 
-    <div  class="analysis-tab"  >
+    <div  class="analysis-tab"  id="analysisZone">
       <div class=" row ml-5  zone-select mt-3">
         <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)">
           <mat-tab label="None" ></mat-tab>

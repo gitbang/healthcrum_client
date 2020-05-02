@@ -155,10 +155,10 @@ export class EPrescriptionComponent implements OnInit {
     console.log("analysis");
     this.analysis = true
   }
-  onTabChanges(event){
-    
+
+
+  onTabChanges(event){  
     //this.analysis = true;
-    
     console.log(event);
     if(event.index == 0) {
       this.analysis = false;
@@ -173,11 +173,10 @@ export class EPrescriptionComponent implements OnInit {
           zone : this.userZone
         }
       })
+      dialogRef.afterClosed().subscribe(result => {
+        console.log("result is : " , result)
+      })
     }
-  }
-  checkBoxValueChange(event){
-    console.log("checkbox ")
-    console.log(event)
   }
   lraSection() {
     console.log("lra reached")
@@ -190,7 +189,7 @@ export class EPrescriptionComponent implements OnInit {
     console.log(temp.value.property )
   }
   
-  myForm = this.fb.group({
+ /* myForm = this.fb.group({
     lracheckbox: this.fb.array([''])
   });
   
@@ -218,7 +217,7 @@ export class EPrescriptionComponent implements OnInit {
     //console.log("form array", this.formReson['lra'].value)
     //this.formReson.controls['lra'].setValue(this.checkbox)
   }
-
+  */
   showlastconsultant(){
     console.log("last consultant reached")
     const dialogRef  = this.dialog.open(LastConsultantComponent, {  
@@ -226,7 +225,7 @@ export class EPrescriptionComponent implements OnInit {
     })
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog box closed`);
+      console.log(`Dialog box closed`, result);
     })
   }
 

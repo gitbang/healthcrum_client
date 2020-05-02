@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface hrainter {
   physical : any,
@@ -17,12 +17,17 @@ export interface hrainter {
 
 export class AnalysisComponent implements OnInit {
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(
+    public dialogRef: MatDialogRef<hrainter>,
+     @Inject(MAT_DIALOG_DATA) public data: any
+    ) { }
 
   userZone : string
   ngOnInit() {
     console.log(this.data)
     this.userZone = this.data.zone;
+    console.log("userzone is :" , this.userZone)
+    console.log("current length",   this.currentdata.length)
   }
   hra : hrainter = {
     physical :  [
@@ -48,13 +53,42 @@ export class AnalysisComponent implements OnInit {
       ans : "yes"
     }]
   }
-
+  userclass = this.userZone == "Red" ? "btn-danger" : (this.userZone =="Green" ? "btn-success" : (this.userZone == "Yellow" ? "btn-warning" : "btn-primary"))
   showcategory : string
-  currentdata : Array<any>
+  currentdata = [ ]
   getdetails(category) {
     console.log("reached")
     this.showcategory = category
     this.currentdata = this.hra[category]
     console.log(this.currentdata)
+  }
+
+  formReasonObj = {
+    physical : [],
+    lifestyle : [],
+    family : [],
+    others : []
+  }
+
+   checkCheckBoxvalue(quest, ans, event){
+    
+    console.log("ques is : ", quest);
+    console.log("ans is ", ans);
+    console.log("event is ", event);
+    var obj = {
+      question : quest,
+      answer : ans
+    }
+    if(event == true) {
+      this.formReasonObj[this.showcategory].push(obj)
+    }
+    else{
+      this.formReasonObj[this.showcategory] = this.formReasonObj[this.showcategory].filter((x)=> x.question!= quest)
+    }
+    console.log(this.formReasonObj)
+  }
+
+  submit(){
+    this.dialogRef.close({event : 'close', data : this.formReasonObj})
   }
 }
