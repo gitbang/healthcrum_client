@@ -12,6 +12,7 @@ table {
 .navbar{
     background-color: blue;
 }  
-d.pointer {
-    cursor: pointer;;
+::ng-deep .pointer {
+    z-index: 200;
+    cursor: pointer;
 }
