@@ -25,10 +25,15 @@ export class AnalysisComponent implements OnInit {
   userZone : string
   ngOnInit() {
     console.log(this.data)
+    console.log("questions passes by the e-prescription", this.data.question)
+    // assign this.data.question to hra according to the output required //
+
     this.userZone = this.data.zone;
     console.log("userzone is :" , this.userZone)
     console.log("current length",   this.currentdata.length)
   }
+
+  //sample questions
   hra : hrainter = {
     physical :  [
       {
@@ -53,6 +58,8 @@ export class AnalysisComponent implements OnInit {
       ans : "yes"
     }]
   }
+  // sample questions end 
+
   userclass = this.userZone == "Red" ? "btn-danger" : (this.userZone =="Green" ? "btn-success" : (this.userZone == "Yellow" ? "btn-warning" : "btn-primary"))
   showcategory : string
   currentdata = [ ]
@@ -83,7 +90,7 @@ export class AnalysisComponent implements OnInit {
       this.formReasonObj[this.showcategory].push(obj)
     }
     else{
-      this.formReasonObj[this.showcategory] = this.formReasonObj[this.showcategory].filter((x)=> x.question!= quest)
+      this.formReasonObj[this.showcategory] = this.formReasonObj[this.showcategory].filter((x)=> x.question != quest)
     }
     console.log(this.formReasonObj)
   }

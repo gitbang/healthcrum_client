@@ -1,16 +1,16 @@
+$bgColor :  #FAFAFA;
 
 .hra-details {
 background-image: linear-gradient(#00BCD4, white);
 }
-
-
 .mat-card-title{
 text-align: center;
 font-size: small;
-
 }
 
-
+table {
+  width: 100%;
+}
 
 tr:nth-child(even){background-color: #f2f2f2}
 
@@ -21,18 +21,10 @@ th {
 td{
     padding-top: 2%;;
 }   
-
-.example-full-width {
-  width: 80%;
+.user-details{
+  background-color: $bgColor ;
 }
-
-mat-sidenav-container {
-  height: 80%;
-}
-mat-sidenav, mat-sidenav-container {
-  padding : 16;
-}
-mat-sidenav{
-  //background-color : lightcoral;
-  width: 200px;
+.font-weight-bold {
+  color: black;
+  font-weight: bold;
 }

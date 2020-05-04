@@ -19,17 +19,32 @@ export class EPrescriptionComponent implements OnInit {
   
   constructor(private dialog : MatDialog, private fb : FormBuilder, private service : DoctorService) {}
 
+  hraReasonBox : any;
+  expansionCard : any;
   ngOnInit() {
     // get hra details//
-    this.service.hradetails();
+    this.service.hradetails().subscribe((result) => {
+      this.hraReasonBox = result
+      console.log(this.hraReasonBox);
+    })
     
+    this.service.getDataForExpansionCard().subscribe((result)=>{
+      this.expansionCard = result;
+      console.log(this.expansionCard);
+    })
+
+    /*checking purpose
+
     this.analysis = false;
     this.formFirst.valueChanges.subscribe((value)=>{
       console.log(this.formFirst.valid)
     })
+
+    */ 
+
   }
 
-  objectKeys = Object.keys;
+  objectKeys = Object.keys;1111
   @ViewChild('analysisZone', {static : true}) zonearea : ElementRef
 
   moveToZone() {
@@ -41,38 +56,13 @@ export class EPrescriptionComponent implements OnInit {
   public showPriscribtion = false;
   public analysis;
   public userZones : string[] = ["Red", "Purple", "Yellow", "Green"]
-  public analysisInvestigation : string[] = ["Reason 1","Reason 2","Reason 3","Reason 4","Reason 5"]
-  public analysisLRA : string[] = ["Reason 1","Reason 2","Reason 3","Reason 4","Reason 5"]
-  public analysisPort : string 
+  // public analysisInvestigation : string[] = ["Reason 1","Reason 2","Reason 3","Reason 4","Reason 5"]
+  // public analysisLRA : string[] = ["Reason 1","Reason 2","Reason 3","Reason 4","Reason 5"]
+   public analysisPort : string 
   public investigationCheckbox : any;
   
   public lraFromOfUser =  { "Family History" : '15'}
-  public lraFromOfUser1 = [
-     { "Family History" : '20'},
-     { "Dietry " : '25'},
-     { "Physical" : '26'},
-     { "Family Background" : '50'},
-  ]
-
-  public userdetail = {
-    "Physical" : [
-      {
-        "Question" : "Do you exercise ?",
-        "Zone" : "Red",
-        "ans" : "No"
-      },
-      {
-        "Question" : "Do you drink alcohol?",
-        "Zone" : "Red",
-        "ans" : "yes"
-      },
-      {
-        "Question" : "Do you smoke ?",
-        "Zone" : "Green",
-        "ans" : "No"
-      }
-    ]
-  }
+ 
 
   @ViewChild('togglegroup', {static : false}) toggle : ElementRef
     // form builder of this page
@@ -171,7 +161,8 @@ export class EPrescriptionComponent implements OnInit {
         height : '80%',
         width : "500px",
         data : {
-          zone : this.userZone
+          zone : this.userZone,
+          question : this.hraReasonBox
         }
       })
       dialogRef.afterClosed().subscribe(result => {
@@ -190,36 +181,6 @@ export class EPrescriptionComponent implements OnInit {
     console.log(temp.value.property )
   }
   
- /* myForm = this.fb.group({
-    lracheckbox: this.fb.array([''])
-  });
-  
-  formReson = this.fb.group({
-    lra  : this.fb.array([])
-  })
-
-  formReasonObj = {
-    lra : [],
-    investigation : [],
-    recommendation : []
-  }
-  checkCheckBoxvalue(key , event){
-    
-    if(event == true) {
-      this.formReasonObj.lra.push(key)
-    }
-    else{
-      this.formReasonObj.lra = this.formReasonObj.lra.filter((x)=> x!= key)
-    }
-    console.log(this.formReasonObj)
-  }
-  submitreason(){
-    console.log(this.formReasonObj)
-    //console.log("form array", this.formReson['lra'].value)
-    //this.formReson.controls['lra'].setValue(this.checkbox)
-  }
-  */
-  
   showlastconsultant(){
     console.log("last consultant reached")
     const dialogRef  = this.dialog.open(LastConsultantComponent, {  
@@ -231,11 +192,11 @@ export class EPrescriptionComponent implements OnInit {
     })
   }
 
-  checkzone(value){
-    console.log(value)
-    if(value < 20 ) {
+  // checkzone(value){
+  //   console.log(value)
+  //   if(value < 20 ) {
     
-    }
-    return true
-  }
+  //   }
+  //   return true
+  // }
 }

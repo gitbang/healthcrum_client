@@ -54,12 +54,7 @@ export class LastConsultantComponent implements OnInit {
   constructor() { }
   col : string[] = ['date', 'doctor', 'symptoms', 'problems', 'diagnosis', 'recommendation']
   ngOnInit() {
-    // this.list = [
-    // { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
-    // { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
-    // { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" },
-    // { date : new Date(), doctor : 'Akash', symptoms : "nothing", problems : "all fine", diagnosis : "healthy", recommendation : "have balance diet" }
-    // ]
+    
     setTimeout(() => this.list.paginator = this.paginator);
     
   }
