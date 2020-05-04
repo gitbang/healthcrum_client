@@ -146,7 +146,7 @@
                           </td>
                           <td class="col-3">
                               <mat-form-field class="example-full-width">
-                                  <input matInput formControlName='rema'>
+                                  <input matInput formControlName='remarks'>
                               </mat-form-field>
                           </td>
                       </tr>
@@ -227,7 +227,8 @@
           </div>
         </div>
         <div>
-          <button mat-raised-button class="btn btn-primary" (click)="submit()">Submit</button>
+          <button mat-raised-button class="btn btn-primary" [disabled]='!formFirst.valid || !formSecond2.valid' 
+          (click)="submit()">Submit</button>
         </div>
       </form>
     </div>

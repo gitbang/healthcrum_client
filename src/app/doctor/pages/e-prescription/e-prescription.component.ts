@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
-import {FormBuilder, FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LastConsultantComponent} from './last-consultant/last-consultant.component'
 import { AnalysisComponent } from "./analysis/analysis.component";
-// import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component
+// import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component4
+import {DoctorService} from '../../doctor.service'
 
 @Component({
   selector: "app-e-prescription",
@@ -16,10 +17,16 @@ export class EPrescriptionComponent implements OnInit {
   //tabBackground = "primary";
   
   
-  constructor(private dialog : MatDialog, private fb : FormBuilder) {}
+  constructor(private dialog : MatDialog, private fb : FormBuilder, private service : DoctorService) {}
 
   ngOnInit() {
-    this.analysis = false
+    // get hra details//
+    this.service.hradetails();
+    
+    this.analysis = false;
+    this.formFirst.valueChanges.subscribe((value)=>{
+      console.log(this.formFirst.valid)
+    })
   }
 
   objectKeys = Object.keys;
@@ -69,45 +76,33 @@ export class EPrescriptionComponent implements OnInit {
 
   @ViewChild('togglegroup', {static : false}) toggle : ElementRef
     // form builder of this page
-    
+  
+
   formFirst = this.fb.group({
     problem : this.fb.group({
-      description : [''],
-      remarks : ['']
+      description : ['', Validators.required],
+      remarks : ['', Validators.required]
     }),
     symptoms : this.fb.group({
-      description : [''],
-      remarks : ['']
+      description : ['',Validators.required],
+      remarks : ['', Validators.required]
     }),
     finding: this.fb.group({
-      description : [''],
-      remarks : ['']
+      description : ['', Validators.required],
+      remarks : ['', Validators.required]
     }),
     recommendation : this.fb.group({
-      description : [''],
-      remarks : ['']
+      description : ['', Validators.required],
+      remarks : ['', Validators.required]
     }),
   })
-
-  // formSecond = this.fb.group({
-  //   medication : this.fb.group({
-  //     medicine : [''],
-  //     dose : [''],
-  //     timing : [''],
-  //     duration : ['']
-  //   }),
-  //   investigation : [''],
-  //   recommendation : ['']
-  // })
-
-  // dynamic form second
 
   formSecond2 = this.fb.group({
     medication : this.fb.array([
       this.addmedicine()
     ]),
-    investigation : [''],
-    recommendation : ['']
+    investigation : ['', Validators.required],
+    recommendation : ['', Validators.required]
   })
 
   addmedicineButtonClick(): void {
@@ -120,10 +115,10 @@ export class EPrescriptionComponent implements OnInit {
   }
   addmedicine() : FormGroup{
     return this.fb.group({
-      medicine : [''],
-      dose : [''],
-      timing : [''],
-      duration : ['']
+      medicine : ['', Validators.required],
+      dose : ['', Validators.required],
+      timing : ['', Validators.required],
+      duration : ['', Validators.required]
     })
   }
     // dynamic form second ends
@@ -132,8 +127,9 @@ export class EPrescriptionComponent implements OnInit {
   
   submit(){
     console.log("submit clicked");
-    console.log("first form",this.formFirst);
-    console.log("dynamic form",this.formSecond2);
+    console.log("first form",this.formFirst.value);
+    console.log("dynamic form",this.formSecond2.value);
+    this.service.submitdaya(this.formFirst, this.formSecond2);
     
   }
   togglefun(event) {

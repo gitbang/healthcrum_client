@@ -55,6 +55,7 @@ import { SharedModule } from '../shared/shared.module';
 import { InvestigationComponent } from './pages/e-prescription/investigation/investigation.component';
 import { LastConsultantComponent } from './pages/e-prescription/last-consultant/last-consultant.component';
 import { AnalysisComponent } from './pages/e-prescription/analysis/analysis.component';
+import {DoctorService} from './doctor.service'
 
 @NgModule({
   declarations: [
@@ -116,6 +117,9 @@ import { AnalysisComponent } from './pages/e-prescription/analysis/analysis.comp
     MatSidenavModule,
     MatToolbarModule,
     MatPaginatorModule
+  ],
+  providers : [
+    DoctorService
   ]
 })
 export class DoctorModule {}
