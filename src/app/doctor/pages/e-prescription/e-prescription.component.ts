@@ -20,7 +20,9 @@ export class EPrescriptionComponent implements OnInit {
   constructor(private dialog : MatDialog, private fb : FormBuilder, private service : DoctorService) {}
 
   hraReasonBox : any;
+  hraReasonAnswer : any
   expansionCard : any;
+  date : string
   ngOnInit() {
     // get hra details//
     this.service.hradetails().subscribe((result) => {
@@ -33,18 +35,11 @@ export class EPrescriptionComponent implements OnInit {
       console.log(this.expansionCard);
     })
 
-    /*checking purpose
-
-    this.analysis = false;
-    this.formFirst.valueChanges.subscribe((value)=>{
-      console.log(this.formFirst.valid)
-    })
-
-    */ 
-
+    let date = new Date();
+    this.date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
   }
 
-  objectKeys = Object.keys;1111
+  objectKeys = Object.keys;
   @ViewChild('analysisZone', {static : true}) zonearea : ElementRef
 
   moveToZone() {
@@ -69,7 +64,7 @@ export class EPrescriptionComponent implements OnInit {
   
 
   formFirst = this.fb.group({
-    problem : this.fb.group({
+    problems : this.fb.group({
       description : ['', Validators.required],
       remarks : ['', Validators.required]
     }),
@@ -85,6 +80,7 @@ export class EPrescriptionComponent implements OnInit {
       description : ['', Validators.required],
       remarks : ['', Validators.required]
     }),
+    date : [this.date]
   })
 
   formSecond2 = this.fb.group({
@@ -92,7 +88,8 @@ export class EPrescriptionComponent implements OnInit {
       this.addmedicine()
     ]),
     investigation : ['', Validators.required],
-    recommendation : ['', Validators.required]
+    recommendation : ['', Validators.required],
+    date : ['']
   })
 
   addmedicineButtonClick(): void {
@@ -111,30 +108,38 @@ export class EPrescriptionComponent implements OnInit {
       duration : ['', Validators.required]
     })
   }
-    // dynamic form second ends
-
-    // form builder ends
-  
-  submit(){
-    console.log("submit clicked");
-    console.log("first form",this.formFirst.value);
-    console.log("dynamic form",this.formSecond2.value);
-    this.service.submitdaya(this.formFirst, this.formSecond2);
-    
+  submitFirstForm(){
+   // console.log(this.formFirst.value);
+    this.formFirst.get('date').setValue(this.date);
+    this.service.submitFirstForm(this.formFirst).subscribe((result) => {
+      console.log(result);
+    })
   }
+  submitSecondForm(){
+    //console.log(this.formSecond2.value);
+    this.formSecond2.get('date').setValue(this.date);
+    this.service.submitSecondForm(this.formSecond2).subscribe((result) => {
+      console.log("", result);
+      if(result.message) {
+        alert("Form Not submitted")
+      }
+    })
+  }
+  
   togglefun(event) {
-    console.log(event);
+ //   console.log(event);
     this.userZone = event.value;
   }
 
   showprofile(){
-    console.log("profile reached")
+  //  console.log("profile reached")
     const dialogRef  = this.dialog.open(CommonDashboardComponent, {  
       height : '80%',
     })
     
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog box closed`);
+      
     });
   }
   
@@ -166,7 +171,11 @@ export class EPrescriptionComponent implements OnInit {
         }
       })
       dialogRef.afterClosed().subscribe(result => {
-        console.log("result is : " , result)
+        console.log("result is : " , result.data);
+        this.service.reasonFromHra(result).subscribe((result)=>{
+          //console.log(result);
+        })
+
       })
     }
   }
@@ -188,15 +197,8 @@ export class EPrescriptionComponent implements OnInit {
     })
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog box closed`, result);
+     // console.log(`Dialog box closed`, result);
+      this.hraReasonAnswer = result;
     })
   }
-
-  // checkzone(value){
-  //   console.log(value)
-  //   if(value < 20 ) {
-    
-  //   }
-  //   return true
-  // }
 }

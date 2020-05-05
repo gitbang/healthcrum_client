@@ -61,7 +61,6 @@ const routes: Routes = [
       }
     ]
   },
-
   {
     path: "doctor",
     component: DoctorComponent,

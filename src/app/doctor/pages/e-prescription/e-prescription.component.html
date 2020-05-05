@@ -97,7 +97,7 @@
                           <th class="col-7 col-lg-6"></th>
                           <th class="col-3 col-lg-3 ">Remarks</th>
                       </tr>
-                      <tr class="row" formGroupName="problem">
+                      <tr class="row" formGroupName="problems">
                           <td class="color col-2">Problems</td>
                           <td class="col-7">
                               <mat-form-field class="example-full-width">
@@ -150,11 +150,12 @@
                           </td>
                       </tr>
                   </table>    
+                  <button class="btn btn-primary btn-sm" [disabled]='!formFirst.valid '(click)="submitFirstForm()">Submit</button>
               </div>
             </form>
           </div>
       </div>
-
+  </mat-sidenav-container>
     <div class="mt-4 recommendation-bottom">
       <form [formGroup]="formSecond2">
         <div class="row"> 
@@ -226,12 +227,12 @@
           </div>
         </div>
         <div>
-          <button mat-raised-button class="btn btn-primary" [disabled]='!formFirst.valid || !formSecond2.valid' 
-          (click)="submit()">Submit</button>
+          <button mat-raised-button class="btn btn-primary" [disabled]='!formSecond2.valid' 
+          (click)="submitSecondForm()">Submit</button>
         </div>
       </form>
     </div>
-  </mat-sidenav-container>
+  
 
   <div class="analysis-menu mt-4">
     
