@@ -1,411 +1,244 @@
-<div class="appoint container-fluid">
+<div class="master container-fluid">
   <div class="row">
-    <div class="col-md-12">
-      <div class="page-categories">
-        <br>
-        <ul class="nav nav-pills nav-pills-rose nav-pills-icons justify-content-center" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active show" data-toggle="tab" href="#link7" role="tablist">
-              <i class="material-icons">event</i> Events
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#link8" role="tablist">
-              <i class="material-icons">shopping_basket</i> Articles
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content tab-space tab-subcategories">
-          <div class="tab-pane active show" id="link7">
-            <div class="card">
-              <div class="card-header card-header-icon card-header-rose">
-                <div class="card-icon">
-                  <i class="material-icons">event</i>
-                </div>
-                <h4 class="card-title ">Events Table</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Event Name
-                        </th>
-                        <th>
-                          Starting Date
-                        </th>
-                        <th>
-                          Location
-                        </th>
-                        <th>
-                          Slot
-                        </th>
-                        <th>
-                          Slot Left
-                        </th>
-                        <th>
-                          Last Booking Date
-                        </th>
-                        <th>
-                          Price(Rs)
-                        </th>
-                        <th>
-                          Details
-                        </th>
-                        <th>
-                          Post by
-                        </th>
-                        <th>
-                          Show Event
-                        </th>
-                        <th>
-                          Cancel
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          20/05/20xx
-                        </td>
-                        <td>
-                          20000
-                        </td>
-                        <td>
-                          XXXXX
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          XXXXXXX
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteEvent()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          20/05/20xx
-                        </td>
-                        <td>
-                          20000
-                        </td>
-                        <td>
-                          XXXXX
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          XXXXXXX
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteEvent()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          20/05/20xx
-                        </td>
-                        <td>
-                          20000
-                        </td>
-                        <td>
-                          XXXXX
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          XXXXXXX
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteEvent()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <ul class="pagination pagination-primary">
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_right</i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="link8">
-            <div class="card">
-              <div class="card-header card-header-icon card-header-rose">
-                <div class="card-icon">
-                  <i class="material-icons">event</i>
-                </div>
-                <h4 class="card-title ">Events Table</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Article Name
-                        </th>
-                        <th>
-                          Posted on
-                        </th>
-                        <th>
-                          Posted By
-                        </th>
-                        <th>
-                          Show / Hide
-                        </th>
-                        <th>
-                          Action
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value=""> Show
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                          </label>
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteArticle()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-
-                        <td>
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value=""> Show
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                          </label>
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteArticle()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-
-                        <td>
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value=""> Show
-                            <span class="form-check-sign">
-                              <span class="check"></span>
-                            </span>
-                          </label>
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteArticle()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <ul class="pagination pagination-primary">
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_right</i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="link9">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Legal info of the product</h4>
-                <p class="card-category">
-                  More information here
-                </p>
-              </div>
-              <div class="card-body">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate
-                one-to-one customer service with robust ideas.
-                <br>
-                <br>Dynamically innovate resource-leveling customer service for state of the art customer service.
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="link10">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Help center</h4>
-                <p class="card-category">
-                  More information here
-                </p>
-              </div>
-              <div class="card-body">
-                From the seamless transition of glass and metal to the streamlined profile, every detail was carefully
-                considered to enhance your experience. So while its display is larger, the phone feels just right.
-                <br>
-                <br> Another Text. The first thing you notice when you hold the phone is how great it feels in your
-                hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a
-                remarkable, simplified design.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <mat-toolbar>
+      <mat-select>
+        <option value="" disabled [value]=""  selected>Select your option</option>
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+      <!--<button class="ml-5 btn-sm" [matMenuTriggerFor]="menu"  >Menu</button>
+      <mat-menu #menu="matMenu" [(ngModel)]='currentpackage' (change)="branchChange()">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+      -->
+      <!--
+      <button class="btn btn-primary"> 
+        Packages for branch : {{package}} 
+      </button>
+      -->
+    </mat-toolbar>
   </div>
+  <div class="row mt-4 mat-elevation-z8 ml-2 mr-2 mb-4" >
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card >
+        <mat-card-title class="red-title">Danger Zone</mat-card-title>
+        <mat-card-footer>4 person</mat-card-footer>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#f70707'"
+          [innerStrokeColor]="'#edbdc4'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+          [showSubtitle]="false"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <mat-card-title class="purple-title">Need Attention</mat-card-title>
+        <mat-card-footer>4 person</mat-card-footer>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#7A67BB'"
+          [innerStrokeColor]="'#bac9f2'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+          [showSubtitle]="false"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <mat-card-title class="yellow-title">Border Line</mat-card-title>
+        <mat-card-footer>10 person</mat-card-footer>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#FDB900'"
+          [innerStrokeColor]="'#f9e8bb'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+          [showSubtitle]="false"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <mat-card-title class="green-title">Green Zone</mat-card-title>
+        <mat-card-footer>20 person</mat-card-footer>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+          [titleFontSize]="50"
+          [showSubtitle]="false"
+        ></circle-progress>
+      </mat-card>
+    </div>
+  </div>
+
+<!--
+  <div class="row mt-4 mat-elevation-z8 ml-2 mr-2 mb-4" >
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="7"
+          [showInnerStroke]="false"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [showSubtitle]='false'
+          [backgroundPadding] = "5"
+          [backgroundColor] = "'#FDB900'"
+          [outerStrokeColor] = "'#FFFFFF'"
+          [innerStrokeColor] = "'#FDB900'"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="7"
+          [showInnerStroke]="false"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [showSubtitle]='false'
+          [backgroundPadding] = "5"
+          [backgroundColor] = "'#F33527'"
+          [outerStrokeColor] = "'#FFFFFF'"
+          [innerStrokeColor] = "'#FDB900'"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+        ></circle-progress>
+      </mat-card>
+    </div>
+  </div>
+
+   <div class="row mt-4 mat-elevation-z8 ml-2 mr-2 mb-4" >
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+     <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+        ></circle-progress>
+      </mat-card>
+    </div>
+    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
+      <mat-card>
+        <circle-progress
+          [percent]="85"
+          [radius]="100"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#f70707'"
+          [innerStrokeColor]="'#edbdc4'"
+          [animation]="true"
+          [animationDuration]="300"
+          [responsive]='true'
+          [titleFontSize]="50"
+        ></circle-progress>
+      </mat-card>
+    </div>
+  </div>
+
+  -->
 </div>
+

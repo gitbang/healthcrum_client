@@ -25,6 +25,9 @@ import { HealthAnalysisComponent } from "./pages/health-analysis/health-analysis
 import { HealthStatusComponent } from "./pages/health-status/health-status.component";
 import { BookedAppointmentComponent } from "./pages/booked-appointment/booked-appointment.component";
 import { DataTablesModule } from "angular-datatables";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgCircleProgressModule} from 'ng-circle-progress';
+import {MatMenuModule} from '@angular/material/menu'
 import {
   MatButtonModule,
   MatInputModule,
@@ -38,8 +41,24 @@ import {
   MatNativeDateModule,
   MatRadioModule,
   MatStepperModule,
-  MatTableModule
+  MatTableModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatCardModule,
+  MatTabsModule,
+  MatListModule,
+  MatButtonToggleModule,
+  MatProgressBarModule,
+  MatExpansionModule,
+  MatChipsModule,
+  MatAutocompleteModule,
+  MatDialogModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatPaginatorModule
 } from "@angular/material";
+import { ChartsModule } from "ng2-charts";
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -83,7 +102,45 @@ import {
     MatRadioModule,
     MatStepperModule,
     MatTableModule,
-    DataTablesModule
+    DataTablesModule,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatInputModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatBadgeModule,
+    MatCommonModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatCardModule,
+    MatTabsModule,
+    MatListModule,
+    MatButtonToggleModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    ChartsModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    DataTablesModule,
+    SharedModule,
+    MatDialogModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    NgCircleProgressModule
   ]
 })
 export class CompanyModule {}

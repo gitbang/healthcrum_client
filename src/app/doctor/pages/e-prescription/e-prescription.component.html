@@ -57,35 +57,35 @@
               <mat-accordion >
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                        <mat-panel-title>Prevent Disease</mat-panel-title>
+                        <mat-panel-title>Present Disease</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-panel-description>
-                            Here describe all disease from major to minor
+                           {{sideExpansion.disease}}
                         </mat-panel-description>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                        <mat-panel-title>Prevent Medicine</mat-panel-title>
+                        <mat-panel-title>Present Medicine</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-panel-description>
-                            Here describe all current medicine
-                        </mat-panel-description>
+                      {{sideExpansion.medicine}}
+                    </mat-panel-description>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>Allergy</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-panel-description>
-                            Here describe the alergy here
-                        </mat-panel-description>
+                      {{sideExpansion.allergy}}
+                    </mat-panel-description>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>Others</mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-panel-description>
-                            Any other aspect describe
-                        </mat-panel-description>
+                    <mat-panel-description>  
+                      {{sideExpansion.others}}
+                    </mat-panel-description>
                 </mat-expansion-panel>
               </mat-accordion>
             </div>

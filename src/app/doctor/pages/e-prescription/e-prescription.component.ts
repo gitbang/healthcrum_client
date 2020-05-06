@@ -22,7 +22,13 @@ export class EPrescriptionComponent implements OnInit {
   hraReasonBox : any;
   hraReasonAnswer : any
   expansionCard : any;
-  date : string
+  date : string;
+  sideExpansion = {
+    disease : 'All about present disease',
+    medicine : "all about present medicine",
+    allergy : 'all about present allergy',
+    others : "other hazardous factors"
+  }
   ngOnInit() {
     // get hra details//
     this.service.hradetails().subscribe((result) => {
@@ -111,19 +117,22 @@ export class EPrescriptionComponent implements OnInit {
   submitFirstForm(){
    // console.log(this.formFirst.value);
     this.formFirst.get('date').setValue(this.date);
-    this.service.submitFirstForm(this.formFirst).subscribe((result) => {
-      console.log(result);
-    })
+    this.service.submitFirstForm(this.formFirst).subscribe(
+      (result) =>  console.log(result),
+      (err : any) => console.log(err)
+    )
   }
   submitSecondForm(){
     //console.log(this.formSecond2.value);
     this.formSecond2.get('date').setValue(this.date);
-    this.service.submitSecondForm(this.formSecond2).subscribe((result) => {
-      console.log("", result);
-      if(result.message) {
-        alert("Form Not submitted")
-      }
-    })
+    this.service.submitSecondForm(this.formSecond2).subscribe(
+      (result) => {
+        if(result.message) {
+          alert("Form Not submitted")
+        }
+      },
+      (err : any) => console.log(err)
+    )
   }
   
   togglefun(event) {

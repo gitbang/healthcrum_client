@@ -55,7 +55,8 @@ import { SharedModule } from '../shared/shared.module';
 import { InvestigationComponent } from './pages/e-prescription/investigation/investigation.component';
 import { LastConsultantComponent } from './pages/e-prescription/last-consultant/last-consultant.component';
 import { AnalysisComponent } from './pages/e-prescription/analysis/analysis.component';
-import {DoctorService} from './doctor.service'
+import {DoctorService} from './doctor.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import {DoctorService} from './doctor.service'
     MatDialogModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgCircleProgressModule.forRoot()
   ],
   providers : [
     DoctorService
