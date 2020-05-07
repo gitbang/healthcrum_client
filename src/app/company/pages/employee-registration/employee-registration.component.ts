@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import {DatePipe} from '@angular/common'  
 import {
   FormBuilder,
   FormControl,
@@ -45,12 +46,37 @@ export class EmployeeRegistrationComponent implements OnInit {
     Validators.email
   ]);
 
+
+  registerationForm = this._formBuilder.group({
+    date : ['' ],
+    firstStepper : this._formBuilder.group({
+      name : ['', Validators.required],
+      email : ['', [Validators.email]],
+      contactno : ['',[Validators.required]],
+      dept : ['', Validators.required],
+      age : ['', Validators.required],
+      dob : ['', [Validators.required]],
+    }),
+    secondStepper : this._formBuilder.group({
+      employId : ['', Validators.required],
+      branch : ['', Validators.required],
+      gender : ['',Validators.required]
+    })
+  })
+
   constructor(
     private _formBuilder: FormBuilder,
     private companyApiService: CompanyApiService
   ) {}
 
   ngOnInit() {
+    
+    let dp = new DatePipe(navigator.language);
+    console.log(dp);
+    let p = 'dd-MM-y'; // YYYY-MM-DD
+    let date = dp.transform(new Date(), p);
+
+
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ["", [Validators.required, Validators.email]]
     });
@@ -61,12 +87,14 @@ export class EmployeeRegistrationComponent implements OnInit {
     this.companyApiService.getEmployeesDetails().subscribe(data => {
       this.empDetails = data;
       return;
-      if (data._meta.success) {
-        this.empDetails = data.result;
-      }
-      console.log(this.empDetails);
     });
-  }
 
+    
+    (<FormGroup>this.registerationForm.controls['firstStepper']).controls['date'].setValue(date)
+    console.log(this.registerationForm.value)
+    
+   // const date = new Date()
+  }
+  date = new Date()
   matcher = new MyErrorStateMatcher();
 }

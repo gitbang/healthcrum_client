@@ -27,71 +27,27 @@
           <table class="table table-responsive">
             <thead class=" text-primary">
               <tr>
-                <th>
-                  S No.
-                </th>
-                <th>
-                  Employee Name
-                </th>
-                <th>
-                  Email
-                </th>
-                <th>
-                  Contact
-                </th>
-                <th>
-                  Age
-                </th>
-                <th>
-                  Gender
-                </th>
-                <th>
-                  D.O.B
-                </th>
-                <th>
-                  Employee ID
-                </th>
-                <th>
-                  Dept
-                </th>
-                <th>
-                  Branch
-                </th>
+                <th> S No.</th>
+                <th>Employee Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>D.O.B</th>
+                <th>Employee ID</th>
+                <th>Dept</th>
+                <th>Branch</th>
               </tr>
             </thead>
-            <tbody *ngIf="empDetails">
-              <tr *ngFor="let emp of empDetails; index as i;">
-
-                <td>
-                  {{(page_no-1)*10+i}}
-                </td>
-                <td>
-                  {{emp.name}}
-                </td>
-                <td>
-                  {{emp.email}}
-                </td>
-                <td>
-                  {{emp.phone}}
-                </td>
-                <td>
-                  34
-                </td>
-                <td class="">
-                  {{emp.gender}}
-                </td>
-                <td class="">
-                  {{emp.dob}}
-                </td>
-                <td class="">
-                  111XXX
-                </td>
-                <td class="">
-                  Medicine
-                </td>
-                <td class="">
-                  Branch Name
-                </td>
+            <tbody>
+              <tr *ngFor = 'let x of empDetails'>
+                <td></td>
+                <td>{{x.name}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
