@@ -59,7 +59,7 @@ import {
 } from "@angular/material";
 import { ChartsModule } from "ng2-charts";
 import { SharedModule } from "app/shared/shared.module";
-
+import {CompanyService} from './company.service'
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -141,6 +141,7 @@ import { SharedModule } from "app/shared/shared.module";
     MatProgressSpinnerModule,
     MatMenuModule,
     NgCircleProgressModule
-  ]
+  ],
+  providers : [CompanyService]
 })
 export class CompanyModule {}
