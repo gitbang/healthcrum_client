@@ -26,7 +26,7 @@ export class CompanyService {
         catchError(this.handleError)
       )
   }
-  dataForParticularPackage(compantName, packageName) {
+  dataForParticularPackage(compantName, packageName) : Observable<any> {
     console.log("particular package reached");
     return this.http.get(this.url + compantName + '/'+ packageName, this.option)
         .pipe(
@@ -36,6 +36,17 @@ export class CompanyService {
   }
   // company dashboard end
 
+
+  // employee-registeration
+  uploadCsvFile(file) : Observable <any> {
+    console.log("reached")
+    return this.http.post(this.url + 'addemploy/csv', file)
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+  }
+  //employ-registeration end
   private handleError(error : HttpErrorResponse) {
     if(error.error instanceof ErrorEvent) {
       console.log('error occur : ' , error.error.message)

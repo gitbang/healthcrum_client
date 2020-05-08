@@ -13,6 +13,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { ErrorStateMatcher } from "@angular/material/core";
 import { CompanyApiService } from "app/services/company-api.service";
 import { RegisterationFormComponent } from "./registeration-form/registeration-form.component";
+import {MatIconRegistry} from '@angular/material/icon';
+import {CompanyService} from '../../company.service'
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -41,7 +43,8 @@ export class EmployeeRegistrationComponent implements OnInit {
     private _formBuilder: FormBuilder, 
     private companyApiService: CompanyApiService,
     private dialog : MatDialog,
-    private _snackbar : MatSnackBar
+    private _snackbar : MatSnackBar,
+    private service : CompanyService
   ) {}
 
   ngOnInit() {
@@ -59,22 +62,14 @@ export class EmployeeRegistrationComponent implements OnInit {
 
   isLinear = false;
   email: String;
-  // firstFormGroup: FormGroup;
-  // secondFormGroup: FormGroup;
   genderList: string[] = ["Male", "Female", "other"];
-  // DOB: Date;
-  // minDate: Date;
-  // maxDate: Date;
   empDetails: any[];
   page_no = 1;
   emailFormControl = new FormControl("", [
     Validators.required,
     Validators.email
   ]);
-
-
   matcher = new MyErrorStateMatcher();
-
   openform(){
     console.log("open form")
     const formport = this.dialog.open(RegisterationFormComponent)
@@ -85,6 +80,27 @@ export class EmployeeRegistrationComponent implements OnInit {
           duration : 2000
         })
       }
+    })
+  }
+  numberOfFiles = 0;
+  files : Array<File>
+  filechanged(event){
+    this.numberOfFiles = event.target.files.length;
+    this.files = event.target.files;
+    console.log(this.files)
+  }
+  fileupload(){
+    const fd : any = new FormData();
+    const files: Array<File> = this.files;
+    // fd.append('csv', this.files)
+    console.log(this.files.length)
+    for(let i = 0; i < files.length; i++) {
+      console.log(files[i], files[i].name)
+      fd.append('upload[]',files[i], files[i].name)
+    }
+    console.log(fd.toString())
+    this.service.uploadCsvFile(fd).subscribe((result)=>{
+      console.log(result)
     })
   }
 }

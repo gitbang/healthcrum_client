@@ -1,4 +1,4 @@
-<div class="row container-fluid">
+<div class="row master container-fluid">
   <div class="col-md-12">
     <div class="card ml-2 mr-2 mat-elevation-z8">
       <div class="card-header card-header-primary card-header-icon">
@@ -6,8 +6,23 @@
           <i class="material-icons">assignment</i>
         </div>
         <h4 class="card-title ">Employee Test Appointment</h4>
-        <button class="btn btn-success" (click)="openform()">Add New Employee</button>
-        <button class="btn ane btn-info">Add Employee (CSV)</button>
+        <div class="row">
+          <button class="col-8 col-lg-4 btn btn-success" (click)="openform()">Add New Employee</button>
+          
+          <input  type="file" #csvFile accept=".csv" multiple 
+          (change)="filechanged($event)"
+          [ngStyle]= '{"display" : numberOfFiles == 0 ? "none" : ""}' class="col-8 col-lg-4">
+
+          <button class="col-8 col-lg-4 btn  btn-info" (click)='csvFile.click()'  
+          [ngStyle]= '{"display" : numberOfFiles > 0 ? "none" : ""}'>Add Employee (CSV)</button>
+          
+          <mat-icon class="col-2 upload" title="Upload file"
+          [ngStyle]= '{"display" : numberOfFiles == 0 ? "none" : ""}'
+          (click)= "fileupload()"
+          >cloud_upload</mat-icon>
+
+        </div>
+        <!--
         <div style="margin-left: auto;" class="col-md-4">
           <form class="navbar-form">
             <span class="bmd-form-group">
@@ -21,6 +36,7 @@
             </span>
           </form>
         </div>
+        -->
       </div>
     </div>
       <!---->
@@ -43,7 +59,7 @@
           </thead>
           <tbody>
             <tr *ngFor = 'let x of empDetails'>
-              <td>{{x.name}}</td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>
