@@ -59,7 +59,9 @@ import {
 } from "@angular/material";
 import { ChartsModule } from "ng2-charts";
 import { SharedModule } from "app/shared/shared.module";
-import {CompanyService} from './company.service'
+import {CompanyService} from './company.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { RegisterationFormComponent } from './pages/employee-registration/registeration-form/registeration-form.component'
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -80,8 +82,10 @@ import {CompanyService} from './company.service'
     EmployeeTrackingComponent,
     HealthAnalysisComponent,
     HealthStatusComponent,
-    BookedAppointmentComponent
+    BookedAppointmentComponent,
+    RegisterationFormComponent
   ],
+  entryComponents : [RegisterationFormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(CompanyRoutes),
@@ -140,7 +144,8 @@ import {CompanyService} from './company.service'
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatMenuModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    MatSnackBarModule
   ],
   providers : [CompanyService]
 })

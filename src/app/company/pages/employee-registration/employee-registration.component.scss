@@ -6,10 +6,16 @@
   margin-top: 16px;
 }
 .cdk-overlay-container {
-  z-index: 99999 !important;
+  z-index: 9999 !important;
 }
 
 .table {
   width: 100%;
   overflow: scroll;
+}
+.increaseZindex{
+  z-index: 99999999;
+}
+mat-option{
+  z-index: 99999;
 }

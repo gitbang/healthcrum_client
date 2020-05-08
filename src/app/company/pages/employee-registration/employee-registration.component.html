@@ -6,7 +6,10 @@
           <i class="material-icons">assignment</i>
         </div>
         <h4 class="card-title ">Employee Test Appointment</h4>
+        <button class="btn btn-success" (click)="openform()">Add New Employee</button>
+        <!--
         <button class="btn btn-success" data-target="#add_emp" data-toggle="modal">Add New Employee</button>
+        -->
         <button class="btn ane btn-info">Add Employee (CSV)</button>
         <div style="margin-left: auto;" class="col-md-4">
           <form class="navbar-form">
@@ -42,7 +45,7 @@
             <tbody>
               <tr *ngFor = 'let x of empDetails'>
                 <td></td>
-                <td>{{x.name}}</td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -76,6 +79,7 @@
 </div>
 
 <!-- Modal -->
+<!--
 <div class="modal fade" id="add_emp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-signup" role="document">
     <div class="modal-content">
@@ -91,26 +95,26 @@
           <div class="separator"></div>
           <div class="test">
             <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
-              <mat-step [stepControl]="firstFormGroup">
-                <form [formGroup]="firstFormGroup">
+              <mat-step [stepControl]="firstStepper">
+                <form [formGroup]="firstStepper">
                   <ng-template matStepLabel>Employee Personal Info</ng-template>
 
                   <div class="row">
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-label>Name</mat-label>
-                        <input matInput placeholder="Employee Name" formControlName="firstCtrl" required>
+                        <input matInput placeholder="Employee Name" formControlName="name" required>
                       </mat-form-field>
                     </div>
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-label>Employee Email-id</mat-label>
                         <input matInput placeholder="Employee Email-id" [errorStateMatcher]="matcher" name="email"
-                          formControlName="firstCtrl" required>
-                        <mat-error *ngIf="firstFormGroup.hasError('email') && !firstFormGroup.hasError('required')">
+                          formControlName="email" required>
+                        <mat-error *ngIf="firstStepper.hasError('email')">
                           Please enter a valid email address
                         </mat-error>
-                        <mat-error *ngIf="firstFormGroup.hasError('required')">
+                        <mat-error *ngIf="firstStepper.hasError('required')">
                           Email is <strong>required</strong>
                         </mat-error>
                       </mat-form-field>
@@ -118,31 +122,32 @@
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-label>Contact Number</mat-label>
-                        <input matInput type="tel" placeholder="Contact Number" formControlName="firstCtrl" required>
+                        <input matInput type="number" placeholder="Contact Number" formControlName="contactno" required>
                       </mat-form-field>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 increaseZindex">
                       <mat-form-field>
                         <mat-label>Select Gender</mat-label>
-                        <mat-select formControlName="firstCtrl" multiple>
-                          <mat-option *ngFor="let gender of genderList" [value]="gender">{{gender}}</mat-option>
+                        <mat-select formControlName="gender" >
+                          <mat-option class="increaseZindex" style="margin-left: 200px; position: relative; z-index: 9999" *ngFor="let gender of genderList" 
+                          [value]="gender">{{gender}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-label>Date of birth</mat-label>
-                        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate">
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName='dob'>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                     </div>
                     <div class="col-md-4">
                       <mat-form-field>
-                        <mat-label>Contact Number</mat-label>
-                        <input matInput type="tel" placeholder="Contact Number" formControlName="firstCtrl" required>
+                        <mat-label>Age</mat-label>
+                        <input matInput type="number" placeholder="Age" formControlName="age" required>
                       </mat-form-field>
                     </div>
                   </div>
@@ -203,3 +208,4 @@
   </div>
 
 </div>
+-->
