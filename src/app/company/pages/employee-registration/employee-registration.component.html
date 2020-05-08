@@ -1,15 +1,12 @@
-<div class="row">
+<div class="row container-fluid">
   <div class="col-md-12">
-    <div class="card">
+    <div class="card ml-2 mr-2 mat-elevation-z8">
       <div class="card-header card-header-primary card-header-icon">
         <div class="card-icon">
           <i class="material-icons">assignment</i>
         </div>
         <h4 class="card-title ">Employee Test Appointment</h4>
         <button class="btn btn-success" (click)="openform()">Add New Employee</button>
-        <!--
-        <button class="btn btn-success" data-target="#add_emp" data-toggle="modal">Add New Employee</button>
-        -->
         <button class="btn ane btn-info">Add Employee (CSV)</button>
         <div style="margin-left: auto;" class="col-md-4">
           <form class="navbar-form">
@@ -25,57 +22,57 @@
           </form>
         </div>
       </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-responsive">
-            <thead class=" text-primary">
-              <tr>
-                <th> S No.</th>
-                <th>Employee Name</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>D.O.B</th>
-                <th>Employee ID</th>
-                <th>Dept</th>
-                <th>Branch</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor = 'let x of empDetails'>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-          <ul class="pagination pagination-primary" *ngIf="empDetails">
-            <li class="page-item">
-              <a class="page-link"><i class="material-icons">chevron_left</i></a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link"><i class="material-icons">chevron_right</i></a>
-            </li>
-          </ul>
-        </div>
+    </div>
+      <!---->
+    <div class="mt-4">
+      <div class="table-responsive">
+        <table class="table table-responsive">
+          <thead class=" text-primary">
+            <tr>
+              <th> S No.</th>
+              <th>Employee Name</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>D.O.B</th>
+              <th>Employee ID</th>
+              <th>Dept</th>
+              <th>Branch</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = 'let x of empDetails'>
+              <td>{{x.name}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination pagination-primary" *ngIf="empDetails">
+          <li class="page-item">
+            <a class="page-link"><i class="material-icons">chevron_left</i></a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link"><i class="material-icons">chevron_right</i></a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- Modal -->

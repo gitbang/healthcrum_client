@@ -55,20 +55,16 @@ export class EmployeeRegistrationComponent implements OnInit {
       this.empDetails = data;
       return;
     });
-
-    this.firstStepper.valueChanges.subscribe((value) =>{
-      console.log(this.firstStepper.value)
-    })
   }
 
   isLinear = false;
   email: String;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  // firstFormGroup: FormGroup;
+  // secondFormGroup: FormGroup;
   genderList: string[] = ["Male", "Female", "other"];
-  DOB: Date;
-  minDate: Date;
-  maxDate: Date;
+  // DOB: Date;
+  // minDate: Date;
+  // maxDate: Date;
   empDetails: any[];
   page_no = 1;
   emailFormControl = new FormControl("", [
@@ -77,36 +73,6 @@ export class EmployeeRegistrationComponent implements OnInit {
   ]);
 
 
-  registerationForm = this._formBuilder.group({
-    date : ['' ],
-    firstStepper : this._formBuilder.group({
-      name : ['', Validators.required],
-      email : ['', [Validators.email]],
-      contactno : ['',[Validators.required]],
-      dept : ['', Validators.required],
-      age : ['', Validators.required],
-      dob : ['', [Validators.required]],
-    }),
-    secondStepper : this._formBuilder.group({
-      employId : ['', Validators.required],
-      branch : ['', Validators.required],
-      gender : ['',Validators.required]
-    })
-  })
-
-  firstStepper = this._formBuilder.group({
-    name : ['', Validators.required],
-    email : ['', [Validators.email]],
-    contactno : ['',[Validators.required]],
-    gender : ['',Validators.required],
-    age : ['', Validators.required],
-    dob : ['', [Validators.required]],
-  })
-  secondStepper = this._formBuilder.group({
-    employId : ['', Validators.required],
-    branch : ['', Validators.required],
-    dept : ['', Validators.required],
-  })
   matcher = new MyErrorStateMatcher();
 
   openform(){
