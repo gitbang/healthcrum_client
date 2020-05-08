@@ -114,7 +114,7 @@ export class EmployeeRegistrationComponent implements OnInit {
     const formport = this.dialog.open(RegisterationFormComponent)
     formport.afterClosed().subscribe((response)=>{
       console.log(response)
-      if(response.result) {
+      if(response.result) { 
         this._snackbar.open("New employ" , "saved", {
           duration : 2000
         })
