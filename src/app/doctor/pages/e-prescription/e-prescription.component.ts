@@ -38,6 +38,7 @@ export class EPrescriptionComponent implements OnInit {
     
     this.service.getDataForExpansionCard().subscribe((result)=>{
       this.expansionCard = result;
+      
       console.log(this.expansionCard);
     })
 

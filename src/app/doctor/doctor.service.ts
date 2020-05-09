@@ -51,7 +51,11 @@ export class DoctorService {
   }
   getDataForExpansionCard(): Observable<any> {
     console.log("data for expansion card reached");
-    return this.http.get('')
+    return this.http.get(this.url + '/getlatestreport', this.options)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
   }
 
   private handleError(error : HttpErrorResponse){
