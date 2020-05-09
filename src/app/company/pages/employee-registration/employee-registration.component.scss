@@ -9,9 +9,9 @@
   z-index: 9999 !important;
 }
 
-.table {
+table {
   width: 100%;
-  overflow: scroll;
+  min-width: 580px;
 }
 .increaseZindex{
   z-index: 99999999;
@@ -26,4 +26,7 @@ mat-option{
   color : white;
   font-size: xx-large;
   cursor: pointer;
+}
+.table-div{
+  overflow-x: scroll;
 }
