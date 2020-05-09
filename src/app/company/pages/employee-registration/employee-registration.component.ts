@@ -129,4 +129,7 @@ export class EmployeeRegistrationComponent implements OnInit {
       console.log(result)
     })
   }
+  applyFilter(value){
+    this.list.filter = value.trim().toLowerCase();
+  }
 }

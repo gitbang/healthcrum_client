@@ -22,60 +22,23 @@
           >cloud_upload</mat-icon>
 
         </div>
-        <!--
-        <div style="margin-left: auto;" class="col-md-4">
-          <form class="navbar-form">
-            <span class="bmd-form-group">
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search Employee..">
-                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
-                  <div class="ripple-container"></div>
-                </button>
-              </div>
-            </span>
-          </form>
-        </div>
-        -->
       </div>
     </div>
       <!---->
     <div class="mt-4 mat-elevation-z8 emp-details-table" >
-      <button class="btn btn-primary btn-sm mt-2 ml-2">Detail of all employ</button>
-      <div class="table-div">
-      <!--
-        <table class="table ">
-          <thead >
-            <tr class=" text-primary">
-              <th> S No.</th>
-              <th>Employee Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Age</th>
-              <th>Gender</th>
-              <th>D.O.B</th>
-              <th>Employee ID</th>
-              <th>Dept</th>
-              <th>Branch</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor = 'let x of empDetails ; let i = index'>
-              <td>{{i + 1}}</td>
-              <td>{{x.name}}</td>
-              <td>{{x.email}}</td>
-              <td>{{x.phone}}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
+      
+      <div class="row mt-2">
+        <div class="col-lg-9">
+          <button class="btn btn-primary btn-sm mt-3">Detail of all employ</button>
+        </div>
+        <div class="col-3 mt-0">
+          <mat-form-field >
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filters">
+          </mat-form-field>
+        </div>
+      </div>
 
-        </table>
-      -->
+      <div class="table-div">
         <table mat-table [dataSource]="list" >
               
           <ng-container matColumnDef="name">
