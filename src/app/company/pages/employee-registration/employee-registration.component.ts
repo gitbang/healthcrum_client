@@ -72,6 +72,7 @@ export class EmployeeRegistrationComponent implements OnInit {
     private _snackbar : MatSnackBar,
     private service : CompanyService
   ) {}
+  
   col : string[] = ['name', 'email', 'contact', 'age', 'empId', 'dept', 'branch']
   list = new MatTableDataSource(list1);
   

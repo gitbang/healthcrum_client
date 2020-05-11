@@ -1,3 +1,20 @@
+<div class="row master container-fluid">
+  <div class="col-md-12">
+    <div class="card ml-2 mr-2 mat-elevation-z8 top-card">
+      <div class="card-header card-header-primary card-header-icon top-card-header">
+        <div class="card-icon">
+          <i class="material-icons">assignment</i>
+        </div>
+        <h4 class="card-title ">Employee Test Appointment</h4>
+        <div class="row">
+          <button class="col-8 col-lg-4 col-xl-3 btn btn-success" (click)="openform()">Add New Event</button>
+          <button class="col-8 col-lg-4 col-xl-3 btn  btn-info" (click)='csvFile.click()'>Add New Article</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="appoint container-fluid">
   <div class="row">
     <div class="col-md-12">
@@ -17,7 +34,7 @@
         </ul>
         <div class="tab-content tab-space tab-subcategories">
           <div class="tab-pane active show" id="link7">
-            <div class="card">
+            <div class="card mat-elevation-z8">
               <div class="card-header card-header-icon card-header-rose">
                 <div class="card-icon">
                   <i class="material-icons">event</i>
@@ -26,210 +43,78 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Event Name
-                        </th>
-                        <th>
-                          Starting Date
-                        </th>
-                        <th>
-                          Location
-                        </th>
-                        <th>
-                          Slot
-                        </th>
-                        <th>
-                          Slot Left
-                        </th>
-                        <th>
-                          Last Booking Date
-                        </th>
-                        <th>
-                          Price(Rs)
-                        </th>
-                        <th>
-                          Details
-                        </th>
-                        <th>
-                          Post by
-                        </th>
-                        <th>
-                          Show Event
-                        </th>
-                        <th>
-                          Cancel
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          20/05/20xx
-                        </td>
-                        <td>
-                          20000
-                        </td>
-                        <td>
-                          XXXXX
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          XXXXXXX
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteEvent()" rel="tooltip" class="btn btn-danger"
+                  
+                  <table mat-table [dataSource]="event" class="mytable-articles" >
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef> Id </th>
+                      <td mat-cell *matCellDef="let element"> {{element.id }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="start">
+                      <th mat-header-cell *matHeaderCellDef> Start On </th>
+                      <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="location">
+                      <th mat-header-cell *matHeaderCellDef> Location </th>
+                      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="slots">
+                      <th mat-header-cell *matHeaderCellDef> Slots </th>
+                      <td mat-cell *matCellDef="let element"> {{element.slots}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastbookingDate">
+                      <th mat-header-cell *matHeaderCellDef>lastbookingDate </th>
+                      <td mat-cell *matCellDef="let element"> {{element.lastbookingDate}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="price">
+                      <th mat-header-cell *matHeaderCellDef> Price</th>
+                      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="details">
+                      <th mat-header-cell *matHeaderCellDef> Details</th>
+                      <td mat-cell *matCellDef="let element"> {{element.details}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="cancel">
+                      <th mat-header-cell *matHeaderCellDef> Cancel</th>
+                      <td mat-cell *matCellDef="let element; let i = index">
+                        <button type="button" (click)="deleteEvent(i)" rel="tooltip" class="btn btn-danger"
                             data-original-title="" title="">
                             <i class="material-icons">close</i>
                           </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          20/05/20xx
-                        </td>
-                        <td>
-                          20000
-                        </td>
-                        <td>
-                          XXXXX
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          XXXXXXX
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteEvent()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          12/05/20xx
-                        </td>
-                        <td>
-                          Delhi
-                        </td>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          20/05/20xx
-                        </td>
-                        <td>
-                          20000
-                        </td>
-                        <td>
-                          XXXXX
-                        </td>
-                        <td>
-                          XXXXXX
-                        </td>
-                        <td>
-                          XXXXXXX
-                        </td>
-                        <td>
-                          <button type="button" (click)="deleteEvent()" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <ul class="pagination pagination-primary">
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_right</i></a>
-                    </li>
-                  </ul>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="colsevent"></tr>
+                    <tr mat-row *matRowDef="let row; columns: colsevent;"></tr>
+                  </table>  
+
                 </div>
               </div>
             </div>
           </div>
           <div class="tab-pane" id="link8">
-            <div class="card">
+            <div class="card ,at-elevation-z8">
               <div class="card-header card-header-icon card-header-rose">
                 <div class="card-icon">
                   <i class="material-icons">event</i>
                 </div>
-                <h4 class="card-title ">Events Table</h4>
+                <h4 class="card-title ">Article Table</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
+                
+                  <!--
                   <table class="table">
                     <thead class=" text-primary">
                       <tr>
@@ -342,64 +227,43 @@
                       </tr>
                     </tbody>
                   </table>
-                  <ul class="pagination pagination-primary">
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#link">5</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#"><i class="material-icons">chevron_right</i></a>
-                    </li>
-                  </ul>
+                 
+                   -->
+                  <table mat-table [dataSource]="article" class="mytable-event" >
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef> Id </th>
+                      <td mat-cell *matCellDef="let element"> {{element.id }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="postedby">
+                      <th mat-header-cell *matHeaderCellDef> Posted By </th>
+                      <td mat-cell *matCellDef="let element"> {{element.postedby}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="show">
+                      <th mat-header-cell *matHeaderCellDef> Show </th>
+                      <td mat-cell *matCellDef="let element"> {{element.show}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef> Action</th>
+                      <td mat-cell *matCellDef="let element; let i = index">
+                        <button type="button" (click)="deleteArticle(i)" rel="tooltip" class="btn btn-danger"
+                            data-original-title="" title="">
+                            <i class="material-icons">close</i>
+                          </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="colsarticle"></tr>
+                    <tr mat-row *matRowDef="let row; columns: colsarticle;"></tr>
+                  </table>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="link9">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Legal info of the product</h4>
-                <p class="card-category">
-                  More information here
-                </p>
-              </div>
-              <div class="card-body">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate
-                one-to-one customer service with robust ideas.
-                <br>
-                <br>Dynamically innovate resource-leveling customer service for state of the art customer service.
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="link10">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Help center</h4>
-                <p class="card-category">
-                  More information here
-                </p>
-              </div>
-              <div class="card-body">
-                From the seamless transition of glass and metal to the streamlined profile, every detail was carefully
-                considered to enhance your experience. So while its display is larger, the phone feels just right.
-                <br>
-                <br> Another Text. The first thing you notice when you hold the phone is how great it feels in your
-                hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a
-                remarkable, simplified design.
               </div>
             </div>
           </div>
