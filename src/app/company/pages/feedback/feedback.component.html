@@ -1,7 +1,7 @@
 <div class="appoint container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <div class="card card-chart">
+      <div class="card card-chart mat-elevation-z8">
         <div class="card-header card-header-icon card-header-danger">
           <div class="card-icon">
             <i class="material-icons">supervisor_account</i>
@@ -9,10 +9,12 @@
           <h4 class="card-title">Employee's FeedBack</h4>
         </div>
         <div class="card-body">
-          <div id="chartPreferences" class="ct-chart"><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct"
+        <!--
+          <div id="chartPreferences" class="ct-chart">
+            <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct"
               width="100%" height="230px" class="ct-chart-pie" style="width: 100%; height: 230px;">
               <g class="ct-series ct-series-a">
-                <path d="M223.028,195.187A110,110,0,1,0,298.328,5L298.328,115Z" class="ct-slice-pie" ct:value="62">
+                <path d="M223.028,195.187A110,110,0,1,0,298.328,5L298.328,115Z" class="ct-slice-pie" ct:value="feedback.bad">
                 </path>
               </g>
               <g class="ct-series ct-series-b">
@@ -23,10 +25,37 @@
                 <path d="M298.328,5A110,110,0,0,0,257.478,12.867L298.328,115Z" class="ct-slice-pie" ct:value="6"></path>
               </g>
               <g><text dx="349.46583172385385" dy="135.24685039765728" text-anchor="middle"
-                  class="ct-label">62%</text><text dx="244.30232620992211" dy="104.6940276977852" text-anchor="middle"
+                  class="ct-label">60%</text><text dx="244.30232620992211" dy="104.6940276977852" text-anchor="middle"
                   class="ct-label">32%</text><text dx="288.0221526977851" dy="60.974201209922136" text-anchor="middle"
                   class="ct-label">6%</text></g>
-            </svg></div>
+            </svg>
+          </div>
+        -->
+          <div class="row ">
+            <div class="col-12  ">
+              <div class="card-chart">
+                <div class="card-body" >
+                  <div class="chart-area">
+                    <div>
+                      <div >
+                      
+                        <canvas baseChart 
+                        id="linechart" class="bg-dark" #biglinechart>
+                        </canvas>
+
+                        <canvas baseChart
+                          [data]='piechartdata'
+                          [labels]='piechartlabels'
+                          [chartType]='pieChartType'
+                        >
+                        </canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
         </div>
         <div class="card-footer">
           <div class="row">
@@ -70,7 +99,7 @@
         </div>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-12 mat-elevation-z8">
         <div class="card card-chart">
           <div class="card-header card-header-icon card-header-danger">
             <div class="card-icon">

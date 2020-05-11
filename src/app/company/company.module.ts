@@ -61,7 +61,8 @@ import { ChartsModule } from "ng2-charts";
 import { SharedModule } from "app/shared/shared.module";
 import {CompanyService} from './company.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { RegisterationFormComponent } from './pages/employee-registration/registeration-form/registeration-form.component'
+import { RegisterationFormComponent } from './pages/employee-registration/registeration-form/registeration-form.component';
+import { AddEventArticleComponent } from './pages/events-article/add-event-article/add-event-article.component'
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -83,9 +84,13 @@ import { RegisterationFormComponent } from './pages/employee-registration/regist
     HealthAnalysisComponent,
     HealthStatusComponent,
     BookedAppointmentComponent,
-    RegisterationFormComponent
+    RegisterationFormComponent,
+    AddEventArticleComponent
   ],
-  entryComponents : [RegisterationFormComponent],
+  entryComponents : [
+    RegisterationFormComponent,
+    AddEventArticleComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(CompanyRoutes),

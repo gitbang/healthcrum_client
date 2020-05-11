@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import Swal from "sweetalert2";
 import { MatDialog, MatSnackBar, MatTableDataSource } from "@angular/material";
 import { CheckboxControlValueAccessor } from "@angular/forms";
+import {AddEventArticleComponent} from './add-event-article/add-event-article.component'
 
 
 export interface events{
@@ -59,6 +60,21 @@ export class EventsArticleComponent implements OnInit {
   article = new MatTableDataSource(article1)
   event = new MatTableDataSource (event1)
   ngOnInit() {}
+
+  addEvent(){
+    console.log("add event reached")
+    this.dialog.open(AddEventArticleComponent, {
+      data : 'event'
+    })
+  }
+  addArticle() {
+    console.log("add article")
+    this.dialog.open(AddEventArticleComponent, {
+      data : 'article'
+    })
+  }
+
+
   deleteEvent(j : number) {
     console.log(j)
     Swal.fire({
