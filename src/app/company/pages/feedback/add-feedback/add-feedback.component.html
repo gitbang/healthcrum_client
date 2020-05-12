@@ -1,0 +1,52 @@
+<div class="col-md-12 mat-elevation-z8">
+  <div class="card card-chart">
+    <div class="card-header card-header-icon card-header-danger">
+      <div class="card-icon">
+        <i class="material-icons">comment</i>
+      </div>
+      <h4 class="card-title">Give FeedBack</h4>
+    </div>
+    <div class="card-body">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" [(ngModel)]="feebdack" name="exampleRadios" value="bad" checked=""> BAD
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="average" checked=""> AVERAGE
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="good" checked=""> GOOD
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="better" checked=""> BETTER
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+      </div>
+    </div>
+    <div style="padding-left: 10px;">
+      <div class="row">
+        <div class="col-md-10">
+          <h6 class="card-category">FeedBack Comment</h6>
+          <div class="form-group bmd-form-group">
+            <textarea class="form-control" type="text" name="max" cols="10" required="false" aria-required="true"
+              [(ngModel)]="textarea" placeholder="Provide some feedback"></textarea>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-success mt-3 mb-3" (click)="submit()">
+        <i class="material-icons">send</i>Submit
+      </button>
+    </div>
+  </div>
+</div>

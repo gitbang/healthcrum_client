@@ -62,7 +62,8 @@ import { SharedModule } from "app/shared/shared.module";
 import {CompanyService} from './company.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RegisterationFormComponent } from './pages/employee-registration/registeration-form/registeration-form.component';
-import { AddEventArticleComponent } from './pages/events-article/add-event-article/add-event-article.component'
+import { AddEventArticleComponent } from './pages/events-article/add-event-article/add-event-article.component';
+import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.component'
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -85,11 +86,13 @@ import { AddEventArticleComponent } from './pages/events-article/add-event-artic
     HealthStatusComponent,
     BookedAppointmentComponent,
     RegisterationFormComponent,
-    AddEventArticleComponent
+    AddEventArticleComponent,
+    AddFeedbackComponent
   ],
   entryComponents : [
     RegisterationFormComponent,
     AddEventArticleComponent,
+    AddFeedbackComponent
   ],
   imports: [
     CommonModule,

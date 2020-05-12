@@ -1,3 +1,19 @@
+<div class="row master container-fluid">
+  <div class="col-md-12">
+    <div class="card ml-2 mr-2 mat-elevation-z8 top-card">
+      <div class="card-header card-header-primary card-header-icon top-card-header">
+        <div class="card-icon">
+          <i class="material-icons">assignment</i>
+        </div>
+        <h4 class="card-title ">Employee Test Appointment</h4>
+        <div class="row">
+          <button class="col-8 col-lg-4 col-xl-3 btn btn-success" (click)="addfeedback()">Give feedback</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="appoint container-fluid">
   <div class="row">
     <div class="col-md-12">
@@ -9,28 +25,6 @@
           <h4 class="card-title">Employee's FeedBack</h4>
         </div>
         <div class="card-body">
-        <!--
-          <div id="chartPreferences" class="ct-chart">
-            <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct"
-              width="100%" height="230px" class="ct-chart-pie" style="width: 100%; height: 230px;">
-              <g class="ct-series ct-series-a">
-                <path d="M223.028,195.187A110,110,0,1,0,298.328,5L298.328,115Z" class="ct-slice-pie" ct:value="feedback.bad">
-                </path>
-              </g>
-              <g class="ct-series ct-series-b">
-                <path d="M257.834,12.725A110,110,0,0,0,223.308,195.449L298.328,115Z" class="ct-slice-pie" ct:value="32">
-                </path>
-              </g>
-              <g class="ct-series ct-series-c">
-                <path d="M298.328,5A110,110,0,0,0,257.478,12.867L298.328,115Z" class="ct-slice-pie" ct:value="6"></path>
-              </g>
-              <g><text dx="349.46583172385385" dy="135.24685039765728" text-anchor="middle"
-                  class="ct-label">60%</text><text dx="244.30232620992211" dy="104.6940276977852" text-anchor="middle"
-                  class="ct-label">32%</text><text dx="288.0221526977851" dy="60.974201209922136" text-anchor="middle"
-                  class="ct-label">6%</text></g>
-            </svg>
-          </div>
-        -->
           <div class="row ">
             <div class="col-12  ">
               <div class="card-chart">
@@ -38,16 +32,8 @@
                   <div class="chart-area">
                     <div>
                       <div >
-                      
                         <canvas baseChart 
-                        id="linechart" class="bg-dark" #biglinechart>
-                        </canvas>
-
-                        <canvas baseChart
-                          [data]='piechartdata'
-                          [labels]='piechartlabels'
-                          [chartType]='pieChartType'
-                        >
+                          id="linechart"  #piechart>
                         </canvas>
                       </div>
                     </div>
@@ -56,101 +42,102 @@
               </div>
             </div>
         </div>
-        </div>
-        <div class="card-footer">
-          <div class="row">
-            <div class="col-md-12">
-              <h6 class="card-category">Legend</h6>
-            </div>
-            <div class="col-md-12">
-              <div style="width:100%;justify-content: space-around;display: flex;">
-                <div>
-                  <span>
-                    <div
-                      style="background-color: red; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px; margin-right: 5px;">
-                    </div>BAD
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    <div
-                      style="background-color: #17a2b8; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px;margin-right: 5px;">
-                    </div>AVERAGE
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    <div
-                      style="background-color: orange; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px;margin-right: 5px;">
-                    </div>GOOD
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    <div
-                      style="background-color: green; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px;margin-right: 5px;">
-                    </div>BETTER
-                  </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
       </div>
 
-      <div class="col-md-12 mat-elevation-z8">
-        <div class="card card-chart">
-          <div class="card-header card-header-icon card-header-danger">
-            <div class="card-icon">
-              <i class="material-icons">comment</i>
-            </div>
-            <h4 class="card-title">Give FeedBack</h4>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 class="card-category">Legend</h6>
           </div>
-          <div class="card-body">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> BAD
-                <span class="circle">
-                  <span class="check"></span>
+          <div class="col-md-12">
+            <div style="width:100%;justify-content: space-around;display: flex;">
+              <div>
+                <span>
+                  <div
+                    style="background-color: red; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px; margin-right: 5px;">
+                  </div>BAD
                 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> AVERAGE
-                <span class="circle">
-                  <span class="check"></span>
+              </div>
+              <div>
+                <span>
+                  <div
+                    style="background-color: #17a2b8; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px;margin-right: 5px;">
+                  </div>AVERAGE
                 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> GOOD
-                <span class="circle">
-                  <span class="check"></span>
+              </div>
+              <div>
+                <span>
+                  <div
+                    style="background-color: orange; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px;margin-right: 5px;">
+                  </div>GOOD
                 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> BETTER
-                <span class="circle">
-                  <span class="check"></span>
+              </div>
+              <div>
+                <span>
+                  <div
+                    style="background-color: green; height: 10px;width: 10px; float: left; vertical-align: middle; margin-top: 6px;margin-right: 5px;">
+                  </div>BETTER
                 </span>
-              </label>
-            </div>
-          </div>
-          <div style="padding-left: 10px;">
-            <div class="row">
-              <div class="col-md-10">
-                <h6 class="card-category">FeedBack Comment</h6>
-                <div class="form-group bmd-form-group">
-                  <textarea class="form-control" type="text" name="max" cols="10" required="false" aria-required="true"
-                    placeholder="Provide some feedback"></textarea>
-                </div>
               </div>
             </div>
-            <button class="btn btn-success mt-3 mb-3">
-              <i class="material-icons">send</i>Submit
-
-            </button>
           </div>
 
         </div>
       </div>
     </div>
+    <!--
+    <div class="col-md-12 mat-elevation-z8">
+      <div class="card card-chart">
+        <div class="card-header card-header-icon card-header-danger">
+          <div class="card-icon">
+            <i class="material-icons">comment</i>
+          </div>
+          <h4 class="card-title">Give FeedBack</h4>
+        </div>
+        <div class="card-body">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> BAD
+              <span class="circle">
+                <span class="check"></span>
+              </span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> AVERAGE
+              <span class="circle">
+                <span class="check"></span>
+              </span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> GOOD
+              <span class="circle">
+                <span class="check"></span>
+              </span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="exampleRadios" value="option1" checked=""> BETTER
+              <span class="circle">
+                <span class="check"></span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div style="padding-left: 10px;">
+          <div class="row">
+            <div class="col-md-10">
+              <h6 class="card-category">FeedBack Comment</h6>
+              <div class="form-group bmd-form-group">
+                <textarea class="form-control" type="text" name="max" cols="10" required="false" aria-required="true"
+                  placeholder="Provide some feedback"></textarea>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success mt-3 mb-3">
+            <i class="material-icons">send</i>Submit
+          </button>
+        </div>
+      </div>
+    </div>
+    -->
+  </div>
+</div>
