@@ -63,7 +63,9 @@ import {CompanyService} from './company.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RegisterationFormComponent } from './pages/employee-registration/registeration-form/registeration-form.component';
 import { AddEventArticleComponent } from './pages/events-article/add-event-article/add-event-article.component';
-import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.component'
+import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.component';
+import { ShowDetailComponent } from './pages/employee-tracking/show-detail/show-detail.component';
+import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-req-form.component'
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -87,12 +89,16 @@ import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.c
     BookedAppointmentComponent,
     RegisterationFormComponent,
     AddEventArticleComponent,
-    AddFeedbackComponent
+    AddFeedbackComponent,
+    ShowDetailComponent,
+    NewReqFormComponent
   ],
   entryComponents : [
     RegisterationFormComponent,
     AddEventArticleComponent,
-    AddFeedbackComponent
+    AddFeedbackComponent,
+    ShowDetailComponent,
+    NewReqFormComponent
   ],
   imports: [
     CommonModule,

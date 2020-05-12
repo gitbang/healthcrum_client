@@ -1,70 +1,3 @@
-<div class="row master container-fluid">
-  <div class="col-md-12">
-    <div class="card ml-2 mr-2 mat-elevation-z8 top-card">
-      <div class="card-header card-header-primary card-header-icon top-card-header">
-        <div class="card-icon">
-          <i class="material-icons">assignment</i>
-        </div>
-        <h4 class="card-title ">Track your Employee</h4>
-        
-        <div class="row">
-          <button class="col-8 col-lg-4 col-xl-3 btn btn-success" (click)="addEvent()">Add New Event</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="appoint container-fluid ml-4">
-  <form [formGroup]="form"> 
-    <div class="row" >
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header card-header-warning card-header-text">
-            <div class="card-icon">
-              <i class="material-icons">insert_invitation</i>
-            </div>
-            <h4 class="card-title">Start Date</h4>
-          </div>
-          <div class="card-body ">
-            <mat-form-field style="width:100%">
-              <mat-label>From</mat-label>
-              <input matInput [matDatepicker]="picker_start" formControlName="start">
-              <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
-              <mat-datepicker #picker_start></mat-datepicker>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card ">
-          <div class="card-header card-header-warning card-header-text">
-            <div class="card-icon">
-              <i class="material-icons">insert_invitation</i>
-            </div>
-            <h4 class="card-title">End Date</h4>
-          </div>
-          <div class="card-body ">
-            <mat-form-field style="width:100%">
-              <mat-label>To</mat-label>
-              <input matInput [matDatepicker]="picker_end" formControlName="end" >
-              <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
-              <mat-datepicker #picker_end></mat-datepicker>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 filter">
-        <button class="btn btn-primary" (click)="filter()">Filter</button>
-      </div>
-    </div>
-  </form>
-</div>
-
-
-<!--
 <div>
   <div class="row">
     <div class="col-md-12">
@@ -79,11 +12,10 @@
             </div>
             <div class="col-md-6"><button class="btn btn-rose">Add New Request</button></div>
           </div>
-
-
         </div>
         <div class="card-body">
           <div class="table-responsive">
+          <!--
             <table class="table">
               <thead class=" text-primary">
                 <tr>
@@ -173,6 +105,77 @@
                 </tr>
               </tbody>
             </table>
+          -->
+            <table mat-table [dataSource]="empdata" class="mytable-articles" >
+              <ng-container matColumnDef="sno">
+                <th mat-header-cell *matHeaderCellDef> S.NO </th>
+                <td mat-cell *matCellDef="let element"> {{element.sno }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="age">
+                <th mat-header-cell *matHeaderCellDef> Age </th>
+                <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="dept">
+                <th mat-header-cell *matHeaderCellDef> Dept </th>
+                <td mat-cell *matCellDef="let element"> {{element.dept}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="pkg">
+                <th mat-header-cell *matHeaderCellDef>Package</th>
+                <td mat-cell *matCellDef="let element"> {{element.pkg}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef> location</th>
+                <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="dateReq">
+                <th mat-header-cell *matHeaderCellDef> dateReq</th>
+                <td mat-cell *matCellDef="let element"> {{element.dateReq}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="dateApp">
+                <th mat-header-cell *matHeaderCellDef> dateApp</th>
+                <td mat-cell *matCellDef="let element">{{element.dateApp}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="lastcheckup">
+                <th mat-header-cell *matHeaderCellDef> Last checkup</th>
+                <td mat-cell *matCellDef="let element">{{element.lastcheckup}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="approved">
+                <th mat-header-cell *matHeaderCellDef> approved</th>
+                <td mat-cell *matCellDef="let element">{{element.approved}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="done">
+                <th mat-header-cell *matHeaderCellDef> Done</th>
+                <td mat-cell *matCellDef="let element">{{element.done}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="repadd">
+                <th mat-header-cell *matHeaderCellDef> Re-Appointment</th>
+                <td mat-cell *matCellDef="let element">{{element.repadd}}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="col"></tr>
+              <tr mat-row *matRowDef="let row; columns: col;"></tr>
+            </table>
+            <!--
             <ul class="pagination pagination-primary">
               <li class="page-item">
                 <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
@@ -190,10 +193,10 @@
                 <a class="page-link" href="#"><i class="material-icons">chevron_right</i></a>
               </li>
             </ul>
+            -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
--->
