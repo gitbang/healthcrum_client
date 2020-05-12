@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {MatDialog, MatTableDataSource, MatPaginator} from '@angular/material'
 import { FormBuilder, Validators } from "@angular/forms";
 import { ShowDetailComponent } from "./show-detail/show-detail.component";
+import {NewReqFormComponent} from './new-req-form/new-req-form.component'
 @Component({
   selector: "app-employee-tracking",
   templateUrl: "./employee-tracking.component.html",
@@ -17,10 +18,12 @@ export class EmployeeTrackingComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
   form = this.fb.group({
     start : ['', Validators.required],
     end : ['', Validators.required]
   })
+
   start : any
   end : any
   async filter() {
@@ -36,5 +39,11 @@ export class EmployeeTrackingComponent implements OnInit {
     } else{
       alert("Invalid Input")
     }
+  }
+  addrequest() {
+    const filter = this.dialog.open(NewReqFormComponent);
+    filter.afterClosed().subscribe((result) =>{
+      console.log(result)
+    })
   }
 }
