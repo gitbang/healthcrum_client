@@ -23,4 +23,7 @@ export class NewReqFormComponent implements OnInit {
     console.log(this.filter);
     this.dialogRef.close( this.filter.value)
   }
+  closeDialog(){
+    this.dialogRef.close();
+  }
 }

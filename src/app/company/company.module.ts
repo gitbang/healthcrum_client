@@ -65,7 +65,9 @@ import { RegisterationFormComponent } from './pages/employee-registration/regist
 import { AddEventArticleComponent } from './pages/events-article/add-event-article/add-event-article.component';
 import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.component';
 import { ShowDetailComponent } from './pages/employee-tracking/show-detail/show-detail.component';
-import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-req-form.component'
+import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-req-form.component';
+import { ShowResultComponent } from './pages/health-analysis/show-result/show-result.component';
+
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -91,14 +93,16 @@ import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-
     AddEventArticleComponent,
     AddFeedbackComponent,
     ShowDetailComponent,
-    NewReqFormComponent
+    NewReqFormComponent,
+    ShowResultComponent,
   ],
   entryComponents : [
     RegisterationFormComponent,
     AddEventArticleComponent,
     AddFeedbackComponent,
     ShowDetailComponent,
-    NewReqFormComponent
+    NewReqFormComponent,
+    ShowResultComponent
   ],
   imports: [
     CommonModule,

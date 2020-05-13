@@ -1,83 +1,80 @@
 <div class="appoint container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <div class="card ">
-        <div class="card-header card-header-primary card-header-icon">
+      <div class="card mat-elevation-z8 card-top" >
+        <div class="card-header card-header-primary card-header-icon card-header-top">
           <div class="card-icon shad ">
             <i class="material-icons">assignment</i>
           </div>
           <h4 class="card-title">Corporate Employee Results</h4>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mat-elevation-z8">
         <div class="card-body">
-          <div class="row">
-            <div class=" col-md-3">
-              <div class="dropdown bootstrap-select show-tick dropup">
-                <mat-form-field>
-                  <mat-label>Select Branches</mat-label>
-                  <mat-select [formControl]="toppings" multiple>
-                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <!-- <select class="selectpicker"
-                  data-style="select-with-transition" multiple="" title="Filter By" data-size="4" tabindex="-98">
-                  <option disabled=""> Multiple Options</option>
-                  <option value="2">Package Wise</option>
-                  <option value="3">Department Wise</option>
-                  <option value="4">Disease Wise</option>
-                  <option value="4">Service Wise</option>
-                </select> -->
+          <form [formGroup]="filterinp">
+            <div class="row">
+              <div class=" col-md-3">
+                <div class="dropdown bootstrap-select show-tick dropup">
+                  <mat-form-field>
+                    <mat-label>Select Category</mat-label>
+                    <mat-select formControlName="category" (selectionChange)="changelist($event)">
+                      <mat-option *ngFor="let element of list" [value]="element.value">{{element.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
-            </div>
-            <div class="col-md-3">
-              <div class="dropdown bootstrap-select show-tick dropup">
-                <mat-form-field>
-                  <mat-label>Select Branches</mat-label>
-                  <mat-select [formControl]="toppings" multiple>
-                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <!-- <select class="selectpicker"
-                  data-style="select-with-transition" multiple="" title="Select" data-size="4" tabindex="-98">
-                  <option disabled=""> Multiple Options</option>
-                  <option value="2">Package Wise</option>
-                  <option value="3">Department Wise</option>
-                  <option value="4">Disease Wise</option>
-                  <option value="4">Service Wise</option>
-                </select> -->
+              <div class="col-md-3">
+                <div class="dropdown bootstrap-select show-tick dropup">
+                  <mat-form-field>
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="subcategory">
+                      <mat-option *ngFor="let element of current" [value]="element">{{element}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
-            </div>
 
-            <div class=" col-md-3">
-              <div class="dropdown bootstrap-select show-tick dropup">
-                <mat-form-field>
-                  <mat-label>Select Branches</mat-label>
-                  <mat-select [formControl]="toppings" multiple>
-                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <!-- <select class="selectpicker"
-                  data-style="select-with-transition" multiple="" title="Gender" data-size="4" tabindex="-98">
-                  <option disabled="">--Select--</option>
-                  <option value="2">Male</option>
-                  <option value="3">Female</option>
-                  <option value="4">Donot Want to specify</option>
-                </select> -->
+              <div class="col-md-3 ">
+                <div class="dropdown bootstrap-select show-tick dropup">
+                  <mat-form-field>
+                    <mat-label>Select year</mat-label>
+                    <mat-select formControlName="year" >
+                    <!--  <mat-option *ngFor="let element of year" [value]="element"> {{element}}</mat-option>-->
+                      <mat-option *ngFor="let element of years" [value]="element">{{element}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
+
+              <div class="col-md-12 mt-3">
+                <span>Age:</span><br /><br />
+                <mat-radio-group aria-label="Select an option" formControlName="age">
+                  <mat-radio-button value="1">Below 35</mat-radio-button>
+                  <mat-radio-button value="2">35 - 40</mat-radio-button>
+                  <mat-radio-button value="3">41 - 45</mat-radio-button>
+                  <mat-radio-button value="4">46 - 50</mat-radio-button>
+                  <mat-radio-button value="5">Above 50</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div class="col-md-6 mt-3">
+                <span>Gender :</span><br /><br />
+                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                  <mat-radio-button value="male">Male</mat-radio-button>
+                  <mat-radio-button value="female">Female</mat-radio-button>
+                  <mat-radio-button value="others">Others</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
             </div>
-            <div class="col-md-12 mt-3">
-              <span>Age:</span><br /><br />
-              <mat-radio-group aria-label="Select an option">
-                <mat-radio-button value="1">Below 35</mat-radio-button>
-                <mat-radio-button value="2">35 - 40</mat-radio-button>
-                <mat-radio-button value="3">41 - 45</mat-radio-button>
-                <mat-radio-button value="4">46 - 50</mat-radio-button>
-                <mat-radio-button value="5">Above 50</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </div>
+          </form>
           <div class="row">
             <div class="col-md-4">
-              <button class="btn btn-primary" onclick="getElementById('Emp-Chart').removeClass('Empchart')"
+              <button class="btn btn-primary"  (click)="filter()"
                 id="filter-Empchart">Filter</button>
             </div>
 
@@ -87,6 +84,7 @@
 
       </div>
     </div>
+    <!--
     <div class="col-md-12">
       <div class="card card-chart" data-count="0">
         <div class="card-header card-header-warning">
@@ -112,5 +110,6 @@
         </div>
       </div>
     </div>
+    -->
   </div>
 </div>

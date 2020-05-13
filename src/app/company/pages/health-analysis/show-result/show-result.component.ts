@@ -1,37 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
-import { MatDialog, MatSnackBar } from '@angular/material';
-import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 
-
-export interface feedback  {
-    bad : number,
-    average : number,
-    good : number,
-    better : number
-}
+import {Chart} from 'chart.js'
 
 @Component({
-  selector: 'app-feedback',
-  templateUrl: './feedback.component.html',
-  styleUrls: ['./feedback.component.scss']
+  selector: 'app-show-result',
+  templateUrl: './show-result.component.html',
+  styleUrls: ['./show-result.component.scss']
 })
-export class FeedbackComponent implements OnInit {
+export class ShowResultComponent implements OnInit {
 
-  constructor(
-    private dialog : MatDialog,
-    private _snackbar : MatSnackBar,
-  ) { }
+  constructor() { }
 
-  feedbacks : feedback;
-  
   ngOnInit() {
-    // http call to fetch the data from background
-    
     this.pieChart()
-    //this.feedbacks['bad'] = 10
   }
-
 
   @ViewChild('piechart',{static: true}) lineElement: ElementRef;
 
@@ -58,6 +40,7 @@ export class FeedbackComponent implements OnInit {
         ]
       },
       options: {
+        aspectRatio : 0.5,
         responsive: true,
         scales: {
           /*
@@ -85,19 +68,4 @@ export class FeedbackComponent implements OnInit {
       }
     });
   }
-  addfeedback(){
-    console.log("give feedback");
-    const feedback =this.dialog.open(AddFeedbackComponent)
-    feedback.afterClosed().subscribe((response)=>{
-      console.log(response)
-      if(response.data) { 
-        this._snackbar.open("Feedback" , "saved", {
-          duration : 2000
-        })
-      }
-    })
-  }
-  // piechartdata = [20, 30 , 25, 25]
-  // piechartlabels =[ "first", 'second', "third", "fourth"]
-  // pieChartType = "pie"
 }

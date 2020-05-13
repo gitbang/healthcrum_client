@@ -27,15 +27,15 @@ export class EmployeeTrackingComponent implements OnInit {
   start : any
   end : any
   async filter() {
-    this.dialog.open(ShowDetailComponent, {
-      height : "80%",
-      width : "80%"
-    })
+    
     console.log(this.form.value, this.form.valid);
     if(this.form.valid) {
       // send http request and pass the data to the dialog box 
       // await http request 
-      
+      this.dialog.open(ShowDetailComponent, {
+        height : "80%",
+        width : "80%"
+      })
     } else{
       alert("Invalid Input")
     }
