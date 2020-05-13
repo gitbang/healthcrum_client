@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
+import {MatDialogRef} from '@angular/material'
 import {Chart} from 'chart.js'
 
 @Component({
@@ -9,7 +9,9 @@ import {Chart} from 'chart.js'
 })
 export class ShowResultComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogRef : MatDialogRef<ShowResultComponent>) { 
+    dialogRef.disableClose = true;
+  }
 
   ngOnInit() {
     this.pieChart()
@@ -17,6 +19,9 @@ export class ShowResultComponent implements OnInit {
 
   @ViewChild('piechart',{static: true}) lineElement: ElementRef;
 
+  closeDialog(){
+    this.dialogRef.close();
+  }
   pieChart() {
     console.log("line chart reached")
     var ctxL = this.lineElement.nativeElement.getContext("2d");  
@@ -40,7 +45,7 @@ export class ShowResultComponent implements OnInit {
         ]
       },
       options: {
-        aspectRatio : 0.5,
+        //aspectRatio : 0.5,
         responsive: true,
         scales: {
           /*
@@ -64,7 +69,7 @@ export class ShowResultComponent implements OnInit {
               }     
             }]
           */
-          }
+        }
       }
     });
   }

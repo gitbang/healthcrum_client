@@ -73,7 +73,10 @@ export class HealthAnalysisComponent implements OnInit {
   current : Array<string> = []
   filter() {
     console.log(this.filterinp.value)
-    this.dialog.open(ShowResultComponent)
+    this.dialog.open(ShowResultComponent, {
+      height: "80%",
+      width : "80%"
+    })
   }
   changelist(event){
     console.log(event)
