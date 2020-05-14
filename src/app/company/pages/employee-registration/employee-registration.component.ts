@@ -78,10 +78,6 @@ export class EmployeeRegistrationComponent implements OnInit {
   
   ngOnInit() { 
     setTimeout(() => this.list.paginator = this.paginator)
-    // let dp = new DatePipe(navigator.language);
-    // console.log(dp);
-    // let p = 'dd-MM-y'; // YYYY-MM-DD
-    // //let date = dp.transform(new Date(), p);
 
     this.companyApiService.getEmployeesDetails().subscribe(data => {
       this.empDetails = data;

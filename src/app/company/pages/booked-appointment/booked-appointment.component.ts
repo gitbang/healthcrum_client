@@ -39,7 +39,27 @@ export interface empdetails {
 }
 
 const list1 : empdetails[] = [
+  {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
+  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12',
+  pkg : "Gold", bookingdate : "10/12/2020", reqdate : '08/12/2020', appdate :'20/10/12', diagnosticCentre :'Metropolis',
+  location : 'Delhi', hraStatus : "pending", checkupStatus:'pending'
+  },
   {healthcrumId: "123456", name : 'Harry', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
+  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12',
+  pkg : "Gold", bookingdate : "10/12/2020", reqdate : '08/12/2020', appdate :'20/10/12', diagnosticCentre :'Metropolis',
+  location : 'Delhi', hraStatus : "pending", checkupStatus:'pending'
+  },
+  {healthcrumId: "123456", name : 'Harry', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
+  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12',
+  pkg : "Gold", bookingdate : "10/12/2020", reqdate : '08/12/2020', appdate :'20/10/12', diagnosticCentre :'Metropolis',
+  location : 'Delhi', hraStatus : "pending", checkupStatus:'pending'
+  },
+  {healthcrumId: "123456", name : 'Harry', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
+  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12',
+  pkg : "Gold", bookingdate : "10/12/2020", reqdate : '08/12/2020', appdate :'20/10/12', diagnosticCentre :'Metropolis',
+  location : 'Delhi', hraStatus : "pending", checkupStatus:'pending'
+  },
+  {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
   empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12',
   pkg : "Gold", bookingdate : "10/12/2020", reqdate : '08/12/2020', appdate :'20/10/12', diagnosticCentre :'Metropolis',
   location : 'Delhi', hraStatus : "pending", checkupStatus:'pending'
@@ -77,7 +97,7 @@ export class BookedAppointmentComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => this.list.paginator = this.paginator)
   }
-  col : string[] = ['healthcrumId','name', 'email', 'contact', 'age', 'empId','dept', 'branch', 'dob', 'gender', 'pkg', 
+  col : string[] = ['healthcrumId','name',  'age', 'empId','dept', 'branch', 'dob', 'gender', 'pkg', 
   'bookingdate', 'reqdate', 'appdate','diagnosticCentre', 'location', 'hraStatus', 'checkupStatus']
   list = new MatTableDataSource(list1);
 

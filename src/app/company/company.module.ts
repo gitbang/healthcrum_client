@@ -68,6 +68,7 @@ import { ShowDetailComponent } from './pages/employee-tracking/show-detail/show-
 import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-req-form.component';
 import { ShowResultComponent } from './pages/health-analysis/show-result/show-result.component';
 import { ShowListComponent } from './pages/appointment/show-list/show-list.component';
+import { CommonTableComponent } from './common-table/common-table.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ShowListComponent } from './pages/appointment/show-list/show-list.compo
     NewReqFormComponent,
     ShowResultComponent,
     ShowListComponent,
+    CommonTableComponent,
   ],
   entryComponents : [
     RegisterationFormComponent,
