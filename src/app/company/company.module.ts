@@ -67,6 +67,7 @@ import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.c
 import { ShowDetailComponent } from './pages/employee-tracking/show-detail/show-detail.component';
 import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-req-form.component';
 import { ShowResultComponent } from './pages/health-analysis/show-result/show-result.component';
+import { ShowListComponent } from './pages/appointment/show-list/show-list.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { ShowResultComponent } from './pages/health-analysis/show-result/show-re
     ShowDetailComponent,
     NewReqFormComponent,
     ShowResultComponent,
+    ShowListComponent,
   ],
   entryComponents : [
     RegisterationFormComponent,
@@ -102,7 +104,8 @@ import { ShowResultComponent } from './pages/health-analysis/show-result/show-re
     AddFeedbackComponent,
     ShowDetailComponent,
     NewReqFormComponent,
-    ShowResultComponent
+    ShowResultComponent,
+    ShowListComponent
   ],
   imports: [
     CommonModule,

@@ -15,6 +15,8 @@ import {
   faCity,
   faCodeBranch
 } from "@fortawesome/free-solid-svg-icons";
+import {MatDialog} from '@angular/material'
+import { ShowListComponent } from "./show-list/show-list.component";
 @Component({
   selector: "app-appointment",
   templateUrl: "./appointment.component.html",
@@ -35,8 +37,8 @@ export class AppointmentComponent implements OnInit {
   faCity = faCity;
   faBranch = faCodeBranch;
 
-  constructor( private fb : FormBuilder) {}
-  company;
+  constructor( private fb : FormBuilder, private dialog : MatDialog) {}
+ // company;
   toppings = new FormControl();
   toppingList: string[] = ["Delhi", "Mumbai", "UP", "punjab"];
   displaydata = {
@@ -62,5 +64,12 @@ export class AppointmentComponent implements OnInit {
   }
   seedetail(){
     console.log("show table")
+    const dialog = this.dialog.open(ShowListComponent, {
+      height : "80%",
+      width: "80%"
+    })
+    dialog.afterClosed().subscribe((response)=>{
+      console.log("response ", response)
+    })
   }
 }

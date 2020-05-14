@@ -28,7 +28,8 @@ export class CompanyService {
   }
   dataForParticularPackage(compantName, packageName) : Observable<any> {
     console.log("particular package reached");
-    return this.http.get(this.url + compantName + '/'+ packageName, this.option)
+    return this.http
+      .get(this.url + compantName + '/'+ packageName, this.option)
         .pipe(
           retry(2),
           catchError(this.handleError)
@@ -40,7 +41,8 @@ export class CompanyService {
   // employee-registeration
   uploadCsvFile(file) : Observable <any> {
     console.log("reached")
-    return this.http.post(this.url + 'addemploy/csv', file)
+    return this.http
+      .post(this.url + 'addemploy/csv', file)
         .pipe(
           retry(2),
           catchError(this.handleError)
