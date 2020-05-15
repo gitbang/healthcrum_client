@@ -41,7 +41,7 @@ export class CompanyService {
 
   // -------------------------------employ registeration ------------------------//
   registerationGetallEmploy() : Observable<any> {
-    return this.http.get(this.url + "/getemployeedetails")
+    return this.http.get(this.url + "/getemployeedetails/"+ this.userId)
   }
 
   addNewEmploy(data) : Observable<any> {
@@ -63,8 +63,6 @@ export class CompanyService {
         )
   }
   
-
-
   //--------------------------------------event article----------------------------//
 
   getallArticles() : Observable<any>{

@@ -73,14 +73,17 @@ export class EmployeeRegistrationComponent implements OnInit {
     private service : CompanyService
   ) {}
   
-  col : string[] = ['name', 'email', 'contact', 'age', 'empId', 'dept', 'branch']
-  list = new MatTableDataSource(list1);
+  //col : string[] = ['name', 'email', 'contact', 'age', 'empId', 'dept', 'branch']
+  col : string[] = ['name', 'email', 'contactNo', 'age', 'empId', 'dept', 'branch']
+  
+  list : any //new MatTableDataSource(list1);
   
   allEmployData : any
   ngOnInit() { 
     this.service.registerationGetallEmploy().subscribe((result)=>{
       console.log(result);
-      this.allEmployData = result
+     // this.list = result
+      console.log("list", this.list);
     })
 
     setTimeout(() => this.list.paginator = this.paginator)

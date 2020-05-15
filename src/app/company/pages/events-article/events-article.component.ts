@@ -56,24 +56,39 @@ export class EventsArticleComponent implements OnInit {
     private service : CompanyService
   ) {}
 
-  colsevent : string[]= ['id', 'name', 'start', 'location', 'slots', 'lastbookingDate', 'price', 'details', 'cancel'];
+  //colsevent : string[]= ['id', 'name', 'start', 'location', 'slots', 'lastbookingDate', 'price', 'details', 'cancel'];
   colsarticle : string[]= ['id', 'name', 'postedby', 'show', 'action'];
-
+  colsevent : string[]= ['id', 'title', 'startDate', 'location', 'slots', 'lastBookingDate', 'price', 'description', 'cancel'];
+ 
   article = new MatTableDataSource(article1)
-  event = new MatTableDataSource (event1)
+  event : any //new MatTableDataSource (event1)
   
-  articlesFromBackend : any;
-  eventFromBackend : any;
+  
+  
   ngOnInit() {
-    this.service.getallArticles().subscribe((result)=>{
-      console.log(result);
-      this.articlesFromBackend = result;
-    })
+    console.log("ngoninit")
+    this.getevents();
+    this.getarticles();
+  }
+  eventFromBackend : any;
+  getevents() {
     this.service.getallEvents().subscribe((result)=>{
       console.log(result);
       this.eventFromBackend = result;
+      this.event = result
+      console.log("our data : ", this.event)
     })
   }
+  articlesFromBackend : any;
+  getarticles() {
+    console.log("events")
+    this.service.getallArticles().subscribe((result)=>{
+      console.log(result);
+      this.articlesFromBackend = result;
+      console.log("our data : " , this.articlesFromBackend)
+    })
+  }
+
 
   addEvent(){
     console.log("add event reached")
@@ -82,6 +97,9 @@ export class EventsArticleComponent implements OnInit {
     })
     dialog.afterClosed().subscribe((response)=>{
       console.log(response)
+      if(response.result) {
+        this.getevents();
+      }
     })
   }
   addArticle() {

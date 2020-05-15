@@ -27,15 +27,30 @@ export class FeedbackComponent implements OnInit {
 
   feedbacks : feedback;
   data : any ;
-
+  bad 
+  avg
+  goood
+  better
+  feedback : any
   ngOnInit() {
     // http call to fetch the data from background
+    this.getDataFromBG()
+    //this.feedbacks['bad'] = 10
+  }
+
+  getDataFromBG() {
     this.service.getFeedback().subscribe((result)=>{
       console.log(result);
       this.data = result
+      this.bad = result.bad;
+      this.avg = result.avg;
+      this.goood = result.good;
+      this.better = result.better
+      this.feedback = [this.bad, this.avg, this.goood, this.better]
+      console.log(this.feedback)
+      this.pieChart()
     })
-    this.pieChart()
-    //this.feedbacks['bad'] = 10
+    
   }
 
   @ViewChild('piechart',{static: true}) lineElement: ElementRef;
@@ -54,7 +69,7 @@ export class FeedbackComponent implements OnInit {
           {
             
             label: 'Feedback',
-            data: [20 , 30, 25, 25 ],
+            data: this.feedback,
             backgroundColor: ['#FFA1B5', '#86C7F3','#FFE29A', '#5dad60'],
             borderColor: [
             ],

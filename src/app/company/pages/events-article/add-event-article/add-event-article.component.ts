@@ -85,15 +85,10 @@ export class AddEventArticleComponent implements OnInit {
   submit(){
     this.firstStepper.get('banner').setValue(this.sendfile);
     if(this.firstStepper.valid) {
-      // let registerationform = this._formBuilder.group({
-      //   firststep : this.firstStepper.value,
-      //   banner : this.sendfile
-      // })
       console.log(this.firstStepper.value)
-      //this.dialogRef.close({this.firstStepper, result : true})
       this.service.addevent(this.firstStepper.value).subscribe((response)=>{
         console.log(response)
-        
+        this.dialogRef.close({result : true})
       })
     } else{
       console.log("invalid")
@@ -104,7 +99,7 @@ export class AddEventArticleComponent implements OnInit {
     console.log(this.articleStepper.value)
     this.service.addarticle(this.articleStepper.value).subscribe((response)=>{
       console.log(response)
-      this.dialogRef.close();
+      this.dialogRef.close({result : true});
     })
     
   }
