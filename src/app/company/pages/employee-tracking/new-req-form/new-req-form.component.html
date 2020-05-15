@@ -15,13 +15,13 @@
               <div class="col-md-4">
                 <mat-form-field>
                   <mat-label>Employee ID</mat-label>
-                  <input matInput placeholder="Employee Name" formControlName="id">
+                  <input matInput placeholder="Employee Name" formControlName="empId">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field>
                   <mat-label>Date</mat-label>
-                  <input matInput [matDatepicker]="picker" formControlName="date">
+                  <input matInput [matDatepicker]="picker" formControlName="reqDate">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

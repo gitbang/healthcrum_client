@@ -19,8 +19,6 @@ export class CompanyService {
 
   // ------------------------company dashboard------------------------// 
 
-  
-
   dataForAllPackages(compantName : string) : Observable <any> {
     console.log("all package reached");
     return this.http.get(this.url + compantName, this.option)
@@ -42,6 +40,9 @@ export class CompanyService {
 
 
   // -------------------------------employ registeration ------------------------//
+  registerationGetallEmploy() : Observable<any> {
+    return this.http.get(this.url + "/getemployeedetails")
+  }
 
   addNewEmploy(data) : Observable<any> {
     return this.http
@@ -66,6 +67,13 @@ export class CompanyService {
 
   //--------------------------------------event article----------------------------//
 
+  getallArticles() : Observable<any>{
+    return this.http.get(this.url + "/getallarticles/" + this.userId, this.option)
+  }
+
+  getallEvents() : Observable<any> {
+    return this.http.get(this.url + "/getevents/" + this.userId, this.option)
+  }
   addevent(data) : Observable <any> {
     console.log(data);
     return this.http
@@ -84,9 +92,60 @@ export class CompanyService {
         )
   }
 
+  // ----------------------booked appointment ----------------------//
 
+  bookappointment(data) : Observable <any> {
+    console.log(data)
+    return this.http
+      .post(this.url + "/bookappontement/" + this.userId, data, this.option)
+        .pipe(
+          retry(2)
+        )
+  }
 
+  appointmentGetDetailsOfEmploysByBranch(branchName : string) : Observable <any> {
+    return this.http
+      .post(this.url + "/getemployeesbybranch/" + this.userId, {branch : branchName }, this.option)
+        .pipe(
+          retry(2)
+        )
+  }
 
+  appointmentDetailOfAllEmploy() : Observable<any> {
+    return this.http
+      .get(this.url + "/getemployees/" + this.userId, this.option)
+        .pipe(
+          retry(2)
+        )
+  }
+
+  // -----------------------feedback ----------------------------------//
+
+  feedbackSend(data) : Observable<any> {
+    console.log(data)
+     return this.http.post(this.url + '/hr/savefeedback/' + this.userId, data, this.option)
+  }
+  getFeedback() : Observable <any> {
+    return this.http.get(this.url + "/hr/getfeedback/"+ this.userId, this.option)
+  }
+
+  // ------------------------employ tracking---------------------------//
+  trackingDateWise(data) :Observable <any> {
+    return this.http
+      .post(this.url + "/hr/getemployeebydate/" + this.userId, data, this.option)
+        .pipe(
+          retry(2)
+        )
+  }
+  trackingFilterSearch(data) : Observable<any> {
+    return this.http
+      .post(this.url + "/hr/addnewappointement/" + this.userId, data, this.option)
+        .pipe(
+          retry(2)
+        )
+  }
+
+  // -----------------------handle error----------------------------//
   private handleError(error : HttpErrorResponse) {
     if(error.error instanceof ErrorEvent) {
       console.log('error occur : ' , error.error.message)

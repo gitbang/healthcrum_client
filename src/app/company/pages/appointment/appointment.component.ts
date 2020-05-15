@@ -18,7 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from '@angular/material'
 import { ShowListComponent } from "./show-list/show-list.component";
-
+import {CompanyService} from '../../company.service'
 
 export interface empdetails {
   healthcrumId : string,
@@ -76,7 +76,11 @@ export class AppointmentComponent implements OnInit {
   faCity = faCity;
   faBranch = faCodeBranch;
 
-  constructor( private fb : FormBuilder, private dialog : MatDialog) {}
+  constructor(
+      private fb : FormBuilder,
+      private dialog : MatDialog,
+      private service : CompanyService
+    ) {}
  // company;
   toppings = new FormControl();
   toppingList: string[] = ["Delhi", "Mumbai", "UP", "punjab"];
@@ -99,14 +103,19 @@ export class AppointmentComponent implements OnInit {
     time : ['', Validators.required],
     empId : ['', Validators.required]
   })
+
   bookappointment(){
-    console.log(this.book.value);
-    console.log(this.book.valid);
-   
-    console.log(this.book.value);
+    this.service.bookappointment(this.book.value).subscribe((response)=>{
+      console.log(response)
+    })
   }
+
   seedetail(){
-    console.log("show table")
+    console.log("show table");
+    let data;
+    this.service.appointmentDetailOfAllEmploy().subscribe((result) => {
+      data = result;
+    })
     const dialog = this.dialog.open(ShowListComponent, {
       height : "80%",
       width: "80%"
@@ -139,5 +148,13 @@ export class AppointmentComponent implements OnInit {
     }
     console.log(this.employselected)
     this.book.get('empId').setValue(this.employselected)
+  }
+
+  employsOFBranch : any;
+  branchChange(event) {
+    console.log(event)
+    this.service.appointmentGetDetailsOfEmploysByBranch(event.value).subscribe((result)=>{
+      this.employsOFBranch = result;
+    })
   }
 }

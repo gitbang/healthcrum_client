@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { MatDialog, MatSnackBar, MatTableDataSource } from "@angular/material";
 import { CheckboxControlValueAccessor } from "@angular/forms";
 import {AddEventArticleComponent} from './add-event-article/add-event-article.component'
+import { CompanyService } from "app/company/company.service";
 
 
 export interface events{
@@ -52,6 +53,7 @@ export class EventsArticleComponent implements OnInit {
   constructor(
     private dialog : MatDialog, 
     private _snackbar : MatSnackBar,
+    private service : CompanyService
   ) {}
 
   colsevent : string[]= ['id', 'name', 'start', 'location', 'slots', 'lastbookingDate', 'price', 'details', 'cancel'];
@@ -59,7 +61,19 @@ export class EventsArticleComponent implements OnInit {
 
   article = new MatTableDataSource(article1)
   event = new MatTableDataSource (event1)
-  ngOnInit() {}
+  
+  articlesFromBackend : any;
+  eventFromBackend : any;
+  ngOnInit() {
+    this.service.getallArticles().subscribe((result)=>{
+      console.log(result);
+      this.articlesFromBackend = result;
+    })
+    this.service.getallEvents().subscribe((result)=>{
+      console.log(result);
+      this.eventFromBackend = result;
+    })
+  }
 
   addEvent(){
     console.log("add event reached")

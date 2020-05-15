@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
-
+import {CompanyService} from '../../company.service'
 
 export interface feedback  {
     bad : number,
@@ -21,17 +21,22 @@ export class FeedbackComponent implements OnInit {
   constructor(
     private dialog : MatDialog,
     private _snackbar : MatSnackBar,
+    private service : CompanyService
+    
   ) { }
 
   feedbacks : feedback;
-  
+  data : any ;
+
   ngOnInit() {
     // http call to fetch the data from background
-    
+    this.service.getFeedback().subscribe((result)=>{
+      console.log(result);
+      this.data = result
+    })
     this.pieChart()
     //this.feedbacks['bad'] = 10
   }
-
 
   @ViewChild('piechart',{static: true}) lineElement: ElementRef;
 

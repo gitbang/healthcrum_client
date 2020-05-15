@@ -31,7 +31,7 @@
           <div class="card-body ">
             <mat-form-field style="width:100%">
               <mat-label>From</mat-label>
-              <input matInput [matDatepicker]="picker_start" formControlName="start">
+              <input matInput [matDatepicker]="picker_start" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
               <mat-datepicker #picker_start></mat-datepicker>
             </mat-form-field>
@@ -49,7 +49,7 @@
           <div class="card-body ">
             <mat-form-field style="width:100%">
               <mat-label>To</mat-label>
-              <input matInput [matDatepicker]="picker_end" formControlName="end" >
+              <input matInput [matDatepicker]="picker_end" formControlName="endDate" >
               <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
               <mat-datepicker #picker_end></mat-datepicker>
             </mat-form-field>

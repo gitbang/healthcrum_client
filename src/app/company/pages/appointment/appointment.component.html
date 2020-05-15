@@ -150,8 +150,8 @@
       </div>
     </form>
     -->
-    <div>
-      <button class="btn btn-primary">Book appointment</button>
+    <div> 
+      <button class="btn btn-primary" >Book appointment</button>
     </div>
     <div class="mt-4 ml-4 mr-4">
       <form [formGroup]="book">
@@ -159,7 +159,7 @@
           <div class="col-sm-6 col-md-4">
             <mat-form-field>
               <mat-label>Select Branches</mat-label>
-              <mat-select formControlName="branch" >
+              <mat-select formControlName="branch" (selectionChange)="branchChange($event)" >
                 <mat-option *ngFor="let element of displaydata.branch" [value]="element">{{element}}</mat-option>
               </mat-select>
             </mat-form-field>

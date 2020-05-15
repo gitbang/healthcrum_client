@@ -3,6 +3,7 @@ import {MatDialog, MatTableDataSource, MatPaginator} from '@angular/material'
 import { FormBuilder, Validators } from "@angular/forms";
 import { ShowDetailComponent } from "./show-detail/show-detail.component";
 import {NewReqFormComponent} from './new-req-form/new-req-form.component'
+import { CompanyService } from "app/company/company.service";
 @Component({
   selector: "app-employee-tracking",
   templateUrl: "./employee-tracking.component.html",
@@ -14,24 +15,27 @@ export class EmployeeTrackingComponent implements OnInit {
 
   constructor( 
     private fb : FormBuilder,
-    private dialog : MatDialog  
+    private dialog : MatDialog  ,
+    private service : CompanyService
   ) {}
 
   ngOnInit() {}
 
   form = this.fb.group({
-    start : ['', Validators.required],
-    end : ['', Validators.required]
+    startDate : ['', Validators.required],
+    endDate : ['', Validators.required]
   })
 
   start : any
   end : any
-  async filter() {
-    
+  dataByDate : any;
+  filter() {
     console.log(this.form.value, this.form.valid);
     if(this.form.valid) {
-      // send http request and pass the data to the dialog box 
-      // await http request 
+      this.service.trackingDateWise(this.form.value).subscribe((result)=>{
+        console.log(result)
+        this.dataByDate = result
+      })
       this.dialog.open(ShowDetailComponent, {
         height : "80%",
         width : "80%"

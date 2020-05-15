@@ -76,7 +76,13 @@ export class EmployeeRegistrationComponent implements OnInit {
   col : string[] = ['name', 'email', 'contact', 'age', 'empId', 'dept', 'branch']
   list = new MatTableDataSource(list1);
   
+  allEmployData : any
   ngOnInit() { 
+    this.service.registerationGetallEmploy().subscribe((result)=>{
+      console.log(result);
+      this.allEmployData = result
+    })
+
     setTimeout(() => this.list.paginator = this.paginator)
 
     this.companyApiService.getEmployeesDetails().subscribe(data => {
