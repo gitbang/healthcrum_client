@@ -10,13 +10,16 @@ export class CompanyService {
 
   constructor(private http : HttpClient) { }
 
-  // company dashboard 
-
-  url : string = 'http:localhost:3000/company/'
+  userId = "5e8efa895b324a3e4c97a278";
+  url: String = "http://localhost:3000";
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
   option = {headers : this.headers}
+
+  // ------------------------company dashboard------------------------// 
+
+  
 
   dataForAllPackages(compantName : string) : Observable <any> {
     console.log("all package reached");
@@ -35,20 +38,55 @@ export class CompanyService {
           catchError(this.handleError)
         )
   }
-  // company dashboard end
+  
 
 
-  // employee-registeration
+  // -------------------------------employ registeration ------------------------//
+
+  addNewEmploy(data) : Observable<any> {
+    return this.http
+      .post(this.url + '/addnewemployee'+ this.userId, data, this.option)
+          .pipe(
+            retry(2),
+            catchError(this.handleError)
+          )
+  }
+
   uploadCsvFile(file) : Observable <any> {
     console.log("reached")
     return this.http
-      .post(this.url + 'addemploy/csv', file)
+      .post(this.url + '/uploadcsv/'+ this.userId, file, this.option)     // here use company id instead of user id
         .pipe(
           retry(2),
           catchError(this.handleError)
         )
   }
-  //employ-registeration end
+  
+
+
+  //--------------------------------------event article----------------------------//
+
+  addevent(data) : Observable <any> {
+    console.log(data);
+    return this.http
+      .post(this.url + '/addevents/' + this.userId, data, this.option)
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+  }
+
+  addarticle(data ) :Observable <any> {
+    return this.http.post(this.url + "/savearticle/" + this.userId, data, this.option )
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+  }
+
+
+
+
   private handleError(error : HttpErrorResponse) {
     if(error.error instanceof ErrorEvent) {
       console.log('error occur : ' , error.error.message)

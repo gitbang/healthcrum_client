@@ -9,6 +9,7 @@ import {
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {CompanyService} from '../../../company.service'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -34,6 +35,7 @@ export class AddEventArticleComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder, 
     private dialogRef : MatDialogRef<AddEventArticleComponent>,
+    private service : CompanyService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
       dialogRef.disableClose = true
@@ -45,22 +47,28 @@ export class AddEventArticleComponent implements OnInit {
 
   display : string;
   genderList: string[] = ["Male", "Female", "other"];
+
   firstStepper = this._formBuilder.group({
-    id: ['', Validators.required],
-    name : ['', [Validators.required]],
-    starton : ['',[Validators.required]],
+   // id: ['', Validators.required],
+    title : ['', [Validators.required]], // title
+    startDate : ['',[Validators.required]], // startDate // endDate // time
+    endDate : [''],
+    time : [''],
     location : ['',Validators.required],
     slots : ['', Validators.required],
-    lastbookingdate: ['', [Validators.required]],
+    lastBookingDate: ['', [Validators.required]],  //  B D
     price : ['', Validators.required],
-    details : ['', Validators.required]
+    description : ['', Validators.required],  // description
+    banner : ['']
   })
   
   articleStepper = this._formBuilder.group({
-    id : ['', Validators.required],
-    name : ['', Validators.required],
-    postby: ['', Validators.required],
-    show : ['', Validators.required],
+    //id : ['', Validators.required],
+    title : ['', Validators.required],
+    article : ['', Validators.required],
+    postedBy: ['', Validators.required],
+    //show : ['', Validators.required],
+    postedOn : ['', Validators.required]
   })
   matcher = new MyErrorStateMatcher();
 
@@ -71,12 +79,22 @@ export class AddEventArticleComponent implements OnInit {
       this.dialogRef.close({result : false});
   }
   
+  selectedFile  : File;
+  sendfile : FormData;
+
   submit(){
+    this.firstStepper.get('banner').setValue(this.sendfile);
     if(this.firstStepper.valid) {
-      let registerationform = this._formBuilder.group({
-        firststep : this.firstStepper
+      // let registerationform = this._formBuilder.group({
+      //   firststep : this.firstStepper.value,
+      //   banner : this.sendfile
+      // })
+      console.log(this.firstStepper.value)
+      //this.dialogRef.close({this.firstStepper, result : true})
+      this.service.addevent(this.firstStepper.value).subscribe((response)=>{
+        console.log(response)
+        
       })
-      this.dialogRef.close({registerationform, result : true})
     } else{
       console.log("invalid")
       alert("Form input is invalid")
@@ -84,5 +102,20 @@ export class AddEventArticleComponent implements OnInit {
   }
   submitarticle(){
     console.log(this.articleStepper.value)
+    this.service.addarticle(this.articleStepper.value).subscribe((response)=>{
+      console.log(response)
+      this.dialogRef.close();
+    })
+    
+  }
+
+  onFileChanged(event) {
+    const file = event.target.files[0];
+    this.selectedFile = event.target.files[0];
+    const fd = new FormData;
+    fd.append('image',this.selectedFile, this.selectedFile.name)
+    
+    this.sendfile = fd;
+    // this.firstStepper.get('banner').setValue=
   }
 }

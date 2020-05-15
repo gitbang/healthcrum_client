@@ -11,6 +11,7 @@ import {
   FormGroup
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
+import {CompanyService } from '../../../company.service'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -37,7 +38,8 @@ export class RegisterationFormComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder, 
-    private dialogRef : MatDialogRef<RegisterationFormComponent>
+    private dialogRef : MatDialogRef<RegisterationFormComponent>,
+    private service : CompanyService
   ) {
       dialogRef.disableClose = true
   }
@@ -53,7 +55,7 @@ export class RegisterationFormComponent implements OnInit {
     dob : ['', [Validators.required]],
   })
   secondStepper = this._formBuilder.group({
-    employId : ['', Validators.required],
+    empId : ['', Validators.required],
     branch : ['', Validators.required],
     dept : ['', Validators.required],
   })
@@ -68,10 +70,17 @@ export class RegisterationFormComponent implements OnInit {
   submit(){
     if(this.firstStepper.valid && this.secondStepper.valid) {
       let registerationform = this._formBuilder.group({
-        firststep : this.firstStepper,
-        secondstep : this.secondStepper
+        firststep : this.firstStepper.value,
+        secondstep : this.secondStepper.value
       })
-      this.dialogRef.close({registerationform, result : true})
+      console.log(registerationform.value)
+      this.service.addNewEmploy(registerationform).subscribe((response)=>{
+        if(response) {
+          this.dialogRef.close({result : true})
+        } else{
+          this.dialogRef.close({result : false})
+        }
+      })
     } else{
       console.log("invalid")
       alert("Form input is invalid")

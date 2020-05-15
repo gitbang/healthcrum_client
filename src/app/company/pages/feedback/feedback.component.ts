@@ -59,6 +59,7 @@ export class FeedbackComponent implements OnInit {
       },
       options: {
         responsive: true,
+        aspectRatio : 3,
         scales: {
           /*
           xAxes: [{

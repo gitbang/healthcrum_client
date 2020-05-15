@@ -63,14 +63,20 @@ export class EventsArticleComponent implements OnInit {
 
   addEvent(){
     console.log("add event reached")
-    this.dialog.open(AddEventArticleComponent, {
+    const dialog = this.dialog.open(AddEventArticleComponent, {
       data : 'event'
+    })
+    dialog.afterClosed().subscribe((response)=>{
+      console.log(response)
     })
   }
   addArticle() {
     console.log("add article")
-    this.dialog.open(AddEventArticleComponent, {
+    const dialog = this.dialog.open(AddEventArticleComponent, {
       data : 'article'
+    })
+    dialog.afterClosed().subscribe((response)=>{
+      console.log(response);
     })
   }
 

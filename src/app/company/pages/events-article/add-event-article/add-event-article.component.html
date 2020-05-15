@@ -1,4 +1,4 @@
- <div class="card card-signup card-plain" *ngIf="data == 'event'">
+<div class="card card-signup card-plain" *ngIf="data == 'event'">
   <div class="row mt-0">
     <h5 class="col-11">Add Event</h5>
     <button type="button" class="close" (click)="closeDialog()">
@@ -13,17 +13,19 @@
           <form [formGroup]="firstStepper">
             <ng-template matStepLabel>Event Info</ng-template>
             <div class="row">
-              <div class="col-md-4"> 
-                <mat-form-field>
-                  <mat-label>Id</mat-label>
-                  <input matInput formControlName="id" required>
-                </mat-form-field>
-              </div>
+              <!--
+                <div class="col-md-4"> 
+                  <mat-form-field>
+                    <mat-label>Id</mat-label>
+                    <input matInput formControlName="id" required>
+                  </mat-form-field>
+                </div>
+              -->
               <div class="col-md-4">
                 <mat-form-field>
-                  <mat-label>Name</mat-label>
-                  <input matInput   name="name"
-                    formControlName="name" required>
+                  <mat-label>Title</mat-label>
+                  <input matInput   name="title"
+                    formControlName="title" required>
                   
                 </mat-form-field>
               </div>
@@ -31,17 +33,26 @@
                 <mat-form-field>
                   <mat-label>Start On</mat-label>
                   <input matInput [matDatepicker]="picker"
-                   formControlName='starton' required>
+                   formControlName='startDate' required>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 increaseZindex">
+              <div class="col-md-4">
                 <mat-form-field>
-                  <mat-label>Location</mat-label>
-                  <input matInput formControlName="location" required>
+                  <mat-label>End On</mat-label>
+                  <input matInput [matDatepicker]="picker4"
+                   formControlName='endDate' required>
+                  <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                  <mat-datepicker #picker4></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>Time</mat-label>
+                  <input matInput placeholder="Selected time" type="time" min="09:00" 
+                  max="18:00" required formControlName="time"
+                  style="width: 100%;text-align: center;letter-spacing: 10px;border: none;">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
@@ -54,42 +65,51 @@
                 <mat-form-field>
                   <mat-label>Last Booking date</mat-label>
                   <input matInput [matDatepicker]="picker1" 
-                  formControlName='lastbookingdate' required>
+                  formControlName='lastBookingDate' required>
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
-                  
                 </mat-form-field>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 increaseZindex">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>Location</mat-label>
+                  <input matInput formControlName="location" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4 ">
+                <mat-form-field>
+                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="description" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4 ">
                 <mat-form-field>
                   <mat-label>Price</mat-label>
                   <input matInput formControlName="price" required>
                 </mat-form-field>
               </div>
-              <div class="col-md-4 increaseZindex">
-                <mat-form-field>
-                  <mat-label>Details</mat-label>
-                  <input matInput formControlName="details" required>
-                </mat-form-field>
+              <div  class="col-md-4">
+                  <input  type="file" (change)="onFileChanged($event)">
               </div>
-            </div>
+            </div>  
             <div>
-              <button mat-button matStepperNext type="button" [disabled]="!firstStepper.valid">Next</button>
+              <!--  <button mat-button matStepperNext type="button" [disabled]="!firstStepper.valid">Next</button> -->
+              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button mat-button (click)="submit()" [disabled]="!firstStepper.valid">Submit</button>
             </div>
           </form>
         </mat-step>
-        
+        <!--
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
           <p>You are now done.</p>
           <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-            <button mat-button (click)="submit()">Submit</button>
+            
+
           </div>
         </mat-step>
+        -->
       </mat-horizontal-stepper>
     </div>
   </div>
@@ -110,27 +130,37 @@
           <form [formGroup]="articleStepper">
             <ng-template matStepLabel>Article Info</ng-template>
             <div class="row">
-              <div class="col-md-4"> 
+              <div class="col-6"> 
                 <mat-form-field>
-                  <mat-label>Id</mat-label>
-                  <input matInput formControlName="id" required>
+                  <mat-label>Title</mat-label>
+                  <input matInput formControlName="title" required>
                 </mat-form-field>
               </div>
-              <div class="col-md-4">
+              <div class="col-6">
                 <mat-form-field>
-                  <mat-label>Name</mat-label>
-                  <input matInput   name="name"
-                    formControlName="name" required>
+                  <mat-label>Article</mat-label>
+                  <input matInput   name="article"
+                    formControlName="article" required>
                   
                 </mat-form-field>
               </div>
-              <div class="col-md-4">
+              <div class="col-6">
                 <mat-form-field>
                   <mat-label>Post By</mat-label>
-                  <input matInput formControlName='postby' required>
+                  <input matInput formControlName='postedBy' required>
                 </mat-form-field>
               </div>
+              <div class="col-6">
+                  <mat-form-field>
+                    <mat-label>Post On</mat-label>
+                    <input matInput [matDatepicker]="picker3"
+                    formControlName='postedOn' required>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+              </div>
             </div>
+            <!--
             <div class="row ml-4">
               <mat-radio-group
                 aria-labelledby="example-radio-group-label"
@@ -146,12 +176,15 @@
                 
                 </mat-radio-group>
             </div>
+            -->
             <div>
-              <button mat-button matStepperNext type="button" [disabled]="!articleStepper.valid">Next</button>
+             <!-- <button mat-button matStepperNext type="button" [disabled]="!articleStepper.valid">Next</button>-->
+              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button mat-button (click)="submitarticle()" [disabled]="!articleStepper.valid">Submit</button>
             </div>
           </form>
         </mat-step>
-        
+        <!--
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
           <p>You are now done.</p>
@@ -161,6 +194,7 @@
             <button mat-button (click)="submitarticle()">Submit</button>
           </div>
         </mat-step>
+        -->
       </mat-horizontal-stepper>
     </div>
   </div>
