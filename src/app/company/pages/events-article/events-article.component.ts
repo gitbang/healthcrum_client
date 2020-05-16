@@ -1,13 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import Swal from "sweetalert2";
-import { MatDialog, MatSnackBar, MatTableDataSource } from "@angular/material";
+import { MatDialog, MatSnackBar, MatTableDataSource , MatPaginator } from "@angular/material";
 import { CheckboxControlValueAccessor } from "@angular/forms";
 import {AddEventArticleComponent} from './add-event-article/add-event-article.component'
 import { CompanyService } from "app/company/company.service";
+import { Observable } from "rxjs";
 
 
 export interface events{
-  id : number,
+  _id : string,
   name : string,
   start : string,
   location : string,
@@ -19,7 +20,7 @@ export interface events{
 }
 
 export interface articles {
-  id : number,
+  _id: string,
   name : string,
   postedby : string,
   show : string,
@@ -27,20 +28,20 @@ export interface articles {
 }
 
 const event1 : events[] = [
-  {id : 1, name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
-  {id : 2, name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
-  {id : 3, name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
-  {id : 4, name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
-  {id : 5, name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
-  {id : 6, name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' }
+  {_id : "1", name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
+  {_id : "2", name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
+  {_id : "3", name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
+  {_id : "4", name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
+  {_id : "5", name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' },
+  {_id : "6", name : "first", start : '10/12/20', location : 'delhi', slots : 2, lastbookingDate : '1/12/20', price: 1000, details :'', cancel :'' }
 ]
 
 const article1 : articles[] = [
-  {id : 1, name :"myname", postedby : "me", show :'', action :''},
-  {id : 2, name :"myname", postedby : "me", show :'', action :''},
-  {id : 3, name :"myname", postedby : "me", show :'', action :''},
-  {id : 4, name :"myname", postedby : "me", show :'', action :''},
-  {id : 5, name :"myname", postedby : "me", show :'', action :''}
+  {_id : "1", name :"myname", postedby : "me", show :'', action :''},
+  {_id : "2", name :"myname", postedby : "me", show :'', action :''},
+  {_id : "3", name :"myname", postedby : "me", show :'', action :''},
+  {_id : "4", name :"myname", postedby : "me", show :'', action :''},
+  {_id : "5", name :"myname", postedby : "me", show :'', action :''}
 ]
 
 @Component({
@@ -50,6 +51,9 @@ const article1 : articles[] = [
 })
 export class EventsArticleComponent implements OnInit {
 
+  @ViewChild(MatPaginator, {static : true}) paginator : MatPaginator
+  @ViewChild( 'secondPaginator', {static : true}) paginatortwo : MatPaginator
+  @ViewChild('TableTwoPaginator', {static: true}) tableTwoPaginator: MatPaginator;
   constructor(
     private dialog : MatDialog, 
     private _snackbar : MatSnackBar,
@@ -57,11 +61,13 @@ export class EventsArticleComponent implements OnInit {
   ) {}
 
   //colsevent : string[]= ['id', 'name', 'start', 'location', 'slots', 'lastbookingDate', 'price', 'details', 'cancel'];
-  colsarticle : string[]= ['id', 'name', 'postedby', 'show', 'action'];
+  //colsarticle : string[]= ['id', 'name', 'postedby', 'show', 'action'];
+  colsarticle : string[]= ['id', 'title', 'postedBy', 'show','postedOn' , 'action'];
+
   colsevent : string[]= ['id', 'title', 'startDate', 'location', 'slots', 'lastBookingDate', 'price', 'description', 'cancel'];
  
   article = new MatTableDataSource(article1)
-  event : any //new MatTableDataSource (event1)
+  event  = new MatTableDataSource (event1)
   
   
   
@@ -75,17 +81,21 @@ export class EventsArticleComponent implements OnInit {
     this.service.getallEvents().subscribe((result)=>{
       console.log(result);
       this.eventFromBackend = result;
-      this.event = result
-      console.log("our data : ", this.event)
+      this.event = new MatTableDataSource(result)
+      console.log("events : ", this.event)
+      setTimeout(() => this.event.paginator = this.paginator)
     })
   }
   articlesFromBackend : any;
   getarticles() {
-    console.log("events")
+    //console.log("articles")
     this.service.getallArticles().subscribe((result)=>{
-      console.log(result);
-      this.articlesFromBackend = result;
-      console.log("our data : " , this.articlesFromBackend)
+      console.log("articles ",result);
+     // this.articlesFromBackend = result;
+      this.article = new MatTableDataSource(result)
+      console.log("articles :", this.article)
+     //setTimeout(() => this.article.paginatortwo = this.paginator)
+     this.article.paginator = this.tableTwoPaginator;
     })
   }
 
@@ -109,12 +119,14 @@ export class EventsArticleComponent implements OnInit {
     })
     dialog.afterClosed().subscribe((response)=>{
       console.log(response);
+      this.getarticles();
     })
   }
 
 
   deleteEvent(j : number) {
-    console.log(j)
+    var _this = this
+    console.log(this.event.data)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -126,13 +138,21 @@ export class EventsArticleComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         // add service which send http request to delete the event at this location .
-        this.deleteRow(this.event, j);
-        Swal.fire("Deleted!", "Event has been deleted.", "success");
+        console.log(this.event.data[j])
+        let id = this.event.data[j]._id;
+        console.log(id)
+        //this.deleteRow(this.event, j);
+        this.service.eventdelete(id).subscribe((result)=>{
+          Swal.fire("Deleted!", "Event has been deleted.", "success");
+        })
+        _this.getevents();
+       
       }
     });
   }
 
   deleteArticle(j : number) {
+    var  _this = this;
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -143,8 +163,16 @@ export class EventsArticleComponent implements OnInit {
       confirmButtonText: "Yes, delete it!"
     }).then(result => {
       if (result.value) {
-        this.deleteRow(this.article, j);
+        console.log(this.article.data[j])
+        let id = this.article.data[j]._id;
+        console.log(id)
+
+        this.service.articledelete(id).subscribe((result)=>{
+          console.log(result)
+        })
+        //this.deleteRow(this.article, j);
         Swal.fire("Deleted!", "Article has been deleted.", "success");
+        this.getarticles();
       }
     });
   }
@@ -152,5 +180,13 @@ export class EventsArticleComponent implements OnInit {
   deleteRow (array  , index) {
     array.data.splice(index , 1);
     array._updateChangeSubscription()
+  }
+
+  applyFilterArticles(filterValue: string) {
+    this.article.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterevents(filterValue: string) {
+    this.event.filter = filterValue.trim().toLowerCase();
   }
 }

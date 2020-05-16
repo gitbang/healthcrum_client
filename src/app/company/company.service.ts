@@ -21,10 +21,10 @@ export class CompanyService {
 
   dataForAllPackages(compantName : string) : Observable <any> {
     console.log("all package reached");
-    return this.http.get(this.url + compantName, this.option)
+    return this.http.get(this.url + "/getemployeedata/" +this.userId, this.option)
       .pipe(
         retry(2),
-        catchError(this.handleError)
+        //catchError(this.handleError)
       )
   }
   dataForParticularPackage(compantName, packageName) : Observable<any> {
@@ -45,8 +45,9 @@ export class CompanyService {
   }
 
   addNewEmploy(data) : Observable<any> {
+    console.log(data)
     return this.http
-      .post(this.url + '/addnewemployee'+ this.userId, data, this.option)
+      .post(this.url + '/addnewemployee/'+ this.userId, data, this.option)
           .pipe(
             retry(2),
             catchError(this.handleError)
@@ -59,7 +60,7 @@ export class CompanyService {
       .post(this.url + '/uploadcsv/'+ this.userId, file, this.option)     // here use company id instead of user id
         .pipe(
           retry(2),
-          catchError(this.handleError)
+         // catchError(this.handleError)
         )
   }
   
@@ -72,6 +73,7 @@ export class CompanyService {
   getallEvents() : Observable<any> {
     return this.http.get(this.url + "/getevents/" + this.userId, this.option)
   }
+
   addevent(data) : Observable <any> {
     console.log(data);
     return this.http
@@ -90,12 +92,25 @@ export class CompanyService {
         )
   }
 
+  eventdelete(data) : Observable<any> {
+    return this.http.post(this.url + "/deleteevents/" + this.userId, {_id : data})
+      .pipe(
+        retry(2)
+      )
+  }
+
+  articledelete(data) : Observable<any> {
+    return this.http.post(this.url + "/deletearticles/" + this.userId, {_id : data})
+      .pipe(
+        retry(2)
+      )
+  }
   // ----------------------booked appointment ----------------------//
 
   bookappointment(data) : Observable <any> {
     console.log(data)
     return this.http
-      .post(this.url + "/bookappontement/" + this.userId, data, this.option)
+      .post(this.url + "/hr/bookappontement/" + this.userId, data, this.option)
         .pipe(
           retry(2)
         )
@@ -103,15 +118,16 @@ export class CompanyService {
 
   appointmentGetDetailsOfEmploysByBranch(branchName : string) : Observable <any> {
     return this.http
-      .post(this.url + "/getemployeesbybranch/" + this.userId, {branch : branchName }, this.option)
+      .post(this.url + "/hr/getemployeesbybranch/" + this.userId, {branch : branchName }, this.option)
         .pipe(
           retry(2)
         )
   }
 
   appointmentDetailOfAllEmploy() : Observable<any> {
+    console.log("details reached")
     return this.http
-      .get(this.url + "/getemployees/" + this.userId, this.option)
+      .get(this.url + "/hr/getbookings/" + this.userId  , this.option)
         .pipe(
           retry(2)
         )

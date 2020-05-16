@@ -30,16 +30,19 @@ export class EmployeeTrackingComponent implements OnInit {
   end : any
   dataByDate : any;
   filter() {
-    console.log(this.form.value, this.form.valid);
+   // console.log(this.form.value, this.form.valid);
     if(this.form.valid) {
       this.service.trackingDateWise(this.form.value).subscribe((result)=>{
         console.log(result)
         this.dataByDate = result
+
+        this.dialog.open(ShowDetailComponent, {
+          data : result,
+          height : "80%",
+          width : "80%"
+        })
       })
-      this.dialog.open(ShowDetailComponent, {
-        height : "80%",
-        width : "80%"
-      })
+      
     } else{
       alert("Invalid Input")
     }

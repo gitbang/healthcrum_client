@@ -80,19 +80,21 @@ export class EmployeeRegistrationComponent implements OnInit {
   
   allEmployData : any
   ngOnInit() { 
-    this.service.registerationGetallEmploy().subscribe((result)=>{
-      console.log(result);
-     // this.list = result
-      console.log("list", this.list);
-    })
-
-    setTimeout(() => this.list.paginator = this.paginator)
-
+    this.getemployDetail();
+    /*
     this.companyApiService.getEmployeesDetails().subscribe(data => {
       this.empDetails = data;
-      console.log(this.empDetails)
-      return;
-    });
+      //console.log("from databse",this.empDetails)
+      //return;
+    });*/
+  }
+  getemployDetail() {
+    this.service.registerationGetallEmploy().subscribe((result)=>{
+      console.log(result);
+      this.list = new MatTableDataSource(result);
+      setTimeout(() => this.list.paginator = this.paginator)
+      console.log("list", this.list);
+    })
   }
 
   isLinear = false;
@@ -112,6 +114,7 @@ export class EmployeeRegistrationComponent implements OnInit {
           duration : 2000
         })
       }
+      this.getemployDetail()
     })
   }
   numberOfFiles = 0;

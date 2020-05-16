@@ -36,13 +36,20 @@
         -->
         <mat-tab-group>
           <mat-tab label="Events"  > 
-            <div class="tab-pane active show" id="link7">
+            <div class="tab-pane active show" >
               <div class="card mat-elevation-z8">
-                <div class="card-header card-header-icon card-header-rose">
-                  <div class="card-icon">
-                    <i class="material-icons">event</i>
+                <div class="card-header card-header-icon card-header-rose row">
+                  <div class="col-8">
+                    <div class="card-icon">
+                      <i class="material-icons">event</i>
+                    </div>
+                    <h4 class="card-title ">Events Table</h4>
                   </div>
-                  <h4 class="card-title ">Events Table</h4>
+                  <div class="col-3">
+                    <mat-form-field >
+                      <input matInput (keyup)="applyFilterevents($event.target.value)" placeholder="Filters">
+                    </mat-form-field>
+                  </div>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -60,7 +67,7 @@
 
                       <ng-container matColumnDef="startDate">
                         <th mat-header-cell *matHeaderCellDef> Start On </th>
-                        <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.startDate | date}} </td>
                       </ng-container>
 
                       <ng-container matColumnDef="location">
@@ -75,7 +82,7 @@
 
                       <ng-container matColumnDef="lastBookingDate">
                         <th mat-header-cell *matHeaderCellDef>lastbookingDate </th>
-                        <td mat-cell *matCellDef="let element"> {{element.lastBookingDate}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.lastBookingDate | date}} </td>
                       </ng-container>
 
                       <ng-container matColumnDef="price">
@@ -101,7 +108,7 @@
                       <tr mat-header-row *matHeaderRowDef="colsevent"></tr>
                       <tr mat-row *matRowDef="let row; columns: colsevent;"></tr>
                     </table>  
-
+                    <mat-paginator [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons> </mat-paginator>
                   </div>
                 </div>
               </div>
@@ -109,28 +116,40 @@
           </mat-tab>
           <mat-tab label="Articles" >
              <div class="card ,at-elevation-z8">
-              <div class="card-header card-header-icon card-header-rose">
-                <div class="card-icon">
-                  <i class="material-icons">event</i>
+              <div class="card-header card-header-icon card-header-rose row">
+                <div class="col-8">
+                  <div class="card-icon">
+                    <i class="material-icons">event</i>
+                  </div>
+                  <h4 class="card-title ">Article Table</h4>
                 </div>
-                <h4 class="card-title ">Article Table</h4>
+                <div class="col-3">
+                    <mat-form-field >
+                      <input matInput (keyup)="applyFilterArticles($event.target.value)" placeholder="Filters">
+                    </mat-form-field>
+                  </div>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table mat-table [dataSource]="article" class="mytable-event" >
                     <ng-container matColumnDef="id">
                       <th mat-header-cell *matHeaderCellDef> Id </th>
-                      <td mat-cell *matCellDef="let element"> {{element.id }} </td>
+                      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1 }} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <ng-container matColumnDef="title">
+                      <th mat-header-cell *matHeaderCellDef> Title </th>
+                      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="postedby">
+                    <ng-container matColumnDef="postedBy">
                       <th mat-header-cell *matHeaderCellDef> Posted By </th>
-                      <td mat-cell *matCellDef="let element"> {{element.postedby}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.postedBy | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="postedOn">
+                      <th mat-header-cell *matHeaderCellDef> Posted On </th>
+                      <td mat-cell *matCellDef="let element"> {{element.postedOn}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="show">
@@ -151,6 +170,7 @@
                     <tr mat-header-row *matHeaderRowDef="colsarticle"></tr>
                     <tr mat-row *matRowDef="let row; columns: colsarticle;"></tr>
                   </table>
+                  <mat-paginator #TableTwoPaginator="matPaginator" [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons> </mat-paginator>
                 </div>
               </div>
             </div>

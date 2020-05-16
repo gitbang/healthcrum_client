@@ -115,6 +115,7 @@ export class FeedbackComponent implements OnInit {
         this._snackbar.open("Feedback" , "saved", {
           duration : 2000
         })
+      this.getDataFromBG();
       }
     })
   }

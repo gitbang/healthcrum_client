@@ -16,7 +16,7 @@ interface ZoneValue {
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
-})
+}) 
 
 export class DashboardComponent implements OnInit {
   constructor(private service : CompanyService) {}
@@ -28,21 +28,38 @@ export class DashboardComponent implements OnInit {
     green : 7,
     yellow : 18
   }
-  percentage : any
+   percentage = {
+     red : 0,
+     total : 0,
+     purple : 0,
+     yellow : 0,
+     green : 0
+   }
+
   ngOnInit() {
 
     // get company details and total packages of the company
     this.service.dataForAllPackages(this.companyName).subscribe(
-      (result)=>{},
+      (result)=> {
+        console.log(result)
+        this.currentData.red = result.danger;
+        this.currentData.purple = result.needAttention,
+        this.currentData.green = result.green,
+        this.currentData.yellow = result.border
+        this.currentData.total = result.danger + result.needAttention + result.green + result.border;
+
+        this.percentage = {
+          total : this.currentData.total,
+          red : Math.round(this.currentData.red/ this.currentData.total * 100),
+          purple : Math.round(this.currentData.purple/ this.currentData.total * 100),
+          yellow : Math.round(this.currentData.yellow / this.currentData.total * 100),
+          green : Math.round(this.currentData.green / this.currentData.total * 100),
+        }
+      },
     //  this.currentData = result
       (error)=> console.log(error)
     ),
-    this.percentage = {
-      red : Math.round(this.currentData.red/ this.currentData.total * 100),
-      purple : Math.round(this.currentData.purple/ this.currentData.total * 100),
-      yellow : Math.round(this.currentData.yellow / this.currentData.total * 100),
-      green : Math.round(this.currentData.green / this.currentData.total * 100),
-    }
+    
     console.log(this.percentage)
   }
   

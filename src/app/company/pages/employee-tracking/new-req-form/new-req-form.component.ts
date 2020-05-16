@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef , MAT_DIALOG_DATA} from '@angular/material';
 import {CompanyService} from '../../../company.service'
 @Component({
   selector: 'app-new-req-form',
@@ -11,10 +11,12 @@ import {CompanyService} from '../../../company.service'
 export class NewReqFormComponent implements OnInit {
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data : any,
     private fb : FormBuilder,  
     private dialogRef : MatDialogRef<NewReqFormComponent>,
     private service : CompanyService  
   ) {
+    console.log("in pop up",data)
   }
   ngOnInit() {
   }

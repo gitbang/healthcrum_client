@@ -49,7 +49,7 @@ export class RegisterationFormComponent implements OnInit {
   firstStepper = this._formBuilder.group({
     name : ['', Validators.required],
     email : ['', [Validators.email]],
-    contactno : ['',[Validators.required]],
+    contactNo : ['',[Validators.required]],
     gender : ['',Validators.required],
     age : ['', Validators.required],
     dob : ['', [Validators.required]],
@@ -74,7 +74,7 @@ export class RegisterationFormComponent implements OnInit {
         secondstep : this.secondStepper.value
       })
       console.log(registerationform.value)
-      this.service.addNewEmploy(registerationform).subscribe((response)=>{
+      this.service.addNewEmploy(registerationform.value).subscribe((response)=>{
         if(response) {
           this.dialogRef.close({result : true})
         } else{

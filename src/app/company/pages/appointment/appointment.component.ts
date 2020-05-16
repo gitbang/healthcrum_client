@@ -35,23 +35,23 @@ export interface empdetails {
 
 const list1 : empdetails[] = [
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '101', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '102', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '103', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '104', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '105', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '106', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '107', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '108', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
   {healthcrumId: "123456", name : 'akash', email : "ab@gmail.com", contact : 9874563210, age : 20 ,
-  empId : '1234', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
+  empId : '109', dept : 'warehouse', branch : 'any' , gender : 'male' ,dob : '10/12/12'},
 ]
 
 
@@ -98,30 +98,37 @@ export class AppointmentComponent implements OnInit {
     branch : ['', Validators.required],
     package :['', Validators.required],
     city : ['', Validators.required],
-    center : ['', Validators.required],
+    diagnosticCenter : ['', Validators.required],
     date : ['', Validators.required],
     time : ['', Validators.required],
     empId : ['', Validators.required]
   })
 
   bookappointment(){
+    console.log("button click")
     this.service.bookappointment(this.book.value).subscribe((response)=>{
-      console.log(response)
+      console.log("booked")
+      console.log(response) 
     })
   }
 
   seedetail(){
     console.log("show table");
-    let data;
+    let data1;
     this.service.appointmentDetailOfAllEmploy().subscribe((result) => {
-      data = result;
-    })
-    const dialog = this.dialog.open(ShowListComponent, {
-      height : "80%",
-      width: "80%"
-    })
-    dialog.afterClosed().subscribe((response)=>{
-      console.log("response ", response)
+      data1 = result;
+      console.log("employ details");
+      console.log(data1)
+      const dialog = this.dialog.open(ShowListComponent, {
+        data :{
+          result : data1.response
+        },
+        height : "80%",
+        width: "80%"
+      })
+      dialog.afterClosed().subscribe((response)=>{
+        console.log("response ", response)
+      })
     })
   }
 
