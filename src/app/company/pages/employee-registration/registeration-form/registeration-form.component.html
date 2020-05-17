@@ -1,4 +1,4 @@
- <div class="card card-signup card-plain">
+<div class="card card-signup card-plain">
   <div class="row mt-0">
     <h5 class="col-11">Register Employee</h5>
     <button type="button" class="close" (click)="closeDialog()">
@@ -6,20 +6,20 @@
     </button>
   </div>
   <div class="text-center">
-    <div >
+    <div>
       <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
         <mat-step [stepControl]="firstStepper">
           <form [formGroup]="firstStepper">
             <ng-template matStepLabel>Employee Personal Info</ng-template>
             <div class="row">
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Name</mat-label>
                   <input matInput placeholder="Employee Name" formControlName="name" required>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Employee Email-id</mat-label>
                   <input matInput placeholder="Employee Email-id" [errorStateMatcher]="matcher" name="email"
                     formControlName="email" required>
@@ -32,33 +32,33 @@
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Contact Number</mat-label>
-                  <input matInput type="number" placeholder="Contact Number" formControlName="contactNo" required 
-                  pattern="[1-9]{1}[0-9]{9}">
+                  <input matInput type="number" placeholder="Contact Number" formControlName="contactNo" required
+                    pattern="[1-9]{1}[0-9]{9}">
                 </mat-form-field>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4 increaseZindex">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Select Gender</mat-label>
-                  <mat-select formControlName="gender" >
-                    <mat-option class="increaseZindex" *ngFor="let gender of genderList" 
-                    [value]="gender">{{gender}}</mat-option>
+                  <mat-select formControlName="gender">
+                    <mat-option class="increaseZindex" *ngFor="let gender of genderList" [value]="gender">{{gender}}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Date of birth</mat-label>
                   <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName='dob'>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Age</mat-label>
                   <input matInput type="number" placeholder="Age" formControlName="age" required>
                 </mat-form-field>
@@ -69,22 +69,21 @@
             </div>
           </form>
         </mat-step>
-      
+
         <mat-step [stepControl]="secondStepper">
           <form [formGroup]="secondStepper">
             <ng-template matStepLabel>Employee Details</ng-template>
             <div class="row">
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Employ Id</mat-label>
                   <input matInput placeholder="Employee Id" formControlName="empId" required>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Branch</mat-label>
-                  <input matInput placeholder="branch" [errorStateMatcher]="matcher"
-                    formControlName="branch" required>
+                  <input matInput placeholder="branch" [errorStateMatcher]="matcher" formControlName="branch" required>
                   <mat-error *ngIf="secondStepper.hasError('email') && !secondFormGroup.hasError('required')">
                     Please enter a valid email address
                   </mat-error>
@@ -94,7 +93,7 @@
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Department</mat-label>
                   <input matInput type="tel" formControlName="dept" required>
                 </mat-form-field>
@@ -106,7 +105,7 @@
             </div>
           </form>
         </mat-step>
-        
+
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
           <p>You are now done.</p>

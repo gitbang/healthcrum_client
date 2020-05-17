@@ -3,6 +3,10 @@
   display: flex;
 }
 
-.top-card ,.top-card-header{
-  background-image: linear-gradient(orange , #f9d293);
+.top-card,
+.top-card-header {
+  background-image: linear-gradient(orange, #f9d293);
+}
+.full-width {
+  width: 100%;
 }

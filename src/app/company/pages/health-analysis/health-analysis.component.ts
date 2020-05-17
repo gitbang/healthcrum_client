@@ -1,36 +1,34 @@
 import { Component, OnInit } from "@angular/core";
 import * as Chartist from "chartist";
 import { FormControl, FormBuilder } from "@angular/forms";
-import {MatDialog} from '@angular/material'
+import { MatDialog } from "@angular/material";
 import { ShowResultComponent } from "./show-result/show-result.component";
 
 @Component({
   selector: "app-health-analysis",
   templateUrl: "./health-analysis.component.html",
-  styleUrls: ["./health-analysis.component.scss"]
+  styleUrls: ["./health-analysis.component.scss"],
 })
 export class HealthAnalysisComponent implements OnInit {
+  male: boolean = false; // male check-box
+  female: boolean = false; // female check-box
+  others: boolean = false; // others check-box
 
-  constructor( 
-    private fb : FormBuilder,
-    private dialog : MatDialog
-  ) {}
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
   ngOnInit() {
-    /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
     const dataDailySalesChart: any = {
       labels: ["M", "T", "W", "T", "F", "S", "S"],
-      series: [[12, 17, 7, 17, 23, 18, 38]]
+      series: [[12, 17, 7, 17, 23, 18, 38]],
     };
 
     const optionsDailySalesChart: any = {
       lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0
+        tension: 0,
       }),
       low: 0,
-      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
+      high: 50,
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
     };
 
     var dailySalesChart = new Chartist.Line(
@@ -41,49 +39,69 @@ export class HealthAnalysisComponent implements OnInit {
 
     this.startAnimationForLineChart(dailySalesChart);
   }
-  
+
   toppings = new FormControl();
   toppingList: string[] = ["Delhi", "Mumbai", "UP", "punjab"];
 
   filterinp = this.fb.group({
-    category : [''],
-    subcategory :[''],
-    year : [''],
-    age : [''],
-    gender : ['']
-  })
+    category: [""],
+    subcategory: [""],
+    year: [""],
+    age: [""],
+    gender: [""],
+  });
 
-  menulist : string[]= ['Package Wise', 'Department Wise', 'Disease Wise', 'Service Wise']
-  
+  menulist: string[] = [
+    "Package Wise",
+    "Department Wise",
+    "Disease Wise",
+    "Service Wise",
+  ];
+
   sublist = {
-    packagelist :['Package 1', 'package2', 'package3', 'package4', 'package5'],
-    departmentlist :  ['department10','department 2','department 3','department 4','department 5'],
-    diseaselist : ['Disease 1','Disease 2','Disease 3','Disease 4','Disease 5'],
-    servicelist : ['Service 1','Service 2','Service 3','Service 4','Service 5', ]  
-  }
-  years : string  [] = ["2020", "2019", "2018", "2017"]
+    packagelist: ["Package 1", "package2", "package3", "package4", "package5"],
+    departmentlist: [
+      "department10",
+      "department 2",
+      "department 3",
+      "department 4",
+      "department 5",
+    ],
+    diseaselist: [
+      "Disease 1",
+      "Disease 2",
+      "Disease 3",
+      "Disease 4",
+      "Disease 5",
+    ],
+    servicelist: [
+      "Service 1",
+      "Service 2",
+      "Service 3",
+      "Service 4",
+      "Service 5",
+    ],
+  };
+  years: string[] = ["2020", "2019", "2018", "2017"];
 
   list = [
-    {name : 'Department Wise', value : 'departmentlist'},
-    {name : 'Disease Wise', value : 'diseaselist'},
-    {name : 'Package Wise', value : 'packagelist'},
-    {name : 'Service Wise', value : 'servicelist'},
-  ]
+    { name: "Department Wise", value: "departmentlist" },
+    { name: "Disease Wise", value: "diseaselist" },
+    { name: "Package Wise", value: "packagelist" },
+    { name: "Service Wise", value: "servicelist" },
+  ];
 
-  current : Array<string> = []
+  current: Array<string> = [];
+
   filter() {
-    console.log(this.filterinp.value)
+    console.log(this.filterinp.value);
     this.dialog.open(ShowResultComponent, {
       height: "80%",
-      width : "80%"
-    })
+      width: "80%",
+    });
   }
-  changelist(event){
-    console.log(event)
-    console.log("reached")
-
-    this.current = this.sublist[event.value]
-    console.log(this.current)
+  changelist(event) {
+    this.current = this.sublist[event.value];
   }
 
   startAnimationForLineChart(chart) {
@@ -92,7 +110,7 @@ export class HealthAnalysisComponent implements OnInit {
     delays = 80;
     durations = 500;
 
-    chart.on("draw", function(data) {
+    chart.on("draw", function (data) {
       if (data.type === "line" || data.type === "area") {
         data.element.animate({
           d: {
@@ -104,8 +122,8 @@ export class HealthAnalysisComponent implements OnInit {
               .translate(0, data.chartRect.height())
               .stringify(),
             to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
+            easing: Chartist.Svg.Easing.easeOutQuint,
+          },
         });
       } else if (data.type === "point") {
         seq++;
@@ -115,8 +133,8 @@ export class HealthAnalysisComponent implements OnInit {
             dur: durations,
             from: 0,
             to: 1,
-            easing: "ease"
-          }
+            easing: "ease",
+          },
         });
       }
     });
@@ -129,7 +147,7 @@ export class HealthAnalysisComponent implements OnInit {
     seq2 = 0;
     delays2 = 80;
     durations2 = 500;
-    chart.on("draw", function(data) {
+    chart.on("draw", function (data) {
       if (data.type === "bar") {
         seq2++;
         data.element.animate({
@@ -138,13 +156,12 @@ export class HealthAnalysisComponent implements OnInit {
             dur: durations2,
             from: 0,
             to: 1,
-            easing: "ease"
-          }
+            easing: "ease",
+          },
         });
       }
     });
 
     seq2 = 0;
   }
-  
 }

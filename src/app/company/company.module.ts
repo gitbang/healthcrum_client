@@ -25,9 +25,9 @@ import { HealthAnalysisComponent } from "./pages/health-analysis/health-analysis
 import { HealthStatusComponent } from "./pages/health-status/health-status.component";
 import { BookedAppointmentComponent } from "./pages/booked-appointment/booked-appointment.component";
 import { DataTablesModule } from "angular-datatables";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {NgCircleProgressModule} from 'ng-circle-progress';
-import {MatMenuModule} from '@angular/material/menu'
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { NgCircleProgressModule } from "ng-circle-progress";
+import { MatMenuModule } from "@angular/material/menu";
 import {
   MatButtonModule,
   MatInputModule,
@@ -55,20 +55,21 @@ import {
   MatDialogModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatPaginatorModule
+  MatPaginatorModule,
 } from "@angular/material";
 import { ChartsModule } from "ng2-charts";
 import { SharedModule } from "app/shared/shared.module";
-import {CompanyService} from './company.service';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { RegisterationFormComponent } from './pages/employee-registration/registeration-form/registeration-form.component';
-import { AddEventArticleComponent } from './pages/events-article/add-event-article/add-event-article.component';
-import {AddFeedbackComponent} from './pages/feedback/add-feedback/add-feedback.component';
-import { ShowDetailComponent } from './pages/employee-tracking/show-detail/show-detail.component';
-import { NewReqFormComponent } from './pages/employee-tracking/new-req-form/new-req-form.component';
-import { ShowResultComponent } from './pages/health-analysis/show-result/show-result.component';
-import { ShowListComponent } from './pages/appointment/show-list/show-list.component';
-import { CommonTableComponent } from './common-table/common-table.component';
+import { CompanyService } from "./company.service";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { RegisterationFormComponent } from "./pages/employee-registration/registeration-form/registeration-form.component";
+import { AddEventArticleComponent } from "./pages/events-article/add-event-article/add-event-article.component";
+import { AddFeedbackComponent } from "./pages/feedback/add-feedback/add-feedback.component";
+import { ShowDetailComponent } from "./pages/employee-tracking/show-detail/show-detail.component";
+import { NewReqFormComponent } from "./pages/employee-tracking/new-req-form/new-req-form.component";
+import { ShowResultComponent } from "./pages/health-analysis/show-result/show-result.component";
+import { ShowListComponent } from "./pages/appointment/show-list/show-list.component";
+import { CommonTableComponent } from "./common-table/common-table.component";
+import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 
 @NgModule({
   declarations: [
@@ -100,14 +101,14 @@ import { CommonTableComponent } from './common-table/common-table.component';
     ShowListComponent,
     CommonTableComponent,
   ],
-  entryComponents : [
+  entryComponents: [
     RegisterationFormComponent,
     AddEventArticleComponent,
     AddFeedbackComponent,
     ShowDetailComponent,
     NewReqFormComponent,
     ShowResultComponent,
-    ShowListComponent
+    ShowListComponent,
   ],
   imports: [
     CommonModule,
@@ -168,8 +169,11 @@ import { CommonTableComponent } from './common-table/common-table.component';
     MatProgressSpinnerModule,
     MatMenuModule,
     NgCircleProgressModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  providers : [CompanyService]
+  providers: [
+    CompanyService,
+    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true } },
+  ],
 })
 export class CompanyModule {}

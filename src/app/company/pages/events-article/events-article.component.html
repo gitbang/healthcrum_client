@@ -1,141 +1,138 @@
-<div class="row master container-fluid">
+<!-- <div class="row master container-fluid">
   <div class="col-md-12">
     <div class="card ml-2 mr-2 mat-elevation-z8 top-card">
-      <div class="card-header card-header-primary card-header-icon top-card-header">
+      <div class="card-header card-header-primary card-header-icon">
         <div class="card-icon">
           <i class="material-icons">assignment</i>
         </div>
         <h4 class="card-title ">Employee Test Appointment</h4>
         <div class="row">
-          <button class="col-8 col-lg-4 col-xl-3 btn btn-success" (click)="addEvent()">Add New Event</button>
-          <button class="col-8 col-lg-4 col-xl-3 btn  btn-info" (click)='addArticle()'>Add New Article</button>
+          
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="appoint container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="page-categories">
-        <br>
-        <!--
-        <ul class="nav nav-pills nav-pills-rose nav-pills-icons justify-content-center" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active show" data-toggle="tab" href="#link7" role="tablist">
-              <i class="material-icons">event</i> Events
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#link8" role="tablist">
-              <i class="material-icons">shopping_basket</i> Articles
-            </a>
-          </li>
-        </ul>
-        -->
-        <mat-tab-group>
-          <mat-tab label="Events"  > 
-            <div class="tab-pane active show" >
-              <div class="card mat-elevation-z8">
-                <div class="card-header card-header-icon card-header-rose row">
-                  <div class="col-8">
-                    <div class="card-icon">
-                      <i class="material-icons">event</i>
-                    </div>
-                    <h4 class="card-title ">Events Table</h4>
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="page-categories">
+
+      <mat-tab-group>
+        <mat-tab label="Events">
+          <div class="tab-pane active show p-2">
+            <button class="btn btn-success mt-3" (click)="addEvent()">Add Event</button>
+
+            <div class="card">
+              <div class="card-header card-header-icon card-header-rose row">
+                <div class="col-9">
+
+                  <div class="card-icon">
+                    <i class="material-icons">event</i>
                   </div>
-                  <div class="col-3">
-                    <mat-form-field >
-                      <input matInput (keyup)="applyFilterevents($event.target.value)" placeholder="Filters">
-                    </mat-form-field>
-                  </div>
+                  <h4 class="card-title ">Events Table</h4>
                 </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    
-                    <table mat-table [dataSource]="event" class="mytable-articles" >
-                      <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef> Id </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{i + 1 }} </td>
-                      </ng-container>
+                <div class="col-3">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilterevents($event.target.value)" placeholder="Filters">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive">
 
-                      <ng-container matColumnDef="title">
-                        <th mat-header-cell *matHeaderCellDef> Name </th>
-                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-                      </ng-container>
+                  <table mat-table [dataSource]="event" class="mytable-articles">
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef> Id </th>
+                      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1 }} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="startDate">
-                        <th mat-header-cell *matHeaderCellDef> Start On </th>
-                        <td mat-cell *matCellDef="let element"> {{element.startDate | date}} </td>
-                      </ng-container>
+                    <ng-container matColumnDef="title">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="location">
-                        <th mat-header-cell *matHeaderCellDef> Location </th>
-                        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
-                      </ng-container>
+                    <ng-container matColumnDef="startDate">
+                      <th mat-header-cell *matHeaderCellDef> Start On </th>
+                      <td mat-cell *matCellDef="let element"> {{element.startDate | date}} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="slots">
-                        <th mat-header-cell *matHeaderCellDef> Slots </th>
-                        <td mat-cell *matCellDef="let element"> {{element.slots}} </td>
-                      </ng-container>
+                    <ng-container matColumnDef="location">
+                      <th mat-header-cell *matHeaderCellDef> Location </th>
+                      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="lastBookingDate">
-                        <th mat-header-cell *matHeaderCellDef>lastbookingDate </th>
-                        <td mat-cell *matCellDef="let element"> {{element.lastBookingDate | date}} </td>
-                      </ng-container>
+                    <ng-container matColumnDef="slots">
+                      <th mat-header-cell *matHeaderCellDef> Slots </th>
+                      <td mat-cell *matCellDef="let element"> {{element.slots}} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="price">
-                        <th mat-header-cell *matHeaderCellDef> Price</th>
-                        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-                      </ng-container>
+                    <ng-container matColumnDef="lastBookingDate">
+                      <th mat-header-cell *matHeaderCellDef>lastbookingDate </th>
+                      <td mat-cell *matCellDef="let element"> {{element.lastBookingDate | date}} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="description">
-                        <th mat-header-cell *matHeaderCellDef> Details</th>
-                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-                      </ng-container>
-                      
-                      <ng-container matColumnDef="edit">
-                        <th mat-header-cell *matHeaderCellDef> Edit</th>
-                        <td mat-cell *matCellDef="let element; let i = index">
-                          <i class="material-icons" (click)="updateEvent(i)">edit</i>  
-                        </td>
-                      </ng-container>
+                    <ng-container matColumnDef="price">
+                      <th mat-header-cell *matHeaderCellDef> Price</th>
+                      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                    </ng-container>
 
-                      <ng-container matColumnDef="cancel">
-                        <th mat-header-cell *matHeaderCellDef> Cancel</th>
-                        <td mat-cell *matCellDef="let element; let i = index">
-                          <i class="material-icons" (click)="deleteEvent(i)">delete</i>  
-                        </td>
-                      </ng-container>
+                    <ng-container matColumnDef="description">
+                      <th mat-header-cell *matHeaderCellDef> Details</th>
+                      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
 
-                      <tr mat-header-row *matHeaderRowDef="colsevent"></tr>
-                      <tr mat-row *matRowDef="let row; columns: colsevent;"></tr>
-                    </table>  
-                    <mat-paginator [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons> </mat-paginator>
-                  </div>
+                    <ng-container matColumnDef="edit">
+                      <th mat-header-cell *matHeaderCellDef> Edit</th>
+                      <td mat-cell *matCellDef="let element; let i = index">
+                        <button class="btn btn-social btn-link btn-info" (click)="updateEvent(i)" title="delete">
+                          <i class="material-icons">edit</i>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cancel">
+                      <th mat-header-cell *matHeaderCellDef> Cancel</th>
+                      <td mat-cell *matCellDef="let element; let i = index">
+                        <!-- <i class="material-icons" >delete</i> -->
+                        <button class="btn btn-social btn-link btn-danger" (click)="deleteEvent(i)" title="delete">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="colsevent"></tr>
+                    <tr mat-row *matRowDef="let row; columns: colsevent;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons> </mat-paginator>
                 </div>
               </div>
             </div>
-          </mat-tab>
-          <mat-tab label="Articles" >
-             <div class="card ,at-elevation-z8">
+          </div>
+        </mat-tab>
+        <mat-tab label="Articles" class="p-2">
+          <div class="tab-pane p-2">
+            <button class="btn  btn-info mt-3" (click)='addArticle()'>Add New Article</button>
+
+            <div class="card">
               <div class="card-header card-header-icon card-header-rose row">
-                <div class="col-8">
+                <div class="col-9">
                   <div class="card-icon">
                     <i class="material-icons">event</i>
                   </div>
                   <h4 class="card-title ">Article Table</h4>
                 </div>
                 <div class="col-3">
-                    <mat-form-field >
-                      <input matInput (keyup)="applyFilterArticles($event.target.value)" placeholder="Filters">
-                    </mat-form-field>
-                  </div>
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilterArticles($event.target.value)" placeholder="Filters">
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="card-body">
+              <div class="card-body p-0">
                 <div class="table-responsive">
-                  <table mat-table [dataSource]="article" class="mytable-event" >
+                  <table mat-table [dataSource]="article" class="mytable-event">
                     <ng-container matColumnDef="id">
                       <th mat-header-cell *matHeaderCellDef> Id </th>
                       <td mat-cell *matCellDef="let element; let i = index"> {{i + 1 }} </td>
@@ -160,155 +157,38 @@
                       <th mat-header-cell *matHeaderCellDef> Show </th>
                       <td mat-cell *matCellDef="let element"> {{element.show}} </td>
                     </ng-container>
-                    
+
                     <ng-container matColumnDef="edit">
-                        <th mat-header-cell *matHeaderCellDef> Edit</th>
-                        <td mat-cell *matCellDef="let element; let i = index">
-                          <i class="material-icons" (click)="updateArticle(i)">edit</i>  
-                        </td>
-                      </ng-container>
+                      <th mat-header-cell *matHeaderCellDef> Edit</th>
+                      <td mat-cell *matCellDef="let element; let i = index">
+                        <button class="btn btn-social btn-link btn-info" (click)="updateArticle(i)" title="delete">
+                          <i class="material-icons">edit</i>
+                        </button>
+                      </td>
+                    </ng-container>
 
                     <ng-container matColumnDef="action">
                       <th mat-header-cell *matHeaderCellDef> Action</th>
                       <td mat-cell *matCellDef="let element; let i = index">
-                        <i class="material-icons" (click)="deleteArticle(i)">delete</i>  
+                        <button class="btn btn-social btn-link btn-danger" (click)="deleteArticle(i)" title="delete">
+                          <i class="material-icons">delete</i>
+                        </button>
                       </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="colsarticle"></tr>
                     <tr mat-row *matRowDef="let row; columns: colsarticle;"></tr>
                   </table>
-                  <mat-paginator #TableTwoPaginator="matPaginator" [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons> </mat-paginator>
+                  <mat-paginator #TableTwoPaginator="matPaginator" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+                  </mat-paginator>
                 </div>
               </div>
             </div>
-          </mat-tab>
-        </mat-tab-group>
-        <!--
-        <div class="tab-content tab-space tab-subcategories">
-          <div class="tab-pane active show" id="link7">
-            <div class="card mat-elevation-z8">
-              <div class="card-header card-header-icon card-header-rose">
-                <div class="card-icon">
-                  <i class="material-icons">event</i>
-                </div>
-                <h4 class="card-title ">Events Table</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  
-                  <table mat-table [dataSource]="event" class="mytable-articles" >
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef> Id </th>
-                      <td mat-cell *matCellDef="let element"> {{element.id }} </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="start">
-                      <th mat-header-cell *matHeaderCellDef> Start On </th>
-                      <td mat-cell *matCellDef="let element"> {{element.start}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="location">
-                      <th mat-header-cell *matHeaderCellDef> Location </th>
-                      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="slots">
-                      <th mat-header-cell *matHeaderCellDef> Slots </th>
-                      <td mat-cell *matCellDef="let element"> {{element.slots}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="lastbookingDate">
-                      <th mat-header-cell *matHeaderCellDef>lastbookingDate </th>
-                      <td mat-cell *matCellDef="let element"> {{element.lastbookingDate}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="price">
-                      <th mat-header-cell *matHeaderCellDef> Price</th>
-                      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="details">
-                      <th mat-header-cell *matHeaderCellDef> Details</th>
-                      <td mat-cell *matCellDef="let element"> {{element.details}} </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="cancel">
-                      <th mat-header-cell *matHeaderCellDef> Cancel</th>
-                      <td mat-cell *matCellDef="let element; let i = index">
-                        <button type="button" (click)="deleteEvent(i)" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="colsevent"></tr>
-                    <tr mat-row *matRowDef="let row; columns: colsevent;"></tr>
-                  </table>  
-
-                </div>
-              </div>
-            </div>
           </div>
-          <div class="tab-pane" id="link8">
-            <div class="card ,at-elevation-z8">
-              <div class="card-header card-header-icon card-header-rose">
-                <div class="card-icon">
-                  <i class="material-icons">event</i>
-                </div>
-                <h4 class="card-title ">Article Table</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                
-               
-                  <table mat-table [dataSource]="article" class="mytable-event" >
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef> Id </th>
-                      <td mat-cell *matCellDef="let element"> {{element.id }} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="postedby">
-                      <th mat-header-cell *matHeaderCellDef> Posted By </th>
-                      <td mat-cell *matCellDef="let element"> {{element.postedby}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="show">
-                      <th mat-header-cell *matHeaderCellDef> Show </th>
-                      <td mat-cell *matCellDef="let element"> {{element.show}} </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="action">
-                      <th mat-header-cell *matHeaderCellDef> Action</th>
-                      <td mat-cell *matCellDef="let element; let i = index">
-                        <button type="button" (click)="deleteArticle(i)" rel="tooltip" class="btn btn-danger"
-                            data-original-title="" title="">
-                            <i class="material-icons">close</i>
-                          </button>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="colsarticle"></tr>
-                    <tr mat-row *matRowDef="let row; columns: colsarticle;"></tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        -->
-      </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
+
 </div>

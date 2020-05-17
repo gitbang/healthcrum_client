@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "app-c-navbar",
   templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
   constructor() {}
@@ -11,6 +11,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {}
 
   getTitle(): String {
-    return "Dashboard";
+    return "Corporate Dashboard";
   }
 }

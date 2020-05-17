@@ -45,6 +45,13 @@ input.mat-input-element {
   color: black !important;
 }
 /* akash*/
+
+.fixed-top {
+  z-index: 999 !important;
+}
+.full-width {
+  width: 100%;
+}
 .main-raised {
   margin: -60px 30px 0;
   border-radius: 6px;

@@ -1,11 +1,12 @@
-.top-card ,.top-card-header{
-  background-image: linear-gradient(orange , #f9d293);
+.top-card,
+.top-card-header {
+  background-image: linear-gradient(orange, #f9d293);
 }
-table{
+table {
   width: 100%;
   min-width: 450px;
 }
-th{
-  font-size: medium;;
-  text-align: center;
+
+.full-width {
+  width: 100%;
 }

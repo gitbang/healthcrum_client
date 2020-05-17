@@ -1,19 +1,28 @@
-.top-label{
-    color: black;
+.top-label {
+  color: black;
 }
 .red-title {
-   color: #E91E63;
+  color: #e91e63;
 }
-.purple-title{
-    color: #7A67BB;
+.purple-title {
+  color: #7a67bb;
 }
 .yellow-title {
-    color: #FDB900;
+  color: #fdb900;
 }
-.green-title{
-    color: #78C000;
+.green-title {
+  color: #78c000;
 }
 
 // .showresult{
 //     background-image: linear-gradient(#FFA603, #FAD08B);
 // }
+
+.card-footer {
+  padding: 10px;
+  color: #ffffff;
+  text-align: center;
+}
+.bg-purple {
+  background-color: #7a67bb;
+}

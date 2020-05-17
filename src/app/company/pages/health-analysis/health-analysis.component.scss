@@ -1,6 +1,10 @@
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
-.card-top , .card-header-top{
-  background-image: linear-gradient(orange , #f9d293);
+.card-top,
+.card-header-top {
+  background-image: linear-gradient(orange, #f9d293);
+}
+.full-width {
+  width: 100%;
 }

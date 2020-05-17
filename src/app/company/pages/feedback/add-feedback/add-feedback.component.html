@@ -1,33 +1,35 @@
-<div class="col-md-12 ">
-  <div class="card card-chart ">
+<div class="col-md-12">
+  <div class="">
     <div class="card-header card-header-icon card-header-danger">
-      <div class="card-icon">
-        <i class="material-icons">comment</i>
-      </div>
+
       <h4 class="card-title">Give FeedBack</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body mt-3 mb-5">
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" [(ngModel)]="feebdack" name="exampleRadios" value="bad" checked=""> BAD
+          <input class="form-check-input" type="radio" [(ngModel)]="feebdack" name="exampleRadios" value="bad"
+            checked=""> BAD
           <span class="circle">
             <span class="check"></span>
           </span>
         </label>
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="avg" checked=""> AVERAGE
+          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="avg"
+            checked=""> AVERAGE
           <span class="circle">
             <span class="check"></span>
           </span>
         </label>
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="good" checked=""> GOOD
+          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="good"
+            checked=""> GOOD
           <span class="circle">
             <span class="check"></span>
           </span>
         </label>
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="better" checked=""> BETTER
+          <input class="form-check-input" type="radio" name="exampleRadios" [(ngModel)]="feebdack" value="better"
+            checked=""> BETTER
           <span class="circle">
             <span class="check"></span>
           </span>
@@ -39,8 +41,8 @@
         <div class="col-md-10">
           <h6 class="card-category">Feedback Comment</h6>
           <div class="form-group bmd-form-group">
-            <textarea class="form-control" type="text" name="max" cols="10" required="false" aria-required="true"
-              [(ngModel)]="textarea" placeholder="Provide some feedback"></textarea>
+            <textarea class="form-control" type="text" name="max" rows="5" cols="10" required="false"
+              aria-required="true" [(ngModel)]="textarea" placeholder="Provide some feedback"></textarea>
           </div>
         </div>
       </div>
