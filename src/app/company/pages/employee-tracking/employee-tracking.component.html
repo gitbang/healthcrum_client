@@ -17,47 +17,32 @@
 </div>
 
 
-<div class="appoint container-fluid ml-4">
+<div class="appoint container-fluid">
   <form [formGroup]="form"> 
-    <div class="row" >
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header card-header-warning card-header-text">
-            <div class="card-icon">
-              <i class="material-icons">insert_invitation</i>
-            </div>
-            <h4 class="card-title">Start Date</h4>
-          </div>
-          <div class="card-body ">
-            <mat-form-field style="width:100%">
+    <div class="row mat-elevation-z5 ml-3 mr-3" >
+      <div class="col-12">
+        <div class="row mt-5 ml-3">
+          <div class="col-md-4 ml-2">
+            <mat-form-field >
               <mat-label>From</mat-label>
-              <input matInput [matDatepicker]="picker_start" formControlName="startDate">
+              <input matInput [matDatepicker]="picker_start" formControl="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
               <mat-datepicker #picker_start></mat-datepicker>
             </mat-form-field>
           </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card ">
-          <div class="card-header card-header-warning card-header-text">
-            <div class="card-icon">
-              <i class="material-icons">insert_invitation</i>
-            </div>
-            <h4 class="card-title">End Date</h4>
-          </div>
-          <div class="card-body ">
-            <mat-form-field style="width:100%">
+          <div class="mr-2" >
+            <mat-form-field >
               <mat-label>To</mat-label>
-              <input matInput [matDatepicker]="picker_end" formControlName="endDate" >
+              <input matInput [matDatepicker]="picker_end" formControl="endDate">
               <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
               <mat-datepicker #picker_end></mat-datepicker>
             </mat-form-field>
           </div>
+          <div class="col-2 filter">
+            <button class="btn btn-primary" (click)="filter()">Filter</button>
+          </div>
         </div>
-      </div>
-      <div class="col-md-4 filter">
-        <button class="btn btn-primary" (click)="filter()">Filter</button>
+        
       </div>
     </div>
   </form>

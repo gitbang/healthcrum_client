@@ -134,7 +134,7 @@ export class AppointmentComponent implements OnInit {
 
   // for table
   @ViewChild(MatPaginator, {static : true}) paginator : MatPaginator
-  col : string[] = ['select','healthcrumId','name',  'age', 'empId','dept', 'branch', 'dob', 'gender']
+  col : string[] = ['select','healthcrumId', 'empId','name',  'age','dept', 'branch', 'dob', 'gender']
   list = new MatTableDataSource(list1);
 
   applyFilter(value){

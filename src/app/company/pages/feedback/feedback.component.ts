@@ -62,7 +62,7 @@ export class FeedbackComponent implements OnInit {
       type: 'pie',
   
       data: {
-        labels : ['Red ', 'purple', 'yellow', 'green'],
+       // labels : ['Red ', 'purple', 'yellow', 'green'],
         
        // labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [

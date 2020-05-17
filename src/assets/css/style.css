@@ -40,7 +40,11 @@ Author URI: http://themeforest.net/user/Ansonika/
 /*============================================================================================*/
 /* 1.  SITE STRUCTURE and TYPOGRAPHY */
 /*============================================================================================*/
-
+/* akash*/
+input.mat-input-element {
+  color: black !important;
+}
+/* akash*/
 .main-raised {
   margin: -60px 30px 0;
   border-radius: 6px;

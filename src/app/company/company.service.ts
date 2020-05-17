@@ -12,6 +12,7 @@ export class CompanyService {
 
   userId = "5e8efa895b324a3e4c97a278";
   url: String = "http://localhost:3000";
+
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
@@ -57,7 +58,7 @@ export class CompanyService {
   uploadCsvFile(file) : Observable <any> {
     console.log("reached")
     return this.http
-      .post(this.url + '/uploadcsv/'+ this.userId, file, this.option)     // here use company id instead of user id
+      .post(this.url + '/uploadcsv/'+ this.userId, file)     // here use company id instead of user id
         .pipe(
           retry(2),
          // catchError(this.handleError)

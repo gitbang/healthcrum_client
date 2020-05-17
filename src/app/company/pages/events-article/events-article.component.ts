@@ -62,9 +62,9 @@ export class EventsArticleComponent implements OnInit {
 
   //colsevent : string[]= ['id', 'name', 'start', 'location', 'slots', 'lastbookingDate', 'price', 'details', 'cancel'];
   //colsarticle : string[]= ['id', 'name', 'postedby', 'show', 'action'];
-  colsarticle : string[]= ['id', 'title', 'postedBy', 'show','postedOn' , 'action'];
+  colsarticle : string[]= ['id', 'title', 'postedBy', 'show','postedOn' , 'edit','action'];
 
-  colsevent : string[]= ['id', 'title', 'startDate', 'location', 'slots', 'lastBookingDate', 'price', 'description', 'cancel'];
+  colsevent : string[]= ['id', 'title', 'startDate', 'location', 'slots', 'lastBookingDate', 'price', 'description', 'edit','cancel'];
  
   article = new MatTableDataSource(article1)
   event  = new MatTableDataSource (event1)
@@ -91,11 +91,9 @@ export class EventsArticleComponent implements OnInit {
     //console.log("articles")
     this.service.getallArticles().subscribe((result)=>{
       console.log("articles ",result);
-     // this.articlesFromBackend = result;
       this.article = new MatTableDataSource(result)
-      console.log("articles :", this.article)
-     //setTimeout(() => this.article.paginatortwo = this.paginator)
-     this.article.paginator = this.tableTwoPaginator;
+      console.log("articles :", this.article.data)
+      this.article.paginator = this.tableTwoPaginator;
     })
   }
 

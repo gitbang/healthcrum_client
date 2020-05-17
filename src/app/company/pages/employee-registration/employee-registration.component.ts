@@ -74,7 +74,7 @@ export class EmployeeRegistrationComponent implements OnInit {
   ) {}
   
   //col : string[] = ['name', 'email', 'contact', 'age', 'empId', 'dept', 'branch']
-  col : string[] = ['name', 'email', 'contactNo', 'age', 'empId', 'dept', 'branch']
+  col : string[] = ['empId', 'name', 'email', 'contactNo', 'age', 'dept', 'branch']
   
   list : any //new MatTableDataSource(list1);
   

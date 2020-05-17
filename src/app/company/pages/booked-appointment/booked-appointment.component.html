@@ -1,35 +1,26 @@
 <div class="appoint container-fluid">
   <div class="row ml-1 mr-1">
-    <div class="col-md-12 mat-elevation-z4 " >
-      <div class="row mt-0 mb-3"> 
-        <div class="col-md-4">
-          <div class="card ">
-            <div class="card-header card-header-warning card-header-text">
-              <div class="card-icon">
-                <i class="material-icons">insert_invitation</i>
-              </div>
-              <h4 class="card-title">Booking Start Date</h4>
-            </div>
-            <div class="card-body ">
-              <mat-form-field style="width:100%">
+    <div class="card col-md-12 mat-elevation-z4">
+
+      <div class="row">
+        <div class="card-header card-header-warning card-header-text col-12">
+          <div class="card-icon">
+            <i class="material-icons">insert_invitation</i>
+          </div>
+          <h4 class="card-title">Select Booking Date</h4>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-4 mr-3">
+              <mat-form-field >
                 <mat-label>From</mat-label>
                 <input matInput [matDatepicker]="picker_start">
                 <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
                 <mat-datepicker #picker_start></mat-datepicker>
               </mat-form-field>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card ">
-            <div class="card-header card-header-warning card-header-text">
-              <div class="card-icon">
-                <i class="material-icons">insert_invitation</i>
-              </div>
-              <h4 class="card-title">Booking End Date</h4>
-            </div>
-            <div class="card-body ">
-              <mat-form-field style="width:100%">
+            <div class="col-md-4 ml-3" >
+              <mat-form-field >
                 <mat-label>To</mat-label>
                 <input matInput [matDatepicker]="picker_end">
                 <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
@@ -38,25 +29,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="row" style="align-items: center;height:100%">
-            <div class="col-md-2">
-              <button type="submit" class="btn btn-primary btn-round btn-just-icon btn-lg">
-                <i class="material-icons">search</i>
-                <div class="ripple-container"></div>
-              </button>
-            </div>
-            <!--
-            <div class="col-md-3 ">
-              <button type="submit" class="btn btn-danger btn-round btn-just-icon">
-                <i class="material-icons">clear</i>
-                <div class="ripple-container"></div>
-              </button>
-            </div>
-            -->
-          </div>
-        </div>
       </div>
+
     </div>
 
     <div class="col-md-12">
