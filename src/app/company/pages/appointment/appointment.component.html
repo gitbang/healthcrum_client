@@ -151,7 +151,7 @@
     </form>
     -->
     <div> 
-      <button class="btn btn-primary" >Book appointment</button>
+      <button class="btn btn-primary not-clickable">Book appointment</button>
     </div>
     <div class="mt-4 ml-4 mr-4">
       <form [formGroup]="book">
@@ -207,10 +207,6 @@
         </div>
       </form>
     </div>
-    <div class="col-12 mb-5 ">
-      <button class="btn btn-warning" (click)="bookappointment()" [disabled]="!book.valid">Book Appointment</button>
-    </div>
-    
     <div class="col-12">
       <div >
         <table mat-table [dataSource]="list" scrollX="true" minWidth="400" >
@@ -276,117 +272,8 @@
         <mat-paginator [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons> </mat-paginator>
       </div>
     </div>
-
-    <!--
-    <div class="col-md-12">
-      <hr>
+    <div class="col-12 mb-5 ">
+      <button class="btn btn-warning" (click)="bookappointment()" [disabled]="!book.valid">Book Appointment</button>
     </div>
-    -->
-    <!--
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header card-header-icon">
-          <div class="card-icon card-header-info">
-            <i class="material-icons">assignment</i>
-          </div>
-          <h4 class="card-title ">Booking</h4>
-
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <tr>
-                  <th>
-                    S No.
-                  </th>
-                  <th>
-                    Employee Name
-                  </th>
-                  <th>
-                    Email
-                  </th>
-                  <th>
-                    Contact
-                  </th>
-                  <th>
-                    Age
-                  </th>
-                  <th>
-                    Gender
-                  </th>
-                  <th>
-                    D.O.B
-                  </th>
-                  <th>
-                    Employee ID
-                  </th>
-                  <th>
-                    Dept
-                  </th>
-                  <th>
-                    Branch
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    11be45
-                  </td>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    abc@gmail.com
-                  </td>
-                  <td>
-                    9800XXXXX
-                  </td>
-                  <td>
-                    34
-                  </td>
-                  <td class="">
-                    Male
-                  </td>
-                  <td class="">
-                    12/06/20XX
-                  </td>
-                  <td class="">
-                    111XXX
-                  </td>
-                  <td class="">
-                    Medicine
-                  </td>
-                  <td class="">
-                    Branch Name
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <ul class="pagination pagination-primary">
-              <li class="page-item">
-                <a class="page-link" href="#"><i class="material-icons">chevron_left</i></a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">3</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link disabled" href="#"><i class="material-icons">chevron_right</i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    -->
-
-    
   </div>
 </div>

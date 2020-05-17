@@ -217,11 +217,12 @@ export class PatientCheckupComponent implements OnInit {
   }
 
   showNotification(type, type_no) {
+    console.log(type_no)
     const msg =
       parseInt(type_no) == 1
         ? "Start Patient Checkup !"
         : "Wrong Patient Checkup Code !";
-
+    /*
     $.notify(
       {
         icon: "notifications",
@@ -246,7 +247,7 @@ export class PatientCheckupComponent implements OnInit {
           '<a href="{3}" target="{4}" data-notify="url"></a>' +
           "</div>"
       }
-    );
+    );*/
   }
 
   getTestList() {

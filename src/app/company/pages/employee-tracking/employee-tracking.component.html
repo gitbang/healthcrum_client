@@ -25,7 +25,7 @@
           <div class="col-md-4 ml-2">
             <mat-form-field >
               <mat-label>From</mat-label>
-              <input matInput [matDatepicker]="picker_start" formControl="startDate">
+              <input matInput [matDatepicker]="picker_start" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_start"></mat-datepicker-toggle>
               <mat-datepicker #picker_start></mat-datepicker>
             </mat-form-field>
@@ -33,7 +33,7 @@
           <div class="mr-2" >
             <mat-form-field >
               <mat-label>To</mat-label>
-              <input matInput [matDatepicker]="picker_end" formControl="endDate">
+              <input matInput [matDatepicker]="picker_end" formControlName="endDate">
               <mat-datepicker-toggle matSuffix [for]="picker_end"></mat-datepicker-toggle>
               <mat-datepicker #picker_end></mat-datepicker>
             </mat-form-field>

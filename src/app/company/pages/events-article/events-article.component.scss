@@ -8,9 +8,18 @@
     width: 100%;
   }
   th{
-    font-size: medium;;
-    text-align: center;
+    font-size: medium;
+    font-weight: bolder;
+    color: black;
+    tr{
+      text-align: center;
+      
+    }
+    
   }
   .material-icons{
     color: black;
+  }
+  i{
+    cursor: pointer;
   }

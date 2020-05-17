@@ -64,7 +64,6 @@ const list1 : empdetails[] = [
 export class EmployeeRegistrationComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static : true}) paginator : MatPaginator
-
   constructor(
     private _formBuilder: FormBuilder, 
     private companyApiService: CompanyApiService,
@@ -74,24 +73,18 @@ export class EmployeeRegistrationComponent implements OnInit {
   ) {}
   
   //col : string[] = ['name', 'email', 'contact', 'age', 'empId', 'dept', 'branch']
-  col : string[] = ['empId', 'name', 'email', 'contactNo', 'age', 'dept', 'branch']
+  col : string[] = ['empId', 'name', 'email', 'contactNo', 'age', 'dept', 'branch', 'update', 'delete']
   
   list : any //new MatTableDataSource(list1);
   
   allEmployData : any
   ngOnInit() { 
     this.getemployDetail();
-    /*
-    this.companyApiService.getEmployeesDetails().subscribe(data => {
-      this.empDetails = data;
-      //console.log("from databse",this.empDetails)
-      //return;
-    });*/
   }
   getemployDetail() {
-    this.service.registerationGetallEmploy().subscribe((result)=>{
+    this.service.registerationGetallEmploy().subscribe((result)=>{ 
       console.log(result);
-      this.list = new MatTableDataSource(result);
+      this.list = new MatTableDataSource(result.data);
       setTimeout(() => this.list.paginator = this.paginator)
       console.log("list", this.list);
     })
@@ -106,10 +99,14 @@ export class EmployeeRegistrationComponent implements OnInit {
  
   openform(){
     console.log("open form")
-    const formport = this.dialog.open(RegisterationFormComponent)
+    const formport = this.dialog.open(RegisterationFormComponent, {
+      data : {
+        type : "new"
+      }
+    })
     formport.afterClosed().subscribe((response)=>{
       console.log(response)
-      if(response.result) { 
+      if(response.success) { 
         this._snackbar.open("New employ" , "saved", {
           duration : 2000
         })
@@ -117,23 +114,46 @@ export class EmployeeRegistrationComponent implements OnInit {
       this.getemployDetail()
     })
   }
+  update(i){
+    console.log(i)
+    let person = this.list.data[i];
+    const formport = this.dialog.open(RegisterationFormComponent, {
+      data : {
+        info : person,
+        type : "update"
+      }
+    })
+    formport.afterClosed().subscribe((response)=>{
+      if(response.success){
+        this._snackbar.open("Employ", response.data)
+      }
+    })
+  }
+  delete(i) {
+    console.log(i);
+    let id = this.list.data[i]._id;
+    console.log(id)
+    this.service.registerationDelete(id).subscribe((result)=>{
+      if(result.success) {
+        this._snackbar.open("Employ" , "Deleted", {
+          duration : 2000
+        })
+      }
+    })
+    this.getemployDetail();
+  }
   numberOfFiles = 0;
-  files : Array<File>
+  files : File = null;
+
+  currentValue : number = 40;
   filechanged(event){
     this.numberOfFiles = event.target.files.length;
-    this.files = event.target.files;
+    this.files = <File>event.target.files[0];
     console.log(this.files)
   }
   fileupload(){
-    const fd : any = new FormData();
-    const files: Array<File> = this.files;
-    // fd.append('csv', this.files)
-    console.log(this.files.length)
-    for(let i = 0; i < files.length; i++) {
-      console.log(files[i], files[i].name)
-      fd.append('upload[]',files[i], files[i].name)
-    }
-    console.log(fd.toString())
+    const fd  = new FormData();
+    fd.append('csv', this.files, this.files.name)
     this.service.uploadCsvFile(fd).subscribe((result)=>{
       console.log(result)
     })

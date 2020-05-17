@@ -5,6 +5,7 @@ import { CheckboxControlValueAccessor } from "@angular/forms";
 import {AddEventArticleComponent} from './add-event-article/add-event-article.component'
 import { CompanyService } from "app/company/company.service";
 import { Observable } from "rxjs";
+//import { FileService } from '../file.service';
 
 
 export interface events{
@@ -81,47 +82,89 @@ export class EventsArticleComponent implements OnInit {
     this.service.getallEvents().subscribe((result)=>{
       console.log(result);
       this.eventFromBackend = result;
-      this.event = new MatTableDataSource(result)
+      this.event = new MatTableDataSource(result.data)
       console.log("events : ", this.event)
       setTimeout(() => this.event.paginator = this.paginator)
     })
   }
   articlesFromBackend : any;
   getarticles() {
-    //console.log("articles")
     this.service.getallArticles().subscribe((result)=>{
       console.log("articles ",result);
-      this.article = new MatTableDataSource(result)
+      this.article = new MatTableDataSource(result.data)
       console.log("articles :", this.article.data)
       this.article.paginator = this.tableTwoPaginator;
     })
   }
-
-
   addEvent(){
     console.log("add event reached")
     const dialog = this.dialog.open(AddEventArticleComponent, {
-      data : 'event'
+      data : {
+        category : "event",
+      }
     })
     dialog.afterClosed().subscribe((response)=>{
       console.log(response)
       if(response.result) {
         this.getevents();
+        this._snackbar.open("Event", "Saved",{
+          duration : 3000,
+        })
       }
     })
   }
   addArticle() {
     console.log("add article")
     const dialog = this.dialog.open(AddEventArticleComponent, {
-      data : 'article'
+      data : {
+        category : "article",
+      }
     })
     dialog.afterClosed().subscribe((response)=>{
       console.log(response);
+      if(response.result) {
+        this._snackbar.open("Article", "Saved", {
+          duration : 3000
+        })
+      }
       this.getarticles();
     })
   }
-
-
+  updateEvent(i) {
+    console.log(i);
+    console.log(this.event.data)
+    const eve = this.dialog.open(AddEventArticleComponent, {
+      data : {
+        category : "event",
+        type : "update",
+        values : this.event.data[i]
+      }
+    })
+    eve.afterClosed().subscribe((response)=>{
+      if(response.result) {
+        this._snackbar.open("Event", "Saved",{
+          duration : 3000
+        })
+      }
+      
+    })
+  }
+  updateArticle(i){
+    const eve = this.dialog.open(AddEventArticleComponent, {
+      data : {
+        category : "article",
+        type : "update",
+        values : this.article.data[i]
+      }
+    })
+    eve.afterClosed().subscribe((response)=>{
+      if(response.result) {
+        this._snackbar.open("article", "Saved",{
+          duration : 3000
+        })
+      }
+    })
+  }
   deleteEvent(j : number) {
     var _this = this
     console.log(this.event.data)
@@ -148,7 +191,6 @@ export class EventsArticleComponent implements OnInit {
       }
     });
   }
-
   deleteArticle(j : number) {
     var  _this = this;
     Swal.fire({
@@ -174,7 +216,6 @@ export class EventsArticleComponent implements OnInit {
       }
     });
   }
-
   deleteRow (array  , index) {
     array.data.splice(index , 1);
     array._updateChangeSubscription()

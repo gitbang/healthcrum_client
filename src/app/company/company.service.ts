@@ -48,21 +48,33 @@ export class CompanyService {
   addNewEmploy(data) : Observable<any> {
     console.log(data)
     return this.http
-      .post(this.url + '/addnewemployee/'+ this.userId, data, this.option)
+      .post(this.url + '/addnewemployee/'+ this.userId, data)
           .pipe(
             retry(2),
             catchError(this.handleError)
           )
   }
 
+  headers1= new HttpHeaders({
+    "Content-Type": "application/csv",
+  });
+  optioncsv = {headers : this.headers1}
+
   uploadCsvFile(file) : Observable <any> {
     console.log("reached")
     return this.http
-      .post(this.url + '/uploadcsv/'+ this.userId, file)     // here use company id instead of user id
+      .post(this.url + '/uploadcsv/'+ this.userId, file, this.optioncsv)     // here use company id instead of user id
         .pipe(
           retry(2),
          // catchError(this.handleError)
         )
+  }
+  registerationupdate(data) : Observable <any> {
+    return this.http.post(this.url + '', data, this.option)
+  }
+
+  registerationDelete(data) : Observable <any> {
+    return this.http.post(this.url + '', {_id : data}, this.option)
   }
   
   //--------------------------------------event article----------------------------//
@@ -78,7 +90,7 @@ export class CompanyService {
   addevent(data) : Observable <any> {
     console.log(data);
     return this.http
-      .post(this.url + '/addevents/' + this.userId, data, this.option)
+      .post(this.url + '/addevents/' + this.userId, data)
         .pipe(
           retry(2),
           catchError(this.handleError)
@@ -105,6 +117,13 @@ export class CompanyService {
       .pipe(
         retry(2)
       )
+  }
+  updateevent(data) : Observable<any> {
+    return this.http.post(this.url + '', data, this.option)
+  }
+
+  updatearticle(data) : Observable<any> {
+    return this.http.post(this.url + '', data, this.option)
   }
   // ----------------------booked appointment ----------------------//
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {DatePipe} from '@angular/common'  ;
 import {MatDialog} from '@angular/material'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -39,14 +39,35 @@ export class RegisterationFormComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder, 
     private dialogRef : MatDialogRef<RegisterationFormComponent>,
-    private service : CompanyService
+    private service : CompanyService,
+    @Inject(MAT_DIALOG_DATA) public info: any
   ) {
+      console.log(info)
+      if(info.type == "update") {
+        this.fillform(info.info);
+        this.update = true
+      }
       dialogRef.disableClose = true
   }
   ngOnInit() {
   }
+  update : boolean = false;
+  fillform(info) {
+    this.firstStepper.get('name').setValue(info.name)
+    this.firstStepper.get('email').setValue(info.email)
+    this.firstStepper.get('contactNo').setValue(info.contactNo)
+    this.firstStepper.get('gender').setValue(info.gender)
+    this.firstStepper.get('age').setValue(info.age)
+    this.firstStepper.get('dob').setValue(info.dob)
+    this.firstStepper.get('_id').setValue(info._id)
+
+    this.secondStepper.get('empId').setValue(info.empId)
+    this.secondStepper.get('branch').setValue(info.branch)
+    this.secondStepper.get('dept').setValue(info.dept)
+  }
   genderList: string[] = ["Male", "Female", "other"];
   firstStepper = this._formBuilder.group({
+    _id : [''],
     name : ['', Validators.required],
     email : ['', [Validators.email]],
     contactNo : ['',[Validators.required]],
@@ -69,18 +90,31 @@ export class RegisterationFormComponent implements OnInit {
   }
   submit(){
     if(this.firstStepper.valid && this.secondStepper.valid) {
-      let registerationform = this._formBuilder.group({
-        firststep : this.firstStepper.value,
-        secondstep : this.secondStepper.value
-      })
-      console.log(registerationform.value)
-      this.service.addNewEmploy(registerationform.value).subscribe((response)=>{
-        if(response) {
-          this.dialogRef.close({result : true})
-        } else{
-          this.dialogRef.close({result : false})
-        }
-      })
+      if(this.update) {
+        let registerationform = this._formBuilder.group({
+          firststep : this.firstStepper.value,
+          secondstep : this.secondStepper.value
+        })
+        this.service.registerationupdate(registerationform.value).subscribe((result)=>{
+          if(result.success) {
+            this.dialogRef.close({success : "true", data : "updated"})
+          }
+        })
+      } else{
+        let registerationform = this._formBuilder.group({
+          firststep : this.firstStepper.value,
+          secondstep : this.secondStepper.value
+        })
+        console.log("form")
+        console.log(registerationform.value)
+        this.service.addNewEmploy(registerationform.value).subscribe((response)=>{
+          if(response) {
+            this.dialogRef.close({success : true, data : "saved"})
+          } else{
+            this.dialogRef.close({success : false})
+          }
+        })
+      }
     } else{
       console.log("invalid")
       alert("Form input is invalid")
