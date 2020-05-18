@@ -178,16 +178,13 @@
     <!-- <div class="col-md-2">
       
     </div> -->
-    <div class="col-md-4">
-      <div class="zones" style="width: 90%;">
-        <mat-accordion>
-          <mat-expansion-panel class="bg-danger text-white">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Danger Zone
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <mat-card class="example-card p-0">
+          <mat-card-header class="py-3">
+            <mat-card-title class="text-center">Danger Zone</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="bg-danger">
             <mat-list style="padding-left:-20px">
               <mat-list-item *ngFor="let test of dangerZoneTests">
                 <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
@@ -196,16 +193,15 @@
                 <mat-divider></mat-divider>
               </mat-list-item>
             </mat-list>
-
-          </mat-expansion-panel>
-          <mat-expansion-panel class="bg-primary text-white" (opened)="panelOpenState = true"
-            (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Border Zone 1
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-3">
+        <mat-card class="example-card p-0">
+          <mat-card-header class="py-3">
+            <mat-card-title class="text-center">Shiba Inu</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="bg-purple">
             <mat-list style="padding-left:-20px">
               <mat-list-item *ngFor="let test of dangerZoneTests">
                 <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
@@ -214,16 +210,15 @@
                 <mat-divider></mat-divider>
               </mat-list-item>
             </mat-list>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="bg-warning text-white" (opened)="panelOpenState = true"
-            (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Border Zone 2
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-3">
+        <mat-card class="example-card p-0">
+          <mat-card-header class="py-3">
+            <mat-card-title class="text-center">Shiba Inu</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="bg-warning">
             <mat-list style="padding-left:-20px">
               <mat-list-item *ngFor="let test of dangerZoneTests">
                 <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
@@ -232,15 +227,15 @@
                 <mat-divider></mat-divider>
               </mat-list-item>
             </mat-list>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel class="bg-success text-white" (opened)="panelOpenState = true"
-            (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Safe Zone
-              </mat-panel-title>
-            </mat-expansion-panel-header>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-3">
+        <mat-card class="example-card p-0">
+          <mat-card-header class="py-3">
+            <mat-card-title class="text-center">Safe Zone</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="bg-success">
             <mat-list style="padding-left:-20px">
               <mat-list-item *ngFor="let test of dangerZoneTests">
                 <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
@@ -249,18 +244,17 @@
                 <mat-divider></mat-divider>
               </mat-list-item>
             </mat-list>
-
-          </mat-expansion-panel>
-        </mat-accordion>
-
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
+
 
   </div>
 
 
 
-  <div class="row mt-2">
+  <div class="row mt-3">
     <div class="col-md-3">
       <mat-card class="example-card mat-card {{top_status.red}}" style="height:100%">
         <mat-card-header>
