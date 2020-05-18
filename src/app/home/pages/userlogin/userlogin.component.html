@@ -19,23 +19,32 @@
 
             </div>
             <div class="box_login last">
-              <div class="form-group">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Login Id</mat-label>
+                <input type="text" matInput [(ngModel)]="user_email" name="user_email"
+                  placeholder="userid / email / phone number">
+              </mat-form-field>
+              <!-- <div class="form-group">
                 <input type="email" class="form-control" placeholder="userid / email / phone number"
                   [(ngModel)]="user_email" name="user_email">
-              </div>
+              </div> -->
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput [(ngModel)]="user_pass" name="user_pass">
+              </mat-form-field>
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Your password" [(ngModel)]="user_pass"
-                  name="user_pass" id="password">
+
                 <a href="#" class="forgot" data-toggle="modal" data-target="#forgotModal"><small>Forgot
                     password?</small></a>
               </div>
               <div class="form-group">
-                <input class="btn btn-info" type="submit" value="Login" (click)="loginLocal()">
+                <input class="btn btn-success" type="submit" value="Login" (click)="loginLocal()">
               </div>
             </div>
           </div>
         </form>
-        <p class="text-center link_bright">Do not have an account yet? <a routerLink="/signup"><strong>Register
+        <p class="text-center link_bright">Do not have an account yet? <a routerLink="/signup"><strong
+              style="color: #fff700;">Register
               now!</strong></a></p>
       </div>
       <!-- /login -->

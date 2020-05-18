@@ -1,89 +1,104 @@
-
-
 <div class="appoint container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header card-header-text card-header-warning">
-          <div class="card-text">
-            <h4 class="card-title">Provide your general Informations</h4>
-            <p class="card-category">Please insure your daily habbits.</p>
-          </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-text card-header-warning">
+        <div class="card-text full-width">
+          <h4 class="card-title">Provide your general Informations</h4>
         </div>
-        <div class="container mt-4">
-          <div class="row">
-            <div class="col-12">
-              <h4 *ngIf="current <= total">Question : {{ current }} of {{total}}</h4>
-              
-              <div class="row">
-                  <h3 class="col-lg-3 col-md-5 col-xs-12 ">{{category_array[category_index]}} : </h3>
-                  <h3 *ngIf="control =='main'" class="col-5">Main Question</h3>
-                  <h3 *ngIf="control == 'subquestion'" class="col-5">Subquestion </h3>
-              
-              </div>
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12 m-auto">
-                  <div >
-                    
+      </div>
+      <div class="container mt-0">
+        <div class="row mb-4">
+          <div class="col-md-12 mb-1">
+
+            <ul class="nav nav-pills nav-pills-icons p-2" role="tablist" style="display:flex;flex-wrap: nowrap;
+              overflow-x: auto;">
+              <li class="nav-item" *ngFor="let cat of category_array;index as i" (click)="changeCategory(i)">
+                <a [class]="i==category_index ? 'nav-link active' : 'nav-link'" href="#dashboard-i" role="tab"
+                  data-toggle="tab">
+                  <circle-progress [percent]="completed[i]" [radius]="40" [outerStrokeWidth]="6"
+                    [outerStrokeColor]="'#ffffff'" [innerStrokeColor]="'#ffffff'" [animation]="true"
+                    [animationDuration]="100" [titleFontSize]="12" [title]="completed[i]" [showUnits]="true"
+                    [backgroundColor]="colors[i]" [showInnerStroke]="false">
+                  </circle-progress>
+                  <label style="font-size: 10px;">{{cat}}</label>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6 col-md-8 col-sm-12 m-auto mb-5">
+            <mat-card class="example-card">
+              <div style="width:100%">
+                <mat-card-title class="text-info">{{category_array[category_index]}}</mat-card-title>
+                <mat-card-subtitle style="width:100%">
+                  <div class="row">
+                    <div class="col-8">
+                      Question : {{ current }} of {{total}}
+                      <br>
+                      <div *ngIf="subTotal >0">
+                        sub question: {{subIndex}} of {{subTotal}}
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <mat-chip-list>
+                        <mat-chip *ngIf="current > total" color="primary" selected>saved</mat-chip>
+                        <mat-chip *ngIf="current < total" color="accent" selected>not saved</mat-chip>
+                      </mat-chip-list>
+                    </div>
                   </div>
-                  <div class="card mb-4">
-                    <div *ngIf="current <= total">
-                      <div class="row ">
-                        <div class="col-12  text-center">
-                          <h4> <em>Question : </em> {{currentQuestion.question}} ?</h4>
-                          <br>
-                        </div>
-                      </div>
-                          <!--
-                          <div class="row justify-content-center">
-                            <button [ngClass]="question.ans == 1 ? 'active':''" class="btn btn-success btn-link"
-                              (click)="setYes(i)">Yes</button>
-                            <button [ngClass]=" question.ans == 0 ? 'active':''" class="btn btn-danger btn-link"
-                              (click)="setNo(i)">No</button>
-                          </div>
-                          -->
-                      <div class="row ">
-                        <div class="col-6 m-auto text-center">  
-                          <div class=" row mt-3 mb-3">
-                            <div *ngFor="let opt of currentQuestion.optionsAre" class=" m-auto text-center">
-                              <div *ngIf="currentQuestion.optionsAre.length > 1">
-                                <button  class="btn  mt-3 mr-2 m btn-sm " (click)="submit(opt.option, opt.value)" 
-                                  mat-button [class.mat-raised-button]="selectCondition(opt.option)" color="warn" 
-                                  mat-stroked-button>{{opt.option}}</button>
-                              </div>
-                              <div *ngIf="currentQuestion.optionsAre.length == 1" >
-                                <input placeholder="Enter Your Answer" type="text" #userinput>
-                                <button (click) = "submit(userinput.value, opt.value)" class="btn btn-danger btn-sm">
-                                   Submit</button>
-                              </div>
-                            </div>
-                            
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mt-5 mb-3"> 
-                        <div class=" m-auto text-center">
-                          <button *ngIf="current != 1 || control == 'subquestion'" class="btn btn-info btn-sm"
-                            (click)="goBack(current)">Previous</button>
-                          <button *ngIf="showNext" class="btn btn-info btn-sm" (click)="next(i)">Next</button>
-                          <button *ngIf="current == total" class="btn btn-warning btn-sm"
-                            (click)="submit()">Submit</button>
+                </mat-card-subtitle>
+              </div>
+              <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+              <mat-card-content>
+                <div *ngIf="current <= total">
+                  <div class="row">
+                    <div class="col-12">
+                      <section class="example-section">
+                        <mat-progress-bar class="example-margin mb-4" color="accent" mode="determinate"
+                          [value]="((current-1)*progress_step_value)" style="height: 10px;border-radius: 10px;">
+                        </mat-progress-bar>
+                      </section>
+                    </div>
+                  </div>
+
+                  <div class="row ">
+                    <div class="col-12  text-center">
+                      <h4> <em>Question : </em> {{currentQuestion.question}} ?</h4>
+                    </div>
+                  </div>
+
+                  <div class="row ">
+                    <div class="col-12 m-auto text-center">
+                      <div class="mt-3 mb-3"
+                        style="display: flex;justify-content: center;flex-direction: row;flex-wrap: wrap;">
+                        <div *ngFor="let opt of currentQuestion.optionsAre" class=" text-center">
+                          <button class="btn  mt-3 mr-2 m btn-sm " (click)="submit(opt.option, opt.value)" mat-button
+                            [class.mat-raised-button]="selectCondition(opt.option)" color="warn"
+                            mat-stroked-button>{{opt.option}}</button>
+
                         </div>
                       </div>
                     </div>
-                    <div *ngIf="current > total">
-                      <h3>Your response is saved </h3>
-                    </div>
+                  </div>
+
+                </div>
+
+              </mat-card-content>
+              <mat-card-actions>
+                <div class="row mt-2 mb-3">
+                  <div class=" m-auto text-center">
+                    <button *ngIf="current != 1" class="btn btn-info btn-sm" (click)="goBack(current)">Previous</button>
+                    <button *ngIf="showNext" class="btn btn-info btn-sm" (click)="next(i)">Next</button>
+                    <button *ngIf="current == total" class="btn btn-warning btn-sm" (click)="submit()">Submit</button>
                   </div>
                 </div>
-              </div>
+              </mat-card-actions>
+            </mat-card>
 
-
-            </div>
           </div>
         </div>
-
       </div>
+
     </div>
   </div>
+
 </div>

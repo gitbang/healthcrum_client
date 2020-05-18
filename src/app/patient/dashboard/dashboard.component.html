@@ -1,10 +1,7 @@
-<app-common-dashboard></app-common-dashboard>
-
-<!--
 <div class="appoint container-fluid main-container">
-  <div class="row hra-details pb-4">
+  <div class="row hra-details pb-4" style="border-bottom: 2px solid #05968926;">
     <div class="col-md-2 col-sm-4 mt-4">
-      <mat-card class="example-card mat-card " style="height:100%">
+      <mat-card class="example-card mat-card card-bottom-border" style="height:100%">
         <mat-card-header>
           <mat-card-title>Allergy</mat-card-title>
         </mat-card-header>
@@ -14,7 +11,7 @@
       </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
-      <mat-card class="example-card mat-card " style="height:100%">
+      <mat-card class="example-card mat-card card-bottom-border" style="height:100%">
         <mat-card-header>
           <mat-card-title>Family History</mat-card-title>
         </mat-card-header>
@@ -24,7 +21,7 @@
       </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
-      <mat-card class="example-card mat-card " style="height:100%">
+      <mat-card class="example-card mat-card card-bottom-border" style="height:100%">
         <mat-card-header>
           <mat-card-title>Profession</mat-card-title>
         </mat-card-header>
@@ -34,7 +31,7 @@
       </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
-      <mat-card class="example-card mat-card " style="height:100%">
+      <mat-card class="example-card mat-card card-bottom-border" style="height:100%">
         <mat-card-header>
           <mat-card-title>Any Major History</mat-card-title>
         </mat-card-header>
@@ -44,7 +41,7 @@
       </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4 ">
-      <mat-card class="example-card mat-card " style="height:100%">
+      <mat-card class="example-card mat-card card-bottom-border" style="height:100%">
         <mat-card-header>
           <mat-card-title>Stress</mat-card-title>
         </mat-card-header>
@@ -54,7 +51,7 @@
       </mat-card>
     </div>
     <div class="col-md-2 col-sm-4 mt-4">
-      <mat-card class="example-card mat-card " style="height:100%">
+      <mat-card class="example-card mat-card card-bottom-border" style="height:100%">
         <mat-card-header>
           <mat-card-title>Insurance</mat-card-title>
         </mat-card-header>
@@ -66,37 +63,16 @@
   </div>
 
 
-<div class="row ">
-  <div class="col-12  ">
-    <div class="card-chart">
-      <div class="card-body" >
-        <div class="chart-area">
-          <div>
-            <div >
-              <canvas baseChart id="linechart" class="bg-dark">
-              </canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
--->
-
-<!--
-
   <div class="row mt-3 mb-3">
-    <div class="col-md-3">
+    <!-- <div class="col-md-3">
       <div class="dd">
         <p class="txt-rotate">{{ name }}</p>
 
         <rg-gauge-chart [canvasWidth]="canvasWidth" [needleValue]="needleValue" [centralLabel]="centralLabel"
           [options]="options" [bottomLabel]="bottomLabel"></rg-gauge-chart>
       </div>
-    </div>
-    <div class="col-md-5">
+    </div> -->
+    <!-- <div class="col-md-5">
       <div class="middle-box">
         <div class="row">
           <div class="col-md-6 p-0">
@@ -197,27 +173,89 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-2">
+    </div> -->
 
+    <!-- <div class="col-md-2">
+      
+    </div> -->
+    <div class="col-md-4">
+      <div class="zones" style="width: 90%;">
+        <mat-accordion>
+          <mat-expansion-panel class="bg-danger text-white">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Danger Zone
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-list style="padding-left:-20px">
+              <mat-list-item *ngFor="let test of dangerZoneTests">
+                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+                <div mat-line class="text-white">{{test.name}}</div>
+                <div mat-line class="text-grey">value: {{test.value}} </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+
+          </mat-expansion-panel>
+          <mat-expansion-panel class="bg-primary text-white" (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Border Zone 1
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-list style="padding-left:-20px">
+              <mat-list-item *ngFor="let test of dangerZoneTests">
+                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+                <div mat-line class="text-white">{{test.name}}</div>
+                <div mat-line class="text-grey">value: {{test.value}} </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="bg-warning text-white" (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Border Zone 2
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-list style="padding-left:-20px">
+              <mat-list-item *ngFor="let test of dangerZoneTests">
+                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+                <div mat-line class="text-white">{{test.name}}</div>
+                <div mat-line class="text-grey">value: {{test.value}} </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="bg-success text-white" (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Safe Zone
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list style="padding-left:-20px">
+              <mat-list-item *ngFor="let test of dangerZoneTests">
+                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+                <div mat-line class="text-white">{{test.name}}</div>
+                <div mat-line class="text-grey">value: {{test.value}} </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
     </div>
-    <div class="col-md-2">
-      <mat-card class="example-card mat-card" style="height:100%">
-        <mat-card-header>
-          <mat-card-title>Reccommendation</mat-card-title>
-        </mat-card-header>
-        <hr class="m-0">
-        <mat-card-content>
-          <ol type="1" style="list-style: decimal;margin-left: 5px;">
-            <li>Hba1c</li>
-            <li>Triglyceride</li>
-            <li>Regular Yoga</li>
-            <li>Cardio Consultation</li>
-            <li>Regular exercise </li>
-          </ol>
-        </mat-card-content>
-      </mat-card>
-    </div>
+
   </div>
 
 
@@ -275,13 +313,13 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-8">
+    <div class="col-md-12">
       <div class="table-responsive" id="report">
         <table class="table text-center table-striped">
           <thead class="thead-dark">
             <tr>
               <th> Date </th>
-              <th> Test Done </th>
+              <th> Test </th>
               <th> Value </th>
               <th> Zone </th>
               <th>Normal Value</th>
@@ -289,7 +327,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let test of lists;index as i" [id]="i">
+            <tr *ngFor="let test of lists;index as i" id="i">
               <td> {{i+1}} </td>
               <td> {{test.test}} </td>
               <td> 80 </td>
@@ -301,7 +339,7 @@
               </td>
               <td> 100-120 </td>
               <td>
-                <div style="height:152px;width:300px">
+                <div>
                   <canvas baseChart [datasets]="barChartData[i]" [labels]="barChartLabels[0]"
                     [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                     [chartType]="barChartType" (chartClick)="chartClicked($event,i)">
@@ -362,34 +400,35 @@
     </div>
 
   </div>
--->
 
-<!--
-  <div class="row">
-    <div class="table pt-4 col-lg-5 col-sm-12" >
-      <table>
-        <tr>
-          <th>Date</th>
-          <th>Test Done</th>
-          <th>Value</th>
-          <th>Zone</th>
-          <th>Normal Zone</th>
-          <th>Comparison</th>
-        </tr>
-
-        <tr *ngFor="let test of lists;index as i" [id]="i">
-          <td> {{i+1}} </td>
-          <td> {{test.test}} </td>
-          <td> 80 </td>
-          <td>
-            <fa-icon *ngIf="test.icon == 'purple'" [icon]="angry" size="2x" class="text-primary"></fa-icon>
-            <fa-icon *ngIf="test.icon == 'angry'" [icon]="angry" size="2x" class="text-danger"></fa-icon>
-            <fa-icon *ngIf="test.icon == 'sad'" [icon]="sad" size="2x" class="text-warning"></fa-icon>
-            <fa-icon *ngIf="test.icon == 'smile'" [icon]="smile" size="2x" class="text-success"></fa-icon>
-          </td>
-          <td> 100-120 </td>
-          <td> <button class="btn btn-xs btn-danger">See Result</button></td>
-        </tr>
+  <!-- <div class="row">
+    <div class="table pt-4 col-lg-5 col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Test Done</th>
+            <th>Value</th>
+            <th>Zone</th>
+            <th>Normal Zone</th>
+            <th>Comparison</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let test of lists;index as i">
+            <td> {{i+1}} </td>
+            <td> {{test.test}} </td>
+            <td> 80 </td>
+            <td>
+              <fa-icon *ngIf="test.icon == 'purple'" [icon]="angry" size="2x" class="text-primary"></fa-icon>
+              <fa-icon *ngIf="test.icon == 'angry'" [icon]="angry" size="2x" class="text-danger"></fa-icon>
+              <fa-icon *ngIf="test.icon == 'sad'" [icon]="sad" size="2x" class="text-warning"></fa-icon>
+              <fa-icon *ngIf="test.icon == 'smile'" [icon]="smile" size="2x" class="text-success"></fa-icon>
+            </td>
+            <td> 100-120 </td>
+            <td> <button class="btn btn-xs btn-danger">See Result</button></td>
+          </tr>
+        </tbody>
       </table>
     </div>
 
@@ -402,15 +441,31 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 
 
-<div class="tooltip bs-tooltip-top" role="tooltip">
-  <div class="arrow"></div>
-  <div class="tooltip-inner">
-    Some tooltip text!
+<div [class]="isRecommendationOpened ? 'side-recommendation opened' : 'side-recommendation closed'">
+  <div class="visible-part" (click)="toggleRecommendation()">
+    <!-- <div *ngIf="isRecommendationOpened" class="visible-part opened" (click)="toggleRecommendation()"> -->
+    <span class="vertical-text animated infinite slideInRight delay-4s">Recommended</span>
+  </div>
+  <div class="recommendations">
+    <mat-card class="example-card mat-card" style="height:100%">
+      <mat-card-header>
+        <mat-card-title>Reccommendation</mat-card-title>
+      </mat-card-header>
+      <hr class="m-0">
+      <mat-card-content>
+        <ol type="1" style="list-style: decimal;margin-left: 5px;">
+          <li>Hba1c</li>
+          <li>Triglyceride</li>
+          <li>Regular Yoga</li>
+          <li>Cardio Consultation</li>
+          <li>Regular exercise </li>
+        </ol>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
--->

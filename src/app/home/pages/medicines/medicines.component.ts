@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-medicines",
   templateUrl: "./medicines.component.html",
-  styleUrls: ["./medicines.component.scss"]
+  styleUrls: ["./medicines.component.scss"],
 })
 export class MedicinesComponent implements OnInit {
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -18,7 +18,7 @@ export class MedicinesComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}
-
+  goNext() {}
   goToMedecine(type) {
     this.router.navigate(["/medecine", type]);
   }

@@ -1,0 +1,146 @@
+<h1 mat-dialog-title>Fill the perscription details</h1>
+<div mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-warning" (click)="onAddClick()">Add field</button>
+        </div>
+        <div class="col-md-8" *ngIf="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Sorry!</strong> please fil the dose details.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table">
+                <thead>
+                    <th>Perscription</th>
+                    <th>Morning Dose</th>
+                    <th>Noon Dose</th>
+                    <th>Night Dose</th>
+                    <th>Remark</th>
+                    <th>Lunch to take</th>
+                    <th>Dose Along</th>
+                    <th>Medecine Duration</th>
+                    <th *ngIf="i > 0">Remove</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let medecine of data.medecines;index as i">
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Medecine Name</mat-label>
+                                <input matInput [(ngModel)]="medecine.medecine_name">
+                            </mat-form-field>
+                        </td>
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Morning Dose</mat-label>
+                                <!-- <input matInput [(ngModel)]="medecine.morning_dose"> -->
+                                <mat-select [(ngModel)]="medecine.morning_dose">
+                                    <mat-option value="quater">1/4</mat-option>
+                                    <mat-option value="half">1/2</mat-option>
+                                    <mat-option value="one">1</mat-option>
+
+                                    <mat-option value="two">2</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Noon Dose</mat-label>
+                                <!-- <input matInput [(ngModel)]="medecine.noon_dose"> -->
+                                <mat-select [(ngModel)]="medecine.noon_dose">
+                                    <mat-option value="quater">1/4</mat-option>
+                                    <mat-option value="half">1/2</mat-option>
+                                    <mat-option value="one">1</mat-option>
+                                    <mat-option value="two">2</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Night/Other Dose</mat-label>
+                                <!-- <input matInput [(ngModel)]="medecine.night_dose"> -->
+                                <mat-select [(ngModel)]="medecine.night_dose">
+                                    <mat-option value="quater">1/4</mat-option>
+                                    <mat-option value="half">1/2</mat-option>
+                                    <mat-option value="one">1</mat-option>
+                                    <mat-option value="two">2</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Remark</mat-label>
+                                <input matInput [(ngModel)]="medecine.remark">
+                            </mat-form-field>
+                        </td>
+
+                        <!-- <td> <input matInput [(ngModel)]="data.other_dose"></td> -->
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Take medecine</mat-label>
+                                <!-- <input matInput [(ngModel)]="medecine.night_dose"> -->
+                                <mat-select [(ngModel)]="medecine.luch">
+                                    <mat-option value="before_lunch">Before Luch</mat-option>
+                                    <mat-option value="after_lunch">After Lunch</mat-option>
+                                    <mat-option value="not_required">Not Required</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Dose with</mat-label>
+                                <!-- <input matInput [(ngModel)]="medecine.night_dose"> -->
+                                <mat-select [(ngModel)]="medecine.with">
+                                    <mat-option value="milk">Milk/</mat-option>
+                                    <mat-option value="water">Water</mat-option>
+                                    <mat-option value="hot_water">Hot water</mat-option>
+                                    <mat-option value="other">other</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td class="perscription">
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Dose Duration</mat-label>
+                                <input matInput [(ngModel)]="medecine.days">
+                            </mat-form-field>
+                        </td>
+                        <td class="td-actions" *ngIf="i != 0">
+                            <button class="btn btn-white btn-round btn-just-icon mat-raised-button"
+                                (click)="removeField(i)">
+                                <mat-icon class="material-icons text-danger">clear</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6">
+            <mat-form-field appearance="outline" [class]="full-width">
+                <mat-label>Recommended Diets</mat-label>
+                <mat-chip-list #chipList aria-label="Recommend selection">
+                    <mat-chip *ngFor="let recommend of data.recommendations" [selectable]="true" [removable]="true"
+                        (removed)="remove(recommend)">
+                        {{recommend}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Recommendations" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-danger" (click)="onNoClick()">cancel</button>
+    <button mat-button class="btn btn-success" (click)="dialogSubmit()">Done</button>
+</div>

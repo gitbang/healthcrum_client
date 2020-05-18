@@ -1,0 +1,81 @@
+<h1 mat-dialog-title>Fill the Test details</h1>
+<div mat-dialog-content class="mat-typography">
+    <div class="row">
+
+        <div class="col-md-8 text-center" *ngIf="alert">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Sorry!</strong> please fill the Test Value.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <mat-label>Sub Document Type</mat-label>
+                <input matInput [(ngModel)]="data.testProfile">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-warning" (click)="onAddClick()">Add field</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table">
+                <thead>
+                    <th>Test Name</th>
+                    <th>Test Result</th>
+                    <th *ngIf="data.tests.length > 1">Remove</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let test of data.tests;index as i">
+                        <td>
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Test Name</mat-label>
+                                <input matInput [(ngModel)]="test.test_name">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                                <mat-label>Result Value</mat-label>
+                                <input matInput [(ngModel)]="test.test_value">
+
+                            </mat-form-field>
+                        </td>
+                        <td class="td-actions" *ngIf="i != 0">
+                            <button class="btn btn-white btn-round btn-just-icon mat-raised-button"
+                                (click)="removeField(i)">
+                                <mat-icon class="material-icons text-danger">clear</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-6">
+            <mat-form-field appearance="outline" [class]="full-width">
+                <mat-label>Recommended Tests</mat-label>
+                <mat-chip-list #chipList aria-label="Recommend selection">
+                    <mat-chip *ngFor="let recommend of data.recommendations" [selectable]="true" [removable]="true"
+                        (removed)="remove(recommend)">
+                        {{recommend}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Recommendations" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-danger" (click)="onNoClick()">cancel</button>
+    <button mat-button class="btn btn-success" (click)="dialogSubmit()">Done</button>
+</div>

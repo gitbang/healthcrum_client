@@ -17,11 +17,15 @@ export class PatientService {
   getQuestions(category: string) {
     console.log(category);
     console.log("service reached");
-    return this.http.post(this.url + "fetchquestion",{ category },this.options);
+    return this.http.post(
+      this.url + "fetchquestion",
+      { category },
+      this.options
+    );
   }
   saveAns(ans) {
     console.log("reached");
     console.log(ans);
-    return this.http.post(this.url + "useranswer", ans, this.options);
+    return this.http.post("http://localhost:3000/usersave", ans);
   }
 }

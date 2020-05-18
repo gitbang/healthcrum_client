@@ -34,6 +34,9 @@ label {
 blockquote {
   border-left: 5px solid #fff;
 }
+.example-full-width {
+  width: 100%;
+}
 .searched-places {
   margin-top: 10em;
   padding: 1em;
@@ -41,7 +44,7 @@ blockquote {
   position: relative;
   z-index: 5;
 }
-.activ {
+.active {
   visibility: hidden;
   position: absolute;
   z-index: -10;
@@ -64,4 +67,88 @@ blockquote {
   padding: 5px 15px;
   background: #0ddcd2;
   box-shadow: 0px 3px 4px 1px #c5c3c3;
+}
+
+.city-box {
+  display: flex;
+  background: #1ba89b;
+  padding-left: 5px;
+  color: #fff;
+  width: 40%;
+}
+.input-group {
+  height: 100%;
+}
+.search-box {
+  padding-left: 5px;
+  width: 100%;
+  background: #e7e7e7;
+  display: flex;
+  height: 45px;
+  padding-right: 10px;
+}
+
+.search-btn {
+  margin-left: 0px;
+  padding: 2px 5px;
+}
+
+.search-btn button {
+  margin-top: 2px;
+}
+
+.mega-dropdown {
+  position: static !important;
+  top: 100%;
+  left: 0;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+.mega-dropdown-menu {
+  padding: 20px 0px;
+  width: 100%;
+  margin-top: 5px;
+  box-shadow: 0 0 2px 1px #dedede;
+  background: #fdf9f9;
+  display: flex;
+  z-index: 99;
+  border-radius: 4px;
+  width: 100%;
+}
+.mega-dropdown-menu > li > ul {
+  padding: 0;
+  margin: 0;
+}
+.mega-dropdown-menu > li > ul > li {
+  list-style: none;
+}
+
+.mega-dropdown-menu > li ul > li > a:hover,
+.mega-dropdown-menu > li ul > li > a:focus {
+  text-decoration: none;
+}
+.mega-dropdown-menu .dropdown-header {
+  font-size: 18px;
+  padding: 5px 60px 5px 5px;
+  line-height: 30px;
+  border-bottom: 1px solid #dadada;
+  margin-right: 32px;
+  margin-bottom: 12px;
+}
+ul li {
+  padding: 5px 10px;
+  color: #323232;
+}
+ul li a {
+  color: #f2cd45;
+  font-weight: bold;
 }

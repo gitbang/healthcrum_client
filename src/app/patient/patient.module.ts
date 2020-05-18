@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { CommonModule, DatePipe } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PatientRoutes } from "./patient.routing";
@@ -21,11 +21,13 @@ import { PatientServicesComponent } from "./patient-services/patient-services.co
 import { PatientFeedbackComponent } from "./patient-feedback/patient-feedback.component";
 import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.component";
 import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
+import {
+  PatientEhrComponent,
+  MedecineDetailFillDialog,
+  TestDetailFillDialog,
+} from "./patient-ehr/patient-ehr.component";
 import { GaugeChartModule } from "angular-gauge-chart";
 import { DataTablesModule } from "angular-datatables";
-import { SharedModule } from '../shared/shared.module';
-
-
 import {
   MatButtonModule,
   MatInputModule,
@@ -42,10 +44,19 @@ import {
   MatTableModule,
   MatCardModule,
   MatChipsModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatExpansionModule,
+  MatListModule,
+  MatIconModule,
+  MatProgressBarModule,
+  MatDialogModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatTabsModule,
+  MatSnackBarModule,
 } from "@angular/material";
+import { NgCircleProgressModule } from "ng-circle-progress";
 import { ChartsModule } from "ng2-charts";
-import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
+import { SlickCarouselModule } from "ngx-slick-carousel";
 
 @NgModule({
   declarations: [
@@ -66,7 +77,8 @@ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
     HraStoryBoardComponent,
     ViewDoctorComponent,
     PatientEhrComponent,
-    
+    MedecineDetailFillDialog,
+    TestDetailFillDialog,
   ],
   imports: [
     CommonModule,
@@ -93,11 +105,46 @@ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
     GaugeChartModule,
     MatCardModule,
     MatChipsModule,
+    MatProgressBarModule,
+    MatExpansionModule,
+    MatListModule,
+    MatIconModule,
     MatAutocompleteModule,
-    SharedModule
+    SlickCarouselModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    NgCircleProgressModule.forRoot({
+      backgroundColor: "#FDB900",
+      radius: 60,
+      space: -10,
+      outerStrokeGradient: true,
+      outerStrokeWidth: 10,
+      outerStrokeColor: "#ffffff",
+      outerStrokeGradientStopColor: "#ffffff",
+      innerStrokeColor: "#ffffff",
+      innerStrokeWidth: 10,
+      title: "Healthcrum",
+      animateTitle: false,
+      animationDuration: 1000,
+      showUnits: true,
+      showBackground: true,
+      clockwise: true,
+      startFromZero: false,
+      imageHeight: 100,
+      imageWidth: 100,
+      titleColor: "#ffffff",
+      subtitleColor: "#ffffff",
+      showSubtitle: false,
+      unitsColor: "#ffffff",
+    }),
   ],
+  entryComponents: [MedecineDetailFillDialog, TestDetailFillDialog],
   providers: [
-    DatePipe
-  ]
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: "outline" },
+    },
+  ],
 })
 export class PatientModule {}

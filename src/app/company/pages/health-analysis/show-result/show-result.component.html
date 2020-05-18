@@ -1,28 +1,24 @@
-<div class="card card-signup card-plain" >
-  <div class="row mt-0 ml-2 mr-2 ">
-    <h5 class="col-11">Show result of employ in year </h5>
-    <button type="button" class="close" (click)="closeDialog()">
-      <i class="material-icons">clear</i>
-    </button>
+<div class="row">
+  <div class="row m-0" style="width: 100%;justify-content: space-between;">
+    <div cclass="col-11">
+      <h5>Show result of employ in year </h5>
+    </div>
+    <div class="col-1">
+      <button type="button" class="close" (click)="closeDialog()">
+        <i class="material-icons">clear</i>
+      </button>
+    </div>
   </div>
-</div>
+  <div class="col-12">
 
-<div class="card-body ml-2 mr-2 mt-3 mat-elevation-z8">
-  <div class="row ">
-    <div class="col-12  ">
-      <div class="card-chart">
-        <div class="card-body" >
-          <div class="chart-area">
-            <div>
-              <div >
-                <canvas baseChart 
-                  id="linechart"  #piechart>
-                </canvas>
-              </div>
-            </div>
-          </div>
+    <div class="chart-area">
+      <div>
+        <div>
+          <canvas baseChart id="linechart" #piechart>
+          </canvas>
         </div>
       </div>
     </div>
+
   </div>
 </div>

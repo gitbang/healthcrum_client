@@ -111,3 +111,16 @@
   margin-right: 10px;
   border: none !important;
 }
+
+.carousel-indicators .active {
+  background-color: #54ba72 !important;
+}
+.carousel-indicators {
+  bottom: -60px !important;
+}
+.carousel-indicators li {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50%;
+  background-color: hsla(0, 0%, 76%, 0.5) !important;
+}

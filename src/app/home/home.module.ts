@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClientJsonpModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomepageComponent } from "./components/homepage.component";
 import { HomePageRoutes } from "./home.routing";
@@ -22,13 +22,19 @@ import {
   MatTableModule,
   MatCheckboxModule,
   MatIconModule,
-  MatChipsModule
+  MatChipsModule,
+  MatDialogModule,
+  MatAutocompleteModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from "@angular/material";
 import { LandingpageComponent } from "./pages/landingpage/landingpage.component";
 import { UserloginComponent } from "./pages/userlogin/userlogin.component";
 
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { SignupComponent } from "./pages/signup/signup.component";
+import {
+  SignupComponent,
+  DialogContentExampleDialog,
+} from "./pages/signup/signup.component";
 import { BloodTestComponent } from "./pages/blood-test/blood-test.component";
 import { LabsComponent } from "./pages/labs/labs.component";
 import { DoctorsComponent } from "./pages/doctors/doctors.component";
@@ -57,7 +63,8 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
     EquipmentsComponent,
     SingleEquipmentComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    DialogContentExampleDialog,
   ],
   imports: [
     CommonModule,
@@ -83,7 +90,17 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
     MatChipsModule,
     SlickCarouselModule,
     FontAwesomeModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    HttpClientJsonpModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+  ],
+  entryComponents: [DialogContentExampleDialog],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: "outline" },
+    },
+  ],
 })
 export class HomeModule {}

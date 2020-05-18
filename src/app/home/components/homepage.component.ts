@@ -8,12 +8,12 @@ import {
   faGooglePlusG,
   faTwitter,
   faInstagram,
-  faYoutube
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 @Component({
   selector: "app-homepage",
   templateUrl: "./homepage.component.html",
-  styleUrls: ["./homepage.component.scss"]
+  styleUrls: ["./homepage.component.scss"],
 })
 export class HomepageComponent implements OnInit {
   loggedIn: boolean;
@@ -28,7 +28,7 @@ export class HomepageComponent implements OnInit {
     private authService: AuthService,
     private authLocal: AuthServiceLocal
   ) {
-    this.authService.authState.subscribe(user => {
+    this.authService.authState.subscribe((user) => {
       if (!user) {
         this.loggedIn = this.authLocal.isUserLoggedIn;
         this.user = new SocialUser();
@@ -48,14 +48,12 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     $('[data-loader="circle-side"]').fadeOut(); // will first fade out the loading animation
-    $("#preloader")
-      .delay(350)
-      .fadeOut("slow"); // will fade out the white DIV that covers the website.
+    $("#preloader").delay(350).fadeOut("slow"); // will fade out the white DIV that covers the website.
 
     // Sticky nav + scroll to top
     var $headerStick = $(".header_sticky");
     var $toTop = $("#toTop");
-    $(window).on("scroll", function() {
+    $(window).on("scroll", function () {
       if ($(this).scrollTop() > 1) {
         $headerStick.addClass("sticky");
       } else {
@@ -67,26 +65,24 @@ export class HomepageComponent implements OnInit {
         $toTop.fadeOut();
       }
     });
-    $toTop.on("click", function() {
+    $toTop.on("click", function () {
       $("body,html").animate(
         {
-          scrollTop: 0
+          scrollTop: 0,
         },
         500
       );
     });
 
     // Menu
-    $("a.open_close").on("click", function() {
+    $("a.open_close").on("click", function () {
       $(".main-menu").toggleClass("show");
       $(".layer").toggleClass("layer-is-visible");
       $("header.static").toggleClass("header_sticky sticky");
       $("body").toggleClass("body_freeze");
     });
-    $("a.show-submenu").on("click", function() {
-      $(this)
-        .next()
-        .toggleClass("show_normal");
+    $("a.show-submenu").on("click", function () {
+      $(this).next().toggleClass("show_normal");
     });
 
     // Hamburger icon
@@ -96,7 +92,7 @@ export class HomepageComponent implements OnInit {
       toggleHandler(toggle);
     }
     function toggleHandler(toggle) {
-      toggle.addEventListener("click", function(e) {
+      toggle.addEventListener("click", function (e) {
         e.preventDefault();
         this.classList.contains("active") === true
           ? this.classList.remove("active")
@@ -113,9 +109,17 @@ export class HomepageComponent implements OnInit {
   }
 
   signOutUser() {
-    this.authService.signOut();
-    this.authLocal.logoutUser();
-    this.user = null;
-    this.loggedIn = false;
+    this.authService
+      .signOut()
+      .then((res) => {
+        this.authLocal.logoutUser();
+        this.user = null;
+        this.loggedIn = false;
+      })
+      .catch((err) => {
+        this.authLocal.logoutUser();
+        this.user = null;
+        this.loggedIn = false;
+      });
   }
 }

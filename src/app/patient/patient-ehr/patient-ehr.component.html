@@ -1,143 +1,172 @@
-<div class="table ">
-<form [formGroup]="details">
-    <table>
-        <tr>
-          <th>Date</th>
-          <th>Location</th>
-          <th>Test name</th>
-          <th>Doctor name</th>
-          <th>Special- ization</th>
-          <th>Document Type</th>
-          <th>Sub Document Name</th>
-          <th>Upload Document</th>
-          <th>Disease</th>
-        </tr>
-      
-        <tr >
-          <td>
-                <input type="date"
-                matInput
-                formControlName = "date" [(ngModel)] = "myDate">
-           
-          </td>
+<div class="container-fluid main-container">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-tab-group dynamicHeight backgroundColor="accent">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">assignment</mat-icon>
+            Reports
+          </ng-template>
+          <!-- Tab 1 (download) -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <!-- <div class="card-header card-header-text card-header-warning">
+                  <div class="card-text">
+                    <h4 class="card-title ">Patient Appointments</h4>
+                  </div>
+                </div> -->
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                      <thead>
+                        <tr>
+                          <th>S.No.</th>
+                          <th>Document Type</th>
+                          <th>Test Type</th>
+                          <th>Tests</th>
+                          <th>Test date</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let test of reports;index as i">
+                          <td>{{ i+1 }}</td>
+                          <td>{{test.documentType}}</td>
+                          <td>{{test.testType}}</td>
+                          <td>{{ test.tests }}</td>
+                          <!-- | date :'short' -->
+                          <td>{{ test.testDate }}</td>
+                          <td class="td-actions">
 
-          <td>
-           
-                <input type="text"
-                matInput
-                formControlName = "location"
-                [matAutocomplete]="loc">
-              <mat-autocomplete #loc="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-           
-          </td>
-          
-          <td>
-                <input type="text"
-                matInput
-                formControlName = "test_name"
-                [matAutocomplete]="test">
-              <mat-autocomplete #test="matAutocomplete">
-                <mat-option *ngFor="let option of testOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-          </td>
-          
-           <td>
-                <input type="text"
-                matInput
-                formControlName = "doctor_name"
-                [matAutocomplete]="doctor">
-              <mat-autocomplete #doctor="matAutocomplete">
-                <mat-option *ngFor="let option of doctorOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-          </td>
+                            <button class="btn btn-social btn-link btn-twitter">
+                              <i class="material-icons">visibility</i>
+                            </button>
+                            <button class="btn btn-social btn-link btn-github" (click)="downloadReport(test.report_id)">
+                              <i class="material-icons">save_alt</i>
+                            </button>
+                          </td>
 
-          <td>
-                <input type="text"
-                matInput
-                formControlName = "specialization"
-                [matAutocomplete]="spec">
-              <mat-autocomplete #spec="matAutocomplete">
-                <mat-option *ngFor="let option of specilizationOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-          </td>
-          
-          <td>
-                <input type="text"
-                matInput
-                formControlName = "documentType"
-                [matAutocomplete]="document">
-              <mat-autocomplete #document="matAutocomplete">
-                <mat-option *ngFor="let option of documentTypeOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
 
-          <td>
-                <input type="text"
-                matInput
-                formControlName = "subDocument"
-                [matAutocomplete]="subdocument">
-              <mat-autocomplete #subdocument="matAutocomplete">
-                <mat-option *ngFor="let option of subDocumentOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-          </td>
 
-          <td>
-            <input type="file" formControlName="file" (change)="inutfile($event)" style="display : none" #fileupload>
-            <button type ="button" (click) = "fileupload.click()" class="btn btn-success pt-1 pl-0"
+        <!-- Tab 2 (upload) -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">playlist_add</mat-icon>
+            Upload Report
+          </ng-template>
 
-            >Pick File</button>
-            </td>
+          <form [formGroup]="details">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card pb-3">
+                  <div class="card-header card-header-text card-header-warning bg-pan-left">
+                    <div class="card-text">
+                      <h4 class="card-title">EHR Form</h4>
+                      <p class="card-category">Please fill your report details.</p>
+                    </div>
+                  </div>
+                  <div class="container mt-4">
+                    <div class="row">
+                      <div class="col-md-12">
 
-          <td>
-                <input type="text"
-                matInput
-                formControlName = "disease"
-                [matAutocomplete]="disease">
-              <mat-autocomplete #disease="matAutocomplete">
-                <mat-option *ngFor="let option of diseaseOptions| async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-          </td>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <mat-form-field appearance="outline" class="full-width">
+                              <mat-label>Date of checkup</mat-label>
+                              <input matInput [matDatepicker]="picker" [formControl]="date">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field appearance="outline" class="full-width">
+                              <mat-label>Location</mat-label>
+                              <input type="text" matInput formControlName="location" [matAutocomplete]="loc">
+                              <mat-autocomplete #loc="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                  {{option}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field appearance="outline" class="full-width">
+                              <mat-label>Doctor Name</mat-label>
+                              <input type="text" matInput formControlName="doctor_name" [matAutocomplete]="doctor">
+                              <mat-autocomplete #doctor="matAutocomplete">
+                                <mat-option *ngFor="let option of doctorOptions | async" [value]="option">
+                                  {{option}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <mat-form-field appearance="outline" class="full-width">
+                              <mat-label>Specialization</mat-label>
+                              <input type="text" matInput formControlName="specialization" [matAutocomplete]="spec">
+                              <mat-autocomplete #spec="matAutocomplete">
+                                <mat-option *ngFor="let option of specilizationOptions | async" [value]="option">
+                                  {{option}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field appearance="outline" class="full-width">
+                              <mat-label>Document Type</mat-label>
+                              <mat-select formControlName="documentType" (ngModelChange)="documentSelected($event)">
+                                <mat-option value="diagnostice_report">Diagnostic Report</mat-option>
+                                <mat-option value="perscription">Perscription</mat-option>
+                                <mat-option value="discharge_report">Discharge summary</mat-option>
+                                <mat-option value="path_report">Path Report</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
 
-         </tr>
-      
-    </table>
-  </form>
-  <div>
-    <button class="btn btn-primary" (click)= "submit()">Submit</button>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <input type="file" formControlName="file" (change)="inutfile($event)" #fileupload>
+                          </div>
+                          <div class="col-md-4">
+
+                          </div>
+                          <div class="col-md-4">
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 m-auto">
+                      <button class="btn btn-warning" (click)="submit()">Upload Report</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
-
-
-<!--
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input type="text"
-           placeholder="Pick one"
-           aria-label="Number"
-           matInput
-           [formControl]="myControl"
-           [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
--->

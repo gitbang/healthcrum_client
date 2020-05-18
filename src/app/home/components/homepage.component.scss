@@ -1,6 +1,7 @@
 @media only screen and (min-width: 991px) {
   li.active {
-    background: #26c6da;
+    // background: #26c6da;
+    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
     border-radius: 52px;
     width: 85px;
     height: 25px;
@@ -13,7 +14,7 @@
 }
 @media only screen and (max-width: 991px) {
   li.active {
-    background: #26c6da;
+    background: #107d6e;
     border-radius: none;
     width: auto;
     height: auto;

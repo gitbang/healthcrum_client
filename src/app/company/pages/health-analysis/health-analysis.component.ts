@@ -17,27 +17,24 @@ export class HealthAnalysisComponent implements OnInit {
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
   ngOnInit() {
-    const dataDailySalesChart: any = {
-      labels: ["M", "T", "W", "T", "F", "S", "S"],
-      series: [[12, 17, 7, 17, 23, 18, 38]],
-    };
-
-    const optionsDailySalesChart: any = {
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0,
-      }),
-      low: 0,
-      high: 50,
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
-    };
-
-    var dailySalesChart = new Chartist.Line(
-      "#dailySalesChart",
-      dataDailySalesChart,
-      optionsDailySalesChart
-    );
-
-    this.startAnimationForLineChart(dailySalesChart);
+    // const dataDailySalesChart: any = {
+    //   labels: ["M", "T", "W", "T", "F", "S", "S"],
+    //   series: [[12, 17, 7, 17, 23, 18, 38]],
+    // };
+    // const optionsDailySalesChart: any = {
+    //   lineSmooth: Chartist.Interpolation.cardinal({
+    //     tension: 0,
+    //   }),
+    //   low: 0,
+    //   high: 50,
+    //   chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+    // };
+    // var dailySalesChart = new Chartist.Line(
+    //   "#dailySalesChart",
+    //   dataDailySalesChart,
+    //   optionsDailySalesChart
+    // );
+    // this.startAnimationForLineChart(dailySalesChart);
   }
 
   toppings = new FormControl();
@@ -49,6 +46,9 @@ export class HealthAnalysisComponent implements OnInit {
     year: [""],
     age: [""],
     gender: [""],
+    male: new FormControl(),
+    female: new FormControl(),
+    others: new FormControl(),
   });
 
   menulist: string[] = [

@@ -66,8 +66,14 @@ export class FeedbackComponent implements OnInit {
           {
             label: "Feedback",
             data: this.feedback,
-            backgroundColor: ["#FFA1B5", "#86C7F3", "#FFE29A", "#5dad60"],
+            backgroundColor: ["#f95777", "#86C7F3", "#FFE29A", "#5dad60"],
             borderColor: [],
+            datalabels: {
+              font: {
+                weight: 16,
+                size: 16,
+              },
+            },
           },
         ],
       },
@@ -96,6 +102,11 @@ export class FeedbackComponent implements OnInit {
               }     
             }]
           */
+        },
+        legend: {
+          labels: {
+            fontColor: "red",
+          },
         },
       },
     });

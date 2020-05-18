@@ -68,8 +68,11 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
 
-
+    <div class="mt-4 ml-4 mr-4">
+      <form [formGroup]="book">
         <div class="row">
           <div class="col-md-8 m-auto">
             <h4 class="m">Select Employees</h4>
@@ -152,10 +155,7 @@
         <div class="col-12 col-mb-5 mb-3">
           <button class="btn btn-warning" (click)="bookappointment()" [disabled]="!book.valid">Book Appointment</button>
         </div>
-
-      </div>
-
+      </form>
     </div>
 
   </div>
-</div>
