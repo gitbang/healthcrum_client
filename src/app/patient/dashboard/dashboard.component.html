@@ -354,49 +354,51 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary btn-sm">
         Previous Investigation
       </button>
-      <button class="btn btn-info">
+      <button class="btn btn-info btn-sm">
         Last Investigation
       </button>
-      <button class="btn btn-success">
+      <button class="btn btn-success btn-sm">
         Last 1 week Investigation
       </button>
-      <button class="btn btn-warning">
+      <button class="btn btn-warning btn-sm">
         LAst 10 Month Investigation
       </button>
-      <button class="btn btn-secondery">
+      <button class="btn btn-secondery btn-sm">
         Last 6 month Investigation
       </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-4">
-      <mat-card>
+  <div class="row mt-2">
+    <div class="col-md-8 ">
+      <mat-form-field color="accent">
+        <mat-label>Inverstigation From</mat-label>
+        <input matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <mat-label>Inverstigation To</mat-label>
+        <input matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </mat-form-field>
+      <button class="ml-2 btn btn-info">Search</button>
+      <!-- <mat-card>
         <mat-card-header>
           <mat-card-title>Custom</mat-card-title>
         </mat-card-header>
         <hr class="m-0">
         <mat-card-content>
-          <mat-form-field color="accent">
-            <mat-label>Inverstigation From</mat-label>
-            <input matInput [matDatepicker]="picker1">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field color="accent">
-            <mat-label>Inverstigation To</mat-label>
-            <input matInput [matDatepicker]="picker2">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2 color="primary"></mat-datepicker>
-          </mat-form-field>
+          
         </mat-card-content>
         <mat-card-footer>
-          <button class="ml-2 btn btn-info">Search</button>
+          
         </mat-card-footer>
-      </mat-card>
+      </mat-card> -->
     </div>
 
   </div>

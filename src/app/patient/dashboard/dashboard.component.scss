@@ -64,7 +64,7 @@ mat-card-content.mat-card-content p {
   cursor: pointer;
 }
 .closed {
-  left: 96.5%;
+  left: 97%;
   transition: 0.3s ease-in;
 }
 .opened {
@@ -75,7 +75,7 @@ mat-card-content.mat-card-content p {
 .side-recommendation {
   display: flex;
   position: absolute;
-  top: 50%;
+  top: 43%;
   right: 0;
   overflow: hidden;
 }
@@ -97,7 +97,7 @@ mat-card-content.mat-card-content p {
     margin-left: 0;
   }
   .closed {
-    left: 83%;
+    left: 89%;
     transition: 0.3s ease-in;
   }
 }
