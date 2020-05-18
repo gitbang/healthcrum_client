@@ -77,14 +77,19 @@
             <ng-container matColumnDef="update">
               <th mat-header-cell *matHeaderCellDef> Edit</th>
               <td mat-cell *matCellDef="let element; let i = index">
-                <i class="material-icons" (click)="update(i)">edit</i>
+                <button class="btn btn-social btn-link btn-info" (click)="update(i)" title="Edit">
+                  <i class="material-icons">edit</i>
+                </button>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="delete">
               <th mat-header-cell *matHeaderCellDef> Delete</th>
               <td mat-cell *matCellDef="let element; let i = index">
-                <i class="material-icons" (click)="delete(i)">delete</i>
+                <button class="btn btn-social btn-link btn-danger" (click)="delete(i)" title="Delete">
+                  <i class="material-icons">delete</i>
+                </button>
+
               </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="col"></tr>

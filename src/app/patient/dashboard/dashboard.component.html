@@ -61,9 +61,13 @@
       </mat-card>
     </div>
   </div>
+  <div class="row mt-5 mb-2">
+    <div class="col-md-6 m-auto">
+      <mat-card class="bg-secondary text-center text-white">Zones</mat-card>
+    </div>
+  </div>
 
-
-  <div class="row mt-3 mb-3">
+  <div class="row mb-5 bg-secondary p-3">
     <!-- <div class="col-md-3">
       <div class="dd">
         <p class="txt-rotate">{{ name }}</p>
@@ -178,76 +182,76 @@
     <!-- <div class="col-md-2">
       
     </div> -->
-    <div class="row mt-3">
-      <div class="col-md-3">
-        <mat-card class="example-card p-0">
-          <mat-card-header class="py-3">
-            <mat-card-title class="text-center">Danger Zone</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="bg-danger">
-            <mat-list style="padding-left:-20px">
-              <mat-list-item *ngFor="let test of dangerZoneTests">
-                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
-                <div mat-line class="text-white">{{test.name}}</div>
-                <div mat-line class="text-grey">value: {{test.value}} </div>
-                <mat-divider></mat-divider>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col-md-3">
-        <mat-card class="example-card p-0">
-          <mat-card-header class="py-3">
-            <mat-card-title class="text-center">Shiba Inu</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="bg-purple">
-            <mat-list style="padding-left:-20px">
-              <mat-list-item *ngFor="let test of dangerZoneTests">
-                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
-                <div mat-line class="text-white">{{test.name}}</div>
-                <div mat-line class="text-grey">value: {{test.value}} </div>
-                <mat-divider></mat-divider>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col-md-3">
-        <mat-card class="example-card p-0">
-          <mat-card-header class="py-3">
-            <mat-card-title class="text-center">Shiba Inu</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="bg-warning">
-            <mat-list style="padding-left:-20px">
-              <mat-list-item *ngFor="let test of dangerZoneTests">
-                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
-                <div mat-line class="text-white">{{test.name}}</div>
-                <div mat-line class="text-grey">value: {{test.value}} </div>
-                <mat-divider></mat-divider>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col-md-3">
-        <mat-card class="example-card p-0">
-          <mat-card-header class="py-3">
-            <mat-card-title class="text-center">Safe Zone</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="bg-success">
-            <mat-list style="padding-left:-20px">
-              <mat-list-item *ngFor="let test of dangerZoneTests">
-                <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
-                <div mat-line class="text-white">{{test.name}}</div>
-                <div mat-line class="text-grey">value: {{test.value}} </div>
-                <mat-divider></mat-divider>
-              </mat-list-item>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <!-- <div class="row mt-3"> -->
+    <div class="col-md-3">
+      <mat-card class="example-card p-0">
+        <mat-card-header class="py-3">
+          <mat-card-title class="text-center">Danger Zone</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="bg-danger">
+          <mat-list style="padding-left:-20px">
+            <mat-list-item *ngFor="let test of dangerZoneTests">
+              <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+              <div mat-line class="text-white">{{test.name}}</div>
+              <div mat-line class="text-grey">value: {{test.value}} </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
     </div>
+    <div class="col-md-3">
+      <mat-card class="example-card p-0">
+        <mat-card-header class="py-3">
+          <mat-card-title class="text-center full-width">Border Zone</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="bg-purple">
+          <mat-list style="padding-left:-20px">
+            <mat-list-item *ngFor="let test of dangerZoneTests">
+              <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+              <div mat-line class="text-white">{{test.name}}</div>
+              <div mat-line class="text-grey">value: {{test.value}} </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-3">
+      <mat-card class="example-card p-0">
+        <mat-card-header class="py-3">
+          <mat-card-title class="text-center">Below Border Zone</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="bg-warning">
+          <mat-list style="padding-left:-20px">
+            <mat-list-item *ngFor="let test of dangerZoneTests">
+              <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+              <div mat-line class="text-white">{{test.name}}</div>
+              <div mat-line class="text-grey">value: {{test.value}} </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-3">
+      <mat-card class="example-card p-0">
+        <mat-card-header class="py-3">
+          <mat-card-title class="text-center">Safe Zone</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="bg-success">
+          <mat-list style="padding-left:-20px">
+            <mat-list-item *ngFor="let test of dangerZoneTests">
+              <mat-icon mat-list-icon class="text-white">assignment</mat-icon>
+              <div mat-line class="text-white">{{test.name}}</div>
+              <div mat-line class="text-grey">value: {{test.value}} </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- </div> -->
 
 
   </div>
