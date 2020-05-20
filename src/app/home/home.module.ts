@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomepageComponent } from "./components/homepage.component";
 import { HomePageRoutes } from "./home.routing";
 import { SlickCarouselModule } from "ngx-slick-carousel";
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 import {
   MatButtonModule,
   MatInputModule,
@@ -46,6 +48,7 @@ import { EquipmentsComponent } from "./pages/equipments/equipments.component";
 import { SingleEquipmentComponent } from "./pages/single-equipment/single-equipment.component";
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
+import { BookTestComponent } from './pages/blood-test/book-test/book-test.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,7 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
     AboutUsComponent,
     ContactUsComponent,
     DialogContentExampleDialog,
+    BookTestComponent,
   ],
   imports: [
     CommonModule,
@@ -94,6 +98,8 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
     HttpClientJsonpModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   entryComponents: [DialogContentExampleDialog],
   providers: [

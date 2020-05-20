@@ -1,4 +1,4 @@
-<main>
+<main #menu>
   <div class="container-fluid p-3">
 
     <!-- <h3 class="test-heading">{{city}}</h3> -->
@@ -8,8 +8,7 @@
           <div class="city-box">
             <mat-icon matPrefix style="align-self: center;color: #e7e7e7;margin-right: 5px;cursor: pointer;"
               (click)="setCurrentLocation()">room</mat-icon>
-            <div class="input-group no-border">
-              <!-- <input matInput placeholder="Placeholder" > -->
+            <div class="input-group no-border city">
               <input type="text" placeholder="city" matInput [formControl]="myControl" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let option of filteredCities | async" [value]="option">
@@ -17,53 +16,71 @@
                 </mat-option>
               </mat-autocomplete>
             </div>
-
           </div>
-
           <div class="search-box">
             <div class="input-group no-border">
-              <input type="text" matInput placeholder="Search packages/ profiles/ tests" [(ngModel)]="searchText"
-                name="searchText" (keydown)="isSearching($event)" (keydown)="searchNow($event)">
+              <input  
+                class="search-box-input" 
+                type="text" 
+                matInput placeholder="Search packages/ profiles/ tests" 
+                [(ngModel)]="searchText"
+                [formControl]="mycontrol"
+                name="searchText" 
+                (focus)="showModel()"
+                (keyup)="showModel()"
+                #toggleButton
+                [matAutocomplete]="auto"
+              >
+              <div>
+                <mat-autocomplete 
+                  #auto="matAutocomplete" 
+                >
+                  <mat-option 
+                  *ngFor="let option of filteredSearch | async" 
+                  [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
             </div>
             <mat-icon matSuffix style="align-self: center;">search</mat-icon>
           </div>
-
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="isSearched" style="position: absolute;width: 100%;z-index: 99;">
-      <div class="col-md-8 m-auto">
-        <ul class="mega-dropdown-menu">
 
-          <li class="col-sm-3">
+    <div class="row" *ngIf="isSearched"  style="position: absolute;width: 100%;z-index: 99;">
+      <div class="col-md-8 m-auto">
+        <ul class="mega-dropdown-menu row" >
+          <li class="col-sm-4">
             <ul>
               <li class="dropdown-header">Packages</li>
-              <li><a href="#">Auto Carousel</a></li>
-              <li><a href="#">Carousel Control</a></li>
-              <li><a href="#">Left & Right Navigation</a></li>
-              <li><a href="#">Four Columns Grid</a></li>
+              <li *ngFor="let test of testcol1; let i = index">
+                <a (click)="addMaindropdown(test)">{{test}}</a>
+                <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+              </li>
               <!-- <li class="divider"></li>
               <li class="dropdown-header">Fonts</li>
               <li><a href="#">Glyphicon</a></li>
               <li><a href="#">Google Fonts</a></li> -->
             </ul>
           </li>
-          <li class="col-sm-3">
+          <li class="col-sm-4">
             <ul>
               <li class="dropdown-header">Profiles</li>
-              <li><a href="#">Navbar Inverse</a></li>
-              <li><a href="#">Pull Right Elements</a></li>
-              <li><a href="#">Coloured Headers</a></li>
-              <li><a href="#">Primary Buttons & Default</a></li>
+              <li *ngFor="let test of testcol2; let i = index">
+                <a (click)="addMaindropdown(test)">{{test}}</a>
+                <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+              </li>
             </ul>
           </li>
-          <li class="col-sm-3">
+          <li class="col-sm-4 ">
             <ul>
               <li class="dropdown-header">Tests</li>
-              <li><a href="#">Easy to Customize</a></li>
-              <li><a href="#">Calls to action</a></li>
-              <li><a href="#">Custom Fonts</a></li>
-              <li><a href="#">Slide down on Hover</a></li>
+              <li *ngFor="let test of testcol3; let i = index">
+                <a (click)="addMaindropdown(test)">{{test}}</a>
+                <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+              </li>
             </ul>
           </li>
         </ul>
@@ -73,8 +90,45 @@
     <div class="row">
       <div class="col-sm-12 col-md-2 col-lg-2">
         <div class="card justify-content-center pt-4 pb-4">
-          <h5 class="text-center">Filter result</h5>
+          <h5 class="text-center">Apply Filters</h5>
           <hr>
+        <!--
+          <div class="display" border=1>
+            <button mat-raised-button color="primary" class="mt-1 btn btn-sm changeColor"  *ngFor="let i of display"
+            matTooltip="Click to remove the filter" (click)="removeSideFilters(i)"
+            matBadge="X" matBadgePosition="after" matBadgeColor="warn"
+            >
+            {{i}}</button>
+          </div>
+
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Packages
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let pack of packages; let i = index ">
+                <mat-checkbox  labelPosition="before" 
+                [checked]="sidepackagescheck(pack.package)" (change)="checkCheckBoxvalue( pack.package ,$event.checked)">
+                {{pack.package}}</mat-checkbox>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Test
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-checkbox labelPosition="before"  [(checked)]="uncheck" class="col-12">Test 1</mat-checkbox>
+              <mat-checkbox labelPosition="before" class="col-12">Test 2</mat-checkbox>
+              <mat-checkbox labelPosition="before" class="col-12">Test 3</mat-checkbox>
+              <mat-checkbox labelPosition="before" class="col-12">Test 4</mat-checkbox>
+            </mat-expansion-panel>
+          </mat-accordion>
+        -->
+          <!--
           <div class="col-8 a-auto">
             <mat-form-field class="example-full-width">
               <mat-checkbox>Packages</mat-checkbox>
@@ -88,13 +142,126 @@
               <mat-checkbox>Single Tests</mat-checkbox>
             </mat-form-field>
           </div>
+          -->
+          <div class=" mt-2">
+            <div class="ml-4">
+                <mat-checkbox>Packages</mat-checkbox>
+            </div>
+            <div class="ml-4">
+                <mat-checkbox>Test</mat-checkbox>
+            </div>
+            <div class="">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Prize
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-checkbox labelPosition="before" class="col-12" 
+                (change)="checkCheckBoxvalue( '1000' ,$event.checked)">Less than 1000</mat-checkbox>
+                <mat-checkbox labelPosition="before" class="col-12"
+                (change)="checkCheckBoxvalue( '1000 - 2000' ,$event.checked)"
+                >1000 - 2000</mat-checkbox>
+                <mat-checkbox labelPosition="before" class="col-12"
+                (change)="checkCheckBoxvalue( '2000-4000' ,$event.checked)"
+                >2000 - 4000</mat-checkbox>
+                <mat-checkbox labelPosition="before" class="col-12"
+                (change)="checkCheckBoxvalue( '4000-above' ,$event.checked)"
+                >above 4000</mat-checkbox>
+            </mat-expansion-panel>
+            </div>
+          </div>
           <div class="col-12 text-center mt-3">
-            <button class="btn btn-warning">Apply</button>
+            <button class="btn btn-warning">Apply Filters</button>
           </div>
         </div>
       </div>
       <div class="col-sm-12 col-md-8 col-lg-9">
-
+        <div class="row mt-2 ml-4 mr-2">
+          <div class="col-md-12 col-lg-6 mt-4 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+            <div class="row">
+              <div class="col-12">
+                <div class="card mt-0 mat-elevation-z3">
+                  <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">grade</i>
+                    </div>
+                    <div class="row">
+                      <div class="col-8"></div>
+                      <div class="offers col-4">
+                        <h3 style="float : right">
+                          54% Off
+                        </h3>
+                      </div>                   
+                    </div>
+                    <div >
+                      <div >
+                        <h4 class="card-title m-0">Blood Test</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-4">
+                        <h5> 
+                          <label>
+                            Includes : 
+                          </label>
+                        </h5>
+                      </div>
+                      <div class="col-8">
+                        <label>
+                          {{shownresult.includes}}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-12">
+                        <h5>
+                          <label> Report Available in :
+                            <span> 
+                              ₹{{shownresult.reportIn }}
+                            </span>
+                          </label>
+                        </h5> 
+                      </div>
+                      <div class="col-12 ">
+                        <h5> <label>Market Prize :
+                            <span class="rupeesign">
+                              ₹{{shownresult.marketprize}}
+                            </span>
+                           </label> 
+                        </h5>
+                      </div>
+                      <div class="col-12 ">
+                        <h5>
+                          <label>HealthCrum Prize : </label>
+                          <span class="rupeesign delete-text">
+                            ₹{{shownresult.healcrumPrize}}
+                          </span>
+                          <span class="offer-prize">
+                             ₹{{shownresult.offerprize}}
+                          </span>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <button class="btn btn-danger" (click)="booknow()">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                      </div>
+                      <div class="col-6">
+                        <button class="btn btn-default" (click)="addTocart()">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      </div>
+                      <div class="col-6" *ngIf="false">
+                        <button class="btn btn-default" (click)="removeFromcart()">Remove from Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

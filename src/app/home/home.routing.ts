@@ -13,6 +13,7 @@ import { EquipmentsComponent } from "./pages/equipments/equipments.component";
 import { SingleEquipmentComponent } from "./pages/single-equipment/single-equipment.component";
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
+import { BookTestComponent } from "./pages/blood-test/book-test/book-test.component";
 
 export const HomePageRoutes: Routes = [
   { path: "home", component: LandingpageComponent },
@@ -28,5 +29,6 @@ export const HomePageRoutes: Routes = [
   { path: "equipment/:id", component: SingleEquipmentComponent },
   { path: "aboutus", component: AboutUsComponent },
   { path: "contactus", component: ContactUsComponent },
-  { path: "view-doctor/:id", component: DoctorComponent }
+  { path: "view-doctor/:id", component: DoctorComponent },
+  {path: "blood-test/:testId", component : BookTestComponent}
 ];

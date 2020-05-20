@@ -3,8 +3,8 @@
   <button class="col-12 btn " [ngClass] = 'userZone == "Red" ? "btn-danger" : (userZone =="Green" ? "btn-success" : (userZone == "Yellow" ? "btn-warning" : "btn-primary")) ' mat-raised-button>Reason to put in {{userZone}}</button>
 </div>
 
-
 <div class="row mt-4">
+
   <div class="col-4">
     <nav class="nav flex-column">
       <a class="nav-link active" (click)="getdetails('lifestyle')" class="btn btn-info btn-sm">Life Style</a>
@@ -13,9 +13,12 @@
       <a class="nav-link" (click)="getdetails('others')" class="btn btn-info btn-sm">Others</a>
     </nav>
   </div>
+  
   <div class="col-7 mt-3">
     <div *ngFor='let value of currentdata; let i = index'> 
-      <mat-checkbox labelPosition="before" (change)="checkCheckBoxvalue(value.question, value.ans, $event.checked)">{{i + 1}} : {{value.question}}  {{value.ans}}</mat-checkbox>
+      <mat-checkbox labelPosition="before" 
+      (change)="checkCheckBoxvalue(value.question, value.ans, $event.checked)">
+      {{i + 1}} : {{value.question}}  {{value.ans}}</mat-checkbox>
     </div>
     <div *ngIf = 'currentdata.length > 0' class="button-class">
       <button class="btn btn-primary btn-sm last-button"  (click)="submit()">Submit</button>
