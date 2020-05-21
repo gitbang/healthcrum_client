@@ -18,13 +18,38 @@
               </mat-autocomplete>
             </div>
           </div>
+          
           <div class="search-box">
+            
             <div class="input-group no-border">
+              <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip
+                  *ngFor="let fruit of searchcart"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(fruit)">
+                  {{fruit}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                
+                <!--
+                <input
+                  placeholder="New fruit..."
+                  #fruitInput
+                  [formControl]="fruitCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+                -->
+              </mat-chip-list>
               <input  
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
                 class="search-box-input" 
                 type="text" 
                 matInput placeholder="Search packages/ profiles/ tests" 
-                [(ngModel)]="searchText"
                 [formControl]="mycontrol"
                 name="searchText" 
                 (focus)="showModel()"
@@ -44,14 +69,58 @@
                 </mat-autocomplete>
               </div>
             </div>
+            
+            <!-- Sample start 
+            <mat-form-field class="example-chip-list">
+              <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip
+                  *ngFor="let fruit of fruits"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(fruit)">
+                  {{fruit}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="New fruit..."
+                  #fruitInput
+                  [formControl]="fruitCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                  {{fruit}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            -->
             <mat-icon matSuffix style="align-self: center;">search</mat-icon>
           </div>
           
         </div>
         
       </div>
-      <div class="mycart"> 
-        <h3>My cart</h3>
+      <div class=""> 
+        <!--
+        <div class="row">
+          <div class="label col-2 mt-2 ml-2">
+            <label>{{mycart.length}}</label>
+          </div>
+          <div class="col-9">
+            <h4 class="ml-3 mr-3">My cart 
+              <mat-icon class="mt-2">add_shopping_cart</mat-icon>
+            </h4>
+          </div>
+        </div>
+        -->
+        <button class="btn btn-info">{{mycart.length}} My Cart</button>
+      </div>
+      <div class="ordernow">
+        <button class="btn btn-success" (click)="proceed()">Proceed</button>
       </div>
     </div>
 
@@ -103,7 +172,10 @@
                 <mat-checkbox>Packages</mat-checkbox>
             </div>
             <div class="ml-4">
-                <mat-checkbox>Test</mat-checkbox>
+                <mat-checkbox>Individual Test</mat-checkbox>
+            </div>
+            <div class="ml-4">
+                <mat-checkbox>Profile Test</mat-checkbox>
             </div>
             <div class="">
               <mat-expansion-panel>
@@ -205,13 +277,13 @@
                     </div>
                     <div class="row">
                       <div class="col-6">
-                        <button class="btn btn-danger" (click)="booknow()">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                        <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
                       </div>
-                      <div class="col-6">
-                        <button class="btn btn-default" (click)="addTocart()">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      <div class="col-6" *ngIf="!checkcart(shownresult._id)">
+                        <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
                       </div>
-                      <div class="col-6" *ngIf="false">
-                        <button class="btn btn-default" (click)="removeFromcart()">Remove from Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      <div class="col-6" *ngIf="checkcart(shownresult._id)">
+                        <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
                       </div>
                     </div>
                   </div>

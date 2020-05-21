@@ -9,6 +9,15 @@ import { startWith, map } from "rxjs/operators";
 import {MatAccordion} from '@angular/material/expansion';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ViewDetailsComponent } from "./view-details/view-details.component";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {HomeServiceService} from '../../home-service.service'
+
+export interface Fruit {
+  name : string
+}
 
 @Component({
   selector: "app-blood-test",
@@ -18,7 +27,7 @@ import { ViewDetailsComponent } from "./view-details/view-details.component";
 export class BloodTestComponent implements OnInit {
   myControl = new FormControl();
   isSearched: boolean = false;
-  searchText: string = "";
+  
   city: string;
   cities: any = [];
   filteredCities: Observable<string[]>;
@@ -61,10 +70,7 @@ export class BloodTestComponent implements OnInit {
   testcol2 : string[] = ["sugar test.","Vitamins test","Protines enzymes"]
   testcol3 : string[] = ["kidney function tests","basic metabolic panel","glucose tests"]
 
-  options : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test", 
-                        "sugar test.","Vitamins test","Protines enzymes",
-                        "kidney function tests","basic metabolic panel","glucose tests"
-                      ]
+  
   @ViewChild('menu', {static: true}) menu: ElementRef;
   @ViewChild('toggleButton', {static : true}) toggleButton: ElementRef;
 
@@ -72,49 +78,140 @@ export class BloodTestComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private renderer: Renderer2,
-    private matDialog : MatDialog
+    private matDialog : MatDialog,
+    private snackbar : MatSnackBar,
+    private service : HomeServiceService
   ) {
-    
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => fruit ? this._filterfruit(fruit) : this.allFruits.slice()));
+  
+    this.service.currentMessage.subscribe((result)=>{
+      console.log(result)
+      if(result.length > 0) {
+        this.mycart = result
+      }
+    })
   }
-
   
   ngAfterViewInit() {
     this.renderer.listen('window', 'click',(e:Event)=>{
-      /**
-       * Only run when toggleButton is not clicked
-       * If we don't check this, all clicks (even on the toggle button) gets into this
-       * section which in the result we might never see the menu open!
-       * And the menu itself is checked here, and it's where we check just outside of
-       * the menu and button the condition abbove must close the menu
-       */
-      if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
-        //  this.isSearched=false;
+     if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
       }
     });
   }
+
   ngOnInit() {
     // this.getLocation();
     this.getIpClientLocation();
-
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filter(value))
     );
 
     this.myControl.valueChanges.subscribe((value) => this.getCities(value));
-    // var fruits = ["Banana", "Orange", "Apple", "Mango"];
-    // var n = fruits.includes("Mango"); 
-    // console.log(n)
-    this.filteredSearch = this.mycontrol.valueChanges.pipe(
+     this.filteredSearch = this.mycontrol.valueChanges.pipe(
       startWith('' ),
       map(value =>this.filtersearch(value))
     )
+    // this.service.currentMessage.subscribe((result)=>{
+    //   console.log(result)
+    // })
   }
+
+
+  /* -----------------cart open----------------------*/
+  proceed(){
+    this.router.navigateByUrl('blood-test/12345')
+  }
+  /*------------------TOP search open------------------ */
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruitCtrl = new FormControl();
+  filteredFruits: Observable<string[]>;
+  fruits: string[] = ['Lemon', "Apple"];
+  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+
+  @ViewChild('fruitInput', {static : true}) fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static : true}) matAutocomplete: MatAutocomplete;
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.fruits.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+    this.fruitCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.searchcart.indexOf(fruit);
+
+    if (index >= 0) {
+      this.searchcart.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.fruitCtrl.setValue(null);
+  }
+
+  private _filterfruit(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+
+
+
+  searchText: string = "";
+  options : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test", 
+                        "sugar test.","Vitamins test","Protines enzymes",
+                        "kidney function tests","basic metabolic panel","glucose tests"
+                      ]
+
   private filtersearch(value : string) : string[] {
     const filtervalue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().includes(filtervalue))
   }
+  showModel(){
+    if(this.searchText.length < 1) {
+      this.isSearched = true
+    } else {
+      this.isSearched = false
+    }
+    console.log(this.mycontrol.value)
+  }
 
+  mycontrol = new FormControl
+  filteredSearch : Observable<string[]>
+
+  showautocomplete(){
+    console.log("check autocomplete")
+    console.log(this.searchText.length)
+    if(this.searchText.length > 0) {
+      return true
+    } 
+    else{
+      return false
+    }
+  }
+
+  /*--------------------------top search close-----------------------------*/
+  
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.stateList.filter(
@@ -276,28 +373,7 @@ export class BloodTestComponent implements OnInit {
     }
   }
 
-  showModel(){
-    if(this.searchText.length < 1) {
-      this.isSearched = true
-    } else {
-      this.isSearched = false
-    }
-    console.log(this.mycontrol.value)
-  }
-
-  mycontrol = new FormControl
-  filteredSearch : Observable<string[]>
-
-  showautocomplete(){
-    console.log("check autocomplete")
-    console.log(this.searchText.length)
-    if(this.searchText.length > 0) {
-      return true
-    } 
-    else{
-      false
-    }
-  }
+ 
   searchNow(event: Event) {
     console.log(this.searchText);
   }
@@ -307,10 +383,10 @@ export class BloodTestComponent implements OnInit {
   }
 
   shownresultarray = [
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
   ]
 
   callfun(){
@@ -324,16 +400,41 @@ export class BloodTestComponent implements OnInit {
     this.router.navigateByUrl('blood-test/12345')
   }
 
-  addTocart(){
-    if(this.userlogin == false) {
-      this.router.navigateByUrl('signup')
+  mycart: string[]= []      // collect _id of the packages 
+
+  addTocart(index : number){
+    console.log(index);
+    this.mycart.push(this.shownresultarray[index]._id)
+    this.snackbar.open("Package", "Added",  {
+      duration : 1000
+    })
+    this.service.changeMessage(this.mycart);
+  }
+  removeFromcart(index : number) {
+    let _id = this.shownresultarray[index]._id
+    this.mycart = this.mycart.filter((x)=> _id != x)
+    this.snackbar.open("Package", "Removed", {
+      duration : 1000
+    })
+    this.service.changeMessage(this.mycart);
+  }
+  
+
+  checkcart(_id : string) {
+    //console.log(_id)
+    if(this.mycart.includes(_id)){
+      return true
+    }
+    else{
+      return false
     }
   }
+  
 
   packageId : string = "123456"
   viewDetails(index){
-    console.log(index)
-    console.log(this.shownresultarray[index])
+    // console.log(index)
+    // console.log(this.shownresultarray[index])
     this.matDialog.open(ViewDetailsComponent, {
       data : this.shownresultarray[index]
     })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+import {HomeServiceService} from '../../../home-service.service'
 @Component({
   selector: 'app-book-test',
   templateUrl: './book-test.component.html',
@@ -7,11 +8,19 @@ import {Router} from '@angular/router'
 })
 export class BookTestComponent implements OnInit {
 
-  constructor(private router : Router) { }
+  constructor(
+    private router : Router,
+    private service : HomeServiceService
+  ) {
+    this.service.currentMessage.subscribe((result)=>{
+      console.log(result)
+    })
+   }
+
   userlogin : boolean = true
   ngOnInit() {
     if(this.userlogin == false) {
-      this.router.navigateByUrl('/signup')
+     // this.router.navigateByUrl('/signup')
     }
   }
   shownresultarrays =[
@@ -19,8 +28,17 @@ export class BookTestComponent implements OnInit {
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
   ]
-  placeorder : string = ""
+  placeorderClass : string = ""
   changeStyle(event) {
-    this.placeorder = event.type == 'mouseover' ? 'btn-success' : '';
+    this.placeorderClass = event.type == 'mouseover' ? 'btn-success' : '';
+  }
+  addmore(){
+    this.router.navigateByUrl('blood-test')
+  }
+  placeorder(){
+    console.log("next portal")
+  }
+  deletefromCart(index : number) {
+    console.log("delete")
   }
 }

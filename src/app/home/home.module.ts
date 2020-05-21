@@ -8,6 +8,7 @@ import { HomePageRoutes } from "./home.routing";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {
   MatButtonModule,
   MatInputModule,
@@ -50,7 +51,7 @@ import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { BookTestComponent } from './pages/blood-test/book-test/book-test.component';
 import { ViewDetailsComponent } from './pages/blood-test/view-details/view-details.component';
-
+import {HomeServiceService} from './home-service.service'
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -101,7 +102,8 @@ import { ViewDetailsComponent } from './pages/blood-test/view-details/view-detai
     MatDialogModule,
     MatAutocompleteModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   entryComponents: [
     DialogContentExampleDialog,
@@ -112,6 +114,7 @@ import { ViewDetailsComponent } from './pages/blood-test/view-details/view-detai
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: "outline" },
     },
+    HomeServiceService
   ],
 })
 export class HomeModule {}
