@@ -49,6 +49,7 @@ import { SingleEquipmentComponent } from "./pages/single-equipment/single-equipm
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { BookTestComponent } from './pages/blood-test/book-test/book-test.component';
+import { ViewDetailsComponent } from './pages/blood-test/view-details/view-details.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { BookTestComponent } from './pages/blood-test/book-test/book-test.compon
     ContactUsComponent,
     DialogContentExampleDialog,
     BookTestComponent,
+    ViewDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -101,7 +103,10 @@ import { BookTestComponent } from './pages/blood-test/book-test/book-test.compon
     MatExpansionModule,
     MatCardModule
   ],
-  entryComponents: [DialogContentExampleDialog],
+  entryComponents: [
+    DialogContentExampleDialog,
+    ViewDetailsComponent
+  ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

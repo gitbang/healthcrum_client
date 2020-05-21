@@ -3,7 +3,6 @@ body {
   min-height: 110vh;
   flex-direction: column;
 }
-
 main {
   flex: 1 0 auto;
 }
@@ -152,11 +151,6 @@ ul li {
   padding: 5px 10px;
   color: #323232;
 }
-/*
-ul li a {
-  color: #f2cd45;
-  font-weight: bold;
-}*/
 
 ul li a {
   color: gray;
@@ -242,7 +236,7 @@ a{
   text-decoration: line-through;
   margin-right: 5px;
 }
-.offer-prize{
+.offer-price{
   display: inline-block;
   padding-left: 0;
   font-family: Ubuntu,sans-serif;
@@ -251,4 +245,16 @@ a{
   color: #1a9ca6;
   margin-top: -4px;
   margin-bottom: 0;
+}
+.view-details{
+  button{
+    color: #1a9ca6;
+  }
+}
+
+.mycart{
+  border: 1px solid #e87528;
+  margin-bottom: 8px;
+  border-radius: 2px 0 17px;
+  
 }

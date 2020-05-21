@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-7 ml-2 mt-4 mr-1">  
+    <div class="col-md-7  ml-2 mt-4 mr-1">  
       <div class="row"> 
         <div class="col-12">
         <!--
@@ -29,45 +29,50 @@
             <h2>Package Details</h2>
           </div>
           <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
-            <div class="package-details mat-elevation-z4 col-12">
-              <h4> 
-                <span class="test-heading "> {{i + 1}} . {{shownresultarray.name}}
-                </span>
-              </h4>
-              <h4> Includes :<label>{{shownresultarray.includes}}</label></h4>
-              <div class="col-12">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-3 ">
-                    Advantages :
-                  </div>
-                  <div class="col-xs-12 col-sm-4">
-                    <ol>
-                      <li>Advantage 1</li>
-                      <li>Advantage </li>
-                      <li>Advantage 3</li>
-                      <li>Advantage 4</li>
-                    </ol>
-                  </div>
-                  <div class="col-5">
-                    <div class="row">
-                      <div class="col-12">
-                        <span>Number of tests</span>
-                      </div>
-                      <div class="col-12" class="testnumber">
-                        <div class="row">
-                          <div class="col-5"></div>
-                          <label>14</label>
+            <div class="package-details bg-white mat-elevation-z4 col-12 mb-4">
+              <div class="">
+                <h4> 
+                  <span class="test-heading "> {{i + 1}} . {{shownresultarray.name}}
+                  </span>
+                </h4>
+                <h4> Includes :<label>{{shownresultarray.includes}}</label></h4>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-3 ">
+                      Advantages :
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                      <ol>
+                        <li>Advantage 1</li>
+                        <li>Advantage </li>
+                        <li>Advantage 3</li>
+                        <li>Advantage 4</li>
+                      </ol>
+                    </div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div class="col-12">
+                          <span>Number of tests</span>
+                        </div>
+                        <div class="col-12" class="testnumber">
+                          <div class="row">
+                            <div class="col-5"></div>
+                            <label>14</label>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <div class="col-md-8 input-number">
+                      <label>Enter number of person : </label>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Enter number of person</mat-label>
+                        <input matInput type="number">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <button class="btn btn-danger">Delete <mat-icon>delete</mat-icon></button> 
+                    </div>
                   </div>
-                </div>
-                <div class="col-12 input-number">
-                  <label>Enter number of person : </label>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Enter number of person</mat-label>
-                    <input matInput type="number">
-                  </mat-form-field>
                 </div>
               </div>
             </div>
@@ -76,25 +81,58 @@
       </div>
     </div>
 
-
-    <div class="col-4 ml-1 mt-4">
+    <div class="col-md-4 ml-1 mt-4">
       <div class="row package-details-book">
         <h2>Booking Details</h2>
       </div>
       <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
-        <div class=" row package-info mb-4">
-          <div class="col-8">
-            <h2>Blood Test</h2>
-          </div>
-          <div class="offers col-4">
-            <h3>
-              Offer applied
-            </h3>
-          </div>  
+        <div class=" col-12 package-info mb-4">
           <div class="col-12">
-            <label class="delete"> Rs. {{shownresultarray.healcrumPrize}}</label>
-            
-            <label class="current">  Rs. {{shownresultarray.offerprize }}</label>
+            <div class="row">
+              <div class="col-8">
+                <h2>{{i + 1}} .)  Blood Test</h2>
+              </div>
+              <div class="offers col-4">
+                <h3>
+                  Offer applied
+                </h3>
+              </div>  
+              <div class="col-12">
+                <label class="delete"> Rs. {{shownresultarray.healcrumPrize}}</label>
+                
+                <label class="current">  Rs. {{shownresultarray.offerprize }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row overall">
+        <div class="col-12 bg-white mat-elevation-4">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Total prize</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>You save :</td>
+                <td>500</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-12">
+              <button class="btn full-width btn-placeorder" 
+                [ngClass]="placeorder"
+                (mouseover)="changeStyle($event)"
+                (mouseout)="changeStyle($event)"
+                (click)="placeorder()">Place Order
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+            <div class="col-12">
+              <button class="btn full-width btn-default" (click)="addmore()">Add more </button>
+            </div>
           </div>
         </div>
       </div>

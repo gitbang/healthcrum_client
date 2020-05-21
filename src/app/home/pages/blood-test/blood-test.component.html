@@ -3,7 +3,8 @@
 
     <!-- <h3 class="test-heading">{{city}}</h3> -->
     <div class="row">
-      <div class="col-md-7 m-auto">
+      <div class="col-2"></div>
+      <div class="col-md-7 ">
         <div style="display:flex;border-radius: 5px;overflow: hidden;background: #fff;;">
           <div class="city-box">
             <mat-icon matPrefix style="align-self: center;color: #e7e7e7;margin-right: 5px;cursor: pointer;"
@@ -45,7 +46,12 @@
             </div>
             <mat-icon matSuffix style="align-self: center;">search</mat-icon>
           </div>
+          
         </div>
+        
+      </div>
+      <div class="mycart"> 
+        <h3>My cart</h3>
       </div>
     </div>
 
@@ -92,57 +98,6 @@
         <div class="card justify-content-center pt-4 pb-4">
           <h5 class="text-center">Apply Filters</h5>
           <hr>
-        <!--
-          <div class="display" border=1>
-            <button mat-raised-button color="primary" class="mt-1 btn btn-sm changeColor"  *ngFor="let i of display"
-            matTooltip="Click to remove the filter" (click)="removeSideFilters(i)"
-            matBadge="X" matBadgePosition="after" matBadgeColor="warn"
-            >
-            {{i}}</button>
-          </div>
-
-          <mat-accordion class="example-headers-align" multi>
-            <mat-expansion-panel [expanded]="true">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Packages
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div *ngFor="let pack of packages; let i = index ">
-                <mat-checkbox  labelPosition="before" 
-                [checked]="sidepackagescheck(pack.package)" (change)="checkCheckBoxvalue( pack.package ,$event.checked)">
-                {{pack.package}}</mat-checkbox>
-              </div>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Test
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-checkbox labelPosition="before"  [(checked)]="uncheck" class="col-12">Test 1</mat-checkbox>
-              <mat-checkbox labelPosition="before" class="col-12">Test 2</mat-checkbox>
-              <mat-checkbox labelPosition="before" class="col-12">Test 3</mat-checkbox>
-              <mat-checkbox labelPosition="before" class="col-12">Test 4</mat-checkbox>
-            </mat-expansion-panel>
-          </mat-accordion>
-        -->
-          <!--
-          <div class="col-8 a-auto">
-            <mat-form-field class="example-full-width">
-              <mat-checkbox>Packages</mat-checkbox>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <mat-checkbox>Profile Tests</mat-checkbox>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <mat-checkbox>Single Tests</mat-checkbox>
-            </mat-form-field>
-          </div>
-          -->
           <div class=" mt-2">
             <div class="ml-4">
                 <mat-checkbox>Packages</mat-checkbox>
@@ -154,18 +109,18 @@
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    Prize
+                    price
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-checkbox labelPosition="before" class="col-12" 
+                <mat-checkbox labelPosition="after" class="col-12" 
                 (change)="checkCheckBoxvalue( '1000' ,$event.checked)">Less than 1000</mat-checkbox>
-                <mat-checkbox labelPosition="before" class="col-12"
+                <mat-checkbox labelPosition="after" class="col-12"
                 (change)="checkCheckBoxvalue( '1000 - 2000' ,$event.checked)"
                 >1000 - 2000</mat-checkbox>
-                <mat-checkbox labelPosition="before" class="col-12"
+                <mat-checkbox labelPosition="after" class="col-12"
                 (change)="checkCheckBoxvalue( '2000-4000' ,$event.checked)"
                 >2000 - 4000</mat-checkbox>
-                <mat-checkbox labelPosition="before" class="col-12"
+                <mat-checkbox labelPosition="after" class="col-12"
                 (change)="checkCheckBoxvalue( '4000-above' ,$event.checked)"
                 >above 4000</mat-checkbox>
             </mat-expansion-panel>
@@ -194,9 +149,12 @@
                         </h3>
                       </div>                   
                     </div>
-                    <div >
-                      <div >
+                    <div class="row">
+                      <div class="col-md-6">
                         <h4 class="card-title m-0">Blood Test</h4>
+                      </div>
+                      <div class="col-md-6 view-details">
+                        <button class="btn btn-default" (click)="viewDetails(i)">View details</button>
                       </div>
                     </div>
                   </div>
@@ -220,27 +178,27 @@
                         <h5>
                           <label> Report Available in :
                             <span> 
-                              ₹{{shownresult.reportIn }}
+                              {{shownresult.reportIn }}
                             </span>
                           </label>
                         </h5> 
                       </div>
                       <div class="col-12 ">
-                        <h5> <label>Market Prize :
+                        <h5> <label>Market price :
                             <span class="rupeesign">
-                              ₹{{shownresult.marketprize}}
+                              ₹{{shownresult.marketprice}}
                             </span>
                            </label> 
                         </h5>
                       </div>
                       <div class="col-12 ">
                         <h5>
-                          <label>HealthCrum Prize : </label>
+                          <label>HealthCrum price : </label>
                           <span class="rupeesign delete-text">
-                            ₹{{shownresult.healcrumPrize}}
+                            ₹{{shownresult.healcrumprice}}
                           </span>
-                          <span class="offer-prize">
-                             ₹{{shownresult.offerprize}}
+                          <span class="offer-price">
+                             ₹{{shownresult.offerprice}}
                           </span>
                         </h5>
                       </div>

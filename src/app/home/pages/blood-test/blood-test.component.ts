@@ -7,6 +7,8 @@ import { UserLocationModal } from "../../../models/userLocation";
 import { FormControl } from "@angular/forms";
 import { startWith, map } from "rxjs/operators";
 import {MatAccordion} from '@angular/material/expansion';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ViewDetailsComponent } from "./view-details/view-details.component";
 
 @Component({
   selector: "app-blood-test",
@@ -68,9 +70,10 @@ export class BloodTestComponent implements OnInit {
 
   constructor(
     private router: Router,
-     private http: HttpClient,
-     private renderer: Renderer2
-    ) {
+    private http: HttpClient,
+    private renderer: Renderer2,
+    private matDialog : MatDialog
+  ) {
     
   }
 
@@ -281,8 +284,10 @@ export class BloodTestComponent implements OnInit {
     }
     console.log(this.mycontrol.value)
   }
+
   mycontrol = new FormControl
   filteredSearch : Observable<string[]>
+
   showautocomplete(){
     console.log("check autocomplete")
     console.log(this.searchText.length)
@@ -302,23 +307,35 @@ export class BloodTestComponent implements OnInit {
   }
 
   shownresultarray = [
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
+    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
   ]
+
   callfun(){
     console.log("reached")
     this.isSearched = false
   }
 
   userlogin : boolean = false
+  
   booknow(){
     this.router.navigateByUrl('blood-test/12345')
   }
+
   addTocart(){
     if(this.userlogin == false) {
       this.router.navigateByUrl('signup')
     }
+  }
+
+  packageId : string = "123456"
+  viewDetails(index){
+    console.log(index)
+    console.log(this.shownresultarray[index])
+    this.matDialog.open(ViewDetailsComponent, {
+      data : this.shownresultarray[index]
+    })
   }
 }

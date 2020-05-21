@@ -19,4 +19,8 @@ export class BookTestComponent implements OnInit {
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
   ]
+  placeorder : string = ""
+  changeStyle(event) {
+    this.placeorder = event.type == 'mouseover' ? 'btn-success' : '';
+  }
 }
