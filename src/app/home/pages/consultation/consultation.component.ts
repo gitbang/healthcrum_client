@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from '@angular/router'
+import {HomeServiceService } from '../../home-service.service'
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.component.html',
@@ -7,27 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router : Router,
+    private service : HomeServiceService
+  ) { }
 
   ngOnInit() {
   }
 
   doctors = [ 
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
-    {image : '', name : 'Mr Bawa', experience : '10+ years', speciality : 'Heart'},
+    {_id : "1", image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "2",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "3",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "4",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "5",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "6",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "7",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
+    {_id : "8",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
   ]
-  shownresultarray = [
-    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-  ]
+  knowMore(index){
+    console.log(index);
+    console.log(this.doctors[index]._id)
+    this.service.changedoctor(this.doctors[index])
+    this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index]._id)
+  }
 }

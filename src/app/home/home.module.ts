@@ -52,7 +52,8 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { BookTestComponent } from './pages/blood-test/book-test/book-test.component';
 import { ViewDetailsComponent } from './pages/blood-test/view-details/view-details.component';
 import {HomeServiceService} from './home-service.service';
-import { AddMemberComponent } from './pages/blood-test/add-member/add-member.component'
+import { AddMemberComponent } from './pages/blood-test/add-member/add-member.component';
+import { ViewDoctorDetailsComponent } from './pages/consultation/view-doctor-details/view-doctor-details.component'
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -74,6 +75,7 @@ import { AddMemberComponent } from './pages/blood-test/add-member/add-member.com
     BookTestComponent,
     ViewDetailsComponent,
     AddMemberComponent,
+    ViewDoctorDetailsComponent,
   ],
   imports: [
     CommonModule,

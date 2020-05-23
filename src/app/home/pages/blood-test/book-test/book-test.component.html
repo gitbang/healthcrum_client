@@ -8,7 +8,7 @@
               <h2>Package Details</h2>
             </div>
             <div class="col-6 add-members">
-              <button class="btn-default" (click)="addMember()">Add Member</button>
+              <button class="btn btn-default" (click)="addMember()">Add Member</button>
             </div>
           </div>
           <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
@@ -16,7 +16,7 @@
               <div class="">
                 <h4> 
                   <span class="test-heading"> 
-                    {{i + 1}} . {{shownresultarray.name}}
+                     {{shownresultarray.name}}
                   </span>
                 </h4>
                 <h4> Includes :<label>{{shownresultarray.includes}}</label></h4>
@@ -47,11 +47,50 @@
                       </div>
                     </div>
                     <div class="col-md-8 input-number">
-                      <label>Enter number of person : </label>
-                      <mat-form-field appearance="outline">
-                        <mat-label>Enter number of person</mat-label>
-                        <input matInput type="number">
-                      </mat-form-field>
+
+                      <div class="row">
+                        <div class="col-4 col-lg-4">
+                          <label>Select test for : </label>  
+                        </div>
+                        <div class="col-8">
+                          <mat-checkbox 
+                            (change)="testForMe( $event.checked, i)"
+                          >For me</mat-checkbox>
+                          <mat-checkbox class="ml-2"
+                            (change)="testForMember($event.checked, i)"
+                          >Other Member</mat-checkbox>
+                        </div>
+                      </div>
+                      
+                      <div class="row" *ngIf= "testfor.value[i].others">
+                        <div class="col-12">
+                          <mat-form-field class="example-chip-list">
+                            <mat-chip-list #chipList aria-label="Fruit selection">
+                              <mat-chip
+                                *ngFor="let member of testfor.value[i].otherlist"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="remove(member, i)">
+                                {{member}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                              </mat-chip>
+                              <input
+                                placeholder="Add members"
+                                #memberInput
+                                [formControl]="memberCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)">
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event, i)">
+                              <mat-option *ngFor="let member of filteredMembers | async" [value]="member">
+                                {{member}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-md-3 mb-3">
                       <button class="btn btn-danger" (click)="deletefromCart(i)">Delete <mat-icon>delete</mat-icon></button> 
@@ -59,7 +98,6 @@
                     <div class="col-12">
                       <div class="row">
                         <div class="">
-                          
                         </div>
                       </div>
                     </div>
@@ -74,7 +112,7 @@
 
     <div class="col-md-4 ml-1 mt-4">
       <div class="row package-details-book">
-        <h2>Booking Details</h2>
+        <h2>Balance Details</h2>
       </div>
       <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
         <div class=" col-12 package-info mb-4">
@@ -89,9 +127,9 @@
                 </h3>
               </div>  
               <div class="col-12">
-                <label class="delete"> Rs. {{shownresultarray.healcrumPrize}}</label>
+                <label class="delete"> ₹ {{shownresultarray.healcrumPrize}}</label>
                 
-                <label class="current">  Rs. {{shownresultarray.offerprize }}</label>
+                <label class="current">  ₹ {{shownresultarray.offerprize }}</label>
               </div>
             </div>
           </div>

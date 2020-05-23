@@ -91,6 +91,7 @@ mat-card-title{
     font-family: Ubuntu,sans-serif;
     font-size: 15px;
     font-weight: 600;
+    
 }
 .testnumber{
     text-align: center;
@@ -135,4 +136,11 @@ mat-card-title{
 }
 .add-members{
     float: right;
+}
+
+input{
+    width: 100%;
+}
+.example-chip-list{
+    width: 100%;
 }

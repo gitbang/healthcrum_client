@@ -18,6 +18,10 @@ $blue : #00A0A8;
     background-color: $blue;
     color: white;
 }*/
+.btn{
+    width: 100%;
+    border-radius: 25px;
+}
 
 .center{
     display: block;
@@ -26,7 +30,6 @@ $blue : #00A0A8;
     width: 50%;
 }
 .btn-danger{
-    border-radius: 25px;
     background-color: $yellow;
     color: white;
 }

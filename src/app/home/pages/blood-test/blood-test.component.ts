@@ -86,7 +86,7 @@ export class BloodTestComponent implements OnInit {
       startWith(null),
       map((fruit: string | null) => fruit ? this._filterfruit(fruit) : this.allFruits.slice()));
   
-    this.service.currentMessage.subscribe((result)=>{
+    this.service.currentCart.subscribe((result)=>{
       console.log(result)
       if(result.length > 0) {
         this.mycart = result

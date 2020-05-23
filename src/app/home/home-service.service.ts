@@ -5,14 +5,28 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HomeServiceService {
 
-  private messageSource = new BehaviorSubject([]);
-  currentMessage = this.messageSource.asObservable();
+  
 
+  constructor() {   
+  }
+
+  //-----------user cart ----------------//
+
+  private messageSource = new BehaviorSubject([]);
+  currentCart = this.messageSource.asObservable();
   changeMessage(message: string[]) {
     this.messageSource.next(message)
     console.log(this.messageSource)
   }
-  constructor() { 
-    
+
+  //--------single doctor details --------//
+
+  private doctorselectedforDetails = new BehaviorSubject({});
+  currendoctor = this.doctorselectedforDetails.asObservable();
+
+  changedoctor(message : object) {
+    console.log(message);
+    this.doctorselectedforDetails.next(message)
   }
+
 }

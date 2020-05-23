@@ -27,7 +27,7 @@
   </div>
   <div class="col-12">
     <div class="row">
-      <div class="col-md-3 col-lg-2 mt-4">
+      <div class="col-md-2 col-lg-2 mt-4">
         <div class="row">
           <mat-accordion>
             <mat-expansion-panel>
@@ -95,17 +95,19 @@
       <div class="col-md-9 ml-2">
         <div class="row">
           
-          <div class="col-md-4 col-lg-3 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
+          <div class="col-md-6 col-lg-4 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
             <div class="row">
               <div class="col-12">
                 <div class="card mt-0 mat-elevation-z3">
                   <div class="card-header card-header-primary card-header-icon">
+                    
                     <div class="row">
+                    
                       <div class="col-12">
-                        <img src="././assets/img/faces/marc.jpg" 
+                        <img src={{doctor.image}} 
                         alt="loading..." 
-                        height="100px" 
-                        width="60px" 
+                        height="105%" 
+                        width="100%" 
                         class="center">
                       </div>
                     </div>
@@ -125,15 +127,26 @@
                             <td>{{doctor.experience}}</td>
                           </tr>
                           <tr>
-                            <td>Speciality</td>
-                            <td>{{doctor.speciality}}</td>
+                            <td>Emergency consultation :</td>
+                            <td>{{doctor.emergency}}</td>
+                          </tr>
+                          <tr>
+                            <td>Telephone timing :</td>
+                            <td>{{doctor.timing}}</td>
+                          </tr>
+                          <tr>
+                            <td>Fees :</td>
+                            <td>Rs. {{doctor.fee}} </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                     <div class="row">
-                      <div class="col-6">
-                        <button class="btn btn-danger booknow" >Book Appointment<mat-icon>arrow_forward</mat-icon></button>
+                      <div class="col-12">
+                        <button class="btn btn-danger booknow" >Book Appointment <mat-icon>arrow_forward</mat-icon></button>
+                      </div>
+                      <div class="col-12">
+                        <button class="btn btn-info booknow" (click)="knowMore(i)" ><mat-icon>control_point</mat-icon> Know More</button>
                       </div>
                     </div>
                     
