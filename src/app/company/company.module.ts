@@ -12,12 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { AppointmentComponent } from "./pages/appointment/appointment.component";
 import { MedicalRecordComponent } from "./pages/medical-record/medical-record.component";
-import { PerscriptionComponent } from "./pages/perscription/perscription.component";
-import { OdersComponent } from "./pages/oders/oders.component";
-import { RecommendComponent } from "./pages/recommend/recommend.component";
-import { ServiceComponent } from "./pages/service/service.component";
 import { EventsArticleComponent } from "./pages/events-article/events-article.component";
-import { EmployeeCheckupComponent } from "./pages/employee-checkup/employee-checkup.component";
 import { EmployeeRegistrationComponent } from "./pages/employee-registration/employee-registration.component";
 import { FeedbackComponent } from "./pages/feedback/feedback.component";
 import { EmployeeTrackingComponent } from "./pages/employee-tracking/employee-tracking.component";
@@ -80,12 +75,7 @@ import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
     DashboardComponent,
     AppointmentComponent,
     MedicalRecordComponent,
-    PerscriptionComponent,
-    OdersComponent,
-    RecommendComponent,
-    ServiceComponent,
     EventsArticleComponent,
-    EmployeeCheckupComponent,
     EmployeeRegistrationComponent,
     FeedbackComponent,
     EmployeeTrackingComponent,

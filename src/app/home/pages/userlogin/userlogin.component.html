@@ -19,18 +19,18 @@
 
             </div>
             <div class="box_login last">
-              <mat-form-field class="example-full-width" appearance="outline">
+              <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Login Id</mat-label>
                 <input type="text" matInput [(ngModel)]="user_email" name="user_email"
-                  placeholder="userid / email / phone number">
+                  placeholder="userid / email / phone number" required>
               </mat-form-field>
               <!-- <div class="form-group">
                 <input type="email" class="form-control" placeholder="userid / email / phone number"
                   [(ngModel)]="user_email" name="user_email">
               </div> -->
-              <mat-form-field class="example-full-width" appearance="outline">
+              <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Password</mat-label>
-                <input type="password" matInput [(ngModel)]="user_pass" name="user_pass">
+                <input type="password" matInput [(ngModel)]="user_pass" name="user_pass" required>
               </mat-form-field>
               <div class="form-group">
 
@@ -57,27 +57,34 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-info">
-        <h5 class="card-title text-white" id="forgotModalLabel">Get Password Reset Link</h5>
+        <h5 class="card-title text-white" id="forgotModalLabel">Password Reset Form</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-row">
-          <div class="col">
-            <input type="email" class="form-control" placeholder="Email Address" required>
+          <div class="col-12">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input type="text" matInput [(ngModel)]="forgot_email" name="forgot_email" placeholder="email address">
+            </mat-form-field>
           </div>
-          <div class="col">
-            <button (click)="sendResetLink()" class="btn btn-primary btn-round">
-              <i class="material-icons">send</i> Send
-            </button>
+          <div class="col-12 text-center mt-3">
+            <!-- <button (click)="sendResetLink()" class="btn btn-primary">
+              <i class="material-icons">send</i> 
+            send link
+            </button> -->
           </div>
         </div>
       </div>
-      <!-- <div class="modal-footer">
+      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
+        <button (click)="sendResetLink()" class="btn btn-primary">
+          <!-- <i class="material-icons">send</i>  -->
+          send link
+        </button>
+      </div>
     </div>
   </div>
 </div>

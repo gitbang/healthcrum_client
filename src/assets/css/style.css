@@ -41,6 +41,36 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* 1.  SITE STRUCTURE and TYPOGRAPHY */
 /*============================================================================================*/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
+.location-selection-map{
+  width: 100% !important;
+  height: 62vh !important;
+}
+.logofileinput .thumbnail > img {
+  max-height: 150px !important;
+  width: 150px !important;
+}
+.form-top-line {
+  position: relative;
+  padding: 22px 0px 0px 0px;
+  border-top: 1px solid #e0dede;
+  margin: 12px -15px 20px -15px;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.form-top-line p {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  background: #f6f6f6;
+  padding: 5px 12px;
+  text-transform: capitalize;
+  color: #10120ce6;
+  font-size: 0.9rem;
+}
+
+.full-width {
+  width: 100%;
+}
 .bg-purple {
   background-color: #7a67bb;
 }

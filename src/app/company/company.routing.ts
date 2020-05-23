@@ -3,16 +3,11 @@ import { CompanyComponent } from "./company.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { AppointmentComponent } from "./pages/appointment/appointment.component";
 import { MedicalRecordComponent } from "./pages/medical-record/medical-record.component";
-import { OdersComponent } from "./pages/oders/oders.component";
-import { PerscriptionComponent } from "./pages/perscription/perscription.component";
-import { RecommendComponent } from "./pages/recommend/recommend.component";
 import { EventsArticleComponent } from "./pages/events-article/events-article.component";
-import { EmployeeCheckupComponent } from "./pages/employee-checkup/employee-checkup.component";
 import { EmployeeRegistrationComponent } from "./pages/employee-registration/employee-registration.component";
 import { FeedbackComponent } from "./pages/feedback/feedback.component";
 import { EmployeeTrackingComponent } from "./pages/employee-tracking/employee-tracking.component";
 import { HealthAnalysisComponent } from "./pages/health-analysis/health-analysis.component";
-import { ServiceComponent } from "./pages/service/service.component";
 import { HealthStatusComponent } from "./pages/health-status/health-status.component";
 import { BookedAppointmentComponent } from "./pages/booked-appointment/booked-appointment.component";
 
@@ -27,5 +22,5 @@ export const CompanyRoutes: Routes = [
   { path: "feedback", component: FeedbackComponent },
   { path: "employee-tracking", component: EmployeeTrackingComponent },
   { path: "health-analysis", component: HealthAnalysisComponent },
-  { path: "service", component: DashboardComponent }
+  { path: "service", component: DashboardComponent },
 ];

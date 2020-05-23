@@ -2,25 +2,26 @@ import { Component, OnInit } from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from "@angular/common/http";
 import {
   faFacebookSquare,
-  faGooglePlusG
+  faGooglePlusG,
 } from "@fortawesome/free-brands-svg-icons";
 import { AuthService, SocialUser } from "angularx-social-login";
 import { AuthServiceLocal } from "../../../services/auth-service.service";
 import {
   FacebookLoginProvider,
-  GoogleLoginProvider
+  GoogleLoginProvider,
 } from "angularx-social-login";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
+// import * as $ from "bootstrap";
 @Component({
   selector: "app-userlogin",
   templateUrl: "./userlogin.component.html",
-  styleUrls: ["./userlogin.component.scss"]
+  styleUrls: ["./userlogin.component.scss"],
 })
 export class UserloginComponent implements OnInit {
   google = faGooglePlusG;
@@ -28,6 +29,7 @@ export class UserloginComponent implements OnInit {
 
   user_email: String;
   user_pass: String;
+  forgot_email: string;
   constructor(
     private authService: AuthService,
     private http: HttpClient,
@@ -38,7 +40,7 @@ export class UserloginComponent implements OnInit {
   }
   signInCallback(authResult) {
     if (authResult.code) {
-      $.post("/auth/google/callback", { code: authResult.code }).done(function(
+      $.post("/auth/google/callback", { code: authResult.code }).done(function (
         data
       ) {
         $("#signinButton").hide();
@@ -53,12 +55,12 @@ export class UserloginComponent implements OnInit {
   signInWithGoogle(): void {
     this.authService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then(user => {
+      .then((user) => {
         if (user) {
           let u = {
             name: user.name,
             id: user.id,
-            image: user.photoUrl
+            image: user.photoUrl,
           };
           //save user data in DB if not there
           this.authLocal.saveUser(JSON.stringify(u));
@@ -67,7 +69,7 @@ export class UserloginComponent implements OnInit {
           swal.fire("Error", "Google Authentication Failed !", "error");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         swal.fire("Error!", "Login Failed", "error");
       });
   }
@@ -81,22 +83,28 @@ export class UserloginComponent implements OnInit {
   }
 
   sendResetLink(): void {
+    let data = {
+      email: this.forgot_email,
+      type: "reset-link",
+    };
+    this.forgot_email = "";
+    // $("#forgotModal").hide();
     swal.fire("Success!", "Email sent successfully !", "success");
   }
 
   loginLocal(): void {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
+        "Content-Type": "application/json",
+      }),
     };
     let data = {
       email: this.user_email,
-      password: this.user_pass
+      password: this.user_pass,
     };
 
     this.authLocal.loginUser(data, httpOptions).subscribe(
-      data => {
+      (data) => {
         // this.alertService.success('Registration successful', true);
         // this.router.navigate(["/patient/dashboard"]);
         // console.log(data);

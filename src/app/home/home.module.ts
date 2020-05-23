@@ -46,6 +46,8 @@ import { EquipmentsComponent } from "./pages/equipments/equipments.component";
 import { SingleEquipmentComponent } from "./pages/single-equipment/single-equipment.component";
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
+import { AfterSocialSignupComponent } from "./pages/after-social-signup/after-social-signup.component";
+import { AfterLocalSignupComponent } from "./pages/after-local-signup/after-local-signup.component";
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
     AboutUsComponent,
     ContactUsComponent,
     DialogContentExampleDialog,
+    AfterSocialSignupComponent,
+    AfterLocalSignupComponent,
   ],
   imports: [
     CommonModule,

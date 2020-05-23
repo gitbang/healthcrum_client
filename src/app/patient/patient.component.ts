@@ -10,6 +10,6 @@ import { Router } from "@angular/router";
 export class PatientComponent implements OnInit {
   constructor(private router: Router) {}
   ngOnInit() {
-    // this.router.navigate(["/patient/hra-report-fill"]);
+    this.router.navigate(["/patient/hra-report-fill"]);
   }
 }

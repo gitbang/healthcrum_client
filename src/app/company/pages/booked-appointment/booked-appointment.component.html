@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-  <div class="col-md-12">
+  <div class="col-md-12 p-0">
     <div class="card m-0">
       <div class="card-header card-header-success card-header-icon">
         <div class="card-icon">
@@ -13,7 +13,7 @@
 
         </div>
         <div class="row mt-5">
-          <div class="col-md-3 mr-3">
+          <div class="col-md-3">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>From</mat-label>
               <input matInput [matDatepicker]="picker_start">
@@ -29,7 +29,7 @@
               <mat-datepicker #picker_end></mat-datepicker>
             </mat-form-field>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 pb-3">
             <button class="btn btn-info">search</button>
           </div>
         </div>
@@ -39,7 +39,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-8 m-auto">
-            <h4 class="m-0">Appointment booked by employes</h4>
+            <h4 class="m-0">Employees Appointment's</h4>
           </div>
           <div class="col-md-3 mx-auto">
 
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="table-responsive">
-          <table mat-table [dataSource]="list" scrollX="true" minWidth="400" class="text-center">
+          <table mat-table [dataSource]="list" scrollX="true" minWidth="400" class="table text-center">
 
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Name </th>

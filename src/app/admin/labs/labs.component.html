@@ -101,66 +101,147 @@
                 </table>
               </div>
               <div class="tab-pane" id="add-Lab">
-                <div class="container-fluid">
-                  <form class="form" method="" action="">
-                    <div class="card-body">
+                <div class="card-body">
+                  <form [formGroup]="labFormGroup">
+
+                    <div class="row form-top-line">
+                      <p>Lab Basic Details</p>
                       <div class="row">
-                        <div class="col-lg-4 col-md-6">
-
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                          <div class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-addon">
-                                <i class="material-icons">face</i>
+                        <div class="col-md-3">
+                          <div class="fileinput logofileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail img-raised">
+                              <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png"
+                                rel="nofollow" alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                            <div style="display:flex">
+                              <span class="btn btn-raised btn-round btn-default btn-file btn-sm">
+                                <span class="fileinput-new">Select logo</span>
+                                <span class="fileinput-exists">Change logo</span>
+                                <input type="file" name="logo" formControlName="lab_logo" />
                               </span>
-                              <input type="text" class="form-control" placeholder="First Name...">
+                              <button class="btn btn-danger btn-round fileinput-exists btn-sm"
+                                data-dismiss="fileinput"><i class="fa fa-times"></i> Remove logo</button>
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
-                          <div class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-addon">
-                                <i class="material-icons">email</i>
-                              </span>
-                              <input type="text" class="form-control" placeholder="Email...">
+                        <div class="col-md-8">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="full-width">
+                                <mat-label>Lab Name</mat-label>
+                                <input matInput formControlName="lab_name">
+                              </mat-form-field>
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                          <div class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-addon">
-                                <i class="material-icons">lock_outline</i>
-                              </span>
-                              <input type="password" placeholder="Password..." class="form-control" />
+                            <div class="col-md-6">
+                              <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Lab Certification Type</mat-label>
+                                <mat-select formControlName="lab_certification">
+                                  <mat-option [value]="cert" *ngFor="let cert of certifications">{{cert}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                              <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Contract Number</mat-label>
+                                <input matInput type="text" formControlName="contract_number" name="contract_number"
+                                  placeholder="Contract Number">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6" style="position: relative;">
+                              <label class="lab-contract-file-label ">Lab Contract File</label>
+                              <input type="file" formControlName="contract_file" (change)="labContractChange($event)"
+                                class="col-md-12" style="padding: 14px 5px 5px 5px;">
                             </div>
                           </div>
                         </div>
                       </div>
 
                     </div>
-                    <div class="modal-footer justify-content-center">
-                      <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+
+
+                    <div class="row form-top-line">
+                      <p>Lab Address</p>
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>State</mat-label>
+                          <input matInput placeholder="Ex. Maharastra">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>City</mat-label>
+                          <input matInput #postalCode placeholder="lab city">
+
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+
+                        <mat-form-field class="full-width">
+                          <mat-label>Area name</mat-label>
+                          <textarea matInput></textarea>
+                        </mat-form-field>
+
+                      </div>
+                      <div class="col-md-2" style="align-self: flex-start;">
+                        <button class="btn btn-white btn-round btn-just-icon btn-lg" (click)="openMap()">
+                          <mat-icon class="text-danger">room</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="row form-top-line">
+                      <p>Lab Working day and time</p>
+                      <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Start Working Day</mat-label>
+                          <mat-select formControlName="lab_working_from">
+                            <mat-option [value]="day" *ngFor="let day of days">{{day}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>End Working Day</mat-label>
+                          <mat-select formControlName="lab_working_to">
+                            <mat-option [value]="day" *ngFor="let day of days">{{day}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-6 col-md-3">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Opening Time</mat-label>
+                          <input matInput type="time" min="00:00" max="24:00" formControlName="lab_open_time">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-6 col-md-3">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Closing Time</mat-label>
+                          <input matInput type="time" min="00:00" max="24:00" formControlName="lab_close_time">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 col-mb-5 mb-3">
+                        <button class="btn btn-warning" (click)="bookappointment()"
+                          [disabled]="labFormGroup.invalid">Add
+                          Lab</button>
+                      </div>
                     </div>
                   </form>
-                </div>
-              </div>
 
+
+
+                </div>
+
+              </div>
             </div>
+
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
 </div>

@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {
   faFacebookSquare,
   faGooglePlusG,
@@ -109,19 +105,15 @@ export class SignupComponent implements OnInit {
       gender: this.user_gender,
       user_type: this.user_type,
     };
-    console.log(data);
+
     swal.fire("success!", "Registration successfull", "success");
   }
+  setUserType(type) {
+    if (type == 1) this.user_type = "patient";
+    else if (type == 2) this.user_type = "company";
+    else if (type == 3) this.user_type = "doctor";
+  }
 
-  setUserPatient() {
-    this.user_type = "patient";
-  }
-  setUserCompany() {
-    this.user_type = "company";
-  }
-  setUserDoctor() {
-    this.user_type = "doctor";
-  }
   showAgree() {
     this.agree = !this.agree;
   }
@@ -177,7 +169,7 @@ export class SignupComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 }

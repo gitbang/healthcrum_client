@@ -1,99 +1,10 @@
 <main>
   <div class="bg_color_2">
     <div class="container margin_60_35">
-      <!-- <div id="login">
-        <h1>Signup to Healthcrum!</h1>
-        <form>
-          <div class="box_form clearfix">
-            <div class="box_login">
-              <h4><b>Signup using</b> </h4>
-              <hr>
-              (click)="signInWithGoogle()"
-              <button class="btn btn-social btn-google w-75 mb-3">
-                <span>
-                  <fa-icon [icon]="google" class="fa-google-icon"></fa-icon>
-                </span> <span>Sign up with Google</span></button>
-              <button class="btn btn-social btn-facebook w-75">
-                <span>
-                  <fa-icon [icon]="fb" class="fa-facebook-icon"></fa-icon>
-                </span> <span>Sign up with Facebook</span></button>
-
-            </div>
-            <div class="box_login last">
-              <h4><b>Signup using Email</b></h4>
-              <hr>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Full name" [(ngModel)]="user_name" name="user_name"
-                  id="fname" required>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="user_email"
-                  name="user_email" id="email" required>
-              </div>
-              <div class="form-group">
-                <input type="tel" class="form-control" placeholder="Phone Number" [(ngModel)]="user_mob" name="user_mob"
-                  id="mob" required>
-              </div>
-              <div class="form-group bmd-form-group">
-                <label for="exampleInput1" class="bmd-label-floating">With Floating Label</label>
-                <input type="email" class="form-control" id="exampleInput1">
-                <span class="bmd-help">We'll never share your email with anyone else.</span>
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control validate valid" placeholder="Your password"
-                  [(ngModel)]="user_pass" name="user_pass" id="password" required>
-
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="confirm password" [(ngModel)]="user_cpass"
-                  name="user_cpass" id="cpassword" id="cpass" required>
-              </div>
-
-              <div class="form-group">
-                <input class="btn btn-info" type="submit" value="Signup" (click)="signupUser()">
-              </div>
-            </div>
-          </div>
-        </form>
-        <p class="text-center link_bright">Alredy have an account ? <a routerLink="/login"><strong>Login
-              now!</strong></a></p>
-      </div> -->
-      <!-- /login -->
       <div class="main main-raised m-auto">
         <div class="row m-0">
-          <!-- <div class="col-md-12 ml-auto mr-auto">
-            <h2 class="text-center title">Join Healthcrum</h2>
-
-            <form class="contact-form">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group bmd-form-group">
-                    <label class="bmd-label-floating">Your Name</label>
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group bmd-form-group">
-                    <label class="bmd-label-floating">Your Email</label>
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group bmd-form-group">
-                <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
-                <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
-              </div>
-              <div class="row">
-                <div class="col-md-4 ml-auto mr-auto text-center">
-                  <button class="btn btn-primary btn-raised">
-                    Send Message
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div> -->
           <div class="card card-login m-0">
-            <form class="form" method="" action="">
+            <form class="form">
               <div class="text-center p-2">
                 <h3 class="py-1 text-center mt-1 heading-title">Join Healthcrum</h3>
                 <div class="social-pane">
@@ -217,21 +128,21 @@
                     <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
 
                       <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserPatient()">
+                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserType(1)">
                           <i>
                             <fa-icon [icon]="patient"></fa-icon>
                           </i> Patient
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserCompany()">
+                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserType(2)">
                           <i>
                             <fa-icon [icon]="company"></fa-icon>
                           </i> Company
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserDoctor()">
+                        <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserType(3)">
                           <i>
                             <fa-icon [icon]="doctor"></fa-icon>
                           </i> Doctor
@@ -298,10 +209,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
     </div>
   </div>
 </div>

@@ -5,21 +5,7 @@ import {
   MatTableDataSource,
   MatPaginator,
 } from "@angular/material";
-import {
-  faBezierCurve,
-  faHospital,
-  faFlask,
-  faUserMd,
-  faBoxOpen,
-  faVials,
-  faStethoscope,
-  faFirstAid,
-  faMedkit,
-  faNotesMedical,
-  faWeight,
-  faCity,
-  faCodeBranch,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { MatDialog } from "@angular/material";
 import { ShowListComponent } from "./show-list/show-list.component";
 import { CompanyService } from "../../company.service";

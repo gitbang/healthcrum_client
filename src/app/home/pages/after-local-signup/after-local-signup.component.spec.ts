@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServiceComponent } from './service.component';
+import { AfterLocalSignupComponent } from './after-local-signup.component';
 
-describe('ServiceComponent', () => {
-  let component: ServiceComponent;
-  let fixture: ComponentFixture<ServiceComponent>;
+describe('AfterLocalSignupComponent', () => {
+  let component: AfterLocalSignupComponent;
+  let fixture: ComponentFixture<AfterLocalSignupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServiceComponent ]
+      declarations: [ AfterLocalSignupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ServiceComponent);
+    fixture = TestBed.createComponent(AfterLocalSignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

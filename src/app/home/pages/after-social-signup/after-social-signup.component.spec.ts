@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecommendComponent } from './recommend.component';
+import { AfterSocialSignupComponent } from './after-social-signup.component';
 
-describe('RecommendComponent', () => {
-  let component: RecommendComponent;
-  let fixture: ComponentFixture<RecommendComponent>;
+describe('AfterSocialSignupComponent', () => {
+  let component: AfterSocialSignupComponent;
+  let fixture: ComponentFixture<AfterSocialSignupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecommendComponent ]
+      declarations: [ AfterSocialSignupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecommendComponent);
+    fixture = TestBed.createComponent(AfterSocialSignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

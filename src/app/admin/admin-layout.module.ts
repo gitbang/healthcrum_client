@@ -17,7 +17,7 @@ import { NgWizardModule, NgWizardConfig, THEME } from "ng-wizard";
 import { TestProfilesComponent } from "./test-profiles/test-profiles.component";
 import { DataTablesModule } from "angular-datatables";
 const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.dots
+  theme: THEME.dots,
 };
 
 import {
@@ -37,11 +37,14 @@ import {
   MatCheckboxModule,
   MatIconModule,
   MatChipsModule,
-  MatAutocompleteModule
+  MatDialogModule,
+  MatAutocompleteModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from "@angular/material";
 
 import { AdminLayoutComponent } from "./admin-layout.component";
-
+import { MapLocationSelectorComponent } from "./shared/map-location-selector/map-location-selector.component";
+import { AgmCoreModule } from "@agm/core";
 @NgModule({
   imports: [
     CommonModule,
@@ -68,7 +71,11 @@ import { AdminLayoutComponent } from "./admin-layout.component";
     MatChipsModule,
     MatAutocompleteModule,
     DataTablesModule,
-    NgWizardModule.forRoot(ngWizardConfig)
+    MatDialogModule,
+    NgWizardModule.forRoot(ngWizardConfig),
+    AgmCoreModule.forRoot({
+      apiKey: "YOUR_GOOGLE_MAPS_API_KEY",
+    }),
   ],
   declarations: [
     AdminLayoutComponent,
@@ -80,9 +87,17 @@ import { AdminLayoutComponent } from "./admin-layout.component";
     PackagesComponent,
     TestsComponent,
     TestProfilesComponent,
-    TableListComponent
+    TableListComponent,
+    MapLocationSelectorComponent,
   ],
   exports: [RouterModule],
-  bootstrap: [AdminLayoutComponent]
+  bootstrap: [AdminLayoutComponent],
+  entryComponents: [MapLocationSelectorComponent],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: "outline" },
+    },
+  ],
 })
 export class AdminLayoutModule {}
