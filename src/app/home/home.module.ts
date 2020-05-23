@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomepageComponent } from "./components/homepage.component";
 import { HomePageRoutes } from "./home.routing";
 import { SlickCarouselModule } from "ngx-slick-carousel";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatCardModule } from "@angular/material/card";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {
   MatButtonModule,
   MatInputModule,
@@ -48,6 +51,11 @@ import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { AfterSocialSignupComponent } from "./pages/after-social-signup/after-social-signup.component";
 import { AfterLocalSignupComponent } from "./pages/after-local-signup/after-local-signup.component";
+import { BookTestComponent } from "./pages/blood-test/book-test/book-test.component";
+import { ViewDetailsComponent } from "./pages/blood-test/view-details/view-details.component";
+import { HomeServiceService } from "./home-service.service";
+import { AddMemberComponent } from "./pages/blood-test/add-member/add-member.component";
+import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-details/view-doctor-details.component";
 
 @NgModule({
   declarations: [
@@ -67,8 +75,10 @@ import { AfterLocalSignupComponent } from "./pages/after-local-signup/after-loca
     AboutUsComponent,
     ContactUsComponent,
     DialogContentExampleDialog,
-    AfterSocialSignupComponent,
-    AfterLocalSignupComponent,
+    BookTestComponent,
+    ViewDetailsComponent,
+    AddMemberComponent,
+    ViewDoctorDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -98,13 +108,21 @@ import { AfterLocalSignupComponent } from "./pages/after-local-signup/after-loca
     HttpClientJsonpModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatSnackBarModule,
   ],
-  entryComponents: [DialogContentExampleDialog],
+  entryComponents: [
+    DialogContentExampleDialog,
+    ViewDetailsComponent,
+    AddMemberComponent,
+  ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: "outline" },
     },
+    HomeServiceService,
   ],
 })
 export class HomeModule {}

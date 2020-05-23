@@ -1,0 +1,76 @@
+<div class="container fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mt-0 mat-elevation-z3">
+        <div class="card-header card-header-primary card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">grade</i>
+          </div>
+          <div class="row">
+            <div class="col-10"></div>
+            <div class="offers col-2">
+              <h3 style="float : right">
+                54% Off
+              </h3>
+            </div>                   
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="card-title m-0">Blood Test</h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-5">
+              <h5> 
+                <label>
+                  Includes : 
+                </label>
+              </h5>
+            </div>
+            <div class="col-md-7">
+              <label>
+                {{shownresult.includes}}
+              </label>
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <label> Report Available in :</label>
+                </div>
+                <div class="col-md-6">
+                  <span> 
+                    {{shownresult.reportIn }}
+                  </span>
+                </div>
+                <div class="col-6">
+                  <label>Market price : </label> 
+                </div>
+                <div class="col-6">
+                  <span class="rupeesign">
+                    ₹{{shownresult.marketprice}}
+                  </span>
+                </div>
+                
+                <div class="col-6">
+                  <label>HealthCrum price : </label>
+                </div>
+                <div class="col-6">
+                  <span class="rupeesign delete-text">
+                    ₹{{shownresult.healcrumprice}}
+                  </span>
+                  <span class="offer-price">
+                    ₹{{shownresult.offerprice}}
+                  </span>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 mt-4">
+      <div class="card mt-0 mat-elevation-z3">
+        <div class="">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="row">
+                <div class=" card-icon mt-1  card-header-primary ">
+                  <i class="material-icons">start</i>
+                  <i class="material-icons">start</i>
+                  <i class="material-icons">start</i>
+                  <i class="material-icons">start</i>
+                </div>  
+                <div class="col-5 doctor-name">
+                  <h2>{{doctor.name}}</h2>
+                </div>   
+              </div>  
+              <div class="row mt-4">
+                <div class="col-10">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td> Speciality </td>
+                        <td> {{doctor.speciality}} </td>
+                      </tr>
+                      <tr>
+                        <td> Degree</td>
+                         <td> {{doctor.degree}}</td>
+                      </tr>
+                      <tr>
+                        <td> Experience</td>
+                         <td> {{doctor.experience}}</td>
+                      </tr>
+                      <tr>
+                        <td>Emergency </td>
+                        <td> {{doctor.emergency}} </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Telephonic Timing</td>
+                         <td> {{doctor.timing}}</td>
+                      </tr>
+                      <tr>
+                        <td>Physical Consultant</td>
+                         <td> {{doctor.physicalConsultant}}</td>
+                      </tr>
+                      <tr>
+                        <td> Degree</td>
+                         <td> {{doctor.speciality}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div>
+                    <label>About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
+                         Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
+                          During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
+                      </label>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <div class="col-md-4">
+              <img src={{doctor.image}} 
+                alt="loading..." 
+                height="80%" 
+                width="80%" 
+                class="center">
+              <div class="col-12">
+                <button class="btn btn-info"><mat-icon>location_on</mat-icon>Get Distance from your location</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

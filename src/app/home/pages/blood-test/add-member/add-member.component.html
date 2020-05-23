@@ -1,0 +1,54 @@
+<div class="card card-signup card-plain">
+  <div class="row mt-0">
+    <h5 class="col-11">Register Member</h5>
+    <button type="button" class="close" (click)="closeDialog()">
+      <i class="material-icons">clear</i>
+    </button>
+  </div>
+  <div class="text-center">
+    <div>
+      <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="registerationForm">
+          <form [formGroup]="registerationForm">
+            <ng-template matStepLabel>Member Personal Info</ng-template>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Employee Name" formControlName="name" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Age</mat-label>
+                  <input matInput placeholder="Age" name="age"
+                    formControlName="age" required>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Contact Number</mat-label>
+                  <input matInput type="number" placeholder="Contact Number" formControlName="contactNo" required
+                    pattern="[1-9]{1}[0-9]{9}">
+                </mat-form-field>
+              </div>
+            
+              <div class="col-md-6 increaseZindex">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Select Gender</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option class="increaseZindex" *ngFor="let gender of genderList" [value]="gender">{{gender}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <button mat-button class="btn btn-success" type="button" [disabled]="!registerationForm.valid">Submit</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

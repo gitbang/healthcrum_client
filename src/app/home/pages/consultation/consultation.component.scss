@@ -1,0 +1,44 @@
+$bg : #F5F8FA;
+$yellow :#E87528;
+$blue : #00A0A8;
+.container-fluid{
+    background-color: $bg;
+}
+.example-full-width{
+    width: 100%;
+    background-color: white;
+    // input[type=text] {
+    //     background-color: #3CBC8D;
+    //     color: white;
+    //   }
+}
+/*
+.color-input{
+    width: 40%;
+    background-color: $blue;
+    color: white;
+}*/
+.btn{
+    width: 100%;
+    border-radius: 25px;
+}
+
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.btn-danger{
+    background-color: $yellow;
+    color: white;
+}
+img{
+    border-radius: 50%;
+}
+.doctor-name > h4 {
+    color : $blue;
+    text-align: center;
+    font-weight: 600;
+    font-size: larger;
+}

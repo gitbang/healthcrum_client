@@ -1,3 +1,163 @@
-<p>
-  consultation works!
-</p>
+<div class="row container-fluid ">
+
+  <div class="col-md-2"></div>
+  <div class="mt-4 col-md-9">
+    <div class="row">
+      <!--
+      <div class="">
+        <input matInput class="bg-white" >
+        <input matInput class="bg-white" >
+      </div>
+      -->
+      <div class="col-8">
+        <form class="example-form">
+          <!--
+          <mat-form-field class="color-input">
+            <input matInput class="bg-white" value="Search Doctor" disabled>
+          </mat-form-field>
+          -->
+          <mat-form-field class="example-full-width">
+            <mat-label>Search Doctor</mat-label>
+            <input matInput class="bg-white" >
+            <mat-icon matSuffix style="align-self: center;">search</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-md-2 col-lg-2 mt-4">
+        <div class="row">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>  
+                <mat-panel-title>
+                  Speciality
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class=" row speciality">
+                 <div class="col-12">
+                  <mat-checkbox >Heart specialist</mat-checkbox>
+                </div>
+                 <div class="col-12">
+                  <mat-checkbox>Skin specialist</mat-checkbox>
+                </div>
+                 <div class="col-12">
+                  <mat-checkbox>Teeth specialist</mat-checkbox>
+                </div>
+              </div>
+            </mat-expansion-panel>
+            
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>  
+                <mat-panel-title>
+                  Charges
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-12">
+                  <mat-checkbox>Below 1000</mat-checkbox>
+                </div>
+                <div class="col-12">
+                  <mat-checkbox>1000 - 2000</mat-checkbox>
+                </div>
+                <div class="col-12">
+                  <mat-checkbox>2000 - 4000</mat-checkbox>
+                </div>
+                <div class="col-12">
+                  <mat-checkbox>above 4000</mat-checkbox>
+                </div> 
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>  
+                <mat-panel-title>
+                  Location
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="row speciality">
+                <div class="col-12">
+                  <mat-checkbox>Delhi</mat-checkbox>
+                </div> 
+                <div class="col-12">
+                    <mat-checkbox>Punjab</mat-checkbox>
+                  </div> 
+                <div class="col-12">
+                    <mat-checkbox>Haryana</mat-checkbox>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+
+      <div class="col-md-9 ml-2">
+        <div class="row">
+          
+          <div class="col-md-6 col-lg-4 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
+            <div class="row">
+              <div class="col-12">
+                <div class="card mt-0 mat-elevation-z3">
+                  <div class="card-header card-header-primary card-header-icon">
+                    
+                    <div class="row">
+                    
+                      <div class="col-12">
+                        <img src={{doctor.image}} 
+                        alt="loading..." 
+                        height="105%" 
+                        width="100%" 
+                        class="center">
+                      </div>
+                    </div>
+                    <div class="row mt-0">
+                        <div class="col-md-12 doctor-name mt-0">
+                          <h4 class=" m-0 ">{{doctor.name}}</h4>
+                        </div>
+                      </div>
+                  </div>
+                  
+                  <div class="card-body">
+                    <div class="row">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Experience :</td>
+                            <td>{{doctor.experience}}</td>
+                          </tr>
+                          <tr>
+                            <td>Emergency consultation :</td>
+                            <td>{{doctor.emergency}}</td>
+                          </tr>
+                          <tr>
+                            <td>Telephone timing :</td>
+                            <td>{{doctor.timing}}</td>
+                          </tr>
+                          <tr>
+                            <td>Fees :</td>
+                            <td>Rs. {{doctor.fee}} </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-danger booknow" >Book Appointment <mat-icon>arrow_forward</mat-icon></button>
+                      </div>
+                      <div class="col-12">
+                        <button class="btn btn-info booknow" (click)="knowMore(i)" ><mat-icon>control_point</mat-icon> Know More</button>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        <div>
+      </div>
+    </div>
+  </div>
+</div>

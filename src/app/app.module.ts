@@ -70,7 +70,7 @@ export function provideConfig() {
   declarations: [
     AppComponent,
     ErrorpageComponent,
-    MapsComponent
+    MapsComponent,
   ],
   providers: [
     {
