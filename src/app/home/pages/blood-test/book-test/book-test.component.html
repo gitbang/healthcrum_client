@@ -3,36 +3,20 @@
     <div class="col-md-7  ml-2 mt-4 mr-1">  
       <div class="row"> 
         <div class="col-12">
-        <!--
-          <mat-card class="mt-4 ml-4 mat-elevation-z5">
-            <mat-card-title>
-              Package Details
-            </mat-card-title>
-            <mat-card-content>
-              <div class="row">
-                <div class="col-12">
-                  Package Name
-                </div>
-                <div class="col-12">
-                  Includes : {{shownresultarray[0].includes}}
-                </div>
-                <div class="col-12">
-                  Show advantages : 
-                </div>
-                <div class="col-12">
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        -->
           <div class="row package-details-book">
-            <h2>Package Details</h2>
+            <div class="col-6">
+              <h2>Package Details</h2>
+            </div>
+            <div class="col-6 add-members">
+              <button class="btn-default" (click)="addMember()">Add Member</button>
+            </div>
           </div>
           <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
             <div class="package-details bg-white mat-elevation-z4 col-12 mb-4">
               <div class="">
                 <h4> 
-                  <span class="test-heading "> {{i + 1}} . {{shownresultarray.name}}
+                  <span class="test-heading"> 
+                    {{i + 1}} . {{shownresultarray.name}}
                   </span>
                 </h4>
                 <h4> Includes :<label>{{shownresultarray.includes}}</label></h4>
@@ -71,6 +55,13 @@
                     </div>
                     <div class="col-md-3 mb-3">
                       <button class="btn btn-danger" (click)="deletefromCart(i)">Delete <mat-icon>delete</mat-icon></button> 
+                    </div>
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="">
+                          
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

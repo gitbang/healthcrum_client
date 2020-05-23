@@ -387,6 +387,8 @@ export class BloodTestComponent implements OnInit {
     {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
     {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
     {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
   ]
 
   callfun(){
@@ -435,8 +437,10 @@ export class BloodTestComponent implements OnInit {
   viewDetails(index){
     // console.log(index)
     // console.log(this.shownresultarray[index])
-    this.matDialog.open(ViewDetailsComponent, {
-      data : this.shownresultarray[index]
-    })
+    // this.matDialog.open(ViewDetailsComponent, {
+    //   data : this.shownresultarray[index]
+    // })
+    this.router.navigateByUrl("blood-test/viewdetails/12345")
   }
+
 }

@@ -226,7 +226,12 @@ a{
   background-color: #fff;
   border-color: #ccc;
 }
-
+.btn-info{
+  text-transform: capitalize;
+}
+.package-price{
+  text-align: center;
+}
 .search-box-input {
   color: grey;
   font-size: small;

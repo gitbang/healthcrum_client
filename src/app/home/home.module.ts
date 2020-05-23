@@ -51,7 +51,8 @@ import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { BookTestComponent } from './pages/blood-test/book-test/book-test.component';
 import { ViewDetailsComponent } from './pages/blood-test/view-details/view-details.component';
-import {HomeServiceService} from './home-service.service'
+import {HomeServiceService} from './home-service.service';
+import { AddMemberComponent } from './pages/blood-test/add-member/add-member.component'
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -72,6 +73,7 @@ import {HomeServiceService} from './home-service.service'
     DialogContentExampleDialog,
     BookTestComponent,
     ViewDetailsComponent,
+    AddMemberComponent,
   ],
   imports: [
     CommonModule,
@@ -107,7 +109,8 @@ import {HomeServiceService} from './home-service.service'
   ],
   entryComponents: [
     DialogContentExampleDialog,
-    ViewDetailsComponent
+    ViewDetailsComponent,
+    AddMemberComponent
   ],
   providers: [
     {

@@ -205,7 +205,7 @@
       </div>
       <div class="col-sm-12 col-md-8 col-lg-9">
         <div class="row mt-2 ml-4 mr-2">
-          <div class="col-md-12 col-lg-6 mt-4 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+          <div class="col-md-6 col-lg-4 mt-4 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
             <div class="row">
               <div class="col-12">
                 <div class="card mt-0 mat-elevation-z3">
@@ -232,20 +232,19 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-sm-12 col-md-5 col-lg-4">
+                      <div class="col-6">
                         <h5> 
                           <label>
                             Includes : 
                           </label>
                         </h5>
                       </div>
-                      <div class="col-8">
-                        <label>
-                          {{shownresult.includes}}
-                        </label>
+                      <div class="col-6">
+                        <label>14 Parameters</label>
                       </div>
                     </div>
                     <div class="row mt-1">
+                      <!--
                       <div class="col-12">
                         <h5>
                           <label> Report Available in :
@@ -263,9 +262,10 @@
                            </label> 
                         </h5>
                       </div>
+                      -->
                       <div class="col-12 ">
                         <h5>
-                          <label>HealthCrum price : </label>
+                          <!--<label>HealthCrum price : </label> -->
                           <span class="rupeesign delete-text">
                             ₹{{shownresult.healcrumprice}}
                           </span>

@@ -14,6 +14,7 @@ import { SingleEquipmentComponent } from "./pages/single-equipment/single-equipm
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { BookTestComponent } from "./pages/blood-test/book-test/book-test.component";
+import { ViewDetailsComponent } from "./pages/blood-test/view-details/view-details.component";
 
 export const HomePageRoutes: Routes = [
   { path: "home", component: LandingpageComponent },
@@ -30,5 +31,6 @@ export const HomePageRoutes: Routes = [
   { path: "aboutus", component: AboutUsComponent },
   { path: "contactus", component: ContactUsComponent },
   { path: "view-doctor/:id", component: DoctorComponent },
-  {path: "blood-test/:testId", component : BookTestComponent}
+  {path: "blood-test/viewdetails/:id", component: ViewDetailsComponent},
+  {path: "blood-test/:hrId", component : BookTestComponent}
 ];
