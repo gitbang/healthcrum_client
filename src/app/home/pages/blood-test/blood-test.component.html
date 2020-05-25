@@ -1,4 +1,4 @@
-<main #menu>
+<main >
   <div class="container-fluid p-3">
 
     <!-- <h3 class="test-heading">{{city}}</h3> -->
@@ -31,9 +31,8 @@
                   {{fruit}}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
-                
-                
               </mat-chip-list>
+              
               <input  
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -60,35 +59,6 @@
                 </mat-autocomplete>
               </div>
             </div>
-            
-            <!-- Sample start 
-            <mat-form-field class="example-chip-list">
-              <mat-chip-list #chipList aria-label="Fruit selection">
-                <mat-chip
-                  *ngFor="let fruit of fruits"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(fruit)">
-                  {{fruit}}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input
-                  placeholder="New fruit..."
-                  #fruitInput
-                  [formControl]="fruitCtrl"
-                  [matAutocomplete]="auto"
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  (matChipInputTokenEnd)="add($event)">
-              </mat-chip-list>
-              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-                  {{fruit}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-
-            -->
             <mat-icon matSuffix style="align-self: center;">search</mat-icon>
           </div>
           
@@ -96,27 +66,15 @@
         
       </div>
       <div class=""> 
-        <!--
-        <div class="row">
-          <div class="label col-2 mt-2 ml-2">
-            <label>{{mycart.length}}</label>
-          </div>
-          <div class="col-9">
-            <h4 class="ml-3 mr-3">My cart 
-              <mat-icon class="mt-2">add_shopping_cart</mat-icon>
-            </h4>
-          </div>
-        </div>
-        -->
         <button class="btn btn-info">{{mycart.length}} My Cart</button>
       </div>
       <div class="ordernow">
         <button class="btn btn-success" (click)="proceed()">Proceed</button>
       </div>
     </div>
-
-    <div class="row" *ngIf="isSearched"  style="position: absolute;width: 100%;z-index: 99;">
-      <div class="col-md-8 m-auto">
+     
+    <div #menu class="row"   style="position: absolute;width: 100%;z-index: 99;"  >
+      <div class="col-md-8 m-auto" *ngIf="isSearched" >
         <ul class="mega-dropdown-menu row" >
           <li class="col-sm-4">
             <ul>
@@ -160,37 +118,37 @@
           <hr>
           <div class=" mt-2">
             <div class="ml-4">
-                <mat-checkbox>Packages</mat-checkbox>
+                <mat-checkbox (change)="singleTestValueChanges($event.checked)">Single test </mat-checkbox>
             </div>
             <div class="ml-4">
-                <mat-checkbox>Individual Test</mat-checkbox>
+                <mat-checkbox (change)="packageTestValueChanges($event.checked)">Package Test</mat-checkbox>
             </div>
             <div class="ml-4">
-                <mat-checkbox>Profile Test</mat-checkbox>
+                <mat-checkbox (change)="profileTestValueChanges($event.checked)">Profile Test</mat-checkbox>
             </div>
             <div class="">
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    price
+                    Price
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-checkbox labelPosition="after" class="col-12" 
-                (change)="checkCheckBoxvalue( '1000' ,$event.checked)">Less than 1000</mat-checkbox>
+                (change)="priceValueChanges(0 , 1000  ,$event.checked)">Less than 1000</mat-checkbox>
                 <mat-checkbox labelPosition="after" class="col-12"
-                (change)="checkCheckBoxvalue( '1000 - 2000' ,$event.checked)"
+                (change)="priceValueChanges( 1000 , 2000 ,$event.checked)"
                 >1000 - 2000</mat-checkbox>
                 <mat-checkbox labelPosition="after" class="col-12"
-                (change)="checkCheckBoxvalue( '2000-4000' ,$event.checked)"
+                (change)="priceValueChanges (2000 , 4000 ,$event.checked)"
                 >2000 - 4000</mat-checkbox>
                 <mat-checkbox labelPosition="after" class="col-12"
-                (change)="checkCheckBoxvalue( '4000-above' ,$event.checked)"
+                (change)="priceValueChanges( 4000, 99999999 ,$event.checked)"
                 >above 4000</mat-checkbox>
             </mat-expansion-panel>
             </div>
           </div>
           <div class="col-12 text-center mt-3">
-            <button class="btn btn-warning">Apply Filters</button>
+            <button class="btn btn-warning" (click)="applyFilters()">Apply Filters</button>
           </div>
         </div>
       </div>
@@ -200,13 +158,14 @@
             <div class="row">
               <div class="col-12">
                 <div class="card mt-0 mat-elevation-z3">
-                  <div class="card-header card-header-primary card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">grade</i>
-                    </div>
+                  <div class="card-header ">
                     <div class="row">
-                      <div class="col-8"></div>
-                      <div class="offers col-4">
+                      <div class="col-md-8 card-icon">
+                        <i class="material-icons">grade</i>
+                        <i class="material-icons">grade</i>
+                        <i class="material-icons">grade</i>
+                      </div>
+                      <div class="offers col-md-4">
                         <h3 style="float : right">
                           54% Off
                         </h3>
@@ -235,28 +194,8 @@
                       </div>
                     </div>
                     <div class="row mt-1">
-                      <!--
-                      <div class="col-12">
-                        <h5>
-                          <label> Report Available in :
-                            <span> 
-                              {{shownresult.reportIn }}
-                            </span>
-                          </label>
-                        </h5> 
-                      </div>
-                      <div class="col-12 ">
-                        <h5> <label>Market price :
-                            <span class="rupeesign">
-                              ₹{{shownresult.marketprice}}
-                            </span>
-                           </label> 
-                        </h5>
-                      </div>
-                      -->
                       <div class="col-12 ">
                         <h5>
-                          <!--<label>HealthCrum price : </label> -->
                           <span class="rupeesign delete-text">
                             ₹{{shownresult.healcrumprice}}
                           </span>

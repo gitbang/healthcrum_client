@@ -110,11 +110,11 @@
       </div>
     </div>
 
-    <div class="col-md-4 ml-1 mt-4">
+    <div class="col-md-4 ml-1 mt-4" >
       <div class="row package-details-book">
         <h2>Balance Details</h2>
       </div>
-      <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
+      <div  *ngFor="let shownresultarray of shownresultarrays; let i = index">
         <div class=" col-12 package-info mb-4">
           <div class="col-12">
             <div class="row">
@@ -127,30 +127,30 @@
                 </h3>
               </div>  
               <div class="col-12">
-                <label class="delete"> ₹ {{shownresultarray.healcrumPrize}}</label>
+                <label class="delete"> ₹ {{shownresultarray.healcrumPrice}}</label>
                 
-                <label class="current">  ₹ {{shownresultarray.offerprize }}</label>
+                <label class="current">  ₹ {{shownresultarray.offerprice }}</label>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row overall">
+      <div class="row overall"  *ngIf = "balanceSide ">
         <div class="col-12 bg-white mat-elevation-4">
           <table class="table">
             <tbody>
               <tr>
-                <td>Total prize</td>
-                <td>500</td>
+                <td>Total price</td>
+                <td>{{sumAfteroffer}}</td>
               </tr>
               <tr>
                 <td>You save :</td>
-                <td>500</td>
+                <td>{{totalsum - sumAfteroffer}}</td>
               </tr>
             </tbody>
           </table>
           <div class="row">
-            <div class="col-12">
+            <div class="col-10 m-auto">
               <button class="btn full-width btn-placeorder" 
                 [ngClass]="placeorderClass"
                 (mouseover)="changeStyle($event)"
@@ -159,7 +159,7 @@
                 <mat-icon>arrow_forward</mat-icon>
               </button>
             </div>
-            <div class="col-12">
+            <div class="col-10 m-auto">
               <button class="btn full-width btn-default" (click)="addmore()">Add more </button>
             </div>
           </div>

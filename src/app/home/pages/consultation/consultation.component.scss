@@ -1,6 +1,41 @@
-$bg : #F5F8FA;
+$bg : #eff4f7;
 $yellow :#E87528;
 $blue : #00A0A8;
+
+// search bar top 
+.city-box {
+    display: flex;
+    background: #1ba89b;
+    padding-left: 5px;
+    color: #fff;
+    width: 40%;
+    input{
+        background-color: transparent;
+        border: none;
+        color: white;
+    }
+} 
+.input-group {
+    height: 100%;
+}
+.search-box {
+    padding-left: 5px;
+    width: 100%;
+   // background: #e7e7e7;
+    background: white;
+    display: flex;
+    height: 45px;
+    padding-right: 10px;
+    .search-box-input{
+        width: 100%;
+        border: none;
+    }
+}
+
+
+
+
+
 .container-fluid{
     background-color: $bg;
 }

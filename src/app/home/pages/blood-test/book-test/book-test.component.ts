@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface Member {
   name: string;
@@ -25,26 +26,57 @@ export class BookTestComponent implements OnInit {
     private router : Router,
     private service : HomeServiceService,
     private dialog : MatDialog,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private snackbar : MatSnackBar
   ) {
+
     this.service.currentCart.subscribe((result)=>{
       console.log(result)
       this.usercart = result
       console.log("usercart : ", this.usercart)
     })
-
-    /*
-    this.filteredMembers = this.memberCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allMembers.slice()));
-        */
-      
+    
     this.filteredMembers = this.memberCtrl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
     
+    this.getUsercart();
    }
+
+   getUsercart(){
+    this.service.currentCompleteCart.subscribe((result)=>{
+      console.log("complete ", result);
+      this.userCompleteCart = result;
+      this.shownresultarrays = result
+      console.log(this.shownresultarrays);
+      if(this.shownresultarrays.length > 0) {
+        this.balanceSide = true;
+      }
+    })
+    this.shownresultarrays.forEach(x =>{
+      console.log("in loop : ", x)
+      this.totalsum += x.healcrumprice;
+      this.sumAfteroffer += x.offerprice;
+    })
+    console.log(this.totalsum, this.sumAfteroffer)
+  }
+  totalsum : number = 0;
+  sumAfteroffer : number = 0;
+  ngOnInit() {
+    this.shownresultarrays.forEach(i=>{
+      this.addgroup();
+    }) 
+
+    // api to fetch total members //
+   this.service.getMembers("12345").subscribe((result)=>{
+     console.log(result)
+   })
+  }
+
+
+
+
 
    add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -108,25 +140,15 @@ export class BookTestComponent implements OnInit {
 
 
   userlogin : boolean = true
-  usercart 
-  ngOnInit() {
-
-   
-    if(this.userlogin == false) {
-     // this.router.navigateByUrl('/signup')
-    }
-    this.shownresultarrays.forEach(i=>{
-      this.addgroup();
-    }) 
-  }
-
+  usercart ;
+  userCompleteCart;
+  
 
   shownresultarrays =[
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprize : 4200, healcrumPrize : 2500, offerprize : 2000},
+    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
+    totaltest : 12, marketprize : 4200, healcrumprice : 2500, offerprice : 2000},
   ]
-
+  balanceSide : boolean = false
   placeorderClass : string = ""
   
   testfor = this.fb.array([
@@ -162,11 +184,12 @@ export class BookTestComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      console.log(result)
+      //console.log(result)
       console.log(index)
-      console.log(this.usercart)
-      this.usercart.slice(index, 1)
-      console.log(this.usercart)
+      this.userCompleteCart.splice(index, 1);
+      console.log("user cart : ", this.userCompleteCart);
+      this.service.addCompleteDetails(this.userCompleteCart);
+      this.getUsercart();
       if (result.value) {
         Swal.fire(
           'Deleted!',
@@ -180,8 +203,15 @@ export class BookTestComponent implements OnInit {
 
   userId : string = "123456";
   addMember(){
-    this.dialog.open(AddMemberComponent, {
+    const dialog = this.dialog.open(AddMemberComponent, {
       data : this.userId
+    })
+    dialog.afterClosed().subscribe((result)=>{
+      if(result.success) {
+        this.snackbar.open("New member", "Added")
+      } else {
+        this.snackbar.open("Something Went Wrong")
+      }
     })
   }
 

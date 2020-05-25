@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA , MatDialogRef} from '@angular/material';
-import {FormBuilder, Validators} from '@angular/forms'
-import Swal from 'sweetalert2'
+import {FormBuilder, Validators} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { HomeServiceService } from 'app/home/home-service.service';
 
 @Component({
   selector: 'app-add-member',
@@ -13,7 +14,8 @@ export class AddMemberComponent implements OnInit {
   constructor(
     @Inject (MAT_DIALOG_DATA) data : any,
     private fb : FormBuilder,
-    private dialogRef : MatDialogRef<AddMemberComponent>
+    private dialogRef : MatDialogRef<AddMemberComponent>,
+    private service : HomeServiceService
   ) {
     console.log(data)
   }
@@ -30,7 +32,17 @@ export class AddMemberComponent implements OnInit {
 
   submit(){
     console.log(this.registerationForm.value)
-    // call service 
+    if(this.registerationForm.valid){
+      this.service.addNewMember(this.registerationForm.value).subscribe((response)=>{
+        if(response.success){
+          this.dialogRef.close({success : true})
+        } else {
+          this.dialogRef.close({success : true})
+        }
+      });
+    
+    }
+    
   }
 
   closeDialog() {

@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { stringify } from "querystring";
 import { UserLocationModal } from "../../../models/userLocation";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormBuilder } from "@angular/forms";
 import { startWith, map } from "rxjs/operators";
 import {MatAccordion} from '@angular/material/expansion';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -80,7 +80,8 @@ export class BloodTestComponent implements OnInit {
     private renderer: Renderer2,
     private matDialog : MatDialog,
     private snackbar : MatSnackBar,
-    private service : HomeServiceService
+    private service : HomeServiceService,
+    private fb : FormBuilder
   ) {
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
@@ -92,11 +93,22 @@ export class BloodTestComponent implements OnInit {
         this.mycart = result
       }
     })
+
+    this.service.currentCompleteCart.subscribe((result)=>{
+      console.log(result);
+      this.myCartComplete = result;
+    })
   }
   
   ngAfterViewInit() {
-    this.renderer.listen('window', 'click',(e:Event)=>{
-     if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
+    this.renderer.listen('window', 'click',(e:Event)=> {
+      // e.stopPropagation();
+      // e.preventDefault();
+      // console.log("e target", e.target);
+      // console.log("our element",this.menu.nativeElement)
+     
+     if(e.target !== this.toggleButton.nativeElement && e.target !== this.menu.nativeElement){
+         this.isSearched = false
       }
     });
   }
@@ -173,9 +185,6 @@ export class BloodTestComponent implements OnInit {
 
     return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
-
-
-
 
   searchText: string = "";
   options : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test", 
@@ -362,7 +371,6 @@ export class BloodTestComponent implements OnInit {
       this.myControl.setValue(this.city);
     });
   }
-
   
   isSearching(event: Event) {
     console.log(this.searchText.length)
@@ -373,7 +381,6 @@ export class BloodTestComponent implements OnInit {
     }
   }
 
- 
   searchNow(event: Event) {
     console.log(this.searchText);
   }
@@ -383,12 +390,12 @@ export class BloodTestComponent implements OnInit {
   }
 
   shownresultarray = [
-    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
-    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4200, healcrumprice : 2500, offerprice : 2000},
+    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 1200, type:'singleTest',healcrumprice : 1000, offerprice : 800},
+    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice :2300, type:'singleTest', healcrumprice : 2000, offerprice : 1900},
+    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4500, type:'singleTest', healcrumprice : 4200, offerprice : 4000},
+    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 5600, type:'singleTest', healcrumprice : 5200, offerprice : 5000},
+    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 7800, type:'singleTest', healcrumprice : 7000, offerprice : 6800},
+    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 2500, type:'singleTest', healcrumprice : 2300, offerprice : 2200},
   ]
 
   callfun(){
@@ -403,25 +410,29 @@ export class BloodTestComponent implements OnInit {
   }
 
   mycart: string[]= []      // collect _id of the packages 
-
+  myCartComplete ;
   addTocart(index : number){
     console.log(index);
     this.mycart.push(this.shownresultarray[index]._id)
+    this.myCartComplete.push(this.shownresultarray[index]);
     this.snackbar.open("Package", "Added",  {
       duration : 1000
     })
     this.service.changeMessage(this.mycart);
+    this.service.addCompleteDetails(this.myCartComplete);
   }
+  
   removeFromcart(index : number) {
     let _id = this.shownresultarray[index]._id
     this.mycart = this.mycart.filter((x)=> _id != x)
+    this.myCartComplete = this.myCartComplete.filter((x)=> x._id != _id)
     this.snackbar.open("Package", "Removed", {
       duration : 1000
     })
     this.service.changeMessage(this.mycart);
+    this.service.addCompleteDetails(this.myCartComplete);
   }
   
-
   checkcart(_id : string) {
     //console.log(_id)
     if(this.mycart.includes(_id)){
@@ -432,7 +443,6 @@ export class BloodTestComponent implements OnInit {
     }
   }
   
-
   packageId : string = "123456"
   viewDetails(index){
     // console.log(index)
@@ -443,4 +453,73 @@ export class BloodTestComponent implements OnInit {
     this.router.navigateByUrl("blood-test/viewdetails/12345")
   }
 
+
+  //-------------code for side filter-------------------//
+
+  sideFilterSearch = {
+    singleTests : false,
+    packageTests : false,
+    profileTests: false,
+    price : {
+      low : null,
+      high : null
+    }
+  }
+
+  singleTestValueChanges(value) {
+    this.sideFilterSearch.singleTests = value;
+    console.log(this.sideFilterSearch)
+  }
+  packageTestValueChanges(value) {
+    this.sideFilterSearch.packageTests = value
+    console.log(this.sideFilterSearch)
+  }
+
+  profileTestValueChanges(value) {
+    this.sideFilterSearch.profileTests = value
+    console.log(this.sideFilterSearch)
+  }
+
+  lower : number[] = []
+  higher : number[] = []
+  priceValueChanges(low :number, high : number, event) {
+    
+    if(event) {
+      this.lower.push(low);
+      this.higher.push(high);
+      this.getPriceValues()
+    } else {
+      const lowInd = this.lower.indexOf(low)
+      const highInd = this.higher.indexOf(high)
+      console.log("indexes : ", lowInd, highInd)
+      this.lower.splice(lowInd, 1)
+      this.higher.splice(highInd, 1)
+      this.getPriceValues()
+    }
+    console.log(this.sideFilterSearch)
+  }
+
+  getPriceValues() {
+    this.sideFilterSearch.price.low = Math.min( ...this.lower)
+    this.sideFilterSearch.price.high = Math.max( ...this.higher)
+  }
+
+  applyFilters(){
+    this.service.bloodTestApplyFilters(this.sideFilterSearch).subscribe((response)=>{
+      console.log(response)
+    })
+  }
+
+
+  //-------------code for top search bar-------------------//
+
+  topSearch = this.fb.array([
+    this.fb.group({
+      _id : [],
+      singleTest : ['false'],
+      packageTest : ['false'],
+      profileTest : ['fasle']
+    })
+  ])
+  
 }

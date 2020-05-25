@@ -1,21 +1,11 @@
-<div class="row container-fluid ">
+<div class=" container-fluid p-3">
 
+  <!--
   <div class="col-md-2"></div>
   <div class="mt-4 col-md-9">
     <div class="row">
-      <!--
-      <div class="">
-        <input matInput class="bg-white" >
-        <input matInput class="bg-white" >
-      </div>
-      -->
       <div class="col-8">
         <form class="example-form">
-          <!--
-          <mat-form-field class="color-input">
-            <input matInput class="bg-white" value="Search Doctor" disabled>
-          </mat-form-field>
-          -->
           <mat-form-field class="example-full-width">
             <mat-label>Search Doctor</mat-label>
             <input matInput class="bg-white" >
@@ -25,138 +15,180 @@
       </div>
     </div>
   </div>
-  <div class="col-12">
-    <div class="row">
-      <div class="col-md-2 col-lg-2 mt-4">
-        <div class="row">
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>  
-                <mat-panel-title>
-                  Speciality
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class=" row speciality">
-                 <div class="col-12">
-                  <mat-checkbox >Heart specialist</mat-checkbox>
+  -->
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-md-7 ">
+      <div style="display:flex;border-radius: 5px;overflow: hidden;background: #fff;;">
+        <div class="city-box">
+          <mat-icon matPrefix style="align-self: center;color: #e7e7e7;margin-right: 5px;cursor: pointer;"
+            (click)="setCurrentLocation()">room</mat-icon>
+          <div class="input-group no-border city">
+            <input type="text" placeholder="city" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredCities | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </div>
+        
+        <div class="search-box">
+          
+          <div class="input-group no-border">
+            <input  
+              class="search-box-input" 
+              type="text" 
+              #toggleButton
+              placeholder= "Search Doctor"
+            >
+          </div>
+          <mat-icon matSuffix style="align-self: center;">search</mat-icon>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-2 col-lg-2 mt-4">
+          <div class="row">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>  
+                  <mat-panel-title>
+                    Speciality
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class=" row speciality">
+                  <div class="col-12">
+                    <mat-checkbox >Heart specialist</mat-checkbox>
+                  </div>
+                  <div class="col-12">
+                    <mat-checkbox>Skin specialist</mat-checkbox>
+                  </div>
+                  <div class="col-12">
+                    <mat-checkbox>Teeth specialist</mat-checkbox>
+                  </div>
                 </div>
-                 <div class="col-12">
-                  <mat-checkbox>Skin specialist</mat-checkbox>
+              </mat-expansion-panel>
+              
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>  
+                  <mat-panel-title>
+                    Charges
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-12">
+                    <mat-checkbox>Below 1000</mat-checkbox>
+                  </div>
+                  <div class="col-12">
+                    <mat-checkbox>1000 - 2000</mat-checkbox>
+                  </div>
+                  <div class="col-12">
+                    <mat-checkbox>2000 - 4000</mat-checkbox>
+                  </div>
+                  <div class="col-12">
+                    <mat-checkbox>above 4000</mat-checkbox>
+                  </div> 
                 </div>
-                 <div class="col-12">
-                  <mat-checkbox>Teeth specialist</mat-checkbox>
+              </mat-expansion-panel> 
+              <!--
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>  
+                  <mat-panel-title>
+                    Location
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row speciality">
+                  <div class="col-12">
+                    <mat-checkbox>Delhi</mat-checkbox>
+                  </div> 
+                  <div class="col-12">
+                      <mat-checkbox>Punjab</mat-checkbox>
+                    </div> 
+                  <div class="col-12">
+                      <mat-checkbox>Haryana</mat-checkbox>
+                  </div>
                 </div>
-              </div>
-            </mat-expansion-panel>
+              </mat-expansion-panel>
+              -->
+            </mat-accordion>
+          </div>
+        </div>
+
+        <div class="col-md-9 ml-2">
+          <div class="row">
             
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>  
-                <mat-panel-title>
-                  Charges
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+            <div class="col-md-6 col-lg-4 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
               <div class="row">
                 <div class="col-12">
-                  <mat-checkbox>Below 1000</mat-checkbox>
-                </div>
-                <div class="col-12">
-                  <mat-checkbox>1000 - 2000</mat-checkbox>
-                </div>
-                <div class="col-12">
-                  <mat-checkbox>2000 - 4000</mat-checkbox>
-                </div>
-                <div class="col-12">
-                  <mat-checkbox>above 4000</mat-checkbox>
-                </div> 
-              </div>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>  
-                <mat-panel-title>
-                  Location
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="row speciality">
-                <div class="col-12">
-                  <mat-checkbox>Delhi</mat-checkbox>
-                </div> 
-                <div class="col-12">
-                    <mat-checkbox>Punjab</mat-checkbox>
-                  </div> 
-                <div class="col-12">
-                    <mat-checkbox>Haryana</mat-checkbox>
-                </div>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </div>
-
-      <div class="col-md-9 ml-2">
-        <div class="row">
-          
-          <div class="col-md-6 col-lg-4 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
-            <div class="row">
-              <div class="col-12">
-                <div class="card mt-0 mat-elevation-z3">
-                  <div class="card-header card-header-primary card-header-icon">
-                    
-                    <div class="row">
-                    
-                      <div class="col-12">
-                        <img src={{doctor.image}} 
-                        alt="loading..." 
-                        height="105%" 
-                        width="100%" 
-                        class="center">
-                      </div>
-                    </div>
-                    <div class="row mt-0">
-                        <div class="col-md-12 doctor-name mt-0">
-                          <h4 class=" m-0 ">{{doctor.name}}</h4>
+                  <div class="card mt-0 mat-elevation-z3">
+                    <div class="card-header card-header-primary card-header-icon">
+                      
+                      <div class="row">
+                      
+                        <div class="col-12">
+                          <img src={{doctor.image}} 
+                          alt="loading..." 
+                          height="105%" 
+                          width="100%" 
+                          class="center">
                         </div>
                       </div>
-                  </div>
-                  
-                  <div class="card-body">
-                    <div class="row">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>Experience :</td>
-                            <td>{{doctor.experience}}</td>
-                          </tr>
-                          <tr>
-                            <td>Emergency consultation :</td>
-                            <td>{{doctor.emergency}}</td>
-                          </tr>
-                          <tr>
-                            <td>Telephone timing :</td>
-                            <td>{{doctor.timing}}</td>
-                          </tr>
-                          <tr>
-                            <td>Fees :</td>
-                            <td>Rs. {{doctor.fee}} </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="row">
-                      <div class="col-12">
-                        <button class="btn btn-danger booknow" >Book Appointment <mat-icon>arrow_forward</mat-icon></button>
-                      </div>
-                      <div class="col-12">
-                        <button class="btn btn-info booknow" (click)="knowMore(i)" ><mat-icon>control_point</mat-icon> Know More</button>
-                      </div>
+                      <div class="row mt-0">
+                          <div class="col-md-12 doctor-name mt-0">
+                            <h4 class=" m-0 ">{{doctor.name}}</h4>
+                          </div>
+                        </div>
                     </div>
                     
+                    <div class="card-body">
+                      <div class="row">
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <td>Experience :</td>
+                              <td>{{doctor.experience}}</td>
+                            </tr>
+                            <tr>
+                              <td>Emergency consultation :</td>
+                              <td>{{doctor.emergency}}</td>
+                            </tr>
+                            <tr>
+                              <td>Telephone timing :</td>
+                              <td>{{doctor.timing}}</td>
+                            </tr>
+                            <tr>
+                              <td>Fees :</td>
+                              <td>Rs. {{doctor.fee}} </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <button class="btn btn-danger booknow" >Book Appointment <mat-icon>arrow_forward</mat-icon></button>
+                        </div>
+                        <div class="col-12">
+                          <button class="btn btn-info booknow" (click)="knowMore(i)" ><mat-icon>control_point</mat-icon> Know More</button>
+                        </div>
+                      </div>
+                      
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          
-        <div>
+            
+          <div>
+        </div>
       </div>
     </div>
   </div>
