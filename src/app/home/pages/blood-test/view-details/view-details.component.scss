@@ -1,15 +1,18 @@
+$grey :#FAFAFA;
+$orange : #f37d26;
 .delete-text{
-    color: #ababab;
+    //color: #ababab;
     font-size: 18px;
     display: inline-block;
     text-decoration: line-through;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 .offers {
+    margin-top: -10px;;
     padding: 2px 2px 2px 2px;
     background-color: #fff;
-    border: 1px solid #e87528;
-    margin-bottom: 8px;
+    border: 1px solid white;
+    margin-bottom: 4px;
     border-radius: 2px 0 17px;
     display: inline-block;
     h3{
@@ -29,3 +32,64 @@
     font-weight: 600;
     color: #1a9ca6;
   }
+  .container-fluid{
+    background-color: $grey;
+  }
+  .card-icon{
+    margin-top: -15px;
+    margin-left: -25px;
+    color: white;
+  }
+  .card-header{
+    margin: 0;
+    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+  }
+  .card-title{
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+   
+  }
+  .title-card{
+    margin-top: -15px;
+  }
+
+  .green-backgrouns{
+    margin: 0;
+    color: white;
+    //background-color: #199CA6;
+    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+    padding: 10px 30px;
+  }
+  li{
+    color: darkgrey;
+    list-style-type: disc;
+  }
+  .btn{
+    border-radius: 20px;
+  }
+  .btn-info{
+    color: white;
+    background-color:$orange ;
+  }
+  .white-button{
+    color: $orange;
+    background-color: white;
+    border: 1px solid $orange;
+  }
+  .mat-expansion-panel-header{
+   // background-color: #ECECEC;
+    margin-bottom: 4px;
+  }
+  .about-package {
+    color: #8484A4;
+  }
+  .emoji-class h4 {
+    color: #484848;
+    font-weight: 500;
+    font-family: Ubuntu,sans-serif;
+  }
+  span {
+    text-align: center;
+  }
+  
