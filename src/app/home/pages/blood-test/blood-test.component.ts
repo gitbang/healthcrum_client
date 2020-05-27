@@ -66,9 +66,7 @@ export class BloodTestComponent implements OnInit {
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   i: number = 0;
   isNext: boolean = false;
-  testcol1 : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test"]
-  testcol2 : string[] = ["sugar test.","Vitamins test","Protines enzymes"]
-  testcol3 : string[] = ["kidney function tests","basic metabolic panel","glucose tests"]
+
 
   
   @ViewChild('menu', {static: true}) menu: ElementRef;
@@ -83,6 +81,8 @@ export class BloodTestComponent implements OnInit {
     private service : HomeServiceService,
     private fb : FormBuilder
   ) {
+
+
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this._filterfruit(fruit) : this.allFruits.slice()));
@@ -101,14 +101,9 @@ export class BloodTestComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    this.renderer.listen('window', 'click',(e:Event)=> {
-      // e.stopPropagation();
-      // e.preventDefault();
-      // console.log("e target", e.target);
-      // console.log("our element",this.menu.nativeElement)
-     
+    this.renderer.listen('window', 'click',(e:Event)=> {   
      if(e.target !== this.toggleButton.nativeElement && e.target !== this.menu.nativeElement){
-         this.isSearched = false
+         //this.isSearched = false
       }
     });
   }
@@ -122,13 +117,16 @@ export class BloodTestComponent implements OnInit {
     );
 
     this.myControl.valueChanges.subscribe((value) => this.getCities(value));
-     this.filteredSearch = this.mycontrol.valueChanges.pipe(
+
+    this.filteredSearch = this.mycontrol.valueChanges.pipe(
       startWith('' ),
       map(value =>this.filtersearch(value))
     )
-    // this.service.currentMessage.subscribe((result)=>{
-    //   console.log(result)
-    // })
+
+    this.profileTestFiltered = this.mycontrol.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterprofiletest(value))
+    )
   }
 
 
@@ -137,7 +135,14 @@ export class BloodTestComponent implements OnInit {
     this.router.navigateByUrl('blood-test/12345')
   }
   /*------------------TOP search open------------------ */
-
+  filterprofiletest(value){
+    console.log("value changes");
+    const filterValue = value.toLowerCase();
+    return this.profileTest.filter(
+      (test) => test.toLowerCase().indexOf(filterValue)
+    );
+  }
+ 
   visible = true;
   selectable = true;
   removable = true;
@@ -147,8 +152,22 @@ export class BloodTestComponent implements OnInit {
   fruits: string[] = ['Lemon', "Apple"];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-  @ViewChild('fruitInput', {static : true}) fruitInput: ElementRef<HTMLInputElement>;
+ // @ViewChild('fruitInput', {static : true}) fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static : true}) matAutocomplete: MatAutocomplete;
+
+  testcol1 : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test"]
+  testcol2 : string[] = ["sugar test.","Vitamins test","Protines enzymes"]
+  testcol3 : string[] = ["kidney function tests","basic metabolic panel","glucose tests"]
+
+  singleTest : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test"]
+  packageTest : string[]= ["sugar test.","Vitamins test","Protines enzymes"]
+  profileTest : string[]= ["kidney function tests","basic metabolic panel","glucose tests"]
+  mycontrol = new FormControl
+  filteredSearch : Observable<string[]>
+
+  singleTestFiltered : Observable<string[]>
+  profileTestFiltered : Observable<string[]>
+  packageTestFiltered : Observable<string[]>
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -176,13 +195,12 @@ export class BloodTestComponent implements OnInit {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
+    //this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }
 
   private _filterfruit(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
@@ -196,28 +214,18 @@ export class BloodTestComponent implements OnInit {
     const filtervalue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().includes(filtervalue))
   }
+
   showModel(){
     if(this.searchText.length < 1) {
       this.isSearched = true
     } else {
       this.isSearched = false
     }
-    console.log(this.mycontrol.value)
+   
   }
 
-  mycontrol = new FormControl
-  filteredSearch : Observable<string[]>
+  
 
-  showautocomplete(){
-    console.log("check autocomplete")
-    console.log(this.searchText.length)
-    if(this.searchText.length > 0) {
-      return true
-    } 
-    else{
-      return false
-    }
-  }
 
   /*--------------------------top search close-----------------------------*/
   

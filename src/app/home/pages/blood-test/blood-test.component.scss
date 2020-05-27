@@ -275,3 +275,20 @@ a{
     border-radius: 30%;
   }
 }
+
+
+//-------------horizontal filters--------------//
+.mat-checkbox-inner-container {
+  background-color: white;
+}
+.mat-checkbox-label {
+  color: white;
+}
+.top-navbar{
+  height: auto;
+  width: 100%;
+  padding: 5px;
+}
+::ng-deep .mat-checkbox{
+  color: white;
+}

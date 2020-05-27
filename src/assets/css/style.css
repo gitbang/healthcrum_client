@@ -41,6 +41,15 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* 1.  SITE STRUCTURE and TYPOGRAPHY */
 /*============================================================================================*/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
+
+/*-------------Akash-------------*/
+.blood-test-filter label .mat-checkbox-inner-container {
+  background-color: white !important;
+}
+.blood-test-filter label .mat-checkbox-label{
+  color: white;
+}
+
 .location-selection-map{
   width: 100% !important;
   height: 62vh !important;

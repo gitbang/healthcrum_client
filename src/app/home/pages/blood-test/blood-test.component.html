@@ -49,10 +49,10 @@
               >
               <div>
                 <mat-autocomplete 
-                  #auto="matAutocomplete" 
+                  #auto="matAutocomplete"
                 >
                   <mat-option 
-                  *ngFor="let option of filteredSearch | async" 
+                  *ngFor="let option of profileTestFiltered | async" 
                   [value]="option">
                     {{option}}
                   </mat-option>
@@ -73,26 +73,25 @@
       </div>
     </div>
      
+     <!--
+       drop down 
+
     <div #menu class="row"   style="position: absolute;width: 100%;z-index: 99;"  >
       <div class="col-md-8 m-auto" *ngIf="isSearched" >
         <ul class="mega-dropdown-menu row" >
           <li class="col-sm-4">
             <ul>
-              <li class="dropdown-header">Packages</li>
-              <li *ngFor="let test of testcol1; let i = index">
+              <li class="dropdown-header">Package Test</li>
+              <li *ngFor="let test of singleTest; let i = index">
                 <a (click)="addMaindropdown(test)">{{test}}</a>
                 <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
               </li>
-              <!-- <li class="divider"></li>
-              <li class="dropdown-header">Fonts</li>
-              <li><a href="#">Glyphicon</a></li>
-              <li><a href="#">Google Fonts</a></li> -->
             </ul>
           </li>
           <li class="col-sm-4">
             <ul>
-              <li class="dropdown-header">Profiles</li>
-              <li *ngFor="let test of testcol2; let i = index">
+              <li class="dropdown-header">Profile Test</li>
+              <li *ngFor="let test of packageTest; let i = index">
                 <a (click)="addMaindropdown(test)">{{test}}</a>
                 <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
               </li>
@@ -100,8 +99,8 @@
           </li>
           <li class="col-sm-4 ">
             <ul>
-              <li class="dropdown-header">Tests</li>
-              <li *ngFor="let test of testcol3; let i = index">
+              <li class="dropdown-header">Single Test</li>
+              <li *ngFor="let test of profileTestFiltered | async; let i = index">
                 <a (click)="addMaindropdown(test)">{{test}}</a>
                 <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
               </li>
@@ -111,7 +110,9 @@
       </div>
     </div>
 
+    -->
     <div class="row">
+      <!--
       <div class="col-sm-12 col-md-2 col-lg-2">
         <div class="card justify-content-center pt-4 pb-4">
           <h5 class="text-center">Apply Filters</h5>
@@ -152,9 +153,46 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-md-8 col-lg-9">
-        <div class="row mt-2 ml-4 mr-2">
-          <div class="col-md-6   mt-4 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+      -->
+    <div class="col-12">
+      <div class="row mt-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-10"> 
+          <mat-toolbar color="primary" class="top-navbar">
+            <div class = "row m-auto">
+              <div class="col-md-3 filter-property">
+                <mat-checkbox (change)="singleTestValueChanges($event.checked)" class="blood-test-filter">
+                Single test </mat-checkbox>
+              </div>
+              <div class="col-md-3 filter-property">
+                <mat-checkbox (change)="packageTestValueChanges($event.checked)" class="blood-test-filter">
+                Package Test</mat-checkbox>
+              </div>
+              <div class="col-md-3 filter-property">
+                <mat-checkbox (change)="profileTestValueChanges($event.checked)" class="blood-test-filter">
+                Profile Test</mat-checkbox>
+              </div>
+              <div class="col-md-3 filter-property">
+                <mat-menu #priceMenu ="matMenu">
+                  <button mat-menu-item >Below Rs.1000</button>
+                  <button mat-menu-item>Rs.1000-Rs.2000</button>
+                  <button mat-menu-item>Rs.2000-Rs.4000</button>
+                  <button mat-menu-item>Above 4000</button>
+                </mat-menu>
+
+                <button mat-flat-button [matMenuTriggerFor]="priceMenu">Charges <mat-icon>keyboard_arrow_down</mat-icon></button>
+              </div>
+            </div>
+            
+          </mat-toolbar>
+        </div>
+      </div>
+    </div>
+
+      <div class="col-md-1"></div>
+      <div class=" col-md-10">
+        <div class="row mt-2">
+          <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
             <div class="row">
               <div class="col-12">
                 <div class="card mt-0 mat-elevation-z3">
