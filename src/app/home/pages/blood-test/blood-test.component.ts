@@ -69,8 +69,8 @@ export class BloodTestComponent implements OnInit {
 
 
   
-  @ViewChild('menu', {static: true}) menu: ElementRef;
-  @ViewChild('toggleButton', {static : true}) toggleButton: ElementRef;
+  // @ViewChild('menu', {static: true}) menu: ElementRef;
+  // @ViewChild('toggleButton', {static : true}) toggleButton: ElementRef;
 
   constructor(
     private router: Router,
@@ -99,13 +99,13 @@ export class BloodTestComponent implements OnInit {
       this.myCartComplete = result;
     })
   }
-  
+
   ngAfterViewInit() {
-    this.renderer.listen('window', 'click',(e:Event)=> {   
-     if(e.target !== this.toggleButton.nativeElement && e.target !== this.menu.nativeElement){
-         //this.isSearched = false
-      }
-    });
+    // this.renderer.listen('window', 'click',(e:Event)=> {   
+    //  if(e.target !== this.toggleButton.nativeElement && e.target !== this.menu.nativeElement){
+    //      //this.isSearched = false
+    //   }
+    // });
   }
 
   ngOnInit() {
@@ -116,16 +116,25 @@ export class BloodTestComponent implements OnInit {
       map((value) => this._filter(value))
     );
 
-    this.myControl.valueChanges.subscribe((value) => this.getCities(value));
+    //this.myControl.valueChanges.subscribe((value) => this.getCities(value));
 
-    this.filteredSearch = this.mycontrol.valueChanges.pipe(
-      startWith('' ),
-      map(value =>this.filtersearch(value))
-    )
+    // this.filteredSearch = this.mycontrol.valueChanges.pipe(
+    //   startWith('' ),
+    //   map(value =>this.filtersearch(value))
+    // )
 
     this.profileTestFiltered = this.mycontrol.valueChanges.pipe(
       startWith(''),
       map(value => this.filterprofiletest(value))
+    )
+
+    this.singleTestFiltered = this.mycontrol.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filtersingletest(value))
+    )
+    this.packageTestFiltered = this.mycontrol.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterpackagetest(value))
     )
   }
 
@@ -136,10 +145,24 @@ export class BloodTestComponent implements OnInit {
   }
   /*------------------TOP search open------------------ */
   filterprofiletest(value){
-    console.log("value changes");
+    console.log("profile test");
+    console.log(value)
     const filterValue = value.toLowerCase();
-    return this.profileTest.filter(
-      (test) => test.toLowerCase().indexOf(filterValue)
+    return this.profileTest.filter( test => test.toLowerCase().includes(filterValue)
+    );
+  }
+  filtersingletest(value){
+    console.log("profile test");
+    console.log(value)
+    const filterValue = value.toLowerCase();
+    return this.singleTest.filter( test => test.toLowerCase().includes(filterValue)
+    );
+  }
+  filterpackagetest(value){
+    console.log("profile test");
+    console.log(value)
+    const filterValue = value.toLowerCase();
+    return this.packageTest.filter( test => test.toLowerCase().includes(filterValue)
     );
   }
  

@@ -123,12 +123,10 @@ blockquote {
   padding: 20px 0px;
   width: 100%;
   margin-top: 5px;
-  box-shadow: 0 0 2px 1px #dedede;
+  
   background: white;
   display: flex;
-  z-index: 99;
   border-radius: 4px;
-  width: 100%;
 }
 .mega-dropdown-menu > li > ul {
   padding: 0;
@@ -292,3 +290,8 @@ a{
 ::ng-deep .mat-checkbox{
   color: white;
 }
+
+::ng-deep .mat-autocomplete-panel{
+  margin-left: -100px;
+  margin-top: 0.5rem;
+} 

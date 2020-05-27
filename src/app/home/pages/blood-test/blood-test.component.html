@@ -44,17 +44,41 @@
                 name="searchText" 
                 (focus)="showModel()"
                 (keyup)="showModel()"
-                #toggleButton
+               
                 [matAutocomplete]="auto"
               >
               <div>
-                <mat-autocomplete 
-                  #auto="matAutocomplete"
-                >
-                  <mat-option 
-                  *ngFor="let option of profileTestFiltered | async" 
-                  [value]="option">
-                    {{option}}
+                <mat-autocomplete #auto="matAutocomplete" [panelWidth]="600">
+                  <ul class="mega-dropdown-menu row" >
+                    <li class="col-sm-4">
+                      <ul>
+                        <li class="dropdown-header">Single Test</li>
+                        <li *ngFor="let test of singleTestFiltered | async; let i = index">
+                          <a (click)="addMaindropdown(test)">{{test}}</a>
+                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="col-sm-4">
+                      <ul>
+                        <li class="dropdown-header">Profile Test</li>
+                        <li *ngFor="let test of profileTestFiltered | async; let i = index">
+                          <a (click)="addMaindropdown(test)">{{test}}</a>
+                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="col-sm-4">
+                      <ul>
+                        <li class="dropdown-header">Package Test</li>
+                        <li *ngFor="let test of packageTestFiltered | async; let i = index">
+                          <a (click)="addMaindropdown(test)">{{test}}</a>
+                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <mat-option >
                   </mat-option>
                 </mat-autocomplete>
               </div>
