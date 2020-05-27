@@ -29,7 +29,11 @@ import {
   MatDialogModule,
   MatAutocompleteModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatMenuModule,
+  MatToolbarModule
 } from "@angular/material";
+
+
 import { LandingpageComponent } from "./pages/landingpage/landingpage.component";
 import { UserloginComponent } from "./pages/userlogin/userlogin.component";
 
@@ -111,6 +115,8 @@ import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-det
     MatExpansionModule,
     MatCardModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatToolbarModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

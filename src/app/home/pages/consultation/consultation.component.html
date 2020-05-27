@@ -33,8 +33,7 @@
           </div>
         </div>
         
-        <div class="search-box">
-          
+        <div class="search-box">     
           <div class="input-group no-border">
             <input  
               class="search-box-input" 
@@ -45,17 +44,39 @@
           </div>
           <mat-icon matSuffix style="align-self: center;">search</mat-icon>
         </div>
-        
-      </div>
-      
+      </div>   
     </div>
   </div>
 
+  <div class="row mt-4">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
+      <mat-toolbar color="primary" class="top-navbar">
+        <mat-menu #appMenu ="matMenu">
+          <button mat-menu-item >Heart Specialist</button>
+          <button mat-menu-item>Skin Speciality</button>
+          <button mat-menu-item>Lungs Speciality</button>
+          <button mat-menu-item>Dentist</button>
+        </mat-menu>
 
+        <mat-menu #priceMenu ="matMenu">
+          <button mat-menu-item >Below Rs.1000</button>
+          <button mat-menu-item>Rs.1000-Rs.2000</button>
+          <button mat-menu-item>Rs.2000-Rs.4000</button>
+          <button mat-menu-item>Above 4000</button>
+        </mat-menu>
+
+        <button mat-flat-button [matMenuTriggerFor]="appMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="priceMenu">Charges <mat-icon>keyboard_arrow_down</mat-icon></button>
+      </mat-toolbar>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-12">
+
       <div class="row">
+        <!--
         <div class="col-md-2 col-lg-2 mt-4">
           <div class="row">
             <mat-accordion>
@@ -77,7 +98,7 @@
                   </div>
                 </div>
               </mat-expansion-panel>
-              
+
               <mat-expansion-panel>
                 <mat-expansion-panel-header>  
                   <mat-panel-title>
@@ -99,34 +120,15 @@
                   </div> 
                 </div>
               </mat-expansion-panel> 
-              <!--
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>  
-                  <mat-panel-title>
-                    Location
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="row speciality">
-                  <div class="col-12">
-                    <mat-checkbox>Delhi</mat-checkbox>
-                  </div> 
-                  <div class="col-12">
-                      <mat-checkbox>Punjab</mat-checkbox>
-                    </div> 
-                  <div class="col-12">
-                      <mat-checkbox>Haryana</mat-checkbox>
-                  </div>
-                </div>
-              </mat-expansion-panel>
-              -->
             </mat-accordion>
           </div>
         </div>
-
-        <div class="col-md-9 ml-2">
+       -->
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
           <div class="row">
             
-            <div class="col-md-6 col-lg-4 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4 ml-0 mb-4" *ngFor= "let doctor of  doctors; let i = index">
               <div class="row">
                 <div class="col-12">
                   <div class="card mt-0 mat-elevation-z3">
@@ -190,6 +192,7 @@
           <div>
         </div>
       </div>
+    
     </div>
   </div>
 </div>
