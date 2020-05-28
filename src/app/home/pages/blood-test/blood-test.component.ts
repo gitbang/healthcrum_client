@@ -141,7 +141,7 @@ export class BloodTestComponent implements OnInit {
 
   /* -----------------cart open----------------------*/
   proceed(){
-    this.router.navigateByUrl('blood-test/12345')
+    this.router.navigateByUrl('blood-test/mycart/12345')
   }
   /*------------------TOP search open------------------ */
   filterprofiletest(value){
@@ -435,13 +435,17 @@ export class BloodTestComponent implements OnInit {
   }
 
   userlogin : boolean = false
-  
-  booknow(){
+  singleTestComplete = [];
+
+  booknow(index : number){
+    this.singleTestComplete = []
+    this.singleTestComplete.push(this.shownresultarray[index]);
+    this.service.bookSingleTest(this.singleTestComplete);
     this.router.navigateByUrl('blood-test/12345')
   }
 
   mycart: string[]= []      // collect _id of the packages 
-  myCartComplete ;
+  myCartComplete;
   addTocart(index : number){
     console.log(index);
     this.mycart.push(this.shownresultarray[index]._id)
@@ -450,7 +454,7 @@ export class BloodTestComponent implements OnInit {
       duration : 1000
     })
     this.service.changeMessage(this.mycart);
-    this.service.addCompleteDetails(this.myCartComplete);
+    this.service.addCompleteDetailsToCart(this.myCartComplete);
   }
   
   removeFromcart(index : number) {
@@ -461,7 +465,7 @@ export class BloodTestComponent implements OnInit {
       duration : 1000
     })
     this.service.changeMessage(this.mycart);
-    this.service.addCompleteDetails(this.myCartComplete);
+    this.service.addCompleteDetailsToCart(this.myCartComplete);
   }
   
   checkcart(_id : string) {

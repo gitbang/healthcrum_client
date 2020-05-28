@@ -33,6 +33,7 @@ export const HomePageRoutes: Routes = [
   { path: "contactus", component: ContactUsComponent },
   { path: "view-doctor/:id", component: DoctorComponent },
   {path: "blood-test/viewdetails/:id", component: ViewDetailsComponent},
-  {path: "blood-test/:hrId", component : BookTestComponent},
+  {path: "blood-test/mycart/:hrId", component : BookTestComponent},
+  {path : "blood-test/:hrId", component : BookTestComponent},
   {path : "consultation/view-doctor-details/:id", component: ViewDoctorDetailsComponent}
 ];

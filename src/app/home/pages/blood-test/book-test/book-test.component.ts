@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {HomeServiceService} from '../../../home-service.service'
 import {MatDialog, MAT_DIALOG_DATA, MatChipInputEvent} from '@angular/material'
 import { AddMemberComponent } from '../add-member/add-member.component';
@@ -27,26 +27,33 @@ export class BookTestComponent implements OnInit {
     private service : HomeServiceService,
     private dialog : MatDialog,
     private fb : FormBuilder,
-    private snackbar : MatSnackBar
+    private snackbar : MatSnackBar,
+    private route: ActivatedRoute,
   ) {
-
-    this.service.currentCart.subscribe((result)=>{
-      console.log(result)
-      this.usercart = result
-      console.log("usercart : ", this.usercart)
+    this.route.url.subscribe((result)=>{
+      console.log("url",result)
+      if(result[1].path == "mycart") {
+        this.getUsercart();
+      } else {
+        this.getSingleTest(); 
+      }
     })
+
+    
+
+    
     
     this.filteredMembers = this.memberCtrl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
     
-    this.getUsercart();
+   // this.getUsercart();
    }
 
    getUsercart(){
     this.service.currentCompleteCart.subscribe((result)=>{
-      console.log("complete ", result);
+     // console.log("complete ", result);
       this.userCompleteCart = result;
       this.shownresultarrays = result
       console.log(this.shownresultarrays);
@@ -61,17 +68,29 @@ export class BookTestComponent implements OnInit {
     })
     console.log(this.totalsum, this.sumAfteroffer)
   }
+
+  getSingleTest(){
+    this.service.currentTest.subscribe(result => {
+      console.log("single test")
+      console.log(result)
+      this.userCompleteCart= result
+      this.shownresultarrays = result
+    })
+    this.totalsum += this.shownresultarrays[0].healcrumprice;
+    this.sumAfteroffer += this.shownresultarrays[0].offerprice;
+  }
+
   totalsum : number = 0;
   sumAfteroffer : number = 0;
+
   ngOnInit() {
+    
+    
     this.shownresultarrays.forEach(i=>{
       this.addgroup();
     }) 
 
-    // api to fetch total members //
-   this.service.getMembers("12345").subscribe((result)=>{
-     console.log(result)
-   })
+    
   }
 
 
@@ -188,7 +207,7 @@ export class BookTestComponent implements OnInit {
       console.log(index)
       this.userCompleteCart.splice(index, 1);
       console.log("user cart : ", this.userCompleteCart);
-      this.service.addCompleteDetails(this.userCompleteCart);
+      this.service.addCompleteDetailsToCart(this.userCompleteCart);
       this.getUsercart();
       if (result.value) {
         Swal.fire(

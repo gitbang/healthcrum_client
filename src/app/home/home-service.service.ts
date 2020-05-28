@@ -20,14 +20,15 @@ export class HomeServiceService {
     private http : HttpClient
   ) {   
   }
+
+
+
   /*---------------- blood test component ---------------*/
 
   //-----------user cart ----------------//
-
-
-
   private messageSource = new BehaviorSubject([]);
   currentCart = this.messageSource.asObservable();
+
   changeMessage(message: string[]) {
     this.messageSource.next(message)
     console.log(this.messageSource.value)
@@ -35,13 +36,25 @@ export class HomeServiceService {
 
   private cartSource = new BehaviorSubject([]);
   currentCompleteCart = this.cartSource.asObservable();
-  addCompleteDetails(data ) {
+
+  addCompleteDetailsToCart(data ) {
     this.cartSource.next(data)
     console.log("service reached ", this.cartSource.value)
   }
 
+  bloodTestApplyFilters(filter) : Observable<any> {
+    return this.http
+            .post(this.url+ '/', filter, this.option)
+            .pipe(retry(2))
+  } 
 
+  private singleTest = new BehaviorSubject([]);
+  currentTest = this.singleTest.asObservable();
 
+  bookSingleTest(testdata : string[]) : void {
+    this.singleTest.next(testdata);
+    console.log("single test seected");
+  }
 
  //-------------- consultation---------------//
 
@@ -54,13 +67,7 @@ export class HomeServiceService {
   }
 
 
-  //------------blood test----------------//
 
-  bloodTestApplyFilters(filter) : Observable<any> {
-    return this.http
-            .post(this.url+ '/', filter, this.option)
-            .pipe(retry(2))
-  } 
 
 
 
