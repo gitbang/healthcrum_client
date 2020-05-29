@@ -30,19 +30,7 @@ export class BookTestComponent implements OnInit {
     private snackbar : MatSnackBar,
     private route: ActivatedRoute,
   ) {
-    this.route.url.subscribe((result)=>{
-      console.log("url",result)
-      if(result[1].path == "mycart") {
-        this.getUsercart();
-      } else {
-        this.getSingleTest(); 
-      }
-    })
-
-    this.filteredMembers = this.memberCtrl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+    
     
    // this.getUsercart();
    }
@@ -103,16 +91,29 @@ export class BookTestComponent implements OnInit {
   sumAfteroffer : number = 0;
 
   ngOnInit() {
-    
-    
+
+    this.route.url.subscribe((result)=>{
+      console.log("url",result)
+      if(result[1].path == "mycart") {
+        this.getUsercart();
+        this.fromCart = true
+      } else {
+        this.getSingleTest();
+        this.fromCart = false 
+      }
+    })
+
+    this.filteredMembers = this.memberCtrl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  
     this.shownresultarrays.forEach(i=>{
       this.addgroup();
     }) 
-
-    
   }
 
-
+  fromCart : boolean 
 
 
 
@@ -222,13 +223,17 @@ export class BookTestComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      //console.log(result)
-      //console.log(index)
-      this.userCompleteCart.splice(index, 1);
-     // console.log("user cart : ", this.userCompleteCart);
-      this.service.addCompleteDetailsToCart(this.userCompleteCart);
-      this.getUsercart();
+      
       if (result.value) {
+
+        this.userCompleteCart.splice(index, 1);
+        if(this.fromCart) {
+          this.service.addCompleteDetailsToCart(this.userCompleteCart);
+          this.getUsercart();
+        } else{
+          this.service.bookSingleTest(this.userCompleteCart);
+          this.getSingleTest();
+        }
         Swal.fire(
           'Deleted!',
           'Your packge has been deleted.',
