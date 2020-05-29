@@ -31,7 +31,13 @@ $blue : #00A0A8;
         border: none;
     }
 }
+.doctor-photo{
+    height : "150px" ;
+    width : "220px" 
+}
+@media screen and (min-width : 1000px) {
 
+} 
 
 
 
@@ -57,7 +63,8 @@ $blue : #00A0A8;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    height: 100%;
+    width: 100%;
 }
 .btn-danger{
     background-color: $yellow;

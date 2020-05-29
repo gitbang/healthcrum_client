@@ -39,10 +39,6 @@ export class BookTestComponent implements OnInit {
       }
     })
 
-    
-
-    
-    
     this.filteredMembers = this.memberCtrl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -51,31 +47,54 @@ export class BookTestComponent implements OnInit {
    // this.getUsercart();
    }
 
-   getUsercart(){
+  getUsercart(){
     this.service.currentCompleteCart.subscribe((result)=>{
      // console.log("complete ", result);
       this.userCompleteCart = result;
       this.shownresultarrays = result
-      console.log(this.shownresultarrays);
+     // console.log(this.shownresultarrays);
+      console.log("get user card length", this.shownresultarrays.length)
       if(this.shownresultarrays.length > 0) {
         this.balanceSide = true;
+      } else {
+          console.log("else executed")
+          this.fireAlert();
       }
     })
+    this.sumAfteroffer = 0;
+    this.totalsum = 0;
     this.shownresultarrays.forEach(x =>{
       console.log("in loop : ", x)
       this.totalsum += x.healcrumprice;
       this.sumAfteroffer += x.offerprice;
     })
-    console.log(this.totalsum, this.sumAfteroffer)
+  }
+
+  fireAlert() {
+    Swal.fire(
+      "Oops!", 
+      "Your cart is empty!",
+      "error")
+       .then(result =>{
+         //console.log(result)
+         if(result.value) {
+          this.router.navigateByUrl("blood-test")  
+        }
+    });
   }
 
   getSingleTest(){
     this.service.currentTest.subscribe(result => {
-      console.log("single test")
-      console.log(result)
+      this.sumAfteroffer = 0;
+      this.totalsum = 0;
       this.userCompleteCart= result
       this.shownresultarrays = result
     })
+    if(this.shownresultarrays.length > 0) {
+      this.balanceSide = true;
+    } else {
+      this.fireAlert();
+    }
     this.totalsum += this.shownresultarrays[0].healcrumprice;
     this.sumAfteroffer += this.shownresultarrays[0].offerprice;
   }
@@ -114,7 +133,7 @@ export class BookTestComponent implements OnInit {
   }
 
   remove(member: string, i: number): void {
-    console.log(member)
+    //console.log(member)
     const index = this.testfor.value[i].otherlist.indexOf(member);
     if (index >= 0) {
       this.testfor.value[i].otherlist.splice(index, 1);
@@ -122,7 +141,7 @@ export class BookTestComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent, index : number): void {
-    console.log("index is : ", index)
+   // console.log("index is : ", index)
     this.members.push(event.option.viewValue);
     this.memberInput.nativeElement.value = '';
     this.memberCtrl.setValue(null);
@@ -130,12 +149,12 @@ export class BookTestComponent implements OnInit {
     this.testfor.value[index].otherlist = this.members
     this.members = []
    // (<FormGroup>this.testfor[index]).get('otherlist').setValue(this.members)
-    console.log("test for array ",this.testfor.value)
+   // console.log("test for array ",this.testfor.value)
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    console.log(this.allMembers)
+   // console.log(this.allMembers)
     return this.allMembers.filter(member => member.toLowerCase().includes(filterValue));
   }
 
@@ -204,9 +223,9 @@ export class BookTestComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       //console.log(result)
-      console.log(index)
+      //console.log(index)
       this.userCompleteCart.splice(index, 1);
-      console.log("user cart : ", this.userCompleteCart);
+     // console.log("user cart : ", this.userCompleteCart);
       this.service.addCompleteDetailsToCart(this.userCompleteCart);
       this.getUsercart();
       if (result.value) {
@@ -217,7 +236,6 @@ export class BookTestComponent implements OnInit {
         )
       }
     })
-    
   }
 
   userId : string = "123456";
@@ -235,15 +253,14 @@ export class BookTestComponent implements OnInit {
   }
 
   testForMe(value, index) {
-    console.log(index)
-   this.testfor.value[index].me = value;
-    console.log(this.testfor.value)
+    //console.log(index)
+    this.testfor.value[index].me = value;
+    //console.log(this.testfor.value)
   }
 
   testForMember(value, index) {
     this.testfor.value[index].others = value;
-    console.log( this.testfor)
-    
+    //console.log( this.testfor)  
   }
 
   
