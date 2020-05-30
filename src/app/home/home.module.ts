@@ -9,6 +9,7 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import {MatDividerModule} from '@angular/material/divider';
 import {
   MatButtonModule,
   MatInputModule,
@@ -116,7 +117,8 @@ import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-det
     MatCardModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDividerModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

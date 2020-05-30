@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
 import {Router} from '@angular/router'
 import {HomeServiceService } from '../../home-service.service'
 import { HttpClient } from '@angular/common/http';
@@ -57,10 +57,6 @@ export class ConsultationComponent implements OnInit {
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   i: number = 0;
   isNext: boolean = false;
-  testcol1 : string[] = ["Calcium blood test","Cardiac enzymes","D-dimer test"]
-  testcol2 : string[] = ["sugar test.","Vitamins test","Protines enzymes"]
-  testcol3 : string[] = ["kidney function tests","basic metabolic panel","glucose tests"]
-
 
   constructor(
     private router : Router,
@@ -70,6 +66,16 @@ export class ConsultationComponent implements OnInit {
     private matDialog : MatDialog,
     private snackbar : MatSnackBar,
   ) { }
+  
+  @ViewChild("main", {static : true}) main : ElementRef
+  @HostListener('window : resize',['$event'])
+  onResize(event) {
+    console.log("event :" , event)
+    console.log(window.innerWidth);
+    if(window.innerWidth < 1100){
+      this.horizontal = false
+    }
+  }
 
   ngOnInit() {
 
@@ -78,24 +84,43 @@ export class ConsultationComponent implements OnInit {
       startWith(""),
       map((value) => this._filter(value))
     );
-
     // this.myControl.valueChanges.subscribe((value) => this.getCities(value));
     //  this.filteredSearch = this.myControl.valueChanges.pipe(
     //   startWith('' ),
     //   map(value =>this.filtersearch(value))
     // )
+    this.setWidth();
+  }
+
+  setWidth(){
+    if(this.horizontal == true) {
+      this.main.nativeElement.style.minWidth = "1200px"
+    }
   }
 
   doctors = [ 
-    {_id : "1", image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "2",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "3",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "4",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "5",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "6",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "7",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-    {_id : "8",image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA', experience : '10+ years', speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', emergency : 'yes'},
-  ]
+    {_id : "1",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS' , city : "Mohali"
+    },
+    {_id : "2",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    },
+    {_id : "3",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    },
+    {_id : "4",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    },
+    {_id : "5",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    },
+    {_id : "6",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    },
+   ]
+
+   horizontal : boolean = false
+
   knowMore(index){
     console.log(index);
     console.log(this.doctors[index]._id)

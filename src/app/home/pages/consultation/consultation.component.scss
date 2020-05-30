@@ -2,7 +2,6 @@ $bg : #eff4f7;
 $yellow :#E87528;
 $blue : #00A0A8;
 
-// search bar top 
 .city-box {
     display: flex;
     background: #1ba89b;
@@ -21,7 +20,6 @@ $blue : #00A0A8;
 .search-box {
     padding-left: 5px;
     width: 100%;
-   // background: #e7e7e7;
     background: white;
     display: flex;
     height: 45px;
@@ -31,57 +29,146 @@ $blue : #00A0A8;
         border: none;
     }
 }
-.doctor-photo{
-    height : "150px" ;
-    width : "220px" 
-}
-@media screen and (min-width : 1000px) {
-
-} 
-
-
-
 
 .container-fluid{
     background-color: $bg;
+    overflow: scroll;
+    height: 80%;
 }
 .example-full-width{
     width: 100%;
     background-color: white;
-    // input[type=text] {
-    //     background-color: #3CBC8D;
-    //     color: white;
-    //   }
+}
+
+img{
+    border-radius: 50%;
+}
+
+.top-navbar{
+    background: linear-gradient(to right, #17c0d3, #027e8e);
+    button{
+        margin-right: 4rem;;
+    }
 }
 
 .btn{
     width: 100%;
+    //border-radius: 25px;
+}
+.btn-round {
     border-radius: 25px;
 }
 
-.center{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-    width: 100%;
-}
 .btn-danger{
     background-color: $yellow;
     color: white;
 }
-img{
-    border-radius: 50%;
+
+.doctor-card {
+    background-color: white;
 }
+.doctor-feedback{
+    margin-top: -15px;
+    margin-left: -15px;
+}
+.doctor-image{
+    margin-top: -10px;
+}
+
+@media screen and (min-width : 1200px) {
+    .center{
+        width: 60%;
+    }
+    .consultation-image {
+        width: 70%;
+    }
+}
+@media screen and (max-width : 1199px) {
+    .center{
+        width: 80%;
+    }
+    .consultation-image {
+        width: 80%;
+    }
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  //  height: 100%;
+    //width: 80%;
+}
+
 .doctor-name > h4 {
     color : $blue;
     text-align: center;
     font-weight: 600;
     font-size: larger;
 }
-.top-navbar{
-    background: linear-gradient(to right, #17c0d3, #027e8e);
-    button{
-        margin-right: 4rem;;
+.consultation-div{
+    margin-top: -20px;
+    border: 1px solid black;
+}
+.consultation-div-horizontal{
+    border-left: 1px dotted black;
+    border-bottom: 1px dotted black;;
+}
+.consultation-div-horizontal, .consultation-div {
+   
+    margin-top : -15px;
+    .consultation-heading{
+        color: white;
+        background: linear-gradient(to right, #17c0d3, #027e8e);
+        margin-left: -15px;
+        padding: 5px;
     }
+}
+
+.image-data{
+    color: black;
+}
+.emergency-image {
+    width: 80%;
+}
+.emergency-time{
+    margin-top: -15px;
+}
+
+.doctor-location-image{
+   // margin: -15px;
+    width: 50px
+}
+.text-center{
+    text-align: center;
+}
+
+
+
+
+
+
+
+// style for horizontal
+
+.feedback-horizontal{
+    margin-top: -15px;
+}
+
+table{
+    width: 100%;
+}
+.consultation-horizontal{
+    padding-right: 0;;
+}
+
+.consultation-image-horizontal{
+    width: 35px;
+}
+.emergency-image-horizontal{
+    width: 70px;
+}
+
+.horizontal-location{
+    width: 45px;
+    cursor: pointer;
 }
