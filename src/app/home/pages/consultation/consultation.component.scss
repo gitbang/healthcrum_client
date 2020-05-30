@@ -1,174 +1,199 @@
-$bg : #eff4f7;
-$yellow :#E87528;
-$blue : #00A0A8;
+$bg: #eff4f7;
+$yellow: #e87528;
+$blue: #00a0a8;
 
 .city-box {
-    display: flex;
-    background: #1ba89b;
-    padding-left: 5px;
-    color: #fff;
-    width: 40%;
-    input{
-        background-color: transparent;
-        border: none;
-        color: white;
-    }
-} 
+  display: flex;
+  background: #1ba89b;
+  padding-left: 5px;
+  color: #fff;
+  width: 40%;
+  input {
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
+}
 .input-group {
-    height: 100%;
+  height: 100%;
 }
 .search-box {
-    padding-left: 5px;
+  padding-left: 5px;
+  width: 100%;
+  background: white;
+  display: flex;
+  height: 45px;
+  padding-right: 10px;
+  .search-box-input {
     width: 100%;
-    background: white;
-    display: flex;
-    height: 45px;
-    padding-right: 10px;
-    .search-box-input{
-        width: 100%;
-        border: none;
-    }
+    border: none;
+  }
 }
 
-.container-fluid{
-    background-color: $bg;
-    overflow: scroll;
-    height: 80%;
+.container-fluid {
+  background-color: $bg;
+  overflow: scroll;
+  height: 80%;
 }
-.example-full-width{
-    width: 100%;
-    background-color: white;
-}
-
-img{
-    border-radius: 50%;
+.example-full-width {
+  width: 100%;
+  background-color: white;
 }
 
-.top-navbar{
-    background: linear-gradient(to right, #17c0d3, #027e8e);
-    button{
-        margin-right: 4rem;;
-    }
+img {
+  border-radius: 50%;
 }
 
-.btn{
-    width: 100%;
-    //border-radius: 25px;
+.top-navbar {
+  background: linear-gradient(to right, #17c0d3, #027e8e);
+  button {
+    margin-right: 4rem;
+  }
+}
+
+.btn {
+  width: 100%;
+  //border-radius: 25px;
 }
 .btn-round {
-    border-radius: 25px;
+  border-radius: 25px;
 }
 
-.btn-danger{
-    background-color: $yellow;
-    color: white;
+.btn-danger {
+  background-color: $yellow;
+  color: white;
 }
 
 .doctor-card {
-    background-color: white;
+  background-color: white;
 }
-.doctor-feedback{
-    margin-top: -15px;
-    margin-left: -15px;
+.doctor-feedback {
+  margin-top: -15px;
+  margin-left: -15px;
 }
-.doctor-image{
-    margin-top: -10px;
+.doctor-image {
+  margin-top: -10px;
 }
 
-@media screen and (min-width : 1200px) {
-    .center{
-        width: 60%;
-    }
-    .consultation-image {
-        width: 70%;
-    }
+@media screen and (min-width: 1200px) {
+  .consultation-image {
+    width: 70%;
+  }
 }
-@media screen and (max-width : 1199px) {
-    .center{
-        width: 80%;
-    }
-    .consultation-image {
-        width: 80%;
-    }
+@media screen and (max-width: 1199px) {
+  .center {
+    width: 80%;
+  }
+  .consultation-image {
+    width: 80%;
+  }
 }
-.center{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  //  height: 100%;
-    //width: 80%;
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
 }
 
 .doctor-name > h4 {
-    color : $blue;
-    text-align: center;
-    font-weight: 600;
-    font-size: larger;
+  color: $blue;
+  text-align: center;
+  font-weight: 600;
+  font-size: larger;
 }
-.consultation-div{
-    margin-top: -20px;
-    border: 1px solid black;
+.consultation-div {
+  margin-top: -20px;
+  border: 1px solid black;
 }
-.consultation-div-horizontal{
-    border-left: 1px dotted black;
-    border-bottom: 1px dotted black;;
+.consultation-div-horizontal {
+  border-left: 1px dotted black;
+  border-bottom: 1px dotted black;
 }
-.consultation-div-horizontal, .consultation-div {
-   
-    margin-top : -15px;
-    .consultation-heading{
-        color: white;
-        background: linear-gradient(to right, #17c0d3, #027e8e);
-        margin-left: -15px;
-        padding: 5px;
-    }
+.consultation-div-horizontal,
+.consultation-div {
+  margin-top: -15px;
+  .consultation-heading {
+    color: white;
+    background: linear-gradient(to right, #17c0d3, #027e8e);
+    margin-left: -15px;
+    padding: 5px;
+  }
 }
 
-.image-data{
-    color: black;
+.image-data {
+  color: black;
 }
 .emergency-image {
-    width: 80%;
+  width: 80%;
 }
-.emergency-time{
-    margin-top: -15px;
-}
-
-.doctor-location-image{
-   // margin: -15px;
-    width: 50px
-}
-.text-center{
-    text-align: center;
+.emergency-time {
+  margin-top: -15px;
 }
 
-
-
-
-
-
+.doctor-location-image {
+  // margin: -15px;
+  width: 50px;
+}
+.text-center {
+  text-align: center;
+}
 
 // style for horizontal
 
-.feedback-horizontal{
-    margin-top: -15px;
+.feedback-horizontal {
+  margin-top: -15px;
 }
 
-table{
-    width: 100%;
+table {
+  width: 100%;
 }
-.consultation-horizontal{
-    padding-right: 0;;
-}
-
-.consultation-image-horizontal{
-    width: 35px;
-}
-.emergency-image-horizontal{
-    width: 70px;
+.consultation-horizontal {
+  padding-right: 0;
 }
 
-.horizontal-location{
-    width: 45px;
-    cursor: pointer;
+.consultation-image-horizontal {
+  width: 35px;
+}
+.emergency-image-horizontal {
+  width: 70px;
+}
+
+.horizontal-location {
+  width: 45px;
+  cursor: pointer;
+}
+.nav-bar-flex {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: none !important;
+}
+.rating-box {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-around;
+  font-weight: 700;
+  position: absolute;
+  right: 4%;
+  border-radius: 5px;
+  /* border: 1px solid #323232; */
+  background: #e6e6e6;
+  padding: 4px 2px;
+}
+.rating-box > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.hrating-box {
+  align-items: flex-end;
+  display: -webkit-box;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+}
+.nav-pills .nav-item .nav-link.active {
+  background-color: #4caf50 !important;
 }

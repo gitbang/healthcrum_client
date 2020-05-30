@@ -1,24 +1,30 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
-import {Router} from '@angular/router'
-import {HomeServiceService } from '../../home-service.service'
-import { HttpClient } from '@angular/common/http';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+  HostListener,
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { HomeServiceService } from "../../home-service.service";
+import { HttpClient } from "@angular/common/http";
+import { MatDialog, MatSnackBar } from "@angular/material";
 
 import { UserLocationModal } from "../../../models/userLocation";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map } from "rxjs/operators";
 
 @Component({
-  selector: 'app-consultation',
-  templateUrl: './consultation.component.html',
-  styleUrls: ['./consultation.component.scss']
+  selector: "app-consultation",
+  templateUrl: "./consultation.component.html",
+  styleUrls: ["./consultation.component.scss"],
 })
 export class ConsultationComponent implements OnInit {
-
   myControl = new FormControl();
   isSearched: boolean = false;
-  
+
   city: string;
   cities: any = [];
   filteredCities: Observable<string[]>;
@@ -59,26 +65,25 @@ export class ConsultationComponent implements OnInit {
   isNext: boolean = false;
 
   constructor(
-    private router : Router,
-    private service : HomeServiceService,
+    private router: Router,
+    private service: HomeServiceService,
     private http: HttpClient,
     private renderer: Renderer2,
-    private matDialog : MatDialog,
-    private snackbar : MatSnackBar,
-  ) { }
-  
-  @ViewChild("main", {static : true}) main : ElementRef
-  @HostListener('window : resize',['$event'])
+    private matDialog: MatDialog,
+    private snackbar: MatSnackBar
+  ) {}
+
+  @ViewChild("main", { static: true }) main: ElementRef;
+  @HostListener("window : resize", ["$event"])
   onResize(event) {
-    console.log("event :" , event)
+    console.log("event :", event);
     console.log(window.innerWidth);
-    if(window.innerWidth < 1100){
-      this.horizontal = false
+    if (window.innerWidth < 1100) {
+      this.horizontal = false;
     }
   }
 
   ngOnInit() {
-
     this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
@@ -92,43 +97,103 @@ export class ConsultationComponent implements OnInit {
     this.setWidth();
   }
 
-  setWidth(){
-    if(this.horizontal == true) {
-      this.main.nativeElement.style.minWidth = "1200px"
+  setWidth() {
+    if (this.horizontal == true) {
+      this.main.nativeElement.style.minWidth = "1200px";
     }
   }
 
-  doctors = [ 
-    {_id : "1",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS' , city : "Mohali"
+  doctors = [
+    {
+      _id: "1",
+      image: "./assets/img/faces/doctor.png",
+      name: "DR. PANKAJ MANORIA",
+      experience: "10+ years",
+      speciality: "Heart",
+      fee: 5000,
+      rating: 5,
+      timing: "10am - 6pm",
+      emergency: "yes",
+      degree: "MBBS",
+      city: "Mohali",
     },
-    {_id : "2",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    {
+      _id: "2",
+      image: "./assets/img/faces/doctor.png",
+      name: "DR. PANKAJ MANORIA",
+      experience: "10+ years",
+      speciality: "Heart",
+      fee: 5000,
+      rating: 5,
+      timing: "10am - 6pm",
+      emergency: "yes",
+      degree: "MBBS",
+      city: "Mohali",
     },
-    {_id : "3",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    {
+      _id: "3",
+      image: "./assets/img/faces/doctor.png",
+      name: "DR. PANKAJ MANORIA",
+      experience: "10+ years",
+      speciality: "Heart",
+      fee: 5000,
+      rating: 5,
+      timing: "10am - 6pm",
+      emergency: "yes",
+      degree: "MBBS",
+      city: "Mohali",
     },
-    {_id : "4",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    {
+      _id: "4",
+      image: "./assets/img/faces/doctor.png",
+      name: "DR. PANKAJ MANORIA",
+      experience: "10+ years",
+      speciality: "Heart",
+      fee: 5000,
+      rating: 5,
+      timing: "10am - 6pm",
+      emergency: "yes",
+      degree: "MBBS",
+      city: "Mohali",
     },
-    {_id : "5",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    {
+      _id: "5",
+      image: "./assets/img/faces/doctor.png",
+      name: "DR. PANKAJ MANORIA",
+      experience: "10+ years",
+      speciality: "Heart",
+      fee: 5000,
+      rating: 5,
+      timing: "10am - 6pm",
+      emergency: "yes",
+      degree: "MBBS",
+      city: "Mohali",
     },
-    {_id : "6",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+    {
+      _id: "6",
+      image: "./assets/img/faces/doctor.png",
+      name: "DR. PANKAJ MANORIA",
+      experience: "10+ years",
+      speciality: "Heart",
+      fee: 5000,
+      rating: 5,
+      timing: "10am - 6pm",
+      emergency: "yes",
+      degree: "MBBS",
+      city: "Mohali",
     },
-   ]
+  ];
 
-   horizontal : boolean = false
+  horizontal: boolean = false;
 
-  knowMore(index){
+  knowMore(index) {
     console.log(index);
-    console.log(this.doctors[index]._id)
-    this.service.changedoctor(this.doctors[index])
-    this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index]._id)
+    console.log(this.doctors[index]._id);
+    this.service.changedoctor(this.doctors[index]);
+    this.router.navigateByUrl(
+      "/consultation/view-doctor-details/" + this.doctors[index]._id
+    );
   }
-
-
 
   //----------top search bar --------------//
 
@@ -211,4 +276,7 @@ export class ConsultationComponent implements OnInit {
     });
   }
 
+  toggleView() {
+    this.horizontal = !this.horizontal;
+  }
 }
