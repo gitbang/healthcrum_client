@@ -1,23 +1,24 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 mt-4">
+    <div class="col-10 my-4 mx-auto">
       <div class=" mt-0 mat-elevation-z3">
-        <div class="">
-          <div class="row">
+        <div class="py-3 px-2">
+          <div class="row" style="align-items: center;">
             <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-4 m-auto card-icon mt-1  header ">
-                  <i class="material-icons">start</i>
-                  <i class="material-icons">start</i>
-                  <i class="material-icons">start</i>
-                  <i class="material-icons">start</i>
-                </div>  
-                <div class="col-md-8 doctor-name">
-                  <h2>{{doctor.name}}</h2>
-                </div>   
-              </div>  
+              <div class="row px-2" style="align-items: center;">
+                <div class="col-lg-6 col-10 doctor-name">
+                  <h4>{{doctor.name}}</h4>
+                </div>
+                <div class="rating-box">
+                  <div>
+                    <i class="material-icons text-warning">grade</i>
+                    <span style="font-size: 0.7rem;font-weight: bold;">4.3</span>
+                  </div>
+                </div>
+
+              </div>
               <div class="row mt-4">
-                <div class="col-10">
+                <div class="col-12 col-lg-10">
                   <table class="table">
                     <tbody>
                       <tr>
@@ -26,51 +27,80 @@
                       </tr>
                       <tr>
                         <td> Degree</td>
-                         <td> {{doctor.degree}}</td>
+                        <td> {{doctor.degree}}</td>
                       </tr>
                       <tr>
                         <td> Experience</td>
-                         <td> {{doctor.experience}}</td>
+                        <td> {{doctor.experience}}</td>
                       </tr>
                       <tr>
                         <td>Emergency </td>
                         <td> {{doctor.emergency}} </td>
                       </tr>
-                      
+
                       <tr>
                         <td>Telephonic Timing</td>
-                         <td> {{doctor.timing}}</td>
+                        <td> {{doctor.timing}}</td>
                       </tr>
                       <tr>
                         <td>Physical Consultant</td>
-                         <td> {{doctor.physicalConsultant}}</td>
+                        <td> {{doctor.physicalConsultant}}</td>
                       </tr>
                       <tr>
                         <td> Degree</td>
-                         <td> {{doctor.speciality}}</td>
+                        <td> {{doctor.speciality}}</td>
                       </tr>
                     </tbody>
                   </table>
                   <div>
-                    <label>About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
-                         Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
-                          During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
-                      </label>
+                    <b>About :</b>
+                    <label style="display: inline;"> Dr. Pankaj Manoria is an Interventional Cardiologist and Director
+                      of the
+                      Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in
+                      2006 and has performed over 12,000 Angiographies and 2,000 Ang
+                      During this time, Dr. Manoria has developed special skills in doing cardiac interventions through
+                      the transradial route.
+                    </label>
                   </div>
                 </div>
-              </div>  
-            </div>
-            <div class="col-md-4">
-              <img src={{doctor.image}} 
-                alt="loading..." 
-                height="60%" 
-                width="80%" 
-                class="center">
-              <div class="col-12">
-                <button class="btn btn-info"><mat-icon>location_on</mat-icon>Get Distance from your location</button>
               </div>
-               <div class="col-12">
-                <button class="btn btn-primary"><mat-icon>bookmark</mat-icon>Book Appointment</button>
+            </div>
+            <div class="col-md-4 text-center mt-3">
+              <img src={{doctor.image}} alt="loading..." height="220px" width="220px" class="mb-4">
+              <div class="col-12">
+                <button class="btn btn-info btn-sm py-2">
+                  <mat-icon>location_on</mat-icon>Get Distance from your location
+                </button>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary btn-sm py-2">
+                  <mat-icon>bookmark</mat-icon>Book Appointment
+                </button>
+              </div>
+              <div class="col-12 mt-4">
+                <div class="row" style="justify-content: space-around;">
+                  <div class="col-3 pt-2 p-0 btn-primary options-menus">
+                    <i class="material-icons">sms</i>
+                    <!-- <img src="./assets/img/consulation/blood-test/video.png" class="consultation-image"> -->
+                    <label class="text-white mt-2">
+                      8am - 6pm
+                    </label>
+                  </div>
+                  <div class="col-3 pt-2 p-0 btn-danger options-menus">
+                    <i class="material-icons">duo</i>
+                    <!-- <img src="./assets/img/consulation/blood-test/telephone.jpg" class="consultation-image"> -->
+                    <label class="text-white mt-2">
+                      8am - 6pm
+                    </label>
+                  </div>
+                  <div class="col-3 pt-2 p-0 btn-info options-menus">
+                    <i class="material-icons">call</i>
+                    <!-- <img src="./assets/img/consulation/blood-test/physicalMeeting.jpg" class="consultation-image"> -->
+                    <label class="text-white mt-2">
+                      8am - 6pm
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

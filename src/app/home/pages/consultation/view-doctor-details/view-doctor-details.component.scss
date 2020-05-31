@@ -1,29 +1,44 @@
-$grey : #F5F8FA;
-$blue : #00AEC5;
-.container-fluid  {
-    background-color: $grey;
+$grey: #f5f8fa;
+$blue: #00aec5;
+.container-fluid {
+  background-color: $grey;
 }
 img {
-    border-radius: 50%;
+  border-radius: 5%;
+  object-fit: cover;
 }
-.doctor-name h2{
-    color : $blue;
-    font-weight: 600;
-    text-align: center;
+.doctor-name h4 {
+  color: $blue;
+  font-weight: 600;
+  //   margin-left: 10px;
 }
-table{
-    border: none !important;
+table {
+  border: none !important;
 }
-.btn{
-    width: 80%;
+.btn {
+  width: 80%;
 }
-.btn-info{
-    background: linear-gradient(to right, #17c0d3, #027e8e);
+.btn-info {
+  background: linear-gradient(to right, #17c0d3, #027e8e);
 }
 .btn-primary {
-    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+  background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
 }
 
-@media screen and (min-width : 800px) {
-    
+@media screen and (min-width: 800px) {
+}
+
+.rating-box > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #dcdbdb;
+  border-radius: 8%;
+  padding: 4px 5px;
+}
+.options-menus {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5%;
+  cursor: pointer;
 }
