@@ -1,5 +1,5 @@
-![Repository Banner](header_image.png)
-#### Please read [`contributing guidelines`](./contributing.md) before submitting new resources.
+![Repository Banner](https://github.com/bradtraversy/design-resources-for-developers/blob/master/header_image.png)
+
 
 ## Table of Contents
 
