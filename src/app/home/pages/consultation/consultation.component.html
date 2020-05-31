@@ -218,27 +218,26 @@
       <div class="col-md-11 mx-auto">
         <div class="row" *ngIf="!horizontal">
           <div class="col-sm-6 col-md-4 col-lg-3  mt-4  mt-3 ml-0 mb-4 " *ngFor="let doctor of doctors; let i = index">
-            <div class="row">
-              <div class="col-12 ">
-                <mat-card class=" doctor-card">
-                  <div class="rating-box">
-                    <div>
-                      <i class="material-icons text-warning">grade</i>
-                      <span style="font-size: 0.7rem;">4.3</span>
 
-                    </div>
-                  </div>
-                  <div class="row mt-2">
-                    <div class="col-12 doctor-image">
-                      <img src={{doctor.image}} alt="Doctor name" class="center">
-                    </div>
-                  </div>
-                  <div class="row mt-1">
-                    <div class="col-md-12 doctor-name mt-0">
-                      <h4 class=" m-0 ">{{doctor.name}}</h4>
-                    </div>
-                  </div>
-                  <!--
+            <mat-card class=" doctor-card">
+              <div class="rating-box">
+                <div>
+                  <i class="material-icons text-warning">grade</i>
+                  <span style="font-size: 0.7rem;">4.3</span>
+
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-12 doctor-image">
+                  <img src={{doctor.image}} alt="Doctor name" class="center">
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-md-12 doctor-name mt-0">
+                  <h4 class=" m-0 ">{{doctor.name}}</h4>
+                </div>
+              </div>
+              <!--
                 <div class="row">
                   <div class="col-12">
                     <table class="table">
@@ -260,110 +259,112 @@
                   </div>
                 </div>
                 -->
-                  <div class="row mt-2">
-                    <div class="col-4 text-center">
-                      <label>Specialist</label>
-                      {{doctor.speciality}}
-                    </div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-4 text-center">
-                      <label>Degree</label>
-                      {{doctor.degree}}</div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-3 text-center">
-                      <label>Experience</label>
-                      {{doctor.experience}}</div>
-                  </div>
-                  <div class="row consultation-div mt-1 ml-1 mr-1">
-                    <div class="col-12">
-                      <label class="consultation-heading mat-elevation-z5">
-                        Consultation
+              <div class="row mt-2">
+                <div class="col-4 text-center">
+                  <label>Specialist</label>
+                  <span style="font-size: 0.8rem;">{{doctor.speciality}} </span>
+                </div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div class="col-4 text-center">
+                  <label>Degree</label>
+                  <span style="font-size: 0.8rem;">{{doctor.degree}}</span></div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div class="col-3 text-center p-0 pl-2">
+                  <label>Experience</label>
+                  <span style="font-size: 0.8rem;">{{doctor.experience}}</span></div>
+              </div>
+              <div class="row consultation-div mt-1">
+                <!-- <div class="col-12">
+                  <label class="consultation-heading mat-elevation-z5">
+                    Consultation
+                  </label>
+                </div> -->
+                <div class="col-12 my-2">
+                  <div class="row" style="justify-content: space-around;">
+                    <div class="col-3 pt-2 p-0 btn-primary options-menus">
+                      <i class="material-icons">sms</i>
+                      <!-- <img src="./assets/img/consulation/blood-test/video.png" class="consultation-image"> -->
+                      <label class="text-white mt-2">
+                        8am - 6pm
                       </label>
                     </div>
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-4">
-                          <img src="./assets/img/consulation/blood-test/video.png" class="consultation-image">
-                          <label class="image-data">
-                            8am-6pm
-                          </label>
-                        </div>
-                        <div class="col-4">
-                          <img src="./assets/img/consulation/blood-test/telephone.jpg" class="consultation-image">
-                          <label class="image-data">
-                            8am-6pm
-                          </label>
-                        </div>
-                        <div class="col-4">
-                          <img src="./assets/img/consulation/blood-test/physicalMeeting.jpg" class="consultation-image">
-                          <label class="image-data">
-                            8am-6pm
-                          </label>
-                        </div>
-                      </div>
+                    <div class="col-3 pt-2 p-0 btn-danger options-menus">
+                      <i class="material-icons">duo</i>
+                      <!-- <img src="./assets/img/consulation/blood-test/telephone.jpg" class="consultation-image"> -->
+                      <label class="text-white mt-2">
+                        8am - 6pm
+                      </label>
                     </div>
-
-                    <div class="col-12 emergency-section">
-                      <mat-divider></mat-divider>
-                      <div class="row">
-
-                        <div class="col-5 mt-1">
-                          <img src="./assets/img/consulation/blood-test/emergency.jpg" class="emergency-image">
-                        </div>
-
-                        <div class="col-7 mt-2">
-                          <div class="row">
-                            <div class="col-12 emergency-fee mt-1">
-                              <h5>Fee : Rs 1500</h5>
-                            </div>
-                            <div class="col-12 emergency-time">
-                              <h4>24 hrs</h4>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="col-3 pt-2 p-0 btn-info options-menus">
+                      <i class="material-icons">call</i>
+                      <!-- <img src="./assets/img/consulation/blood-test/physicalMeeting.jpg" class="consultation-image"> -->
+                      <label class="text-white mt-2">
+                        8am - 6pm
+                      </label>
                     </div>
                   </div>
+                </div>
+
+                <div class="col-12 emergency-section">
+                  <mat-divider></mat-divider>
                   <div class="row">
-                    <div class="col-12">
+
+                    <div class="col-5 mt-1">
+                      <img src="./assets/img/consulation/blood-test/emergency.jpg" class="emergency-image">
+                    </div>
+
+                    <div class="col-7 mt-2">
                       <div class="row">
-                        <div class="col-6 mt-3">
-                          <label style="color : black">City : Mohali</label>
+                        <div class="col-12 emergency-fee mt-1">
+                          <h5>Fee : ₹ 1500</h5>
                         </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-5">
-                              <img src="./assets/img/consulation/blood-test/location.jpg" class="doctor-location-image">
-                            </div>
-                            <div class="col-7 mt-3">
-                              5 KM
-                            </div>
-                          </div>
+                        <div class="col-12 emergency-time">
+                          <h6>24 hrs</h6>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <button class="btn btn-danger booknow">Book Appointment <mat-icon>arrow_forward</mat-icon>
-                      </button>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-info booknow" (click)="knowMore(i)">
-                        <mat-icon>control_point</mat-icon> Know More
-                      </button>
-                    </div>
-                  </div>
-
-                </mat-card>
+                </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-8 mt-3">
+                      <label style="color : black">City : Mohali</label>
+                    </div>
+                    <div class="col-4" style="align-items: center;display: flex;">
+
+                      <span class="material-icons" style="margin-top: -3px;">
+                        person_pin_circle
+                      </span>
+                      <span>5 KM</span>
+                      <!-- <img src="./assets/img/consulation/blood-test/location.jpg" class="doctor-location-image"> -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="justify-content: center;">
+                <div class="col-10">
+                  <button class="btn btn-success full-width btn-sm py-2">Book Appointment <mat-icon>arrow_forward
+                    </mat-icon>
+                  </button>
+                </div>
+                <div class="col-10">
+                  <button class="btn btn-info full-width btn-sm py-2" (click)="knowMore(i)">
+                    <mat-icon>control_point</mat-icon> Know More
+                  </button>
+                </div>
+              </div>
+
+            </mat-card>
+
           </div>
         </div>
         <div class="continer" *ngIf="horizontal">
           <div class="row horizontal-port mt-2" *ngFor="let doctor of doctors; let i = index">
             <!--Apply loop here-->
-            <div class="col-lg-9">
+            <div class="col-lg-10 mx-auto">
               <mat-card class=" doctor-card">
                 <div class="row ">
                   <div class="col-4">
@@ -374,12 +375,13 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-10 m-auto">
-                        <button class="btn btn-danger booknow">Book Appointment <mat-icon>arrow_forward</mat-icon>
+                      <div class="col-7 m-auto">
+                        <button class="btn btn-success full-width btn-sm py-2">Book Appointment <mat-icon>arrow_forward
+                          </mat-icon>
                         </button>
                       </div>
-                      <div class="col-10 m-auto">
-                        <button class="btn btn-info booknow" (click)="knowMore(i)">
+                      <div class="col-7 m-auto">
+                        <button class="btn btn-info full-width btn-sm py-2" (click)="knowMore(i)">
                           <mat-icon>control_point</mat-icon> Know More
                         </button>
                       </div>
@@ -442,45 +444,39 @@
 
                   <div class="col-5 consultation-horizontal">
                     <div class="row consultation-div-horizontal ml-4 mr-1">
-                      <div class="col-12">
+                      <!-- <div class="col-12">
                         <label class="consultation-heading mat-elevation-z5">
                           Consultation
                         </label>
-                      </div>
+                      </div> -->
                       <div class="col-12">
-                        <div class="row">
-                          <div class="col-4">
-                            <div>
-                              <img src="./assets/img/consulation/blood-test/video.png"
-                                class="consultation-image-horizontal">
-                            </div>
-                            <label class="image-data">
-                              8am-6pm
+                        <div class="row py-2" style="justify-content: space-around;">
+                          <div class="col-3 pt-2 p-0 btn-primary options-menus">
+                            <i class="material-icons">sms</i>
+                            <!-- <img src="./assets/img/consulation/blood-test/video.png" class="consultation-image"> -->
+                            <label class="text-white mt-2">
+                              8am - 6pm
                             </label>
                           </div>
-                          <div class="col-4">
-                            <div>
-                              <img src="./assets/img/consulation/blood-test/telephone.jpg"
-                                class="consultation-image-horizontal">
-                            </div>
-                            <label class="image-data">
-                              8am-6pm
+                          <div class="col-3 pt-2 p-0 btn-danger options-menus">
+                            <i class="material-icons">duo</i>
+                            <!-- <img src="./assets/img/consulation/blood-test/telephone.jpg" class="consultation-image"> -->
+                            <label class="text-white mt-2">
+                              8am - 6pm
                             </label>
                           </div>
-                          <div class="col-4">
-                            <div>
-                              <img src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
-                                class="consultation-image-horizontal">
-                            </div>
-                            <label class="image-data">
-                              8am-6pm
+                          <div class="col-3 pt-2 p-0 btn-info options-menus">
+                            <i class="material-icons">call</i>
+                            <!-- <img src="./assets/img/consulation/blood-test/physicalMeeting.jpg" class="consultation-image"> -->
+                            <label class="text-white mt-2">
+                              8am - 6pm
                             </label>
                           </div>
                         </div>
                       </div>
 
                       <div class="col-12 emergency-section">
-                        <mat-divider></mat-divider>
+                        <!-- <mat-divider></mat-divider> -->
                         <div class="row">
 
                           <div class="col-5 mt-1">
@@ -494,7 +490,7 @@
                                 <h5>Fee : Rs 1500</h5>
                               </div>
                               <div class="col-12 emergency-time">
-                                <h4>24 hrs</h4>
+                                <span>24 hrs</span>
                               </div>
                             </div>
                           </div>
@@ -505,7 +501,7 @@
                 </div>
               </mat-card>
             </div>
-            <div class="col-2"></div>
+            <!-- <div class="col-2"></div> -->
           </div>
         </div>
       </div>

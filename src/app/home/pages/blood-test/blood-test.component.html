@@ -1,4 +1,4 @@
-<main >
+<main>
   <div class="container-fluid p-3">
 
     <!-- <h3 class="test-heading">{{city}}</h3> -->
@@ -18,43 +18,31 @@
               </mat-autocomplete>
             </div>
           </div>
-          
+
           <div class="search-box">
             <div class="input-group no-border">
               <mat-chip-list #chipList aria-label="Fruit selection">
-                <mat-chip
-                  *ngFor="let fruit of searchcart"
-                  [selectable]="selectable"
-                  [removable]="removable"
+                <mat-chip *ngFor="let fruit of searchcart" [selectable]="selectable" [removable]="removable"
                   (removed)="remove(fruit)">
                   {{fruit}}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
               </mat-chip-list>
-              
-              <input  
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="add($event)"
-                class="search-box-input" 
-                type="text" 
-                matInput placeholder="Search packages/ profiles/ tests" 
-                [formControl]="mycontrol"
-                name="searchText" 
-                (focus)="showModel()"
-                (keyup)="showModel()"
-               
-                [matAutocomplete]="auto"
-              >
+
+              <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)" class="search-box-input" type="text" matInput
+                placeholder="Search packages/ profiles/ tests" [formControl]="mycontrol" name="searchText"
+                (focus)="showModel()" (keyup)="showModel()" [matAutocomplete]="auto">
               <div>
                 <mat-autocomplete #auto="matAutocomplete" [panelWidth]="600">
-                  <ul class="mega-dropdown-menu row" >
+                  <ul class="mega-dropdown-menu row">
                     <li class="col-sm-4">
                       <ul>
                         <li class="dropdown-header">Single Test</li>
                         <li *ngFor="let test of singleTestFiltered | async; let i = index">
                           <a (click)="addMaindropdown(test)">{{test}}</a>
-                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">
+                            done_outline</mat-icon>
                         </li>
                       </ul>
                     </li>
@@ -63,7 +51,8 @@
                         <li class="dropdown-header">Profile Test</li>
                         <li *ngFor="let test of profileTestFiltered | async; let i = index">
                           <a (click)="addMaindropdown(test)">{{test}}</a>
-                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">
+                            done_outline</mat-icon>
                         </li>
                       </ul>
                     </li>
@@ -72,31 +61,32 @@
                         <li class="dropdown-header">Package Test</li>
                         <li *ngFor="let test of packageTestFiltered | async; let i = index">
                           <a (click)="addMaindropdown(test)">{{test}}</a>
-                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
+                          <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">
+                            done_outline</mat-icon>
                         </li>
                       </ul>
                     </li>
                   </ul>
-                  <mat-option >
+                  <mat-option>
                   </mat-option>
                 </mat-autocomplete>
               </div>
             </div>
             <mat-icon matSuffix style="align-self: center;">search</mat-icon>
           </div>
-          
+
         </div>
-        
+
       </div>
-      <div class=""> 
+      <div class="">
         <button class="btn btn-info">{{mycart.length}} My Cart</button>
       </div>
       <div class="ordernow">
         <button class="btn btn-success" (click)="proceed()">Proceed</button>
       </div>
     </div>
-     
-     <!--
+
+    <!--
        drop down 
 
     <div #menu class="row"   style="position: absolute;width: 100%;z-index: 99;"  >
@@ -177,45 +167,46 @@
         </div>
       </div>
       -->
-    <div class="col-12">
-      <div class="row mt-4">
-        <div class="col-md-1"></div>
-        <div class="col-md-10"> 
-          <mat-toolbar color="primary" class="top-navbar">
-            <div class = "row m-auto">
-              <div class="col-md-3 filter-property">
-                <mat-checkbox (change)="singleTestValueChanges($event.checked)" class="blood-test-filter">
-                Single test </mat-checkbox>
-              </div>
-              <div class="col-md-3 filter-property">
-                <mat-checkbox (change)="packageTestValueChanges($event.checked)" class="blood-test-filter">
-                Package Test</mat-checkbox>
-              </div>
-              <div class="col-md-3 filter-property">
-                <mat-checkbox (change)="profileTestValueChanges($event.checked)" class="blood-test-filter">
-                Profile Test</mat-checkbox>
-              </div>
-              <div class="col-md-3 filter-property">
-                <mat-menu #priceMenu ="matMenu">
-                  <button mat-menu-item >Below Rs.1000</button>
-                  <button mat-menu-item>Rs.1000-Rs.2000</button>
-                  <button mat-menu-item>Rs.2000-Rs.4000</button>
-                  <button mat-menu-item>Above 4000</button>
-                </mat-menu>
+      <div class="col-12">
+        <div class="row mt-4">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <mat-toolbar color="primary" class="top-navbar">
+              <div class="row m-auto">
+                <div class="col-md-3 filter-property">
+                  <mat-checkbox (change)="singleTestValueChanges($event.checked)" class="blood-test-filter">
+                    Single test </mat-checkbox>
+                </div>
+                <div class="col-md-3 filter-property">
+                  <mat-checkbox (change)="packageTestValueChanges($event.checked)" class="blood-test-filter">
+                    Package Test</mat-checkbox>
+                </div>
+                <div class="col-md-3 filter-property">
+                  <mat-checkbox (change)="profileTestValueChanges($event.checked)" class="blood-test-filter">
+                    Profile Test</mat-checkbox>
+                </div>
+                <div class="col-md-3 filter-property">
+                  <mat-menu #priceMenu="matMenu">
+                    <button mat-menu-item>Below Rs.1000</button>
+                    <button mat-menu-item>Rs.1000-Rs.2000</button>
+                    <button mat-menu-item>Rs.2000-Rs.4000</button>
+                    <button mat-menu-item>Above 4000</button>
+                  </mat-menu>
 
-                <button mat-flat-button [matMenuTriggerFor]="priceMenu">Charges <mat-icon>keyboard_arrow_down</mat-icon></button>
+                  <button mat-flat-button [matMenuTriggerFor]="priceMenu">Charges <mat-icon>keyboard_arrow_down
+                    </mat-icon></button>
+                </div>
               </div>
-            </div>
-            
-          </mat-toolbar>
+
+            </mat-toolbar>
+          </div>
         </div>
       </div>
-    </div>
 
       <div class="col-md-1"></div>
       <div class=" col-md-10">
         <div class="row mt-2">
-          <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+          <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor="let shownresult of  shownresultarray; let i = index">
             <div class="row">
               <div class="col-12">
                 <div class="card mt-0 mat-elevation-z3">
@@ -230,7 +221,7 @@
                         <h3 style="float : right">
                           54% Off
                         </h3>
-                      </div>                   
+                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
@@ -244,9 +235,9 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-6">
-                        <h5> 
+                        <h5>
                           <label>
-                            Includes : 
+                            Includes :
                           </label>
                         </h5>
                       </div>
@@ -258,23 +249,26 @@
                       <div class="col-12 ">
                         <h5>
                           <span class="rupeesign delete-text">
-                            ₹{{shownresult.healcrumprice}}
+                            ₹&nbsp;{{shownresult.healcrumprice}}
                           </span>
                           <span class="offer-price">
-                             ₹{{shownresult.offerprice}}
+                            ₹{{shownresult.offerprice}}
                           </span>
                         </h5>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-6">
-                        <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                        <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward
+                          </mat-icon></button>
                       </div>
                       <div class="col-6" *ngIf="!checkcart(shownresult._id)">
-                        <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                        <button class="btn btn-default" (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart
+                          </mat-icon></button>
                       </div>
                       <div class="col-6" *ngIf="checkcart(shownresult._id)">
-                        <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
+                        <button class="btn btn-danger" (click)="removeFromcart(i)">Remove <mat-icon>add_shopping_cart
+                          </mat-icon></button>
                       </div>
                     </div>
                   </div>

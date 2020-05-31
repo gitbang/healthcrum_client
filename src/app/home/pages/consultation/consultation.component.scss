@@ -44,24 +44,8 @@ img {
   border-radius: 50%;
 }
 
-.top-navbar {
-  background: linear-gradient(to right, #17c0d3, #027e8e);
-  button {
-    margin-right: 4rem;
-  }
-}
-
-.btn {
-  width: 100%;
-  //border-radius: 25px;
-}
 .btn-round {
   border-radius: 25px;
-}
-
-.btn-danger {
-  background-color: $yellow;
-  color: white;
 }
 
 .doctor-card {
@@ -105,11 +89,12 @@ img {
 }
 .consultation-div {
   margin-top: -20px;
-  border: 1px solid black;
+  border-top: 1px solid rgb(204, 203, 203);
+  border-bottom: 1px solid rgb(204, 203, 203);
 }
-.consultation-div-horizontal {
-  border-left: 1px dotted black;
-  border-bottom: 1px dotted black;
+.consultation-horizontal {
+  align-items: flex-end;
+  display: flex;
 }
 .consultation-div-horizontal,
 .consultation-div {
@@ -124,6 +109,7 @@ img {
 
 .image-data {
   color: black;
+  font-size: 0.7rem;
 }
 .emergency-image {
   width: 80%;
@@ -196,4 +182,15 @@ table {
 }
 .nav-pills .nav-item .nav-link.active {
   background-color: #4caf50 !important;
+}
+.options-menus {
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5%;
+  cursor: pointer;
+  text-align: center;
+  label {
+    font-size: 0.6rem;
+  }
 }
