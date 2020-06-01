@@ -76,8 +76,11 @@ export class ConsultationComponent implements OnInit {
       this.horizontal = false
     }
   }
-
+  rating : number = 3
+  ratingArray : Array<number> 
   ngOnInit() {
+
+    this.ratingArray = Array(5).fill(0)
 
     this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
@@ -90,11 +93,14 @@ export class ConsultationComponent implements OnInit {
     //   map(value =>this.filtersearch(value))
     // )
     this.setWidth();
+    if(window.innerWidth < 1000){
+      this.horizontal = false
+    }
   }
 
   setWidth(){
     if(this.horizontal == true) {
-      this.main.nativeElement.style.minWidth = "1200px"
+      //this.main.nativeElement.style.minWidth = "1200px"
     }
   }
 
@@ -119,7 +125,7 @@ export class ConsultationComponent implements OnInit {
     },
    ]
 
-   horizontal : boolean = false
+   horizontal : boolean = true
 
   knowMore(index){
     console.log(index);

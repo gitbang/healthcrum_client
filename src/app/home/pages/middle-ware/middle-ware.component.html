@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 mt-4 main-background">
+      <div class="row"> <!--Apply loop here-->
+        <div class="col-md-4 no-padding"  *ngFor="let img of data; let i = index">
+          <img
+            [src]='img.img'
+            class="img-size"
+          >
+          <div class="adjust-it center">
+            <div class="upper">
+              <label class="upper-label">{{img.name}}</label>
+            </div>
+            <div class="bottom mt-3 cursor-pointer">
+              <label class="bottom-label">Search Doctors <mat-icon>keyboard_arrow_right</mat-icon></label>
+            </div>
+          </div>
+        </div>
+        <!--
+        <div class="col-4" id="ayurvedic">
+          <img
+            src="./assets/img/consulation/middle-ware/ayurvedic.jpg"
+            class="img-size"
+          >
+        </div>
+        <div class="col-4" id="homeopathy">
+          <img
+            src="./assets/img/consulation/middle-ware/homeopathy.jpg"
+            class="img-size"
+          >
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+</div>

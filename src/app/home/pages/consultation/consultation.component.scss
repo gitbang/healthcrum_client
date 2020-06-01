@@ -40,8 +40,10 @@ $blue : #00A0A8;
     background-color: white;
 }
 
-img{
-    border-radius: 50%;
+.img-circle{
+    border-radius: 50%;   
+    height: 200px;
+    margin-top: 5px;
 }
 
 .top-navbar{
@@ -103,16 +105,14 @@ img{
     color : $blue;
     text-align: center;
     font-weight: 600;
-    font-size: larger;
+    font-size: 20px;
+    font-family: cursive;
 }
 .consultation-div{
     margin-top: -20px;
     border: 1px solid black;
 }
-.consultation-div-horizontal{
-    border-left: 1px dotted black;
-    border-bottom: 1px dotted black;;
-}
+
 .consultation-div-horizontal, .consultation-div {
    
     margin-top : -15px;
@@ -165,10 +165,78 @@ table{
     width: 35px;
 }
 .emergency-image-horizontal{
-    width: 70px;
+    width: 50px;
 }
 
 .horizontal-location{
     width: 45px;
+    cursor: pointer;
+}
+
+.consultation-port-new{
+   background-color: $yellow;
+   margin: 5px;
+   border-radius: 10px;
+   padding: 5px;
+    .consultation-label-top{
+     //   color: white;
+        margin-left: 10px;
+    }
+    label{
+        color: white;
+    }
+}
+.consultation-border{
+    border: 1px solid black;
+}
+.emergency-section{
+    border: 1px solid black;
+    margin-top: 10px;
+}
+.normal-fee-heading{
+    color: $yellow;
+    font-size: small;
+    text-align: center;
+}
+.normal-fee-cost{
+    text-align: center;
+    color: $yellow;
+    font-weight: 600;
+    
+}
+
+.emergency-fee{
+    color: black;
+    margin-left: 2px;
+    font-size: small;
+}
+.emergency-time-div {
+    margin-top: -10px;
+}
+.emergency-time{
+    color: black;
+    font-size: small;
+}
+
+.bottom-view-details{
+    color: #0C9DAE;
+    font-size: x-large;
+    font-family: serif;
+    cursor: pointer;
+}
+.bottom-view-feedback{
+    color: black;
+    font-family: cursive;
+    margin-top: 8px;
+}
+
+.active-feedback{
+   // color: coral;
+    color: #E87528;
+}
+.passive-feedback{
+    color: #f7e5c3
+}
+.cursor-pointer{
     cursor: pointer;
 }

@@ -61,6 +61,7 @@ import { ViewDetailsComponent } from "./pages/blood-test/view-details/view-detai
 import { HomeServiceService } from "./home-service.service";
 import { AddMemberComponent } from "./pages/blood-test/add-member/add-member.component";
 import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-details/view-doctor-details.component";
+import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-det
     ViewDetailsComponent,
     AddMemberComponent,
     ViewDoctorDetailsComponent,
+    MiddleWareComponent,
   ],
   imports: [
     CommonModule,
