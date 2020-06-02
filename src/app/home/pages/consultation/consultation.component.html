@@ -253,12 +253,12 @@
                   </div>
                   <div class="col-12">
                     <div class="row">
-                      <div class="col-3 ">
+                      <div class="col-3 cursor-pointer" style="padding : 0">
                         <div class="cursor-pointer">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/video.png"
-                              class="consultation-image-horizontal"
+                              class="consultation-image-horizontal center"
                             >
                           </div>
                           <label class="image-data">
@@ -266,12 +266,12 @@
                           </label>
                         </div>
                       </div>
-                      <div class="col-3 ">
+                      <div class="col-3 cursor-pointer" style="padding : 0">
                         <div  class=" cursor-pointer">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/telephone.jpg"
-                              class="consultation-image-horizontal"
+                              class="consultation-image-horizontal center"
                             >
                           </div>
                           <label class="image-data">
@@ -279,12 +279,12 @@
                           </label>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3 cursor-pointer" style="padding : 0">
                         <div  class=" cursor-pointer">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
-                              class="consultation-image-horizontal"
+                              class="consultation-image-horizontal center"
                             >
                           </div>
                           <label class="image-data">
@@ -292,16 +292,16 @@
                           </label>
                         </div>
                       </div>
-                      <div class="col-3">
-                        <div  class=" cursor-pointer">
+                      <div class="col-3 cursor-pointer"style="padding : 0">
+                        <div class=" cursor-pointer">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/phone.jpg"
-                              class="consultation-image-horizontal"
+                              class="consultation-image-horizontal center"
                             >
                           </div>
                           <label class="image-data">
-                            Chat
+                            10am-6pm
                           </label>
                         </div>
                       </div>
@@ -311,19 +311,21 @@
                     <div class="row">
                       <div class="col-5">
                         <div class="row mt-1">
-                          <div class="col-md-12">
+                          <div class="col-md-12" style="padding : 0">
                             <label class="normal-fee-heading">
                               Consultation Fee 
                             </label>
                           </div>
+                          
                           <div class="col-md-4 normal-fee-cost">
                             200/-
                           </div>
                         </div>
                       </div>
-                      <div class="col-7">
+                       <mat-divider [vertical]="true"></mat-divider>
+                      <div class="col-6">
                         <div class="row ">
-                          <div class="col-5 mt-1">
+                          <div class="col-5 mt-1" style="padding : 0">
                             <img
                               src="./assets/img/consulation/blood-test/emergency1.jpg"
                               class="emergency-image-horizontal"
@@ -332,7 +334,7 @@
                           <div class="col-7 mt-1">
                             <div class="row">
                               <div class="col-12 emergency-fee mt-1">
-                                <label class="emergency-fee">Fee : 1500/-</label>
+                                <label class="emergency-fee" style="font-size : smaller">Fee : 1500/-</label>
                               </div>
                               <div class="col-12 emergency-time-div">
                                 <label class="emergency-time">24 hrs</label>
@@ -374,7 +376,7 @@
                   </div>
                   -->
                   <div class="col-12">
-                    <button class="btn btn-info booknow" (click)="knowMore(i)" ><mat-icon>control_point</mat-icon> Know More</button>
+                    <button class="btn btn-info booknow" (click)="knowMore(i)" ><mat-icon>control_point</mat-icon>View profile</button>
                   </div>
                 </div>
                 
@@ -611,7 +613,7 @@
                               <div class="col-12 emergency-fee mt-1">
                                 <label class="emergency-fee">Fee : 1500/-</label>
                               </div>
-                              <div class="col-12 emergency-time-div">
+                              <div class="col-12 emergency-time-div" style="margin-top : -5px">
                                 <label class="emergency-time">24 hrs</label>
                               </div>
                             </div>

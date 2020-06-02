@@ -126,6 +126,7 @@ $blue : #00A0A8;
 
 .image-data{
     color: black;
+    font-size: smaller;
 }
 .emergency-image {
     width: 80%;
@@ -208,11 +209,15 @@ table{
 .emergency-fee{
     color: black;
     margin-left: 2px;
-    font-size: small;
+    //font-size: smaller;
+    font-weight: 600;
+    padding: 0;
 }
-.emergency-time-div {
-    margin-top: -10px;
-}
+
+// .emergency-time-div {
+//     //margin-top: -10px;
+// }
+
 .emergency-time{
     color: black;
     font-size: small;
@@ -239,4 +244,7 @@ table{
 }
 .cursor-pointer{
     cursor: pointer;
+    :hover{
+        background-color: $bg;
+    }
 }
