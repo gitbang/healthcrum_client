@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
-import {Router} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
 import {HomeServiceService } from '../../home-service.service'
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -60,6 +60,7 @@ export class ConsultationComponent implements OnInit {
 
   constructor(
     private router : Router,
+    private route : ActivatedRoute,
     private service : HomeServiceService,
     private http: HttpClient,
     private renderer: Renderer2,
@@ -78,34 +79,41 @@ export class ConsultationComponent implements OnInit {
   }
   rating : number = 3
   ratingArray : Array<number> 
+
   ngOnInit() {
 
     this.ratingArray = Array(5).fill(0)
+
+    this.route.params.subscribe(result=>{
+      console.log(result)
+      if(result.type) {
+        this.doctorType = result.type
+        this.service.getDoctorByCategory(this.doctorType).subscribe((doc)=>{
+          if(doc.success){
+            this.doctors = doc;
+          } else{
+            console.log("something went wrong")
+          }
+          
+        })
+      }
+    })
 
     this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filter(value))
     );
-    // this.myControl.valueChanges.subscribe((value) => this.getCities(value));
-    //  this.filteredSearch = this.myControl.valueChanges.pipe(
-    //   startWith('' ),
-    //   map(value =>this.filtersearch(value))
-    // )
-    this.setWidth();
+    
     if(window.innerWidth < 1000){
       this.horizontal = false
     }
   }
 
+  doctorType : string;
+
   setCurrentLocation() {
     this.myControl.setValue(this.city);
-  }
-
-  setWidth(){
-    if(this.horizontal == true) {
-      //this.main.nativeElement.style.minWidth = "1200px"
-    }
   }
 
   doctors = [ 
@@ -137,15 +145,6 @@ export class ConsultationComponent implements OnInit {
     this.service.changedoctor(this.doctors[index])
     this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index]._id)
   }
-
-
-
-  //----------top search bar --------------//
-
-  // private filtersearch(value : string) : string[] {
-  //   const filtervalue = value.toLowerCase();
-  //   //return this.options.filter(option => option.toLowerCase().includes(filtervalue))
-  // }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -214,11 +213,52 @@ export class ConsultationComponent implements OnInit {
   getLocationName(ip: string) {
     let url = "http://ip-api.com/json/" + ip;
     this.http.get(url).subscribe((res: UserLocationModal) => {
-      // console.log(res);
+       console.log("response of city",res);
       this.city = res.city;
+      this.state = res.regionName;
       this.search_city = this.city;
       this.myControl.setValue(this.city);
+      this.filterBylocation();
     });
   }
+  state : string;
+  filterBylocation(){
+    console.log(this.city)
+    this.service.consultationFilterByCity(this.city, this.state).subscribe(res=>{
+      console.log(res)
 
+    })
+  }
+
+  filters = {
+    stream : null,
+    location : null,
+    profession : null,
+    area : null,
+    rating  : null,
+    experience : null,
+    gender : null
+  }
+
+  getStream(name : string) {
+    this.filters.stream = name
+  }
+  getLocation(location: string) {
+    this.filters.location =location
+  }
+  getProfession(profession : string) {
+    this.filters.profession = profession
+  }
+  getArea(area : string) {
+    this.filters.area = area
+  }
+  getRating(rating : string) {
+    this.filters.rating = rating
+  }
+  getExperience(experience : string) {
+    this.filters.experience = experience
+  }
+  getGender(gen : string) {
+    this.filters.gender = gen
+  }
 }

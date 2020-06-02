@@ -1,9 +1,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-1"></div>
-    <div class="col-lg-10 mt-4 main-background">
+    <div class="col-lg-10 mt-4 ">
       <div class="row"> <!--Apply loop here-->
-        <div class="col-md-4 no-padding"  *ngFor="let img of data; let i = index">
+        <div class="col-md-6 col-lg-4 no-padding mt-3"  *ngFor="let img of data; let i = index">
+          <div class="row">
+            <div class="col-12">
+            
+            </div>
+          </div>
           <img
             [src]='img.img'
             class="img-size"
@@ -12,25 +17,26 @@
             <div class="upper">
               <label class="upper-label">{{img.name}}</label>
             </div>
-            <div class="bottom mt-3 cursor-pointer">
-              <label class="bottom-label">Search Doctors <mat-icon>keyboard_arrow_right</mat-icon></label>
+            <div class="bottom mt-3 cursor-pointer" (click)="typeSelected(img.name)">
+              <label class="bottom-label">Search Doctors</label> <mat-icon class="mt-2 white-icon ">keyboard_arrow_right</mat-icon>
+            </div>
+          </div>
+          <div class="row mt-2 mb-2 p-2">
+            <div class="col-12 mat-elevation-z5 main-background">
+              <div class="">
+                <div class="buttom-details ">
+                  <label>Total number of doctors : 14</label>
+                </div>
+                <div>
+                  <label>Number of online doctors : 10</label>
+                </div>
+                <div>
+                  <label>Average cost : Rs. 1200/-</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <!--
-        <div class="col-4" id="ayurvedic">
-          <img
-            src="./assets/img/consulation/middle-ware/ayurvedic.jpg"
-            class="img-size"
-          >
-        </div>
-        <div class="col-4" id="homeopathy">
-          <img
-            src="./assets/img/consulation/middle-ware/homeopathy.jpg"
-            class="img-size"
-          >
-        </div>
-        -->
       </div>
     </div>
   </div>

@@ -58,9 +58,9 @@
       
       <mat-toolbar color="primary" class="top-navbar">
         <mat-menu #streamMenu ="matMenu">
-          <button mat-menu-item >Ayurvedic</button>
-          <button mat-menu-item>Allopathic</button>
-          <button mat-menu-item>Homeophathic</button>
+          <button mat-menu-item (click)="getStream('Ayurvedic')" >Ayurvedic</button>
+          <button mat-menu-item (click)="getStream('Allopathic')">Allopathic</button>
+          <button mat-menu-item (click)="getStream('Homeophathic')">Homeophathic</button>
         </mat-menu>
         
         <mat-menu #specialityMenu ="matMenu">
@@ -258,12 +258,14 @@
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/video.png"
-                              class="consultation-image-horizontal center"
+                              class="consultation-image-horizontal "
                             >
                           </div>
-                          <label class="image-data">
-                            8am-6pm
-                          </label>
+                          <div>
+                            <label class="image-data">
+                              8am-6pm
+                            </label>
+                          </div>
                         </div>
                       </div>
                       <div class="col-3 cursor-pointer" style="padding : 0">
@@ -590,7 +592,7 @@
                     <div class="row">
                       <div class="col-5">
                         <div class="row mt-1">
-                          <div class="col-md-8">
+                          <div class="col-md-8 col-xl-6 ">
                             <label class="normal-fee-heading">
                               Consultation Fee 
                             </label>
@@ -602,7 +604,7 @@
                       </div>
                       <div class="col-7">
                         <div class="row ">
-                          <div class="col-5 mt-1">
+                          <div class="col-md-4 mt-1">
                             <img
                               src="./assets/img/consulation/blood-test/emergency1.jpg"
                               class="emergency-image-horizontal"

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {Http, RequestOptions} from '@angular/http'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { retry } from 'rxjs/operators';
+import { retry, catchError } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,12 +67,17 @@ export class HomeServiceService {
     this.doctorselectedforDetails.next(message)
   }
 
+  getDoctorByCategory(name : string) : Observable<any>{
+    return this.http
+            .get(this.url + '/'+ name + '/doctors', this.option)
+            .pipe(retry(2))
+  }
 
-
-
-
-
-
+  consultationFilterByCity(city : string, state : string) : Observable<any> {
+    return this.http
+              .get(this.url + '/' + state + '/' + city,  this.option)
+              .pipe(retry(2))
+  }
 
 //---------------- book-test---------------//
 
@@ -85,5 +91,5 @@ export class HomeServiceService {
     return ;
   }
   
-  //getMembers(data) :
 } 
+

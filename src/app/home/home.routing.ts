@@ -25,7 +25,7 @@ export const HomePageRoutes: Routes = [
   { path: "blood-test", component: BloodTestComponent },
   { path: "labs", component: LabsComponent },
   { path: "doctors", component: DoctorsComponent },
-  { path: "consultation", component: ConsultationComponent },
+  { path: "consultation/:type", component: ConsultationComponent },
   { path: "medecines", component: MedicinesComponent },
   { path: "medecine/:id", component: SingleMedicineComponent },
   { path: "equipments", component: EquipmentsComponent },
