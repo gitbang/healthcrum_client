@@ -31,7 +31,9 @@ import {
   MatAutocompleteModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatMenuModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
 } from "@angular/material";
 
 
@@ -120,7 +122,9 @@ import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
     MatSnackBarModule,
     MatMenuModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSidenavModule,
+    MatListModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

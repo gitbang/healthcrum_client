@@ -82,7 +82,6 @@ export class ConsultationComponent implements OnInit {
 
     this.ratingArray = Array(5).fill(0)
 
-    //
     this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
@@ -97,6 +96,10 @@ export class ConsultationComponent implements OnInit {
     if(window.innerWidth < 1000){
       this.horizontal = false
     }
+  }
+
+  setCurrentLocation() {
+    this.myControl.setValue(this.city);
   }
 
   setWidth(){
