@@ -73,9 +73,22 @@ export class HomeServiceService {
             .pipe(retry(2))
   }
 
-  consultationFilterByCity(city : string, state : string) : Observable<any> {
+  consultationFilterByCity(city : string) : Observable<any> {
+    return this.http
+              .get(this.url + '/' + city,  this.option)
+              .pipe(retry(2))
+  }
+
+  consultationFilterByCityAndState(city : string, state : string) : Observable<any> {
     return this.http
               .get(this.url + '/' + state + '/' + city,  this.option)
+              .pipe(retry(2))
+  }
+  
+  consultationFilter(filters : Object) : Observable<any>{
+    console.log("in services : filters are : ", filters)
+    return this.http
+              .post(this.url + '/filterdoctor', filters)
               .pipe(retry(2))
   }
 
@@ -90,6 +103,6 @@ export class HomeServiceService {
   getMembers(data ) : Observable <any> {
     return ;
   }
-  
+
 } 
 

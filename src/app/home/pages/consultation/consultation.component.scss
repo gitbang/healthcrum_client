@@ -248,3 +248,11 @@ table{
         background-color: $bg;
     }
 }
+
+.search-icon {
+    cursor: pointer;
+    &:hover{
+        background-color: $bg;
+    }
+    
+}

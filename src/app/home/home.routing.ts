@@ -25,7 +25,12 @@ export const HomePageRoutes: Routes = [
   { path: "blood-test", component: BloodTestComponent },
   { path: "labs", component: LabsComponent },
   { path: "doctors", component: DoctorsComponent },
+
+  {path : "consultation", component: MiddleWareComponent},
   { path: "consultation/:type", component: ConsultationComponent },
+  {path : "consultation/view-doctor-details/:id", component: ViewDoctorDetailsComponent},
+  { path: "consultation/:type/:city", component: ConsultationComponent },
+  
   { path: "medecines", component: MedicinesComponent },
   { path: "medecine/:id", component: SingleMedicineComponent },
   { path: "equipments", component: EquipmentsComponent },
@@ -33,9 +38,7 @@ export const HomePageRoutes: Routes = [
   { path: "aboutus", component: AboutUsComponent },
   { path: "contactus", component: ContactUsComponent },
   { path: "view-doctor/:id", component: DoctorComponent },
-  {path : "blood-test/middleware", component: MiddleWareComponent},
   {path: "blood-test/viewdetails/:id", component: ViewDetailsComponent},
   {path: "blood-test/mycart/:hrId", component : BookTestComponent},
   {path : "blood-test/:hrId", component : BookTestComponent},
-  {path : "consultation/view-doctor-details/:id", component: ViewDoctorDetailsComponent}
 ];

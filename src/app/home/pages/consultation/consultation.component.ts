@@ -8,6 +8,7 @@ import { UserLocationModal } from "../../../models/userLocation";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { startWith, map } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-consultation',
@@ -66,56 +67,69 @@ export class ConsultationComponent implements OnInit {
     private renderer: Renderer2,
     private matDialog : MatDialog,
     private snackbar : MatSnackBar,
+    private location :Location
   ) { }
   
   @ViewChild("main", {static : true}) main : ElementRef
   @HostListener('window : resize',['$event'])
   onResize(event) {
-    console.log("event :" , event)
-    console.log(window.innerWidth);
+    //console.log("event :" , event)
+    //console.log(window.innerWidth);
     if(window.innerWidth < 1100){
       this.horizontal = false
     }
   }
   rating : number = 3
-  ratingArray : Array<number> 
-
+  ratingArray : Array<number>; 
+  category : string;
+  activeCity : string = null;
   ngOnInit() {
 
+    this.getIpClientLocation();
+    
     this.ratingArray = Array(5).fill(0)
 
     this.route.params.subscribe(result=>{
-      console.log(result)
-      if(result.type) {
-        this.doctorType = result.type
-        this.service.getDoctorByCategory(this.doctorType).subscribe((doc)=>{
-          if(doc.success){
-            this.doctors = doc;
-          } else{
-            console.log("something went wrong")
-          }
-          
+      console.log("params are : ",result)
+      this.category = result.type;
+      if(result.city && result.city != undefined){
+        console.log("city is : ", result.city)
+        // send api request to fetch data regarding that city
+        this.myControl.setValue(result.city)
+        this.activeCity = result.city;
+        this.filters.city = result.city
+        this.filters.stream = result.type
+        console.log("filters object : ", this.filters)
+        this.service.consultationFilter(this.filters).subscribe(result=>{
+          console.log(result)
         })
-      }
+      } else{
+        this.getIpClientLocation();
+      } 
     })
 
-    this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filter(value))
     );
     
     if(window.innerWidth < 1000){
-      this.horizontal = false
+      this.horizontal = false;
     }
   }
 
   doctorType : string;
 
-  setCurrentLocation() {
-    this.myControl.setValue(this.city);
+  changeRoute(){
+    this.location.replaceState("/consultation/"+ this.category + '/'+ this.myControl.value);
   }
 
+  setCurrentLocation() {
+    this.myControl.setValue(this.city);
+    this.filterBylocation();
+    this.changeRoute()
+  }
+  
   doctors = [ 
     {_id : "1",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
     speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS' , city : "Mohali"
@@ -135,9 +149,9 @@ export class ConsultationComponent implements OnInit {
     {_id : "6",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
     speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
     },
-   ]
+  ]
 
-   horizontal : boolean = true
+  horizontal : boolean = true
 
   knowMore(index){
     console.log(index);
@@ -217,48 +231,98 @@ export class ConsultationComponent implements OnInit {
       this.city = res.city;
       this.state = res.regionName;
       this.search_city = this.city;
-      this.myControl.setValue(this.city);
+     // this.myControl.setValue(this.city);
+      if(this.activeCity == null) {
+        this.setCurrentLocation() 
+      }
+      
       this.filterBylocation();
     });
   }
+
   state : string;
   filterBylocation(){
     console.log(this.city)
-    this.service.consultationFilterByCity(this.city, this.state).subscribe(res=>{
+    this.service.consultationFilterByCity(this.myControl.value).subscribe(res=>{
       console.log(res)
-
     })
   }
 
   filters = {
     stream : null,
-    location : null,
-    profession : null,
-    area : null,
+    //location : null,
+    speciality : null,
+    fromHealthcrum :null,
+    consultation : {
+      video : null,
+      tele : null,
+      physical : null,
+      emergency : null
+    },
     rating  : null,
     experience : null,
-    gender : null
+    gender : null,
+    name : null,
+    city : null
+  }
+
+  filterDotor(){
+    // this.service.consultationFilter(this.filters).subscribe((result)=>{
+    //   console.log("in filterdoctor function ", result);
+    // })
+    console.log(this.filters)
   }
 
   getStream(name : string) {
-    this.filters.stream = name
+    this.filters.stream = name.toLowerCase()
+    this.filterDotor();
   }
-  getLocation(location: string) {
-    this.filters.location =location
+  getSpeciality(name : string) {
+    this.filters.speciality = name
+    this.filterDotor();
   }
-  getProfession(profession : string) {
-    this.filters.profession = profession
-  }
-  getArea(area : string) {
-    this.filters.area = area
-  }
-  getRating(rating : string) {
+ 
+  getRating(rating : number) {
     this.filters.rating = rating
+    this.filterDotor();
   }
-  getExperience(experience : string) {
+  getExperience(experience : number) {
     this.filters.experience = experience
+    this.filterDotor();
   }
   getGender(gen : string) {
     this.filters.gender = gen
+    this.filterDotor();
   }
+  getDoctorType(type : boolean){
+    this.filters.fromHealthcrum = type;
+    this.filterDotor()
+  }
+  getConsultation(type : string){
+    this.filters.consultation.emergency = false
+    this.filters.consultation.video = false
+    this.filters.consultation.tele = false
+    this.filters.consultation.physical = false
+    this.filters.consultation[type] = true;
+    //console.log("filters in getConsultation function : ", this.filters)
+    this.filterDotor()
+  }
+
+  searchBy : string = 'name';
+  searchBarMain : string = ""
+  searchByFunction(event){
+
+    //console.log("in function searchByFunction : ", this.searchBy)
+  }
+  searchBar(){
+    console.log("searchBar : ", this.searchBarMain)
+    if(this.searchBy == 'name') {
+      this.filters.name = this.searchBarMain;
+    } else{
+      this.filters.speciality = this.searchBarMain;
+    }
+    //console.log("searchBar in function", this.filters)
+    this.filterDotor();
+  }
+
 }

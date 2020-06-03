@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import {Location} from '@angular/common'; 
+
 @Component({
   selector: 'app-middle-ware',
   templateUrl: './middle-ware.component.html',
@@ -9,11 +11,14 @@ import { Router } from '@angular/router';
 export class MiddleWareComponent implements OnInit {
 
   constructor(
-    private router : Router
+    private router : Router,
+    private location: Location 
   ) { }
 
   ngOnInit() {
+   // this.location.replaceState("/some/newstate/");
   }
+  
   data = [
     {name : "Allopathy", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/allopathy.jpg"},
     {name : "Homeopathy", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/homeopathy.jpg"},
@@ -21,7 +26,7 @@ export class MiddleWareComponent implements OnInit {
   ]
 
   typeSelected(name : string) {
-    this.router.navigateByUrl('/consultation/'+ name)
+    this.router.navigateByUrl('/consultation/'+ name.toLowerCase())
   }
 
 }

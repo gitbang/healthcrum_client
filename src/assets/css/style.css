@@ -49,6 +49,27 @@ Author URI: http://themeforest.net/user/Ansonika/
 .blood-test-filter label .mat-checkbox-label{
   color: white;
 }
+.consultation .mat-form-field-infix {
+  padding: 0 !important;
+}
+.consultation .mat-form-field-flex {
+  margin: 0 !important;
+}
+@media screen and (max-width : 550px) {
+  .consultation .mat-form-field-infix{
+    width: 20px;
+  }
+}
+@media screen and (min-width : 1000x) {
+  .consultation .mat-form-field-infix{
+    width: 150px;
+  }
+}
+@media screen and (min-width : 551px ) and (max-width : 999px) {
+  .consultation .mat-form-field-infix{
+    width: 140px;
+  }
+}
 
 .location-selection-map{
   width: 100% !important;

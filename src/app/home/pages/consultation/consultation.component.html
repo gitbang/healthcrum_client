@@ -36,26 +36,30 @@
         <div class="search-box">     
           <div class="input-group no-border">
             <input  
+              [(ngModel)]="searchBarMain"
               class="search-box-input" 
               type="text" 
               #toggleButton
               placeholder= "Search Doctor"
             >
           </div>
-          <mat-icon matSuffix style="align-self: center;">search</mat-icon>
+          <div class="consultation">
+            <mat-form-field>
+              <mat-label>Select an option</mat-label>
+              <mat-select [(value)]="searchBy" (selectionChange)="searchByFunction($event)">
+                <mat-option value="name">Search by name</mat-option>
+                <mat-option value="speciality">Search by speciality</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-icon matSuffix class="search-icon" style="align-self: center;" (click)=" searchBar()">search</mat-icon>
         </div>
       </div>   
     </div>
   </div>
 
- 
-
-
   <div class="row mt-4">
-    <div class="col-md-12"> 
-
-
-      
+    <div class="col-md-12">   
       <mat-toolbar color="primary" class="top-navbar">
         <mat-menu #streamMenu ="matMenu">
           <button mat-menu-item (click)="getStream('Ayurvedic')" >Ayurvedic</button>
@@ -64,40 +68,41 @@
         </mat-menu>
         
         <mat-menu #specialityMenu ="matMenu">
-          <button mat-menu-item >Heart Specialist</button>
-          <button mat-menu-item>Skin Speciality</button>
-          <button mat-menu-item>Lungs Speciality</button>
-          <button mat-menu-item>Dentist</button>
+          <button mat-menu-item (click)="getSpeciality('heart')">Heart Specialist</button>
+          <button mat-menu-item (click)="getSpeciality('skin')">Skin Speciality</button>
+          <button mat-menu-item (click)="getSpeciality('lung')">Lungs Speciality</button>
+          <button mat-menu-item (click)="getSpeciality('dentist')">Dentist</button>
         </mat-menu>
 
         <mat-menu #genderMenu ="matMenu">
-          <button mat-menu-item >Male</button>
-          <button mat-menu-item>Female</button>
+          <button mat-menu-item (click)="getGender('male')" >Male</button>
+          <button mat-menu-item (click)="getGender('female')">Female</button>
         </mat-menu>
 
         <mat-menu #experienceMenu ="matMenu">
-          <button mat-menu-item >Below 2 years</button>
-          <button mat-menu-item>2 years to 5 years</button>
-          <button mat-menu-item>Above 5 years</button>
+          <button mat-menu-item (click)="getExperience(2)">Below 2 years</button>
+          <button mat-menu-item (click)="getExperience(5)">2 years to 5 years</button>
+          <button mat-menu-item (click)="getExperience(10)">Above 5 years</button>
         </mat-menu>
 
         <mat-menu #healthcrumMenu ="matMenu">
-          <button mat-menu-item >Healthcrum Doctor</button>
-          <button mat-menu-item>Other doctors</button>
+          <button mat-menu-item (click)="getDoctorType(true)">Healthcrum Doctor</button>
+          <button mat-menu-item (click)="getDoctorType(true)">Other doctors</button>
         </mat-menu>
 
         <mat-menu #consultationMenu ="matMenu">
-          <button mat-menu-item>Telephonic consultation</button>
-          <button mat-menu-item>Video consultation</button>
-          <button mat-menu-item>Physical consultation</button>
+          <button mat-menu-item (click)="getConsultation('tele')">Telephonic consultation</button>
+          <button mat-menu-item (click)="getConsultation('video')">Video consultation</button>
+          <button mat-menu-item (click)="getConsultation('emergency')">Physical consultation</button>
+          <button mat-menu-item (click)="getConsultation('physical')">Physical consultation</button>
         </mat-menu>
 
         <mat-menu #ratingMenu ="matMenu">
-          <button mat-menu-item >1 stars</button>
-          <button mat-menu-item>2 stars</button>
-          <button mat-menu-item>3 stars</button>
-          <button mat-menu-item>4 stars</button>
-          <button mat-menu-item>5 stars</button>
+          <button mat-menu-item (click)="getRating(1)">1 stars</button>
+          <button mat-menu-item (click)="getRating(2)">2 stars</button>
+          <button mat-menu-item (click)="getRating(3)">3 stars</button>
+          <button mat-menu-item (click)="getRating(4)">4 stars</button>
+          <button mat-menu-item (click)="getRating(5)">5 stars</button>
         </mat-menu>
 
         <button class="" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
