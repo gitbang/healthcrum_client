@@ -1,15 +1,20 @@
 $grey : #F5F8FA;
 $blue : #00AEC5;
+$bg : #eff4f7;
+$yellow :#E87528;
+
 .container-fluid  {
     background-color: $grey;
 }
-img {
+.img-circle {
     border-radius: 50%;
 }
 .doctor-name h2{
     color : $blue;
     font-weight: 600;
     text-align: center;
+    font-family: cursive;
+    font-size: x-large;
 }
 table{
     border: none !important;
@@ -25,5 +30,71 @@ table{
 }
 
 @media screen and (min-width : 800px) {
-    
+
+}
+
+.active-feedback{
+    // color: coral;
+     color: #E87528;
+ }
+ .passive-feedback{
+     color: #f7e5c3
+ }
+
+
+.horizontal-location{
+    width: 45px;
+    cursor: pointer;
+}
+.consultation-horizontal{
+    padding-right: 0;;
+}
+.consultation-div-horizontal, .consultation-div {
+   
+    margin-top : -15px;
+    .consultation-heading{
+        color: white;
+        background: linear-gradient(to right, #17c0d3, #027e8e);
+        margin-left: -15px;
+        padding: 5px;
+    }
+}
+.consultation-port-new{
+    background-color: $yellow;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+     .consultation-label-top{
+      //   color: white;
+         margin-left: 10px;
+     }
+     label{
+         color: white;
+     }
+ }
+ .consultation-image-horizontal{
+    width: 35px;
+}
+.emergency-image-horizontal{
+    width: 100px;
+}
+.select-slot{
+    padding-left: 10%;
+}
+.image-data{
+    color: black;
+    font-size: smaller;
+}
+.consultation-border{
+    border: 1px solid black;
+}
+.color-black{
+    color: black;
+}
+
+.simple-border{
+    border: 1px solid black;
+}
+.img-gallary{
+    width: 220px;
 }
