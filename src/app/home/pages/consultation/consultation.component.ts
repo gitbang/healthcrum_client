@@ -77,6 +77,8 @@ export class ConsultationComponent implements OnInit {
     //console.log(window.innerWidth);
     if(window.innerWidth < 1100){
       this.horizontal = false
+    } else {
+      this.horizontal = true
     }
   }
   rating : number = 3
@@ -92,19 +94,23 @@ export class ConsultationComponent implements OnInit {
     this.route.params.subscribe(result=>{
       console.log("params are : ",result)
       this.category = result.type;
+      this.filters.stream = result.type;
       if(result.city && result.city != undefined){
         console.log("city is : ", result.city)
-        // send api request to fetch data regarding that city
         this.myControl.setValue(result.city)
         this.activeCity = result.city;
-        this.filters.city = result.city
-        this.filters.stream = result.type
-        console.log("filters object : ", this.filters)
-        this.service.consultationFilter(this.filters).subscribe(result=>{
-          console.log(result)
-        })
+        this.filters.location.city= result.city.toLowerCase();
+        console.log("city in filter", this.filters.location.city);
+        console.log("filters object : ", this.filters);
+        // this.service.consultationFilter(this.filters).subscribe(result=>{
+        //   console.log("from server in ngonInit",result)
+        //   if(result.success){
+        //     this.doctors = result.data
+        //   }
+        // })
+        this.filterDotor();
       } else{
-        this.getIpClientLocation();
+        //this.getIpClientLocation();
       } 
     })
 
@@ -126,28 +132,57 @@ export class ConsultationComponent implements OnInit {
 
   setCurrentLocation() {
     this.myControl.setValue(this.city);
-    this.filterBylocation();
+    //this.filterBylocation();
+    this.filters.location.city = this.myControl.value.toLowerCase();
+    this.filterDotor();
     this.changeRoute()
   }
   
   doctors = [ 
-    {_id : "1",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS' , city : "Mohali"
-    },
-    {_id : "2",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
-    },
-    {_id : "3",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
-    },
-    {_id : "4",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
-    },
-    {_id : "5",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
-    },
-    {_id : "6",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-    speciality : 'Heart', fee : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS', city : "Mohali"
+  //   {_id : "1",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
+  //   speciality : 'Heart', consultationFees : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS' , city : "Mohali"
+  //   ,location : {
+  //     city : "mohali",
+  //     state : "Punjab"
+  //   },  
+  // },
+    { _id : "2",  
+     // image : './assets/img/faces/doctor.png',    // profile picture
+      name : 'DR. PANKAJ MANORIA',  
+      experience : 10 ,                            // add + years
+      speciality : 'Heart', 
+      consultationFees : 5000,  
+      rating : 5,
+      timing : '10am - 6pm',                      
+      emergency : 'yes',                    // in consultation
+      degree : 'MBBS',                      //  delete in qualification
+      city : "Mohali",                       // delete in location
+      location : {
+        city : "mohali",
+        state : "Punjab"
+      },
+      consultation : {
+        emergency : true,
+        video : true,
+        tele : true,
+        physical: true,
+      },
+      emergencyFees : 2000,
+      language : [],
+      distance : 5,  
+      fromHealthcrum : false,
+      gender : 'male',
+      pictures : [],
+      profilepic : './assets/img/faces/doctor.png',
+      qualification : ['MBBS'],
+      registerationNumber : '12345',
+      stream : 'ayurveda',
+      consultationTiming: {
+        emergency: {from: "8 am", to: "2 pm"},
+        physical: {from: "8 am", to : "6pm"},
+        tele: {from: "8 am", to: "2 pm"},
+        video: {from: "8 am", to: "2 pm"}
+      }
     },
   ]
 
@@ -231,26 +266,28 @@ export class ConsultationComponent implements OnInit {
       this.city = res.city;
       this.state = res.regionName;
       this.search_city = this.city;
+      //
      // this.myControl.setValue(this.city);
       if(this.activeCity == null) {
         this.setCurrentLocation() 
+        this.filters.location.city = this.city;
       }
       
-      this.filterBylocation();
+      //this.filterBylocation();
+     // this.filterDotor();
     });
   }
 
   state : string;
   filterBylocation(){
-    console.log(this.city)
-    this.service.consultationFilterByCity(this.myControl.value).subscribe(res=>{
-      console.log(res)
-    })
+    // console.log(this.city)
+    // this.service.consultationFilterByCity(this.myControl.value).subscribe(res=>{
+    //   console.log("from server, filterBylocation",res)
+    // })
   }
 
   filters = {
     stream : null,
-    //location : null,
     speciality : null,
     fromHealthcrum :null,
     consultation : {
@@ -263,14 +300,23 @@ export class ConsultationComponent implements OnInit {
     experience : null,
     gender : null,
     name : null,
-    city : null
+    location : {
+      city : null
+    }
   }
 
+
   filterDotor(){
-    // this.service.consultationFilter(this.filters).subscribe((result)=>{
-    //   console.log("in filterdoctor function ", result);
-    // })
-    console.log(this.filters)
+    console.log("filters are : ", this.filters)
+    this.service.consultationFilter(this.filters).subscribe((result)=>{
+      console.log("in filterdoctor function ", result);
+      if(result.success){
+        this.doctors = result.data
+      } else{
+        alert ("No doctor found")
+      }
+    })
+    // console.log(this.filters)
   }
 
   getStream(name : string) {

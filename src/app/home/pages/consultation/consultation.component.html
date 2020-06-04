@@ -132,7 +132,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12 doctor-image">
-                    <img src={{doctor.image}} 
+                    <img src={{doctor.profilepic}} 
                     alt="loading..."                         
                     class="center img-circle">
                   </div>
@@ -166,17 +166,18 @@
                 -->
                 <div class="row mt-2">
                   <div class="col-4 text-center">
-                    <label>Specialist</label>
+                    <!--<label>Specialist</label>-->
                     {{doctor.speciality}}
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
                   <div class="col-4 text-center">
-                    <label>Degree</label>
-                  {{doctor.degree}}</div>
+                    <!--<label>Degree</label>-->
+                    <label style="color : black" *ngFor="let deg of doctor.qualification">{{deg | uppercase}}</label>
+                  </div>
                   <mat-divider [vertical]="true"></mat-divider>
                   <div class="col-3 text-center">
-                    <label>Experience</label>
-                  {{doctor.experience}}</div>
+                    <!--<label>Experience</label>-->
+                  {{doctor.experience}}+</div>
                 </div>
                 <div class="row mt-1 ml-1 mr-1">
 
@@ -268,7 +269,7 @@
                           </div>
                           <div>
                             <label class="image-data">
-                              8am-6pm
+                              {{doctor.consultationTiming.video.from}} - {{doctor.consultationTiming.video.to}}
                             </label>
                           </div>
                         </div>
@@ -282,7 +283,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            8am-6pm
+                            {{doctor.consultationTiming.tele.from}} - {{doctor.consultationTiming.tele.to}}
                           </label>
                         </div>
                       </div>
@@ -295,7 +296,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            8am-6pm
+                             {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
                           </label>
                         </div>
                       </div>
@@ -308,7 +309,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            10am-6pm
+                            Chat
                           </label>
                         </div>
                       </div>
@@ -325,7 +326,7 @@
                           </div>
                           
                           <div class="col-md-4 normal-fee-cost">
-                            200/-
+                            Rs.{{doctor.consultationFees}}/-
                           </div>
                         </div>
                       </div>
@@ -341,7 +342,7 @@
                           <div class="col-7 mt-1">
                             <div class="row">
                               <div class="col-12 emergency-fee mt-1">
-                                <label class="emergency-fee" style="font-size : smaller">Fee : 1500/-</label>
+                                <label class="emergency-fee" tyle="font-size : smaller;padding-left: 15px;">Fee : {{doctor.emergencyFees}}</label>
                               </div>
                               <div class="col-12 emergency-time-div">
                                 <label class="emergency-time">24 hrs</label>
@@ -405,7 +406,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12 doctor-image">
-                    <img src={{doctor.image}} 
+                    <img src={{doctor.profilepic}} 
                     alt="loading..."                         
                     class="center img-circle">
                   </div>
@@ -425,46 +426,47 @@
               <div class="col-3">
                 <div class="row mt-0">
                   <div class="col-md-12 doctor-name mt-0">
-                    <h4 class=" m-0 ">{{doctor.name}}</h4>
+                    <h4 class=" m-0 ">{{doctor.name }}</h4>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="row mt-2">
-                    <div class="col-4 text-center">
-                      <label>Specialist</label>
-                      {{doctor.speciality}}
-                    </div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-4 text-center">
-                      <label>Degree</label>
-                    {{doctor.degree}}</div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-3 text-center">
-                      <label>Experience</label>
-                    {{doctor.experience}}</div>
+                <div class="row mt-4">
+                  
+                  <div class="col-4 text-center">
+                    <!--<label>Specialist</label>-->
+                    {{doctor.speciality | titlecase }}
                   </div>
-                </div>
-                <div class="row mt-3">
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-4 text-center">
+                  <!--  <label>Degree</label> 
+                  {{doctor.degree}}-->
+                    <label style="color : black" *ngFor="let deg of doctor.qualification">{{deg | titlecase}}</label>
+                  </div>
+                  
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-3 text-center">
+                  <!--  <label>Experience</label> -->
+                  {{doctor.experience}} years</div>
                   
                 </div>
-                <div class="row mt-2">
+                
+                <div class="row mt-3">
                   <div class="col-4 text-center">
                     <div>
-                      <label>City</label>
+                    <!--  <label>City</label> -->
                     </div>
-                    {{doctor.city}}
+                   {{doctor.location.city | titlecase}}
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
                   <div class="col-4 text-center">
                     <div>
-                      <label>Distance</label>
+                    <!--  <label>Distance</label> -->
                     </div>
                     5 Km
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
                   <div class="col-3 text-center">
                     <div>
-                      <label>Location</label>
+                    <!--  <label>Location</label> -->
                     </div>
                     <img
                       src="./assets/img/consulation/blood-test/location.jpg"
@@ -502,7 +504,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            8am-6pm
+                            {{doctor.consultationTiming.video.from}} - {{doctor.consultationTiming.video.to}}
                           </label>
                         </div>
                       </div>
@@ -515,7 +517,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            8am-6pm
+                            {{doctor.consultationTiming.tele.from}} - {{doctor.consultationTiming.tele.to}}
                           </label>
                         </div>
                       </div>
@@ -528,7 +530,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            8am-6pm
+                            {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
                           </label>
                         </div>
                       </div>
@@ -603,7 +605,7 @@
                             </label>
                           </div>
                           <div class="col-md-4 normal-fee-cost mt-2">
-                            200/-
+                            {{doctor.consultationFees}}
                           </div>
                         </div>
                       </div>
@@ -618,7 +620,7 @@
                           <div class="col-7 mt-1">
                             <div class="row">
                               <div class="col-12 emergency-fee mt-1">
-                                <label class="emergency-fee">Fee : 1500/-</label>
+                                <label class="emergency-fee">Fee : {{doctor.emergencyFees}}/-</label>
                               </div>
                               <div class="col-12 emergency-time-div" style="margin-top : -5px">
                                 <label class="emergency-time">24 hrs</label>
@@ -636,7 +638,7 @@
             <div class="row">
               <div class="col-4">
                 <div class="center">
-                  <label class="bottom-view-details">View profile</label>
+                  <label class="bottom-view-details" (click)="knowMore(i)">View profile</label>
                 </div>
               </div>
               <div class="col-3">
