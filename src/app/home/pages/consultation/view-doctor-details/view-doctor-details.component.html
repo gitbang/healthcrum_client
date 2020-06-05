@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-12 mt-4">
       <div class=" mt-0 mat-elevation-z3 bg-white">
-        <div class="">
+        
           <div class="row">
             <div class="col-md-8">
               <div class="row">
                 <div class="col-md-4 col-lg-3  card-icon mt-1  header-icon ">
                    <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                    *ngFor="let star of ratingArray let i = index">grade</i>
+                    *ngFor="let star of ratingArray; let i = index">grade</i>
                 </div>  
                 <div class="col-md-8 col-lg-9 doctor-name">
                   <h2>{{doctor.name}} (Reg.No.{{doctor.registerationNumber}})</h2>
@@ -204,12 +204,7 @@
                     
                   </div>
                 </div> 
-                <div class="col-12 mt-4 ml-4">
-                  <label>About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
-                        Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
-                        During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
-                    </label>
-                </div>
+                
                 <div class="">
 
                 </div>
@@ -229,9 +224,18 @@
               </div>
             </div>
           </div>
-        </div>
+          <div class="row m-auto">
+            <div class="col-12 mt-4 ml-4 mr-4">
+              <label>About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
+                    Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
+                    During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
+                </label>
+            </div>
+          </div>
+        
         <div class="card-body">
-          <div class="col-12 mt-1 simple-border">
+          <div class="col-12 mt-1 slicker-simple">
+            <!--
               <div class="row slicker">
                 <img
                   src={{doctor.image}}
@@ -250,6 +254,18 @@
                   class="img-gallary"
                 >
               </div>
+            -->
+            <div class="">
+              <ngx-slick-carousel class="customer-logos " [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                  <img  
+                    src={{doctor.image}}
+                    class="img-gallary"  
+                  >
+                </div>
+              </ngx-slick-carousel>
+            </div>
+
             </div>
             <div class="col-12 mt-3">
               <div class="row feedback-heading">

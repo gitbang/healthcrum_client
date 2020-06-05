@@ -9,6 +9,7 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { startWith, map } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { BookModelComponent } from './book-model/book-model.component';
 
 @Component({
   selector: 'app-consultation',
@@ -151,7 +152,7 @@ export class ConsultationComponent implements OnInit {
       name : 'DR. PANKAJ MANORIA',  
       experience : 10 ,                            // add + years
       speciality : 'Heart', 
-      consultationFees : 5000,  
+      consultationFees : 500,  
       rating : 5,
       timing : '10am - 6pm',                      
       emergency : 'yes',                    // in consultation
@@ -369,6 +370,28 @@ export class ConsultationComponent implements OnInit {
     }
     //console.log("searchBar in function", this.filters)
     this.filterDotor();
+  }
+
+
+  openDialog(typeCons : string, index : number){
+    console.log(typeCons, index);
+    let activeFee = 0;
+    if(typeCons == "emergency"){
+     // console.log("in emergency")
+      activeFee = this.doctors[index].emergencyFees
+    } else {
+      activeFee = this.doctors[index].consultationFees
+    }
+    console.log("active field ", activeFee);
+    const dialog = this.matDialog.open(BookModelComponent, {
+      height: "auto",
+      width : "75%",
+      data :{
+        type : typeCons,
+        fee : activeFee,
+        doctor : this.doctors[index]
+      }
+    })
   }
 
 }

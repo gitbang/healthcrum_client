@@ -260,7 +260,7 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-3 cursor-pointer" style="padding : 0">
-                        <div class="cursor-pointer">
+                        <div class="cursor-pointer" (click)="openDialog('video', i)">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/video.png"
@@ -275,7 +275,7 @@
                         </div>
                       </div>
                       <div class="col-3 cursor-pointer" style="padding : 0">
-                        <div  class=" cursor-pointer">
+                        <div  class=" cursor-pointer" (click)="openDialog('tele', i)">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/telephone.jpg"
@@ -288,7 +288,7 @@
                         </div>
                       </div>
                       <div class="col-3 cursor-pointer" style="padding : 0">
-                        <div  class=" cursor-pointer">
+                        <div  class=" cursor-pointer" (click)="openDialog('physical', i)">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
@@ -301,7 +301,7 @@
                         </div>
                       </div>
                       <div class="col-3 cursor-pointer"style="padding : 0">
-                        <div class=" cursor-pointer">
+                        <div class=" cursor-pointer" (click)="openDialog('chat', i)">
                           <div>
                             <img
                               src="./assets/img/consulation/blood-test/phone.jpg"
@@ -339,12 +339,12 @@
                               class="emergency-image-horizontal"
                             >
                           </div>
-                          <div class="col-7 mt-1">
-                            <div class="row">
-                              <div class="col-12 emergency-fee mt-1">
+                          <div class="col-7 mt-1" class="cursor-pointer">
+                            <div class="row" class="cursor-pointer">
+                              <div class="col-12 emergency-fee mt-1" class="cursor-pointer">
                                 <label class="emergency-fee" tyle="font-size : smaller;padding-left: 15px;">Fee : {{doctor.emergencyFees}}</label>
                               </div>
-                              <div class="col-12 emergency-time-div">
+                              <div class="col-12 emergency-time-div" class="cursor-pointer">
                                 <label class="emergency-time">24 hrs</label>
                               </div>
                             </div>
@@ -495,7 +495,7 @@
                   </div>
                   <div class="col-12">
                     <div class="row">
-                      <div class="col-3 ">
+                      <div class="col-3 " (click)="openDialog('video', i)">
                         <div class="consultation-border cursor-pointer text-center">
                           <div class="center">
                             <img
@@ -508,7 +508,7 @@
                           </label>
                         </div>
                       </div>
-                      <div class="col-3 ">
+                      <div class="col-3" (click)="openDialog('telephonic', i)">
                         <div  class="consultation-border cursor-pointer text-center">
                           <div  class="center">
                             <img
@@ -521,7 +521,7 @@
                           </label>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3" (click)="openDialog('physical', i)">
                         <div  class="consultation-border cursor-pointer text-center">
                           <div class="center">
                             <img
@@ -534,7 +534,7 @@
                           </label>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3" (click)="openDialog('chat', i)">
                         <div  class="consultation-border cursor-pointer text-center">
                           <div class="center">
                             <img
@@ -609,15 +609,15 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-7">
-                        <div class="row ">
+                      <div class="col-7 cursor-pointer" (click)="openDialog('emergency', i)">
+                        <div class="row cursor-pointer">
                           <div class="col-md-4 mt-1">
                             <img
                               src="./assets/img/consulation/blood-test/emergency1.jpg"
                               class="emergency-image-horizontal"
                             >
                           </div>
-                          <div class="col-7 mt-1">
+                          <div class="col-7 mt-1 cursor-pointer">
                             <div class="row">
                               <div class="col-12 emergency-fee mt-1">
                                 <label class="emergency-fee">Fee : {{doctor.emergencyFees}}/-</label>

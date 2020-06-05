@@ -1,0 +1,209 @@
+<mat-horizontal-stepper  #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill Details</ng-template>
+      <!--
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      -->
+      <div class="row">
+        <div class="col-12 bg-greenMix mat-elevation-z3">
+          <div class="row upper-part">
+            <div class="col-12">
+              <div class="row mt-4">
+                <div class="col-md-5  ">
+                  <div class="image-div ">
+                    <div class="mat-elevation-z4">
+                      <img src={{data.doctor.profilepic}} 
+                        alt="loading..."                         
+                        class="center img-doctor"
+                      >
+                    </div>
+                    <div class="doctor-name mat-elevation-z4 mt-2">
+                      <label class="name-label">
+                        {{data.doctor.name}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 pr-4 pb-4 ">
+                  <div class="row bg-white right-side">
+                    <div class="col-12">
+                      <label class="top-icon">
+                        <mat-icon>meeting_room</mat-icon>
+                      </label>
+                      <label class="top-consultation">
+                        {{data.type | titlecase }} Consultation
+                      </label>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="col-12">
+                      <label>Select Date : </label>
+                      <mat-form-field>
+                        <mat-label>Select Date</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <label>Time Slots</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="row">
+                            <button 
+                              (click) = "bookslot(slot)"
+                              *ngFor= "let slot of slots" 
+                              class="btn ml-1 slot-button"
+                              [ngClass] = "selected(slot) ? 'btn-danger' : 'default'"  
+                            >
+                              {{slot}}</button>
+                          
+                          </div>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row lowerpart">
+            <div class="col-12 mt-4">
+              <div class="row book-consultation-dialog mt-4">
+               
+                  <div class="col-md-6 col-lg-3 ">
+                    <mat-form-field>
+                      <mat-label>Enter Name</mat-label>
+                      <input matInput >  
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 col-lg-3 ">
+                    <mat-form-field>
+                      <mat-label>Phone number</mat-label>
+                      <input matInput type="number">  
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-md-6 col-lg-3 mt-2">  
+                    <button class="btn btn-custom" mat-button matStepperNext>
+                      Submit
+                    </button>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+      -->
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Verify</ng-template>
+        <div class="row ">
+          <div class="col-12 bg-greenMix mat-elevation-z3">
+            <div class="row mt-4">
+            <!--
+              <div class="col-12 otp-main-div">
+                <div>
+                  <img
+                    src="./assets/img/consulation/dialog_box/OTP1.png"
+                    class="otp-image"
+                  >
+                </div>
+                <div class="book-consultation-dialog">
+                  <mat-form-field>
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="number">  
+                  </mat-form-field> 
+                </div>
+                <button class="btn btn-success" mat-button matStepperNext>
+                  Submit
+                </button>
+              </div>
+            -->
+              <div class="col-4"></div>
+              <div class="col-4">
+                <div class="row">  
+                  <div class="col-12">
+                    <img
+                      src="./assets/img/consulation/dialog_box/OTP1.png"
+                      class="otp-image"
+                    >
+                  </div>
+                  <div class="book-consultation-dialog ml-3">
+                    <mat-form-field>
+                      <mat-label>Phone number</mat-label>
+                      <input matInput type="number" class="">  
+                    </mat-form-field> 
+                  </div>
+                  <button class="btn btn-success width-seventy ml-3" mat-button matStepperNext>
+                    Submit
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!--
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+      -->
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Make Payment</ng-template>
+    <div class="row ">
+      <div class="col-12 bg-greenMix mat-elevation-z3">
+        <div class="row mt-4">
+          <div class="col-4"></div>
+          <div class="col-4   p-4">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Order Id. :</td>
+                  <td> 123456</td>
+                </tr>
+                <tr>
+                  <td>Bill No. : </td>
+                  <td>6541230</td>
+                </tr>
+                <tr>
+                  <td>Fees : </td>
+                  <td>Rs. 2500</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn partial-width payment-button">Make a payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+    -->
+  </mat-step>
+   <mat-step>
+    <ng-template matStepLabel>E-receipt</ng-template>
+      <table></table>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+

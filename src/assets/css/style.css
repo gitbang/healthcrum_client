@@ -43,6 +43,10 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
 
 /*-------------Akash-------------*/
+.book-consultation-dialog .mat-form-field-flex{
+  background-color: white !important;
+}
+
 .blood-test-filter label .mat-checkbox-inner-container {
   background-color: white !important;
 }

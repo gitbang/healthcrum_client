@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeServiceService} from '../.././../home-service.service'
 import * as $ from 'jquery';
-import * as slick from 'slick-carousel';
 
 @Component({
   selector: 'app-view-doctor-details',
@@ -15,18 +14,23 @@ export class ViewDoctorDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.ratingArray = Array(5).fill(0);
+
     (<any>$('.slicker')).slick({
-      infinite: true,
+      // infinite: true,
       slidesToShow: 3,
-      slidesToScroll: 3
+      slidesToScroll: 3,
+      // dots : true,
+      // arrows : true
     });
 
-    this.ratingArray = Array(5).fill(0)
+    
 
     this.service.currendoctor.subscribe((result)=>{
       //this.doctor = result
       console.log(this.doctor)
     })
+    
   }
   rating : number = 3
   ratingArray : Array<number>; 
@@ -78,7 +82,54 @@ export class ViewDoctorDetailsComponent implements OnInit {
   }
 
   slots = ["6am-7am","6am-7am","6am-7am","6am-7am"]
-   
- 
+   slideConfig = {
+     slidesToShow: 6, 
+     slidesToScroll: 4, 
+     infinite: true,
+     dots: true,
+     
+      speed: 300,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
+    };
+  slides = [
+    { img: "./assets/img/partners/p1-omron.png" },
+    { img: "./assets/img/partners/p2-max.png" },
+    { img: "./assets/img/partners/p3-apollo-clinics.png" },
+    { img: "./assets/img/partners/p4-rsz_drlalpath_labs.png" },
+    { img: "./assets/img/partners/p5-Srl_Diagnostics.jpg.png" },
+    { img: "./assets/img/partners/p7-rsz_modern-diagnostic.png" },
+    { img: "./assets/img/partners/p7-rsz_modern-diagnostic.png" },
+    { img: "./assets/img/partners/p7-rsz_modern-diagnostic.png" },
+    { img: "./assets/img/partners/p7-rsz_modern-diagnostic.png" },
+    { img: "./assets/img/partners/p7-rsz_modern-diagnostic.png" },
+    { img: "./assets/img/partners/p8-dots.png" }
+  ];
 }
 

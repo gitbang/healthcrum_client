@@ -64,6 +64,7 @@ import { HomeServiceService } from "./home-service.service";
 import { AddMemberComponent } from "./pages/blood-test/add-member/add-member.component";
 import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-details/view-doctor-details.component";
 import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
+import { BookModelComponent } from './pages/consultation/book-model/book-model.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
     AddMemberComponent,
     ViewDoctorDetailsComponent,
     MiddleWareComponent,
+    BookModelComponent,
   ],
   imports: [
     CommonModule,
@@ -130,6 +132,7 @@ import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
     DialogContentExampleDialog,
     ViewDetailsComponent,
     AddMemberComponent,
+    BookModelComponent
   ],
   providers: [
     {
