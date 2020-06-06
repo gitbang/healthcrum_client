@@ -1,0 +1,36 @@
+.bg-green {
+    background: linear-gradient(to right,#96E4DF,#4DCCC6);
+}
+.align-center {
+    text-align: center;
+}
+
+@mixin white-color {
+    color: white;
+}
+.top-label{
+    @include white-color;
+    padding-top: 15px;
+    font-size: large;
+}
+.top-icon{
+    @include white-color;
+}
+.order-number{
+    @include white-color;
+}
+.order-date{
+    @include white-color;
+}
+td{
+    @include white-color
+}
+
+.pdf-button{
+    color: #4DCCC6;
+    background-color: white;
+    &:hover{
+        @include white-color;
+        background-color: #4DCCC6;
+    } 
+}

@@ -17,6 +17,8 @@ import { BookTestComponent } from "./pages/blood-test/book-test/book-test.compon
 import { ViewDetailsComponent } from "./pages/blood-test/view-details/view-details.component";
 import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-details/view-doctor-details.component";
 import { MiddleWareComponent } from "./pages/middle-ware/middle-ware.component";
+import { CheckOutComponent } from "./pages/consultation/check-out/check-out.component";
+import { ERecieptComponent } from "./pages/consultation/e-reciept/e-reciept.component";
 
 export const HomePageRoutes: Routes = [
   { path: "home", component: LandingpageComponent },
@@ -27,9 +29,11 @@ export const HomePageRoutes: Routes = [
   { path: "doctors", component: DoctorsComponent },
 
   {path : "consultation", component: MiddleWareComponent},
-  { path: "consultation/:type", component: ConsultationComponent },
+  {path : "consultation/checkout", component: CheckOutComponent},
+  {path : "consultation/e-reciept", component: ERecieptComponent },
+  {path: "consultation/:type", component: ConsultationComponent },
   {path : "consultation/view-doctor-details/:id", component: ViewDoctorDetailsComponent},
-  { path: "consultation/:type/:city", component: ConsultationComponent },
+  {path: "consultation/:type/:city", component: ConsultationComponent },
   
   { path: "medecines", component: MedicinesComponent },
   { path: "medecine/:id", component: SingleMedicineComponent },

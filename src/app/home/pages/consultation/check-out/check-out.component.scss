@@ -1,0 +1,160 @@
+$blue : #00a0a8;
+
+.container-fluid{
+    background-color: #ECF1F8;
+}
+mat-card-title{
+    background-color: #00a0a8;
+    color: white;
+    font-family: Ubuntu,sans-serif;
+}
+
+.test-heading{
+    background-color: #00a0a8;
+    color: white;
+   // border-radius: 20px;
+   // padding-left: 5px;
+    padding-right: 5px;
+    margin-left: -15px;
+    padding: 3px;
+}
+
+.package-detils{
+    box-shadow: 2px 2px 6px 0px #ccc;
+    //background-color: red;
+    //border-radius: 6px 6px;
+    h2{
+        font-family: Ubuntu,sans-serif;
+        color:#00a0a8;
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+.package-details-book{
+    background-color: #00a0a8;
+    border-radius: 6px 6px;
+    padding: 18px 30px;
+    margin: 8px 0px 10px 0;
+}
+.package-details-book h2 {
+    background-color: #00a0a8;
+    width: 100%;
+    float: left;
+    color: #fff;
+    font-family: Ubuntu,sans-serif;
+    
+    //box-shadow: 2px 2px 6px 0px #ccc;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+.package-info {
+    background-color: white;
+    width: 100%;
+    float: left;
+    border-radius: 6px 6px;
+    box-shadow: 2px 2px 6px 0px #ccc;
+    text-transform: uppercase;
+    h2{
+        margin: 4px 0px 5px 0;
+        padding: 10px 10px;
+        font-family: Ubuntu,sans-serif;
+        color:#00a0a8;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .delete{
+        padding-left: 30px;
+        font-family: Ubuntu,sans-serif;
+        color: red;
+        text-decoration: line-through;
+        margin-right: 5px;
+    }
+    .current{
+        font-family: Lato,sans-serif;;
+        color: #635f5f;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 600;
+    }
+}
+.offers{
+    padding: 8px 4px 8px 4px;
+    background-color: #fff;
+    border: 1px solid #e87528;
+    margin-bottom: 8px;
+    border-radius: 2px 0 17px;
+    display: inline-block;
+    h3 {
+        font-size: small;
+        color:#e87528; 
+        font-weight: 600;
+    }
+}
+.package-detils  h4 span {
+    color: #00a0a8;
+    font-family: Ubuntu,sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    
+}
+.testnumber{
+    text-align: center;
+    align-self: center;
+    label {
+        font-size: xx-large;
+        font-weight: 600;
+    }
+}
+
+.full-width {
+    border-radius: 25px;
+    transition: .3s ease-in-out;
+    font-size: 16px;
+    width: 100%;
+}
+
+.btn {
+    border-color: #f37d26;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.btn-danger, .btn-default {
+    color: #f37d26;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-placeorder{
+    color: white;
+    background-color: #f37d26 !important
+}
+.add-members{
+    float: right;
+}
+
+input{
+    width: 100%;
+}
+.example-chip-list{
+    width: 100%;
+}
+
+
+
+// own
+
+.doctor-name{
+    text-align: center;
+    color: $blue;
+    font-weight: 600;
+}

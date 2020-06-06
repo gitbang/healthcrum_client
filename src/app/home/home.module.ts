@@ -65,6 +65,8 @@ import { AddMemberComponent } from "./pages/blood-test/add-member/add-member.com
 import { ViewDoctorDetailsComponent } from "./pages/consultation/view-doctor-details/view-doctor-details.component";
 import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
 import { BookModelComponent } from './pages/consultation/book-model/book-model.component';
+import { CheckOutComponent } from './pages/consultation/check-out/check-out.component';
+import { ERecieptComponent } from './pages/consultation/e-reciept/e-reciept.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { BookModelComponent } from './pages/consultation/book-model/book-model.c
     ViewDoctorDetailsComponent,
     MiddleWareComponent,
     BookModelComponent,
+    CheckOutComponent,
+    ERecieptComponent,
   ],
   imports: [
     CommonModule,

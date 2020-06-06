@@ -183,7 +183,8 @@ export class ConsultationComponent implements OnInit {
         physical: {from: "8 am", to : "6pm"},
         tele: {from: "8 am", to: "2 pm"},
         video: {from: "8 am", to: "2 pm"}
-      }
+      },
+      chat : '8am - 6pm'
     },
   ]
 
@@ -384,14 +385,27 @@ export class ConsultationComponent implements OnInit {
     }
     console.log("active field ", activeFee);
     const dialog = this.matDialog.open(BookModelComponent, {
-      height: "auto",
-      width : "75%",
+      height: "90vh",
       data :{
         type : typeCons,
         fee : activeFee,
         doctor : this.doctors[index]
       }
     })
-  }
 
+    dialog.afterClosed().subscribe(result=>{
+      console.log(result);
+      if(result.success) {
+        // set data in the service;
+        console.log("after dialog closed")
+        console.log(result.phone, result.data)
+        let toSaveInService = {
+          userData : result.userdata,
+          doctor : result.data
+        }
+        this.service.ConsultationchangeDoctorSelected(toSaveInService);
+        this.router.navigateByUrl('consultation/checkout')
+      }
+    })
+  }
 }

@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <div class="row bg-green">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 align-center ">
+          <label class="top-label">Payment Successfull</label>
+        </div>
+        <div class="col-12 align-center ">
+          <mat-icon class="top-icon">check_circle_outline</mat-icon>
+        </div>
+        <div class="col-12 align-center">
+           <label class="order-number">Order# FL0151018559</label>
+        </div>
+        <div class="col-12 align-center">
+           <label class="order-date">Order placed on 4th June 2020</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <tr>
+              <td>Name :</td>
+              <td>{{eData.name}}</td>
+            </tr>
+            <tr>
+              <td>Gender :</td>
+              <td>{{eData.gender}}</td>
+            </tr>
+            <tr>
+              <td>Date of request :</td>
+              <td>{{eData.requestDate}}</td>
+            </tr>
+            <tr>
+              <td>Date of checkup :</td>
+              <td>{{eData.checkupDate}}</td>
+            </tr>
+            <tr>
+              <td>Center name :</td>
+              <td>{{eData.centerName}}</td>
+            </tr>
+            <tr>
+              <td>Service provider :</td>
+              <td>{{eData.serviceProvier}}</td>
+            </tr>
+            <tr>
+              <td>MRP :</td>
+              <td>{{eData.mrp}}</td>
+            </tr>
+            <tr>
+              <td>Discount price :</td>
+              <td>{{eData.discountPrice}}</td>
+            </tr>
+            <tr>
+              <td>Total price :</td>
+              <td>{{eData.totalPrice}}</td>
+            </tr>
+            <tr>
+              <td>IGST/Other tax percentage:</td>
+              <td>{{eData.gstPercent}}</td>
+            </tr>
+            <tr>
+              <td>IGST/Other tax amount :</td>
+              <td>{{eData.gstAmount}}</td>
+            </tr>
+            <tr>
+              <td>Total :</td>
+              <td>{{eData.total}}</td>
+            </tr>
+            <tr>
+              <td>Payment mode :</td>
+              <td>{{eData.paymentMode}}</td>
+            </tr>
+            <tr>
+              <td>Status :</td>
+              <td>{{eData.status}}</td>
+            </tr>
+            
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn pdf-button">Save as pdf <mat-icon>picture_as_pdf</mat-icon></button>
+        </div>
+         <div class="col-md-6">
+           <button class="btn pdf-button">Close <mat-icon> cancel_presentation</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

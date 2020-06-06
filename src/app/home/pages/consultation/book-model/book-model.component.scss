@@ -4,58 +4,68 @@ $bg : #1BA89B;
     width: 220px;
     height: 220px;
     border-radius: 15px;
-   
 }
+
 .image-div{
     width: 220px;
     background: transparent;
 }
+
 .bg-greenMix{
     background: linear-gradient(to right,#30e8d5, #1BA89B);
     border-radius: 20px;
 }
+
 .name-label{
     width: 100%;
     color:  #1BA89B;
     text-align: center;
     vertical-align: text-top;
 }
+
 .doctor-name{
     background-color: white;
     border-radius: 20px;
 }
+
 .top-consultation{
-    color: black;
+    color: $bg;
     width: 80%;
     text-align: center;
     font-size: large;
 }
+
 .top-icon{
     color: #1BA89B;
     font-size: x-large;
 }
+
 .right-side{
     border-radius: 20px;
 }
+
 .individual-slot{
     border: 1px solid black;
 }
+
 .active {
     background-color: red;
     color: white;
     border: none;
 }
+
 .passive {
     background-color: white;
     color: black;
     border: 1px solid black;
 }
+
 .slot-button{
     width: 90px;
     height: 30px;
-    
     padding: 0;
 }
+
 .default {
     background-color: white;
     color: black;
@@ -71,33 +81,45 @@ $bg : #1BA89B;
     width: 220px;
 }
 .partial-width{
-    width: 75%;
+   width: 75%;
 }
 .btn-success {
     background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
-  }
-  .btn-success:hover {
+}
+.btn-success:hover {
     background: linear-gradient(to right, rgb(4, 158, 112), #107d6e);
-  }
+}
 
-  .btn-custom {
+.btn-custom {
     background-color: white;
     color: $bg;
-  }
-  .btn-custom:hover {
+}
+.btn-custom:hover {
     background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
     color: white;
-  }
-
+}
 .width-seventy{
     width: 70%;
+}
+
+.resend-otp{
+    color: white;
+   // cursor: pointer;
+    label{
+        color: white;
+        cursor: pointer;
+    }
 }
 
   // third stepper
 .full-width {
     width: 100%;
 }
-  .payment-button{
+.payment-button{
     background-color: white;
     color: $bg;
-  }
+}
+
+.mat-horizontal-stepper-header { 
+    pointer-events: none !important; 
+}

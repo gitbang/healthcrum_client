@@ -1,0 +1,128 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7  ml-2 mt-4 mr-1">  
+      <div class="row"> 
+        <div class="col-12">
+          <div class="row package-details-book">
+            <div class="col-6">
+              <h2>Package Details</h2>
+            </div>
+          </div>
+          <div *ngFor="let shownresultarray of shownresultarrays; let i = index">
+            <div class="package-details bg-white mat-elevation-z4 col-12 mb-4">
+              <div class="" *ngIf="shownresultarray.type == 'video'">
+                <h4> 
+                  <span class="test-heading"> 
+                    <mat-icon class="p">videocam</mat-icon>  Video Consultation
+                  </span>
+                </h4>
+              </div>
+
+              <div class="" *ngIf="shownresultarray.type == 'telephone'">
+                <h4> 
+                  <span class="test-heading"> 
+                    <mat-icon class="p-2">perm_phone_msg</mat-icon> Telephonic Consultation
+                  </span>
+                </h4>
+              </div>
+
+              <div class="" *ngIf="shownresultarray.type == 'physical'">
+                <h4> 
+                  <span class="test-heading"> 
+                    <mat-icon>meeting_room</mat-icon> Physical Consultation
+                  </span>
+                </h4>
+              </div>
+
+              <div class="" *ngIf="shownresultarray.type == 'emergency'">
+                <h4> 
+                  <span class="test-heading"> 
+                    <mat-icon>announcement</mat-icon> Emergency Consultation
+                  </span>
+                </h4>
+              </div>
+              <div class="row">
+                <div class="col-12 doctor-name">
+                  <h2  class="doctor-name">{{shownresultarray.docname}}</h2>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align : center">
+                  <table class="table">
+                    <tr>
+                      <td>Date</td>
+                      <td>{{shownresultarray.date}}</td>
+                    </tr>
+                    <tr>
+                      <td>Time</td>
+                      <td>{{shownresultarray.timeslot}}</td>
+                      
+                    </tr>
+                    <tr>
+                      <td>Amount</td>
+                      <td>Rs. {{shownresultarray.amount}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 ml-1 mt-4" >
+      <div class="row package-details-book">
+        <h2>Balance Details</h2>
+      </div>
+      <div  *ngFor="let shownresultarray of shownresultarrays; let i = index">
+        <div class=" col-12 package-info mb-4">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-8" style="padding: 0;">
+                <h2> Book Consultation</h2>
+              </div>
+              <div class="offers col-4">
+                <h3 style="margin: 0;">
+                  Offer applied
+                </h3>
+              </div>  
+              <div class="col-12">
+                <label class="delete"> ₹ {{shownresultarray.healcrumprice}}</label> 
+                <label class="current">  ₹ {{shownresultarray.offerprice }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row overall mb-2" >
+        <div class="col-12 bg-white mat-elevation-4">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Total price</td>
+                <td>{{shownresultarrays[0].offerprice}}</td>
+              </tr>
+              <tr>
+                <td>You save :</td>
+                <td> {{shownresultarrays[0]. healcrumprice - shownresultarrays[0].offerprice}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row">
+            <div class="col-10 m-auto">
+              <button class="btn full-width btn-placeorder" 
+                
+                (click)="placeorder()">Place Order
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+            <!--
+            <div class="col-10 m-auto">
+              <button class="btn full-width btn-default" (click)="addmore()">Add more </button>
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

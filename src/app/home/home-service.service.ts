@@ -92,6 +92,26 @@ export class HomeServiceService {
               .pipe(retry(2))
   }
 
+  consultationBookOtpcheck(data ) : Observable<any> {
+    return this.http
+              .post(this.url + '/sendotp', data)
+              .pipe(retry(2))
+  }
+
+  consultationChekOTP(data) : Observable <any>{
+    return this.http
+            .post(this.url + '/verifyotp', data)
+            .pipe(retry(2))
+  }
+  private consultationdoctorForAppointment = new BehaviorSubject({});
+  consultationDoctorSelectedData = this.messageSource.asObservable();
+
+  ConsultationchangeDoctorSelected(message : object) {
+    this.consultationdoctorForAppointment.next(message)
+    console.log(this.messageSource.value)
+  }
+
+
 //---------------- book-test---------------//
 
   addNewMember(data) : Observable <any> {
@@ -103,6 +123,9 @@ export class HomeServiceService {
   getMembers(data ) : Observable <any> {
     return ;
   }
+
+
+
 
 } 
 
