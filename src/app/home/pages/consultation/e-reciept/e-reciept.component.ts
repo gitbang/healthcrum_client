@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {MatDialogRef} from '@angular/material'
 
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas'
@@ -13,10 +14,12 @@ import html2canvas from 'html2canvas'
 })
 export class ERecieptComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog : MatDialogRef<ERecieptComponent>) { }
 
+  @ViewChild('content', {static : true}) content : ElementRef
   ngOnInit() {
   }
+
 
   eData = {
     name : 'Karan',
@@ -35,28 +38,25 @@ export class ERecieptComponent implements OnInit {
     status : 'confirmed'
   }
 
+  
   saveAsPDF(){
-    var  element = document.getElementById('pdf')
-    html2canvas(element).then((canvas)=>{
-
-      //console.log(canvas.width, canvas.height)
-      // let imgData = canvas.toDataURL('image/png')
-      // let doc = new jspdf();
-      // let height = canvas.height * 208  / canvas.width;
-      // console.log("height is", height)
-      // doc.addImage(imgData, 0, 0, 208, 105);
-      //doc.save();
-     // doc.output('dataurlnewwindow'); 
+    //var  element = document.getElementById('pdf')
+    let element = this.content.nativeElement
+    console.log("check-out")
+    html2canvas(element, {scrollY : -window.scrollY}).then(canvas => {
       var imgWidth = 208;
       var pageHeight = 295;
       var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-      
+      var heightLeft = imgHeight;  
       const contentDataURL = canvas.toDataURL('image/png')
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
       var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      //pdf.save(); // Generated PDF
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight)
+      pdf.save('new-file.pdf'); // Generated PDF
     })
+  }
+
+  closeDialog(){
+    this.dialog.close({success : true})
   }
 }

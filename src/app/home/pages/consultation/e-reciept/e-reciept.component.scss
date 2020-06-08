@@ -1,3 +1,5 @@
+$blue : #00a0a8;
+
 .bg-green {
     background: linear-gradient(to right,#5CD1CB, #28c1b5);
 }
@@ -22,9 +24,9 @@
 .order-date{
     @include white-color;
 }
-td{
-    @include white-color
-}
+// td{
+//     @include white-color
+// }
 
 .pdf-button{
     color: #4DCCC6;
@@ -34,16 +36,64 @@ td{
         background-color: #4DCCC6;
     } 
 }
+.mytable {
+    td {
+        color: black;
+    }
+}
 
 
 // for the pdf
 
-.top-logo{
-    height: 250px;
-    width: 320px;
-}
 
-#pdf{
-    // height: 720px;
-     width: 720px;
-}
+.top-logo{
+    //  height: 250px;
+      width: 220px;
+  }
+  
+  #pdf{
+      width: 720px;
+  }
+  
+  .top-label{
+      color: black;
+      margin-left: 4px;
+      font-size: small;
+  }
+  .color-green {
+      color: $blue;
+  }
+  .bg-green{
+      background-color: $blue;
+  }
+  .color-white{
+      color: white;
+  }
+  .align-right{
+      text-align: end;
+  }
+  .color-black {
+      color: black;
+  }
+  
+  .bg-lightgrey{
+      background-color: #CBE9F6;
+      label{
+          font-size: small;
+      }
+  }
+  
+  .bg-lightgreen{
+      background-color:#CFFED4 ;
+      label {
+          font-size: small;
+      }
+  }
+  
+  td{
+      font-size: small;
+  }
+
+  .label-div{
+      margin-top: -10px;
+  }
