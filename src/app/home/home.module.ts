@@ -67,6 +67,7 @@ import { MiddleWareComponent } from './pages/middle-ware/middle-ware.component';
 import { BookModelComponent } from './pages/consultation/book-model/book-model.component';
 import { CheckOutComponent } from './pages/consultation/check-out/check-out.component';
 import { ERecieptComponent } from './pages/consultation/e-reciept/e-reciept.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import { ERecieptComponent } from './pages/consultation/e-reciept/e-reciept.comp
     MatToolbarModule,
     MatDividerModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatProgressBarModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

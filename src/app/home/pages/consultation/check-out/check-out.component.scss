@@ -1,7 +1,7 @@
 $blue : #00a0a8;
 
 .container-fluid{
-    background-color: #ECF1F8;
+   // background-color: #ECF1F8;
 }
 mat-card-title{
     background-color: #00a0a8;
@@ -157,4 +157,57 @@ input{
     text-align: center;
     color: $blue;
     font-weight: 600;
+}
+
+
+
+
+// for the pdf
+
+.top-logo{
+  //  height: 250px;
+    width: 220px;
+}
+
+#pdf{
+    width: 720px;
+}
+
+.top-label{
+    color: black;
+    margin-left: 4px;
+    font-size: small;
+}
+.color-green {
+    color: $blue;
+}
+.bg-green{
+    background-color: $blue;
+}
+.color-white{
+    color: white;
+}
+.align-right{
+    text-align: end;
+}
+.color-black {
+    color: black;
+}
+
+.bg-lightgrey{
+    background-color: #CBE9F6;
+    label{
+        font-size: small;
+    }
+}
+
+.bg-lightgreen{
+    background-color:#CFFED4 ;
+    label {
+        font-size: small;
+    }
+}
+
+td{
+    font-size: small;
 }

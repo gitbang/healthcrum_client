@@ -1,3 +1,4 @@
+<!--
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-7  ml-2 mt-4 mr-1">  
@@ -115,14 +116,226 @@
                 <mat-icon>arrow_forward</mat-icon>
               </button>
             </div>
-            <!--
-            <div class="col-10 m-auto">
-              <button class="btn full-width btn-default" (click)="addmore()">Add more </button>
-            </div>
-            -->
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+-->
+
+<div class="container-fluid" id="pdf">
+  <div class="row">
+    <div class="col-12 mt-4">
+      <div class="row">
+        <div class="col-5 ">
+          <img
+          src="./assets/img/consulation/downloadpdf/logo1.png"
+          class="top-logo"
+          >
+        </div>
+        <div class="col-7">
+          <div class="row">
+            <div class="col-6">
+              <mat-icon class="color-green"> location_on</mat-icon>
+              <label class="top-label">Mohali, Punjab</label>
+            </div>
+            <div class="">
+              <mat-icon class="color-green"> contact_mail</mat-icon>
+              <label class="top-label">contact@healthcrum.com</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <mat-icon class="color-green">perm_phone_msg</mat-icon>
+              <label class="top-label">9874563210</label>
+            </div>
+            <div class="ml-2">
+              <mat-icon class="color-green">language</mat-icon>
+              <label class="top-label">www.healthcrum.com</label>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>  
+      
+      <div class="row mt-3">
+        <div class="col-4">
+          <label class="color-green">Invoice issue to :</label>
+          <label class="top-label">{{eData.name}}</label>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <label class="color-green">Bill No :</label>
+          <label class="top-label">FL1236547</label>
+        </div>
+      </div>
+
+      <div class="row bg-green mt-3">
+        <div class="col-10">
+          <label class="color-white" style="font-size : larger">Payment Successfull</label>
+        </div>
+        <div class="col-2 align-right">
+          <label>
+            <mat-icon class="top-icon color-white " 
+              style = "font-size: x-large; margin-top: 6px;">check_circle_outline</mat-icon>
+          </label>
+        </div>
+      </div>
+      <div class="row mt-2 bg-lightgrey">
+        <div class="col-12">
+          <div class="row mt-2 ">
+            <div class="col-6">
+              <label class="color-black">Name</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.name}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-6">
+              <label class="color-black">Gender</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.gender}}</label>
+            </div>
+          </div>
+
+          <div class="row  ">
+            <div class="col-6">
+              <label class="color-black">FSHPL ID:</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">15245321</label>
+            </div>
+          </div>
+        </div>
+        <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+      </div>
+      
+      <div  class=" row mt-1 bg-lightgreen">
+        <div class="col-12">
+          <div class="row mt-2 ">
+            <div class="col-6">
+              <label class="color-black">Date of request</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.requestDate}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-6">
+              <label class="color-black">Date of checkup</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.checkupDate}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <label class="color-black">Center:</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.centerName}}</label>
+            </div>
+          </div>
+        </div>
+        <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+      </div>
+
+      <div class="row mt-1 bg-lightgrey">
+        <div class="col-12">
+          <div class="row mt-2 ">
+            <div class="col-6">
+              <label class="color-black">Test/Service list</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">Video consultation</label>
+            </div>
+          </div>
+
+          <div class="row  bg-lightgrey">
+            <div class="col-6">
+              <label class="color-black">Service provider</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.serviceProvider}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <label class="color-black">Benefeciary name</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">Anything</label>
+            </div>
+          </div>
+        </div>
+        <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+      </div>   
+
+      <div class="row mt-1 bg-lightgreen ">
+        <div class="col-12">
+          <div class="row mt-2 ">
+            <div class="col-6">
+              <label class="color-black">Payment mode</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.paymentMode}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-6">
+              <label class="color-black">Payment status</label>
+            </div>
+            <div class="col-6 align-right">
+              <label class="color-black">{{eData.status}}</label>
+            </div>
+          </div>
+        </div>
+        
+      </div>     
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-6 " style="padding : 0">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>MRP :</td>
+            <td>{{eData.mrp}}</td>
+          </tr>
+          <tr>
+            <td>Discount price :</td>
+            <td>{{eData.discountPrice }}</td>
+          </tr>
+          <tr>
+            <td>Total :</td>
+            <td>{{eData.totalPrice}}</td>
+          </tr>
+          <tr>
+            <td>IGST/Tax percentage :</td>
+            <td>{{eData.gstPercent}}</td>
+          </tr>
+          <tr>
+            <td>IGST/Tax Amount</td>
+            <td>{{eData.gstAmount}}</td>
+          </tr>
+          <tr>
+            <td class="color-green">Grand Total :</td>
+            <td>{{eData.total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+ <button class="btn pdf-button" (click)="saveAsPDF()">Save as pdf <mat-icon>picture_as_pdf</mat-icon></button>

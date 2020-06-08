@@ -1,5 +1,5 @@
 .bg-green {
-    background: linear-gradient(to right,#96E4DF,#4DCCC6);
+    background: linear-gradient(to right,#5CD1CB, #28c1b5);
 }
 .align-center {
     text-align: center;
@@ -33,4 +33,17 @@ td{
         @include white-color;
         background-color: #4DCCC6;
     } 
+}
+
+
+// for the pdf
+
+.top-logo{
+    height: 250px;
+    width: 320px;
+}
+
+#pdf{
+    // height: 720px;
+     width: 720px;
 }
