@@ -40,13 +40,23 @@ export class ERecieptComponent implements OnInit {
     html2canvas(element).then((canvas)=>{
 
       //console.log(canvas.width, canvas.height)
-      let imgData = canvas.toDataURL('image/png')
-      let doc = new jspdf();
-      let height = canvas.height * 208  / canvas.width;
-      console.log("height is", height)
-      doc.addImage(imgData, 0, 0, 208, 105);
+      // let imgData = canvas.toDataURL('image/png')
+      // let doc = new jspdf();
+      // let height = canvas.height * 208  / canvas.width;
+      // console.log("height is", height)
+      // doc.addImage(imgData, 0, 0, 208, 105);
       //doc.save();
-      doc.output('dataurlnewwindow'); 
+     // doc.output('dataurlnewwindow'); 
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      //pdf.save(); // Generated PDF
     })
   }
 }

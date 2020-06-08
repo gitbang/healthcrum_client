@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ERecieptComponent } from '../e-reciept/e-reciept.component';
 import { HomeServiceService } from 'app/home/home-service.service';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas'
+
+
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
@@ -18,6 +25,7 @@ export class CheckOutComponent implements OnInit {
     private service : HomeServiceService
   ) { }
 
+  @ViewChild('content', {static : true}) content : ElementRef
   ngOnInit() {
     this.service.consultationDoctorSelectedData.subscribe(result=>{
       console.log(result);
@@ -55,18 +63,38 @@ export class CheckOutComponent implements OnInit {
 
 
   saveAsPDF(){
-    var  element = document.getElementById('pdf')
-    html2canvas(element).then((canvas)=>{
-
-      //console.log(canvas.width, canvas.height)
-      let imgData = canvas.toDataURL('image/png')
+   // var  element = document.getElementById('pdf')
+    let element = this.content.nativeElement
+      console.log("check-out")
+      html2canvas(element, {scrollY : -window.scrollY}).then(canvas => {
+        var imgWidth = 208;
+        var pageHeight = 295;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+        
+        const contentDataURL = canvas.toDataURL('image/png')
+        let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+        var position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight)
+        pdf.save('new-file.pdf'); // Generated PDF
+      })
+      /*
       let doc = new jspdf();
-      let height = canvas.height * 208  / canvas.width;
-      console.log("height is", height)
-      doc.addImage(imgData, 0, 0, 208, 105);
-      //doc.save();
-      doc.output('dataurlnewwindow'); 
-    })
+
+      let specificelemrnthandler = {
+        '#editor' : function(element, renderer) {
+          return true
+        }
+      };
+
+      let content = this.content.nativeElement;
+
+      doc.fromHTML(content.innerHTML, 15, 15, {
+        'width' : 190,
+        'elementHandlers' : specificelemrnthandler
+      })
+      doc.save('test.pdf')
+      */
   }
 
 

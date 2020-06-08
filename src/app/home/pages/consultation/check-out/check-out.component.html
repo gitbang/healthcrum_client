@@ -125,9 +125,10 @@
 </div>
 -->
 
-<div class="container-fluid" id="pdf">
+<div class="container-fluid" id="pdf" #content>
+  
   <div class="row">
-    <div class="col-12 mt-4">
+    <div class="col-12 mt-4 ">
       <div class="row">
         <div class="col-5 ">
           <img
@@ -280,7 +281,7 @@
         <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
       </div>   
 
-      <div class="row mt-1 bg-lightgreen ">
+      <div class="row mt-1 git bg-lightgreen ">
         <div class="col-12">
           <div class="row mt-2 ">
             <div class="col-6">
@@ -336,6 +337,7 @@
       </table>
     </div>
   </div>
+  
 </div>
 
  <button class="btn pdf-button" (click)="saveAsPDF()">Save as pdf <mat-icon>picture_as_pdf</mat-icon></button>
