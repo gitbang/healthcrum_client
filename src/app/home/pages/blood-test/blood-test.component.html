@@ -116,8 +116,6 @@
               <mat-menu #conditionFilter ="matMenu">
                
               </mat-menu>
-              
-                
                 <div class="col-md-3 filter-property">
                   <button mat-flat-button [matMenuTriggerFor]="priceSort">Sort by price <mat-icon>keyboard_arrow_down</mat-icon></button>
                 </div>
@@ -134,93 +132,92 @@
           </div>
         </div>
       </div>
-        <div class="col-md-1"></div>
-        <div class=" col-md-10">
-          <div class="row mt-2">
-            <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
-              <div class="row">
-                <div class="col-12">
-                  <div class="card mt-0 mat-elevation-z3">
-                    <div class="card-header ">
-                      <div class="row" style="margin-top : -20px">
-                        <div class="col-6 card-icon" style="padding : 0">
-                          <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
-                          *ngFor="let star of ratingArray; let ind = index">grade</i>
-                        </div>
-                        <div class="offers col-6">
-                          <h3 class="" style="float : right">
-                            54% Off
-                          </h3>
-                        </div>                   
+      <div class="col-md-1"></div>
+      <div class=" col-md-10" *ngIf="!horizontal">
+        <div class="row mt-2">
+          <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+            <div class="row">
+              <div class="col-12">
+                <div class="card mt-0 mat-elevation-z3">
+                  <div class="card-header ">
+                    <div class="row" style="margin-top : -20px">
+                      <div class="col-6 card-icon" style="padding : 0">
+                        <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                        *ngFor="let star of ratingArray; let ind = index">grade</i>
                       </div>
-                      <div class="row">
-                        <div class="col-6" style="margin-top: 5px">
-                          <h4 class="card-title m-0" style="font-weight : 600; font-size : x-large">Blood Test</h4>
-                        </div>
-                        <div class="col-6 view-details">
-                          <button class="btn btn-default" (click)="viewDetails(i)">View details</button>
-                        </div>
+                      <div class="offers col-6">
+                        <h3 class="" style="float : right">
+                          54% Off
+                        </h3>
+                      </div>                   
+                    </div>
+                    <div class="row">
+                      <div class="col-6" style="margin-top: 5px">
+                        <h4 class="card-title m-0" style="font-weight : 600; font-size : x-large">Blood Test</h4>
+                      </div>
+                      <div class="col-6 view-details">
+                        <button class="btn btn-default" (click)="viewDetails(i)">View details</button>
                       </div>
                     </div>
-                    <div class="card-body" style="padding-top : 0">
-                      <div class="row">
-                        <div class="col-6">
-                          <h5> 
-                            <label>
-                              Includes : 
-                            </label>
-                          </h5>
-                        </div>
-                        <div class="col-6">
-                          <label>14 Parameters</label>
-                        </div>
+                  </div>
+                  <div class="card-body" style="padding-top : 0">
+                    <div class="row">
+                      <div class="col-6">
+                        <h5> 
+                          <label>
+                            Includes : 
+                          </label>
+                        </h5>
                       </div>
-                      <div class="row">
-                        <div class="col-7">
-                          <h5> 
-                            <label>
-                              Report TAT : 
-                            </label>
-                          </h5>
-                        </div>
-                        <div class="col-5">
-                          <label>24 hrs</label>
-                        </div>
+                      <div class="col-6">
+                        <label>14 Parameters</label>
                       </div>
-                      <div class="row">
-                        <div class="col-7">
-                          <h5> 
-                            <label>
-                              Fasting Required : 
-                            </label>
-                          </h5>
-                        </div>
-                        <div class="col-5">
-                          <label>Yes</label>
-                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-7">
+                        <h5> 
+                          <label>
+                            Report TAT : 
+                          </label>
+                        </h5>
                       </div>
-                      <div class="row mt-1">
-                        <div class="col-12 ">
-                          <h5>
-                            <span class="rupeesign delete-text">
-                              ₹{{shownresult.healcrumprice}}
-                            </span>
-                            <span class="offer-price">
-                              ₹{{shownresult.offerprice}}
-                            </span>
-                          </h5>
-                        </div>
+                      <div class="col-5">
+                        <label>24 hrs</label>
                       </div>
-                      <div class="row">
-                        <div class="col-6" style="padding : 0">
-                          <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
-                        </div>
-                        <div class="col-6" *ngIf="!checkcart(shownresult._id)" style="padding : 2px">
-                          <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
-                        </div>
-                        <div class="col-6" *ngIf="checkcart(shownresult._id)" style="padding : 2px">
-                          <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
-                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-7">
+                        <h5> 
+                          <label>
+                            Fasting Required : 
+                          </label>
+                        </h5>
+                      </div>
+                      <div class="col-5">
+                        <label>Yes</label>
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-12 ">
+                        <h5>
+                          <span class="rupeesign delete-text">
+                            ₹{{shownresult.healcrumprice}}
+                          </span>
+                          <span class="offer-price">
+                            ₹{{shownresult.offerprice}}
+                          </span>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6" style="padding : 0">
+                        <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                      </div>
+                      <div class="col-6" *ngIf="!checkcart(shownresult._id)" style="padding : 2px">
+                        <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      </div>
+                      <div class="col-6" *ngIf="checkcart(shownresult._id)" style="padding : 2px">
+                        <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
                       </div>
                     </div>
                   </div>
@@ -229,6 +226,77 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="col-md-8" *ngIf="horizontal">
+        <div class="row mt-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+          <mat-card class="example-card" style="width : 100%; padding-top : 0">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <div class="col-sm-4 col-md-3" style="margin-left: -80px; margin-top : 10px">
+                <h4 style="font-weight : 600; font-size : x-large; color: #00AEC5">Blood test</h4>
+              </div>
+              <div class="col-md-2">
+                  <button class="btn btn-info horizona-detail-button ">View details</button>
+              </div>
+              <div class="col-7">
+                <div class="horizontal-feedback">
+                  <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                    *ngFor="let star of ratingArray; let ind = index">grade</i>
+                </div>
+              </div>
+            </mat-card-header>
+
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-5 mt-3">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Includes</td>
+                        <td>74 parameters</td>
+                      </tr>
+                      <tr>
+                        <td>Report TAT</td>
+                        <td>24 hrs</td>
+                      </tr>
+                      <tr>
+                        <td>Fasting Required</td>
+                        <td>Yes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                  <div class="row">
+                    <div class="col-5 price-div">
+                      <h5>
+                        <span class="rupeesign delete-text">
+                          ₹4522
+                        </span>
+                        <span class="offer-price">
+                          ₹544
+                        </span>
+                      </h5>
+                    </div>
+                    <div class="col-6 button-div">
+                      <div class="" style="padding : 0">
+                        <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                      </div>
+                      <div class="" style="padding : 2px">
+                        <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </div>
   </div>
 </main>

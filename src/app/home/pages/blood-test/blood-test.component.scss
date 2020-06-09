@@ -310,3 +310,25 @@ a{
 .passive-feedback{
    color: #f7e5c3
 }
+
+.button-div{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.price-div{
+  position: absolute;
+  bottom: 0;
+}
+
+.horizontal-feedback{
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+}
+
+.horizona-detail-button{
+  color: $blue;
+  background-color: white;
+}

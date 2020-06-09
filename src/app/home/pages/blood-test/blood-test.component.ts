@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -136,6 +136,10 @@ export class BloodTestComponent implements OnInit {
       startWith(''),
       map(value => this.filterpackagetest(value))
     )
+
+    if(window.innerWidth < 1200){
+      this.horizontal = false;
+    }
   }
 
 
@@ -419,6 +423,17 @@ export class BloodTestComponent implements OnInit {
   setCurrentLocation() {
     this.myControl.setValue(this.city);
   }
+  horizontal : boolean = true;
+  @HostListener('window : resize',['$event'])
+  onResize(event) {
+    //console.log("event :" , event)
+    //console.log(window.innerWidth);
+    if(window.innerWidth < 1270){
+      this.horizontal = false
+    } else {
+      this.horizontal = true
+    }
+  }
 
   ratingArray : Array<number>;
   rating = 3
@@ -561,4 +576,6 @@ export class BloodTestComponent implements OnInit {
     })
   ])
   
+  
+
 }
