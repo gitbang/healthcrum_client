@@ -41,12 +41,11 @@
           -->
 
           <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title class="header">{{img.name}}</mat-card-title>
+            <mat-card-header style="justify-content: center">
+              <mat-card-title class="header" style="font-size : x-large; font-weight : 600">{{img.name}}</mat-card-title>
               <mat-card-subtitle></mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image [src]='img.img' class="img-size" alt="Photo of a Shiba Inu">
+            <img mat-card-image [src]='img.img' style="margin : 0" class="img-size" alt="Photo of a Shiba Inu">
             <mat-card-content>
               <table class="table">
                 <tbody>
@@ -59,7 +58,7 @@
                     <td>9</td>
                   </tr>
                   <tr>
-                    <td>Average cose</td>
+                    <td>Average cost</td>
                     <td>Rs. 1200</td>
                   </tr>
                 </tbody>
