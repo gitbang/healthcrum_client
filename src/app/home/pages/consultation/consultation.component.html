@@ -128,7 +128,7 @@
               <mat-card  class=" doctor-card">  
                 <div class="row feedback-horizontal">
                   <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                  *ngFor="let star of ratingArray let i = index">grade</i>
+                  *ngFor="let star of ratingArray; let i = index">grade</i>
                 </div>
                 <div class="row">
                   <div class="col-12 doctor-image">
@@ -401,8 +401,9 @@
             <div class="row ">
               <div class="col-4">
                 <div class="row feedback-horizontal">
-                  <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                  *ngFor="let star of ratingArray let i = index">grade</i>
+                  
+                  <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                  *ngFor="let star of ratingArray let ind = index">grade</i> 
                 </div>
                 <div class="row">
                   <div class="col-12 doctor-image">

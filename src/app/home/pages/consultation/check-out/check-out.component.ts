@@ -32,7 +32,7 @@ export class CheckOutComponent implements OnInit {
       this.completeData = result
     })
   }
-  completeData;
+  completeData;       // this contain complete data of the doctor as well as the patient
   shownresultarrays =[
       { 
       _id : '',  
@@ -49,8 +49,21 @@ export class CheckOutComponent implements OnInit {
   ]
   placeorder(){
     console.log("place order go to gateway")
+
+    // this.complete data contain all the required result to book an appointment;
+
     // call the api for the payment gateway
-    //this.router.navigateByUrl('consultation/e-reciept')
+    
+    // after getting the response from gateway send request to book an appointment:
+    
+    //appointmentDate, from, to, status, doctorEmail, appointmentTime, appointmentType
+
+    let data = {
+      appointmentDate : this.completeData.userdata.date,
+      appointmentTime : this.completeData.userdata.timeslot,
+      appointmentType : this.completeData.data.type,
+    }
+    
     const dialog = this.dialog.open(ERecieptComponent, {
       height : "90vh",
       width : "60%"

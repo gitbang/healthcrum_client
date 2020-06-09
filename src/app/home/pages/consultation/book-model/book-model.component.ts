@@ -82,7 +82,8 @@ export class BookModelComponent implements OnInit {
       .subscribe((result)=>{
         if(result.success) {
           if(result.exists){
-            this.dialog.close({success  : true, data : this.data , phone : this.firstFormGroup.value})
+            this.dialog.close({success  : true, data : this.data , userdata : this.firstFormGroup.value})
+            // this.data contain data of the doctor
           } else {
             stepper.next();
           }

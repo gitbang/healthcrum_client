@@ -172,15 +172,17 @@ a{
   font-family: Ubuntu,sans-serif;
   font-weight: 600;
   color: #f27d27;
-  padding: 0;
+  border: 1px solid #e87528;
+  border-radius: 2px 0 17px;
+ 
+  padding: 4px;
   margin: 0;
 }
 .offers {
-  padding: 8px 15px 8px 10px;
-  background-color: #fff;
-  border: 1px solid #e87528;
-  margin-bottom: 8px;
-  border-radius: 2px 0 17px;
+  padding: 0;
+  //background-color: #fff;
+  
+  //margin-bottom: 8px;
   display: inline-block;
   label{
     font-size: x-small;
@@ -299,4 +301,12 @@ a{
   ::ng-deep .mat-autocomplete-panel{
   margin-left: -100px;
   } 
+}
+
+.active-feedback{
+  // color: coral;
+   color: #E87528;
+}
+.passive-feedback{
+   color: #f7e5c3
 }

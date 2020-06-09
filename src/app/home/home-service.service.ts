@@ -111,6 +111,11 @@ export class HomeServiceService {
     console.log(this.messageSource.value)
   }
 
+  consultationBookAppointment(userId : string, data ) : Observable<any>{
+    return this.http  
+              .post(this.url + ' /saveappointement/' + userId, data ,this.option)
+              .pipe(retry(2))
+  }
 
 //---------------- book-test---------------//
 

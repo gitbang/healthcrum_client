@@ -3,7 +3,9 @@
     <div class="col-lg-1"></div>
     <div class="col-lg-10 mt-4 ">
       <div class="row"> <!--Apply loop here-->
+        
         <div class="col-md-6 col-lg-4 no-padding mt-3"  *ngFor="let img of data; let i = index">
+          <!--
           <div class="row">
             <div class="col-12">
             
@@ -36,7 +38,44 @@
               </div>
             </div>
           </div>
+          -->
+
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title class="header">{{img.name}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]='img.img' class="img-size" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Total no. of doctors</td>
+                    <td>14</td>
+                  </tr>
+                  <tr>
+                    <td>Total no. of active doctors</td>
+                    <td>9</td>
+                  </tr>
+                  <tr>
+                    <td>Average cose</td>
+                    <td>Rs. 1200</td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button 
+                class="btn btn-info full-width"
+                (click)="typeSelected(img.name)"
+                >Search Doctors 
+                <mat-icon class="white-icon ">keyboard_arrow_right</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
         </div>
+        
       </div>
     </div>
   </div>

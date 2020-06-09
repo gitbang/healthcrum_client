@@ -1,7 +1,6 @@
 <main >
   <div class="container-fluid p-3">
 
-    <!-- <h3 class="test-heading">{{city}}</h3> -->
     <div class="row">
       <div class="col-2"></div>
       <div class="col-md-7 ">
@@ -84,9 +83,7 @@
             </div>
             <mat-icon matSuffix style="align-self: center;">search</mat-icon>
           </div>
-          
         </div>
-        
       </div>
       <div class=""> 
         <button class="btn btn-info">{{mycart.length}} My Cart</button>
@@ -96,185 +93,134 @@
       </div>
     </div>
      
-     <!--
-       drop down 
-
-    <div #menu class="row"   style="position: absolute;width: 100%;z-index: 99;"  >
-      <div class="col-md-8 m-auto" *ngIf="isSearched" >
-        <ul class="mega-dropdown-menu row" >
-          <li class="col-sm-4">
-            <ul>
-              <li class="dropdown-header">Package Test</li>
-              <li *ngFor="let test of singleTest; let i = index">
-                <a (click)="addMaindropdown(test)">{{test}}</a>
-                <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
-              </li>
-            </ul>
-          </li>
-          <li class="col-sm-4">
-            <ul>
-              <li class="dropdown-header">Profile Test</li>
-              <li *ngFor="let test of packageTest; let i = index">
-                <a (click)="addMaindropdown(test)">{{test}}</a>
-                <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
-              </li>
-            </ul>
-          </li>
-          <li class="col-sm-4 ">
-            <ul>
-              <li class="dropdown-header">Single Test</li>
-              <li *ngFor="let test of profileTestFiltered | async; let i = index">
-                <a (click)="addMaindropdown(test)">{{test}}</a>
-                <mat-icon *ngIf="checkMaindropdown(test)" matSuffix class="" style="align-self: center;">done_outline</mat-icon>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    -->
     <div class="row">
-      <!--
-      <div class="col-sm-12 col-md-2 col-lg-2">
-        <div class="card justify-content-center pt-4 pb-4">
-          <h5 class="text-center">Apply Filters</h5>
-          <hr>
-          <div class=" mt-2">
-            <div class="ml-4">
-                <mat-checkbox (change)="singleTestValueChanges($event.checked)">Single test </mat-checkbox>
-            </div>
-            <div class="ml-4">
-                <mat-checkbox (change)="packageTestValueChanges($event.checked)">Package Test</mat-checkbox>
-            </div>
-            <div class="ml-4">
-                <mat-checkbox (change)="profileTestValueChanges($event.checked)">Profile Test</mat-checkbox>
-            </div>
-            <div class="">
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Price
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-checkbox labelPosition="after" class="col-12" 
-                (change)="priceValueChanges(0 , 1000  ,$event.checked)">Less than 1000</mat-checkbox>
-                <mat-checkbox labelPosition="after" class="col-12"
-                (change)="priceValueChanges( 1000 , 2000 ,$event.checked)"
-                >1000 - 2000</mat-checkbox>
-                <mat-checkbox labelPosition="after" class="col-12"
-                (change)="priceValueChanges (2000 , 4000 ,$event.checked)"
-                >2000 - 4000</mat-checkbox>
-                <mat-checkbox labelPosition="after" class="col-12"
-                (change)="priceValueChanges( 4000, 99999999 ,$event.checked)"
-                >above 4000</mat-checkbox>
-            </mat-expansion-panel>
-            </div>
-          </div>
-          <div class="col-12 text-center mt-3">
-            <button class="btn btn-warning" (click)="applyFilters()">Apply Filters</button>
+      <div class="col-12">
+        <div class="row mt-4">
+          <div class="col-md-1"></div>
+          <div class="col-md-10"> 
+            <mat-toolbar color="primary" class="top-navbar">
+              <mat-menu #priceSort ="matMenu">
+                <button mat-menu-item>From low to high</button>
+                <button mat-menu-item>From high to low</button>
+              </mat-menu>
+              <mat-menu #genderFilter ="matMenu">
+                <button mat-menu-item>Men</button>
+                <button mat-menu-item>Women</button>
+                <button mat-menu-item>Kids</button>
+                <button mat-menu-item>Senior citizen male</button>
+                <button mat-menu-item>Senior citizen female</button>
+              </mat-menu>
+              <mat-menu #habbitFilter ="matMenu">
+                
+              </mat-menu>
+              <mat-menu #conditionFilter ="matMenu">
+               
+              </mat-menu>
+              
+                
+                <div class="col-md-3 filter-property">
+                  <button mat-flat-button [matMenuTriggerFor]="priceSort">Sort by price <mat-icon>keyboard_arrow_down</mat-icon></button>
+                </div>
+                <div class="col-md-3 filter-property">
+                  <button mat-flat-button [matMenuTriggerFor]="genderFilter">Filters <mat-icon>keyboard_arrow_down</mat-icon></button>
+                </div>
+                <div class="col-md-3 filter-property">
+                  <button mat-flat-button [matMenuTriggerFor]="habbitFilter">Habbits <mat-icon>keyboard_arrow_down</mat-icon></button>
+                </div>
+                <div class="col-md-3 filter-property">
+                  <button mat-flat-button [matMenuTriggerFor]="conditionFilter">Conditions<mat-icon>keyboard_arrow_down</mat-icon></button>
+                </div>
+            </mat-toolbar>
           </div>
         </div>
       </div>
-      -->
-    <div class="col-12">
-      <div class="row mt-4">
         <div class="col-md-1"></div>
-        <div class="col-md-10"> 
-          <mat-toolbar color="primary" class="top-navbar">
-            <div class = "row m-auto">
-              <div class="col-md-3 filter-property">
-                <mat-checkbox (change)="singleTestValueChanges($event.checked)" class="blood-test-filter">
-                Single test </mat-checkbox>
-              </div>
-              <div class="col-md-3 filter-property">
-                <mat-checkbox (change)="packageTestValueChanges($event.checked)" class="blood-test-filter">
-                Package Test</mat-checkbox>
-              </div>
-              <div class="col-md-3 filter-property">
-                <mat-checkbox (change)="profileTestValueChanges($event.checked)" class="blood-test-filter">
-                Profile Test</mat-checkbox>
-              </div>
-              <div class="col-md-3 filter-property">
-                <mat-menu #priceMenu ="matMenu">
-                  <button mat-menu-item >Below Rs.1000</button>
-                  <button mat-menu-item>Rs.1000-Rs.2000</button>
-                  <button mat-menu-item>Rs.2000-Rs.4000</button>
-                  <button mat-menu-item>Above 4000</button>
-                </mat-menu>
-
-                <button mat-flat-button [matMenuTriggerFor]="priceMenu">Charges <mat-icon>keyboard_arrow_down</mat-icon></button>
-              </div>
-            </div>
-            
-          </mat-toolbar>
-        </div>
-      </div>
-    </div>
-
-      <div class="col-md-1"></div>
-      <div class=" col-md-10">
-        <div class="row mt-2">
-          <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
-            <div class="row">
-              <div class="col-12">
-                <div class="card mt-0 mat-elevation-z3">
-                  <div class="card-header ">
-                    <div class="row">
-                      <div class="col-md-8 card-icon">
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
+        <div class=" col-md-10">
+          <div class="row mt-2">
+            <div class="col-md-6 col-xl-4  mt-3 ml-0 mb-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card mt-0 mat-elevation-z3">
+                    <div class="card-header ">
+                      <div class="row" style="margin-top : -20px">
+                        <div class="col-6 card-icon" style="padding : 0">
+                          <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                          *ngFor="let star of ratingArray; let ind = index">grade</i>
+                        </div>
+                        <div class="offers col-6">
+                          <h3 class="" style="float : right">
+                            54% Off
+                          </h3>
+                        </div>                   
                       </div>
-                      <div class="offers col-md-4">
-                        <h3 style="float : right">
-                          54% Off
-                        </h3>
-                      </div>                   
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h4 class="card-title m-0">Blood Test</h4>
-                      </div>
-                      <div class="col-md-6 view-details">
-                        <button class="btn btn-default" (click)="viewDetails(i)">View details</button>
+                      <div class="row">
+                        <div class="col-6" style="margin-top: 5px">
+                          <h4 class="card-title m-0" style="font-weight : 600; font-size : x-large">Blood Test</h4>
+                        </div>
+                        <div class="col-6 view-details">
+                          <button class="btn btn-default" (click)="viewDetails(i)">View details</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-6">
-                        <h5> 
-                          <label>
-                            Includes : 
-                          </label>
-                        </h5>
+                    <div class="card-body" style="padding-top : 0">
+                      <div class="row">
+                        <div class="col-6">
+                          <h5> 
+                            <label>
+                              Includes : 
+                            </label>
+                          </h5>
+                        </div>
+                        <div class="col-6">
+                          <label>14 Parameters</label>
+                        </div>
                       </div>
-                      <div class="col-6">
-                        <label>14 Parameters</label>
+                      <div class="row">
+                        <div class="col-7">
+                          <h5> 
+                            <label>
+                              Report TAT : 
+                            </label>
+                          </h5>
+                        </div>
+                        <div class="col-5">
+                          <label>24 hrs</label>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row mt-1">
-                      <div class="col-12 ">
-                        <h5>
-                          <span class="rupeesign delete-text">
-                            ₹{{shownresult.healcrumprice}}
-                          </span>
-                          <span class="offer-price">
-                             ₹{{shownresult.offerprice}}
-                          </span>
-                        </h5>
+                      <div class="row">
+                        <div class="col-7">
+                          <h5> 
+                            <label>
+                              Fasting Required : 
+                            </label>
+                          </h5>
+                        </div>
+                        <div class="col-5">
+                          <label>Yes</label>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                      <div class="row mt-1">
+                        <div class="col-12 ">
+                          <h5>
+                            <span class="rupeesign delete-text">
+                              ₹{{shownresult.healcrumprice}}
+                            </span>
+                            <span class="offer-price">
+                              ₹{{shownresult.offerprice}}
+                            </span>
+                          </h5>
+                        </div>
                       </div>
-                      <div class="col-6" *ngIf="!checkcart(shownresult._id)">
-                        <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
-                      </div>
-                      <div class="col-6" *ngIf="checkcart(shownresult._id)">
-                        <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
+                      <div class="row">
+                        <div class="col-6" style="padding : 0">
+                          <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
+                        </div>
+                        <div class="col-6" *ngIf="!checkcart(shownresult._id)" style="padding : 2px">
+                          <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                        </div>
+                        <div class="col-6" *ngIf="checkcart(shownresult._id)" style="padding : 2px">
+                          <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -283,7 +229,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </main>

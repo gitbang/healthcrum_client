@@ -122,7 +122,7 @@ export class BloodTestComponent implements OnInit {
     //   startWith('' ),
     //   map(value =>this.filtersearch(value))
     // )
-
+    this.ratingArray = Array(5).fill(0)
     this.profileTestFiltered = this.mycontrol.valueChanges.pipe(
       startWith(''),
       map(value => this.filterprofiletest(value))
@@ -420,13 +420,22 @@ export class BloodTestComponent implements OnInit {
     this.myControl.setValue(this.city);
   }
 
+  ratingArray : Array<number>;
+  rating = 3
+
   shownresultarray = [
-    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 1200, type:'singleTest',healcrumprice : 1000, offerprice : 800},
-    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice :2300, type:'singleTest', healcrumprice : 2000, offerprice : 1900},
-    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 4500, type:'singleTest', healcrumprice : 4200, offerprice : 4000},
-    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 5600, type:'singleTest', healcrumprice : 5200, offerprice : 5000},
-    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 7800, type:'singleTest', healcrumprice : 7000, offerprice : 6800},
-    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", totaltest : 12, marketprice : 2500, type:'singleTest', healcrumprice : 2300, offerprice : 2200},
+    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 3,
+     reportIn : "24 hrs", totaltest : 12, marketprice : 1200, type:'singleTest',healcrumprice : 1000, offerprice : 800},
+    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 1,
+     reportIn : "24 hrs", totaltest : 12, marketprice :2300, type:'singleTest', healcrumprice : 2000, offerprice : 1900},
+    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 2,
+     reportIn : "24 hrs", totaltest : 12, marketprice : 4500, type:'singleTest', healcrumprice : 4200, offerprice : 4000},
+    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 4,
+     reportIn : "24 hrs", totaltest : 12, marketprice : 5600, type:'singleTest', healcrumprice : 5200, offerprice : 5000},
+    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 5, 
+    reportIn : "24 hrs", totaltest : 12, marketprice : 7800, type:'singleTest', healcrumprice : 7000, offerprice : 6800},
+    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 3,
+     reportIn : "24 hrs", totaltest : 12, marketprice : 2500, type:'singleTest', healcrumprice : 2300, offerprice : 2200},
   ]
 
   callfun(){
@@ -480,11 +489,6 @@ export class BloodTestComponent implements OnInit {
   
   packageId : string = "123456"
   viewDetails(index){
-    // console.log(index)
-    // console.log(this.shownresultarray[index])
-    // this.matDialog.open(ViewDetailsComponent, {
-    //   data : this.shownresultarray[index]
-    // })
     this.router.navigateByUrl("blood-test/viewdetails/12345")
   }
 
@@ -505,6 +509,7 @@ export class BloodTestComponent implements OnInit {
     this.sideFilterSearch.singleTests = value;
     console.log(this.sideFilterSearch)
   }
+
   packageTestValueChanges(value) {
     this.sideFilterSearch.packageTests = value
     console.log(this.sideFilterSearch)
@@ -518,7 +523,6 @@ export class BloodTestComponent implements OnInit {
   lower : number[] = []
   higher : number[] = []
   priceValueChanges(low :number, high : number, event) {
-    
     if(event) {
       this.lower.push(low);
       this.higher.push(high);

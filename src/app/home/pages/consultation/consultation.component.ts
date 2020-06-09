@@ -398,7 +398,7 @@ export class ConsultationComponent implements OnInit {
       if(result.success) {
         // set data in the service;
         console.log("after dialog closed")
-        console.log(result.phone, result.data)
+        console.log(result.userdata, result.data)
         let toSaveInService = {
           userData : result.userdata,
           doctor : result.data
