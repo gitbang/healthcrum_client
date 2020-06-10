@@ -254,11 +254,6 @@ a{
   margin-top: -4px;
   margin-bottom: 0;
 }
-.view-details{
-  button{
-    color: #1a9ca6;
-  }
-}
 
 .mycart{
   cursor: pointer;
@@ -294,9 +289,9 @@ a{
 }
 
 ::ng-deep .mat-autocomplete-panel{
-  
   margin-top: 0.5rem;
 } 
+
 @media only screen and (max-width: 1000px) {
   ::ng-deep .mat-autocomplete-panel{
   margin-left: -100px;

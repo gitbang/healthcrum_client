@@ -504,6 +504,9 @@ export class BloodTestComponent implements OnInit {
   
   packageId : string = "123456"
   viewDetails(index){
+    this.singleTestComplete = []
+    this.singleTestComplete.push(this.shownresultarray[index]);
+    this.service.bookSingleTest(this.singleTestComplete);
     this.router.navigateByUrl("blood-test/viewdetails/12345")
   }
 

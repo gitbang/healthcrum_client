@@ -60,6 +60,7 @@ $orange : #f37d26;
     //background-color: #199CA6;
     background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
     padding: 10px 30px;
+    border-radius: 5px;
   }
   li{
     color: darkgrey;
@@ -68,14 +69,15 @@ $orange : #f37d26;
   .btn{
     border-radius: 20px;
   }
-  .btn-info{
+  .place-order{
     color: white;
-    background-color:$orange ;
+    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
   }
   .white-button{
-    color: $orange;
+    color: #107d6e;
     background-color: white;
-    border: 1px solid $orange;
+    border: 1px solid #107d6e;
+    
   }
   .mat-expansion-panel-header{
    // background-color: #ECECEC;
@@ -96,4 +98,23 @@ $orange : #f37d26;
   .border-green{
     border: 2px solid #107d6e;
     border-top: none;
+  }
+
+  .individual{
+    background-color: rgb(82, 184, 113) ;
+    padding: 5px;
+    border-radius: 20px;
+    height: 35px;
+    color: white;
+  }
+  .individual-parent{
+    padding-right: 25px;
+    padding-bottom: 5px;
+    margin-left: 10%;
+  }
+
+  .img-style{
+    height: 30px;
+    width :30px; 
+    border-radius : 25px
   }

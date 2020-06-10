@@ -18,7 +18,7 @@
             </h3>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding-bottom : 10px">
           <div class="row">
             <div class="col-md-6">
               <table class="table">
@@ -41,60 +41,82 @@
                 </tbody>
               </table>
             </div>
-            <div class="col-md-4 ml-2 emoji-class" >
-              <h4>Recommended for</h4>
+            <div class="col-md-6 emoji-class" >
+              <h4 style="text-align:center; font-weight : 600">Recommended for</h4>
               <div class="recommended row">
-                <div class="col-4">
-                  <div>
-                    <img 
-                    src="./assets/img/faces/boy.jpg"
-                    height="50%" 
-                    width="50%" 
-                    >
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-4 individual-parent">
+                      <div class="row  individual">
+                        <div class="col-4">
+                          <img 
+                          src="./assets/img/faces/boy.jpg"
+                          class="img-style"
+                          >
+                        </div>
+                        <div class="col-8 mt-2">
+                          Male
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 ml-4 individual-parent">
+                      <div class="row individual">
+                        <div class="col-4">
+                          <img 
+                          src="./assets/img/faces/girl.png"
+                          class="img-style"
+                          >
+                        </div>
+                        <div class="col-8 mt-1">
+                          Female
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 mt-2 individual-parent">
+                      <div class="row individual">
+                        <div class="col-4">
+                          <img 
+                          src="./assets/img/faces/kid.png"
+                          class="img-style"
+                          >
+                        </div>
+                        <div class="col-8 mt-1">
+                          Kid
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 ml-4 mt-2 individual-parent">
+                      <div class="row individual">
+                        <div class="col-4">
+                          <img 
+                          src="./assets/img/faces/calender.jpg"
+                          class="img-style"
+                          >
+                        </div>
+                        <div class="col-8 mt-1">
+                          5-99 yrs
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <span>  Male</span>
-                </div>
-                <div class="col-4">
-                  <div>
-                     <img 
-                      src="./assets/img/faces/girl.png"
-                      width="50%"
-                      height="50%"
-                      >
-                  </div>
-                  <span>Female </span>
-                </div>
-                <div class="col-4">
-                  <div>
-                    <img 
-                    src="./assets/img/faces/calender.jpg"
-                    width="50%"
-                    height="50%"
-                    >
-                  </div>
-                  <span>  5-99 years </span>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div class="row">
-            <div class="about-package ml-1 mr-1">
-              Healthians’ 2020 package can help you identify any developing disease so that you can take precautions before it is too late.
+          <div class="row" style="margin : auto">
+            <div class=" col-12 about-package">
+              Healthians’ 2020 package can help you identify any developing disease so that you can take precautions 
+              before it is too late.
                This at-home preventive health checkup consists of 82 important health parameters.
                 These include tests like lipid, liver, thyroid, iron, kidney, urine and vitamin test
               . Simply click the button below to book the test now. 10 hours of fasting is mandatory to get accurate results.   
               ndia’s largest health test @ home service, creating a new benchmark for very high quality and honest prices.
                Healthians employs state of art 46 touchpoints technology for assuring quality collection and testing across 
-          
             </div>
           </div>
-          
-          
         </div>
       </div>
-
-      <div class="row ">
+      <div class="row mt-2">
         <div class="m-auto">
           <!--
           <div class="row">
@@ -106,12 +128,11 @@
             </div>
           </div>
           -->
-          <button class="btn btn-info" (click)="booknow()">Book know <mat-icon>arrow_forward</mat-icon></button>
+          <button class="btn place-order" (click)="booknow()">Book know <mat-icon>arrow_forward</mat-icon></button>
           <button class="btn white-button" (click)="getCall()">Get a Call Back</button>  
               
         </div>
       </div>
-
       <div class="row green-backgrouns mt-4">
         <div class="col-12">
           <div class="row">
@@ -152,6 +173,79 @@
                 {{param}}
               </li>
             </ul>
+          </mat-expansion-panel>
+        </div>
+      </div>
+
+      <div class="row mt-4" class="blood-test-checkout">
+        <div class="col-12 mt-4" style="padding:0"  >
+          <mat-expansion-panel class="green-backgrouns">
+            <mat-expansion-panel-header style= "height : 20px">
+              <mat-panel-title style="color : white">
+                About Test
+              </mat-panel-title>
+              <mat-panel-description>
+               
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
+            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+          </mat-expansion-panel>
+        </div>
+        <div class="col-12 mt-2" style="padding:0"  >
+          <mat-expansion-panel class="green-backgrouns">
+            <mat-expansion-panel-header style= "height : 20px">
+              <mat-panel-title style="color : white">
+                Why this test is done
+              </mat-panel-title>
+              <mat-panel-description>
+               
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
+            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+          </mat-expansion-panel>
+        </div>
+        <div class="col-12 mt-2" style="padding:0"  >
+          <mat-expansion-panel class="green-backgrouns">
+            <mat-expansion-panel-header style= "height : 20px">
+              <mat-panel-title style="color : white">
+                Finding of the result
+              </mat-panel-title>
+              <mat-panel-description>
+               
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
+            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+          </mat-expansion-panel>
+        </div>
+        <div class="col-12 mt-2" style="padding:0"  >
+          <mat-expansion-panel class="green-backgrouns">
+            <mat-expansion-panel-header style= "height : 20px">
+              <mat-panel-title style="color : white">
+                Related Disease
+              </mat-panel-title>
+              <mat-panel-description>
+               
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
+            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+          </mat-expansion-panel>
+        </div>
+        <div class="col-12 mt-2" style="padding:0"  >
+          <mat-expansion-panel class="green-backgrouns">
+            <mat-expansion-panel-header style= "height : 20px">
+              <mat-panel-title style="color : white">
+                Additional Information
+              </mat-panel-title>
+              <mat-panel-description>
+               
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
+            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
           </mat-expansion-panel>
         </div>
       </div>

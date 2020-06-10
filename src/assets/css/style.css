@@ -43,6 +43,14 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
 
 /*-------------Akash-------------*/
+.blood-test-checkout .mat-expansion-panel-header{
+  color: white;
+  height: 20px !important;
+  
+}
+.blood-test-checkout .mat-expansion-indicator::after{
+    color: white;
+}
 .book-consultation-dialog .mat-form-field-flex{
   background-color: white !important;
 }
