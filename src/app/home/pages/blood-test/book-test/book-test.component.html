@@ -56,6 +56,7 @@
                         </div>
                         <div class="col-8">
                           <mat-checkbox 
+                            [checked]="testfor.value[i].me"
                             (change)="testForMe( $event.checked, i)"
                           >For me</mat-checkbox>
                           <mat-checkbox class="ml-2"
@@ -143,11 +144,11 @@
             <tbody>
               <tr>
                 <td>Total price</td>
-                <td>{{sumAfteroffer}}</td>
+                <td>{{finalPrice}}</td>
               </tr>
               <tr>
                 <td>You save :</td>
-                <td>{{totalsum - sumAfteroffer}}</td>
+                <td>{{moneysaved}}</td>
               </tr>
             </tbody>
           </table>

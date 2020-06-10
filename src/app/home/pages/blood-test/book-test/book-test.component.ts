@@ -22,6 +22,8 @@ export interface Member {
 })
 export class BookTestComponent implements OnInit {
 
+  userId : string = "123456";
+
   constructor(
     private router : Router,
     private service : HomeServiceService,
@@ -91,6 +93,7 @@ export class BookTestComponent implements OnInit {
   sumAfteroffer : number = 0;
 
   ngOnInit() {
+    this.getrelatives();
 
     this.route.url.subscribe((result)=>{
       console.log("url",result)
@@ -103,30 +106,37 @@ export class BookTestComponent implements OnInit {
       }
     })
 
+    // api to fetch total relatives;
+
     this.filteredMembers = this.memberCtrl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allMembers.slice())
     );
-  
-    this.shownresultarrays.forEach(i=>{
-      this.addgroup();
-    }) 
-  }
 
+    for(let i = 0; i < this.shownresultarrays.length; i++) {
+      this.addgroup();
+      this.testForMe(true,  i)
+    }
+
+  }
   fromCart : boolean 
 
+  getrelatives(){
+    this.service.bloodTestFetchMember(this.userId).subscribe((result)=>{
+      console.log("result in get relatives api",result)
+    })
+  }
 
 
    add(event: MatChipInputEvent): void {
+     console.log("add executed")
     const input = event.input;
     const value = event.value;
-
-    // Add our fruit
+    console.log(input, value)
     if ((value || '').trim()) {
       this.members.push(value.trim());
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }
@@ -134,29 +144,36 @@ export class BookTestComponent implements OnInit {
   }
 
   remove(member: string, i: number): void {
-    //console.log(member)
+    console.log(member, i)
     const index = this.testfor.value[i].otherlist.indexOf(member);
+    console.log("index is : ", index)
     if (index >= 0) {
+      // this.members.splice(index, 1);
+      // this.testfor.value[index].otherlist = this.members;
       this.testfor.value[i].otherlist.splice(index, 1);
     }
+    this.calculateprice(i);
   }
 
   selected(event: MatAutocompleteSelectedEvent, index : number): void {
-   // console.log("index is : ", index)
-    this.members.push(event.option.viewValue);
+
     this.memberInput.nativeElement.value = '';
     this.memberCtrl.setValue(null);
-   // console.log(this.testfor.value);
-    this.testfor.value[index].otherlist = this.members
-    this.members = []
-   // (<FormGroup>this.testfor[index]).get('otherlist').setValue(this.members)
-   // console.log("test for array ",this.testfor.value)
+    console.log(this.testfor.value[index])
+    //console.log("members are : ",this.members)
+    if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
+      this.testfor.value[index].otherlist.push(event.option.viewValue);
+      // this.testfor.value[index].otherlist = this.members;
+    }
+   
+    console.log("total members selected",this.testfor.value[index].otherlist.length)
+    this.calculateprice(index);
   }
 
-  private _filter(value: string): string[] {
+   _filter(value: string): string[] {
+     console.log(value)
     const filterValue = value.toLowerCase();
-   // console.log(this.allMembers)
-    return this.allMembers.filter(member => member.toLowerCase().includes(filterValue));
+    return this.allMembers.filter(option => option.toLowerCase().includes(filterValue));
   }
 
 
@@ -177,7 +194,6 @@ export class BookTestComponent implements OnInit {
   @ViewChild('memberInput', {static : false}) memberInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static : true}) matAutocomplete: MatAutocomplete;
 
-
   userlogin : boolean = true
   usercart ;
   userCompleteCart;
@@ -195,9 +211,15 @@ export class BookTestComponent implements OnInit {
 
   addgroup (){
     this.testfor.push(this.fb.group({
-      me : [false],
+      me : [true],
       others : [false],
-      otherlist : []
+      otherlist : this.fb.array([])
+    }))
+
+    this.pricearray.push(this.fb.group({
+      total : [],
+      saved : [],
+      totalcount : []
     }))
   }
   
@@ -207,10 +229,6 @@ export class BookTestComponent implements OnInit {
 
   addmore(){
     this.router.navigateByUrl('blood-test')
-  }
-
-  placeorder(){
-    console.log("next portal")
   }
 
   deletefromCart(index : number) {
@@ -223,11 +241,9 @@ export class BookTestComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      
       if (result.value) {
-
         this.userCompleteCart.splice(index, 1);
-        if(this.fromCart) {
+        if(this.fromCart) {                               // it checks whether user click on booknow or proceed.
           this.service.addCompleteDetailsToCart(this.userCompleteCart);
           this.getUsercart();
         } else{
@@ -243,30 +259,79 @@ export class BookTestComponent implements OnInit {
     })
   }
 
-  userId : string = "123456";
+  
   addMember(){
     const dialog = this.dialog.open(AddMemberComponent, {
       data : this.userId
     })
     dialog.afterClosed().subscribe((result)=>{
       if(result.success) {
-        this.snackbar.open("New member", "Added")
+        this.snackbar.open("New member", "Added", {
+          duration : 2000
+        })
+        this.getrelatives();
       } else {
-        this.snackbar.open("Something Went Wrong")
+        this.snackbar.open("Something Went Wrong", '', {
+          duration : 2000
+        })
       }
     })
   }
 
+  placeorder(){
+    console.log("next portal")
+  }
+
   testForMe(value, index) {
-    //console.log(index)
+    console.log(this.userCompleteCart[index])
     this.testfor.value[index].me = value;
-    //console.log(this.testfor.value)
+    if(value) {
+      this.myfee = this.userCompleteCart[index].offerprice;
+    } else {
+      this.myfee = 0
+    }
+    this.calculateprice(index);
   }
 
   testForMember(value, index) {
     this.testfor.value[index].others = value;
-    //console.log( this.testfor)  
+    if(value == false) {
+      //this.members = [];
+      this.testfor.value[index].otherlist = [];
+      this.otherfee = 0;
+      this.calculateprice(index);
+    }
   }
 
-  
+  // calculate price
+  myfee : number = 0;
+  otherfee : number = 0;
+  totalPrice : number = 0;
+
+  moneysaved : number = 0;
+
+  pricearray = this.fb.array([]);
+
+  calculateprice(index : number){
+    this.otherfee = this.userCompleteCart[index].offerprice * this.testfor.value[index].otherlist.length;
+
+    this.totalPrice = this.myfee + this.otherfee;
+
+    let num = this.totalPrice / this.userCompleteCart[index].offerprice
+    
+    this.pricearray.value[index].totalcount = num;
+    this.pricearray.value[index].saved = num * (this.userCompleteCart[index].healcrumprice - this.userCompleteCart[index].offerprice)
+    this.pricearray.value[index].total = this.totalPrice;
+    //console.log(this.pricearray.value)
+    this.finalPrice = 0;
+    this.moneysaved = 0;
+    this.pricearray.value.forEach(item =>{
+      this.finalPrice += item.total;
+      this.moneysaved += item.saved;
+    })
+    this.totalPrice = 0;
+     console.log("price array values",this.pricearray.value)
+  }
+
+  finalPrice : number = 0;
 }

@@ -57,6 +57,24 @@ export class HomeServiceService {
     console.log("single test seected");
   }
 
+  bloodtestAddMember(userId : string, data : object) : Observable<any>{
+    return this.http
+                .post(this.url + '/savemember/' + userId, data, this.option)
+                .pipe(retry(2))
+  }
+
+  bloodTestFetchMember(userId : string) : Observable<any>{
+    return this.http
+                .get(this.url + '/getfamilymembers/' + userId, this.option)
+                .pipe(retry(2))
+  }
+
+  bloodTestgetMembers(data ) : Observable <any> {
+    return ;
+  }
+
+
+
  //-------------- consultation---------------//
 
   private doctorselectedforDetails = new BehaviorSubject({});
@@ -118,19 +136,6 @@ export class HomeServiceService {
   }
 
 //---------------- book-test---------------//
-
-  addNewMember(data) : Observable <any> {
-    return this.http
-            .post(this.url + '/', data, this.option)
-            .pipe(retry(2))
-  }
-
-  getMembers(data ) : Observable <any> {
-    return ;
-  }
-
-
-
 
 } 
 

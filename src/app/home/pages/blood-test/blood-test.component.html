@@ -98,7 +98,7 @@
         <div class="row mt-4">
           <div class="col-md-1"></div>
           <div class="col-md-10"> 
-            <mat-toolbar color="primary" class="top-navbar">
+            <mat-toolbar  class="top-navbar">
               <mat-menu #priceSort ="matMenu">
                 <button mat-menu-item>From low to high</button>
                 <button mat-menu-item>From high to low</button>
@@ -272,10 +272,10 @@
                     <div class="col-5 price-div">
                       <h5>
                         <span class="rupeesign delete-text">
-                          ₹4522
+                          ₹{{shownresult.healcrumprice}}
                         </span>
                         <span class="offer-price">
-                          ₹544
+                          ₹{{shownresult.offerprice}}
                         </span>
                       </h5>
                     </div>

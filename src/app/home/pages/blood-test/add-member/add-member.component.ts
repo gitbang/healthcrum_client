@@ -10,7 +10,7 @@ import { HomeServiceService } from 'app/home/home-service.service';
   styleUrls: ['./add-member.component.scss']
 })
 export class AddMemberComponent implements OnInit {
-
+  userId : string
   constructor(
     @Inject (MAT_DIALOG_DATA) data : any,
     private fb : FormBuilder,
@@ -18,13 +18,15 @@ export class AddMemberComponent implements OnInit {
     private service : HomeServiceService
   ) {
     console.log(data)
+    this.userId = data
+    console.log("in constructor userId" , this.userId)
   }
   genderList : string[] = ["Male", "Female", "Others"]
   registerationForm = this.fb.group({
     name : ['', Validators.required],
     gender : ['', Validators.required],
     age : ['', Validators.required],
-    contactNo : ['', Validators.required]
+    phoneNo : ['', Validators.required]
   })
 
   ngOnInit() {
@@ -33,16 +35,15 @@ export class AddMemberComponent implements OnInit {
   submit(){
     console.log(this.registerationForm.value)
     if(this.registerationForm.valid){
-      this.service.addNewMember(this.registerationForm.value).subscribe((response)=>{
+      this.service.bloodtestAddMember( this.userId,this.registerationForm.value).subscribe((response)=>{
+        console.log("response after in submit", response)
         if(response.success){
           this.dialogRef.close({success : true})
         } else {
-          this.dialogRef.close({success : true})
+          this.dialogRef.close({success : false})
         }
       });
-    
     }
-    
   }
 
   closeDialog() {
