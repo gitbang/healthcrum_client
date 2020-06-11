@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeServiceService} from '../.././../home-service.service'
 import * as $ from 'jquery';
-
+import {Router} from '@angular/router';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { BookModelComponent } from '../book-model/book-model.component';
 @Component({
   selector: 'app-view-doctor-details',
   templateUrl: './view-doctor-details.component.html',
@@ -10,7 +12,9 @@ import * as $ from 'jquery';
 export class ViewDoctorDetailsComponent implements OnInit {
 
   constructor(
-    private service : HomeServiceService
+    private service : HomeServiceService,
+    private router : Router,
+    private matDialog : MatDialog
   ) { }
 
   ngOnInit() {
@@ -133,5 +137,42 @@ export class ViewDoctorDetailsComponent implements OnInit {
     { img: "./assets/img/partners/p7-rsz_modern-diagnostic.png" },
     { img: "./assets/img/partners/p8-dots.png" }
   ];
+
+  openDialog(typeCons : string, index : number){
+    console.log(typeCons, index);
+    let activeFee = 0;
+    if(typeCons == "emergency"){
+     // console.log("in emergency")
+      activeFee = this.doctor.emergencyFees
+    } else {
+      activeFee = this.doctor.consultationFees
+    }
+    console.log("active field ", activeFee);
+    const dialog = this.matDialog.open(BookModelComponent, {
+      height: "90vh",
+      data :{
+        type : typeCons,
+        fee : activeFee,
+        doctor : this.doctor
+      }
+    })
+
+    dialog.afterClosed().subscribe(result=>{
+      console.log(result);
+      if(result.success) {
+        // set data in the service;
+        console.log("after dialog closed")
+        console.log(result.userdata, result.data)
+        let toSaveInService = {
+          userData : result.userdata,
+          doctor : result.data
+        }
+        this.service.ConsultationchangeDoctorSelected(toSaveInService);
+        this.router.navigateByUrl('consultation/checkout')
+      } else {
+        console.log("dialog box closed without booking")
+      }
+    })
+  }
 }
 

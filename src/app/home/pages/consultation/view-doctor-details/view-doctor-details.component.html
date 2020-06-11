@@ -35,7 +35,10 @@
             </div>
             -->
               <div class="col-12 mt-4">
-              <button class="btn btn-primary btn-book-appointment"><mat-icon>bookmark</mat-icon>Book Appointment</button>
+              <button class="btn btn-primary btn-book-appointment">
+                Book Appointment
+                <mat-icon style= "font-size: x-large;">arrow_drop_down_circle</mat-icon>  
+              </button>
             </div>
           </div>
           <div class="col-md-1"></div>
@@ -246,8 +249,7 @@
                 </div>
               </div>
               --> 
-              <div class="">
-              </div>
+              
             </div>  
           </div>
         </div>
@@ -313,7 +315,7 @@
                         </div>
                       </div>
                       <div class="col-3">
-                        <div  class="consultation-border cursor-pointer text-center">
+                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('physical', i)">
                           <div class="center">
                             <img
                               src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
@@ -326,7 +328,7 @@
                         </div>
                       </div>
                       <div class="col-3">
-                        <div  class="consultation-border cursor-pointer text-center">
+                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('chat', i)">
                           <div class="center">
                             <img
                               src="./assets/img/consulation/blood-test/phone.jpg"
@@ -374,7 +376,7 @@
                   </div>
                   <div class="col-11 available-details">
                     <mat-chip-list aria-label="daysAvailable">
-                      <mat-chip  *ngFor="let days of doctor.availableDays" selected>{{days}}</mat-chip>
+                      <mat-chip  *ngFor="let days of doctor.availableDays" >{{days}}</mat-chip>
                     </mat-chip-list>
                   </div>
                 </div>

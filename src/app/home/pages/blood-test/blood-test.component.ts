@@ -436,7 +436,8 @@ export class BloodTestComponent implements OnInit {
   }
 
   ratingArray : Array<number>;
-  rating = 3
+  rating = 3;
+  myId : string = "5e8efa895b324a3e4c97a278"
 
   shownresultarray = [
     {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 3,

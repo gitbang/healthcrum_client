@@ -9,6 +9,9 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class HomeServiceService {
 
+  
+  
+
   url : string = 'http://localhost:3000'
  
   headers = new HttpHeaders({
@@ -58,21 +61,18 @@ export class HomeServiceService {
   }
 
   bloodtestAddMember(userId : string, data : object) : Observable<any>{
+    console.log("in service , add member : ", data)
     return this.http
                 .post(this.url + '/savemember/' + userId, data, this.option)
                 .pipe(retry(2))
   }
 
   bloodTestFetchMember(userId : string) : Observable<any>{
+    console.log(userId)
     return this.http
                 .get(this.url + '/getfamilymembers/' + userId, this.option)
                 .pipe(retry(2))
   }
-
-  bloodTestgetMembers(data ) : Observable <any> {
-    return ;
-  }
-
 
 
  //-------------- consultation---------------//

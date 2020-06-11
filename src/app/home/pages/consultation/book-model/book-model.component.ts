@@ -57,7 +57,7 @@ export class BookModelComponent implements OnInit {
     this.bookedslot = slot
   }
   toCheck = {
-    _id : '123456789',
+    userId : 'abcdef',
     phone : null
   }
   submitFirstForm(stepper : MatStepper){
@@ -66,7 +66,7 @@ export class BookModelComponent implements OnInit {
 
     if(this.firstFormGroup.valid){
       this.toCheck = {
-        _id : "123456789",
+        userId : "asdfghjk",
         phone : this.firstFormGroup.get('phoneNo').value
       }
       console.log(this.toCheck)
@@ -80,6 +80,7 @@ export class BookModelComponent implements OnInit {
   generateotp( stepper : MatStepper){
     this.service.consultationBookOtpcheck(this.toCheck)
       .subscribe((result)=>{
+        console.log(result)
         if(result.success) {
           if(result.exists){
             this.dialog.close({success  : true, data : this.data , userdata : this.firstFormGroup.value})
@@ -99,7 +100,9 @@ export class BookModelComponent implements OnInit {
         otp : this.secondFormGroup.get('otp').value,
         phone : this.firstFormGroup.get('phoneNo').value
       }
+      console.log("verify otp : ", toSend);
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
+        console.log(result)
         if(result.success){
           this.dialog.close({success : true, data : this.data , userdata: this.firstFormGroup.value})
         } else{

@@ -23,7 +23,7 @@ export interface Member {
 export class BookTestComponent implements OnInit {
 
   userId : string = "123456";
-
+  
   constructor(
     private router : Router,
     private service : HomeServiceService,
@@ -108,23 +108,40 @@ export class BookTestComponent implements OnInit {
 
     // api to fetch total relatives;
 
-    this.filteredMembers = this.memberCtrl.valueChanges.pipe(
-      startWith(''),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allMembers.slice())
-    );
-
     for(let i = 0; i < this.shownresultarrays.length; i++) {
       this.addgroup();
       this.testForMe(true,  i)
     }
 
   }
-  fromCart : boolean 
 
+  getfilteredMembers(){
+    this.filteredMembers = this.memberCtrl.valueChanges.pipe(
+      startWith(''),
+      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allMembers.slice())
+    );
+  }
+
+
+  fromCart : boolean 
+  relativeData ;
   getrelatives(){
-    this.service.bloodTestFetchMember(this.userId).subscribe((result)=>{
+    this.service.bloodTestFetchMember(this.myId).subscribe((result)=>{
       console.log("result in get relatives api",result)
+      if(result.success) {
+        this.relativeData = result.data;
+        this.getRelativesString(result)
+      }
     })
+  }
+
+  getRelativesString(result : any){
+    this.allMembers = [];
+    result.data.members.forEach(mem =>{
+      this.allMembers.push(mem.name)
+    })
+    console.log("members from backend are : ", this.allMembers)
+    this.getfilteredMembers();
   }
 
 
@@ -136,7 +153,6 @@ export class BookTestComponent implements OnInit {
     if ((value || '').trim()) {
       this.members.push(value.trim());
     }
-
     if (input) {
       input.value = '';
     }
@@ -151,6 +167,7 @@ export class BookTestComponent implements OnInit {
       // this.members.splice(index, 1);
       // this.testfor.value[index].otherlist = this.members;
       this.testfor.value[i].otherlist.splice(index, 1);
+      this.allID.others.splice(index, 1);
     }
     this.calculateprice(i);
   }
@@ -159,13 +176,20 @@ export class BookTestComponent implements OnInit {
 
     this.memberInput.nativeElement.value = '';
     this.memberCtrl.setValue(null);
-    console.log(this.testfor.value[index])
+    //console.log(this.testfor.value[index])
     //console.log("members are : ",this.members)
-    if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
-      this.testfor.value[index].otherlist.push(event.option.viewValue);
-      // this.testfor.value[index].otherlist = this.members;
-    }
+   // console.log("in selected", this.relativeData)
+    // console.log(this.allID.others);
+    // console.log(this.relativeData.members[index]._id)
    
+    console.log("event is : ", event)
+    //if(!this.allID.others.includes(this.relativeData.members[index]._id)){
+    if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
+      this.testfor.value[index].otherlist.push(event.option.viewValue);      
+      this.allID.others.push(this.relativeData.members[index]._id)
+      console.log("in reached")
+    }
+
     console.log("total members selected",this.testfor.value[index].otherlist.length)
     this.calculateprice(index);
   }
@@ -175,7 +199,6 @@ export class BookTestComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.allMembers.filter(option => option.toLowerCase().includes(filterValue));
   }
-
 
   visible = true;
   selectable = true;
@@ -198,6 +221,7 @@ export class BookTestComponent implements OnInit {
   usercart ;
   userCompleteCart;
   
+  myId : string = "5e8efa895b324a3e4c97a278";
 
   shownresultarrays =[
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
@@ -287,13 +311,16 @@ export class BookTestComponent implements OnInit {
     this.testfor.value[index].me = value;
     if(value) {
       this.myfee = this.userCompleteCart[index].offerprice;
+      this.allID.me = this.myId;
     } else {
+      this.allID.me = "";
       this.myfee = 0
     }
     this.calculateprice(index);
   }
 
   testForMember(value, index) {
+    console.log("indec in test-for-members",index)
     this.testfor.value[index].others = value;
     if(value == false) {
       //this.members = [];
@@ -332,6 +359,9 @@ export class BookTestComponent implements OnInit {
     this.totalPrice = 0;
      console.log("price array values",this.pricearray.value)
   }
-
+  allID = {
+    me : this.myId,
+    others : []
+  }
   finalPrice : number = 0;
 }

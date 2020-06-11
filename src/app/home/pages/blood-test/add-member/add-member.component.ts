@@ -29,13 +29,25 @@ export class AddMemberComponent implements OnInit {
     phoneNo : ['', Validators.required]
   })
 
+  myId : string = "5e8efa895b324a3e4c97a278"
   ngOnInit() {
   }
 
   submit(){
+    console.log("submit ")
     console.log(this.registerationForm.value)
+    let data = {
+      members: {
+        name : this.registerationForm.get('name').value,
+        gender : this.registerationForm.get('gender').value,
+        age : this.registerationForm.get('age').value,
+        phoneNo: this.registerationForm.get('phoneNo').value,
+      }
+    }
+    console.log(data)
     if(this.registerationForm.valid){
-      this.service.bloodtestAddMember( this.userId,this.registerationForm.value).subscribe((response)=>{
+      console.log("valid")
+      this.service.bloodtestAddMember( this.myId, data).subscribe((response)=>{
         console.log("response after in submit", response)
         if(response.success){
           this.dialogRef.close({success : true})
