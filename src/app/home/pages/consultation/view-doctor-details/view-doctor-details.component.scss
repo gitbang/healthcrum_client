@@ -3,6 +3,10 @@ $blue : #00AEC5;
 $bg : #eff4f7;
 $yellow :#E87528;
 
+@mixin green-gradient {
+    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+}
+
 .container-fluid  {
     background-color: $grey;
 }
@@ -12,7 +16,7 @@ $yellow :#E87528;
 .doctor-name h2{
     color : $blue;
     font-weight: 600;
-    text-align: center;
+    //text-align: center;
     font-family: cursive;
     font-size: x-large;
 }
@@ -25,14 +29,25 @@ table{
 .btn-info{
     background: linear-gradient(to right, #17c0d3, #027e8e);
 }
-.btn-primary {
-    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+// .btn-primary {
+//     background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+// }
+.btn-book-appointment{
+
+    color: #107d6e;
+    background-color: white;
+    border: 1px solid #107d6e;
+    &:hover{
+        //background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+        @include green-gradient;
+        color: white;
+    }
 }
 
 @media screen and (min-width : 800px) {
-
 }
-
+@media screen and (min-width : 800px) {
+}
 .active-feedback{
     // color: coral;
      color: #E87528;
@@ -49,9 +64,9 @@ table{
 .consultation-horizontal{
     padding-right: 0;;
 }
+
 .consultation-div-horizontal, .consultation-div {
-   
-    margin-top : -15px;
+    //margin-top : -15px;
     .consultation-heading{
         color: white;
         background: linear-gradient(to right, #17c0d3, #027e8e);
@@ -60,7 +75,8 @@ table{
     }
 }
 .consultation-port-new{
-    background-color: $yellow;
+    //background-color: $yellow;
+    @include green-gradient();
     margin: 5px;
     border-radius: 10px;
     padding: 5px;
@@ -77,6 +93,17 @@ table{
 }
 .emergency-image-horizontal{
     width: 100px;
+}
+
+.available-heading{
+    @include green-gradient();
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    label{
+        color: white;
+        font-size: x-large;
+    }
 }
 .select-slot{
     padding-left: 10%;
@@ -99,6 +126,26 @@ table{
     width: 220px;
 }
 
+
+
 .slicker-simple{
     padding: 0;
+}
+.top-heading-background{
+    background-color: #deebdd;
+    background-image: linear-gradient(315deg, #deebdd 0%, #bbdbbe 74%);
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    .logo-div{
+        position: absolute;
+        right: 0;
+        top: 0;
+        .logo{
+            width: 50px;
+        }
+    }
+}
+.fee-in-consultation{
+    font-size: large;
 }

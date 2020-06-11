@@ -16,13 +16,13 @@ export class ViewDoctorDetailsComponent implements OnInit {
   ngOnInit() {
     this.ratingArray = Array(5).fill(0);
 
-    (<any>$('.slicker')).slick({
-      // infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      // dots : true,
-      // arrows : true
-    });
+    // (<any>$('.slicker')).slick({
+    //   // infinite: true,
+    //   slidesToShow: 3,
+    //   slidesToScroll: 3,
+    //   // dots : true,
+    //   // arrows : true
+    // });
 
     
 
@@ -78,7 +78,8 @@ export class ViewDoctorDetailsComponent implements OnInit {
       physical: {from: "8 am", to : "6pm"},
       tele: {from: "8 am", to: "2 pm"},
       video: {from: "8 am", to: "2 pm"}
-    }
+    },
+    availableDays : ["Monday", "Tuesday", "Wednesday", "Thursday","Friday"]
   }
 
   slots = ["6am-7am","6am-7am","6am-7am","6am-7am"]
@@ -87,8 +88,8 @@ export class ViewDoctorDetailsComponent implements OnInit {
     slidesToScroll: 4, 
     infinite: true,
     dots: true,
-    
     speed: 300,
+    /*
     responsive: [
       {
         breakpoint: 1024,
@@ -117,6 +118,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
       // settings: "unslick"
       // instead of a settings object
     ]
+    */
   };
   slides = [
     { img: "./assets/img/partners/p1-omron.png" },

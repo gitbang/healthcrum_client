@@ -79,7 +79,7 @@ export class ConsultationComponent implements OnInit {
     if(window.innerWidth < 1100){
       this.horizontal = false
     } else {
-      this.horizontal = true
+      //this.horizontal = true
     }
   }
   rating : number = 3

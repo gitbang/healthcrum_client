@@ -68,6 +68,7 @@ import { BookModelComponent } from './pages/consultation/book-model/book-model.c
 import { CheckOutComponent } from './pages/consultation/check-out/check-out.component';
 import { ERecieptComponent } from './pages/consultation/e-reciept/e-reciept.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatDividerModule,
     MatSidenavModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTabsModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

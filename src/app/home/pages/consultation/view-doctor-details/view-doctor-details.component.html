@@ -1,318 +1,475 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 mt-4">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 mt-4">
       <div class=" mt-0 mat-elevation-z3 bg-white">
-        
-          <div class="row">
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-4 col-lg-3  card-icon mt-1  header-icon ">
-                   <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                    *ngFor="let star of ratingArray; let i = index">grade</i>
-                </div>  
-                <div class="col-md-8 col-lg-9 doctor-name">
-                  <h2>{{doctor.name}} (Reg.No.{{doctor.registerationNumber}})</h2>
-                </div>   
+        <div class="row top-heading-background">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-4 col-lg-3  card-icon mt-1  header-icon ">
+                <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
+                *ngFor="let star of ratingArray; let i = index">grade</i>
               </div>  
-              <div class="row mt-2">
-                <div class="col-10">
-                  <div class="row mt-4">
-                  
-                    <div class="col-4 text-center">
-                      <div>
-                        <label>Specialist</label>
-                      </div>
-                      {{doctor.speciality | titlecase }}
-                    </div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-4 text-center">
-                      <div>
-                        <label>Degree</label> 
-                      </div>
-                    <!--{{doctor.degree}}-->
-                      <label style="color : black" *ngFor="let deg of doctor.qualification">{{deg | titlecase}}</label>
-                    </div>
-                    
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-3 text-center">
+              <div class="col-md-8 col-lg-7 doctor-name">
+                <h2>{{doctor.name}} (Reg.No.{{doctor.registerationNumber}})</h2>
+              </div> 
+              <div class="logo-div">
+                <img
+                  src="./assets/img/consulation/logo.png"
+                  class="logo"
+                >
+              </div>  
+            </div>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-md-4 mt-4" style="text-align : center">
+            <img src={{doctor.image}} 
+              alt="loading..." 
+              height="220px" 
+              width="220px" 
+              class="center img-circle">
+            <!--
+            <div class="col-12">
+              <button class="btn btn-info"><mat-icon>location_on</mat-icon>Get Distance </button>
+            </div>
+            -->
+              <div class="col-12 mt-4">
+              <button class="btn btn-primary btn-book-appointment"><mat-icon>bookmark</mat-icon>Book Appointment</button>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-7">
+              
+            <div class="row mt-2">
+              <!--
+              <div class="col-8">
+                <div class="row mt-4">
+                
+                  <div class="col-4 text-center">
                     <div>
-                      <label>Experience</label> 
+                      <label>Specialist</label>
                     </div>
-                    {{doctor.experience}} years</div>
-                    
+                    {{doctor.speciality | titlecase }}
                   </div>
-                  <div class="row mt-3">
-                    <div class="col-4 text-center">
-                      <div>
-                        <label>City</label> 
-                      </div>
-                    {{doctor.location.city | titlecase}}
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-4 text-center">
+                    <div>
+                      <label>Degree</label> 
                     </div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-4 text-center">
-                      <div>
-                        <label>Distance</label> 
-                      </div>
-                      5 Km
+                  
+                    <label style="color : black" *ngFor="let deg of doctor.qualification">{{deg | titlecase}}</label>
+                  </div>
+                  
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-3 text-center">
+                  <div>
+                    <label>Experience</label> 
+                  </div>
+                  {{doctor.experience}} years</div>
+                  
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4 text-center">
+                    <div>
+                      <label>City</label> 
                     </div>
-                    <mat-divider [vertical]="true"></mat-divider>
-                    <div class="col-3 text-center">
-                      <div>
-                        <label>Location</label> 
-                      </div>
+                  {{doctor.location.city | titlecase}}
+                  </div>
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-4 text-center">
+                    <div>
+                      <label>Distance</label> 
+                    </div>
+                    5 Km
+                  </div>
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-3 text-center">
+                    <div>
+                      <label>Location</label> 
+                    </div>
+                    <img
+                      src="./assets/img/consulation/blood-test/location.jpg"
+                      class="horizontal-location"
+                    >
+                  </div>
+                </div>
+              </div>
+              -->
+              <div class="col-md-12">
+                <table class="table">
+                  <tr>
+                    <td>Speciality</td>
+                    <td> {{doctor.speciality | titlecase }}</td>
+                  </tr>
+                  <tr>
+                    <td>Degree</td>
+                    <td><label style="color : black" *ngFor="let deg of doctor.qualification">{{deg | titlecase}}</label></td>
+                  </tr>
+                  <tr>
+                    <td>Experience</td>
+                    <td>{{doctor.experience}}</td>
+                  </tr>
+                  <tr>
+                    <td>City</td>
+                    <td>{{doctor.location.city | titlecase}}</td>
+                  </tr>
+                  <tr>
+                    <td>Distance</td>
+                    <td> 5 Km</td>
+                  </tr>
+                  <tr>
+                    <td>Location</td>
+                    <td>
                       <img
                         src="./assets/img/consulation/blood-test/location.jpg"
                         class="horizontal-location"
                       >
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="row mt-4">
-                    <div class="col-md-6 col-lg-7 consultatio n-horizontal">
-                      <div class="row consultation-div-horizontal ml-4 mr-1"> 
-                        <div class="col-12 consultation-port-new">
-                          <div class="row"> 
-                            <div class="col-12">
-                              <label class="consultation-label-top">
-                                BOOK APPOINTMENT
-                              </label>
-                            </div>
-                            <div class="col-12">
-                              <label class="consultation-label-bottom">
-                                Click Preferred Mode of Consultation
-                              </label>
-                            </div>
-                          </div> 
-                        </div>
-                        <div class="col-12">
-                          <div class="row">
-                            <div class="col-3 ">
-                              <div class="consultation-border cursor-pointer text-center" (click)="openDialog('video', i)">
-                                <div class="center">
-                                  <img
-                                    src="./assets/img/consulation/blood-test/video.png"
-                                    class="consultation-image-horizontal"
-                                  >
-                                </div>
-                                <label class="image-data">
-                                  {{doctor.consultationTiming.video.from}} - {{doctor.consultationTiming.video.to}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <!--
+              <div class="col-12">
+                <div class="row mt-4">
+                  <div class="col-md-12 col-lg-9 consultatio n-horizontal">
+                    <div class="row consultation-div-horizontal ml-4 mr-1"> 
+                      <div class="col-12 consultation-port-new">
+                        <div class="row"> 
+                          <div class="col-md-9">
+                            <div class="row">
+                              <div class="col-12">
+                                <label class="consultation-label-top">
+                                  BOOK APPOINTMENT
                                 </label>
                               </div>
-                            </div>
-                            <div class="col-3 ">
-                              <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('telephone', i)">
-                                <div  class="center">
-                                  <img
-                                    src="./assets/img/consulation/blood-test/telephone.jpg"
-                                    class="consultation-image-horizontal"
-                                  >
-                                </div>
-                                <label class="image-data">
-                                  {{doctor.consultationTiming.tele.from}}-{{doctor.consultationTiming.tele.to}}
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-3">
-                              <div  class="consultation-border cursor-pointer text-center">
-                                <div class="center">
-                                  <img
-                                    src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
-                                    class="consultation-image-horizontal"
-                                  >
-                                </div>
-                                <label class="image-data">
-                                  {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-3">
-                              <div  class="consultation-border cursor-pointer text-center">
-                                <div class="center">
-                                  <img
-                                    src="./assets/img/consulation/blood-test/phone.jpg"
-                                    class="consultation-image-horizontal"
-                                  >
-                                </div>
-                                <label class="image-data ">
-                                  Chat
+                              <div class="col-12">
+                                <label class="consultation-label-bottom">
+                                  Click Preferred Mode of Consultation
                                 </label>
                               </div>
                             </div>
                           </div>
+                          <div class="col-md-3">
+                            <div class="row">
+                              <div class="col-12"  >
+                                <label class="fee-in-consultation">
+                                    Rs.{{doctor.consultationFees}}/-
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div> 
+                      </div>
+                      <div class="col-12">
+                        <div class="row">
+                          <div class="col-3 ">
+                            <div class="consultation-border cursor-pointer text-center" (click)="openDialog('video', i)">
+                              <div class="center">
+                                <img
+                                  src="./assets/img/consulation/blood-test/video.png"
+                                  class="consultation-image-horizontal"
+                                >
+                              </div>
+                              <label class="image-data">
+                                {{doctor.consultationTiming.video.from}} - {{doctor.consultationTiming.video.to}}
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-3 ">
+                            <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('telephone', i)">
+                              <div  class="center">
+                                <img
+                                  src="./assets/img/consulation/blood-test/telephone.jpg"
+                                  class="consultation-image-horizontal"
+                                >
+                              </div>
+                              <label class="image-data">
+                                {{doctor.consultationTiming.tele.from}}-{{doctor.consultationTiming.tele.to}}
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div  class="consultation-border cursor-pointer text-center">
+                              <div class="center">
+                                <img
+                                  src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
+                                  class="consultation-image-horizontal"
+                                >
+                              </div>
+                              <label class="image-data">
+                                {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div  class="consultation-border cursor-pointer text-center">
+                              <div class="center">
+                                <img
+                                  src="./assets/img/consulation/blood-test/phone.jpg"
+                                  class="consultation-image-horizontal"
+                                >
+                              </div>
+                              <label class="image-data ">
+                                Chat
+                              </label>
+                            </div>
+                          </div>
                         </div>
-                        <div class="col-12 emergency-section">
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="row ">
-                                <div class="col-md-6 col-lg-4 mt-2 ">
-                                  <img
-                                    src="./assets/img/consulation/blood-test/emergency1.jpg"
-                                    class="emergency-image-horizontal"
-                                  >
-                                </div>
-                                <div class="col-md-6 col-lg-5 mt-2">
-                                  <div class="row">
-                                    <div class="col-12 emergency-fee mt-1">
-                                      <label class="emergency-fee color-black">Fee : {{doctor.emergencyFees}}/-</label>
-                                    </div>
-                                    <div class="col-12 emergency-time-div " style="margin-top : -5px">
-                                      <label class="emergency-time color-black">24 hrs</label>
-                                    </div>
+                      </div>
+                      <div class="col-12 emergency-section">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="row ">
+                              <div class="col-md-6 col-lg-4 mt-2 ">
+                                <img
+                                  src="./assets/img/consulation/blood-test/emergency1.jpg"
+                                  class="emergency-image-horizontal"
+                                >
+                              </div>
+                              <div class="col-md-6 col-lg-5 mt-2">
+                                <div class="row">
+                                  <div class="col-12 emergency-fee mt-1">
+                                    <label class="emergency-fee color-black">Fee : {{doctor.emergencyFees}}/-</label>
+                                  </div>
+                                  <div class="col-12 emergency-time-div " style="margin-top : -5px">
+                                    <label class="emergency-time color-black">24 hrs</label>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>   
-                        
-                      </div>
-                    </div>
-                    <div class="col-md-5 col-lg-4 select-slot">
-                      <div class="row">
-                        <!--
-                        <div class="col-12">
-                          <h4>Book Slot</h4>
-                          <mat-form-field>
-                            <mat-label>Book slot</mat-label>
-                            <mat-select>
-                              <mat-option *ngFor="let slot of slots" [value]="slot">
-                                {{slot}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                        </div>
-                        -->
-                        <div class="col-12"> 
-                          <div class="row consultation-border">
-                            <div class="col-4">
-                              <div>Fee</div>
-                              {{doctor.consultationFees}}
-                            </div>
-                            <div class="col-4">
-                              <div>
-                                Days
-                              </div>
-                              6
-                            </div>
-                            <div class="col-4">
-                              <div>Timing</div>
-                              8 hrs
-                            </div>
-                          </div>  
                         </div>
                       </div>
-                      
-                      
                     </div>
-                    
                   </div>
-                </div> 
-                
-                <div class="">
-
                 </div>
-              </div>  
-            </div>
-            <div class="col-md-4" style="text-align : center">
-              <img src={{doctor.image}} 
-                alt="loading..." 
-                height="220px" 
-                width="220px" 
-                class="center img-circle">
-              <div class="col-12">
-                <button class="btn btn-info"><mat-icon>location_on</mat-icon>Get Distance from your location</button>
               </div>
-               <div class="col-12">
-                <button class="btn btn-primary"><mat-icon>bookmark</mat-icon>Book Appointment</button>
+              --> 
+              <div class="">
               </div>
-            </div>
+            </div>  
           </div>
-          <div class="row m-auto">
-            <div class="col-12 mt-4 ml-4 mr-4">
-              <label>About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
-                    Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
-                    During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
-                </label>
-            </div>
-          </div>
+        </div>
         
-        <div class="card-body">
-          <div class="col-12 mt-1 slicker-simple">
-            <!--
-              <div class="row slicker">
-                <img
-                  src={{doctor.image}}
-                  class="img-gallary"
-                >
-                <img
-                  src={{doctor.image}}
-                  class="img-gallary"
-                >
-                <img
-                  src={{doctor.image}}
-                  class="img-gallary"
-                >
-                <img
-                  src={{doctor.image}}
-                  class="img-gallary"
-                >
+        <div class="row">
+          <div class="col-12">
+            <div class="row mt-4">
+              <div class="col-md-6 consultation-horizontal">
+                <div class="row consultation-div-horizontal ml-4 mr-1"> 
+                  <div class="col-12 consultation-port-new">
+                    <div class="row"> 
+                      <div class="col-md-9">
+                        <div class="row">
+                          <div class="col-12">
+                            <label class="consultation-label-top">
+                              BOOK APPOINTMENT
+                            </label>
+                          </div>
+                          <div class="col-12">
+                            <label class="consultation-label-bottom">
+                              Click Preferred Mode of Consultation
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="row">
+                          <div class="col-12"  >
+                            <label class="fee-in-consultation">
+                                Rs.{{doctor.consultationFees}}/-
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-3 ">
+                        <div class="consultation-border cursor-pointer text-center" (click)="openDialog('video', i)">
+                          <div class="center">
+                            <img
+                              src="./assets/img/consulation/blood-test/video.png"
+                              class="consultation-image-horizontal"
+                            >
+                          </div>
+                          <label class="image-data">
+                            {{doctor.consultationTiming.video.from}} - {{doctor.consultationTiming.video.to}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3 ">
+                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('telephone', i)">
+                          <div  class="center">
+                            <img
+                              src="./assets/img/consulation/blood-test/telephone.jpg"
+                              class="consultation-image-horizontal"
+                            >
+                          </div>
+                          <label class="image-data">
+                            {{doctor.consultationTiming.tele.from}}-{{doctor.consultationTiming.tele.to}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div  class="consultation-border cursor-pointer text-center">
+                          <div class="center">
+                            <img
+                              src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
+                              class="consultation-image-horizontal"
+                            >
+                          </div>
+                          <label class="image-data">
+                            {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div  class="consultation-border cursor-pointer text-center">
+                          <div class="center">
+                            <img
+                              src="./assets/img/consulation/blood-test/phone.jpg"
+                              class="consultation-image-horizontal"
+                            >
+                          </div>
+                          <label class="image-data ">
+                            Chat
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 emergency-section">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="row ">
+                          <div class="col-md-6 col-lg-4 mt-2 ">
+                            <img
+                              src="./assets/img/consulation/blood-test/emergency1.jpg"
+                              class="emergency-image-horizontal"
+                            >
+                          </div>
+                          <div class="col-md-6 col-lg-5 mt-2">
+                            <div class="row">
+                              <div class="col-12 emergency-fee mt-1">
+                                <label class="emergency-fee color-black">Fee : {{doctor.emergencyFees}}/-</label>
+                              </div>
+                              <div class="col-12 emergency-time-div " style="margin-top : -5px">
+                                <label class="emergency-time color-black">24 hrs</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            -->
-            <div class="">
+              <div class="col-md-1"></div>
+              <div class="col-md-5">
+                <div class="row available">
+                  <div class="col-11 available-heading" >
+                    <label>Available days</label>
+                  </div>
+                  <div class="col-11 available-details">
+                    <mat-chip-list aria-label="daysAvailable">
+                      <mat-chip  *ngFor="let days of doctor.availableDays" selected>{{days}}</mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row m-auto">
+          <div class="col-11 mt-4 ml-4 mr-4">
+            <mat-tab-group mat-stretch-tabs>
+              <mat-tab label="General Info"> 
+                <label class="mt-4">
+                  About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
+                  Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
+                  During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
+                </label>
+              </mat-tab>
+              <mat-tab label="About Me"> 
+                <label class="mt-4" >
+                  About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
+                  Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
+                  During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
+                </label>
+              </mat-tab>
+              <mat-tab label="Background"> 
+                <label class="mt-4">
+                  About : Dr. Pankaj Manoria is an Interventional Cardiologist and Director of the 
+                  Cardiac Cath Lab at Manoria Heart & Critical Care Hospital in Bhopal. He started practicing in 2006 and has performed over 12,000 Angiographies and 2,000 Ang
+                  During this time, Dr. Manoria has developed special skills in doing cardiac interventions through the transradial route.
+                </label>
+              </mat-tab>
+            </mat-tab-group>
+            
+          </div>
+        </div>
+        
+        <div class="">
+          <div class="col-11">
+            <div class="container mt-5">
               <ngx-slick-carousel class="customer-logos " [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-                  <img  
-                    src={{doctor.image}}
-                    class="img-gallary"  
+                  <img 
+                    src="{{doctor.image}}"
+                    class="img-gallary"
                   >
                 </div>
               </ngx-slick-carousel>
             </div>
-
-            </div>
-            <div class="col-12 mt-3">
-              <div class="row feedback-heading">
+          </div>
+          <div class="col-11 mt-3">
+            <div class="row feedback-heading">
+              <div class="col-12 ml-2">
                 <h4> Reviews/Feedbacks </h4>
               </div>
-              <div class="row">
-                <div class="col-12 mt-3">
-                  <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        View Doctor feedback
-                      </mat-panel-title>
-                      <mat-panel-description>
-                        5
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <div class=" mt-2">     <!--apply loop here-->
-                      <div class="row">
-                        <div class="col-4">1. Harry</div>
-                        <div class="col-6">4 / 5</div>
-                      </div>
-                      <div class="row">
-                        <div class="col-12 ml-3 mt-1">
-                          This is very good doctor
-                        </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mt-3">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      View Doctor feedback
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      5
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class=" mt-2">     <!--apply loop here-->
+                    <div class="row">
+                      <div class="col-4">1. Harry</div>
+                      <div class="col-6">4 / 5</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 ml-3 mt-1">
+                        This is very good doctor
                       </div>
                     </div>
-                    <mat-divider></mat-divider>
-                    <div class=" mt-2 "> 
-                      <div class="row ">
-                        <div class="col-4">2. Harry</div>
-                        <div class="col-6">4 / 5</div>
-                      </div>
-                      <div class="row">
-                        <div class="col-12 ml-3 mt-1">
-                          This is very good doctor
-                        </div>
+                  </div>
+                  <mat-divider></mat-divider>
+                  <div class=" mt-2 "> 
+                    <div class="row ">
+                      <div class="col-4">2. Harry</div>
+                      <div class="col-6">4 / 5</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 ml-3 mt-1">
+                        This is very good doctor
                       </div>
                     </div>
-                  </mat-expansion-panel>
-                </div>
+                  </div>
+                </mat-expansion-panel>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
