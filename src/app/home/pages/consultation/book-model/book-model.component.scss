@@ -12,8 +12,10 @@ $bg : #1BA89B;
 }
 
 .bg-greenMix{
-    background: linear-gradient(to right,#30e8d5, #1BA89B);
-    border-radius: 20px;
+   // background: linear-gradient(to right,#30e8d5, #1BA89B);
+   // background: linear-gradient(to right, #fdfbfb , #ebedee);
+   
+   border-radius: 20px;
 }
 
 .name-label{
@@ -33,6 +35,7 @@ $bg : #1BA89B;
     width: 80%;
     text-align: center;
     font-size: large;
+    text-decoration: underline;
 }
 
 .top-icon{
@@ -122,4 +125,12 @@ $bg : #1BA89B;
 
 .mat-horizontal-stepper-header { 
     pointer-events: none !important; 
+}
+
+.logo{
+    width: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
 }

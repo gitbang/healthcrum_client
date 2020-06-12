@@ -13,12 +13,18 @@
           <div class="row upper-part">
             <div class="col-md-12">
               <div class="row mt-4">
+                <div class="logo-div">
+                  <img
+                    src="./assets/img/consulation/logo.png"
+                    class="logo"
+                  >
+                </div>  
                 <div class="col-md-5  ">
                   <div class="image-div ">
-                    <div class="mat-elevation-z4">
+                    <div class="">
                       <img src={{data.doctor.profilepic}} 
                         alt="loading..."                         
-                        class="center img-doctor"
+                        class="center img-doctor mat-elevation-z4"
                       >
                     </div>
                     <div class="doctor-name mat-elevation-z4 mt-2">
@@ -40,7 +46,7 @@
                     </div>
                     <mat-divider></mat-divider>
                     <div class="col-12">
-                      <label>Select Date : </label>
+                      <label style="color : black; margin-right : 4px">Select Date : </label>
                       <mat-form-field>
                         <mat-label>Select Date</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="date" [min]="toDayDate ">
@@ -49,18 +55,18 @@
                       </mat-form-field>
                     </div>
                     <div class="col-12">
-                      <label>Time Slots</label>
+                      <label  style="color : black;">Time Slots available : </label>
                       <div class="row">
                         <div class="col-12">
                           <div class="row">
                             <button 
                               (click) = "bookslot(slot)"
                               *ngFor= "let slot of slots" 
-                              class="btn ml-1 slot-button"
+                              class="btn ml-1 slot-button "
                               [ngClass] = "selected(slot) ? 'btn-danger' : 'default'"  
                             >
-                              {{slot}}</button>
-                          
+                              {{slot}}
+                            </button>
                           </div>
                         </div>  
                       </div>

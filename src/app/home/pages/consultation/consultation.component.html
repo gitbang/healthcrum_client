@@ -44,7 +44,7 @@
             >
           </div>
           <div class="consultation">
-            <mat-form-field>
+            <mat-form-field style="padding-top: 4px">
               <mat-label>Select an option</mat-label>
               <mat-select [(value)]="searchBy" (selectionChange)="searchByFunction($event)">
                 <mat-option value="name">Search by name</mat-option>
@@ -125,10 +125,16 @@
        *ngFor="let doctor of doctors; let i = index" >    
         <div class="row">
           <div class="col-12 ">
-              <mat-card  class=" doctor-card">  
+              <mat-card  class=" doctor-card" style="padding-top : 0">  
                 <div class="row feedback-horizontal">
                   <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
                   *ngFor="let star of ratingArray; let i = index">grade</i>
+                  <div class="logo-div">
+                    <img
+                      src="./assets/img/consulation/logo.png"
+                      class="logo"
+                    >
+                  </div>  
                 </div>
                 <div class="row">
                   <div class="col-12 doctor-image">
@@ -309,7 +315,7 @@
                             >
                           </div>
                           <label class="image-data">
-                            Chat
+                            8am-6pm
                           </label>
                         </div>
                       </div>
@@ -647,6 +653,13 @@
                   <label class="bottom-view-feedback">40 Feedbacks</label>
                 </div>
               </div>
+              <div class="col-4 logo-div">
+                <img
+                  src="./assets/img/consulation/logo.png"
+                  class="logo"
+                  style="margin-top: 5px; width : 35px"
+                >
+              </div>  
             </div>
           </mat-card>
         </div>

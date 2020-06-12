@@ -142,8 +142,15 @@
                   <div class="card-header ">
                     <div class="row" style="margin-top : -20px">
                       <div class="col-6 card-icon" style="padding : 0">
+                        <img
+                          src="./assets/img/consulation/logo.png"
+                          class="logo"
+                          style="margin-top: 5px; width : 30px"
+                        >
+                        <!--
                         <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
                         *ngFor="let star of ratingArray; let ind = index">grade</i>
+                        -->
                       </div>
                       <div class="offers col-6">
                         <h3 class="" style="float : right">
@@ -160,7 +167,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-body" style="padding-top : 0">
+                  <div class="card-body" style="padding-top : 0; padding-bottom : 0">
                     <div class="row">
                       <div class="col-6">
                         <h5> 
@@ -219,6 +226,10 @@
                       <div class="col-6" *ngIf="checkcart(shownresult._id)" style="padding : 2px">
                         <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
                       </div>
+                    </div>
+                    <div style="float: right">
+                       <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                        *ngFor="let star of ratingArray; let ind = index">grade</i>
                     </div>
                   </div>
                 </div>
@@ -283,8 +294,11 @@
                       <div class="" style="padding : 0">
                         <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
                       </div>
-                      <div class="" style="padding : 2px">
+                      <div class="" *ngIf="!checkcart(shownresult._id)" style="padding : 2px">
                         <button class="btn btn-default"   (click)="addTocart(i)">Add to Cart <mat-icon>add_shopping_cart</mat-icon></button>
+                      </div>
+                      <div class="" *ngIf="checkcart(shownresult._id)" style="padding : 2px">
+                        <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
                       </div>
                     </div>
                   </div>

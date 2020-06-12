@@ -46,6 +46,7 @@ mat-card-title{
     font-size: 15px;
 }
 .package-info {
+    padding: 0;
     background-color: white;
     width: 100%;
     float: left;
@@ -76,16 +77,21 @@ mat-card-title{
     }
 }
 .offers{
-    padding: 8px 4px 8px 4px;
+    //padding: 8px 4px 8px 4px;
+    padding : 0;
     background-color: #fff;
-    border: 1px solid #e87528;
+    //border: 1px solid #e87528;
     margin-bottom: 8px;
-    border-radius: 2px 0 17px;
+    //border-radius: 2px 0 17px;
     display: inline-block;
     h3 {
+        padding: 5px;
+        border: 1px solid #e87528;
+        border-radius: 2px 0 17px;
         font-size: small;
         color:#e87528; 
         font-weight: 600;
+        margin: 0;
     }
 }
 .package-detils  h4 span {

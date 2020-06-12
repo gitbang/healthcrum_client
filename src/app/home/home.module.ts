@@ -69,6 +69,7 @@ import { CheckOutComponent } from './pages/consultation/check-out/check-out.comp
 import { ERecieptComponent } from './pages/consultation/e-reciept/e-reciept.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
+import { LandingPageComponent } from './pages/wellness/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     BookModelComponent,
     CheckOutComponent,
     ERecieptComponent,
+    LandingPageComponent,
   ],
   imports: [
     CommonModule,

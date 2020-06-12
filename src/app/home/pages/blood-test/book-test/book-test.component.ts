@@ -194,8 +194,8 @@ export class BookTestComponent implements OnInit {
     this.calculateprice(index);
   }
 
-   _filter(value: string): string[] {
-     console.log(value)
+  _filter(value: string): string[] {
+    console.log(value)
     const filterValue = value.toLowerCase();
     return this.allMembers.filter(option => option.toLowerCase().includes(filterValue));
   }
@@ -206,7 +206,7 @@ export class BookTestComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   memberCtrl = new FormControl();
   memberarray = this.fb.array([
-])
+  ])
   filteredMembers: Observable<string[]>;
   members: string[] = [];
   allMembers: string[] = ['Member1', 'Member2', 'Member3', 'Member4', 'Member5'];

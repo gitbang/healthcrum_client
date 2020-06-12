@@ -6,6 +6,12 @@ $yellow :#E87528;
 @mixin green-gradient {
     background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
 }
+@mixin  blue-gradient {
+    background-image: linear-gradient(#00BCD4, #2ee0f4);
+}
+@mixin  blue-gradient-triple {
+    background-image: linear-gradient(to right, #00BCD4, #6fe5f2, #00BCD4); 
+}
 
 .container-fluid  {
     background-color: $grey;
@@ -14,7 +20,8 @@ $yellow :#E87528;
     border-radius: 50%;
 }
 .doctor-name h2{
-    color : $blue;
+    //color : $blue;
+    color: white;
     font-weight: 600;
     //text-align: center;
     font-family: cursive;
@@ -34,12 +41,12 @@ table{
 // }
 .btn-book-appointment{
 
-    color: #107d6e;
+    color: $blue;
     background-color: white;
-    border: 1px solid #107d6e;
+    border: 1px solid $blue;
     &:hover{
         //background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
-        @include green-gradient;
+        @include blue-gradient();
         color: white;
     }
 }
@@ -53,8 +60,9 @@ table{
      color: #E87528;
  }
  .passive-feedback{
-     color: #f7e5c3
- }
+     //color: #f7e5c3
+    color: white;
+}
 
 
 .horizontal-location{
@@ -67,17 +75,21 @@ table{
 
 .consultation-div-horizontal, .consultation-div {
     //margin-top : -15px;
+    border: 1px solid green;
+    border-radius: 10px;
     .consultation-heading{
         color: white;
-        background: linear-gradient(to right, #17c0d3, #027e8e);
+       // background: linear-gradient(to right, #17c0d3, #027e8e);
+        background-image: linear-gradient(#00BCD4, white);
         margin-left: -15px;
         padding: 5px;
     }
 }
 .consultation-port-new{
     //background-color: $yellow;
-    @include green-gradient();
-    margin: 5px;
+    //@include green-gradient();
+    @include blue-gradient();
+    //margin: 5px;
     border-radius: 10px;
     padding: 5px;
      .consultation-label-top{
@@ -96,7 +108,7 @@ table{
 }
 
 .available-heading{
-    @include green-gradient();
+    @include blue-gradient();
     margin: 5px;
     border-radius: 10px;
     padding: 5px;
@@ -133,10 +145,14 @@ table{
 }
 .top-heading-background{
     background-color: #deebdd;
-    background-image: linear-gradient(315deg, #deebdd 0%, #bbdbbe 74%);
-    margin: 0;
-    padding-top: 5px;
-    padding-bottom: 5px;
+   // background-image: linear-gradient(315deg, #deebdd 0%, #bbdbbe 74%);
+  // @include green-gradient(); 
+   //background: linear-gradient(to right, rgb(82, 184, 113), #107d6e,rgb(82, 184, 113),);
+  // background-image: linear-gradient(to right, #6cb782,#107d6e, #6cb782);
+  background-image: linear-gradient(to right, #00BCD4, #6fe5f2); 
+  margin: 0;
+    //padding-top: 5px;
+    padding-bottom: 10px;
     .logo-div{
         position: absolute;
         right: 0;
@@ -148,4 +164,15 @@ table{
 }
 .fee-in-consultation{
     font-size: large;
+}
+
+@media screen and (max-width : 770px) {
+    .photo-right{
+        padding-left: 15%;
+    }
+}
+
+.about-me-label{
+    color: black;
+    text-decoration: underline;
 }
