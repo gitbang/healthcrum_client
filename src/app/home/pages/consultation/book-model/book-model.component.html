@@ -79,26 +79,25 @@
           <div class="row lowerpart">
             <div class="col-12 mt-4">
               <div class="row book-consultation-dialog mt-4">
-                  <div class="col-md-2"></div>
-                  <div class="col-md-6 col-lg-3 ">
-                    <mat-form-field>
-                      <mat-label>Enter Name</mat-label>
-                      <input matInput formControlName="name">  
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-6 col-lg-3 ">
-                    <mat-form-field>
-                      <mat-label>Phone number</mat-label>
-                      <input matInput type="number" formControlName="phoneNo" pattern="[1-9]{1}[0-9]{9}">  
-                    </mat-form-field> 
-                  </div>
-              
-                  <div class="col-md-6 col-lg-3 mt-2 ml-1">  
-                    <button class="btn btn-custom btn-success" mat-button  (click)="submitFirstForm(stepper)">
-                      Submit
-                    </button>
-                  </div>
-                
+                <div class="col-md-2"></div>
+                <div class="col-md-6 col-lg-3 ">
+                  <mat-form-field>
+                    <mat-label>Enter Name</mat-label>
+                    <input matInput formControlName="name">  
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 col-lg-3 ">
+                  <mat-form-field>
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="number" formControlName="phoneNo" pattern="[1-9]{1}[0-9]{9}">  
+                  </mat-form-field> 
+                </div>
+            
+                <div class="col-md-6 col-lg-3 mt-2 ml-1">  
+                  <button class="btn btn-custom btn-success" mat-button  (click)="submitFirstForm(stepper)">
+                    Submit
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -137,7 +136,7 @@
               </div>
             -->
               <div class="col-md-4"></div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-8">
                 <div class="row">  
                   <div class="col-12">
                     <img
@@ -146,22 +145,36 @@
                     >
                   </div>
                   <div class="col-12 book-consultation-dialog ml-3">
-                    <mat-form-field>
-                      <mat-label>Enter OTP</mat-label>
-                      <input matInput type="number" class="" formControlName="otp">  
-                    </mat-form-field> 
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                        <mat-form-field>
+                          <mat-label>Enter OTP</mat-label>
+                          <input matInput type="number" class="" formControlName="otp">  
+                        </mat-form-field> 
+                      </div>
+                      <div class="col-md-4  ">
+                        <button class="btn btn-resend-otp width-full">
+                           Resend Otp
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-md-6 col-lg-7">
-                    <button class="btn btn-success width-seventy ml-3" mat-button (click)="submitsecondStepper(stepper)">
-                      Submit
-                    </button>
+                  <div class="col-md-12 col-lg-12">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <button class="btn btn-success width-full  ml-3" mat-button (click)="submitsecondStepper(stepper)">
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <button class=" btn btn-info width-full ml-3 mt-2 mb-2" mat-button matStepperPrevious >
+                          Change number
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-md-6 col-lg-3  resend-otp" (click)="generateotp(stepper)">
-                    <label>Resend Otp</label>
-                  </div>
-                  <button class="col-md-12 col-lg-7 btn btn-info width-seventy ml-3 mt-2 mb-2" mat-button matStepperPrevious >
-                    Change number
-                  </button>
                 </div>
               </div>
             </div>

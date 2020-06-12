@@ -301,7 +301,9 @@ a{
 
 .active-feedback{
   // color: coral;
-   color: #E87528;
+  background: -webkit-linear-gradient( #BF953F, #FCF6BA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .passive-feedback{
    color: #f7e5c3

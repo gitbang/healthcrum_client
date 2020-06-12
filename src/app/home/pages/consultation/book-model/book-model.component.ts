@@ -61,19 +61,20 @@ export class BookModelComponent implements OnInit {
     phone : null
   }
   submitFirstForm(stepper : MatStepper){
-    this.firstFormGroup.get('timeslot').setValue(this.bookedslot)
-    console.log(this.firstFormGroup.value);  
+    stepper.next();
+    // this.firstFormGroup.get('timeslot').setValue(this.bookedslot)
+    // console.log(this.firstFormGroup.value);  
 
-    if(this.firstFormGroup.valid){
-      this.toCheck = {
-        userId : "asdfghjk",
-        phone : this.firstFormGroup.get('phoneNo').value
-      }
-      console.log(this.toCheck)
-      this.generateotp( stepper);
-    } else {
-      alert("Invalid Inputs")
-    }
+    // if(this.firstFormGroup.valid){
+    //   this.toCheck = {
+    //     userId : "asdfghjk",
+    //     phone : this.firstFormGroup.get('phoneNo').value
+    //   }
+    //   console.log(this.toCheck)
+    //   this.generateotp( stepper);
+    // } else {
+    //   alert("Invalid Inputs")
+    // }
   }
 
   userotp : number

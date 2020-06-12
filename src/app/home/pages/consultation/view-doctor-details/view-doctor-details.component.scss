@@ -57,11 +57,19 @@ table{
 }
 .active-feedback{
     // color: coral;
-     color: #E87528;
- }
+   //  color: #E87528;
+    // color: #BF953F;
+    // color : #FCF6BA;
+     background: -webkit-linear-gradient( #BF953F, #FCF6BA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
  .passive-feedback{
      //color: #f7e5c3
+  //  color : #FCF6BA;
     color: white;
+    //font-size: 72px;
+    
 }
 
 

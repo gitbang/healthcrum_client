@@ -204,18 +204,49 @@
                         <label>Yes</label>
                       </div>
                     </div>
-                    <div class="row mt-1">
-                      <div class="col-12 ">
-                        <h5>
-                          <span class="rupeesign delete-text">
-                            ₹{{shownresult.healcrumprice}}
-                          </span>
-                          <span class="offer-price">
-                            ₹{{shownresult.offerprice}}
-                          </span>
+
+                    <div class="row">
+                      <div class="col-7">
+                        <h5> 
+                          <label>
+                            Market-price :
+                          </label>
                         </h5>
                       </div>
+                      <div class="col-5">
+                        <label> ₹{{shownresult.healcrumprice}}</label>
+                      </div>
                     </div>
+
+                    <div class="row">
+                      <div class="col-7">
+                        <h5> 
+                          <label>
+                            HealthCrum-price :
+                          </label>
+                        </h5>
+                      </div>
+                      <div class="col-5">
+                        <span class="offer-price">
+                          ₹{{shownresult.offerprice}}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!--
+                      <div class="row mt-1">
+                        <div class="col-12 ">
+                          <h5>
+                            <span class="rupeesign delete-text">
+                              ₹{{shownresult.healcrumprice}}
+                            </span>
+                            <span class="offer-price">
+                              ₹{{shownresult.offerprice}}
+                            </span>
+                          </h5>
+                        </div>
+                      </div>
+                    -->
                     <div class="row">
                       <div class="col-6" style="padding : 0">
                         <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>

@@ -86,6 +86,10 @@ $bg : #1BA89B;
 .partial-width{
    width: 75%;
 }
+
+.btn {
+    //width: 100%;
+}
 .btn-success {
     background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
 }
@@ -133,4 +137,18 @@ $bg : #1BA89B;
     right: 0;
     top: 0;
     margin-right: 10px;
+}
+
+.width-full{
+    width: 100%;
+}
+
+.btn-resend-otp{
+    color: $bg;
+    background-color: white;
+    border: 1px solid $bg;
+    &:hover{
+        color: $bg;
+        background-color: white;
+    }
 }
