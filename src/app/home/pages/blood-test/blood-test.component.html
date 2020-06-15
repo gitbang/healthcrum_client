@@ -86,10 +86,10 @@
         </div>
       </div>
       <div class=""> 
-        <button class="btn btn-info">{{mycart.length}} My Cart</button>
+        <button class="btn btn-info">{{mycart.length}} Cart <mat-icon>add_shopping_cart</mat-icon></button>
       </div>
-      <div class="ordernow">
-        <button class="btn btn-success" (click)="proceed()">Proceed</button>
+      <div class="ordernow" style="padding-left : 3px">
+        <button class="btn btn-custom" (click)="proceed()">Proceed</button>
       </div>
     </div>
      
@@ -141,7 +141,7 @@
                 <div class="card mt-0 mat-elevation-z3">
                   <div class="card-header ">
                     <div class="row" style="margin-top : -20px">
-                      <div class="col-6 card-icon" style="padding : 0">
+                      <div class="col-1 card-icon" style="padding : 0">
                         <img
                           src="./assets/img/consulation/logo.png"
                           class="logo"
@@ -152,7 +152,11 @@
                         *ngFor="let star of ratingArray; let ind = index">grade</i>
                         -->
                       </div>
-                      <div class="offers col-6">
+                      <div class="col-7" style="float: right; text-align : center">
+                       <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                        *ngFor="let star of ratingArray; let ind = index">grade</i>
+                    </div>
+                      <div class="offers col-4">
                         <h3 class="" style="float : right">
                           54% Off
                         </h3>
@@ -160,14 +164,14 @@
                     </div>
                     <div class="row">
                       <div class="col-6" style="margin-top: 5px">
-                        <h4 class="card-title m-0" style="font-weight : 600; font-size : x-large">Blood Test</h4>
+                        <h4 class="card-title m-0" style="font-weight : 600; font-size : x-large">{{shownresult.name}}</h4>
                       </div>
-                      <div class="col-6 view-details">
+                      <div class="col-6 view-details" style="padding-top : 5px">
                         <button class="btn btn-info horizona-detail-button" (click)="viewDetails(i)">View details</button>
                       </div>
                     </div>
                   </div>
-                  <div class="card-body" style="padding-top : 0; padding-bottom : 0">
+                  <div class="card-body" style="padding-top : 0">
                     <div class="row">
                       <div class="col-6">
                         <h5> 
@@ -177,7 +181,7 @@
                         </h5>
                       </div>
                       <div class="col-6">
-                        <label>14 Parameters</label>
+                        <label>{{shownresult.totaltest}} parameters</label>
                       </div>
                     </div>
                     <div class="row">
@@ -189,7 +193,7 @@
                         </h5>
                       </div>
                       <div class="col-5">
-                        <label>24 hrs</label>
+                        <label>{{shownresult.reportTAT}}</label>
                       </div>
                     </div>
                     <div class="row">
@@ -201,7 +205,7 @@
                         </h5>
                       </div>
                       <div class="col-5">
-                        <label>Yes</label>
+                        <label>{{shownresult.fasting}}</label>
                       </div>
                     </div>
 
@@ -214,7 +218,7 @@
                         </h5>
                       </div>
                       <div class="col-5">
-                        <label> ₹{{shownresult.healcrumprice}}</label>
+                        <label> ₹{{shownresult.marketprice}}</label>
                       </div>
                     </div>
 
@@ -258,10 +262,12 @@
                         <button class="btn btn-danger" (click)="removeFromcart(i)">Remove  <mat-icon>add_shopping_cart</mat-icon></button>
                       </div>
                     </div>
+                    <!--
                     <div style="float: right">
                        <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
                         *ngFor="let star of ratingArray; let ind = index">grade</i>
                     </div>
+                    -->
                   </div>
                 </div>
               </div>
@@ -274,14 +280,21 @@
         <div class="row mt-4" *ngFor= "let shownresult of  shownresultarray; let i = index">
           <mat-card class="example-card" style="width : 100%; padding-top : 0">
             <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <div class="col-sm-4 col-md-3" style="margin-left: -80px; margin-top : 10px">
-                <h4 style="font-weight : 600; font-size : x-large; color: #00AEC5">Blood test</h4>
+              
+              <div class="col-2">
+                <img
+                  src="./assets/img/consulation/logo.png"
+                  class="logo"
+                  style="margin-top: 5px; margin-left : -50px; width : 30px"
+                >
               </div>
-              <div class="col-md-2">
-                  <button class="btn btn-info horizona-detail-button" (click)="viewDetails(i)">View details</button>
+              <div class="col-sm-6" style="text-align : center; margin-left: -80px; margin-top : 10px">
+                <h4 style="margin-top:-10px; font-weight : 600; font-size : x-large; color: #00AEC5">Blood test</h4>
               </div>
-              <div class="col-7">
+              
+              
+              
+              <div class="col-4" style="position : absolute; right : 0">
                 <div class="horizontal-feedback">
                   <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
                     *ngFor="let star of ratingArray; let ind = index">grade</i>
@@ -308,20 +321,46 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="col-md-2"></div>
-                <div class="col-md-5">
-                  <div class="row">
-                    <div class="col-5 price-div">
-                      <h5>
-                        <span class="rupeesign delete-text">
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                  <div class="row" style="text-align : center">
+                    <div class="col-5 price-div" style="padding: 0">
+                      <div class="row">
+                        <div class="col-12">
+                          <span class="rupeesign" style=" color: #ababab; ">
+                          Market price : 
+                        </span>
+                        <span class="rupeesign delete-text"> 
                           ₹{{shownresult.healcrumprice}}
                         </span>
-                        <span class="offer-price">
-                          ₹{{shownresult.offerprice}}
-                        </span>
-                      </h5>
+                        </div>
+                      </div>
+                      <div class="row glow mt-2">
+                        <div class="col-12">
+                          <span class="mt-2 offer-label" style="font-size:large">
+                            Healthcrum price 
+                          </span>
+                        </div>
+                        <div class="col-12">
+                          <span class="offer-price " >
+                            ₹{{shownresult.offerprice}}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-6 button-div">
+                      <!--  
+                      <div class="row">
+                        <div class="col-12 offers"  style="padding : 0">
+                          <h3 class="" style="float : right">
+                            54% Off
+                          </h3>
+                        </div>  
+                      </div>
+                      -->
+                      <div class="" style="padding : 0">
+                        <button class="btn btn-info horizona-detail-button" (click)="viewDetails(i)">View details</button>
+                      </div>
                       <div class="" style="padding : 0">
                         <button class="btn btn-danger booknow" (click)="booknow(i)">Book Now <mat-icon>arrow_forward</mat-icon></button>
                       </div>

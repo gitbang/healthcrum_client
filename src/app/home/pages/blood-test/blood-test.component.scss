@@ -237,6 +237,7 @@ a{
   color: grey;
   font-size: small;
 }
+
 .delete-text{
   color: #ababab;
   font-size: 18px;
@@ -247,6 +248,7 @@ a{
 .offer-price{
   display: inline-block;
   padding-left: 0;
+  padding: 0;
   font-family: Ubuntu,sans-serif;
   font-size: 30px;
   font-weight: 600;
@@ -317,7 +319,7 @@ a{
 
 .price-div{
   position: absolute;
-  bottom: 0;
+  bottom: 25px;
 }
 
 .horizontal-feedback{
@@ -329,4 +331,44 @@ a{
 .horizona-detail-button{
   color: $blue;
   background-color: white;
+  border: 1px solid $blue;
+}
+
+
+.glow {
+  font-size: large;
+  color: #BF953F;
+  // background: -webkit-linear-gradient( #BF953F, #FCF6BA);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+// @-webkit-keyframes glow {
+//   from {
+//     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+//   }
+  
+//   to {
+//     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+//   }
+// }
+
+// @-webkit-keyframes glow {
+//   from {
+//     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px $blue, 0 0 40px $blue, 0 0 50px $blue, 0 0 60px $blue, 0 0 70px $blue;
+//   }
+  
+//   to {
+//     text-shadow: 0 0 20px #fff, 0 0 30px $yellow, 0 0 40px $yellow, 0 0 50px $yellow, 0 0 60px $yellow, 0 0 70px $yellow, 0 0 80px $yellow;
+//   }
+// }
+.btn-custom {
+  background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+}
+.btn-custom:hover {
+  background: linear-gradient(to right, rgb(4, 158, 112), #107d6e);
 }

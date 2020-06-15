@@ -42,8 +42,7 @@ export class BookTestComponent implements OnInit {
      // console.log("complete ", result);
       this.userCompleteCart = result;
       this.shownresultarrays = result
-     // console.log(this.shownresultarrays);
-      console.log("get user card length", this.shownresultarrays.length)
+      console.log(this.shownresultarrays)
       if(this.shownresultarrays.length > 0) {
         this.balanceSide = true;
       } else {
@@ -55,7 +54,7 @@ export class BookTestComponent implements OnInit {
     this.totalsum = 0;
     this.shownresultarrays.forEach(x =>{
       console.log("in loop : ", x)
-      this.totalsum += x.healcrumprice;
+      this.totalsum += x.marketprice;
       this.sumAfteroffer += x.offerprice;
     })
   }
@@ -85,7 +84,7 @@ export class BookTestComponent implements OnInit {
     } else {
       this.fireAlert();
     }
-    this.totalsum += this.shownresultarrays[0].healcrumprice;
+    this.totalsum += this.shownresultarrays[0].marketprice;
     this.sumAfteroffer += this.shownresultarrays[0].offerprice;
   }
 
@@ -225,7 +224,7 @@ export class BookTestComponent implements OnInit {
 
   shownresultarrays =[
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
-    totaltest : 12, marketprize : 4200, healcrumprice : 2500, offerprice : 2000},
+    totaltest : 12, marketprize : 4200, marketprice : 2500, offerprice : 2000},
   ]
   balanceSide : boolean = false
   placeorderClass : string = ""
@@ -347,7 +346,7 @@ export class BookTestComponent implements OnInit {
     let num = this.totalPrice / this.userCompleteCart[index].offerprice
     
     this.pricearray.value[index].totalcount = num;
-    this.pricearray.value[index].saved = num * (this.userCompleteCart[index].healcrumprice - this.userCompleteCart[index].offerprice)
+    this.pricearray.value[index].saved = num * (this.userCompleteCart[index].marketprice - this.userCompleteCart[index].offerprice)
     this.pricearray.value[index].total = this.totalPrice;
     //console.log(this.pricearray.value)
     this.finalPrice = 0;

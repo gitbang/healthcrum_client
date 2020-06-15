@@ -61,22 +61,23 @@ export class BookModelComponent implements OnInit {
     phone : null
   }
   submitFirstForm(stepper : MatStepper){
-    stepper.next();
-    // this.firstFormGroup.get('timeslot').setValue(this.bookedslot)
-    // console.log(this.firstFormGroup.value);  
+   // stepper.next();
+    this.firstFormGroup.get('timeslot').setValue(this.bookedslot)
+    console.log(this.firstFormGroup.value);  
 
-    // if(this.firstFormGroup.valid){
-    //   this.toCheck = {
-    //     userId : "asdfghjk",
-    //     phone : this.firstFormGroup.get('phoneNo').value
-    //   }
-    //   console.log(this.toCheck)
-    //   this.generateotp( stepper);
-    // } else {
-    //   alert("Invalid Inputs")
-    // }
+    if(this.firstFormGroup.valid){
+      this.toCheck = {
+        userId : "asdfghjk",
+        phone : this.firstFormGroup.get('phoneNo').value
+      }
+      console.log(this.toCheck)
+      this.generateotp( stepper);
+    } else {
+      alert("Invalid Inputs")
+    }
   }
 
+  loading : boolean = false;
   userotp : number
   generateotp( stepper : MatStepper){
     this.service.consultationBookOtpcheck(this.toCheck)
@@ -97,12 +98,14 @@ export class BookModelComponent implements OnInit {
  
   submitsecondStepper(stepper : MatStepper){
     if(this.secondFormGroup.valid){
+      this.loading = true;
       let toSend = {
         otp : this.secondFormGroup.get('otp').value,
         phone : this.firstFormGroup.get('phoneNo').value
       }
       console.log("verify otp : ", toSend);
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
+        this.loading = true;
         console.log(result)
         if(result.success){
           this.dialog.close({success : true, data : this.data , userdata: this.firstFormGroup.value})

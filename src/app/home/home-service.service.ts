@@ -73,6 +73,12 @@ export class HomeServiceService {
                 .get(this.url + '/getfamilymembers/' + userId, this.option)
                 .pipe(retry(2))
   }
+  
+  bloodTestFetchAllTest() : Observable <any> {
+    return this.http
+                .get(this.url + '/alltestsbylabs', this.option)
+                .pipe(retry(2))
+  } 
 
 
  //-------------- consultation---------------//

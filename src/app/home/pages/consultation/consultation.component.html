@@ -488,18 +488,26 @@
                   
                   <div class="col-12 consultation-port-new">
                     <div class="row"> 
-                      <div class="col-12">
-                        <label class="consultation-label-top">
-                          BOOK APPOINTMENT
-                        </label>
+                      <div class="col-9" style="padding-right : 0">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <label class="consultation-label-top">
+                              BOOK APPOINTMENT
+                            </label>
+                          </div>
+                          <div class="col-md-12">
+                            <label class="consultation-label-bottom">
+                              Click Preferred Mode of Consultation
+                            </label>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-12">
-                        <label class="consultation-label-bottom">
-                          Click Preferred Mode of Consultation
-                        </label>
+                      <div class="col-3" style="padding : 0; font-size : large; color : white">
+                        Rs.{{doctor.consultationFees}}/-
                       </div>
                     </div> 
                   </div>
+                  
                   <div class="col-12">
                     <div class="row">
                       <div class="col-3 " (click)="openDialog('video', i)">
@@ -604,18 +612,6 @@
                   -->
                   <div class="col-12 emergency-section">
                     <div class="row">
-                      <div class="col-5">
-                        <div class="row mt-1">
-                          <div class="col-md-8 col-xl-6 ">
-                            <label class="normal-fee-heading">
-                              Consultation Fee 
-                            </label>
-                          </div>
-                          <div class="col-md-4 normal-fee-cost mt-2">
-                            {{doctor.consultationFees}}
-                          </div>
-                        </div>
-                      </div>
                       <div class="col-7 cursor-pointer" (click)="openDialog('emergency', i)">
                         <div class="row cursor-pointer">
                           <div class="col-md-4 mt-1">
@@ -624,7 +620,8 @@
                               class="emergency-image-horizontal"
                             >
                           </div>
-                          <div class="col-7 mt-1 cursor-pointer">
+                          <div class="col-md-2"></div>
+                          <div class="col-6 mt-1 cursor-pointer">
                             <div class="row">
                               <div class="col-12 emergency-fee mt-1">
                                 <label class="emergency-fee">Fee : {{doctor.emergencyFees}}/-</label>

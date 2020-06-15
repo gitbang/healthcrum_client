@@ -46,47 +46,33 @@
             <div class="row mt-2 ml-3">
               <div class="col-8">
                 <div class="row mt-4">
-                  <div class="col-4 text-center">
-                    <div>
-                      <label>Specialist</label>
-                    </div>
+                  <div class="col-4 text-center doctor-points">
+                  
                     {{doctor.speciality | titlecase }}
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
-                  <div class="col-4 text-center">
-                    <div>
-                      <label>Degree</label> 
-                    </div>
+                  <div class="col-4 text-center doctor-points">
+                    
                   
-                    <label style="color : black" *ngFor="let deg of doctor.qualification">{{deg | titlecase}}</label>
+                    <label class="doctor-points" style="color : black" *ngFor="let deg of doctor.qualification">{{deg | uppercase}}</label>
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
-                  <div class="col-3 text-center">
-                  <div>
-                    <label>Experience</label> 
-                  </div>
+                  <div class="col-3 text-center doctor-points">
+                  
                   {{doctor.experience}} years</div>
                   
                 </div>
                 <div class="row mt-3">
-                  <div class="col-4 text-center">
-                    <div>
-                      <label>City</label> 
-                    </div>
+                  <div class="col-4 text-center doctor-points">
+                    
                   {{doctor.location.city | titlecase}}
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
-                  <div class="col-4 text-center">
-                    <div>
-                      <label>Distance</label> 
-                    </div>
+                  <div class="col-4 text-center doctor-points">
                     5 Km
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
-                  <div class="col-3 text-center">
-                    <div>
-                      <label>Location</label> 
-                    </div>
+                  <div class="col-3 text-center doctor-points">
                     <img
                       src="./assets/img/consulation/blood-test/location.jpg"
                       class="horizontal-location"
@@ -253,7 +239,7 @@
                 <label class="about-me-label">About Me</label>
               </div>
               <div class="col-12">
-                <label>
+                <label style="padding-right : 20px">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, 
                   nisi lorem egestas vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec
                   congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum
@@ -360,13 +346,13 @@
                     <div class="row" style="border-top : 1px solid green">
                       <div class="col-12">
                         <div class="row ">
-                          <div class="col-md-6 col-lg-4 mt-2 ">
+                          <div class="col-6 col-lg-4 mt-2 ">
                             <img
                               src="./assets/img/consulation/blood-test/emergency1.jpg"
                               class="emergency-image-horizontal"
                             >
                           </div>
-                          <div class="col-md-6 col-lg-5 mt-2">
+                          <div class="col-6 col-lg-5 mt-2">
                             <div class="row">
                               <div class="col-12 emergency-fee mt-1">
                                 <label class="emergency-fee color-black">Fee : {{doctor.emergencyFees}}/-</label>
@@ -384,7 +370,7 @@
               </div>
               <div class="col-md-1"></div>
               <div class="col-md-5">
-                <div class="row available">
+                <div class="row available" style="margin : 0">
                   <div class="col-11 available-heading" >
                     <label>Available days</label>
                   </div>
@@ -400,6 +386,7 @@
           </div>
         </div>
 
+        <!--
         <div class="row m-auto">
           <div class="col-11 mt-4 ml-4 mr-4">
             <mat-tab-group mat-stretch-tabs>
@@ -421,7 +408,7 @@
             
           </div>
         </div>
-        
+        -->
         <div class="col-12">
           <div class="">
             <div class="container mt-5">
@@ -435,7 +422,7 @@
               </ngx-slick-carousel>
             </div>
           </div>
-          <div class="col-12 mt-3">
+          <div class="col-12 mt-3 mb-3">
             <div class="row feedback-heading">
               <div class="col-12 ml-2">
                 <h4> Reviews/Feedbacks </h4>

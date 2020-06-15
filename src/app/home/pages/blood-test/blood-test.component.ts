@@ -122,6 +122,15 @@ export class BloodTestComponent implements OnInit {
     //   startWith('' ),
     //   map(value =>this.filtersearch(value))
     // )
+
+    /*--------------------api to fetch bloodtest-------------------*/
+
+    // this.service.bloodTestFetchAllTest().subscribe((result)=>{
+    //   console.log("in fetch api")
+    //   console.log(result)
+    // })
+    this.fetchbloodtest();
+
     this.ratingArray = Array(5).fill(0)
     this.profileTestFiltered = this.mycontrol.valueChanges.pipe(
       startWith(''),
@@ -149,21 +158,21 @@ export class BloodTestComponent implements OnInit {
   }
   /*------------------TOP search open------------------ */
   filterprofiletest(value){
-    console.log("profile test");
+   // console.log("profile test");
     console.log(value)
     const filterValue = value.toLowerCase();
     return this.profileTest.filter( test => test.toLowerCase().includes(filterValue)
     );
   }
   filtersingletest(value){
-    console.log("profile test");
+   // console.log("profile test");
     console.log(value)
     const filterValue = value.toLowerCase();
     return this.singleTest.filter( test => test.toLowerCase().includes(filterValue)
     );
   }
   filterpackagetest(value){
-    console.log("profile test");
+   // console.log("profile test");
     console.log(value)
     const filterValue = value.toLowerCase();
     return this.packageTest.filter( test => test.toLowerCase().includes(filterValue)
@@ -439,9 +448,93 @@ export class BloodTestComponent implements OnInit {
   rating = 3;
   myId : string = "5e8efa895b324a3e4c97a278"
 
+  fetchbloodtest(){
+    this.service.bloodTestFetchAllTest().subscribe((result)=>{
+      console.log(result)
+      if(result.success) {
+        this.shownresultarray = [],
+        this.resultFromApi = result
+        if(result.PackageTests.length > 0){
+          result.PackageTests.forEach((pack)=>{
+          let add ;
+          result.PackageTests.forEach((pack)=>{
+            add = {
+              _id : pack._id,
+              name : pack.name,
+              labLogo : pack.lab.logo,
+              totaltest : pack.individualTests.length,
+              marketprice : pack.mrp,
+              offerprice : pack.offerPrice,
+              rating : pack.lab.rating,
+              type : 'profiletest',
+              fasting : "yes",
+              reportTAT : "24 hrs"
+            }
+          })
+          console.log("add is", add)
+          this.shownresultarray.push(add)
+          })
+        }
+        if(result.SingleTests.length > 0) {
+          let add ;
+          result.SingleTests.forEach((pack)=>{
+            add = {
+              _id : pack._id,
+              name : pack.name,
+              labLogo : pack.lab.logo,
+              totaltest : 1,
+              marketprice : pack.mrp,
+              offerprice : pack.offerPrice,
+              rating : pack.lab.rating,
+              type : 'profiletest',
+              fasting : "yes",
+              reportTAT : "24 hrs"
+            }
+          })
+          console.log("add is", add)
+          this.shownresultarray.push(add)
+        }
+        if(result.ProfileTests.length > 0) {
+          console.log("profile test")
+          let add ;
+          result.ProfileTests.forEach((pack)=>{
+            add = {
+              _id : pack._id,
+              name : pack.name,
+              labLogo : pack.lab.logo,
+              totaltest : pack.individualTests.length,
+              marketprice : pack.mrp,
+              offerprice : pack.offerPrice,
+              rating : pack.lab.rating,
+              type : 'profiletest',
+              fasting : "yes",
+              reportTAT : "24 hrs"
+            }
+          })
+          console.log("add is", add)
+         
+          this.shownresultarray.push(add)
+        }
+        
+      }
+
+    })
+  }
+  resultFromApi : any
   shownresultarray = [
-    {_id : "abc123", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 3,
-     reportIn : "24 hrs", totaltest : 12, marketprice : 1200, type:'singleTest',healcrumprice : 1000, offerprice : 800},
+    { _id : "abc123", 
+      name : "Blood Test", 
+      includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", 
+      rating : 3,
+      reportIn : "24 hrs", 
+      totaltest : 12,
+      marketprice : 1200, 
+      type:'singleTest',
+      healcrumprice : 1000, 
+      offerprice : 800,
+      labLogo : "",
+      parameters : 5,
+    },
     {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 1,
      reportIn : "24 hrs", totaltest : 12, marketprice :2300, type:'singleTest', healcrumprice : 2000, offerprice : 1900},
     {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 2,
@@ -579,7 +672,4 @@ export class BloodTestComponent implements OnInit {
       profileTest : ['fasle']
     })
   ])
-  
-  
-
 }
