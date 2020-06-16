@@ -110,6 +110,7 @@ export class BloodTestComponent implements OnInit {
 
   ngOnInit() {
     // this.getLocation();
+    this.ratingArray = Array(5).fill(0);
     this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
@@ -131,7 +132,7 @@ export class BloodTestComponent implements OnInit {
     // })
     this.fetchbloodtest();
 
-    this.ratingArray = Array(5).fill(0)
+    // this.ratingArray = Array(5).fill(0)
     this.profileTestFiltered = this.mycontrol.valueChanges.pipe(
       startWith(''),
       map(value => this.filterprofiletest(value))
@@ -458,84 +459,113 @@ export class BloodTestComponent implements OnInit {
           result.PackageTests.forEach((pack)=>{
           let add ;
           result.PackageTests.forEach((pack)=>{
+            //this.getRating(pack.lab.rating);
             add = {
               _id : pack._id,
               name : pack.name,
               labLogo : pack.lab.logo,
-              totaltest : pack.individualTests.length,
+              parameters: pack.individualTests.length,
               marketprice : pack.mrp,
               offerprice : pack.offerPrice,
               rating : pack.lab.rating,
-              type : 'profiletest',
-              fasting : "yes",
-              reportTAT : "24 hrs"
+              type : 'packageTest',
+              fasting : pack.fasting,
+              reportTAT : pack.reportingTime.within,
+              recommendedFor : {
+                ...pack.recommended_for
+              },
+              recommendedage : {
+                ...pack.recommended_age
+              }
             }
           })
-          console.log("add is", add)
+          //console.log("add is", add)
           this.shownresultarray.push(add)
           })
         }
-        if(result.SingleTests.length > 0) {
+        if(result.SingleTests.length > 0) {   
           let add ;
           result.SingleTests.forEach((pack)=>{
+           // this.getRating(pack.lab.rating);
             add = {
               _id : pack._id,
               name : pack.name,
               labLogo : pack.lab.logo,
-              totaltest : 1,
+              parameters : 1,
               marketprice : pack.mrp,
               offerprice : pack.offerPrice,
               rating : pack.lab.rating,
-              type : 'profiletest',
+              type : 'singleTest',
               fasting : "yes",
-              reportTAT : "24 hrs"
+              reportTAT : pack.reportingTime.within,
+              recommendedFor : {
+                ...pack.recommended_for
+              },
+              recommendedage : {
+                ...pack.recommended_age
+              },
+              what : pack.what,
+              why : pack.why,
+              when : pack.when
             }
           })
-          console.log("add is", add)
+          //console.log("add is", add)
           this.shownresultarray.push(add)
         }
         if(result.ProfileTests.length > 0) {
-          console.log("profile test")
+          console.log("profileTest")
           let add ;
           result.ProfileTests.forEach((pack)=>{
+           // this.getRating(pack.lab.rating);
             add = {
               _id : pack._id,
               name : pack.name,
               labLogo : pack.lab.logo,
-              totaltest : pack.individualTests.length,
+              parameters : pack.individualTests.length,
               marketprice : pack.mrp,
               offerprice : pack.offerPrice,
               rating : pack.lab.rating,
-              type : 'profiletest',
+              type : 'profileTest',
               fasting : "yes",
-              reportTAT : "24 hrs"
+              reportTAT : pack.reportingTime.within,
+              recommendedFor : {
+                ...pack.recommended_for
+              },
+              recommendedage : {
+                ...pack.recommended_age
+              }
             }
           })
-          console.log("add is", add)
-         
           this.shownresultarray.push(add)
-        }
-        
+        } 
       }
-
     })
   }
+
+  // getRating(num : number){
+  //   console.log(num)
+  //   let tem =  Array(num).fill(0)
+  //   this.fullRatingArray.push(tem);
+  //   console.log(this.fullRatingArray)
+  // }
+  // fullRatingArray  : Array <Array <number>>
+  //this.ratingArray = Array(5).fill(0)
   resultFromApi : any
   shownresultarray = [
     { _id : "abc123", 
       name : "Blood Test", 
       includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", 
       rating : 3,
-      reportIn : "24 hrs", 
-      totaltest : 12,
+      reportTAT : "24 hrs", 
+      parameters : 12,
       marketprice : 1200, 
       type:'singleTest',
       healcrumprice : 1000, 
       offerprice : 800,
-      labLogo : "",
-      parameters : 5,
+      labLogo : "./assets/img/consulation/logo.png",
+      fasting : "yes",
     },
-    {_id : "abc1234", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 1,
+    {_id : "abc1234", name : "Full Chelestrol Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 1,
      reportIn : "24 hrs", totaltest : 12, marketprice :2300, type:'singleTest', healcrumprice : 2000, offerprice : 1900},
     {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 2,
      reportIn : "24 hrs", totaltest : 12, marketprice : 4500, type:'singleTest', healcrumprice : 4200, offerprice : 4000},

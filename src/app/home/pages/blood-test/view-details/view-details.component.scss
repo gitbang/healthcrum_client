@@ -10,6 +10,7 @@ $orange : #f37d26;
 .offers {
     margin-top: -10px;;
     display: inline-block;
+    background-color: t;
     h3{
         padding: 5px;
         background-color: #fff;
@@ -20,7 +21,6 @@ $orange : #f37d26;
         font-family: Ubuntu,sans-serif;
         font-weight: 600;
         color: #f27d27;
-       
         margin: 0;
     }
   }
@@ -122,4 +122,14 @@ $orange : #f37d26;
 .bottom-expansion-title{
   font-size: large;
   font-weight: 600;
+}
+
+.active-feedback{
+  // color: coral;
+  background: -webkit-linear-gradient( #BF953F, #FCF6BA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.passive-feedback{
+   color: white
 }

@@ -11,7 +11,7 @@
                 *ngFor="let star of ratingArray; let i = index">grade</i>
               </div>  
               <div class="col-md-8 col-lg-7 doctor-name">
-                <h2>{{doctor.name}} (Reg.No.{{doctor.registerationNumber}})</h2>
+                <h2>{{doctor.name}} (Reg.No.{{doctor.registrationNumber}})</h2>
               </div> 
               <div class="logo-div">
                 <img
@@ -24,16 +24,11 @@
         </div> 
         <div class="row">
           <div class="col-md-4 mt-4" style="text-align : center">
-            <img src={{doctor.image}} 
+            <img src={{doctor.profilepic}} 
               alt="loading..." 
               height="220px" 
               width="220px" 
               class="center img-circle">
-            <!--
-            <div class="col-12">
-              <button class="btn btn-info"><mat-icon>location_on</mat-icon>Get Distance </button>
-            </div>
-            -->
               <div class="col-12 mt-4">
               <button class="btn btn-primary btn-book-appointment">
                 Book Appointment
@@ -41,7 +36,6 @@
               </button>
             </div>
           </div>
-         <!-- <div class="col-md-1"></div>-->
           <div class="col-md-8 photo-right">
             <div class="row mt-2 ml-3">
               <div class="col-8">
@@ -413,9 +407,10 @@
           <div class="">
             <div class="container mt-5">
               <ngx-slick-carousel class="customer-logos " [config]="slideConfig">
-                <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+                <div ngxSlickItem *ngFor="let pic of doctor.pictures " class="slide">
+                 hello
                   <img 
-                    src="{{doctor.image}}"
+                    src="{{doctor.profilepic}}"
                     class="img-gallary"
                   >
                 </div>

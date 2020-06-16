@@ -35,7 +35,7 @@ import {
   MatSidenavModule,
   MatListModule,
 } from "@angular/material";
-
+import {AngularFittextModule} from 'angular-fittext';
 
 import { LandingpageComponent } from "./pages/landingpage/landingpage.component";
 import { UserloginComponent } from "./pages/userlogin/userlogin.component";
@@ -136,7 +136,8 @@ import { LandingPageComponent } from './pages/wellness/landing-page/landing-page
     MatSidenavModule,
     MatListModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
+    AngularFittextModule,
   ],
   entryComponents: [
     DialogContentExampleDialog,

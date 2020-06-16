@@ -31,23 +31,18 @@ export class ViewDoctorDetailsComponent implements OnInit {
     
 
     this.service.currendoctor.subscribe((result)=>{
-      //this.doctor = result
+      console.log("doctor detail :", result)
+      //this.doctor = null
+      if(result) {
+        this.doctor = result[0];
+      }
       console.log(this.doctor)
     })
     
   }
   rating : number = 3
   ratingArray : Array<number>; 
-//  doctor : object
-  // doctor = {_id : "1",
-  //  image : './assets/img/faces/doctor.png', 
-  //  name : 'DR. PANKAJ MANORIA', 
-  //  experience : '10+ years',
-  //  speciality : 'Heart', fee : 5000, rating : 5, timing : '10am - 6pm', 
-  //  emergency : 'yes', degree : 'MD', physicalConsultant : '10am - 6pm',
-  //  registerationNumber : 123456,
-  // }
-  doctor = { image : './assets/img/faces/doctor.png',    // profile picture
+  doctor = { profilepic : './assets/img/faces/doctor.png',    // profile picture
     name : 'DR. PANKAJ MANORIA',  
     experience : 10 ,                            // add + years
     speciality : 'Heart', 
@@ -61,6 +56,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
       city : "mohali",
       state : "Punjab"
     },
+    days : ["Sunday", "monday"],
     consultation : {
       emergency : true,
       video : true,
@@ -72,10 +68,9 @@ export class ViewDoctorDetailsComponent implements OnInit {
     distance : 5,  
     fromHealthcrum : false,
     gender : 'male',
-    pictures : [],
-    profilepic : './assets/img/faces/doctor.png',
+    pictures : ["./assets/img/partners/p1-omron.png", "./assets/img/partners/p1-omron.png"],
     qualification : ['MBBS'],
-    registerationNumber : '12345',
+    registrationNumber : '12345',
     stream : 'ayurveda',
     consultationTiming: {
       emergency: {from: "8 am", to: "2 pm"},
@@ -93,36 +88,6 @@ export class ViewDoctorDetailsComponent implements OnInit {
     infinite: true,
     dots: true,
     speed: 300,
-    /*
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-      // You can unslick at a given breakpoint now by adding:
-      // settings: "unslick"
-      // instead of a settings object
-    ]
-    */
   };
   slides = [
     { img: "./assets/img/partners/p1-omron.png" },
@@ -160,7 +125,6 @@ export class ViewDoctorDetailsComponent implements OnInit {
     dialog.afterClosed().subscribe(result=>{
       console.log(result);
       if(result.success) {
-        // set data in the service;
         console.log("after dialog closed")
         console.log(result.userdata, result.data)
         let toSaveInService = {

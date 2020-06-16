@@ -44,9 +44,9 @@
             >
           </div>
           <div class="consultation">
-            <mat-form-field style="padding-top: 4px">
-              <mat-label>Select an option</mat-label>
-              <mat-select [(value)]="searchBy" (selectionChange)="searchByFunction($event)">
+            <mat-form-field style="padding-top: 4px" appearance="standard">
+              <mat-select  (selectionChange)="searchByFunction($event)">
+                <mat-option value="" disabled>Select</mat-option>
                 <mat-option value="name">Search by name</mat-option>
                 <mat-option value="speciality">Search by speciality</mat-option>
               </mat-select>
@@ -61,6 +61,16 @@
   <div class="row mt-4">
     <div class="col-md-12">   
       <mat-toolbar color="primary" class="top-navbar">
+
+        
+        <button class="" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
+        
         <mat-menu #streamMenu ="matMenu">
           <button mat-menu-item (click)="getStream('Ayurvedic')" >Ayurvedic</button>
           <button mat-menu-item (click)="getStream('Allopathic')">Allopathic</button>
@@ -105,13 +115,6 @@
           <button mat-menu-item (click)="getRating(5)">5 stars</button>
         </mat-menu>
 
-        <button class="" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
       </mat-toolbar>
     </div>
   </div>
@@ -365,7 +368,7 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-6 mt-3">
-                        <label style="color : black">City  :  Mohali</label>
+                        <label style="color : black">City  : {{doctor.location.city | titlecase}}</label>
                       </div>
                       <div class="col-6">
                         <div class="row">

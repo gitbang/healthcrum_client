@@ -78,16 +78,31 @@ export class HomeServiceService {
     return this.http
                 .get(this.url + '/alltestsbylabs', this.option)
                 .pipe(retry(2))
-  } 
+  }
+  
+  bloodtestDetailById(id : string, type : object) : Observable<any> {
+    console.log("in service ",type)
+    return this.http
+              .post(this.url + '/gettestbyid/' + id, type, this.option)
+              .pipe(retry(2))
+  }
 
 
  //-------------- consultation---------------//
 
-  private doctorselectedforDetails = new BehaviorSubject({});
+//  private singleTest = new BehaviorSubject([]);
+//   currentTest = this.singleTest.asObservable();
+
+//   bookSingleTest(testdata : string[]) : void {
+//     this.singleTest.next(testdata);
+//     console.log("single test seected");
+//   }
+
+  private doctorselectedforDetails = new BehaviorSubject([]);
   currendoctor = this.doctorselectedforDetails.asObservable();
 
-  changedoctor(message : object) {
-    console.log(message);
+  changedoctor(message : string[]) {
+    console.log("inservice", message);
     this.doctorselectedforDetails.next(message)
   }
 

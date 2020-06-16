@@ -4,19 +4,26 @@
     <div class="col-md-10 mt-4">
       <div class="border-green">
         <div class="card-header row">
-          <div class="card-icon col-4">
-            <i class="material-icons">grade</i>
-            <i class="material-icons">grade</i>
-            <i class="material-icons">grade</i>
+          <div class="card-icon col-sm-4 col-lg-3">
+            <i class="material-icons" [ngClass]="ind < shownresult[0].rating? 'active-feedback' : 'passive-feedback' " 
+              *ngFor="let star of ratingArray; let ind = index">grade</i>
           </div>
-          <div class="col-6 title-card" >
-            <h4 class="card-title m-0">Blood Test</h4>
+          <div class="col-sm-8 col-md-5 title-card" >
+            <h4 class="card-title m-0" style="padding-top : 7px">{{shownresult[0].name}} ( {{shownresult[0].type}} )</h4>
           </div>
-          <div class="col-lg-2 col-2 offers">
-            <h3 style="float : right">
+          <div class="col-sm-2 col-md-2 offers">
+            <h3>
               54% Off
             </h3>
           </div>
+          <div class="col-sm-6 col-md-2" >
+            <img
+              src="{{shownresult[0].labLogo}}"
+              class="logo"
+              style="width : 50px; right : 20px; top : -10px ; position : absolute"
+            >
+          </div>
+
         </div>
         <div class="card-body" style="padding-bottom : 10px">
           <div class="row">
@@ -25,21 +32,21 @@
                 <tbody>
                     <tr>
                       <td>Includes :</td>
-                      <td>{{shownresult.includes}}</td>
+                      <td>{{shownresult[0].parameters}}</td>
                     </tr>
                     <tr>
                       <td>Report Available in :</td>
-                      <td>{{shownresult.reportIn }}</td>
+                      <td>{{shownresult[0].reportTAT }}</td>
                     </tr>
                     <tr>
                       <td>Fasting required </td>
-                      <td>Yes</td>
+                      <td>{{shownresult[0].fasting}}</td>
                     </tr>
                     <tr>
                       <td>HealthCrum Price :</td>
                       <td>
-                        <span class="delete-text">₹{{shownresult.healcrumprice}} </span>
-                        <span class="offer-price">₹{{shownresult.offerprice}} </span>
+                        <span class="delete-text">₹{{shownresult[0].marketprice}} </span>
+                        <span class="offer-price">₹{{shownresult[0].offerprice}} </span>
                       </td>
                     </tr>
                 </tbody>
@@ -50,7 +57,7 @@
               <div class="recommended row">
                 <div class="col-12">
                   <div class="row">
-                    <div class="col-4 individual-parent">
+                    <div class="col-4 individual-parent" *ngIf="shownresult[0].recommendedFor.male">
                       <div class="row  individual">
                         <div class="col-4">
                           <img 
@@ -63,7 +70,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-4 ml-4 individual-parent">
+                    <div class="col-4 ml-4 individual-parent" *ngIf="shownresult[0].recommendedFor.male">
                       <div class="row individual">
                         <div class="col-4">
                           <img 
@@ -76,7 +83,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-4 mt-2 individual-parent">
+                    <div class="col-4 mt-2 individual-parent" >
                       <div class="row individual">
                         <div class="col-4">
                           <img 
@@ -98,9 +105,9 @@
                           >
                         </div>
                         <div class="col-8 mt-1">
-                          5-99 yrs
+                          {{shownresult[0].recommendedage.from}}-{{shownresult[0].recommendedage.to}} yrs
                         </div>
-                      </div>
+                      </div>  
                     </div>
                   </div>
                 </div>
@@ -109,13 +116,7 @@
           </div>
           <div class="row" style="margin : auto">
             <div class=" col-12 about-package">
-              HealthCrum’ 2020 package can help you identify any developing disease so that you can take precautions 
-              before it is too late.
-               This at-home preventive health checkup consists of 82 important health parameters.
-                These include tests like lipid, liver, thyroid, iron, kidney, urine and vitamin test
-              . Simply click the button below to book the test now. 10 hours of fasting is mandatory to get accurate results.   
-              ndia’s largest health test @ home service, creating a new benchmark for very high quality and honest prices.
-               HealthCrum employs state of art 46 touchpoints technology for assuring quality collection and testing across 
+              {{shownresult[0].why}}
             </div>
           </div>
         </div>
@@ -137,7 +138,7 @@
               
         </div>
       </div>
-      <div class="row green-backgrouns mt-4">
+      <div class="row green-backgrouns mt-4" *ngIf="shownresult[0].type != 'singleTest'">
         <div class="col-12">
           <div class="row">
             <div class="col-4">
@@ -161,7 +162,7 @@
         </div>
         -->
       </div>
-      <div class="row mt-2">
+      <div class="row mt-2" *ngIf="shownresult[0].type != 'singleTest'">
         <div class="col-12" *ngFor="let profile of profiles">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -192,8 +193,7 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
-            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+            {{shownresult[0].why}}  
           </mat-expansion-panel>
         </div>
         <div class="col-12 mt-2" style="padding:0"  >
@@ -206,8 +206,7 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
-            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+            {{shownresult[0].why}}  
           </mat-expansion-panel>
         </div>
         <div class="col-12 mt-2" style="padding:0"  >
@@ -220,8 +219,7 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
-            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+           {{shownresult[0].what}}  
           </mat-expansion-panel>
         </div>
         <div class="col-12 mt-2" style="padding:0"  >
@@ -248,8 +246,7 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
-            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+            {{shownresult[0].when}}   
           </mat-expansion-panel>
         </div>
       </div>

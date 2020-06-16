@@ -193,7 +193,9 @@ export class ConsultationComponent implements OnInit {
   knowMore(index){
     console.log(index);
     console.log(this.doctors[index]._id)
-    this.service.changedoctor(this.doctors[index])
+    let doc = [];
+    doc.push(this.doctors[index])
+    this.service.changedoctor(doc)
     this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index]._id)
   }
 
