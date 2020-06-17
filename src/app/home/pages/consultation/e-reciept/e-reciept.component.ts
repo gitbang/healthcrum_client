@@ -23,11 +23,14 @@ export class ERecieptComponent implements OnInit {
 
   eData = {
     name : 'Karan',
+    billno : "FL1236547",
     gender : 'male',
+    fshplId : "15245321",
     requestDate : '10/12/2020',
     checkupDate : '10/12/2020',
     centerName : 'Mohali',
     serviceProvider : 'Dr Meena',
+    type : "Video Consultation",
     mrp : 2000,
     discountPrice : 1000,
     totalPrice : 1000,
