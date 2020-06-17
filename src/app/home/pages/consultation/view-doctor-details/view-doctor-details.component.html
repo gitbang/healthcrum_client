@@ -38,17 +38,14 @@
           </div>
           <div class="col-md-8 photo-right">
             <div class="row mt-2 ml-3">
-              <div class="col-8">
+              <div class="col-md-8">
                 <div class="row mt-4">
                   <div class="col-4 text-center doctor-points">
-                  
                     {{doctor.speciality | titlecase }}
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
                   <div class="col-4 text-center doctor-points">
-                    
-                  
-                    <label class="doctor-points" style="color : black" *ngFor="let deg of doctor.qualification">{{deg | uppercase}}</label>
+                    <label class="doctor-points" style="color:black" *ngFor="let deg of doctor.qualification">{{deg | uppercase}}</label>
                   </div>
                   <mat-divider [vertical]="true"></mat-divider>
                   <div class="col-3 text-center doctor-points">
@@ -246,7 +243,7 @@
           <div class="col-12">
             <div class="row mt-4">
               <div class="col-md-6 consultation-horizontal">
-                <div class="row consultation-div-horizontal ml-4 mr-1"> 
+                <div class="row consultation-div-horizontal mr-1"> 
                   <div class="col-12 consultation-port-new">
                     <div class="row"> 
                       <div class="col-md-9">

@@ -8,10 +8,11 @@ $orange : #f37d26;
     margin-right: 8px;
 }
 .offers {
-    margin-top: -10px;;
+   // margin-top: -10px;;
     display: inline-block;
-    background-color: t;
+   // background-color: white;
     h3{
+      display: inline-block;
         padding: 5px;
         background-color: #fff;
         border: 1px solid white;
@@ -53,6 +54,27 @@ $orange : #f37d26;
   .title-card{
     margin-top: -15px;
   }
+
+  .logo{
+    width : 50px;
+    right : 20px; 
+    top : -10px ; 
+    position : absolute
+  }
+  @media only screen and (max-width : 800px) {
+    .title-card{
+      margin-top: 0px;
+      padding: 0;
+    }
+    .logo{
+      top: -140px;
+      right: 2px;
+    }
+    .offer-percent{
+      float: right;
+    }
+  }
+  
 
   .green-backgrouns{
     margin: 0;

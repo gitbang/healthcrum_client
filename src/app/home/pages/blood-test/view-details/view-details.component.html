@@ -8,11 +8,11 @@
             <i class="material-icons" [ngClass]="ind < shownresult[0].rating? 'active-feedback' : 'passive-feedback' " 
               *ngFor="let star of ratingArray; let ind = index">grade</i>
           </div>
-          <div class="col-sm-8 col-md-5 title-card" >
-            <h4 class="card-title m-0" style="padding-top : 7px">{{shownresult[0].name}} ( {{shownresult[0].type}} )</h4>
+          <div class="col-md-5 title-card" >
+            <h4 class="card-title m-0" style="padding-top : 7px">{{shownresult[0].name}} ({{shownresult[0].type}})</h4>
           </div>
-          <div class="col-sm-2 col-md-2 offers">
-            <h3>
+          <div class="col-sm-4 col-md-2 offers">
+            <h3 class="offer-percent">
               54% Off
             </h3>
           </div>
@@ -20,7 +20,6 @@
             <img
               src="{{shownresult[0].labLogo}}"
               class="logo"
-              style="width : 50px; right : 20px; top : -10px ; position : absolute"
             >
           </div>
 

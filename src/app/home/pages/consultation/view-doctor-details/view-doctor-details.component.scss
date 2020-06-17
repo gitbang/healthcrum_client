@@ -78,7 +78,13 @@ table{
     cursor: pointer;
 }
 .consultation-horizontal{
-    padding-right: 0;;
+    padding-right: 0;
+    padding-left: 35px;
+}
+@media only screen and (max-width: 600px) {
+    .consultation-horizontal{
+        padding-right: 35px;
+    }
 }
 
 .consultation-div-horizontal, .consultation-div {
@@ -99,7 +105,7 @@ table{
     @include blue-gradient();
     //margin: 5px;
     border-radius: 10px;
-    padding: 5px;
+    //padding: 5px;
      .consultation-label-top{
       //   color: white;
          margin-left: 10px;
