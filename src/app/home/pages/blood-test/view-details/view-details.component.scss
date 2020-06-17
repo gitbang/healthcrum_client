@@ -149,6 +149,7 @@ $orange : #f37d26;
 .active-feedback{
   // color: coral;
   background: -webkit-linear-gradient( #BF953F, #FCF6BA);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
