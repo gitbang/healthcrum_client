@@ -36,14 +36,21 @@ export class BookTestComponent implements OnInit {
     
    // this.getUsercart();
    }
-
+   mycart ;
   getUsercart(){
+    this.service.currentCart.subscribe((result)=>{
+      console.log("my cart", result)
+      if(result.length > 0) {
+        this.mycart = result
+      }
+    })
     this.service.currentCompleteCart.subscribe((result)=>{
-     // console.log("complete ", result);
+      console.log("complete ", result);
       this.userCompleteCart = result;
       this.shownresultarrays = result
-      console.log(this.shownresultarrays)
-      if(this.shownresultarrays.length > 0) {
+      //console.log(this.shownresultarrays)
+      //console.log(this.shownresultarrays)
+      if(this.userCompleteCart.length > 0) {
         this.balanceSide = true;
       } else {
           console.log("else executed")
@@ -52,12 +59,12 @@ export class BookTestComponent implements OnInit {
     })
     this.sumAfteroffer = 0;
     this.totalsum = 0;
-    this.shownresultarrays.forEach(x =>{
+    this.userCompleteCart.forEach(x =>{
       console.log("in loop : ", x)
       this.totalsum += x.marketprice;
       this.sumAfteroffer += x.offerprice;
     })
-  }
+  }   
 
   fireAlert() {
     Swal.fire(
@@ -74,6 +81,7 @@ export class BookTestComponent implements OnInit {
 
   getSingleTest(){
     this.service.currentTest.subscribe(result => {
+     // console.log("single test", result)
       this.sumAfteroffer = 0;
       this.totalsum = 0;
       this.userCompleteCart= result
@@ -95,7 +103,7 @@ export class BookTestComponent implements OnInit {
     this.getrelatives();
 
     this.route.url.subscribe((result)=>{
-      console.log("url",result)
+    //  console.log("url",result)
       if(result[1].path == "mycart") {
         this.getUsercart();
         this.fromCart = true
@@ -107,7 +115,7 @@ export class BookTestComponent implements OnInit {
 
     // api to fetch total relatives;
 
-    for(let i = 0; i < this.shownresultarrays.length; i++) {
+    for(let i = 0; i < this.userCompleteCart.length; i++) {
       this.addgroup();
       this.testForMe(true,  i)
     }
@@ -126,7 +134,7 @@ export class BookTestComponent implements OnInit {
   relativeData ;
   getrelatives(){
     this.service.bloodTestFetchMember(this.myId).subscribe((result)=>{
-      console.log("result in get relatives api",result)
+   //   console.log("result in get relatives api",result)
       if(result.success) {
         this.relativeData = result.data;
         this.getRelativesString(result)
@@ -139,16 +147,16 @@ export class BookTestComponent implements OnInit {
     result.data.members.forEach(mem =>{
       this.allMembers.push(mem.name)
     })
-    console.log("members from backend are : ", this.allMembers)
+   // console.log("members from backend are : ", this.allMembers)
     this.getfilteredMembers();
   }
 
 
    add(event: MatChipInputEvent): void {
-     console.log("add executed")
+   //  console.log("add executed")
     const input = event.input;
     const value = event.value;
-    console.log(input, value)
+  //  console.log(input, value)
     if ((value || '').trim()) {
       this.members.push(value.trim());
     }
@@ -159,9 +167,9 @@ export class BookTestComponent implements OnInit {
   }
 
   remove(member: string, i: number): void {
-    console.log(member, i)
+  //  console.log(member, i)
     const index = this.testfor.value[i].otherlist.indexOf(member);
-    console.log("index is : ", index)
+  //  console.log("index is : ", index)
     if (index >= 0) {
       // this.members.splice(index, 1);
       // this.testfor.value[index].otherlist = this.members;
@@ -186,15 +194,15 @@ export class BookTestComponent implements OnInit {
     if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
       this.testfor.value[index].otherlist.push(event.option.viewValue);      
       this.allID.others.push(this.relativeData.members[index]._id)
-      console.log("in reached")
+     // console.log("in reached")
     }
 
-    console.log("total members selected",this.testfor.value[index].otherlist.length)
+   // console.log("total members selected",this.testfor.value[index].otherlist.length)
     this.calculateprice(index);
   }
 
   _filter(value: string): string[] {
-    console.log(value)
+   // console.log(value)
     const filterValue = value.toLowerCase();
     return this.allMembers.filter(option => option.toLowerCase().includes(filterValue));
   }
@@ -265,11 +273,18 @@ export class BookTestComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
+        //this.shownresultarrays.splice(index, 1);
         this.userCompleteCart.splice(index, 1);
+        console.log("in delete", this.userCompleteCart)
+        this.mycart.splice(index, 1);
+        this.service.changeMessage(this.mycart);
+        this.testfor.removeAt(index);
+        this.pricearray.removeAt(index);
+        this.sumall();
         if(this.fromCart) {                               // it checks whether user click on booknow or proceed.
           this.service.addCompleteDetailsToCart(this.userCompleteCart);
           this.getUsercart();
-        } else{
+        } else {
           this.service.bookSingleTest(this.userCompleteCart);
           this.getSingleTest();
         }
@@ -302,11 +317,11 @@ export class BookTestComponent implements OnInit {
   }
 
   placeorder(){
-    console.log("next portal")
+    //console.log("next portal")
   }
 
   testForMe(value, index) {
-    console.log(this.userCompleteCart[index])
+   // console.log(this.userCompleteCart[index])
     this.testfor.value[index].me = value;
     if(value) {
       this.myfee = this.userCompleteCart[index].offerprice;
@@ -319,7 +334,7 @@ export class BookTestComponent implements OnInit {
   }
 
   testForMember(value, index) {
-    console.log("indec in test-for-members",index)
+    //console.log("indec in test-for-members",index)
     this.testfor.value[index].others = value;
     if(value == false) {
       //this.members = [];
@@ -333,22 +348,23 @@ export class BookTestComponent implements OnInit {
   myfee : number = 0;
   otherfee : number = 0;
   totalPrice : number = 0;
-
   moneysaved : number = 0;
-
   pricearray = this.fb.array([]);
 
   calculateprice(index : number){
+
     this.otherfee = this.userCompleteCart[index].offerprice * this.testfor.value[index].otherlist.length;
-
     this.totalPrice = this.myfee + this.otherfee;
-
     let num = this.totalPrice / this.userCompleteCart[index].offerprice
     
     this.pricearray.value[index].totalcount = num;
     this.pricearray.value[index].saved = num * (this.userCompleteCart[index].marketprice - this.userCompleteCart[index].offerprice)
     this.pricearray.value[index].total = this.totalPrice;
     //console.log(this.pricearray.value)
+    this.sumall();
+  }
+
+  sumall(){
     this.finalPrice = 0;
     this.moneysaved = 0;
     this.pricearray.value.forEach(item =>{
@@ -356,8 +372,9 @@ export class BookTestComponent implements OnInit {
       this.moneysaved += item.saved;
     })
     this.totalPrice = 0;
-     console.log("price array values",this.pricearray.value)
+    // console.log("price array values",this.pricearray.value)
   }
+
   allID = {
     me : this.myId,
     others : []

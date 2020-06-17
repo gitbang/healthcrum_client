@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class=""> 
-        <button class="btn btn-info">{{mycart.length}} Cart <mat-icon>add_shopping_cart</mat-icon></button>
+        <button class="btn btn-info">{{myCartComplete.length}} Cart <mat-icon>add_shopping_cart</mat-icon></button>
       </div>
       <div class="ordernow" style="padding-left : 3px">
         <button class="btn btn-custom" (click)="proceed()">Proceed</button>
@@ -167,8 +167,9 @@
                         <h4 
                           fittext [maxFontSize]="24"[minFontSize]="16" class="card-title m-0"
                           style="font-weight : 600; font-size : x-large">
-                          {{shownresult.name}}
+                          {{shownresult.name}} 
                         </h4>
+                         <label class="testType" style = " font-weight: 100;">({{shownresult.type}})</label>
                       </div>
                       <div class="col-6 view-details" style="padding-top : 5px">
                         <button class="btn btn-info horizona-detail-button" (click)="viewDetails(i)">View details</button>
@@ -271,12 +272,13 @@
                   style="margin-top: 5px; margin-left : -50px; width : 50px"
                 >
               </div>
-              <div class="col-sm-4" style="text-align : center; margin-left: -80px; margin-top : 10px">
-                <h4 style="margin-top:-10px; font-weight : 600; font-size : x-large; color: #00AEC5">
+              <div class="col-sm-4 col-lg-6" style="text-align : center; margin-left: -80px; margin-top : 10px">
+                <h4 style="margin-top:-10px; font-weight : 600; font-size : x-large; color: #00AEC5; margin-bottom : 0">
                   {{shownresult.name}}
                 </h4>
+                <label>({{shownresult.type}})</label>
               </div>
-              <div class="col-4" >
+              <div class="col-sm-4 col-lg-2" >
                 <div class="horizontal-feedback">
                   <i class="material-icons" [ngClass]="ind < shownresult.rating ? 'active-feedback' : 'passive-feedback' " 
                     *ngFor="let star of ratingArray  ; let ind = index">grade</i>

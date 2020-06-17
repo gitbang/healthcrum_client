@@ -88,7 +88,7 @@ export class BloodTestComponent implements OnInit {
       map((fruit: string | null) => fruit ? this._filterfruit(fruit) : this.allFruits.slice()));
   
     this.service.currentCart.subscribe((result)=>{
-      console.log(result)
+      console.log("my cart", result)
       if(result.length > 0) {
         this.mycart = result
       }
@@ -160,21 +160,21 @@ export class BloodTestComponent implements OnInit {
   /*------------------TOP search open------------------ */
   filterprofiletest(value){
    // console.log("profile test");
-    console.log(value)
+   // console.log(value)
     const filterValue = value.toLowerCase();
     return this.profileTest.filter( test => test.toLowerCase().includes(filterValue)
     );
   }
   filtersingletest(value){
    // console.log("profile test");
-    console.log(value)
+    //console.log(value)
     const filterValue = value.toLowerCase();
     return this.singleTest.filter( test => test.toLowerCase().includes(filterValue)
     );
   }
   filterpackagetest(value){
    // console.log("profile test");
-    console.log(value)
+    //console.log(value)
     const filterValue = value.toLowerCase();
     return this.packageTest.filter( test => test.toLowerCase().includes(filterValue)
     );
@@ -261,9 +261,6 @@ export class BloodTestComponent implements OnInit {
    
   }
 
-  
-
-
   /*--------------------------top search close-----------------------------*/
   
   private _filter(value: string): string[] {
@@ -320,22 +317,22 @@ export class BloodTestComponent implements OnInit {
     }  else{
      this.removeFromCart(x)
     }
-    console.log(this.searchcart)
+   // console.log(this.searchcart)
   }
 
   removeSideFilters(i) {
     this.filtercontent(i)
-    console.log(this.display)
+   // console.log(this.display)
   }
 
   checkCheckBoxvalue(value, event) {
-    console.log(value, event)
+   // console.log(value, event)
     if(event == true) {
       this.display.push(value)
     } else {
       this.filtercontent(value)
     }
-    console.log(this.display)
+   // console.log(this.display)
   }
 
   sidepackagescheck(value : string) {
@@ -418,7 +415,7 @@ export class BloodTestComponent implements OnInit {
   }
   
   isSearching(event: Event) {
-    console.log(this.searchText.length)
+   // console.log(this.searchText.length)
     if (this.searchText.length == 1) {
       this.isSearched = true;
     } else {
@@ -427,7 +424,7 @@ export class BloodTestComponent implements OnInit {
   }
 
   searchNow(event: Event) {
-    console.log(this.searchText);
+   // console.log(this.searchText);
   }
 
   setCurrentLocation() {
@@ -451,7 +448,7 @@ export class BloodTestComponent implements OnInit {
 
   fetchbloodtest(){
     this.service.bloodTestFetchAllTest().subscribe((result)=>{
-      console.log(result)
+      console.log("initial fetch", result)
       if(result.success) {
         this.shownresultarray = [],
         this.resultFromApi = result
@@ -513,7 +510,7 @@ export class BloodTestComponent implements OnInit {
           this.shownresultarray.push(add)
         }
         if(result.ProfileTests.length > 0) {
-          console.log("profileTest")
+          //console.log("profileTest")
           let add ;
           result.ProfileTests.forEach((pack)=>{
            // this.getRating(pack.lab.rating);
@@ -537,19 +534,12 @@ export class BloodTestComponent implements OnInit {
             }
           })
           this.shownresultarray.push(add)
-        } 
+        }
+        console.log("final result : ", this.shownresultarray) 
       }
     })
   }
 
-  // getRating(num : number){
-  //   console.log(num)
-  //   let tem =  Array(num).fill(0)
-  //   this.fullRatingArray.push(tem);
-  //   console.log(this.fullRatingArray)
-  // }
-  // fullRatingArray  : Array <Array <number>>
-  //this.ratingArray = Array(5).fill(0)
   resultFromApi : any
   shownresultarray = [
     { _id : "abc123", 
@@ -578,7 +568,6 @@ export class BloodTestComponent implements OnInit {
   ]
 
   callfun(){
-    console.log("reached")
     this.isSearched = false
   }
 
@@ -595,7 +584,6 @@ export class BloodTestComponent implements OnInit {
   mycart: string[]= []      // collect _id of the packages 
   myCartComplete;
   addTocart(index : number){
-    console.log(index);
     this.mycart.push(this.shownresultarray[index]._id)
     this.myCartComplete.push(this.shownresultarray[index]);
     this.snackbar.open("Package", "Added",  {
@@ -615,9 +603,10 @@ export class BloodTestComponent implements OnInit {
     this.service.changeMessage(this.mycart);
     this.service.addCompleteDetailsToCart(this.myCartComplete);
   }
-  
+
   checkcart(_id : string) {
-    //console.log(_id)
+    console.log(_id)
+    
     if(this.mycart.includes(_id)){
       return true
     }
@@ -649,17 +638,17 @@ export class BloodTestComponent implements OnInit {
 
   singleTestValueChanges(value) {
     this.sideFilterSearch.singleTests = value;
-    console.log(this.sideFilterSearch)
+   // console.log(this.sideFilterSearch)
   }
 
   packageTestValueChanges(value) {
     this.sideFilterSearch.packageTests = value
-    console.log(this.sideFilterSearch)
+    //console.log(this.sideFilterSearch)
   }
 
   profileTestValueChanges(value) {
     this.sideFilterSearch.profileTests = value
-    console.log(this.sideFilterSearch)
+    //console.log(this.sideFilterSearch)
   }
 
   lower : number[] = []
@@ -672,12 +661,12 @@ export class BloodTestComponent implements OnInit {
     } else {
       const lowInd = this.lower.indexOf(low)
       const highInd = this.higher.indexOf(high)
-      console.log("indexes : ", lowInd, highInd)
+     // console.log("indexes : ", lowInd, highInd)
       this.lower.splice(lowInd, 1)
       this.higher.splice(highInd, 1)
       this.getPriceValues()
     }
-    console.log(this.sideFilterSearch)
+   // console.log(this.sideFilterSearch)
   }
 
   getPriceValues() {
@@ -687,7 +676,7 @@ export class BloodTestComponent implements OnInit {
 
   applyFilters(){
     this.service.bloodTestApplyFilters(this.sideFilterSearch).subscribe((response)=>{
-      console.log(response)
+      console.log("filter search" ,response)
     })
   }
 

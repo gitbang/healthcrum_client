@@ -22,10 +22,10 @@ export class ViewDetailsComponent implements OnInit {
     this.ratingArray = Array(5).fill(0);
     this.service.currentTest.subscribe((result)=>{
       this.data1 = result[0];
-      console.log(result[0])
+      console.log("single test fetch details ",result[0])
       if(result){
         let add ;
-       //this.shownresult = []
+       this.shownresult = []
         add = {
           _id : result[0]._id,
           name : result[0].name,
@@ -45,9 +45,10 @@ export class ViewDetailsComponent implements OnInit {
         }
         console.log("add is : ", add)
         this.shownresult.push(add)
+        console.log("shown result", this.shownresult);
       }
     })
-    console.log(this.data1)
+    //console.log(this.data1)
     this.service.bloodtestDetailById(this.data1._id, {type : this.data1.type}).subscribe((result)=>{
       console.log("specific test : ", result)
     })

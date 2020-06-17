@@ -234,12 +234,7 @@
               </div>
               <div class="col-12">
                 <label style="padding-right : 20px">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, 
-                  nisi lorem egestas vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec
-                  congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum
-                    nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. 
-                    Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum.
-                  Sed dapibus pulvinar nibh tempor porta.
+                 {{doctor.aboutme}}
                 </label>  
               </div>
             </div>
@@ -370,7 +365,7 @@
                   </div>
                   <div class="col-11 available-details">
                     <mat-chip-list aria-label="daysAvailable">
-                      <mat-chip  *ngFor="let days of doctor.availableDays" >{{days}}</mat-chip>
+                      <mat-chip  *ngFor="let days of doctor.days" >{{days}}</mat-chip>
                     </mat-chip-list>
                   </div>
                 </div>
@@ -410,7 +405,7 @@
                 <div ngxSlickItem *ngFor="let pic of doctor.pictures " class="slide">
                  hello
                   <img 
-                    src="{{doctor.profilepic}}"
+                    src="{{pic}}"
                     class="img-gallary"
                   >
                 </div>

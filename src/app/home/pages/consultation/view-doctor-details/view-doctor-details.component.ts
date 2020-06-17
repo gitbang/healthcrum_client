@@ -18,17 +18,8 @@ export class ViewDoctorDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.ratingArray = Array(5).fill(0);
-
-    // (<any>$('.slicker')).slick({
-    //   // infinite: true,
-    //   slidesToShow: 3,
-    //   slidesToScroll: 3,
-    //   // dots : true,
-    //   // arrows : true
-    // });
-
-    
 
     this.service.currendoctor.subscribe((result)=>{
       console.log("doctor detail :", result)
@@ -38,11 +29,11 @@ export class ViewDoctorDetailsComponent implements OnInit {
       }
       console.log(this.doctor)
     })
-    
   }
   rating : number = 3
   ratingArray : Array<number>; 
-  doctor = { profilepic : './assets/img/faces/doctor.png',    // profile picture
+  doctor = {
+    profilepic : './assets/img/faces/doctor.png',    // profile picture
     name : 'DR. PANKAJ MANORIA',  
     experience : 10 ,                            // add + years
     speciality : 'Heart', 
@@ -56,6 +47,12 @@ export class ViewDoctorDetailsComponent implements OnInit {
       city : "mohali",
       state : "Punjab"
     },
+    aboutme : ` Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, 
+    nisi lorem egestas vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec
+    congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum
+      nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. 
+      Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.`,
     days : ["Sunday", "monday"],
     consultation : {
       emergency : true,
@@ -78,7 +75,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
       tele: {from: "8 am", to: "2 pm"},
       video: {from: "8 am", to: "2 pm"}
     },
-    availableDays : ["Monday", "Tuesday", "Wednesday", "Thursday","Friday"]
+    //availableDays : ["Monday", "Tuesday", "Wednesday", "Thursday","Friday"]       use days instead
   }
 
   slots = ["6am-7am","6am-7am","6am-7am","6am-7am"]
