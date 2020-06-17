@@ -61,15 +61,33 @@
   <div class="row mt-4">
     <div class="col-md-12">   
       <mat-toolbar color="primary" class="top-navbar">
-
+        <!--<div class="col-12">
+          <div class="row"> -->
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button class="filter" mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button class="filter" mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt-1">
+              <button  class="filter" mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <!--
+          </div>
+        </div>-->
         
-        <button class="" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
-        <button mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
         
         <mat-menu #streamMenu ="matMenu">
           <button mat-menu-item (click)="getStream('Ayurvedic')" >Ayurvedic</button>

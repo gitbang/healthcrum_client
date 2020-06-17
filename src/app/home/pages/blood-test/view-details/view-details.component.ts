@@ -52,9 +52,8 @@ export class ViewDetailsComponent implements OnInit {
     this.service.bloodtestDetailById(this.data1._id, {type : this.data1.type}).subscribe((result)=>{
       console.log("specific test : ", result)
     })
-
   }
-
+  
   data1 : any;
   shownresult = [
     { _id : "", name : "Blood Test",
