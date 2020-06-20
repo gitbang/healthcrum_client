@@ -25,35 +25,7 @@ export class ConsultationComponent implements OnInit {
   cities: any = [];
   filteredCities: Observable<string[]>;
   search_city: string;
-  stateList: string[] = [
-    // "Andhra Pradesh",
-    // "Arunachal Pradesh",
-    // "Assam",
-    // "Bihar",
-    // "Chandigarh",
-    // "Chhattisgarh",
-    // "Delhi",
-    // "Goa",
-    // "Gujarat",
-    // "Haryana",
-    // "Himachal Pradesh",
-    // "Jharkhand",
-    // "Karnataka",
-    // "Kerala",
-    // "Madhya Pradesh",
-    // "Maharashtra",
-    // "Odisha",
-    // "Puducherry",
-    // "Punjab",
-    // "Rajasthan",
-    // "Sikkim",
-    // "Tamil Nadu",
-    // "Telangana",
-    // "Tripura",
-    // "Uttarakhand",
-    // "Uttar Pradesh",
-    // "West Bengal",
-  ];
+  stateList: string[] = [];
   cityList: string[] = ["city1", "city2", "city3"];
   locationList: string[] = ["Location1", "Location2", "Location3"];
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -74,12 +46,10 @@ export class ConsultationComponent implements OnInit {
   @ViewChild("main", {static : true}) main : ElementRef
   @HostListener('window : resize',['$event'])
   onResize(event) {
-    //console.log("event :" , event)
-    //console.log(window.innerWidth);
     if(window.innerWidth < 1100){
       this.horizontal = false
     } else {
-      //this.horizontal = true
+      this.horizontal = true
     }
   }
   rating : number = 3
