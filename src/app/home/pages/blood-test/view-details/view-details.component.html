@@ -13,7 +13,7 @@
           </div>
           <div class="col-sm-4 col-md-2 offers">
             <h3 class="offer-percent">
-              54% Off
+              {{shownresult[0].offer}}% Off
             </h3>
           </div>
           <div class="col-sm-6 col-md-2" >
@@ -30,7 +30,7 @@
                 <tbody>
                     <tr>
                       <td>Includes :</td>
-                      <td>{{shownresult[0].parameters}}</td>
+                      <td>{{totalparams}}</td>
                     </tr>
                     <tr>
                       <td>Report Available in :</td>
@@ -114,7 +114,7 @@
           </div>
           <div class="row" style="margin : auto">
             <div class=" col-12 about-package">
-              {{shownresult[0].why}}
+              {{shownresult[0].what}}
             </div>
           </div>
         </div>
@@ -172,8 +172,8 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <ul type>
-              <li *ngFor="let param of profile.parametersAre">
-                {{param}}
+              <li *ngFor="let param of profile.tests">
+                {{param.name}}
               </li>
             </ul>
           </mat-expansion-panel>
@@ -191,7 +191,7 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            {{shownresult[0].why}}  
+            {{shownresult[0].when}}
           </mat-expansion-panel>
         </div>
         <div class="col-12 mt-2" style="padding:0"  >
@@ -204,9 +204,10 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            {{shownresult[0].why}}  
+            {{shownresult[0].why}} 
           </mat-expansion-panel>
         </div>
+        <!--
         <div class="col-12 mt-2" style="padding:0"  >
           <mat-expansion-panel class="green-backgrouns">
             <mat-expansion-panel-header style= "height : 20px">
@@ -220,6 +221,8 @@
            {{shownresult[0].what}}  
           </mat-expansion-panel>
         </div>
+        
+
         <div class="col-12 mt-2" style="padding:0"  >
           <mat-expansion-panel class="green-backgrouns">
             <mat-expansion-panel-header style= "height : 20px">
@@ -230,10 +233,11 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            With it installed in the code editor you are using, you can type “lorem” and then tab and it will expand into a paragraph of Lorem Ipsum placeholder text. But it can do more!
-            You can control how much you get, place it within HTML structure as it expands, and get different bits of it in repeated elements
+            <div *ngFor = "let dis of fromServer[0].relatedDiseases"></div>
           </mat-expansion-panel>
         </div>
+        -->
+        <!--
         <div class="col-12 mt-2" style="padding:0"  >
           <mat-expansion-panel class="green-backgrouns">
             <mat-expansion-panel-header style= "height : 20px">
@@ -247,6 +251,7 @@
             {{shownresult[0].when}}   
           </mat-expansion-panel>
         </div>
+        -->
       </div>
     </div>
   </div>

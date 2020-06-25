@@ -57,7 +57,7 @@ export class HomeServiceService {
 
   bookSingleTest(testdata : string[]) : void {
     this.singleTest.next(testdata);
-    console.log("single test seected");
+    console.log("Detail selected");
   }
 
   bloodtestAddMember(userId : string, data : object) : Observable<any>{

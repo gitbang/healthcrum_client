@@ -88,14 +88,14 @@ export class BloodTestComponent implements OnInit {
       map((fruit: string | null) => fruit ? this._filterfruit(fruit) : this.allFruits.slice()));
   
     this.service.currentCart.subscribe((result)=>{
-      console.log("my cart", result)
+      //console.log("my cart", result)
       if(result.length > 0) {
         this.mycart = result
       }
     })
 
     this.service.currentCompleteCart.subscribe((result)=>{
-      console.log(result);
+      //console.log(result);
       this.myCartComplete = result;
     })
   }
@@ -457,23 +457,29 @@ export class BloodTestComponent implements OnInit {
           let add ;
           result.PackageTests.forEach((pack)=>{
             //this.getRating(pack.lab.rating);
+            let offers  = pack.offerPrice / pack.mrp * 100;
+            offers = 100 - Math.round(offers)
             add = {
-              _id : pack._id,
-              name : pack.name,
-              labLogo : pack.lab.logo,
-              parameters: pack.individualTests.length,
+              _id         : pack._id,
+              name        : pack.name,
+              labLogo     : pack.lab.logo,
+              parameters  : pack.individualTests.length,
               marketprice : pack.mrp,
-              offerprice : pack.offerPrice,
-              rating : pack.lab.rating,
-              type : 'packageTest',
-              fasting : pack.fasting,
-              reportTAT : pack.reportingTime.within,
+              offerprice  : pack.offerPrice,
+              rating      : pack.lab.rating,
+              type        : 'packageTest',
+              fasting     : pack.fasting,
+              reportTAT   : pack.reportingTime.within,
               recommendedFor : {
                 ...pack.recommended_for
               },
               recommendedage : {
                 ...pack.recommended_age
-              }
+              },
+              what : pack.what,
+              why : pack.why,
+              when : pack.when,
+              offer : offers
             }
           })
           //console.log("add is", add)
@@ -484,16 +490,18 @@ export class BloodTestComponent implements OnInit {
           let add ;
           result.SingleTests.forEach((pack)=>{
            // this.getRating(pack.lab.rating);
+           let offers  = pack.offerPrice / pack.mrp * 100;
+            offers = 100 - Math.round(offers)
             add = {
-              _id : pack._id,
-              name : pack.name,
-              labLogo : pack.lab.logo,
-              parameters : 1,
+              _id         : pack._id,
+              name        : pack.name,
+              labLogo     : pack.lab.logo,
+              parameters  : 1,
               marketprice : pack.mrp,
-              offerprice : pack.offerPrice,
-              rating : pack.lab.rating,
-              type : 'singleTest',
-              fasting : "yes",
+              offerprice  : pack.offerPrice,
+              rating      : pack.lab.rating,
+              type        : 'singleTest',
+              fasting     : "yes",
               reportTAT : pack.reportingTime.within,
               recommendedFor : {
                 ...pack.recommended_for
@@ -503,7 +511,8 @@ export class BloodTestComponent implements OnInit {
               },
               what : pack.what,
               why : pack.why,
-              when : pack.when
+              when : pack.when,
+              offer : offers
             }
           })
           //console.log("add is", add)
@@ -513,7 +522,8 @@ export class BloodTestComponent implements OnInit {
           //console.log("profileTest")
           let add ;
           result.ProfileTests.forEach((pack)=>{
-           // this.getRating(pack.lab.rating);
+            let offers  = pack.offerPrice / pack.mrp * 100;
+            offers = 100 - Math.round(offers)
             add = {
               _id : pack._id,
               name : pack.name,
@@ -530,12 +540,16 @@ export class BloodTestComponent implements OnInit {
               },
               recommendedage : {
                 ...pack.recommended_age
-              }
+              },
+              what : pack.what,
+              why : pack.why,
+              when : pack.when,
+              offer : offers
             }
           })
           this.shownresultarray.push(add)
         }
-        console.log("final result : ", this.shownresultarray) 
+        //console.log("final result : ", this.shownresultarray) 
       }
     })
   }
@@ -555,16 +569,6 @@ export class BloodTestComponent implements OnInit {
       labLogo : "./assets/img/consulation/logo.png",
       fasting : "yes",
     },
-    {_id : "abc1234", name : "Full Chelestrol Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 1,
-     reportIn : "24 hrs", totaltest : 12, marketprice :2300, type:'singleTest', healcrumprice : 2000, offerprice : 1900},
-    {_id : "abc1235", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 2,
-     reportIn : "24 hrs", totaltest : 12, marketprice : 4500, type:'singleTest', healcrumprice : 4200, offerprice : 4000},
-    {_id : "abc1236", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 4,
-     reportIn : "24 hrs", totaltest : 12, marketprice : 5600, type:'singleTest', healcrumprice : 5200, offerprice : 5000},
-    {_id : "abc1237", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 5, 
-    reportIn : "24 hrs", totaltest : 12, marketprice : 7800, type:'singleTest', healcrumprice : 7000, offerprice : 6800},
-    {_id : "abc1238", name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", rating : 3,
-     reportIn : "24 hrs", totaltest : 12, marketprice : 2500, type:'singleTest', healcrumprice : 2300, offerprice : 2200},
   ]
 
   callfun(){
@@ -605,7 +609,7 @@ export class BloodTestComponent implements OnInit {
   }
 
   checkcart(_id : string) {
-    console.log(_id)
+    //console.log(_id)
     
     if(this.mycart.includes(_id)){
       return true
