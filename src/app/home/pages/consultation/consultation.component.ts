@@ -110,13 +110,6 @@ export class ConsultationComponent implements OnInit {
   }
   
   doctors = [ 
-  //   {_id : "1",   image : './assets/img/faces/doctor.png', name : 'DR. PANKAJ MANORIA',  experience : '10+ years', 
-  //   speciality : 'Heart', consultationFees : 5000,  rating : 5, timing : '10am - 6pm', emergency : 'yes', degree : 'MBBS' , city : "Mohali"
-  //   ,location : {
-  //     city : "mohali",
-  //     state : "Punjab"
-  //   },  
-  // },
     { _id : "2",  
      // image : './assets/img/faces/doctor.png',    // profile picture
       name : 'DR. PANKAJ MANORIA',  
@@ -140,6 +133,7 @@ export class ConsultationComponent implements OnInit {
       },
       emergencyFees : 2000,
       language : [],
+      about : "",
       distance : 5,  
       fromHealthcrum : false,
       gender : 'male',

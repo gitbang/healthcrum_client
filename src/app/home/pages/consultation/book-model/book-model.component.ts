@@ -17,11 +17,12 @@ export class BookModelComponent implements OnInit {
     @Inject (MAT_DIALOG_DATA) data : any,
     private service : HomeServiceService,
     private fb : FormBuilder,
-    private dialog : MatDialogRef<BookModelComponent>
+    private dialog: MatDialogRef<BookModelComponent>
 
   ) {
     console.log("received data is : " ,data)
     this.data = data  
+    this.dialog.disableClose = true;
    }
 
    isLinear = false;
@@ -71,7 +72,7 @@ export class BookModelComponent implements OnInit {
         phone : this.firstFormGroup.get('phoneNo').value
       }
       console.log(this.toCheck)
-      this.generateotp( stepper);
+      this.generateotp(stepper);
     } else {
       alert("Invalid Inputs")
     }
@@ -116,6 +117,27 @@ export class BookModelComponent implements OnInit {
     }
   }
 
+  closeDialog() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      console.log(result)
+      if (result.value) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.dialog.close({success : false})
+      }
+    })
+  }
   /*
   resend(){
     console.log("resenfotp");

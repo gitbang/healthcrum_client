@@ -18,7 +18,8 @@ export class AddMemberComponent implements OnInit {
     private service : HomeServiceService
   ) {
     console.log(data)
-    this.userId = data
+    this.userId = data;
+    this.dialogRef.disableClose = true;
     console.log("in constructor userId" , this.userId)
   }
   genderList : string[] = ["Male", "Female", "Others"]
