@@ -124,10 +124,10 @@ export class ViewDoctorDetailsComponent implements OnInit {
       if(result.success) {
         console.log("after dialog closed")
         console.log(result.userdata, result.data)
-        let toSaveInService = {
+        let toSaveInService = [{
           userData : result.userdata,
           doctor : result.data
-        }
+        }]
         this.service.ConsultationchangeDoctorSelected(toSaveInService);
         this.router.navigateByUrl('consultation/checkout')
       } else {

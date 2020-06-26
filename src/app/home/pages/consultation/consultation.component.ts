@@ -150,9 +150,10 @@ export class ConsultationComponent implements OnInit {
       stream : 'ayurveda',
       consultationTiming: {
         emergency: {from: "8 am", to: "2 pm"},
-        physical: {from: "8 am", to : "6pm"},
+        physical : {from: "8 am", to : "6pm"},
         tele: {from: "8 am", to: "2 pm"},
-        video: {from: "8 am", to: "2 pm"}
+        video: {from: "8 am", to: "2 pm"},
+        char :{from: "8 am", to: "2 pm"}
       },
       chat : '8am - 6pm'
     },
@@ -371,10 +372,10 @@ export class ConsultationComponent implements OnInit {
         // set data in the service;
         console.log("after dialog closed")
         console.log(result.userdata, result.data)
-        let toSaveInService = {
+        let toSaveInService = [{
           userData : result.userdata,
-          doctor : result.data
-        }
+          doctor : {...result.data}
+        }]
         this.service.ConsultationchangeDoctorSelected(toSaveInService);
         this.router.navigateByUrl('consultation/checkout')
       }

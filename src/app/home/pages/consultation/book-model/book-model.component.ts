@@ -76,7 +76,6 @@ export class BookModelComponent implements OnInit {
       alert("Invalid Inputs")
     }
   }
-
   loading : boolean = false;
   userotp : number
   generateotp( stepper : MatStepper){
@@ -94,18 +93,19 @@ export class BookModelComponent implements OnInit {
           alert("something went wrong")
         }
       })
-  }
+  } 
  
   submitsecondStepper(stepper : MatStepper){
     if(this.secondFormGroup.valid){
       this.loading = true;
       let toSend = {
         otp : this.secondFormGroup.get('otp').value,
-        phone : this.firstFormGroup.get('phoneNo').value
+        phone : this.firstFormGroup.get('phoneNo').value,
+        role : "patient"
       }
       console.log("verify otp : ", toSend);
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
-        this.loading = true;
+        this.loading = false;
         console.log(result)
         if(result.success){
           this.dialog.close({success : true, data : this.data , userdata: this.firstFormGroup.value})
@@ -115,4 +115,17 @@ export class BookModelComponent implements OnInit {
       })
     }
   }
+
+  /*
+  resend(){
+    console.log("resenfotp");
+    let toSend = {
+      phone : this.firstFormGroup.get('phoneNo').value,
+    }
+    this.service.consultationResendOTP(toSend).subscribe((result)=>{
+      console.log("resend otp", result)
+    })
+  }
+  */
+  
 }

@@ -28,15 +28,28 @@ export class CheckOutComponent implements OnInit {
   
   ngOnInit() {
     this.service.consultationDoctorSelectedData.subscribe(result=>{
-      console.log(result);
+      console.log("from client server ", result);
       this.completeData = result
+      if(!result || result.length == 0){
+        console.log("empty")
+        this.router.navigateByUrl('/consultation')
+      } else{
+        this.shownresultarrays[0]._id = result[0].doctor.doctor._id;
+        this.shownresultarrays[0].docname = result[0].doctor.doctor.name;
+        this.shownresultarrays[0].type = result[0].doctor.type;
+        this.shownresultarrays[0].offerprice = result[0].doctor.fee;
+        this.shownresultarrays[0].date = result[0].userData.date;
+        this.shownresultarrays[0].timeslot = result[0].userData.timeslot;
+        this.shownresultarrays[0].phone = result[0].userData.phoneNo;
+      }
     })
+    console.log("this. resultarray is : ", this.shownresultarrays[0])
   }
   completeData;       // this contain complete data of the doctor as well as the patient
   shownresultarrays =[
       { 
       _id : '',  
-      mobileNo : 9874563210,
+      phone : 9874563210,
       docname : "Dr. AR Kapoor", 
       healcrumprice : 2500, 
       offerprice : 2000,

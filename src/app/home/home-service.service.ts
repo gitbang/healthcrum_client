@@ -142,12 +142,18 @@ export class HomeServiceService {
             .post(this.url + '/verifyotp', data)
             .pipe(retry(2))
   }
-  private consultationdoctorForAppointment = new BehaviorSubject({});
-  consultationDoctorSelectedData = this.messageSource.asObservable();
 
-  ConsultationchangeDoctorSelected(message : object) {
+  consultationResendOTP(data) : Observable<any> {
+    return this.http
+                .post(this.url + '/retryotp', data)
+                .pipe(retry(2))
+  }
+
+  private consultationdoctorForAppointment = new BehaviorSubject([]);
+  consultationDoctorSelectedData = this.consultationdoctorForAppointment.asObservable();
+
+  ConsultationchangeDoctorSelected(message : Array<any>) {
     this.consultationdoctorForAppointment.next(message)
-    console.log(this.messageSource.value)
   }
 
   consultationBookAppointment(userId : string, data ) : Observable<any>{
@@ -155,8 +161,6 @@ export class HomeServiceService {
               .post(this.url + ' /saveappointement/' + userId, data ,this.option)
               .pipe(retry(2))
   }
-
-//---------------- book-test---------------//
 
 } 
 
