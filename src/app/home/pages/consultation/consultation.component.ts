@@ -274,18 +274,22 @@ export class ConsultationComponent implements OnInit {
     }
   }
 
-
+  containDoctor : boolean = false
   filterDotor(){
+    console.log("my control",this.myControl.value)
+    this.filters.location.city = this.myControl.value.toLowerCase()
+    
     console.log("filters are : ", this.filters)
+    
     this.service.consultationFilter(this.filters).subscribe((result)=>{
       console.log("in filterdoctor function ", result);
       if(result.success){
+        this.containDoctor = true;
         this.doctors = result.data
       } else{
-        alert ("No doctor found")
+        this.containDoctor = false;
       }
     })
-    // console.log(this.filters)
   }
 
   getStream(name : string) {
@@ -331,12 +335,17 @@ export class ConsultationComponent implements OnInit {
   }
   searchBar(){
     console.log("searchBar : ", this.searchBarMain)
-    if(this.searchBy == 'name') {
-      this.filters.name = this.searchBarMain;
-    } else{
-      this.filters.speciality = this.searchBarMain;
+    if(this.searchBarMain.length !=0) {
+      if(this.searchBy == 'name') {
+        this.filters.name = this.searchBarMain;
+      } else{
+        this.filters.speciality = this.searchBarMain;
+      }
+    } else {
+      this.filters.name = null;
+      this.filters.speciality = null;
     }
-    //console.log("searchBar in function", this.filters)
+    
     this.filterDotor();
   }
 

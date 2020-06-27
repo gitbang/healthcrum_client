@@ -224,7 +224,6 @@ export class BloodTestComponent implements OnInit {
 
   remove(fruit: string): void {
     const index = this.searchcart.indexOf(fruit);
-
     if (index >= 0) {
       this.searchcart.splice(index, 1);
     }
@@ -232,7 +231,6 @@ export class BloodTestComponent implements OnInit {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.fruits.push(event.option.viewValue);
-    //this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }
 
@@ -453,10 +451,9 @@ export class BloodTestComponent implements OnInit {
         this.shownresultarray = [],
         this.resultFromApi = result
         if(result.PackageTests.length > 0){
-          result.PackageTests.forEach((pack)=>{
+          
           let add ;
           result.PackageTests.forEach((pack)=>{
-            //this.getRating(pack.lab.rating);
             let offers  = pack.offerPrice / pack.mrp * 100;
             offers = 100 - Math.round(offers)
             add = {
@@ -482,9 +479,7 @@ export class BloodTestComponent implements OnInit {
               offer : offers
             }
           })
-          //console.log("add is", add)
           this.shownresultarray.push(add)
-          })
         }
         if(result.SingleTests.length > 0) {   
           let add ;
@@ -519,7 +514,6 @@ export class BloodTestComponent implements OnInit {
           this.shownresultarray.push(add)
         }
         if(result.ProfileTests.length > 0) {
-          //console.log("profileTest")
           let add ;
           result.ProfileTests.forEach((pack)=>{
             let offers  = pack.offerPrice / pack.mrp * 100;
@@ -549,7 +543,6 @@ export class BloodTestComponent implements OnInit {
           })
           this.shownresultarray.push(add)
         }
-        //console.log("final result : ", this.shownresultarray) 
       }
     })
   }
@@ -609,8 +602,6 @@ export class BloodTestComponent implements OnInit {
   }
 
   checkcart(_id : string) {
-    //console.log(_id)
-    
     if(this.mycart.includes(_id)){
       return true
     }
@@ -628,60 +619,28 @@ export class BloodTestComponent implements OnInit {
   }
 
 
-  //-------------code for side filter-------------------//
+  //-------------code for top filters-------------------//
 
-  sideFilterSearch = {
-    singleTests : false,
-    packageTests : false,
-    profileTests: false,
-    price : {
-      low : null,
-      high : null
-    }
-  }
-
-  singleTestValueChanges(value) {
-    this.sideFilterSearch.singleTests = value;
-   // console.log(this.sideFilterSearch)
-  }
-
-  packageTestValueChanges(value) {
-    this.sideFilterSearch.packageTests = value
-    //console.log(this.sideFilterSearch)
-  }
-
-  profileTestValueChanges(value) {
-    this.sideFilterSearch.profileTests = value
-    //console.log(this.sideFilterSearch)
-  }
-
-  lower : number[] = []
-  higher : number[] = []
-  priceValueChanges(low :number, high : number, event) {
-    if(event) {
-      this.lower.push(low);
-      this.higher.push(high);
-      this.getPriceValues()
+  sortPackage(ascending : boolean) {
+    if(ascending) {
+      this.shownresultarray.sort((a,b)=> {
+        return a.offerprice - b.offerprice
+      })
     } else {
-      const lowInd = this.lower.indexOf(low)
-      const highInd = this.higher.indexOf(high)
-     // console.log("indexes : ", lowInd, highInd)
-      this.lower.splice(lowInd, 1)
-      this.higher.splice(highInd, 1)
-      this.getPriceValues()
+      this.shownresultarray.sort((a,b)=> {
+        return b.offerprice - a.offerprice
+      }) 
     }
-   // console.log(this.sideFilterSearch)
+    console.log("in sort", this.shownresultarray)
   }
 
-  getPriceValues() {
-    this.sideFilterSearch.price.low = Math.min( ...this.lower)
-    this.sideFilterSearch.price.high = Math.max( ...this.higher)
+  filter(){
+    
   }
-
   applyFilters(){
-    this.service.bloodTestApplyFilters(this.sideFilterSearch).subscribe((response)=>{
-      console.log("filter search" ,response)
-    })
+    // this.service.bloodTestApplyFilters(this.sideFilterSearch).subscribe((response)=>{
+    //   console.log("filter search" ,response)
+    // })
   }
 
 

@@ -125,7 +125,7 @@ export class HomeServiceService {
   }
   
   consultationFilter(filters : Object) : Observable<any>{
-    console.log("in services : filters are : ", filters)
+    //console.log("in services : filters are : ", filters)
     return this.http
               .post(this.url + '/filterdoctor', filters)
               .pipe(retry(2))

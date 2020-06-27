@@ -70,6 +70,7 @@ import { ERecieptComponent } from './pages/consultation/e-reciept/e-reciept.comp
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { LandingPageComponent } from './pages/wellness/landing-page/landing-page.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { LandingPageComponent } from './pages/wellness/landing-page/landing-page
     CheckOutComponent,
     ERecieptComponent,
     LandingPageComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

@@ -260,6 +260,11 @@ table{
     cursor: pointer;
     &:hover{
         background-color: $bg;
-    }
-    
+    }   
+}
+
+.not-found{
+    padding: 10px;
+    background-color: white;
+    margin-top: 25px;
 }

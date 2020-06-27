@@ -129,11 +129,6 @@ export class BookModelComponent implements OnInit {
     }).then((result) => {
       console.log(result)
       if (result.value) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
         this.dialog.close({success : false})
       }
     })

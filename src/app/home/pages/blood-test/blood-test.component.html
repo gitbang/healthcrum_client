@@ -100,8 +100,8 @@
           <div class="col-md-10"> 
             <mat-toolbar  class="top-navbar">
               <mat-menu #priceSort ="matMenu">
-                <button mat-menu-item>From low to high</button>
-                <button mat-menu-item>From high to low</button>
+                <button mat-menu-item (click)="sortPackage(true)">From low to high</button>
+                <button mat-menu-item (click)="sortPackage(false)">From high to low</button>
               </mat-menu>
               <mat-menu #genderFilter ="matMenu">
                 <button mat-menu-item>Men</button>
