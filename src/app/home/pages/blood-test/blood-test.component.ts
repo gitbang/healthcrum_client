@@ -444,14 +444,23 @@ export class BloodTestComponent implements OnInit {
   rating = 3;
   myId : string = "5e8efa895b324a3e4c97a278"
 
+  datafound : boolean = false
   fetchbloodtest(){
     this.service.bloodTestFetchAllTest().subscribe((result)=>{
       console.log("initial fetch", result)
       if(result.success) {
-        this.shownresultarray = [],
+        this.datafound = true
+        this.insertFetchedData(result)
+      } else {
+        this.datafound = false;
+        console.log("no data found")
+      }
+    })
+  }
+  insertFetchedData(result) {
+    this.shownresultarray = [],
         this.resultFromApi = result
         if(result.PackageTests.length > 0){
-          
           let add ;
           result.PackageTests.forEach((pack)=>{
             let offers  = pack.offerPrice / pack.mrp * 100;
@@ -510,7 +519,6 @@ export class BloodTestComponent implements OnInit {
               offer : offers
             }
           })
-          //console.log("add is", add)
           this.shownresultarray.push(add)
         }
         if(result.ProfileTests.length > 0) {
@@ -543,8 +551,6 @@ export class BloodTestComponent implements OnInit {
           })
           this.shownresultarray.push(add)
         }
-      }
-    })
   }
 
   resultFromApi : any
@@ -644,11 +650,19 @@ export class BloodTestComponent implements OnInit {
     console.log(event.checked)
     this.filterToSend[toapply] = event.checked;
     console.log(this.filterToSend)
+    this.applyFilters();
   }
   applyFilters(){
-    // this.service.bloodTestApplyFilters(this.sideFilterSearch).subscribe((response)=>{
-    //   console.log("filter search" ,response)
-    // })
+    this.service.bloodTestApplyFilters(this.filterToSend).subscribe((response)=>{
+      console.log("filter search" ,response)
+      if(response.success){
+        this.datafound = true;
+        this.insertFetchedData(response)
+      } else {
+        this.datafound = false
+        console.log("no data found")
+      }
+    })
   }
 
 

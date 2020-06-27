@@ -48,7 +48,7 @@ export class HomeServiceService {
 
   bloodTestApplyFilters(filter) : Observable<any> {
     return this.http
-            .post(this.url+ '/', filter, this.option)
+            .post(this.url+ '/bloodtest/filters', filter, this.option)
             .pipe(retry(2))
   } 
 
@@ -125,7 +125,6 @@ export class HomeServiceService {
   }
   
   consultationFilter(filters : Object) : Observable<any>{
-    //console.log("in services : filters are : ", filters)
     return this.http
               .post(this.url + '/filterdoctor', filters)
               .pipe(retry(2))
