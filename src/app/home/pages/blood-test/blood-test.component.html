@@ -103,12 +103,38 @@
                 <button mat-menu-item (click)="sortPackage(true)">From low to high</button>
                 <button mat-menu-item (click)="sortPackage(false)">From high to low</button>
               </mat-menu>
-              <mat-menu #genderFilter ="matMenu">
-                <button mat-menu-item>Men</button>
-                <button mat-menu-item>Women</button>
-                <button mat-menu-item>Kids</button>
-                <button mat-menu-item>Senior citizen male</button>
-                <button mat-menu-item>Senior citizen female</button>
+              <mat-menu #filter ="matMenu">
+                <!--
+                  <button mat-menu-item>Men</button>
+                  <button mat-menu-item>Women</button>
+                  <button mat-menu-item>Kids</button>
+                  <button mat-menu-item>Senior citizen male</button>
+                  <button mat-menu-item>Senior citizen female</button>
+                -->
+                <div class="col-12">
+                  <div class="row filterbox" >
+                    <div class="col-12">
+                      <mat-checkbox (change)="filterChanges($event, 'men')">
+                        Men
+                      </mat-checkbox>
+                    </div>
+                    <div class="col-12">
+                      <mat-checkbox (change)="filterChanges($event, 'women')">
+                        women
+                      </mat-checkbox>
+                    </div>
+                    <div class="col-12">
+                      <mat-checkbox (change)="filterChanges($event, 'kids')">
+                        Kids
+                      </mat-checkbox>
+                    </div>
+                    <div class="col-12">
+                      <mat-checkbox (change)="filterChanges($event, 'senior')">
+                        Senior Citizen
+                      </mat-checkbox>
+                    </div>
+                  </div>
+                </div>
               </mat-menu>
               <mat-menu #habbitFilter ="matMenu">
               </mat-menu>
@@ -119,7 +145,7 @@
                   <button mat-flat-button [matMenuTriggerFor]="priceSort">Sort by price <mat-icon>keyboard_arrow_down</mat-icon></button>
                 </div>
                 <div class="col-md-3 filter-property">
-                  <button mat-flat-button [matMenuTriggerFor]="genderFilter">Filters <mat-icon>keyboard_arrow_down</mat-icon></button>
+                  <button mat-flat-button [matMenuTriggerFor]="filter">Filters <mat-icon>keyboard_arrow_down</mat-icon></button>
                 </div>
                 <div class="col-md-3 filter-property">
                   <button mat-flat-button [matMenuTriggerFor]="habbitFilter">Habbits <mat-icon>keyboard_arrow_down</mat-icon></button>

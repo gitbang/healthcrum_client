@@ -634,8 +634,16 @@ export class BloodTestComponent implements OnInit {
     console.log("in sort", this.shownresultarray)
   }
 
-  filter(){
-    
+  filterToSend = {
+    men : false,
+    women : false,
+    senior : false,
+    kids : false
+  }
+  filterChanges(event, toapply){
+    console.log(event.checked)
+    this.filterToSend[toapply] = event.checked;
+    console.log(this.filterToSend)
   }
   applyFilters(){
     // this.service.bloodTestApplyFilters(this.sideFilterSearch).subscribe((response)=>{
