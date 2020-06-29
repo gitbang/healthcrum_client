@@ -10,17 +10,17 @@ import { Observable } from "rxjs";
 import { startWith, map } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { BookModelComponent } from './book-model/book-model.component';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.component.html',
   styleUrls: ['./consultation.component.scss']
 })
-export class ConsultationComponent implements OnInit {
 
+export class ConsultationComponent implements OnInit {
   myControl = new FormControl();
   isSearched: boolean = false;
-  
   city: string;
   cities: any = [];
   filteredCities: Observable<string[]>;
@@ -56,6 +56,11 @@ export class ConsultationComponent implements OnInit {
   ratingArray : Array<number>; 
   category : string;
   activeCity : string = null;
+
+  myDoctorControl = new FormControl();
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
+
   ngOnInit() {
 
     this.getIpClientLocation();
@@ -93,11 +98,24 @@ export class ConsultationComponent implements OnInit {
     if(window.innerWidth < 1000){
       this.horizontal = false;
     }
+    
   }
 
-  doctorType : string;
+  autofilldoctor(){
+    this.filteredOptions = this.myDoctorControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.doctorFilter(value))
+    );
+  }
 
+  private doctorFilter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  
+  doctorType : string;
   changeRoute(){
+    console.log("in changeroute",this.myControl.value)
     this.location.replaceState("/consultation/"+ this.category + '/'+ this.myControl.value);
   }
 
@@ -260,10 +278,10 @@ export class ConsultationComponent implements OnInit {
     speciality : null,
     fromHealthcrum :null,
     consultation : {
-      video : null,
-      tele : null,
-      physical : null,
-      emergency : null
+      // video : null,
+      // tele : null,
+      // physical : null,
+      // emergency : null
     },
     rating  : null,
     experience : null,
@@ -276,20 +294,35 @@ export class ConsultationComponent implements OnInit {
 
   containDoctor : boolean = false
   filterDotor(){
-    console.log("my control",this.myControl.value)
-    this.filters.location.city = this.myControl.value.toLowerCase()
+    // console.log("my control",this.myControl.value)
+    // this.filters.location.city = this.myControl.value.toLowerCase()
     
     console.log("filters are : ", this.filters)
     
     this.service.consultationFilter(this.filters).subscribe((result)=>{
       console.log("in filterdoctor function ", result);
       if(result.success){
-        this.containDoctor = true;
         this.doctors = result.data
+        this.autofilldata();
+        this.containDoctor = true;
       } else{
         this.containDoctor = false;
       }
     })
+  }
+
+  autofilldata(){
+    let list : string[]= []
+    if(this.byname){
+      this.doctors.forEach(element=>{
+        list.push(element.name)
+      })
+      this.options = list;
+    } else {
+      this.options = ["Heart", "skin"];
+    }
+    console.log(this.options)
+    this.autofilldoctor();
   }
 
   getStream(name : string) {
@@ -300,7 +333,6 @@ export class ConsultationComponent implements OnInit {
     this.filters.speciality = name
     this.filterDotor();
   }
- 
   getRating(rating : number) {
     this.filters.rating = rating
     this.filterDotor();
@@ -318,28 +350,37 @@ export class ConsultationComponent implements OnInit {
     this.filterDotor()
   }
   getConsultation(type : string){
-    this.filters.consultation.emergency = false
-    this.filters.consultation.video = false
-    this.filters.consultation.tele = false
-    this.filters.consultation.physical = false
+    // this.filters.consultation.emergency = false
+    // this.filters.consultation.video = false
+    // this.filters.consultation.tele = false
+    // this.filters.consultation.physical = false
     this.filters.consultation[type] = true;
     //console.log("filters in getConsultation function : ", this.filters)
     this.filterDotor()
   }
 
   searchBy : string = 'name';
-  searchBarMain : string = ""
+  searchBarMain : string = "";
+  byname : boolean = true;
   searchByFunction(event){
-
-    //console.log("in function searchByFunction : ", this.searchBy)
+    //console.log("in event",event)
+    if(event.value == "name"){
+      this.byname = true
+    } else {
+      this.byname = false
+    }
+    this.autofilldata();
   }
+
   searchBar(){
     console.log("searchBar : ", this.searchBarMain)
     if(this.searchBarMain.length !=0) {
       if(this.searchBy == 'name') {
         this.filters.name = this.searchBarMain;
+        this.filters.speciality = null;
       } else{
         this.filters.speciality = this.searchBarMain;
+        this.filters.name = null;
       }
     } else {
       this.filters.name = null;
@@ -347,8 +388,8 @@ export class ConsultationComponent implements OnInit {
     }
     
     this.filterDotor();
+    this.changeRoute();
   }
-
 
   openDialog(typeCons : string, index : number){
     console.log(typeCons, index);

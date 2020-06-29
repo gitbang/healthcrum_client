@@ -35,13 +35,29 @@
         
         <div class="search-box">     
           <div class="input-group no-border">
-            <input  
+            <input
+              [formControl]="myDoctorControl"
               [(ngModel)]="searchBarMain"
               class="search-box-input" 
               type="text" 
               #toggleButton
               placeholder= "Search Doctor"
+              [matAutocomplete]="auto"
             >
+            <div>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+            <div *ngIf="false">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
           </div>
           <div class="consultation">
             <mat-form-field style="padding-top: 4px" appearance="standard">
@@ -90,13 +106,13 @@
         
         
         <mat-menu #streamMenu ="matMenu">
-          <button mat-menu-item (click)="getStream('Ayurvedic')" >Ayurvedic</button>
+          <button mat-menu-item (click)="getStream('Ayurveda')" >Ayurvedic</button>
           <button mat-menu-item (click)="getStream('Allopathic')">Allopathic</button>
           <button mat-menu-item (click)="getStream('Homeophathic')">Homeophathic</button>
         </mat-menu>
         
         <mat-menu #specialityMenu ="matMenu">
-          <button mat-menu-item (click)="getSpeciality('heart')">Heart Specialist</button>
+          <button mat-menu-item (click)="getSpeciality('Heart')">Heart Specialist</button>
           <button mat-menu-item (click)="getSpeciality('skin')">Skin Speciality</button>
           <button mat-menu-item (click)="getSpeciality('lung')">Lungs Speciality</button>
           <button mat-menu-item (click)="getSpeciality('dentist')">Dentist</button>
@@ -115,14 +131,14 @@
 
         <mat-menu #healthcrumMenu ="matMenu">
           <button mat-menu-item (click)="getDoctorType(true)">Healthcrum Doctor</button>
-          <button mat-menu-item (click)="getDoctorType(true)">Other doctors</button>
+          <button mat-menu-item (click)="getDoctorType(false)">Other doctors</button>
         </mat-menu>
 
         <mat-menu #consultationMenu ="matMenu">
           <button mat-menu-item (click)="getConsultation('tele')">Telephonic consultation</button>
           <button mat-menu-item (click)="getConsultation('video')">Video consultation</button>
-          <button mat-menu-item (click)="getConsultation('emergency')">Physical consultation</button>
           <button mat-menu-item (click)="getConsultation('physical')">Physical consultation</button>
+          <button mat-menu-item (click)="getConsultation('emergency')">Emergency consultation</button>
         </mat-menu>
 
         <mat-menu #ratingMenu ="matMenu">
@@ -337,22 +353,21 @@
             <div class="col-12">
               <mat-card  class=" doctor-card">  
                 <div class="row ">
-                  <div class="col-4">
+                  <div class="col-md-4 col-lg-3">
                     <div class="row feedback-horizontal">
-                      
-                      <i class="material-icons" [ngClass]="ind < rating ? 'active-feedback' : 'passive-feedback' " 
+                      <i class="material-icons" [ngClass]="ind <= rating ? 'active-feedback' : 'passive-feedback' " 
                       *ngFor="let star of ratingArray let ind = index">grade</i> 
                     </div>
                     <div class="row">
                       <div class="col-12 doctor-image">
                         <img src={{doctor.profilepic}} 
                         alt="loading..."                         
-                        class="center img-circle">
+                        class=" img-circle">
                       </div>
                     </div>
                   </div>
 
-                  <div class="col-3">
+                  <div class="col-md-4 col-ld-5">
                     <div class="row mt-0">
                       <div class="col-md-12 doctor-name mt-0">
                         <h4 class=" m-0 ">{{doctor.name }}</h4>
@@ -529,10 +544,9 @@
     </div>
     <div class="col-md-1"></div>
     <div class="not-found col-md-10" *ngIf="!containDoctor">
-    <h3>Thanks for showing interest in HealthCrum. Currently we do not have any specialist at your location and we 
+      <h3>Thanks for showing interest in HealthCrum. Currently we do not have any specialist at your location and we 
       promise to reach at ever corner of this country as soon as possible.
-    </h3>
+      </h3>
+    </div>
   </div>
-  </div>
-  
 </div>

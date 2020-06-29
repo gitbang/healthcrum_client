@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { stringify } from "querystring";
 import { UserLocationModal } from "../../../models/userLocation";
 import { FormControl, FormBuilder } from "@angular/forms";
-import { startWith, map } from "rxjs/operators";
+import { startWith, map, single } from "rxjs/operators";
 import {MatAccordion} from '@angular/material/expansion';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ViewDetailsComponent } from "./view-details/view-details.component";
@@ -133,6 +133,21 @@ export class BloodTestComponent implements OnInit {
     this.fetchbloodtest();
 
     // this.ratingArray = Array(5).fill(0)
+    
+
+    if(window.innerWidth < 1200){
+      this.horizontal = false;
+    }
+  }
+
+
+  /* -----------------cart open----------------------*/
+  proceed(){
+    this.router.navigateByUrl('blood-test/mycart/12345')
+  }
+  /*------------------TOP search open------------------ */
+
+  afterFetch(){
     this.profileTestFiltered = this.mycontrol.valueChanges.pipe(
       startWith(''),
       map(value => this.filterprofiletest(value))
@@ -146,38 +161,24 @@ export class BloodTestComponent implements OnInit {
       startWith(''),
       map(value => this.filterpackagetest(value))
     )
-
-    if(window.innerWidth < 1200){
-      this.horizontal = false;
-    }
   }
 
-
-  /* -----------------cart open----------------------*/
-  proceed(){
-    this.router.navigateByUrl('blood-test/mycart/12345')
-  }
-  /*------------------TOP search open------------------ */
   filterprofiletest(value){
-   // console.log("profile test");
-   // console.log(value)
     const filterValue = value.toLowerCase();
-    return this.profileTest.filter( test => test.toLowerCase().includes(filterValue)
-    );
+    return this.profileTest.filter( test => test.toLowerCase().includes(filterValue));
   }
   filtersingletest(value){
-   // console.log("profile test");
-    //console.log(value)
     const filterValue = value.toLowerCase();
-    return this.singleTest.filter( test => test.toLowerCase().includes(filterValue)
-    );
+    return this.singleTest.filter( test => test.toLowerCase().includes(filterValue));
+      // this.fromdatabase.SingleTests.forEach(element => {
+      //   return (element.name.toLowerCase().includes(filterValue))  ? "a" : "";
+      // });
   }
   filterpackagetest(value){
-   // console.log("profile test");
+    // console.log("profile test");
     //console.log(value)
     const filterValue = value.toLowerCase();
-    return this.packageTest.filter( test => test.toLowerCase().includes(filterValue)
-    );
+    return this.packageTest.filter( test => test.toLowerCase().includes(filterValue));
   }
  
   visible = true;
@@ -226,6 +227,8 @@ export class BloodTestComponent implements OnInit {
     const index = this.searchcart.indexOf(fruit);
     if (index >= 0) {
       this.searchcart.splice(index, 1);
+      let ind = this.comparison(fruit);
+      this.removeFromcart(ind);
     }
   }
 
@@ -284,12 +287,31 @@ export class BloodTestComponent implements OnInit {
   }
   searchcart : string[] = [];
 
+  comparison(x : string){
+    let index : number
+    this.shownresultarray.forEach((value, i)=>{
+      console.log(x , value.name)
+      if(value.name.toLowerCase() == x.toLowerCase()){
+        index = i;
+        console.log(index)
+      }
+    })
+    return index
+  }
+
   addMaindropdown(x : string) {
+    
+    let index = this.comparison(x);
+    
+    console.log("index is : ", index)
     if(this.searchcart.includes(x)) {
       this.searchcart = this.searchcart.filter((i)=> i != x)
+      this.removeFromcart(index);
     }
     else{
+      // add to cart
       this.searchcart.push(x);
+      this.addTocart(index)
     }
     this.searchText = "";
     this.searchcart.forEach((x)=>{
@@ -305,18 +327,18 @@ export class BloodTestComponent implements OnInit {
     }
   }
 
-  removeFromCart(x) {
-    this.searchcart = this.searchcart.filter((i)=> i != x)
-  }
+  // removeFromCart(x) {
+  //   this.searchcart = this.searchcart.filter((i)=> i != x)
+  // }
 
-  maindropdown(x, event) {
-    if(event == true) {
-      this.searchcart.push(x)
-    }  else{
-     this.removeFromCart(x)
-    }
-   // console.log(this.searchcart)
-  }
+  // maindropdown(x, event) {
+  //   if(event == true) {
+  //     this.searchcart.push(x)
+  //   }  else{
+  //    this.removeFromCart(x)
+  //   }
+  //  // console.log(this.searchcart)
+  // }
 
   removeSideFilters(i) {
     this.filtercontent(i)
@@ -443,13 +465,15 @@ export class BloodTestComponent implements OnInit {
   ratingArray : Array<number>;
   rating = 3;
   myId : string = "5e8efa895b324a3e4c97a278"
-
   datafound : boolean = false
+  fromdatabase ;
   fetchbloodtest(){
     this.service.bloodTestFetchAllTest().subscribe((result)=>{
       console.log("initial fetch", result)
       if(result.success) {
         this.datafound = true
+        this.fromdatabase = result
+      //  let single = result.SingleTests;
         this.insertFetchedData(result)
       } else {
         this.datafound = false;
@@ -459,98 +483,108 @@ export class BloodTestComponent implements OnInit {
   }
   insertFetchedData(result) {
     this.shownresultarray = [],
-        this.resultFromApi = result
-        if(result.PackageTests.length > 0){
-          let add ;
-          result.PackageTests.forEach((pack)=>{
-            let offers  = pack.offerPrice / pack.mrp * 100;
-            offers = 100 - Math.round(offers)
-            add = {
-              _id         : pack._id,
-              name        : pack.name,
-              labLogo     : pack.lab.logo,
-              parameters  : pack.individualTests.length,
-              marketprice : pack.mrp,
-              offerprice  : pack.offerPrice,
-              rating      : pack.lab.rating,
-              type        : 'packageTest',
-              fasting     : pack.fasting,
-              reportTAT   : pack.reportingTime.within,
-              recommendedFor : {
-                ...pack.recommended_for
-              },
-              recommendedage : {
-                ...pack.recommended_age
-              },
-              what : pack.what,
-              why : pack.why,
-              when : pack.when,
-              offer : offers
-            }
-          })
-          this.shownresultarray.push(add)
-        }
-        if(result.SingleTests.length > 0) {   
-          let add ;
-          result.SingleTests.forEach((pack)=>{
-           // this.getRating(pack.lab.rating);
-           let offers  = pack.offerPrice / pack.mrp * 100;
-            offers = 100 - Math.round(offers)
-            add = {
-              _id         : pack._id,
-              name        : pack.name,
-              labLogo     : pack.lab.logo,
-              parameters  : 1,
-              marketprice : pack.mrp,
-              offerprice  : pack.offerPrice,
-              rating      : pack.lab.rating,
-              type        : 'singleTest',
-              fasting     : "yes",
-              reportTAT : pack.reportingTime.within,
-              recommendedFor : {
-                ...pack.recommended_for
-              },
-              recommendedage : {
-                ...pack.recommended_age
-              },
-              what : pack.what,
-              why : pack.why,
-              when : pack.when,
-              offer : offers
-            }
-          })
-          this.shownresultarray.push(add)
-        }
-        if(result.ProfileTests.length > 0) {
-          let add ;
-          result.ProfileTests.forEach((pack)=>{
-            let offers  = pack.offerPrice / pack.mrp * 100;
-            offers = 100 - Math.round(offers)
-            add = {
-              _id : pack._id,
-              name : pack.name,
-              labLogo : pack.lab.logo,
-              parameters : pack.individualTests.length,
-              marketprice : pack.mrp,
-              offerprice : pack.offerPrice,
-              rating : pack.lab.rating,
-              type : 'profileTest',
-              fasting : "yes",
-              reportTAT : pack.reportingTime.within,
-              recommendedFor : {
-                ...pack.recommended_for
-              },
-              recommendedage : {
-                ...pack.recommended_age
-              },
-              what : pack.what,
-              why : pack.why,
-              when : pack.when,
-              offer : offers
-            }
-          })
-          this.shownresultarray.push(add)
-        }
+      this.resultFromApi = result
+      if(result.PackageTests.length > 0){
+        let add ;
+        let list : Array<string> = []
+        result.PackageTests.forEach((pack)=>{
+          list.push(pack.name)
+          let offers  = pack.offerPrice / pack.mrp * 100;
+          offers = 100 - Math.round(offers)
+          add = {
+            _id         : pack._id,
+            name        : pack.name,
+            labLogo     : pack.lab.logo,
+            parameters  : pack.individualTests.length,
+            marketprice : pack.mrp,
+            offerprice  : pack.offerPrice,
+            rating      : pack.lab.rating,
+            type        : 'packageTest',
+            fasting     : pack.fasting,
+            reportTAT   : pack.reportingTime.within,
+            recommendedFor : {
+              ...pack.recommended_for
+            },
+            recommendedage : {
+              ...pack.recommended_age
+            },
+            what : pack.what,
+            why : pack.why,
+            when : pack.when,
+            offer : offers
+          }
+        })
+        this.shownresultarray.push(add)
+        this.packageTest = list
+      }
+      if(result.SingleTests.length > 0) {   
+        let add ;
+        let list : Array<string> = []
+        result.SingleTests.forEach((pack)=>{
+          // this.getRating(pack.lab.rating);
+          list.push(pack.name)
+          let offers  = pack.offerPrice / pack.mrp * 100;
+          offers = 100 - Math.round(offers)
+          add = {
+            _id         : pack._id,
+            name        : pack.name,
+            labLogo     : pack.lab.logo,
+            parameters  : 1,
+            marketprice : pack.mrp,
+            offerprice  : pack.offerPrice,
+            rating      : pack.lab.rating,
+            type        : 'singleTest',
+            fasting     : "yes",
+            reportTAT : pack.reportingTime.within,
+            recommendedFor : {
+              ...pack.recommended_for
+            },
+            recommendedage : {
+              ...pack.recommended_age
+            },
+            what : pack.what,
+            why : pack.why,
+            when : pack.when,
+            offer : offers
+          }
+        })
+        this.shownresultarray.push(add)
+        this.singleTest = list
+      }
+      if(result.ProfileTests.length > 0) {
+        let add ;
+        let list : Array<string> = []
+        result.ProfileTests.forEach((pack)=>{
+          list.push(pack.name)
+          let offers  = pack.offerPrice / pack.mrp * 100;
+          offers = 100 - Math.round(offers)
+          add = {
+            _id : pack._id,
+            name : pack.name,
+            labLogo : pack.lab.logo,
+            parameters : pack.individualTests.length,
+            marketprice : pack.mrp,
+            offerprice : pack.offerPrice,
+            rating : pack.lab.rating,
+            type : 'profileTest',
+            fasting : "yes",
+            reportTAT : pack.reportingTime.within,
+            recommendedFor : {
+              ...pack.recommended_for
+            },
+            recommendedage : {
+              ...pack.recommended_age
+            },
+            what : pack.what,
+            why : pack.why,
+            when : pack.when,
+            offer : offers
+          }
+        })
+        this.shownresultarray.push(add)
+        this.profileTest = list
+      }
+    this.afterFetch();
   }
 
   resultFromApi : any
@@ -592,10 +626,12 @@ export class BloodTestComponent implements OnInit {
     this.snackbar.open("Package", "Added",  {
       duration : 1000
     })
+    this.pushtoService();
+  }
+  pushtoService(){
     this.service.changeMessage(this.mycart);
     this.service.addCompleteDetailsToCart(this.myCartComplete);
   }
-  
   removeFromcart(index : number) {
     let _id = this.shownresultarray[index]._id
     this.mycart = this.mycart.filter((x)=> _id != x)
@@ -603,17 +639,14 @@ export class BloodTestComponent implements OnInit {
     this.snackbar.open("Package", "Removed", {
       duration : 1000
     })
-    this.service.changeMessage(this.mycart);
-    this.service.addCompleteDetailsToCart(this.myCartComplete);
+    this.pushtoService();
   }
 
   checkcart(_id : string) {
-    if(this.mycart.includes(_id)){
+    if(this.mycart.includes(_id))
       return true
-    }
-    else{
+    else
       return false
-    }
   }
   
   packageId : string = "123456"

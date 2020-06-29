@@ -123,7 +123,6 @@ blockquote {
   padding: 20px 0px;
   width: 100%;
   margin-top: 5px;
-  
   background: white;
   display: flex;
   border-radius: 4px;
@@ -381,4 +380,10 @@ a{
   padding: 10px;
   background-color: white;
   margin-top: 25px;
+}
+
+.afterSelect{
+  color : $blue !important;
+  font-weight: 600;
+  text-decoration: underline !important;
 }
