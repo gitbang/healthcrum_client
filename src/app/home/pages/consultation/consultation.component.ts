@@ -277,12 +277,7 @@ export class ConsultationComponent implements OnInit {
     stream : null,
     speciality : null,
     fromHealthcrum :null,
-    consultation : {
-      // video : null,
-      // tele : null,
-      // physical : null,
-      // emergency : null
-    },
+    consultation : {},
     rating  : null,
     experience : null,
     gender : null,
@@ -293,12 +288,9 @@ export class ConsultationComponent implements OnInit {
   }
 
   containDoctor : boolean = false
+  
   filterDotor(){
-    // console.log("my control",this.myControl.value)
-    // this.filters.location.city = this.myControl.value.toLowerCase()
-    
     console.log("filters are : ", this.filters)
-    
     this.service.consultationFilter(this.filters).subscribe((result)=>{
       console.log("in filterdoctor function ", result);
       if(result.success){
@@ -310,7 +302,7 @@ export class ConsultationComponent implements OnInit {
       }
     })
   }
-
+  
   autofilldata(){
     let list : string[]= []
     if(this.byname){
@@ -319,7 +311,7 @@ export class ConsultationComponent implements OnInit {
       })
       this.options = list;
     } else {
-      this.options = ["Heart", "skin"];
+      this.options = ["Heart", "skin", "Lungs", "Dentist"];
     }
     console.log(this.options)
     this.autofilldoctor();
@@ -329,41 +321,43 @@ export class ConsultationComponent implements OnInit {
     this.filters.stream = name.toLowerCase()
     this.filterDotor();
   }
+  
   getSpeciality(name : string) {
     this.filters.speciality = name
     this.filterDotor();
   }
+  
   getRating(rating : number) {
     this.filters.rating = rating
     this.filterDotor();
   }
+  
   getExperience(experience : number) {
     this.filters.experience = experience
     this.filterDotor();
   }
+  
   getGender(gen : string) {
     this.filters.gender = gen
     this.filterDotor();
   }
+  
   getDoctorType(type : boolean){
     this.filters.fromHealthcrum = type;
     this.filterDotor()
   }
+  
   getConsultation(type : string){
-    // this.filters.consultation.emergency = false
-    // this.filters.consultation.video = false
-    // this.filters.consultation.tele = false
-    // this.filters.consultation.physical = false
+    this.filters.consultation = {};
     this.filters.consultation[type] = true;
-    //console.log("filters in getConsultation function : ", this.filters)
     this.filterDotor()
   }
 
   searchBy : string = 'name';
   searchBarMain : string = "";
   byname : boolean = true;
+  
   searchByFunction(event){
-    //console.log("in event",event)
     if(event.value == "name"){
       this.byname = true
     } else {
@@ -375,7 +369,7 @@ export class ConsultationComponent implements OnInit {
   searchBar(){
     console.log("searchBar : ", this.searchBarMain)
     if(this.searchBarMain.length !=0) {
-      if(this.searchBy == 'name') {
+      if(this.byname) {
         this.filters.name = this.searchBarMain;
         this.filters.speciality = null;
       } else{

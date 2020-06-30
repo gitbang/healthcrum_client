@@ -534,7 +534,7 @@ export class BloodTestComponent implements OnInit {
             offerprice  : pack.offerPrice,
             rating      : pack.lab.rating,
             type        : 'singleTest',
-            fasting     : "yes",
+            fasting     : pack.fasting,
             reportTAT : pack.reportingTime.within,
             recommendedFor : {
               ...pack.recommended_for
@@ -567,7 +567,7 @@ export class BloodTestComponent implements OnInit {
             offerprice : pack.offerPrice,
             rating : pack.lab.rating,
             type : 'profileTest',
-            fasting : "yes",
+            fasting : pack.fasting,
             reportTAT : pack.reportingTime.within,
             recommendedFor : {
               ...pack.recommended_for

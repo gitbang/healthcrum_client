@@ -104,8 +104,8 @@ blockquote {
 }
 
 .mega-dropdown {
-  position: static !important;
-  top: 100%;
+  //position: static !important;
+  //top: 100%;
   left: 0;
   min-width: 10rem;
   padding: 0.5rem 0;
@@ -122,7 +122,7 @@ blockquote {
 .mega-dropdown-menu {
   padding: 20px 0px;
   width: 100%;
-  margin-top: 5px;
+  //margin-top: 5px;
   background: white;
   display: flex;
   border-radius: 4px;
@@ -141,11 +141,11 @@ blockquote {
 }
 .mega-dropdown-menu .dropdown-header {
   font-size: 18px;
-  padding: 5px 60px 5px 5px;
+  text-align: center;
+  padding: 0;
   line-height: 30px;
   border-bottom: 1px solid #dadada;
-  margin-right: 32px;
-  margin-bottom: 12px;
+  margin: 0;
 }
 ul li {
   padding: 5px 10px;
@@ -346,25 +346,6 @@ a{
   animation: glow 1s ease-in-out infinite alternate;
 }
 
-// @-webkit-keyframes glow {
-//   from {
-//     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-//   }
-  
-//   to {
-//     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
-//   }
-// }
-
-// @-webkit-keyframes glow {
-//   from {
-//     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px $blue, 0 0 40px $blue, 0 0 50px $blue, 0 0 60px $blue, 0 0 70px $blue;
-//   }
-  
-//   to {
-//     text-shadow: 0 0 20px #fff, 0 0 30px $yellow, 0 0 40px $yellow, 0 0 50px $yellow, 0 0 60px $yellow, 0 0 70px $yellow, 0 0 80px $yellow;
-//   }
-// }
 .btn-custom {
   background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
 }

@@ -26,53 +26,30 @@ export class ViewDetailsComponent implements OnInit {
       if(result){
         let add ;
        this.shownresult = []
-        add = {
-          _id : result[0]._id,
-          name : result[0].name,
-          labLogo : result[0].labLogo,
-          parameters : 1,
-          marketprice : result[0].marketprice,
-          offerprice : result[0].offerprice,
-          rating : result[0].rating,
-          type : result[0].type,
-          fasting : "yes",
-          reportTAT : result[0].reportTAT,
-          recommendedFor : result[0].recommendedFor,
-          recommendedage : result[0].recommendedage,
-          what : result[0].what,
-          why : result[0].why,
-          when : result[0].when,
-          offer : result[0].offer
-        }
+        add = {...result[0]}
         this.shownresult.push(add)
         console.log("shown result", this.shownresult);
       }
     })
     //console.log(this.data1._id)
-    this.service.bloodtestDetailById(this.data1._id, {type : this.data1.type}).subscribe((result)=>{
-      console.log("specific test : ", result)
-      if(result.success) {
-        this.profiles = [];
-        //this.fromServer.push(result.data);
-        this.fromServer.what = result.data[0].what; 
-        this.fromServer.when = result.data[0].when;
-        this.fromServer.why = result.data[0].why;
-        console.log("from server ", this.fromServer)
-        result.data[0].parameters.forEach(element => {
-          let x = {
-            name : element.name,
-            parameters : element.tests.length,
-            tests : element.tests
-          }
-          this.totalparams += x.parameters
-          this.profiles.push(x);
-        });
-        if(this.totalparams == 0) {
-          this.totalparams = 1;
-        }
-        console.log("this.profiles are : ",  this.profiles)
-      }
-    })
+    // this.service.bloodtestDetailById(this.data1._id, {type : this.data1.type}).subscribe((result)=>{
+    //   console.log("specific test : ", result)
+    //   if(result.success) {
+    //     this.profiles = [];
+    //     result.data[0].parameters.forEach(element => {
+    //       let x = {
+    //         name : element.name,
+    //         parameters : element.tests.length,
+    //         tests : element.tests
+    //       }
+    //       this.profiles.push(x);
+    //     });
+    //     if(this.totalparams == 0) {
+    //       this.totalparams = 1;
+    //     }
+    //     console.log("this.profiles are : ",  this.profiles)
+    //   }
+    // })
   }
   
   fromServer = {
