@@ -87,6 +87,7 @@ $blue : #00A0A8;
 
 .filter{
   color: black;
+  padding-left: 0;
 }
 
 .img-class {
@@ -114,4 +115,14 @@ $blue : #00A0A8;
 .btn-detail{
   color: $blue;
   background-color: white;
+}
+.price-container{
+  color: $blue;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 500px){
+  .stock {
+    float: none;
+  }
 }

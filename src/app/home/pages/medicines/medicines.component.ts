@@ -60,10 +60,6 @@ export class MedicinesComponent implements OnInit {
 
   setCurrentLocation() {
     this.myControl.setValue(this.city);
-    //this.filterBylocation();
-    //this.filters.location.city = this.myControl.value.toLowerCase();
-    // this.filterDotor();
-    // this.changeRoute()
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -105,21 +101,13 @@ export class MedicinesComponent implements OnInit {
       this.city = res.city;
       this.state = res.regionName;
       this.search_city = this.city;
-      //
-     // this.myControl.setValue(this.city);
+
       if(this.activeCity == null) {
         this.setCurrentLocation() 
-        //this.filters.location.city = this.city;
       }
-      
-      //this.filterBylocation();
-     // this.filterDotor();
     });
   }
 
-
-
-  goNext() {}
   goToMedecine(type) {
     this.router.navigate(["/medecine", type]);
   }
@@ -154,14 +142,22 @@ export class MedicinesComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  tablet = [{
-    name : "Paracetamol",
-    brand : "My Brand",
-    pieces : 10,
-    stock : "In",
-    price : 100,
-    img : "../../../../assets/img/tablet.png"
-  }]
+  //--------------- search bae -----------------//
+  searchText = new FormControl();
+  searchBar(){
+    console.log(this.searchText.value)
+    console.log("search bar")
+  }
+
+
+  tablet = [
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
+
+  ]
 
   brands : string[] = ["Brand1", "Brand2"]
 }

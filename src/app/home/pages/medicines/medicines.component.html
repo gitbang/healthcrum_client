@@ -1,5 +1,5 @@
 <main>
-  <div class="container-fluid p-4">
+  <div class="container-fluid pt-4">
 
     <div class="row">
       <div class="col-2"></div>
@@ -17,10 +17,10 @@
               </mat-autocomplete>
             </div>
           </div>
-          
           <div class="search-box">     
             <div class="input-group no-border">
               <input  
+                [formControl] = "searchText"
                 [(ngModel)]="searchBarMain"
                 class="search-box-input" 
                 type="text" 
@@ -28,18 +28,7 @@
                 placeholder= "Search Doctor"
               >
             </div>
-            <!--
-            <div class="consultation">
-              <mat-form-field style="padding-top: 4px" appearance="standard">
-                <mat-select  (selectionChange)="searchByFunction($event)">
-                  <mat-option value="" disabled>Select</mat-option>
-                  <mat-option value="name">Search by name</mat-option>
-                  <mat-option value="speciality">Search by speciality</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            -->
-            <mat-icon matSuffix class="search-icon" style="align-self: center;" (click)=" searchBar()">search</mat-icon>
+            <mat-icon matSuffix class="search-icon" style="align-self: center; cursor : pointer;" (click)=" searchBar()">search</mat-icon>
           </div>
         </div>   
       </div>
@@ -48,18 +37,18 @@
     <div class="row mt-4">
       <div class="col-md-12">   
         <mat-toolbar class="top-navbar">
-              <div class="col-sm-3 col-lg-2 mt-1">
-                <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="priceMenu">Price <mat-icon>keyboard_arrow_down</mat-icon></button>
-              </div>
-              <div class="col-sm-3 col-lg-2 mt-1">
-                <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="brandMenu">Brand <mat-icon>keyboard_arrow_down</mat-icon></button>
-              </div>
-              <div class="col-sm-3 col-lg-2 mt-1">
-                <button  class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="sortMenu">Sort <mat-icon>keyboard_arrow_down</mat-icon></button>
-              </div>
-              <div class="col-sm-3 col-lg-2 mt-1">
-                <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="discountMenu">Discount<mat-icon>keyboard_arrow_down</mat-icon></button>
-              </div>
+          <div class="col-sm-3 col-lg-2 mt-1 p-0">
+            <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="priceMenu">Price <mat-icon>keyboard_arrow_down</mat-icon></button>
+          </div>
+          <div class="col-sm-3 col-lg-2 mt-1 p-0">
+            <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="brandMenu">Brand <mat-icon>keyboard_arrow_down</mat-icon></button>
+          </div>
+          <div class="col-sm-3 col-lg-2 mt-1 p-0">
+            <button  class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="sortMenu">Sort <mat-icon>keyboard_arrow_down</mat-icon></button>
+          </div>
+          <div class="col-sm-3 col-lg-2 mt-1 p-0">
+            <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="discountMenu">Discount<mat-icon>keyboard_arrow_down</mat-icon></button>
+          </div>
           <mat-menu #priceMenu ="matMenu">
             <button mat-menu-item (click)="getStream('Ayurvedic')">Below rs.100</button>
             <button mat-menu-item (click)="getStream('Allopathic')">Rs.100 - Rs.200</button>
@@ -92,20 +81,18 @@
     </div>
 
     <div class="row mt-2">
-      <div class="col-md-1 ">
-      </div>
       <div class="col-sm-12 col-md-8 col-lg-9">
 
         <mat-tab-group>
-          <mat-tab label="Vertical View">
 
+          <mat-tab label="Vertical View">
             <div class="row bg-white mt-2">
               <div class="col-12">
                 <p class="m-0 top-title">Tablets</p>
               </div>
               <div class="col-12 element" [ngClass]="tablets ? 'display-in-block' : 'display-in-line'">
 
-                <div class="col-md-3" *ngFor="let tab of tablet">
+                <div class="col-sm-6 col-md-3 " *ngFor="let tab of tablet">
                   <div  class="card card-product card-plain no-shadow doc-card" (click)="goToMedecine(1)">
                     <div class="card-header card-header-image">
                       <a href="#">
@@ -113,17 +100,19 @@
                       </a>
                     </div>
                     <div class="card-body">
-                      <div>
+                      <div class="">
                         <p class="m-0">{{tab.name}} <label class="brand-name">({{tab.brand}})</label></p>
                       </div>
-                      <div>
-                        <span class="description">
-                          {{tab.pieces}} pieces
-                        </span>
-                        <span class="stock">{{tab.stock}} stock</span>
+                      <div class="row">
+                        <div class="col-12">
+                          <span class="description col-">
+                            {{tab.pieces}} pieces
+                          </span>
+                          <span class="stock ml-2">{{tab.stock}} stock</span>
+                        </div>
                       </div>
                       <mat-divider></mat-divider>
-                      <div class="mt-2">
+                      <div class="mt-2" >
                         <div class="price-container">
                           <span>Rs.{{tab.price}}</span>
                           <span class="btn btn-link cart-label">Add to cart</span>
@@ -139,6 +128,7 @@
               <div class="col-12">
                 <p class="m-0 top-title">Capsules</p>
               </div>
+
               <div class="col-12 element" [ngClass]="capsules ? 'display-in-block' : 'display-in-line'">
                 <div class="col-md-2" *ngFor="let i of items">
                   <div class="card card-product card-plain no-shadow doc-card" (click)="goToMedecine(2)">
@@ -192,6 +182,7 @@
             </div>
 
           </mat-tab>
+
           <mat-tab label="Horizontal View">
             <mat-card class="example-card mt-2" *ngFor="let tab of tablet">
               <mat-card-content>
