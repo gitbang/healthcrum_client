@@ -2,7 +2,7 @@
   <div class="container-fluid pt-4">
 
     <div class="row">
-      <div class="col-2"></div>
+      <div class="col-1"></div>
       <div class="col-md-7 ">
         <div style="display:flex;border-radius: 5px;overflow: hidden;background: #fff;;">
           <div class="city-box">
@@ -25,12 +25,19 @@
                 class="search-box-input" 
                 type="text" 
                 #toggleButton
-                placeholder= "Search Doctor"
+                placeholder= "Search Medicine"
+                (keyup.enter)="searchBar()"
               >
             </div>
             <mat-icon matSuffix class="search-icon" style="align-self: center; cursor : pointer;" (click)=" searchBar()">search</mat-icon>
           </div>
         </div>   
+      </div>
+      <div class=""> 
+        <button class="btn btn-info"> Cart <mat-icon>add_shopping_cart</mat-icon></button>
+      </div>
+      <div class="ordernow" style="padding-left : 3px">
+        <button class="btn btn-custom" (click)="proceed()">Proceed</button>
       </div>
     </div>
 

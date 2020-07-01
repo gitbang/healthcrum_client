@@ -32,35 +32,8 @@ export class BloodTestComponent implements OnInit {
   cities: any = [];
   filteredCities: Observable<string[]>;
   search_city: string;
-  stateList: string[] = [
-    // "Andhra Pradesh",
-    // "Arunachal Pradesh",
-    // "Assam",
-    // "Bihar",
-    // "Chandigarh",
-    // "Chhattisgarh",
-    // "Delhi",
-    // "Goa",
-    // "Gujarat",
-    // "Haryana",
-    // "Himachal Pradesh",
-    // "Jharkhand",
-    // "Karnataka",
-    // "Kerala",
-    // "Madhya Pradesh",
-    // "Maharashtra",
-    // "Odisha",
-    // "Puducherry",
-    // "Punjab",
-    // "Rajasthan",
-    // "Sikkim",
-    // "Tamil Nadu",
-    // "Telangana",
-    // "Tripura",
-    // "Uttarakhand",
-    // "Uttar Pradesh",
-    // "West Bengal",
-  ];
+  stateList: string[] = [];
+  isLogin : boolean;
   cityList: string[] = ["city1", "city2", "city3"];
   locationList: string[] = ["Location1", "Location2", "Location3"];
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -87,29 +60,23 @@ export class BloodTestComponent implements OnInit {
       startWith(null),
       map((fruit: string | null) => fruit ? this._filterfruit(fruit) : this.allFruits.slice()));
   
-    this.service.currentCart.subscribe((result)=>{
-      //console.log("my cart", result)
-      if(result.length > 0) {
-        this.mycart = result
-      }
-    })
-
-    this.service.currentCompleteCart.subscribe((result)=>{
-      //console.log(result);
-      this.myCartComplete = result;
-    })
-  }
-
-  ngAfterViewInit() {
-    // this.renderer.listen('window', 'click',(e:Event)=> {   
-    //  if(e.target !== this.toggleButton.nativeElement && e.target !== this.menu.nativeElement){
-    //      //this.isSearched = false
+    // this.service.currentCart.subscribe((result)=>{
+    //   //console.log("my cart in blood test", result)
+    //   if(result.length > 0) {
+    //     this.mycart = result
     //   }
-    // });
+    // })
   }
 
   ngOnInit() {
     // this.getLocation();
+    this.isLogin= this.service.checkLogin();
+    
+    if(this.isLogin)
+      this.cartfromServer();
+    else
+      this.cartfromClient(); 
+
     this.ratingArray = Array(5).fill(0);
     this.getIpClientLocation();
     this.filteredCities = this.myControl.valueChanges.pipe(
@@ -117,19 +84,7 @@ export class BloodTestComponent implements OnInit {
       map((value) => this._filter(value))
     );
 
-    //this.myControl.valueChanges.subscribe((value) => this.getCities(value));
-
-    // this.filteredSearch = this.mycontrol.valueChanges.pipe(
-    //   startWith('' ),
-    //   map(value =>this.filtersearch(value))
-    // )
-
-    /*--------------------api to fetch bloodtest-------------------*/
-
-    // this.service.bloodTestFetchAllTest().subscribe((result)=>{
-    //   console.log("in fetch api")
-    //   console.log(result)
-    // })
+  
     this.fetchbloodtest();
 
     // this.ratingArray = Array(5).fill(0)
@@ -139,8 +94,21 @@ export class BloodTestComponent implements OnInit {
       this.horizontal = false;
     }
   }
-
-
+  //--------fetch cart info---------//
+  cartfromClient(){
+    console.log("from client")
+    this.service.currentCompleteCart.subscribe((result)=>{
+      console.log("my cart in blood test",result);
+      this.myCartComplete = result;
+      this.mycart = []
+      result.forEach(test=>{
+        this.mycart.push(test._id)
+      })
+    })
+  }
+  cartfromServer(){
+    console.log("from server")
+  } 
   /* -----------------cart open----------------------*/
   proceed(){
     this.router.navigateByUrl('blood-test/mycart/12345')
@@ -550,7 +518,7 @@ export class BloodTestComponent implements OnInit {
         })
         this.shownresultarray.push(add)
         this.singleTest = list
-      }
+      } 
       if(result.ProfileTests.length > 0) {
         let add ;
         let list : Array<string> = []
@@ -619,14 +587,19 @@ export class BloodTestComponent implements OnInit {
   }
 
   mycart: string[]= []      // collect _id of the packages 
-  myCartComplete;
+  myCartComplete = [];
+
   addTocart(index : number){
-    this.mycart.push(this.shownresultarray[index]._id)
-    this.myCartComplete.push(this.shownresultarray[index]);
-    this.snackbar.open("Package", "Added",  {
-      duration : 1000
-    })
-    this.pushtoService();
+    if(this.isLogin){
+      
+    } else{
+      this.mycart.push(this.shownresultarray[index]._id)
+      this.myCartComplete.push(this.shownresultarray[index]);
+      this.snackbar.open("Package", "Added",  {
+        duration : 1000
+      })
+      this.pushtoService();
+    }
   }
   pushtoService(){
     this.service.changeMessage(this.mycart);

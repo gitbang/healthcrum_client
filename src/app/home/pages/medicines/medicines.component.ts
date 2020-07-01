@@ -142,13 +142,15 @@ export class MedicinesComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  //--------------- search bae -----------------//
+  //--------------- search bar -----------------//
   searchText = new FormControl();
   searchBar(){
     console.log(this.searchText.value)
     console.log("search bar")
   }
-
+  proceed(){
+    console.log("proceed")
+  }
 
   tablet = [
     {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},

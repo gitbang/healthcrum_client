@@ -346,6 +346,10 @@ a{
   animation: glow 1s ease-in-out infinite alternate;
 }
 
+.small-radius{
+  border-radius: 5px !important;
+}
+
 .btn-custom {
   background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
 }
