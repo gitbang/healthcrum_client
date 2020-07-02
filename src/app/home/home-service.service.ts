@@ -37,7 +37,7 @@ export class HomeServiceService {
 
   /*---------------- blood test component ---------------*/
 
-  //-----------user cart ----------------//
+  //-----------user cart from client ----------------//
   private messageSource = new BehaviorSubject([]);
   currentCart = this.messageSource.asObservable();
 
@@ -51,13 +51,28 @@ export class HomeServiceService {
 
   addCompleteDetailsToCart(data ) {
     this.cartSource.next(data)
-    console.log("service reached ", this.cartSource.value)
+    //console.log("service reached ", this.cartSource.value)
 
     localStorage.setItem("test", JSON.stringify(data) )
     let fetchtest =  JSON.parse(localStorage.getItem('test'));
-    console.log("local",fetchtest)
+    //console.log("local",fetchtest)
   }
-
+  //--cart from server--//
+  bloodTestGetCartServer(userId : string) : Observable<any>{
+    return this.http
+              .get(this.url + "/cart/save/test/" + userId)
+              .pipe(retry(2), catchError(this.handleError))
+  }
+  bloodTestPostCartServer(userId : string, data: Object) : Observable<any>{
+    return this.http
+              .post(this.url + "/cart/save/test/" + userId, data)
+              .pipe(retry(2), catchError(this.handleError))
+  }
+  bloodTestDeleteCartServer(userId : string, packId : string ) : Observable<any>{
+    return this.http
+              .post(this.url + "/cart/delete/test/" + userId, {testId : packId})
+              .pipe(retry(2), catchError(this.handleError))
+  }
   bloodTestApplyFilters(filter) : Observable<any> {
     return this.http
             .post(this.url+ '/bloodtest/filters', filter, this.option)
@@ -178,8 +193,4 @@ export class HomeServiceService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-
 } 
-
-
-

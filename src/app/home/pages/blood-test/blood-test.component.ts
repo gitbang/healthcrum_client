@@ -14,6 +14,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {HomeServiceService} from '../../home-service.service'
+import { TestBed } from "@angular/core/testing";
 
 export interface Fruit {
   name : string
@@ -27,7 +28,7 @@ export interface Fruit {
 export class BloodTestComponent implements OnInit {
   myControl = new FormControl();
   isSearched: boolean = false;
-  
+  userId : string = "1234";
   city: string;
   cities: any = [];
   filteredCities: Observable<string[]>;
@@ -83,13 +84,11 @@ export class BloodTestComponent implements OnInit {
       startWith(""),
       map((value) => this._filter(value))
     );
-
   
     this.fetchbloodtest();
 
     // this.ratingArray = Array(5).fill(0)
     
-
     if(window.innerWidth < 1200){
       this.horizontal = false;
     }
@@ -106,9 +105,44 @@ export class BloodTestComponent implements OnInit {
       })
     })
   }
+
   cartfromServer(){
     console.log("from server")
+    this.service.bloodTestGetCartServer(this.userId).subscribe((result)=>{
+      if(result.success){
+
+        this.myCartComplete = [];
+        this.mycart = []
+        console.log("cart from backend", result)
+        result.data.forEach(test =>{
+          console.log("lab id",test.labId)
+          let add;
+          let offerprice = test.offerPrice;
+          let marketprice = test.mrp
+          let offers  = test.offerPrice / test.mrp * 100;
+          
+          offers = 100 - Math.round(offers)
+          let parameters = 1
+          if(test.individualTests) {
+             parameters = test.individualTests.length;
+          } 
+         
+          add = {...test, offer : offers, parameters :parameters, offerprice : offerprice, marketprice  : marketprice }
+          this.myCartComplete.push(add)
+          this.mycart.push(test._id)
+        })
+        console.log("")
+        this.pushtoService()
+       // console.log("my cart complete", this.myCartComplete)
+
+      } else {
+        console.log("success false", result)
+      }
+    })
+   
   } 
+
+
   /* -----------------cart open----------------------*/
   proceed(){
     this.router.navigateByUrl('blood-test/mycart/12345')
@@ -135,16 +169,13 @@ export class BloodTestComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.profileTest.filter( test => test.toLowerCase().includes(filterValue));
   }
+
   filtersingletest(value){
     const filterValue = value.toLowerCase();
     return this.singleTest.filter( test => test.toLowerCase().includes(filterValue));
-      // this.fromdatabase.SingleTests.forEach(element => {
-      //   return (element.name.toLowerCase().includes(filterValue))  ? "a" : "";
-      // });
   }
+
   filterpackagetest(value){
-    // console.log("profile test");
-    //console.log(value)
     const filterValue = value.toLowerCase();
     return this.packageTest.filter( test => test.toLowerCase().includes(filterValue));
   }
@@ -331,40 +362,6 @@ export class BloodTestComponent implements OnInit {
     }
   }
 
-  viewDoctor(index) {
-    this.router.navigate(["/view-doctor", 1]);
-  }
-
-  showNext() {
-    this.items = [];
-    this.isNext = true;
-    this.i++;
-    setTimeout(() => {
-      for (let i = 1; i <= 12; i++) {
-        this.items.push(Math.floor(Math.random() * 100));
-      }
-    }, 100);
-
-    window.scrollTo(0, 0);
-  }
-
-  showPrev() {
-    this.items = [];
-    setTimeout(() => {
-      if (this.i > 1) {
-        this.i--;
-        for (let i = 1; i <= 12; i++) {
-          this.items.push(Math.floor(Math.random() * 100));
-        }
-      } else {
-        this.isNext = false;
-        this.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-      }
-    }, 100);
-
-    window.scrollTo(0, 0);
-  }
-
   getCities(value) {
     if (value.length > 2) {
       let url =
@@ -403,16 +400,12 @@ export class BloodTestComponent implements OnInit {
   }
   
   isSearching(event: Event) {
-   // console.log(this.searchText.length)
+   
     if (this.searchText.length == 1) {
       this.isSearched = true;
     } else {
       this.isSearched = false;
     }
-  }
-
-  searchNow(event: Event) {
-   // console.log(this.searchText);
   }
 
   setCurrentLocation() {
@@ -479,7 +472,8 @@ export class BloodTestComponent implements OnInit {
             what : pack.what,
             why : pack.why,
             when : pack.when,
-            offer : offers
+            offer : offers,
+            labId : pack.lab._id
           }
         })
         this.shownresultarray.push(add)
@@ -513,7 +507,8 @@ export class BloodTestComponent implements OnInit {
             what : pack.what,
             why : pack.why,
             when : pack.when,
-            offer : offers
+            offer : offers,
+            labId : pack.lab._id
           }
         })
         this.shownresultarray.push(add)
@@ -546,7 +541,8 @@ export class BloodTestComponent implements OnInit {
             what : pack.what,
             why : pack.why,
             when : pack.when,
-            offer : offers
+            offer : offers,
+            labId : pack.lab._id
           }
         })
         this.shownresultarray.push(add)
@@ -569,6 +565,7 @@ export class BloodTestComponent implements OnInit {
       offerprice : 800,
       labLogo : "./assets/img/consulation/logo.png",
       fasting : "yes",
+      labId : "1234"
     },
   ]
 
@@ -590,8 +587,24 @@ export class BloodTestComponent implements OnInit {
   myCartComplete = [];
 
   addTocart(index : number){
+    console.log("add to cart", this.shownresultarray[index]);
     if(this.isLogin){
       
+      console.log("add to cart from server")
+      let toSend = {
+        testId : this.shownresultarray[index]._id,
+        labId  : this.shownresultarray[index].labId,
+        type   : this.shownresultarray[index].type,
+      }
+      this.service.bloodTestPostCartServer(this.userId, toSend).subscribe((result)=>{
+        if(result.success) {
+          console.log("success", result)
+          this.cartfromServer();
+        } else {
+          console.log("unable to store", result)
+        }
+      })
+
     } else{
       this.mycart.push(this.shownresultarray[index]._id)
       this.myCartComplete.push(this.shownresultarray[index]);
@@ -606,13 +619,31 @@ export class BloodTestComponent implements OnInit {
     this.service.addCompleteDetailsToCart(this.myCartComplete);
   }
   removeFromcart(index : number) {
-    let _id = this.shownresultarray[index]._id
-    this.mycart = this.mycart.filter((x)=> _id != x)
-    this.myCartComplete = this.myCartComplete.filter((x)=> x._id != _id)
-    this.snackbar.open("Package", "Removed", {
-      duration : 1000
-    })
-    this.pushtoService();
+
+    if(this.isLogin) {
+
+      this.service.bloodTestDeleteCartServer(this.userId, this.myCartComplete[index]._id)
+        .subscribe((result)=>{
+          if(result.success) {
+            console.log(result)
+
+            this.cartfromServer();
+          } else {
+            console.log("unable to delete from cart", result)
+          }
+        })
+
+    } else {
+
+      let _id = this.shownresultarray[index]._id
+      this.mycart = this.mycart.filter((x)=> _id != x)
+      this.myCartComplete = this.myCartComplete.filter((x)=> x._id != _id)
+      this.snackbar.open("Package", "Removed", {
+        duration : 1000
+      })
+      this.pushtoService();
+
+    } 
   }
 
   checkcart(_id : string) {
