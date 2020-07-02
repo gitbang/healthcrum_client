@@ -599,6 +599,9 @@ export class BloodTestComponent implements OnInit {
       this.service.bloodTestPostCartServer(this.userId, toSend).subscribe((result)=>{
         if(result.success) {
           console.log("success", result)
+          this.snackbar.open("Package", "Added", {
+            duration : 1000
+          })
           this.cartfromServer();
         } else {
           console.log("unable to store", result)
@@ -626,7 +629,9 @@ export class BloodTestComponent implements OnInit {
         .subscribe((result)=>{
           if(result.success) {
             console.log(result)
-
+            this.snackbar.open("Package", "Removed", {
+              duration : 1000
+            })
             this.cartfromServer();
           } else {
             console.log("unable to delete from cart", result)

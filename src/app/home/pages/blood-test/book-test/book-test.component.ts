@@ -71,16 +71,17 @@ export class BookTestComponent implements OnInit {
   }   
 
   fireAlert() {
-    Swal.fire(
-      "Oops!", 
-      "Your cart is empty!",
-      "error")
-       .then(result =>{
-         //console.log(result)
-         if(result.value) {
-          this.router.navigateByUrl("blood-test")  
-        }
-    });
+    // Swal.fire(
+    //   "Oops!", 
+    //   "Your cart is empty!",
+    //   "error")
+    //    .then(result =>{
+    //      //console.log(result)
+    //      if(result.value) {
+         
+    //     }
+    // });
+    this.router.navigateByUrl("blood-test")  
   }
 
   getSingleTest(){
@@ -329,6 +330,8 @@ export class BookTestComponent implements OnInit {
   }
 
   deletefromCart(index : number) {
+    console.log(index)
+    console.log(this.userCompleteCart)
     console.log("id to deleted",this.userCompleteCart[index]._id)
     Swal.fire({
       title: 'Are you sure?',
@@ -341,36 +344,37 @@ export class BookTestComponent implements OnInit {
     }).then((result) => {
       
       if (result.value) {
-        //this.shownresultarrays.splice(index, 1);
+        console.log(this.userCompleteCart[index])
         this.service.bloodTestDeleteCartServer(this.userId, this.userCompleteCart[index]._id)
         .subscribe((result)=>{
           if(result.success) {
             console.log(result)
+            this.userCompleteCart.splice(index, 1);
+            console.log("in delete", this.userCompleteCart)
+            console.log(this.mycart)
+            this.mycart.splice(index, 1);
+            this.service.changeMessage(this.mycart);
+            this.testfor.removeAt(index);
+            this.pricearray.removeAt(index);
+            
+            this.sumall();
+            if(this.fromCart) {                               // it checks whether user click on booknow or proceed.
+              this.service.addCompleteDetailsToCart(this.userCompleteCart);
+              this.getUsercart();
+            } else {
+              this.service.bookSingleTest(this.userCompleteCart);
+              this.getSingleTest();
+            }
+            Swal.fire(
+              'Deleted!',
+              'Your packge has been deleted.',
+              'success'
+            )
           } else {
             console.log("unable to delete from cart", result)
           }
         })
-        this.userCompleteCart.splice(index, 1);
-        console.log("in delete", this.userCompleteCart)
-        console.log(this.mycart)
-        this.mycart.splice(index, 1);
-        this.service.changeMessage(this.mycart);
-        this.testfor.removeAt(index);
-        this.pricearray.removeAt(index);
-        
-        this.sumall();
-        if(this.fromCart) {                               // it checks whether user click on booknow or proceed.
-          this.service.addCompleteDetailsToCart(this.userCompleteCart);
-          this.getUsercart();
-        } else {
-          this.service.bookSingleTest(this.userCompleteCart);
-          this.getSingleTest();
-        }
-        Swal.fire(
-          'Deleted!',
-          'Your packge has been deleted.',
-          'success'
-        )
+       
       }
     })
   }
