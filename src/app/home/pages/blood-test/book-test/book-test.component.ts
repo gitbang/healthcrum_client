@@ -22,8 +22,8 @@ export interface Member {
 })
 export class BookTestComponent implements OnInit {
 
-  userId : string = "123456";
-  
+  //userId : string = "1234";
+  userId : string = "5e8efa895b324a3e4c97a278";
   constructor(
     private router : Router,
     private service : HomeServiceService,
@@ -59,11 +59,15 @@ export class BookTestComponent implements OnInit {
     })
     this.sumAfteroffer = 0;
     this.totalsum = 0;
+    this.mycart = [];
     this.userCompleteCart.forEach(x =>{
+      this.mycart.push(x._id)
       console.log("in loop : ", x)
       this.totalsum += x.marketprice;
       this.sumAfteroffer += x.offerprice;
     })
+  
+    this.addGrop(this.userCompleteCart.length);
   }   
 
   fireAlert() {
@@ -94,32 +98,100 @@ export class BookTestComponent implements OnInit {
     }
     this.totalsum += this.shownresultarrays[0].marketprice;
     this.sumAfteroffer += this.shownresultarrays[0].offerprice;
+    this.addGrop(this.userCompleteCart.length); 
   }
 
   totalsum : number = 0;
   sumAfteroffer : number = 0;
+  isLogin : boolean = false;
+  toshow : boolean = false;
 
   ngOnInit() {
+
+    this.isLogin= this.service.checkLogin();
+
     this.getrelatives();
 
     this.route.url.subscribe((result)=>{
-    //  console.log("url",result)
-      if(result[1].path == "mycart") {
-        this.getUsercart();
-        this.fromCart = true
+      if(this.isLogin){
+
+        if(result[1].path == "mycart") {
+          this.cartfromServer();
+          this.fromCart = true;
+        } else {
+          this.getSingleTest();
+          this.fromCart = false 
+        }
+
       } else {
-        this.getSingleTest();
-        this.fromCart = false 
+
+        if(result[1].path == "mycart") {
+          this.getUsercart();
+          this.fromCart = true;
+        } else {
+          this.getSingleTest();
+          this.fromCart = false 
+        }
+        // this.addGrop(this.userCompleteCart.length);
+
       }
     })
+  }
 
-    // api to fetch total relatives;
-
-    for(let i = 0; i < this.userCompleteCart.length; i++) {
+  addGrop(length : number){
+    console.log("in add grop : length", length)
+    if(length > 0) 
+      this.toshow = true
+    else 
+      this.toshow = false
+    for(let i = 0; i < length; i++) {
       this.addgroup();
       this.testForMe(true,  i)
     }
+    console.log("to show ", this.toshow)
+  }
 
+  myCartComplete;
+
+  cartfromServer(){
+    console.log("from server")
+    this.service.bloodTestGetCartServer(this.userId).subscribe((result)=>{
+      if(result.success){
+        this.myCartComplete = [];
+        this.mycart = []
+        console.log("cart from backend", result)
+        result.data.forEach(test =>{
+          console.log("lab id",test.labId)
+          let add;
+          let offerprice = test.offerPrice;
+          let marketprice = test.mrp
+          let offers  = test.offerPrice / test.mrp * 100;
+          
+          offers = 100 - Math.round(offers)
+          let parameters = 1
+          if(test.individualTests) {
+             parameters = test.individualTests.length;
+          } 
+         
+          add = {...test, offer : offers, parameters :parameters, offerprice : offerprice, marketprice  : marketprice }
+          this.myCartComplete.push(add)
+          this.mycart.push(test._id)
+        })
+        console.log("my cart complete")
+        console.log(this.myCartComplete)
+
+        this.pushtoService()
+        
+      } else {
+        console.log("success false", result)
+      }
+    })
+  } 
+
+  pushtoService(){
+    this.service.changeMessage(this.mycart);
+    this.service.addCompleteDetailsToCart(this.myCartComplete);
+    this.getUsercart();
   }
 
   getfilteredMembers(){
@@ -129,9 +201,9 @@ export class BookTestComponent implements OnInit {
     );
   }
 
-
   fromCart : boolean 
   relativeData ;
+  
   getrelatives(){
     this.service.bloodTestFetchMember(this.myId).subscribe((result)=>{
    //   console.log("result in get relatives api",result)
@@ -152,7 +224,7 @@ export class BookTestComponent implements OnInit {
   }
 
 
-   add(event: MatChipInputEvent): void {
+  add(event: MatChipInputEvent): void {
    //  console.log("add executed")
     const input = event.input;
     const value = event.value;
@@ -167,12 +239,11 @@ export class BookTestComponent implements OnInit {
   }
 
   remove(member: string, i: number): void {
-  //  console.log(member, i)
+
     const index = this.testfor.value[i].otherlist.indexOf(member);
-  //  console.log("index is : ", index)
+  
     if (index >= 0) {
-      // this.members.splice(index, 1);
-      // this.testfor.value[index].otherlist = this.members;
+    
       this.testfor.value[i].otherlist.splice(index, 1);
       this.allID.others.splice(index, 1);
     }
@@ -183,18 +254,12 @@ export class BookTestComponent implements OnInit {
 
     this.memberInput.nativeElement.value = '';
     this.memberCtrl.setValue(null);
-    //console.log(this.testfor.value[index])
-    //console.log("members are : ",this.members)
-   // console.log("in selected", this.relativeData)
-    // console.log(this.allID.others);
-    // console.log(this.relativeData.members[index]._id)
-   
+    
     console.log("event is : ", event)
-    //if(!this.allID.others.includes(this.relativeData.members[index]._id)){
+    
     if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
       this.testfor.value[index].otherlist.push(event.option.viewValue);      
       this.allID.others.push(this.relativeData.members[index]._id)
-     // console.log("in reached")
     }
 
    // console.log("total members selected",this.testfor.value[index].otherlist.length)
@@ -227,7 +292,8 @@ export class BookTestComponent implements OnInit {
   userlogin : boolean = true
   usercart ;
   userCompleteCart;
-  
+  show : boolean = false;
+
   myId : string = "5e8efa895b324a3e4c97a278";
 
   shownresultarrays =[
@@ -263,6 +329,7 @@ export class BookTestComponent implements OnInit {
   }
 
   deletefromCart(index : number) {
+    console.log("id to deleted",this.userCompleteCart[index]._id)
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -272,14 +339,25 @@ export class BookTestComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
+      
       if (result.value) {
         //this.shownresultarrays.splice(index, 1);
+        this.service.bloodTestDeleteCartServer(this.userId, this.userCompleteCart[index]._id)
+        .subscribe((result)=>{
+          if(result.success) {
+            console.log(result)
+          } else {
+            console.log("unable to delete from cart", result)
+          }
+        })
         this.userCompleteCart.splice(index, 1);
         console.log("in delete", this.userCompleteCart)
+        console.log(this.mycart)
         this.mycart.splice(index, 1);
         this.service.changeMessage(this.mycart);
         this.testfor.removeAt(index);
         this.pricearray.removeAt(index);
+        
         this.sumall();
         if(this.fromCart) {                               // it checks whether user click on booknow or proceed.
           this.service.addCompleteDetailsToCart(this.userCompleteCart);

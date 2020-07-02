@@ -28,7 +28,8 @@ export interface Fruit {
 export class BloodTestComponent implements OnInit {
   myControl = new FormControl();
   isSearched: boolean = false;
-  userId : string = "1234";
+  //userId : string = "1234";
+  userId : string = "5e8efa895b324a3e4c97a278";
   city: string;
   cities: any = [];
   filteredCities: Observable<string[]>;
@@ -133,7 +134,6 @@ export class BloodTestComponent implements OnInit {
         })
         console.log("")
         this.pushtoService()
-       // console.log("my cart complete", this.myCartComplete)
 
       } else {
         console.log("success false", result)
@@ -621,8 +621,8 @@ export class BloodTestComponent implements OnInit {
   removeFromcart(index : number) {
 
     if(this.isLogin) {
-
-      this.service.bloodTestDeleteCartServer(this.userId, this.myCartComplete[index]._id)
+      console.log(this.myCartComplete)
+      this.service.bloodTestDeleteCartServer(this.userId, this.shownresultarray[index]._id)
         .subscribe((result)=>{
           if(result.success) {
             console.log(result)
