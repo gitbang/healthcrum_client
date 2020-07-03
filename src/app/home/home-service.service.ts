@@ -181,6 +181,14 @@ export class HomeServiceService {
               .pipe(retry(2), catchError(this.handleError))
   }
 
+
+  //------------- Medicine ----------//
+
+  medicinePrescriptionUpload(data) : Observable<any>{
+    return this.http.post(this.url  + " ", data )
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -193,4 +201,6 @@ export class HomeServiceService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+
+
 } 

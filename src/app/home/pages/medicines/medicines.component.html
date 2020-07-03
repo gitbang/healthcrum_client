@@ -1,7 +1,83 @@
 <main>
   <div class="container-fluid pt-4">
 
-    <div class="row">
+    <div class="row top-details pb-4">
+      <div class="col-sm-3 mt-4">
+        <mat-card class="example-card mat-card text-center" (click)="uploadPrescription()">
+          <mat-card-header>
+            <mat-card-title>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-1 padding-zero">
+                    <mat-icon >cloud_upload</mat-icon>
+                  </div>
+                  <div class="col-11">
+                     Upload prescription
+                  </div>
+                </div>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div class="col-sm-3 mt-4 pointer">
+        <mat-card class="example-card mat-card text-center" (click)="prescribeByHealthCrumDoctor()">
+          <mat-card-header>
+            <mat-card-title>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-1 padding-zero">
+                    <mat-icon >description</mat-icon>
+                  </div>
+                  <div class="col-11">
+                    Prescribe by healthcrum doctor
+                  </div>
+                </div>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div class="col-sm-3 mt-4 pointer">
+        <!-- <button class="btn btn-warning"></button> -->
+        <mat-card class="example-card mat-card text-center" (click)="uploadPrescription()">
+          <mat-card-header>
+            <mat-card-title>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-1 padding-zero">
+                    <mat-icon>announcement</mat-icon>
+                  </div>
+                  <div class="col-11">
+                    Uploaded Prescription
+                  </div>
+                </div>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div class="col-sm-3 mt-4 pointer">
+        <mat-card class="example-card mat-card text-center" (click)="onlineConsultation()">
+          <mat-card-header>
+            <mat-card-title>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-1 padding-zero">
+                    <mat-icon>account_box</mat-icon>
+                  </div>
+                  <div class="col-11">
+                    Take online consultation
+                  </div>
+                </div>
+              </div>
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row mt-4">
       <div class="col-1"></div>
       <div class="col-md-7 ">
         <div style="display:flex;border-radius: 5px;overflow: hidden;background: #fff;;">
@@ -42,8 +118,8 @@
     </div>
 
     <div class="row mt-4">
-      <div class="col-md-12">   
-        <mat-toolbar class="top-navbar">
+      <div class="col-md-12 padding-null" >   
+        <mat-toolbar class="top-navbar padding-null">
           <div class="col-sm-3 col-lg-2 mt-1 p-0">
             <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="priceMenu">Price <mat-icon>keyboard_arrow_down</mat-icon></button>
           </div>
@@ -57,14 +133,14 @@
             <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="discountMenu">Discount<mat-icon>keyboard_arrow_down</mat-icon></button>
           </div>
           <mat-menu #priceMenu ="matMenu">
-            <button mat-menu-item (click)="getStream('Ayurvedic')">Below rs.100</button>
-            <button mat-menu-item (click)="getStream('Allopathic')">Rs.100 - Rs.200</button>
-            <button mat-menu-item (click)="getStream('Homeophathic')">Above Rs.200</button>
+            <button mat-menu-item (click)="price(100)">Below rs.100</button>
+            <button mat-menu-item (click)="price(200)">Rs.100 - Rs.200</button>
+            <button mat-menu-item (click)="price()">Above Rs.200</button>
           </mat-menu>
           
           <mat-menu #brandMenu ="matMenu">
             <div clas="col-12">
-              <div clas="row">
+              <div clas="row" style="padding-left : 10px">
                 <div clas="col-md-6" *ngFor="let brand of brands">
                   <mat-checkbox>{{brand}}</mat-checkbox>
                 </div>
@@ -74,13 +150,13 @@
           </mat-menu>
 
           <mat-menu #sortMenu ="matMenu">
-            <button mat-menu-item (click)="getGender('male')" >Increasing price </button>
-            <button mat-menu-item (click)="getGender('female')">Decreasing price</button>
+            <button mat-menu-item (click)="sortMedicine(true)" >Increasing price </button>
+            <button mat-menu-item (click)="sortMedicine(false)">Decreasing price</button>
           </mat-menu>
 
           <mat-menu #discountMenu ="matMenu">
-            <button mat-menu-item (click)="getRating(1)">50%</button>
-            <button mat-menu-item (click)="getRating(2)">60%</button>
+            <button mat-menu-item (click)="discount(1)">50%</button>
+            <button mat-menu-item (click)="discount(2)">60%</button>
           </mat-menu>
 
         </mat-toolbar>
@@ -191,7 +267,7 @@
           </mat-tab>
 
           <mat-tab label="Horizontal View">
-            <mat-card class="example-card mt-2" *ngFor="let tab of tablet">
+            <mat-card class=" mt-2" *ngFor="let tab of tablet">
               <mat-card-content>
                 <div class="col-12">
                   <div class="row">
@@ -205,7 +281,7 @@
                       <div class="row">
                         <div class="col-12 justify-content-center">
                           <h3 class="heading-name">{{tab.name}}</h3>
-                          <span>{{tab.brand}} | {{tab.stock}} stock</span>
+                          <span class="heading-span">{{tab.brand}} | {{tab.stock}} stock</span>
                         </div>
                         <div class="price-div col-12 mt-4 justify-content-center">
                           <h4 class="main-price">

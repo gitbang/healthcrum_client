@@ -1,0 +1,30 @@
+.btn-success {
+    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+  }
+.btn-success:hover {
+  background: linear-gradient(to right, rgb(4, 158, 112), #107d6e);
+}
+.margin-four{
+  margin-top: 3rem;
+}
+.text-center {
+  text-align: center;
+}
+.top-heading{
+  margin-top: -35px;
+}
+.otp-div{
+  margin-top: -50px;
+}
+.otp-img{
+  width: 400px;
+}
+.mat-dialog-container{
+  padding: 0;
+}
+@media only screen and (max-width : 500px) {
+  .oto-img{
+    width: 220px;
+  }
+}
+

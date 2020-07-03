@@ -1,0 +1,70 @@
+<div class="card card-signup card-plain">
+  <div class="row top-heading" >
+    <h5 class="col-11">Upload Prescription</h5>
+    <button type="button" class="close" (click)="closeDialog()">
+      <i class="material-icons">clear</i>
+    </button>
+  </div>
+  <div >
+    <div>
+      <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="registerationForm" *ngIf="!isLogin">
+          <form [formGroup]="registerationForm">
+            <ng-template matStepLabel>Member Personal Info</ng-template>
+            <div class="row margin-four">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Employee Name" formControlName="name" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Contact Number</mat-label>
+                  <input matInput type="number" placeholder="Contact Number" formControlName="phoneNo" required
+                    pattern="[1-9]{1}[0-9]{9}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row margin-four">
+              <div class="col-md-6">
+                <input type="file" #pdfFile accept=".pdf" (change)="filechanged($event)">
+              </div>
+              <div class="col-md-6">
+                <button mat-button class="btn btn-success"  (click)="submit()" type="button" [disabled]="!registerationForm.valid">Submit</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="secondForm" *ngIf="!isLogin">
+          <ng-template matStepLabel>OTP Verification</ng-template>
+          <div class="row text-center">
+            <div class="col-12 otp-div">
+              <img
+                src="./assets/img/medicine/otp.jpg"
+                class="otp-img"
+              >
+            </div>
+            <div class="col-12">
+              Check your mobile phone for OTP
+            </div>
+            <div class="col-12">
+              <form [formGroup]="secondForm">
+                <mat-form-field appearance="outline"  >
+                <mat-label>Enter OTP</mat-label>
+                <input matInput  placeholder="OTP"
+                    formControlName="otp" required>
+                </mat-form-field>
+              </form>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-info" [disabled]="!secondForm.valid">Verify</button>
+              <button class="btn btn-info ml-2">Resend</button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

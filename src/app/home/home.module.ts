@@ -71,6 +71,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { LandingPageComponent } from './pages/wellness/landing-page/landing-page.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { UploadPrescriptionComponent } from './pages/medicines/upload-prescription/upload-prescription.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ERecieptComponent,
     LandingPageComponent,
     NotFoundComponent,
+    UploadPrescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -145,7 +147,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     DialogContentExampleDialog,
     ViewDetailsComponent,
     AddMemberComponent,
-    BookModelComponent
+    BookModelComponent,
+    UploadPrescriptionComponent
   ],
   providers: [
     {

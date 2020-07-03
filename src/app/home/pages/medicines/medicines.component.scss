@@ -7,12 +7,44 @@
 .element::-webkit-scrollbar {
   width: 0 !important;
 }
+
 .doc-card:hover {
   box-shadow: 0 0 4px 1px #d1d1d1;
   padding: 6px;
   transition: ease-out 0.3s;
   cursor: pointer;
 }
+//---top most -----//
+
+.top-details {
+  background-image: linear-gradient(#00BCD4, white);
+}
+
+.example-card {
+  height: 88px;
+  align-items: center;
+  transition: 1s;
+  
+  &:hover {
+    background-color: #0cbaba;
+    background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+    color: white;
+    cursor: pointer;
+    animation: ease-in;
+    transform: scale(1.1);
+    
+  }
+}
+
+.mat-card-title{
+text-align: center;
+font-size: medium;
+}
+
+.top-navbar {
+  justify-content: center;
+}
+
 .top-title {
   width: fit-content;
   background: #15c9d1;
@@ -91,7 +123,7 @@ $blue : #00A0A8;
 }
 
 .img-class {
-  width: 150px;
+  width: 120px;
 }
 
 .heading-name{
@@ -120,6 +152,9 @@ $blue : #00A0A8;
   color: $blue;
   font-weight: 600;
 }
+.padding-zero {
+  padding : 0;
+}
 
 .btn-custom {
   background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
@@ -130,5 +165,23 @@ $blue : #00A0A8;
 @media only screen and (max-width: 500px){
   .stock {
     float: none;
+  }
+  .padding-null {
+    padding: 0;
+  }
+  .img-class{
+    width: 100px;
+  }
+  .btn-common {
+    padding: 15px 5px;
+  }
+  .heading-name{
+    font-size: larger;
+  }
+  .heading-span{
+    font-size: smaller;
+  }
+  .top-navbar{
+    justify-content: flex-start;
   }
 }

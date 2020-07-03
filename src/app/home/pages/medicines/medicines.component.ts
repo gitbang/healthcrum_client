@@ -8,7 +8,7 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { UserLocationModal } from "app/models/userLocation";
-
+import { UploadPrescriptionComponent } from "./upload-prescription/upload-prescription.component";
 @Component({
   selector: "app-medicines",
   templateUrl: "./medicines.component.html",
@@ -36,6 +36,7 @@ export class MedicinesComponent implements OnInit {
   locationList: string[] = ["Location1", "Location2", "Location3"];
   activeCity : string = null;
   state : string;
+  isLogin : boolean = false;
   // items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   // i: number = 0;
   // isNext: boolean = false;
@@ -44,13 +45,17 @@ export class MedicinesComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private snackbar : MatSnackBar,
-    private location :Location  
+    private location :Location ,
+    private service : HomeServiceService,
+    private dialog : MatDialog
   ) {}
 
   @ViewChild("main", {static : true}) main : ElementRef
 
   ngOnInit() {
     this.getIpClientLocation();
+
+    this.isLogin = this.service.checkLogin();
 
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
@@ -142,6 +147,26 @@ export class MedicinesComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  //----- top most card ------//
+
+  uploadPrescription(){
+    
+    const prescription = this.dialog.open(UploadPrescriptionComponent, {
+       height : '600px',
+      // width : '80%'
+    })
+
+    prescription.afterClosed().subscribe((response)=>{
+      console.log("close", response);
+      if(response.success) {
+        console.log("success")
+      } else {
+        console.log("unsuccess")
+      }
+    })
+    console.log("upload")
+  }
+
   //--------------- search bar -----------------//
   searchText = new FormControl();
   searchBar(){
@@ -152,14 +177,36 @@ export class MedicinesComponent implements OnInit {
     console.log("proceed")
   }
 
+  //----- filters-------//
+  //ascending : boolean = true
+  price(value : number) {
+    console.log("price ", value)
+  }
+  brand(value : string){
+    console.log(value)
+  }
+  sortMedicine(ascending : boolean) {
+    
+    this.tablet.sort((a,b)=>{
+      if(ascending){
+        return a.price - b.price
+      } else {
+        return b.price - a.price
+      }
+    })
+    
+  }
+
   tablet = [
     {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
-    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
-    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
-    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
-    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "out",price : 200,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 300,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "out",price : 400,img : "../../../../assets/img/tablet.png"},
+    {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 500,img : "../../../../assets/img/tablet.png"},
 
   ]
+
+  
 
   brands : string[] = ["Brand1", "Brand2"]
 }
