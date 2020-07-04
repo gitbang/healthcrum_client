@@ -46,6 +46,7 @@ export class UploadPrescriptionComponent implements OnInit {
     } 
   }
 
+  uploadPerentage : number = 60;
   upload(){
     if(this.selectFile != null) {
       console.log(event);
@@ -54,6 +55,11 @@ export class UploadPrescriptionComponent implements OnInit {
       fileData.append('data', this.registerationForm.value )
       console.log(this.registerationForm.value)
       console.log("filedata", fileData)
+
+      if(this.uploadPerentage == 100) {
+        this.dialogRef.close({success : true})
+      }
     }
   }
+
 }

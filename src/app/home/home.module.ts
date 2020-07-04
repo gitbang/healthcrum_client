@@ -72,6 +72,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { LandingPageComponent } from './pages/wellness/landing-page/landing-page.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UploadPrescriptionComponent } from './pages/medicines/upload-prescription/upload-prescription.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { UploadPrescriptionComponent } from './pages/medicines/upload-prescripti
     MatProgressBarModule,
     MatTabsModule,
     AngularFittextModule,
+    MatSliderModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

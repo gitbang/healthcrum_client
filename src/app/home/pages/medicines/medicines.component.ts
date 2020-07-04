@@ -9,6 +9,7 @@ import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { UserLocationModal } from "app/models/userLocation";
 import { UploadPrescriptionComponent } from "./upload-prescription/upload-prescription.component";
+import Swal from "sweetalert2";
 @Component({
   selector: "app-medicines",
   templateUrl: "./medicines.component.html",
@@ -159,6 +160,13 @@ export class MedicinesComponent implements OnInit {
     prescription.afterClosed().subscribe((response)=>{
       console.log("close", response);
       if(response.success) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your file has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
         console.log("success")
       } else {
         console.log("unsuccess")
@@ -179,8 +187,14 @@ export class MedicinesComponent implements OnInit {
 
   //----- filters-------//
   //ascending : boolean = true
+  priceValue : number = 50;
   price(value : number) {
     console.log("price ", value)
+  }
+  updatePrice(event){
+    console.log("price Value",this.priceValue)
+    console.log("price event0", event);
+    this.priceValue = event.value
   }
   brand(value : string){
     console.log(value)
@@ -194,8 +208,100 @@ export class MedicinesComponent implements OnInit {
         return b.price - a.price
       }
     })
-    
   }
+  // arrays of category
+  menuBar = [ 
+    {name : "category1", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category2", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category3", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category4", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category5", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category6", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category7", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category1", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category8", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+  ]
 
   tablet = [
     {name : "Paracetamol",brand : "My Brand",pieces : 10,stock : "In",price : 100,img : "../../../../assets/img/tablet.png"},

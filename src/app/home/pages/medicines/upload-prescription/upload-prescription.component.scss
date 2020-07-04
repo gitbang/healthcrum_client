@@ -1,6 +1,11 @@
+// fot top search bar
+$bg : #eff4f7;
+$yellow :#E87528;
+$blue : #00A0A8;
+
 .btn-success {
-    background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
-  }
+  background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+}
 .btn-success:hover {
   background: linear-gradient(to right, rgb(4, 158, 112), #107d6e);
 }
@@ -22,9 +27,35 @@
 .mat-dialog-container{
   padding: 0;
 }
+.btn-verify {
+  color: white;
+  background: linear-gradient(to right, rgb(82, 184, 113), #107d6e);
+  &:hover {
+    background: linear-gradient(to right, rgb(4, 158, 112), #107d6e);
+  }
+}
+.btn-resend {
+  color: $blue;
+  background-color: white;
+  border: 1px solid $blue;
+  &:hover {
+    color: white;
+    background-color: $blue;
+  }
+}
+
 @media only screen and (max-width : 500px) {
-  .oto-img{
+  .otp-img{
     width: 220px;
+  }
+  .mobile-full{
+    width: 100% ;
+  }
+  .uploading-gif{
+    width: 200px;
+  }
+  .upload-heading{
+    font-size: medium;;
   }
 }
 

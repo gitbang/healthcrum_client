@@ -117,6 +117,30 @@
       </div>
     </div>
 
+    <div class="row display-in-block" style="justify-content : center">
+      <div *ngFor="let category of menuBar; let i = index" class="dropdown-main">
+        <div class="dropdown">
+          <div class="row no-margin">
+            <div>
+              <button class="dropbtn">{{category.name | titlecase}} </button>
+            </div>
+            <div style="padding : 0" class="drop-down-arrow-div" >
+              <mat-icon class="drop-down-arrow">arrow_drop_down_circle</mat-icon>
+            </div>
+          </div>
+          
+          <div class="dropdown-content">
+
+            <div  class="sub-category-div" *ngFor="let subcat of category.subcategory">
+              
+              <a href="#" class="sub-category-heading"> {{subcat.name | titlecase}} </a>
+              <a href="#" class="s-s-category" *ngFor = "let sscat of subcat.subcategory">  {{sscat.name | titlecase}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row mt-4">
       <div class="col-md-12 padding-null" >   
         <mat-toolbar class="top-navbar padding-null">
@@ -133,9 +157,24 @@
             <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="discountMenu">Discount<mat-icon>keyboard_arrow_down</mat-icon></button>
           </div>
           <mat-menu #priceMenu ="matMenu">
+            <!--
             <button mat-menu-item (click)="price(100)">Below rs.100</button>
             <button mat-menu-item (click)="price(200)">Rs.100 - Rs.200</button>
             <button mat-menu-item (click)="price()">Above Rs.200</button>
+            -->
+            <div class="col-12">
+              <mat-slider
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1"
+                min="1"
+                max="100"
+                [value]="priceValue"
+                (change)="updatePrice($event)"
+                >
+              </mat-slider>
+            </div>
+            
           </mat-menu>
           
           <mat-menu #brandMenu ="matMenu">

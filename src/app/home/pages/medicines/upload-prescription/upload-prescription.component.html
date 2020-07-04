@@ -59,8 +59,27 @@
               </form>
             </div>
             <div class="col-12">
-              <button class="btn btn-info" [disabled]="!secondForm.valid">Verify</button>
-              <button class="btn btn-info ml-2">Resend</button>
+               
+              <button class="btn btn-verify mobile-full" [disabled]="!secondForm.valid">Verify</button>
+              <button class="btn btn-resend ml-2 mobile-full">Resend</button>
+            </div>
+          </div>
+          
+        </mat-step>
+
+        <mat-step [stepControl]="secondForm" *ngIf="!isLogin">
+          <ng-template matStepLabel>Upload Portal</ng-template>
+          <div class="row text-center">
+            <div class="col-12">
+             <h3 class="upload-heading"> Please wait while we are uploading your file .</h3> 
+            </div>
+            <div class="col-12 mt-4">  
+              <mat-progress-bar mode="determinate" [value]='uploadPerentage'></mat-progress-bar>
+            </div>
+            <div class="col-12 gif-div">
+              <img src="./assets/img/medicine/uploading2.gif"
+                class="uploading-gif"
+              >
             </div>
           </div>
         </mat-step>
