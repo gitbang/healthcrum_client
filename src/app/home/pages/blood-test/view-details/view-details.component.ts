@@ -102,8 +102,10 @@ export class ViewDetailsComponent implements OnInit {
       . Simply click the button below to book the test now. 10 hours of fasting is mandatory to get accurate results.   
       ndia’s largest health test @ home service, creating a new benchmark for very high quality and honest prices.
        HealthCrum employs state of art 46 touchpoints technology for assuring quality collection and testing across 
-    `
-    }
+    `,
+      additionalInfo : "Here to write additional Info",
+      relatedDisease : ["Typhide", "Cough", "Fever"]
+  }
   ]
   profiles = [
     {

@@ -9,7 +9,8 @@
             <mat-icon matPrefix style="align-self: center;color: #e7e7e7;margin-right: 5px;cursor: pointer;"
               (click)="setCurrentLocation()">room</mat-icon>
             <div class="input-group no-border city">
-              <input type="text" placeholder="city" matInput [formControl]="myControl" [matAutocomplete]="autoCity">
+              <input type="text" placeholder="city" style="color : white"
+                matInput [formControl]="myControl" [matAutocomplete]="autoCity">
               <mat-autocomplete #autoCity="matAutocomplete">
                 <mat-option *ngFor="let option of filteredCities | async" [value]="option">
                   {{option}}
@@ -138,9 +139,10 @@
                 </div>
               </mat-menu>
               <mat-menu #habbitFilter ="matMenu">
+                <button mat-menu-item disabled>Coming soon</button>
               </mat-menu>
               <mat-menu #conditionFilter ="matMenu">
-               
+               <button mat-menu-item disabled>Coming soon</button>
               </mat-menu>
                 <div class="col-md-3 filter-property">
                   <button mat-flat-button [matMenuTriggerFor]="priceSort">Sort by price <mat-icon>keyboard_arrow_down</mat-icon></button>

@@ -115,6 +115,10 @@ export class HomeServiceService {
               .pipe(retry(2), catchError(this.handleError))
   }
 
+  bloodTestPromoCode(data) : Observable <any> {
+    return this.http  
+              .post(this.url, + "")
+  }
 
  //-------------- consultation---------------//
 

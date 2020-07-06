@@ -104,19 +104,31 @@ export class BloodTestComponent implements OnInit {
       result.forEach(test=>{
         this.mycart.push(test._id)
       })
+
+      this.addToSearchCart();
     })
   }
 
+  addToSearchCart(){
+    //console.log("add to search cart complete",this.myCartComplete)
+    this.searchcart = []
+    this.myCartComplete.forEach(test=>{
+      this.searchcart.push(test.name)
+    })
+    //console.log("search cart0 ", this.searchcart)
+  }
+
   cartfromServer(){
-    console.log("from server")
+    //console.log("from server")
     this.service.bloodTestGetCartServer(this.userId).subscribe((result)=>{
+      //console.log("from server", result)
       if(result.success){
 
         this.myCartComplete = [];
         this.mycart = []
-        console.log("cart from backend", result)
+       // console.log("cart from backend", result)
         result.data.forEach(test =>{
-          console.log("lab id",test.labId)
+          //console.log("lab id",test.labId)
           let add;
           let offerprice = test.offerPrice;
           let marketprice = test.mrp
@@ -128,11 +140,14 @@ export class BloodTestComponent implements OnInit {
              parameters = test.individualTests.length;
           } 
          
-          add = {...test, offer : offers, parameters :parameters, offerprice : offerprice, marketprice  : marketprice }
+          add = {...test, offer : offers, parameters :parameters,
+             offerprice : offerprice, marketprice  : marketprice, labId : test.labId }
           this.myCartComplete.push(add)
           this.mycart.push(test._id)
         })
-        console.log("")
+        this.addToSearchCart();
+        // console.log("my cart complete", this.myCartComplete)
+        // console.log("")
         this.pushtoService()
 
       } else {
@@ -299,7 +314,7 @@ export class BloodTestComponent implements OnInit {
   }
 
   addMaindropdown(x : string) {
-    
+    //console.log("main drop down")
     let index = this.comparison(x);
     
     console.log("index is : ", index)
@@ -309,7 +324,7 @@ export class BloodTestComponent implements OnInit {
     }
     else{
       // add to cart
-      this.searchcart.push(x);
+      //this.searchcart.push(x);
       this.addTocart(index)
     }
     this.searchText = "";
@@ -428,6 +443,7 @@ export class BloodTestComponent implements OnInit {
   myId : string = "5e8efa895b324a3e4c97a278"
   datafound : boolean = false
   fromdatabase ;
+
   fetchbloodtest(){
     this.service.bloodTestFetchAllTest().subscribe((result)=>{
       console.log("initial fetch", result)
@@ -580,7 +596,7 @@ export class BloodTestComponent implements OnInit {
     this.singleTestComplete = []
     this.singleTestComplete.push(this.shownresultarray[index]);
     this.service.bookSingleTest(this.singleTestComplete);
-    this.router.navigateByUrl('blood-test/12345')
+    this.router.navigateByUrl('blood-test/' + this.shownresultarray[index]._id)
   }
 
   mycart: string[]= []      // collect _id of the packages 
@@ -588,8 +604,13 @@ export class BloodTestComponent implements OnInit {
 
   addTocart(index : number){
     console.log("add to cart", this.shownresultarray[index]);
+    for(let  i = 0; i < this.myCartComplete.length; i++) {
+      if( this.shownresultarray[index]._id == this.myCartComplete[i]._id) {
+        alert("Already added")
+        return
+      }
+    }
     if(this.isLogin){
-      
       console.log("add to cart from server")
       let toSend = {
         testId : this.shownresultarray[index]._id,
@@ -663,7 +684,7 @@ export class BloodTestComponent implements OnInit {
     this.singleTestComplete = []
     this.singleTestComplete.push(this.shownresultarray[index]);
     this.service.bookSingleTest(this.singleTestComplete);
-    this.router.navigateByUrl("blood-test/viewdetails/12345")
+    this.router.navigateByUrl("blood-test/viewdetails/"+ this.shownresultarray[index]._id)
   }
 
 

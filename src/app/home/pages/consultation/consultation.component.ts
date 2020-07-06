@@ -98,7 +98,6 @@ export class ConsultationComponent implements OnInit {
     if(window.innerWidth < 1000){
       this.horizontal = false;
     }
-    
   }
 
   autofilldoctor(){
@@ -110,7 +109,12 @@ export class ConsultationComponent implements OnInit {
 
   private doctorFilter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    var x : string[] =  this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    x = x.map(elem =>{
+      return "Dr " + elem
+    })
+    return x;
+    //return  this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   
   doctorType : string;
@@ -167,7 +171,8 @@ export class ConsultationComponent implements OnInit {
         video: {from: "8 am", to: "2 pm"},
         char :{from: "8 am", to: "2 pm"}
       },
-      chat : '8am - 6pm'
+      chat : '8am - 6pm',
+      logo : "./assets/img/consulation/logo.png"
     },
   ]
 
@@ -370,16 +375,17 @@ export class ConsultationComponent implements OnInit {
     console.log("searchBar : ", this.searchBarMain)
     if(this.searchBarMain.length !=0) {
       if(this.byname) {
-        this.filters.name = this.searchBarMain;
+        this.filters.name = this.searchBarMain.toLowerCase();
         this.filters.speciality = null;
       } else{
-        this.filters.speciality = this.searchBarMain;
+        this.filters.speciality = this.searchBarMain.toLowerCase();
         this.filters.name = null;
       }
     } else {
       this.filters.name = null;
       this.filters.speciality = null;
     }
+    this.filters.location.city = this.myControl.value
     
     this.filterDotor();
     this.changeRoute();

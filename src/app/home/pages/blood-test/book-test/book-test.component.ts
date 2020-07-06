@@ -37,6 +37,9 @@ export class BookTestComponent implements OnInit {
    // this.getUsercart();
    }
    mycart ;
+   promocodeComplete;
+   promocodeList : string [];
+
   getUsercart(){
     this.service.currentCart.subscribe((result)=>{
       console.log("my cart", result)
@@ -71,16 +74,6 @@ export class BookTestComponent implements OnInit {
   }   
 
   fireAlert() {
-    // Swal.fire(
-    //   "Oops!", 
-    //   "Your cart is empty!",
-    //   "error")
-    //    .then(result =>{
-    //      //console.log(result)
-    //      if(result.value) {
-         
-    //     }
-    // });
     this.router.navigateByUrl("blood-test")  
   }
 
@@ -137,6 +130,8 @@ export class BookTestComponent implements OnInit {
 
       }
     })
+
+    
   }
 
   addGrop(length : number){
@@ -374,28 +369,34 @@ export class BookTestComponent implements OnInit {
             console.log("unable to delete from cart", result)
           }
         })
-       
       }
     })
   }
 
   
   addMember(){
-    const dialog = this.dialog.open(AddMemberComponent, {
-      data : this.userId
-    })
-    dialog.afterClosed().subscribe((result)=>{
-      if(result.success) {
-        this.snackbar.open("New member", "Added", {
-          duration : 2000
-        })
-        this.getrelatives();
-      } else {
-        this.snackbar.open("Something Went Wrong", '', {
-          duration : 2000
-        })
-      }
-    })
+    if(this.isLogin) {
+      const dialog = this.dialog.open(AddMemberComponent, {
+        data : {
+          userId :this.userId,
+          list :  this.allMembers
+        }
+      })
+      dialog.afterClosed().subscribe((result)=>{
+        if(result.success) {
+          this.snackbar.open("New member", "Added", {
+            duration : 2000
+          })
+          this.getrelatives();
+        } else {
+          this.snackbar.open("Something Went Wrong", '', {
+            duration : 2000
+          })
+        }
+      })
+    } else {
+      alert ("Login irst")
+    }
   }
 
   placeorder(){
@@ -463,3 +464,4 @@ export class BookTestComponent implements OnInit {
   }
   finalPrice : number = 0;
 }
+

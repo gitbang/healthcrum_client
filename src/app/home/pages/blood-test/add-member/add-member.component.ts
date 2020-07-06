@@ -10,7 +10,10 @@ import { HomeServiceService } from 'app/home/home-service.service';
   styleUrls: ['./add-member.component.scss']
 })
 export class AddMemberComponent implements OnInit {
+
   userId : string
+  members : string[];
+
   constructor(
     @Inject (MAT_DIALOG_DATA) data : any,
     private fb : FormBuilder,
@@ -18,7 +21,8 @@ export class AddMemberComponent implements OnInit {
     private service : HomeServiceService
   ) {
     console.log(data)
-    this.userId = data;
+    this.userId = data.userId;
+    this.members = data.list;
     this.dialogRef.disableClose = true;
     console.log("in constructor userId" , this.userId)
   }
@@ -30,33 +34,39 @@ export class AddMemberComponent implements OnInit {
     phoneNo : ['', Validators.required]
   })
 
-  myId : string = "5e8efa895b324a3e4c97a278"
+ // myId : string = "5e8efa895b324a3e4c97a278"
   ngOnInit() {
+
   }
 
   submit(){
-    console.log("submit ")
-    console.log(this.registerationForm.value)
-    let data = {
-      members: {
-        name : this.registerationForm.get('name').value,
-        gender : this.registerationForm.get('gender').value,
-        age : this.registerationForm.get('age').value,
-        phoneNo: this.registerationForm.get('phoneNo').value,
+    if(this.members.includes(this.registerationForm.get('name').value)) {
+      alert("Member name already exists")
+    } else {
+      console.log("submit ")
+      console.log(this.registerationForm.value)
+      let data = {
+        members: {
+          name : this.registerationForm.get('name').value,
+          gender : this.registerationForm.get('gender').value,
+          age : this.registerationForm.get('age').value,
+          phoneNo: this.registerationForm.get('phoneNo').value,
+        }
+      }
+      console.log(data)
+      if(this.registerationForm.valid){
+        console.log("valid")
+        this.service.bloodtestAddMember( this.userId, data).subscribe((response)=>{
+          console.log("response after in submit", response)
+          if(response.success){
+            this.dialogRef.close({success : true})
+          } else {
+            this.dialogRef.close({success : false})
+          }
+        });
       }
     }
-    console.log(data)
-    if(this.registerationForm.valid){
-      console.log("valid")
-      this.service.bloodtestAddMember( this.myId, data).subscribe((response)=>{
-        console.log("response after in submit", response)
-        if(response.success){
-          this.dialogRef.close({success : true})
-        } else {
-          this.dialogRef.close({success : false})
-        }
-      });
-    }
+    
   }
 
   closeDialog() {
