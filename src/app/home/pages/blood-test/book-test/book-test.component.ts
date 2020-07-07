@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {HomeServiceService} from '../../../home-service.service'
-import {MatDialog, MAT_DIALOG_DATA, MatChipInputEvent} from '@angular/material'
+import {MatDialog, MAT_DIALOG_DATA, MatChipInputEvent, MAT_HAMMER_OPTIONS} from '@angular/material'
 import { AddMemberComponent } from '../add-member/add-member.component';
 import {FormBuilder, FormArray, FormGroup, FormControl} from '@angular/forms'
 import { Observable } from 'rxjs';
@@ -10,11 +10,12 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import Swal from 'sweetalert2';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ERecieptComponent} from "../../consultation/e-reciept/e-reciept.component";
 
 export interface Member {
   name: string;
 }
-
+declare var Razorpay: any; 
 @Component({
   selector: 'app-book-test',
   templateUrl: './book-test.component.html',
@@ -32,8 +33,7 @@ export class BookTestComponent implements OnInit {
     private snackbar : MatSnackBar,
     private route: ActivatedRoute,
   ) {
-    
-    
+
    // this.getUsercart();
    }
    mycart ;
@@ -296,6 +296,7 @@ export class BookTestComponent implements OnInit {
     { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
     totaltest : 12, marketprize : 4200, marketprice : 2500, offerprice : 2000},
   ]
+
   balanceSide : boolean = false
   placeorderClass : string = ""
   
@@ -443,7 +444,7 @@ export class BookTestComponent implements OnInit {
     this.pricearray.value[index].totalcount = num;
     this.pricearray.value[index].saved = num * (this.userCompleteCart[index].marketprice - this.userCompleteCart[index].offerprice)
     this.pricearray.value[index].total = this.totalPrice;
-    //console.log(this.pricearray.value)
+    
     this.sumall();
   }
 
@@ -456,6 +457,12 @@ export class BookTestComponent implements OnInit {
     })
     this.totalPrice = 0;
     // console.log("price array values",this.pricearray.value)
+    this.getEffectivePrice();
+  }
+
+
+  getEffectivePrice(){
+    this.effectivePrice = this.finalPrice - this.discountPrice;
   }
 
   allID = {
@@ -463,5 +470,71 @@ export class BookTestComponent implements OnInit {
     others : []
   }
   finalPrice : number = 0;
+  effectivePrice : number = 0;
+  discountPrice : number = 0;
+  // payment integrtion 
+  
+  razorKeyGeneration(){
+    var razorOptions  = {
+      amount : this.effectivePrice,
+      currency : "INR"
+    }
+    this.service.RazorPayKeyGeneration(razorOptions).subscribe((response)=>{
+      console.log(response)
+      if(response.success){
+        console.log("proceed for success")
+
+        this.openRazorInterface(response.sub, response.key);
+
+      } else {
+        alert("Something went wront. Try again later")
+        console.log("something went wrong")
+      }
+    })
+  }
+
+  openRazorInterface(response, key){
+      var _this = this
+      var options = {
+        "key": key, 
+        "amount": response.amount, 
+        "currency": response.currency,
+        "name": "Akash",
+        "description": "Book Test",
+        "order_id": response.id, 
+        "handler":function(response1){
+          _this.service.razorPayVerification(response1).subscribe((result)=>{
+            console.log("after verification", result)
+            if(result.success){
+              setTimeout(() => {
+                _this.generatePDf(response, response1)
+              }, 2000);
+            }
+          })
+        },
+        "prefill": { 
+          "name" : "Akash",
+          "email" :"ab@gmail.com",
+          "contact": "9999999999"
+        },
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    console.log("works");
+  }
+  
+  generatePDf(res1, res2){
+    console.log("pdf", res1)
+    console.log("pdf", res2)
+    
+    const eRecipt = this.dialog.open(ERecieptComponent, {
+      height : "90vh",
+      width : "60%"
+    })
+    
+    eRecipt.afterClosed().subscribe((result)=>{
+      console.log(result)
+    })
+  }
 }
 

@@ -118,8 +118,20 @@ export class HomeServiceService {
   bloodTestPromoCode(data) : Observable <any> {
     return this.http  
               .post(this.url, + "")
+              .pipe(retry(2), catchError(this.handleError))
   }
 
+  RazorPayKeyGeneration(data) : Observable<any>{
+    return this.http
+              .post(this.url + "/payment/getkey", data, this.option)
+              .pipe(retry(2), catchError(this.handleError))
+  }
+
+ razorPayVerification(data : object) : Observable <any>{
+    return this.http
+              .post(this.url + "/payment/verification", data, this.option)
+              .pipe(retry(2), catchError(this.handleError))
+  }
  //-------------- consultation---------------//
 
   private doctorselectedforDetails = new BehaviorSubject([]);

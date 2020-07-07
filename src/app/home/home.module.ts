@@ -150,7 +150,8 @@ import {MatSliderModule} from '@angular/material/slider';
     ViewDetailsComponent,
     AddMemberComponent,
     BookModelComponent,
-    UploadPrescriptionComponent
+    UploadPrescriptionComponent,
+    ERecieptComponent
   ],
   providers: [
     {
