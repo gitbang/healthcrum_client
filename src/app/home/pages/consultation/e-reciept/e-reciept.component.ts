@@ -1,11 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import {MatDialogRef} from '@angular/material'
+import { Component, OnInit, ElementRef, ViewChild, Inject, NgZone } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material'
 
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas'
-
-// import pdfMake from 'pdfmake/build/pdfmake'
-// import  pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
   selector: 'app-e-reciept',
@@ -14,36 +11,43 @@ import html2canvas from 'html2canvas'
 })
 export class ERecieptComponent implements OnInit {
 
-  constructor(private dialog : MatDialogRef<ERecieptComponent>) { }
-
+  constructor(
+    private dialogRef : MatDialogRef<ERecieptComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private ngZone: NgZone
+    ) {
+      this.dialogRef.disableClose = true
+      console.log(data)
+  }
+  
   @ViewChild('content', {static : true}) content : ElementRef
   ngOnInit() {
   }
 
 
   eData = {
-    name : 'Karan',
-    billno : "FL1236547",
-    gender : 'male',
-    fshplId : "15245321",
-    requestDate : '10/12/2020',
-    checkupDate : '10/12/2020',
+    name : this.data.user.name,
+    billno : this.data.razorpay_order_id,
+    gender : this.data.user.gender,
+    fshplId : this.data.razorpay_payment_id,
+    requestDate : this.data.date,
+    //checkupDate : '10/12/2020',
     centerName : 'Mohali',
     serviceProvider : 'Dr Meena',
-    type : "Video Consultation",
-    mrp : 2000,
-    discountPrice : 1000,
-    totalPrice : 1000,
-    gstPercent : 18,
-    gstAmount : 180,
-    total : 1180,
-    paymentMode : 'card',
+    type : this.data.type,
+    mrp : parseInt(this.data.save)  + parseInt(this.data.amount) ,
+    discountPrice : this.data.save,
+    // totalPrice : 1000,
+    // gstPercent : 18,
+    // gstAmount : 180,
+    total : this.data.amount,
+    //paymentMode : 'card',
     status : 'confirmed'
   }
 
   
   saveAsPDF(){
-    //var  element = document.getElementById('pdf')
+    
     let element = this.content.nativeElement
     console.log("check-out")
     html2canvas(element, {scrollY : -window.scrollY}).then(canvas => {
@@ -60,6 +64,8 @@ export class ERecieptComponent implements OnInit {
   }
 
   closeDialog(){
-    this.dialog.close({success : true})
+    this.ngZone.run(() => {
+      this.dialogRef.close({success : true});
+    })
   }
 }

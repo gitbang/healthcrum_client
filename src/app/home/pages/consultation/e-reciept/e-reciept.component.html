@@ -107,7 +107,7 @@
 
             <div class="row  ">
               <div class="col-6">
-                <label class="color-black">FSHPL ID:</label>
+                <label class="color-black">Order ID:</label>
               </div>
               <div class="col-6 align-right">
                 <label class="color-black">{{eData.fshplId}}</label>
@@ -124,16 +124,16 @@
                 <label class="color-black">Date of request</label>
               </div>
               <div class="col-6 align-right">
-                <label class="color-black">{{eData.requestDate}}</label>
+                <label class="color-black">{{eData.requestDate | date}}</label>
               </div>
             </div>
 
-            <div class="row ">
+            <div class="row" *ngIf ='eData.type == "consultation"'>
               <div class="col-6">
                 <label class="color-black">Date of checkup</label>
               </div>
               <div class="col-6 align-right">
-                <label class="color-black">{{eData.checkupDate}}</label>
+                <label class="color-black">{{eData.checkupDate | date}}</label>
               </div>
             </div>
 
@@ -174,7 +174,7 @@
                 <label class="color-black">Benefeciary name</label>
               </div>
               <div class="col-6 align-right">
-                <label class="color-black">Anything</label>
+                <label class="color-black">{{eData.name}}</label>
               </div>
             </div>
           </div>
@@ -218,18 +218,20 @@
             <td>Discount price :</td>
             <td>{{eData.discountPrice }}</td>
           </tr>
-          <tr>
-            <td>Total :</td>
-            <td>{{eData.totalPrice}}</td>
-          </tr>
-          <tr>
-            <td>IGST/Tax percentage :</td>
-            <td>{{eData.gstPercent}}</td>
-          </tr>
-          <tr>
-            <td>IGST/Tax Amount</td>
-            <td>{{eData.gstAmount}}</td>
-          </tr>
+          <!--
+            <tr>
+              <td>Total :</td>
+              <td>{{eData.totalPrice}}</td>
+            </tr>
+            <tr>
+              <td>IGST/Tax percentage :</td>
+              <td>{{eData.gstPercent}}</td>
+            </tr>
+            <tr>
+              <td>IGST/Tax Amount</td>
+              <td>{{eData.gstAmount}}</td>
+            </tr>
+          -->
           <tr>
             <td class="color-green">Grand Total :</td>
             <td>{{eData.total}}</td>

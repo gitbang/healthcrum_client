@@ -395,12 +395,12 @@ export class ConsultationComponent implements OnInit {
     console.log(typeCons, index);
     let activeFee = 0;
     if(typeCons == "emergency"){
-     // console.log("in emergency")
       activeFee = this.doctors[index].emergencyFees
     } else {
       activeFee = this.doctors[index].consultationFees
     }
     console.log("active field ", activeFee);
+    
     const dialog = this.matDialog.open(BookModelComponent, {
       height: "90vh",
       data :{

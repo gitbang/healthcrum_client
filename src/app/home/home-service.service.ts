@@ -117,7 +117,19 @@ export class HomeServiceService {
 
   bloodTestPromoCode(data) : Observable <any> {
     return this.http  
-              .post(this.url, + "")
+              .post(this.url, + "/")
+              .pipe(retry(2), catchError(this.handleError))
+  }
+
+  bloodTestsavePaymentDetails(data) : Observable<any> {
+    return this.http
+              .post(this.url + "/getPaymentStatus", data, this.option)
+              .pipe(retry(2), catchError(this.handleError))
+  }
+
+  bloodTestsavePdf(data) : Observable<any>{
+    return this.http
+              .post(this.url +"/", data)
               .pipe(retry(2), catchError(this.handleError))
   }
 
@@ -127,7 +139,7 @@ export class HomeServiceService {
               .pipe(retry(2), catchError(this.handleError))
   }
 
- razorPayVerification(data : object) : Observable <any>{
+  razorPayVerification(data : object) : Observable <any>{
     return this.http
               .post(this.url + "/payment/verification", data, this.option)
               .pipe(retry(2), catchError(this.handleError))

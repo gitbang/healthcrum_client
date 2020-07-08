@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ERecieptComponent } from '../e-reciept/e-reciept.component';
@@ -11,7 +11,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-
+declare var Razorpay: any; 
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
@@ -19,10 +19,12 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class CheckOutComponent implements OnInit {
 
+
   constructor(
     private router: Router,
     private dialog : MatDialog,
-    private service : HomeServiceService
+    private service : HomeServiceService,
+    private ngZone : NgZone
   ) { }
 
   
@@ -63,47 +65,83 @@ export class CheckOutComponent implements OnInit {
   placeorder(){
     console.log("place order go to gateway")
 
-    // this.complete data contain all the required result to book an appointment;
-
-    // call the api for the payment gateway
+    this.razorKeyGeneration()
     
-    // after getting the response from gateway send request to book an appointment:
-    
-    //appointmentDate, from, to, status, doctorEmail, appointmentTime, appointmentType
-
     let data = {
-      appointmentDate : this.completeData.userdata.date,
-      appointmentTime : this.completeData.userdata.timeslot,
-      appointmentType : this.completeData.data.type,
+
+      appointmentDate : this.shownresultarrays[0].date,
+      appointmentTime : this.shownresultarrays[0].timeslot,
+      appointmentType : this.shownresultarrays[0].type
     }
     
-    const dialog = this.dialog.open(ERecieptComponent, {
-      height : "90vh",
-      width : "60%"
-    })
-
-    dialog.afterClosed().subscribe(result=>{
-      this.router.navigateByUrl("consultation")
-    })
+    
   }
 
 
+  razorKeyGeneration(){
+    var razorOptions  = {
+      amount :  this.shownresultarrays[0].offerprice,
+      currency : "INR"
+    }
+    this.service.RazorPayKeyGeneration(razorOptions).subscribe((response)=>{
+      console.log(response)
+      if(response.success){
+        console.log("proceed for success")
 
+        this.openRazorInterface(response.sub, response.key);
 
-  // eData = {
-  //   name : 'Karan',
-  //   gender : 'male',
-  //   requestDate : '10/12/2020',
-  //   checkupDate : '10/12/2020',
-  //   centerName : 'Mohali',
-  //   serviceProvider : 'Dr Meena',
-  //   mrp : 2000,
-  //   discountPrice : 1000,
-  //   totalPrice : 1000,
-  //   gstPercent : 18,
-  //   gstAmount : 180,
-  //   total : 1180,
-  //   paymentMode : 'card',
-  //   status : 'confirmed'
-  // }
+      } else {
+        alert("Something went wront. Try again later")
+        console.log("something went wrong")
+      }
+    })
+  }
+
+  openRazorInterface(response, key){
+      var _this = this
+      var options = {
+        "key": key, 
+        "amount": response.amount, 
+        "currency": response.currency,
+        "name": "Akash",
+        "description": "Book Consultation",
+        "order_id": response.id, 
+        "handler":function(response1){
+          _this.service.razorPayVerification(response1).subscribe((result)=>{
+            console.log("after verification", result)
+            if(result.success){
+              
+              
+              
+              setTimeout(() => {
+               // _this.generatePDf(response, response1)
+              }, 2000);
+            }
+          })
+        },
+        "prefill": { 
+          "name" : "Akash",
+          "email" :"ab@gmail.com",
+          "contact": "9999999999"
+        },
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    console.log("works");
+  }
+  
+  generatePDf(res1, res2){
+    console.log("pdf", res1)
+    console.log("pdf", res2)
+    this.ngZone.run(()=>{
+      const dialog = this.dialog.open(ERecieptComponent, {
+        height : "90vh",
+        width : "60%"
+      })
+  
+      dialog.afterClosed().subscribe(result=>{
+        this.router.navigateByUrl("consultation")
+      })
+    })
+  }
 }

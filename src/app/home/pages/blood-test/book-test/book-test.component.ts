@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, NgZone } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {HomeServiceService} from '../../../home-service.service'
 import {MatDialog, MAT_DIALOG_DATA, MatChipInputEvent, MAT_HAMMER_OPTIONS} from '@angular/material'
@@ -11,6 +11,7 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import Swal from 'sweetalert2';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ERecieptComponent} from "../../consultation/e-reciept/e-reciept.component";
+
 
 export interface Member {
   name: string;
@@ -32,6 +33,7 @@ export class BookTestComponent implements OnInit {
     private fb : FormBuilder,
     private snackbar : MatSnackBar,
     private route: ActivatedRoute,
+    private ngZone : NgZone
   ) {
 
    // this.getUsercart();
@@ -130,8 +132,6 @@ export class BookTestComponent implements OnInit {
 
       }
     })
-
-    
   }
 
   addGrop(length : number){
@@ -293,7 +293,10 @@ export class BookTestComponent implements OnInit {
   myId : string = "5e8efa895b324a3e4c97a278";
 
   shownresultarrays =[
-    { name : "Blood Test", includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
+    { name : "Blood Test", 
+    _id : "",
+    type : "",
+    includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
     totaltest : 12, marketprize : 4200, marketprice : 2500, offerprice : 2000},
   ]
 
@@ -401,7 +404,7 @@ export class BookTestComponent implements OnInit {
   }
 
   placeorder(){
-    //console.log("next portal")
+   
   }
 
   testForMe(value, index) {
@@ -456,11 +459,18 @@ export class BookTestComponent implements OnInit {
       this.moneysaved += item.saved;
     })
     this.totalPrice = 0;
-    // console.log("price array values",this.pricearray.value)
+    
     this.getEffectivePrice();
   }
 
-
+  aboutUser = {
+    _id : "5e8efa895b324a3e4c97a278",
+    name : "Akash",
+    gender : "Male",
+    location : "Jalandhar",
+    phone : "9779692376",
+    healthcrumId : "Health1234"
+  }
   getEffectivePrice(){
     this.effectivePrice = this.finalPrice - this.discountPrice;
   }
@@ -472,7 +482,6 @@ export class BookTestComponent implements OnInit {
   finalPrice : number = 0;
   effectivePrice : number = 0;
   discountPrice : number = 0;
-  // payment integrtion 
   
   razorKeyGeneration(){
     var razorOptions  = {
@@ -506,16 +515,19 @@ export class BookTestComponent implements OnInit {
           _this.service.razorPayVerification(response1).subscribe((result)=>{
             console.log("after verification", result)
             if(result.success){
-              setTimeout(() => {
-                _this.generatePDf(response, response1)
-              }, 2000);
+
+              // send api request to save the required details in the database
+              _this.ngZone.run(()=>{
+                _this.savePaymentData(response, response1);
+              }) 
+              
             }
           })
         },
         "prefill": { 
-          "name" : "Akash",
+          "name" : this.aboutUser.name,
           "email" :"ab@gmail.com",
-          "contact": "9999999999"
+          "contact": this.aboutUser.phone
         },
     };
     var rzp1 = new Razorpay(options);
@@ -523,17 +535,56 @@ export class BookTestComponent implements OnInit {
     console.log("works");
   }
   
-  generatePDf(res1, res2){
-    console.log("pdf", res1)
-    console.log("pdf", res2)
+  generatePDf(complete){
     
     const eRecipt = this.dialog.open(ERecieptComponent, {
       height : "90vh",
-      width : "60%"
+      width : "70%",
+      data :{
+        ...complete,
+        user : this.aboutUser,
+        save : this.moneysaved,
+        date : new Date
+      }
     })
     
     eRecipt.afterClosed().subscribe((result)=>{
       console.log(result)
+    })
+  }
+  
+  savePaymentData(response, response1){
+    response.amount = response.amount / 100;
+    let complete = {};
+    let orderDetail = []
+    for(var i = 0; i < this.shownresultarrays.length; i++) {
+      let add ;
+      let date  = new Date()
+      add = {
+        productId : this.shownresultarrays[i]._id,
+        type : this.shownresultarrays[i].type,
+        forUser : this.testfor.value[i].me,
+        forMembers : this.testfor.value[i].others,
+        memberIds : this.allID.others,
+        dateOfCheckup : ""
+      }
+      orderDetail.push(add)
+    }
+    complete = {
+      orderDetails : orderDetail,
+      ...response,
+      ...response1,
+      userId : this.aboutUser._id,
+      type : "BloodTest"
+    }
+    console.log("complete", complete)
+
+    setTimeout(() => {
+      this.generatePDf(complete)
+    }, 1000);
+
+    this.service.bloodTestsavePaymentDetails(complete).subscribe((result)=>{
+      console.log(result);
     })
   }
 }

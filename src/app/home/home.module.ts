@@ -10,6 +10,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {MatDividerModule} from '@angular/material/divider';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatInputModule,
@@ -143,7 +144,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatProgressBarModule,
     MatTabsModule,
     AngularFittextModule,
-    MatSliderModule
+    MatSliderModule,
+   // BrowserAnimationsModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

@@ -62,7 +62,7 @@ export class BookModelComponent implements OnInit {
     phone : null
   }
   submitFirstForm(stepper : MatStepper){
-   // stepper.next();
+   
     this.firstFormGroup.get('timeslot').setValue(this.bookedslot)
     console.log(this.firstFormGroup.value);  
 
@@ -76,6 +76,7 @@ export class BookModelComponent implements OnInit {
     } else {
       alert("Invalid Inputs")
     }
+    
   }
   loading : boolean = false;
   userotp : number
@@ -133,16 +134,4 @@ export class BookModelComponent implements OnInit {
       }
     })
   }
-  /*
-  resend(){
-    console.log("resenfotp");
-    let toSend = {
-      phone : this.firstFormGroup.get('phoneNo').value,
-    }
-    this.service.consultationResendOTP(toSend).subscribe((result)=>{
-      console.log("resend otp", result)
-    })
-  }
-  */
-  
 }
