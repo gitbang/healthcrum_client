@@ -489,7 +489,9 @@ export class BloodTestComponent implements OnInit {
             why : pack.why,
             when : pack.when,
             offer : offers,
-            labId : pack.lab._id
+            labId : pack.lab._id,
+            additional_Info : pack.additional_Info,
+            relatedDiseases : pack.relatedDiseases
           }
         })
         this.shownresultarray.push(add)
@@ -524,7 +526,9 @@ export class BloodTestComponent implements OnInit {
             why : pack.why,
             when : pack.when,
             offer : offers,
-            labId : pack.lab._id
+            labId : pack.lab._id,
+            additional_Info : pack.additional_Info,
+            relatedDiseases : pack.relatedDiseases
           }
         })
         this.shownresultarray.push(add)
@@ -558,7 +562,9 @@ export class BloodTestComponent implements OnInit {
             why : pack.why,
             when : pack.when,
             offer : offers,
-            labId : pack.lab._id
+            labId : pack.lab._id,
+            additional_Info : pack.additional_Info,
+            relatedDiseases : pack.relatedDiseases
           }
         })
         this.shownresultarray.push(add)

@@ -214,7 +214,7 @@
             <td>MRP :</td>
             <td>{{eData.mrp}}</td>
           </tr>
-          <tr>
+          <tr *ngIf="eData.discountPrice > 0">
             <td>Discount price :</td>
             <td>{{eData.discountPrice }}</td>
           </tr>

@@ -31,25 +31,6 @@ export class ViewDetailsComponent implements OnInit {
         console.log("shown result", this.shownresult);
       }
     })
-    //console.log(this.data1._id)
-    // this.service.bloodtestDetailById(this.data1._id, {type : this.data1.type}).subscribe((result)=>{
-    //   console.log("specific test : ", result)
-    //   if(result.success) {
-    //     this.profiles = [];
-    //     result.data[0].parameters.forEach(element => {
-    //       let x = {
-    //         name : element.name,
-    //         parameters : element.tests.length,
-    //         tests : element.tests
-    //       }
-    //       this.profiles.push(x);
-    //     });
-    //     if(this.totalparams == 0) {
-    //       this.totalparams = 1;
-    //     }
-    //     console.log("this.profiles are : ",  this.profiles)
-    //   }
-    // })
   }
   
   fromServer = {
@@ -103,8 +84,8 @@ export class ViewDetailsComponent implements OnInit {
       ndia’s largest health test @ home service, creating a new benchmark for very high quality and honest prices.
        HealthCrum employs state of art 46 touchpoints technology for assuring quality collection and testing across 
     `,
-      additionalInfo : "Here to write additional Info",
-      relatedDisease : ["Typhide", "Cough", "Fever"]
+      additional_Info : "Here to write additional Info",
+      relatedDiseases : ["Typhide", "Cough", "Fever"]
   }
   ]
   profiles = [

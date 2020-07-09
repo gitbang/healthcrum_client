@@ -298,7 +298,7 @@
                                   class="emergency-image-horizontal"
                                 >
                               </div>
-                              <div class="col-7 mt-1" class="cursor-pointer">
+                              <div class="col-7 mt-1 cursor-pointer"  (click)="openDialog('emergency', i)">
                                 <div class="row" class="cursor-pointer">
                                   <div class="col-12 emergency-fee mt-1" class="cursor-pointer">
                                     <label class="emergency-fee" tyle="font-size : smaller;padding-left: 15px;">Fee : {{doctor.emergencyFees}}</label>
@@ -446,7 +446,7 @@
                               </label>
                             </div>
                           </div>
-                          <div class="col-3" (click)="openDialog('telephonic', i)">
+                          <div class="col-3" (click)="openDialog('tele', i)">
                             <div  class="consultation-border cursor-pointer text-center">
                               <div  class="center">
                                 <img

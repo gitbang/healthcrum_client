@@ -35,8 +35,6 @@ export class BookTestComponent implements OnInit {
     private route: ActivatedRoute,
     private ngZone : NgZone
   ) {
-
-   // this.getUsercart();
    }
    mycart ;
    promocodeComplete;
@@ -53,8 +51,7 @@ export class BookTestComponent implements OnInit {
       console.log("complete ", result);
       this.userCompleteCart = result;
       this.shownresultarrays = result
-      //console.log(this.shownresultarrays)
-      //console.log(this.shownresultarrays)
+  
       if(this.userCompleteCart.length > 0) {
         this.balanceSide = true;
       } else {
@@ -128,7 +125,6 @@ export class BookTestComponent implements OnInit {
           this.getSingleTest();
           this.fromCart = false 
         }
-        // this.addGrop(this.userCompleteCart.length);
 
       }
     })
@@ -242,6 +238,8 @@ export class BookTestComponent implements OnInit {
     
       this.testfor.value[i].otherlist.splice(index, 1);
       this.allID.others.splice(index, 1);
+
+      this.memberIDsTest.value[index].list.splice(index, 1);
     }
     this.calculateprice(i);
   }
@@ -256,14 +254,16 @@ export class BookTestComponent implements OnInit {
     if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
       this.testfor.value[index].otherlist.push(event.option.viewValue);      
       this.allID.others.push(this.relativeData.members[index]._id)
+
+      this.memberIDsTest.value[index].list.push(this.relativeData.members[index]._id)
     }
 
-   // console.log("total members selected",this.testfor.value[index].otherlist.length)
+   
     this.calculateprice(index);
   }
 
   _filter(value: string): string[] {
-   // console.log(value)
+  
     const filterValue = value.toLowerCase();
     return this.allMembers.filter(option => option.toLowerCase().includes(filterValue));
   }
@@ -317,6 +317,10 @@ export class BookTestComponent implements OnInit {
       total : [],
       saved : [],
       totalcount : []
+    }))
+
+    this.memberIDsTest.push(this.fb.group({
+      list : this.fb.array([])
     }))
   }
   
@@ -403,10 +407,6 @@ export class BookTestComponent implements OnInit {
     }
   }
 
-  placeorder(){
-   
-  }
-
   testForMe(value, index) {
    // console.log(this.userCompleteCart[index])
     this.testfor.value[index].me = value;
@@ -421,10 +421,8 @@ export class BookTestComponent implements OnInit {
   }
 
   testForMember(value, index) {
-    //console.log("indec in test-for-members",index)
     this.testfor.value[index].others = value;
     if(value == false) {
-      //this.members = [];
       this.testfor.value[index].otherlist = [];
       this.otherfee = 0;
       this.calculateprice(index);
@@ -479,6 +477,8 @@ export class BookTestComponent implements OnInit {
     me : this.myId,
     others : []
   }
+
+  memberIDsTest = this.fb.array([])
   finalPrice : number = 0;
   effectivePrice : number = 0;
   discountPrice : number = 0;
@@ -508,7 +508,7 @@ export class BookTestComponent implements OnInit {
         "key": key, 
         "amount": response.amount, 
         "currency": response.currency,
-        "name": "Akash",
+        "name": this.aboutUser.name,
         "description": "Book Test",
         "order_id": response.id, 
         "handler":function(response1){
@@ -544,7 +544,9 @@ export class BookTestComponent implements OnInit {
         ...complete,
         user : this.aboutUser,
         save : this.moneysaved,
-        date : new Date
+        date : new Date,
+        complete : complete,
+        serviceProvider : "HealthCrum"
       }
     })
     
@@ -554,6 +556,9 @@ export class BookTestComponent implements OnInit {
   }
   
   savePaymentData(response, response1){
+
+    console.log("members id :", this.memberIDsTest.value)
+
     response.amount = response.amount / 100;
     let complete = {};
     let orderDetail = []
@@ -565,7 +570,8 @@ export class BookTestComponent implements OnInit {
         type : this.shownresultarrays[i].type,
         forUser : this.testfor.value[i].me,
         forMembers : this.testfor.value[i].others,
-        memberIds : this.allID.others,
+        //memberIds : this.allID.others,
+        memberIds : this.memberIDsTest.value[i].list,
         dateOfCheckup : ""
       }
       orderDetail.push(add)
@@ -581,11 +587,6 @@ export class BookTestComponent implements OnInit {
 
     setTimeout(() => {
       this.generatePDf(complete)
-    }, 1000);
-
-    this.service.bloodTestsavePaymentDetails(complete).subscribe((result)=>{
-      console.log(result);
-    })
+    });
   }
 }
-

@@ -43,6 +43,9 @@ export class CheckOutComponent implements OnInit {
         this.shownresultarrays[0].date = result[0].userData.date;
         this.shownresultarrays[0].timeslot = result[0].userData.timeslot;
         this.shownresultarrays[0].phone = result[0].userData.phoneNo;
+        this.aboutUser.name = result[0].userData.name;
+        this.aboutUser.phone = result[0].userData.phoneNo;
+        // add gender to about user as well when available
       }
     })
     console.log("this. resultarray is : ", this.shownresultarrays[0])
@@ -68,15 +71,11 @@ export class CheckOutComponent implements OnInit {
     this.razorKeyGeneration()
     
     let data = {
-
       appointmentDate : this.shownresultarrays[0].date,
       appointmentTime : this.shownresultarrays[0].timeslot,
       appointmentType : this.shownresultarrays[0].type
     }
-    
-    
   }
-
 
   razorKeyGeneration(){
     var razorOptions  = {
@@ -98,50 +97,97 @@ export class CheckOutComponent implements OnInit {
   }
 
   openRazorInterface(response, key){
-      var _this = this
-      var options = {
-        "key": key, 
-        "amount": response.amount, 
-        "currency": response.currency,
-        "name": "Akash",
-        "description": "Book Consultation",
-        "order_id": response.id, 
-        "handler":function(response1){
-          _this.service.razorPayVerification(response1).subscribe((result)=>{
-            console.log("after verification", result)
-            if(result.success){
-              
-              
-              
-              setTimeout(() => {
-               // _this.generatePDf(response, response1)
-              }, 2000);
-            }
-          })
-        },
-        "prefill": { 
-          "name" : "Akash",
-          "email" :"ab@gmail.com",
-          "contact": "9999999999"
-        },
+    var _this = this
+    var options = {
+      "key": key, 
+      "amount": response.amount, 
+      "currency": response.currency,
+      "name": "Akash",
+      "description": "Book Consultation",
+      "order_id": response.id, 
+      "handler":function(response1){
+        _this.service.razorPayVerification(response1).subscribe((result)=>{
+          console.log("after verification", result)
+          if(result.success){
+            
+            _this.ngZone.run(()=>{
+              _this.savePaymentData(response, response1)
+            })   
+          }
+        })
+      },
+      "prefill": { 
+        "name" : "Akash",
+        "email" :"ab@gmail.com",
+        "contact": "9999999999"
+      },
     };
     var rzp1 = new Razorpay(options);
     rzp1.open();
     console.log("works");
   }
   
-  generatePDf(res1, res2){
-    console.log("pdf", res1)
-    console.log("pdf", res2)
+  generatePDf(complete){
     this.ngZone.run(()=>{
       const dialog = this.dialog.open(ERecieptComponent, {
         height : "90vh",
-        width : "60%"
+        width : "70%",
+        data :{
+          ...complete,
+          user : this.aboutUser,
+          save : null,
+          date : new Date,
+          serviceProvider : this.shownresultarrays[0].docname,
+          complete : complete
+        }
       })
   
       dialog.afterClosed().subscribe(result=>{
         this.router.navigateByUrl("consultation")
       })
     })
+  }
+
+  aboutUser = {
+    _id : "5e8efa895b324a3e4c97a278",
+    name : "Akash",
+    gender : "Male",
+    location : "Jalandhar",
+    phone : "9779692376",
+    healthcrumId : "Health1234"
+  }
+
+  savePaymentData(response, response1){
+
+    console.log("shown result array",this.shownresultarrays)
+
+    response.amount = response.amount / 100;
+    let complete = {};
+    let orderDetail = []
+    for(var i = 0; i < this.shownresultarrays.length; i++) {
+      let add ;
+      let date  = new Date()
+      add = {
+        productId : this.shownresultarrays[i]._id,
+        type : this.shownresultarrays[i].type + "Consultation",
+        dateOfCheckup : this.shownresultarrays[0].date,
+        time : this.shownresultarrays[0].timeslot,
+
+        forUser : true,
+        // forMembers : this.testfor.value[i].others,
+        // memberIds : this.allID.others,
+      }
+      orderDetail.push(add)
+    }
+    complete = {
+      orderDetails : orderDetail,
+      ...response,
+      ...response1,
+      userId : this.aboutUser._id,
+      type : "consultation"
+    }
+    console.log("complete", complete)
+
+    this.generatePDf(complete)
   }
 }

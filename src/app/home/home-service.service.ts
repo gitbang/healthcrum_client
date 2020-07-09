@@ -121,15 +121,20 @@ export class HomeServiceService {
               .pipe(retry(2), catchError(this.handleError))
   }
 
-  bloodTestsavePaymentDetails(data) : Observable<any> {
+  headermul= new HttpHeaders({
+    'Content-Type': 'multipart/form-data',
+  });
+  optionmul = { headers: this.headermul};
+
+  savePaymentDetails(data) : Observable<any> {
     return this.http
-              .post(this.url + "/getPaymentStatus", data, this.option)
+              .post(this.url + "/payment/getPaymentStatus", data)
               .pipe(retry(2), catchError(this.handleError))
   }
 
-  bloodTestsavePdf(data) : Observable<any>{
+  savePaymentPdf(data) : Observable<any>{
     return this.http
-              .post(this.url +"/", data)
+              .post(this.url +"/payment/getPaymentStatus", data)
               .pipe(retry(2), catchError(this.handleError))
   }
 

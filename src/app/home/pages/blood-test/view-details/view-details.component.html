@@ -215,10 +215,10 @@
                 Finding of the result
               </mat-panel-title>
               <mat-panel-description>
-               
+              
               </mat-panel-description>
             </mat-expansion-panel-header>
-            Here is the finding of the test 
+            {{shownresult[0].additional_Info}} 
           </mat-expansion-panel>
         </div>
         
@@ -233,28 +233,12 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <!--
-            <div *ngFor = "let dis of fromServer[0].relatedDiseases"></div>
-            -->
-            Here is the related disease
+            
+            <div *ngFor = "let disease of shownresult[0].relatedDiseases">
+              {{disease}}
+            </div>
           </mat-expansion-panel>
         </div>
-        
-        <!--
-        <div class="col-12 mt-2" style="padding:0"  >
-          <mat-expansion-panel class="green-backgrouns">
-            <mat-expansion-panel-header style= "height : 20px">
-              <mat-panel-title style="color : white" class="bottom-expansion-title">
-                Additional Information
-              </mat-panel-title>
-              <mat-panel-description>
-               
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            {{shownresult[0].when}}   
-          </mat-expansion-panel>
-        </div>
-        -->
       </div>
     </div>
   </div>

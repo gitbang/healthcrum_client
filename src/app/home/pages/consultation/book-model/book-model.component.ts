@@ -20,9 +20,13 @@ export class BookModelComponent implements OnInit {
     private dialog: MatDialogRef<BookModelComponent>
 
   ) {
-    console.log("received data is : " ,data)
+    //console.log("received data is : " ,data)
     this.data = data  
     this.dialog.disableClose = true;
+    console.log(this.data.doctor.consultationTimingSlots);
+    console.log(this.data.type)
+    this.slots = this.data.doctor.consultationTimingSlots[this.data.type]
+    console.log("slots are", this.slots)
    }
 
    isLinear = false;
@@ -81,6 +85,7 @@ export class BookModelComponent implements OnInit {
   loading : boolean = false;
   userotp : number
   generateotp( stepper : MatStepper){
+    
     this.service.consultationBookOtpcheck(this.toCheck)
       .subscribe((result)=>{
         console.log(result)
