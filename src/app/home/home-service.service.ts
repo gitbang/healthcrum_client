@@ -102,9 +102,9 @@ export class HomeServiceService {
                 .pipe(retry(2), catchError(this.handleError))
   }
   
-  bloodTestFetchAllTest() : Observable <any> {
+  bloodTestFetchAllTest(data) : Observable <any> {
     return this.http
-                .get(this.url + '/alltestsbylabs', this.option)
+                .post(this.url + '/alltestsbylabs', data, this.option)
                 .pipe( retry(2), catchError(this.handleError))
   }
   
@@ -121,10 +121,10 @@ export class HomeServiceService {
               .pipe(retry(2), catchError(this.handleError))
   }
 
-  headermul= new HttpHeaders({
+  headerMulForm= new HttpHeaders({
     'Content-Type': 'multipart/form-data',
   });
-  optionmul = { headers: this.headermul};
+  optionMulForm = { headers: this.headerMulForm};
 
   savePaymentDetails(data) : Observable<any> {
     return this.http

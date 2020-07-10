@@ -1,0 +1,180 @@
+<div class="continer-fluid">
+  <div class="main m-auto">
+    <form class="form">
+      <div class="text-center p-2">
+        <h3 class="py-1 text-center mt-1 heading-title">Join Healthcrum</h3>
+         <!--
+        <div class="social-pane">
+         
+            <div class="row justify-content-center">
+              <div class="col-md-4">
+                <button class="btn btn-social btn-google mb-3" style="width:100%" (click)="signupWithGoogle()">
+                  <span>
+                    <fa-icon [icon]="google" class="fa-google-icon"></fa-icon>
+                  </span> <span>Sign up with Google</span>
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-social btn-facebook mb-3" style="width:100%"
+                  (click)="signupWithFacebook()">
+                  <span>
+                    <fa-icon [icon]="fb" class="fa-google-icon"></fa-icon>
+                  </span> <span>Sign up with Facebook</span></button>
+              </div>
+            </div>
+          
+        </div>
+        <div class="or-line">
+          <hr>
+          <h4 class="text-center m-0">OR</h4>
+        </div>
+
+        -->
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Full Name</mat-label>
+              <input type="text" matInput placeholder="Full Name" [(ngModel)]="user_name" name="user_name">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input type="email" matInput placeholder="example@example.com" [(ngModel)]="user_email"
+                name="user_email">
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Phone Numer</mat-label>
+              <input type="tel" matInput placeholder="+91 9823xxxxxx" [(ngModel)]="user_mob" name="user_mob">
+            </mat-form-field>
+
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Select your Gender</mat-label>
+
+              <mat-select (selectionChange)="selectGender($event.value)">
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="other">Other</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput [(ngModel)]="user_pass" name="user_pass">
+            </mat-form-field>
+
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" matInput [(ngModel)]="user_cpass" name="user_cpass">
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" [formControl]="user_dob">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+
+          </div>
+        </div>
+
+        <div class="row" style="align-items: center;background: #f8fbfd;">
+          <div class="col-md-4 text-center">
+            <h4>Signup As</h4>
+          </div>
+          <div class="col-md-8">
+            <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
+
+              <li class="nav-item">
+                <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserType('patient')">
+                  <i>
+                    <fa-icon [icon]="patient"></fa-icon>
+                  </i> Patient
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserType('employee')">
+                  <i>
+                    <fa-icon [icon]="company"></fa-icon>
+                  </i> Employee
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" role="tab" data-toggle="tab" (click)="setUserType(doctor)">
+                  <i>
+                    <fa-icon [icon]="doctor"></fa-icon>
+                  </i> Doctor
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="user_type == 'employee'">
+          <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Employee Id</mat-label>
+              <input matInput [(ngModel)]="employeeId" name="empId">
+            </mat-form-field>
+          </div>
+          <div class=" col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Organisation </mat-label>
+              <input matInput [(ngModel)]="companyId" name="compId">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Branch</mat-label>
+              <input matInput [(ngModel)]="branchId" name="branchId">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Department</mat-label>
+              <input matInput [(ngModel)]="departmentId" name="deptId">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="agree" 
+                  (click)="showAgree()" name="checkboox">
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                  <b>Agree to </b><a (click)="openDialog()">terms and conditions</a>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

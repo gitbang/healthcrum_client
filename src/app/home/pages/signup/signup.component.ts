@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import {
   faFacebookSquare,
@@ -20,6 +20,8 @@ import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+import { EventManager } from "@angular/platform-browser";
+import { SocialDetailsComponent } from "./social-details/social-details.component";
 
 @Component({
   selector: "app-signup",
@@ -42,6 +44,12 @@ export class SignupComponent implements OnInit {
   user_type: String;
   user_gender: String = "none";
   agree = false;
+  employeeId : String;
+  companyId :String
+  branchId :String
+  departmentId :String
+
+  // save To db ;
   constructor(
     private authService: AuthService,
     private http: HttpClient,
@@ -52,43 +60,49 @@ export class SignupComponent implements OnInit {
     // $(document).ready(() => {});
   }
 
+  fromGoogle : any;
+  social : boolean = false
   ngOnInit() {}
+
   signupUser(): void {
     if (this.user_name == "" || this.user_name == undefined) {
-      $("#fname").focus();
+      //$("#fname").focus();
       swal.fire("Please enter your full name");
       return;
     }
     if (this.user_email == "" || this.user_email == undefined) {
-      $("#email").focus();
+      
       swal.fire("Please enter your email address");
       return;
     }
     if (this.user_mob == "" || this.user_mob == undefined) {
-      $("#mob").focus();
+      //$("#mob").focus();
       swal.fire("Please enter Phone Number");
       return;
     }
     if (this.user_gender == "none" || this.user_gender == undefined) {
-      $("#gender").focus();
+     // $("#gender").focus();
       swal.fire("Please select your gender");
       return;
     }
-    if (this.user_pass == "" || this.user_pass == undefined) {
-      $("#pass").focus();
-      swal.fire("Please enter password for account");
-      return;
+    if(!this.social) {
+      if (this.user_pass == "" || this.user_pass == undefined) {
+        //$("#pass").focus();
+        swal.fire("Please enter password for account");
+        return;
+      }
+      if (this.user_cpass == "" || this.user_cpass == undefined) {
+        //$("#cpass").focus();
+        swal.fire("Please confirm password");
+        return;
+      }
+      if (this.user_pass != this.user_cpass) {
+       // $("#cpass").focus();
+        swal.fire("password doesn't matches");
+        return;
+      }
     }
-    if (this.user_cpass == "" || this.user_cpass == undefined) {
-      $("#cpass").focus();
-      swal.fire("Please confirm password");
-      return;
-    }
-    if (this.user_pass != this.user_cpass) {
-      $("#cpass").focus();
-      swal.fire("password doesn't matches");
-      return;
-    }
+    
     if (!this.user_type) {
       swal.fire("Please choose user type");
       return;
@@ -97,31 +111,78 @@ export class SignupComponent implements OnInit {
       swal.fire("please accept terms and conditions");
       return;
     }
-    let data = {
-      name: this.user_name,
-      email: this.user_email,
-      password: this.user_pass,
-      phone: this.user_mob,
-      gender: this.user_gender,
-      user_type: this.user_type,
-    };
+    var data;
+    if(this.user_type == 'employee'){
+      if(!this.employeeId){
+        swal.fire("please enter employeeId");
+        return
+      }
+      if(!this.companyId){
+        swal.fire("please enter companyId");
+        return
+      }
+      if(!this.branchId){
+        swal.fire("please enter branchId");
+        return
+      }
+      if(!this.departmentId){
+        swal.fire("please enter departmentId");
+        return
+      }
+      data = {
+        name: this.user_name,
+        email: this.user_email,
+        password: this.user_pass,
+        phone: this.user_mob,
+        gender: this.user_gender,
+        user_type: this.user_type,
+        employeeId : this.employeeId,
+        companyId : this.companyId,
+        branchId : this.branchId,
+        deptId : this.departmentId
+      };
+      
+    } else {
+      data = {
+        name: this.user_name,
+        email: this.user_email,
+        password: this.user_pass,
+        phone: this.user_mob,
+        gender: this.user_gender,
+        user_type: this.user_type,
+      };
+    }
+    
 
     swal.fire("success!", "Registration successfull", "success");
+
+    this.authLocal.signUpUser(data).subscribe((result)=>{
+      console.log(result)
+      if(result.success){
+        this.router.navigateByUrl["/login"]
+      }
+    })
+    
   }
-  setUserType(type) {
-    if (type == 1) this.user_type = "patient";
-    else if (type == 2) this.user_type = "company";
-    else if (type == 3) this.user_type = "doctor";
+
+  setUserType(type : string) {
+    this.user_type = type
+  }
+
+  selectGender(event){
+    console.log("in gender", event)
+    this.user_gender = event
   }
 
   showAgree() {
     this.agree = !this.agree;
   }
-  sendResetLink() {}
+  
   signupWithGoogle() {
     this.authService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user) => {
+        console.log("complete user", user)
         if (user) {
           let u = {
             name: user.name,
@@ -130,9 +191,12 @@ export class SignupComponent implements OnInit {
             image: user.photoUrl,
             method: 2,
           };
-          //save user data in DB if not there
-          this.authLocal.saveUser(JSON.stringify(u));
-          // this.router.navigate(["/patient/dashboard"]);
+          this.social = true
+          this.fromGoogle = user
+          this.user_name = user.name;
+          this.user_email = user.email;
+          this.user_pass = user.id
+
         } else {
           swal.fire("Error", "Google Authentication Failed !", "error");
         }
@@ -154,9 +218,10 @@ export class SignupComponent implements OnInit {
             image: user.photoUrl,
             method: 3,
           };
-          //save user data in DB if not there
-          this.authLocal.saveUser(JSON.stringify(u));
-          // this.router.navigate(["/patient/dashboard"]);
+          this.social = true
+          this.fromGoogle = user
+          this.user_name = user.name;
+          this.user_email = user.email;
         } else {
           swal.fire("Error", "Google Authentication Failed !", "error");
         }
@@ -165,12 +230,19 @@ export class SignupComponent implements OnInit {
         swal.fire("Error!", "Login Failed", "error");
       });
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log(`Dialog result: ${result}`);
+      this.agree = (result === 'true')
+      console.log(this.agree)
     });
+  }
+
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+    console.log("Processing beforeunload...");
+    //this.authService.signOut();
   }
 }
 

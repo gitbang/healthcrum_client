@@ -74,6 +74,7 @@ import { LandingPageComponent } from './pages/wellness/landing-page/landing-page
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UploadPrescriptionComponent } from './pages/medicines/upload-prescription/upload-prescription.component';
 import {MatSliderModule} from '@angular/material/slider';
+import { SocialDetailsComponent } from './pages/signup/social-details/social-details.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import {MatSliderModule} from '@angular/material/slider';
     LandingPageComponent,
     NotFoundComponent,
     UploadPrescriptionComponent,
+    SocialDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -153,7 +155,8 @@ import {MatSliderModule} from '@angular/material/slider';
     AddMemberComponent,
     BookModelComponent,
     UploadPrescriptionComponent,
-    ERecieptComponent
+    ERecieptComponent,
+    SocialDetailsComponent
   ],
   providers: [
     {

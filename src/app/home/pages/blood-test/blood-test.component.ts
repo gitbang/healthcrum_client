@@ -86,7 +86,7 @@ export class BloodTestComponent implements OnInit {
       map((value) => this._filter(value))
     );
   
-    this.fetchbloodtest();
+    //this.fetchbloodtest();   call this function after the fetch of blood Test
 
     // this.ratingArray = Array(5).fill(0)
     
@@ -341,19 +341,6 @@ export class BloodTestComponent implements OnInit {
     }
   }
 
-  // removeFromCart(x) {
-  //   this.searchcart = this.searchcart.filter((i)=> i != x)
-  // }
-
-  // maindropdown(x, event) {
-  //   if(event == true) {
-  //     this.searchcart.push(x)
-  //   }  else{
-  //    this.removeFromCart(x)
-  //   }
-  //  // console.log(this.searchcart)
-  // }
-
   removeSideFilters(i) {
     this.filtercontent(i)
    // console.log(this.display)
@@ -411,6 +398,8 @@ export class BloodTestComponent implements OnInit {
       this.city = res.city;
       this.search_city = this.city;
       this.myControl.setValue(this.city);
+
+      this.fetchbloodtest();  // fetch blood test according to city
     });
   }
   
@@ -445,7 +434,7 @@ export class BloodTestComponent implements OnInit {
   fromdatabase ;
 
   fetchbloodtest(){
-    this.service.bloodTestFetchAllTest().subscribe((result)=>{
+    this.service.bloodTestFetchAllTest({city : this.myControl.value.toLowerCase()}).subscribe((result)=>{
       console.log("initial fetch", result)
       if(result.success) {
         this.datafound = true

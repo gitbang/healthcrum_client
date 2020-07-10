@@ -59,6 +59,6 @@
         sophisticated in-browser navigational capabilities.</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Decline</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Accept</button>
+    <button mat-button [mat-dialog-close]='false'>Decline</button>
+    <button mat-button [mat-dialog-close]='true' cdkFocusInitial>Accept</button>
 </mat-dialog-actions>

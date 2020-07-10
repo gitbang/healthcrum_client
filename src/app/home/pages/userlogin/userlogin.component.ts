@@ -57,14 +57,7 @@ export class UserloginComponent implements OnInit {
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user) => {
         if (user) {
-          let u = {
-            name: user.name,
-            id: user.id,
-            image: user.photoUrl,
-          };
-          //save user data in DB if not there
-          this.authLocal.saveUser(JSON.stringify(u));
-          this.router.navigate(["/patient/dashboard"]);
+          this.afterSocialLogin(user);
         } else {
           swal.fire("Error", "Google Authentication Failed !", "error");
         }
@@ -75,9 +68,39 @@ export class UserloginComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService
+      .signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then(user=>{
+        if(user) {
+          this.afterSocialLogin(user)
+        } else {
+          swal.fire("Error", "Facebook Authentication Failed !", "error");
+        }
+      })
+      .catch(err =>{
+        swal.fire("Error!", "Login Failed", "error")
+      })
   }
 
+  afterSocialLogin(user) {
+    let u = {
+      name: user.name,
+      id: user.id,
+      image: user.photoUrl,
+    };
+    //save user data in DB if not there
+    // delete the following line when data start storing in database
+    this.authLocal.saveUser(JSON.stringify(u));
+    this.authLocal.loginUser({username : user.name , password : user.id})
+      .subscribe((response)=>{
+        console.log("response after user login save",response)
+
+        if(response.success){
+         console.log("data save ")
+        }
+      })
+  }
+  
   signOut(): void {
     this.authService.signOut();
   }
@@ -93,17 +116,13 @@ export class UserloginComponent implements OnInit {
   }
 
   loginLocal(): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-    };
+    
     let data = {
       email: this.user_email,
       password: this.user_pass,
     };
 
-    this.authLocal.loginUser(data, httpOptions).subscribe(
+    this.authLocal.loginUser(data).subscribe(
       (data) => {
         // this.alertService.success('Registration successful', true);
         // this.router.navigate(["/patient/dashboard"]);
