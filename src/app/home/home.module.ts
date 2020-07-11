@@ -75,6 +75,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UploadPrescriptionComponent } from './pages/medicines/upload-prescription/upload-prescription.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { SocialDetailsComponent } from './pages/signup/social-details/social-details.component';
+import { FlipModule } from 'ngx-flip';
 
 @NgModule({
   declarations: [
@@ -147,7 +148,7 @@ import { SocialDetailsComponent } from './pages/signup/social-details/social-det
     MatTabsModule,
     AngularFittextModule,
     MatSliderModule,
-   // BrowserAnimationsModule
+    FlipModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

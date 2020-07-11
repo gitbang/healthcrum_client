@@ -49,6 +49,7 @@ export class SignupComponent implements OnInit {
   branchId :String
   departmentId :String
 
+  data : any;
   // save To db ;
   constructor(
     private authService: AuthService,
@@ -65,44 +66,40 @@ export class SignupComponent implements OnInit {
   ngOnInit() {}
 
   signupUser(): void {
+    var data;
+
     if (this.user_name == "" || this.user_name == undefined) {
-      //$("#fname").focus();
       swal.fire("Please enter your full name");
       return;
     }
     if (this.user_email == "" || this.user_email == undefined) {
-      
       swal.fire("Please enter your email address");
       return;
     }
     if (this.user_mob == "" || this.user_mob == undefined) {
-      //$("#mob").focus();
       swal.fire("Please enter Phone Number");
       return;
     }
     if (this.user_gender == "none" || this.user_gender == undefined) {
-     // $("#gender").focus();
       swal.fire("Please select your gender");
       return;
     }
     if(!this.social) {
+      this.data = 'local'
       if (this.user_pass == "" || this.user_pass == undefined) {
-        //$("#pass").focus();
         swal.fire("Please enter password for account");
         return;
       }
       if (this.user_cpass == "" || this.user_cpass == undefined) {
-        //$("#cpass").focus();
         swal.fire("Please confirm password");
         return;
       }
       if (this.user_pass != this.user_cpass) {
-       // $("#cpass").focus();
         swal.fire("password doesn't matches");
         return;
       }
-    }
-    
+    } 
+
     if (!this.user_type) {
       swal.fire("Please choose user type");
       return;
@@ -111,7 +108,7 @@ export class SignupComponent implements OnInit {
       swal.fire("please accept terms and conditions");
       return;
     }
-    var data;
+    
     if(this.user_type == 'employee'){
       if(!this.employeeId){
         swal.fire("please enter employeeId");
@@ -135,11 +132,12 @@ export class SignupComponent implements OnInit {
         password: this.user_pass,
         phone: this.user_mob,
         gender: this.user_gender,
-        user_type: this.user_type,
+        role: this.user_type,
         employeeId : this.employeeId,
         companyId : this.companyId,
         branchId : this.branchId,
-        deptId : this.departmentId
+        deptId : this.departmentId,
+        method : this.data
       };
       
     } else {
@@ -149,17 +147,20 @@ export class SignupComponent implements OnInit {
         password: this.user_pass,
         phone: this.user_mob,
         gender: this.user_gender,
-        user_type: this.user_type,
+        role: this.user_type,
+        method : this.data
       };
     }
-    
 
     swal.fire("success!", "Registration successfull", "success");
 
+    console.log("final data :" , data)
     this.authLocal.signUpUser(data).subscribe((result)=>{
-      console.log(result)
+      
       if(result.success){
-        this.router.navigateByUrl["/login"]
+        this.router.navigateByUrl('/login')
+      } else {
+        swal.fire(result.error)
       }
     })
     
@@ -191,6 +192,7 @@ export class SignupComponent implements OnInit {
             image: user.photoUrl,
             method: 2,
           };
+          this.data = "google"
           this.social = true
           this.fromGoogle = user
           this.user_name = user.name;
@@ -218,6 +220,7 @@ export class SignupComponent implements OnInit {
             image: user.photoUrl,
             method: 3,
           };
+          this.data = "facebook"
           this.social = true
           this.fromGoogle = user
           this.user_name = user.name;

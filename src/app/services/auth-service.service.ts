@@ -17,7 +17,7 @@ export class AuthServiceLocal {
   });
   option = { headers: this.headers };
 
-  baseurl: string = "http://localhost:3000/";
+  baseurl: string = 'http://localhost:3000';
 
   get isUserLoggedIn(): boolean {
     let user = localStorage.getItem("user");
@@ -46,12 +46,12 @@ export class AuthServiceLocal {
 
   signUpUser(data) : Observable<any>{
     return this.http
-            .post(this.baseurl + "/", data, this.option)
+            .post(this.baseurl + "/api//user/sign-up", data, this.option)
             .pipe(retry(2), catchError(this.handleError))
   }
 
   loginUser(data) : Observable<any> {
-    return this.http.post(this.baseurl + "/user/signin", data, this.option)
+    return this.http.post(this.baseurl + "/api//user/login", data, this.option)
               .pipe(retry(2), catchError(this.handleError))
   }
 

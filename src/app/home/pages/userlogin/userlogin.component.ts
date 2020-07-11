@@ -17,6 +17,7 @@ import {
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
+import {HomeServiceService} from '../../home-service.service'
 // import * as $ from "bootstrap";
 @Component({
   selector: "app-userlogin",
@@ -27,6 +28,8 @@ export class UserloginComponent implements OnInit {
   google = faGooglePlusG;
   fb = faFacebookSquare;
 
+  flipDiv : boolean = false
+
   user_email: String;
   user_pass: String;
   forgot_email: string;
@@ -34,7 +37,8 @@ export class UserloginComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private authLocal: AuthServiceLocal,
-    private router: Router
+    private router: Router,
+    private service : HomeServiceService
   ) {
     // $(document).ready(() => {});
   }
@@ -88,9 +92,11 @@ export class UserloginComponent implements OnInit {
       id: user.id,
       image: user.photoUrl,
     };
-    //save user data in DB if not there
+    
     // delete the following line when data start storing in database
+    // save the data in local storage which comes after login verified
     this.authLocal.saveUser(JSON.stringify(u));
+
     this.authLocal.loginUser({username : user.name , password : user.id})
       .subscribe((response)=>{
         console.log("response after user login save",response)
@@ -115,25 +121,87 @@ export class UserloginComponent implements OnInit {
     swal.fire("Success!", "Email sent successfully !", "success");
   }
 
+  completeData : any;
   loginLocal(): void {
     
     let data = {
-      email: this.user_email,
+      username: this.user_email,
       password: this.user_pass,
     };
 
-    this.authLocal.loginUser(data).subscribe(
-      (data) => {
-        // this.alertService.success('Registration successful', true);
-        // this.router.navigate(["/patient/dashboard"]);
-        // console.log(data);
-      },
-      (error: HttpErrorResponse) => {
-        // let errorPayload = JSON.parse(error.message);
-        //ToDo: apply your handling logic e.g.:
-        // console.log(errorPayload);
-        swal.fire("Error", "Wrong email or password", "error");
+    this.authLocal.loginUser(data).subscribe((data) => {
+       console.log("local response",data)
+       if(data.success) {
+        this.completeData = data        // contains : loginToken , success , userDetail
+        if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
+          console.log("one method is verified")
+        } else {
+          this.flip();
+          this.userMobile = data.userDetail.phone;
+          this.userEmail = data.userDetail.email;
+        }
+       } else {
+         alert("Something")
+       }
       }
     );
   }
+
+
+
+  // verificational portal
+
+  flip(){
+    this.flipDiv = !this.flipDiv;
+  }
+
+  userMobile : number ;
+  userEmail : string
+  bynumber : boolean = true;
+  otpSend : boolean = false
+  verifyByNumber(){
+    this.bynumber = true;
+    this.otpSend = false
+  }
+  verifyByEmail(){
+    this.bynumber = false;
+    this.otpSend = false
+  }
+
+
+  sendOTP(){
+
+    this.otpSend = true
+    swal.fire({
+      icon: 'success',
+      title: 'OTP send',
+      showConfirmButton: false,
+      timer: 1500,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+    if(this.bynumber) {
+
+
+    } else {
+
+    }
+  } 
+
+
+  generateotp(data){
+    
+    this.service.consultationBookOtpcheck(data)
+      .subscribe((result)=>{
+        console.log(result)
+        if(result.success) {
+        } else {
+          alert("something went wrong")
+        }
+      })
+  } 
 }

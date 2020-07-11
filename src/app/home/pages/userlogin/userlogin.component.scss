@@ -1,3 +1,23 @@
+$red : #DD4B39;
+$blue : #3B5998;
 .example-full-width {
   width: 100%;
+}
+
+.btn-number {
+  color : $blue;
+  background-color: white;
+}
+.btn-number-click {
+  background-color: $blue;
+  color: white;
+}
+
+.btn-email {
+  color : $red;
+  background-color: white;
+}
+.btn-email-click {
+  background-color: $red;
+  color: white;
 }
