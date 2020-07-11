@@ -55,6 +55,10 @@ export class AuthServiceLocal {
               .pipe(retry(2), catchError(this.handleError))
   }
 
+  saveTokenAndRole(token, role){
+    localStorage.setItem("token", token)
+    localStorage.setItem("role", role)
+  }
 
   handleError(error) {
     let errorMessage = '';
