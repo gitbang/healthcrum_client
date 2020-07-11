@@ -76,8 +76,9 @@ export class SignupComponent implements OnInit {
       swal.fire("Please enter your email address");
       return;
     }
-    if (this.user_mob == "" || this.user_mob == undefined) {
-      swal.fire("Please enter Phone Number");
+    if (this.user_mob == "" || this.user_mob == undefined ||
+       this.user_mob.toString().length != 10) {
+      swal.fire("Please enter Valid Phone Number");
       return;
     }
     if (this.user_gender == "none" || this.user_gender == undefined) {
@@ -152,12 +153,13 @@ export class SignupComponent implements OnInit {
       };
     }
 
-    swal.fire("success!", "Registration successfull", "success");
+    
 
     console.log("final data :" , data)
     this.authLocal.signUpUser(data).subscribe((result)=>{
       
       if(result.success){
+        swal.fire("success!", "Registration successfull", "success");
         this.router.navigateByUrl('/login')
       } else {
         swal.fire(result.error)

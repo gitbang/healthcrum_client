@@ -19,6 +19,7 @@ import { Router } from "@angular/router";
 import * as $ from "jquery";
 import {HomeServiceService} from '../../home-service.service'
 // import * as $ from "bootstrap";
+//declare var $ : any
 @Component({
   selector: "app-userlogin",
   templateUrl: "./userlogin.component.html",
@@ -87,6 +88,7 @@ export class UserloginComponent implements OnInit {
   }
 
   afterSocialLogin(user) {
+    console.log(user)
     let u = {
       name: user.name,
       id: user.id,
@@ -97,7 +99,7 @@ export class UserloginComponent implements OnInit {
     // save the data in local storage which comes after login verified
     this.authLocal.saveUser(JSON.stringify(u));
 
-    this.authLocal.loginUser({username : user.name , password : user.id})
+    this.authLocal.loginUser({username : user.email, password : user.id})
       .subscribe((response)=>{
         console.log("response after user login save",response)
 
@@ -124,6 +126,15 @@ export class UserloginComponent implements OnInit {
   completeData : any;
   loginLocal(): void {
     
+    if(!this.user_email) {
+      swal.fire("Id required")
+      return
+    }
+    if(!this.user_pass) {
+      swal.fire("Password required")
+      return
+    }
+
     let data = {
       username: this.user_email,
       password: this.user_pass,
@@ -131,25 +142,29 @@ export class UserloginComponent implements OnInit {
 
     this.authLocal.loginUser(data).subscribe((data) => {
        console.log("local response",data)
-       if(data.success) {
+      if(data.success) {
         this.completeData = data        // contains : loginToken , success , userDetail 
 
-        // fetch token and role  from the userDetail and store in local storage
-          if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
-            console.log("one method is verified")
-          } else {
-            this.flip();
-            this.userMobile = data.userDetail.phone;
-            this.userEmail = data.userDetail.email;
-          }
-        } else {
-         alert("Something")
-       }
+        this.authLocal.saveTokenAndRole(data.userDetail)    
+
+        // code here to add dashboard dynamically
+
+        // if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
+
+        //   // 
+
+        //   console.log("one method is verified")
+        // } else {
+
+        //   this.flip();
+        //   this.userMobile = data.userDetail.phone;
+        //   this.userEmail = data.userDetail.email;
+        // }
+      } else {
+        alert("No data found")
       }
-    );
+    });
   }
-
-
 
   // verificational portal
 
@@ -223,5 +238,13 @@ export class UserloginComponent implements OnInit {
         alert("OTP did not match")
       }
     })
+  }
+
+  forgetpass(){
+    //console.log("forget reached")
+    if(!this.user_email) {
+      swal.fire("Please enter userId")
+      return 
+    }
   }
 }

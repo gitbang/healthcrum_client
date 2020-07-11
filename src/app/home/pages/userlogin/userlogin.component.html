@@ -36,8 +36,14 @@
                   </mat-form-field>
                   <div class="form-group">
 
-                    <a href="#" class="forgot" data-toggle="modal" data-target="#forgotModal"><small>Forgot
-                        password?</small></a>
+                    <a href="#" class="forgot" data-toggle="modal"
+                     
+                     [attr.data-target]="user_email ? '#forgotModal' : ''" 
+                      style="cursor : pointer"
+                      (click)="forgetpass()"
+                      >
+
+                     <small>Forgot password?</small></a>
                   </div>
                   <div class="form-group">
                     <input class="btn btn-success" type="submit" value="Login" (click)="loginLocal()">
