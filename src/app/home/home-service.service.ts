@@ -9,8 +9,6 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class HomeServiceService {
 
-  
-  
 
   url : string = 'http://localhost:3000'
  

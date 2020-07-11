@@ -132,15 +132,17 @@ export class UserloginComponent implements OnInit {
     this.authLocal.loginUser(data).subscribe((data) => {
        console.log("local response",data)
        if(data.success) {
-        this.completeData = data        // contains : loginToken , success , userDetail
-        if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
-          console.log("one method is verified")
+        this.completeData = data        // contains : loginToken , success , userDetail 
+
+        // fetch token and role  from the userDetail and store in local storage
+          if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
+            console.log("one method is verified")
+          } else {
+            this.flip();
+            this.userMobile = data.userDetail.phone;
+            this.userEmail = data.userDetail.email;
+          }
         } else {
-          this.flip();
-          this.userMobile = data.userDetail.phone;
-          this.userEmail = data.userDetail.email;
-        }
-       } else {
          alert("Something")
        }
       }
@@ -156,9 +158,9 @@ export class UserloginComponent implements OnInit {
   }
 
   userMobile : number ;
-  userEmail : string
+  userEmail : string;
   bynumber : boolean = true;
-  otpSend : boolean = false
+  otpSend : boolean = false;
   verifyByNumber(){
     this.bynumber = true;
     this.otpSend = false
@@ -171,24 +173,10 @@ export class UserloginComponent implements OnInit {
 
   sendOTP(){
 
-    this.otpSend = true
-    swal.fire({
-      icon: 'success',
-      title: 'OTP send',
-      showConfirmButton: false,
-      timer: 1500,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
     if(this.bynumber) {
-
-
+      this.generateotp({phone : this.userMobile})
     } else {
-
+      // send link to the otp
     }
   } 
 
@@ -199,9 +187,41 @@ export class UserloginComponent implements OnInit {
       .subscribe((result)=>{
         console.log(result)
         if(result.success) {
+          this.otpSend = true;
+          this.flip();
+          swal.fire({
+            icon: 'success',
+            title: 'OTP send',
+            showConfirmButton: false,
+            timer: 1500,
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
         } else {
           alert("something went wrong")
         }
       })
-  } 
+  }
+
+  myotp : number;
+  verify(){
+    var toSend = {
+      otp : this.myotp,
+      phone : this.userMobile
+    }
+    var _this = this
+    this.service.consultationChekOTP(toSend).subscribe((result)=>{
+     // this.loading = false;
+      console.log(result)
+      if(result.success){
+        _this.router.navigateByUrl('/patient')    
+      } else{
+        alert("OTP did not match")
+      }
+    })
+  }
 }
