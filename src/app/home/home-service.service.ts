@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import {Http, RequestOptions} from '@angular/http'
+// import {Http, RequestOptions} from '@angular/http'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 
