@@ -24,14 +24,14 @@
                 </tr>
               </thead>
               <tbody>
-                <!--
-                <tr *ngFor = "appointment of appointments">
+                
+                <tr *ngFor= "let appointment of appointments">
                   <td class="">{{appointment.number}}</td>
-                  <td class="">{{appointment.number}}</td>
-                  <td class="">{{appointment.number}}</td>
-                  <td class="">{{appointment.number}}</td>
-                  <td class="">{{appointment.number}}</td>
-                  <td class="">{{appointment.number}}</td>
+                  <td class="">{{appointment.doctor_name}}</td>
+                  <td class="">{{appointment.location}}</td>
+                  <td class="">{{appointment.lab}}</td>
+                  <td class="">{{appointment.date}}</td>
+                  <td class="">{{appointment.fee}}</td>
                   <td class="td-actions">
                     <button type="button" onclick="demo.showSwal('warning-message-and-confirmation')" rel="tooltip"
                       class="btn btn-danger" data-original-title="" title="">
@@ -46,7 +46,7 @@
                   </td>
 
                 </tr>
-                -->
+                
               </tbody>
             </table>
           </div>
@@ -90,25 +90,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    11be45
-                  </td>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Delhi
-                  </td>
-                  <td>
-                    Lab-Name
-                  </td>
-                  <td>
-                    13/08/20XX
-                  </td>
-                  <td>
-                    3738
-                  </td>
+                <tr *ngFor= "let appointment of appointmentsdone">
+                  <td class="">{{appointment.number}}</td>
+                  <td class="">{{appointment.doctor_name}}</td>
+                  <td class="">{{appointment.location}}</td>
+                  <td class="">{{appointment.lab}}</td>
+                  <td class="">{{appointment.date}}</td>
+                  <td class="">{{appointment.fee}}</td>
                   <td class="td-actions">
                     <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
                       data-original-title="" title="">

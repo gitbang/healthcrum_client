@@ -23,4 +23,8 @@ export class PatientApponitmentsComponent implements OnInit {
   appointments = [ 
     {number : "123456", doctor_name : "Mr meena", location : "Delhi", lab : "ABC laboratory", date : "12/10/20", fee :"2000"}
   ]  
+
+  appointmentsdone = [ 
+    {number : "123456", doctor_name : "Mr meena", location : "Delhi", lab : "ABC laboratory", date : "12/10/20", fee :"2000"}
+  ]  
 }
