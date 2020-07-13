@@ -137,7 +137,7 @@ export class SignupComponent implements OnInit {
         employeeId : this.employeeId,
         companyId : this.companyId,
         branchId : this.branchId,
-        deptId : this.departmentId,
+        departmentId : this.departmentId,
         method : this.data
       };
       

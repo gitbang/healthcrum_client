@@ -11,6 +11,7 @@ $blue : #3B5998;
 .btn-number-click {
   background-color: $blue;
   color: white;
+  // transform: scale(1.1);
 }
 
 .btn-email {
@@ -20,4 +21,6 @@ $blue : #3B5998;
 .btn-email-click {
   background-color: $red;
   color: white;
+  //transform: scale(1.1);
+
 }

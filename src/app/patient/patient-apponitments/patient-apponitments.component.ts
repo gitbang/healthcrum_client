@@ -10,6 +10,17 @@ export class PatientApponitmentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    // check role from local storage
+
+    // send token to backend for fetching data in it;
+
+    // retrive _id from data and then fetch the required data using that id
+
+    // 
   }
 
+  appointments = [ 
+    {number : "123456", doctor_name : "Mr meena", location : "Delhi", lab : "ABC laboratory", date : "12/10/20", fee :"2000"}
+  ]  
 }

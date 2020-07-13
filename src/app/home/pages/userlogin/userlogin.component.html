@@ -53,7 +53,7 @@
             </form>
           </div>
             
-          <div class="back" back>
+          <div class="back"  *ngIf="!forgotPass" back>
             <form>
               <div class="box_form clearfix">
                 <div class="box_login">
@@ -80,25 +80,27 @@
                     </a>
                   </div>
                 </div>
+
                 <div class="box_login last">
 
                   <mat-form-field class="full-width" *ngIf="bynumber"
                     appearance="outline">
                    
-                    <input type="text" matInput [(ngModel)]="userMobile" name="user_email"
-                      placeholder="Phone Number" [readonly]="true">
+                    <input type="text" matInput [(ngModel)]="userMobile" name="user_number"
+                      placeholder="Phone Number" >
                   </mat-form-field>
 
                   <mat-form-field class="full-width" *ngIf="!bynumber"
                     appearance="outline">
                    
                     <input type="text" matInput [(ngModel)]="userEmail" name="user_email"
-                      placeholder="Phone Number" [readonly]="true">
+                      placeholder="Email" >
                   </mat-form-field>
                   
                   <div class="form-group" *ngIf="!otpSend">
                     <input class="btn btn-success" type="submit" value="Send OTP" (click)="sendOTP()">
                   </div>
+
                   <div *ngIf="otpSend">
                     <mat-form-field class="full-width" appearance="outline">
                       <mat-label>OTP</mat-label>
@@ -115,9 +117,100 @@
 
                     </div>
                   </div>
+
                 </div>
               </div>
             </form>
+          </div>
+
+          <div class="back"  *ngIf="forgotPass" back>
+            <form>
+              <div class="box_form clearfix">
+                <div class="box_login">
+
+                  <button  class="btn btn-social btn-facebook w-75 mb-3" 
+                  [ngClass]="bynumber ? 'btn-number-click' : 'btn-number'"
+                  (click)="verifyByNumber()">
+                    <span>
+                      <mat-icon> mobile_screen_share</mat-icon>
+                      <!--<fa-icon [icon]="fb" class="fa-facebook-icon"></fa-icon>-->
+                    </span> <span>Get otp by Number</span>
+                  </button>
+
+                  <button  class="btn btn-social btn-google w-75" 
+                  [ngClass]="!bynumber ? 'btn-email-click' : 'btn-email'"
+                  (click)="verifyByEmail()">
+                    <span>
+                      <mat-icon> email</mat-icon>
+                      <!--<fa-icon [icon]="google" class="fa-google-icon"></fa-icon>-->
+                    </span> <span>Link by Email</span></button>
+                  <div class="form-group mt-3">
+                    <a class="forgot" (click)="flip()" style="cursor : pointer">
+                      <small>GO Back</small>
+                    </a>
+                  </div>
+                </div>
+                
+                
+                <div class="box_login last" *ngIf="!otpConfirmed">
+
+                  <mat-form-field class="full-width" *ngIf="bynumber"
+                    appearance="outline">
+                   
+                    <input type="number" matInput [(ngModel)]="forgotMobile" name="user_number"
+                      placeholder="Enter phone number" >
+                  </mat-form-field>
+
+                  <mat-form-field class="full-width" *ngIf="!bynumber"
+                    appearance="outline">
+                   
+                    <input type="text" matInput [(ngModel)]="forgotEmail" name="user_email"
+                      placeholder="Enter email">
+                  </mat-form-field>
+                  
+                  <div class="form-group" *ngIf="!otpSend">
+                    <input class="btn btn-success" type="submit" value="Send OTP" (click)="sendOTP()">
+                  </div>
+
+                  <div *ngIf="otpSend">
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>OTP</mat-label>
+                      <input type="number" matInput placeholder="Enter OTP" [(ngModel)]="myotp" required name="forgotOtp">
+                    </mat-form-field>
+                    <div class="form-group">
+
+                      <a class="forgot" (click)="sendOTP()" style="cursor : pointer">
+                        <small>Resend OTP </small>
+                      </a>
+                    </div>
+                    <div class="form-group">
+                      <input class="btn btn-success" type="submit" value="Verify" (click)="verify()">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="box_login last" *ngIf="otpConfirmed">
+                  <mat-form-field class="full-width" *ngIf="bynumber"
+                    appearance="outline">
+                   
+                    <input type="password" matInput [(ngModel)]="newPassword" name="newPass"
+                      placeholder="Enter new password">
+                  </mat-form-field>
+
+                  <mat-form-field class="full-width" *ngIf="bynumber"
+                    appearance="outline">
+                   
+                    <input type="password" matInput [(ngModel)]="newPasswordConfirm" name="newPassConfirm"
+                      placeholder="Confirm password" >
+                  </mat-form-field>
+                  
+                  <div class="form-group">
+                    <input class="btn btn-success" type="submit" value="Change" (click)="changePassword()">
+                  </div>
+                </div>
+              </div>
+            </form>
+
           </div>
         </ngx-flip>
           
@@ -131,6 +224,8 @@
   </div>
 </main>
 <!-- Modal -->
+
+<!--
 <div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -162,20 +257,18 @@
             </mat-form-field>
           </div>
           <div class="col-12 text-center mt-3">
-            <!-- <button (click)="sendResetLink()" class="btn btn-primary">
-              <i class="material-icons">send</i> 
-            send link
-            </button> -->
+            
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button (click)="sendResetLink()" class="btn btn-primary">
-          <!-- <i class="material-icons">send</i>  -->
+         
           send link
         </button>
       </div>
     </div>
   </div>
 </div>
+-->
