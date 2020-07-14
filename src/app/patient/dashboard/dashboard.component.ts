@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     let role = this.localService.getUserRole();
     console.log("role is ", role)
-    if(role != 'doctor') {
+    if(role == 'doctor') {
       this.router.navigateByUrl('/login')
     }
     this.getTestResults();

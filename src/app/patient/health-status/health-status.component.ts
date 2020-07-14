@@ -74,7 +74,7 @@ export class HealthStatusComponent implements OnInit {
   }
   ngOnInit() {
     let role = this.localService.getUserRole();
-    if(role != 'doctor') {
+    if(role == 'doctor') {
       this.router.navigateByUrl('/login')
     }
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */

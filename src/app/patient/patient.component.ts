@@ -15,7 +15,7 @@ export class PatientComponent implements OnInit {
   ) {}
   ngOnInit() {
     let role = this.localService.getUserRole();
-    if(role != 'doctor') {
+    if(role == 'doctor') {
       this.router.navigateByUrl('/login')
     }
     this.router.navigate(["/patient/hra-report-fill"]);

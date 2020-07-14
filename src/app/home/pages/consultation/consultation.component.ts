@@ -134,6 +134,7 @@ export class ConsultationComponent implements OnInit {
   doctors = [ 
     { _id : "2",  
      // image : './assets/img/faces/doctor.png',    // profile picture
+      
       name : 'DR. PANKAJ MANORIA',  
       experience : 10 ,                            // add + years
       speciality : 'Heart', 
