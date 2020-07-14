@@ -97,7 +97,6 @@ export class DashboardComponent implements OnInit {
       branch_id: this.authLocal.getUserBranchID,
     };
     this.service.getAllTemperatures(data).subscribe((res:any)=>{
-      console.log(res);
        let danger = 0;
        let safe = 0;
        let no_entry = 0;
@@ -139,7 +138,6 @@ export class DashboardComponent implements OnInit {
       branch_id: this.authLocal.getUserBranchID,
     };
     this.service.getCovidAnswers(data).subscribe((res:any)=>{
-      console.log(res);
         if(res.success){
           res.data.forEach((el:any) => {
           let inititalans = JSON.parse(el.answers ? el.answers : "{}");
