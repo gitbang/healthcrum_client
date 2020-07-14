@@ -8,6 +8,9 @@ import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
 import { color } from "html2canvas/dist/types/css/types/color";
+import {AuthServiceLocal} from '../../services/auth-service.service';
+import {Router} from '@angular/router'
+
 export interface Section {
   name: string;
   value: string;
@@ -112,11 +115,19 @@ export class DashboardComponent implements OnInit {
     needleStartValue: 0,
   };
 
-  constructor() {}
+  constructor(
+    private router : Router,
+    private localService : AuthServiceLocal
+  ) {}
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
   ngOnInit() {
+    let role = this.localService.getUserRole();
+    console.log("role is ", role)
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
     this.getTestResults();
     this.sideBargraph();
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthServiceLocal} from '../services/auth-service.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-doctor',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private localService : AuthServiceLocal,
+    private router : Router
+  ) { }
 
   ngOnInit() {
+    let role = this.localService.getUserRole()
+    console.log("user role : ", role  )
+    if(!role) {
+      this.router.navigateByUrl('/login')
+    }
   }
 
 }

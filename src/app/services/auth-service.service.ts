@@ -58,6 +58,7 @@ export class AuthServiceLocal {
   saveTokenAndRole(userDetail){
     try {
       localStorage.removeItem("userDetail");
+      userDetail = JSON.stringify(userDetail)
       localStorage.setItem("userDetail", userDetail)  
     } catch (error) {
       return alert(error)
@@ -65,9 +66,35 @@ export class AuthServiceLocal {
   }
 
   getUserDetails(){
-    try {
-      
-      return JSON.parse(localStorage.getItem('userDetail'));
+  
+      let data =  localStorage.getItem('userDetail');
+      console.log("data in user details" , JSON.parse(data) )
+      return JSON.parse(data)
+  }
+
+  getUserId(){
+    try{
+      let data = JSON.parse(localStorage.getItem('userDetail'));
+      return data.userId
+    } catch(error){
+      return null
+    }
+  }
+
+  isLoggin(){
+    let user = JSON.parse(localStorage.getItem('userDetail'));
+    if (!user) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  getUserRole(){
+    try{
+      let data = JSON.parse(localStorage.getItem('userDetail'));
+      console.log("local storage data is : ", data)
+      return data.role
     } catch(error){
       return null
     }

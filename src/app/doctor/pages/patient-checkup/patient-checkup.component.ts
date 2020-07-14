@@ -16,6 +16,8 @@ import Swal from "sweetalert2";
 import { faAngry, faFlushed, faSmile } from "@fortawesome/free-solid-svg-icons";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import {AuthServiceLocal} from '../../../services/auth-service.service'
+import {Router} from '@angular/router'
 
 declare var $: any;
 import {
@@ -150,7 +152,11 @@ export class PatientCheckupComponent implements OnInit {
   @ViewChild("wauto", null) wmatAutocomplete: MatAutocomplete;
   @ViewChild("dauto", null) dmatAutocomplete: MatAutocomplete;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private localService : AuthServiceLocal,
+    private router : Router  
+  ) {
     this.filteredPackages = this.packagesCtrl.valueChanges.pipe(
       startWith(null),
       map((packages: string | null) =>
@@ -160,6 +166,10 @@ export class PatientCheckupComponent implements OnInit {
   }
 
   ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
     this.getTestList();
     this.getProfileTestList();
     this.getTestResults();

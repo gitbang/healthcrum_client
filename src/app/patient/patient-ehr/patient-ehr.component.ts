@@ -13,6 +13,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from "@angular/material/dialog";
+import {AuthServiceLocal} from '../../services/auth-service.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: "app-patient-ehr",
@@ -23,7 +25,9 @@ export class PatientEhrComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private http: HttpClient,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router : Router,
+    private localService : AuthServiceLocal
   ) {}
 
   //download section
@@ -134,6 +138,11 @@ export class PatientEhrComponent implements OnInit {
   disease: string[] = ["Fever", "Cold", "Cough"];
 
   ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
+
     this.fetchPerscriptionData();
     this.autofillfunction();
     this.selectedDocument = this.details.get("documentType").valueChanges.pipe(

@@ -5,6 +5,8 @@ import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LastConsultantComponent} from './last-consultant/last-consultant.component'
 import { AnalysisComponent } from "./analysis/analysis.component";
+import {AuthServiceLocal} from '../../../services/auth-service.service'
+import {Router} from '@angular/router'
 // import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component4
 import {DoctorService} from '../../doctor.service'
 
@@ -17,7 +19,13 @@ export class EPrescriptionComponent implements OnInit {
   //tabBackground = "primary";
   
   
-  constructor(private dialog : MatDialog, private fb : FormBuilder, private service : DoctorService) {}
+  constructor(
+    private dialog : MatDialog, 
+    private fb : FormBuilder, 
+    private service : DoctorService,
+    private localService : AuthServiceLocal,
+    private router : Router
+    ) {}
 
   hraReasonBox : any;
   hraReasonAnswer : any
@@ -30,6 +38,12 @@ export class EPrescriptionComponent implements OnInit {
     others : "other hazardous factors"
   }
   ngOnInit() {
+
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
+
     // get hra details//
     this.service.hradetails().subscribe((result) => {
       this.hraReasonBox = result

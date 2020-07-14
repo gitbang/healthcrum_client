@@ -5,6 +5,8 @@ import { zIndex } from 'html2canvas/dist/types/css/property-descriptors/z-index'
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import {MatPaginator, MatTableDataSource} from '@angular/material'
+import {AuthServiceLocal} from '../../../services/auth-service.service'
+import {Router} from '@angular/router'
 
 export interface samedoctor {
   date : Date,
@@ -58,7 +60,12 @@ export class DashboardComponent implements OnInit {
   dashboardList
   dashlist
   public showPriscribtion = false;
-  constructor( private dialog : MatDialog) {
+
+  constructor( 
+    private dialog : MatDialog,
+    private localService : AuthServiceLocal,
+    private router : Router
+    ) {
     
   }
 
@@ -80,12 +87,20 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
+    // check login user is doctor or not 
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
+
     // create service which fetch user details from database 
 
     this.dashlist = new MatTableDataSource(this.patientDetails.appointments)
     console.log(this.dashlist);
     //console.log(this.list)
     setTimeout(() => this.list.paginator = this.paginator);
+
+  
   }
   
 }

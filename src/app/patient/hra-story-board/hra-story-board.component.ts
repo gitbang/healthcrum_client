@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import * as $ from "jquery";
 // insert a a service
 import { PatientService } from "../patient.service";
+import {AuthServiceLocal} from '../../services/auth-service.service';
+
 
 @Component({
   selector: "app-hra-story-board",
@@ -24,7 +26,11 @@ export class HraStoryBoardComponent implements OnInit {
     "#ffd700",
   ];
   completed: number[] = [50, 20, 70, 54, 83, 62, 95, 80, 58];
-  constructor(private router: Router, private service: PatientService) {}
+  constructor(
+    private router: Router, 
+    private service: PatientService,
+    private localService : AuthServiceLocal  
+  ) {}
   category_array = [
     "Life Style",
     "Physical Health",
@@ -41,6 +47,11 @@ export class HraStoryBoardComponent implements OnInit {
   progress_step_value = 0;
   questions: any;
   ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
+
     this.service
       .getQuestions(this.category_array[this.category_index])
       .subscribe((questions: any) => {

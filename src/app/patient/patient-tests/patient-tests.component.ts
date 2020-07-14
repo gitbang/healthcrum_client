@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import { faAngry, faFlushed, faSmile } from "@fortawesome/free-solid-svg-icons";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import {AuthServiceLocal} from '../../services/auth-service.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: "app-patient-tests",
@@ -62,9 +64,16 @@ export class PatientTestsComponent implements OnInit {
   public barChartLegend = false;
   public barChartPlugins = [pluginDataLabels];
 
-  constructor() {}
+  constructor(
+    private router : Router,
+    private localService : AuthServiceLocal
+  ) {}
 
   ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
     this.getTestResults();
   }
 

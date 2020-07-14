@@ -4,6 +4,7 @@ import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { HomeServiceService } from 'app/home/home-service.service';
 import { MatStepper } from '@angular/material/stepper';
+import {AuthServiceLocal} from '../../../../services/auth-service.service'
 
 @Component({
   selector: 'app-book-model',
@@ -17,8 +18,8 @@ export class BookModelComponent implements OnInit {
     @Inject (MAT_DIALOG_DATA) data : any,
     private service : HomeServiceService,
     private fb : FormBuilder,
-    private dialog: MatDialogRef<BookModelComponent>
-
+    private dialog: MatDialogRef<BookModelComponent>,
+    private localService : AuthServiceLocal
   ) {
     //console.log("received data is : " ,data)
     this.data = data  
@@ -35,6 +36,10 @@ export class BookModelComponent implements OnInit {
 
   toDayDate : Date;
   ngOnInit() {
+
+    // User detail from local storage
+    
+
     this.toDayDate =  new Date()
     this.firstFormGroup = this.fb.group({
       date: ['', Validators.required],

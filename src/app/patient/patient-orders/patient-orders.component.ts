@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import {AuthServiceLocal} from '../../services/auth-service.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: "app-patient-orders",
@@ -9,11 +11,19 @@ export class PatientOrdersComponent implements OnInit {
   pendingOrders: any[] = [];
   doneOrders: any[] = [];
 
-  constructor() {
+  constructor(
+    private router : Router,
+    private localService : AuthServiceLocal
+  ) {
     this.initializeOrders();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
+  }
 
   initializeOrders() {
     for (let i = 0; i < 10; i++) {

@@ -4,8 +4,8 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ERecieptComponent } from '../e-reciept/e-reciept.component';
 import { HomeServiceService } from 'app/home/home-service.service';
 import * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas'
-
+import html2canvas from 'html2canvas';
+import {AuthServiceLocal} from '../../../../services/auth-service.service'
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -24,11 +24,30 @@ export class CheckOutComponent implements OnInit {
     private router: Router,
     private dialog : MatDialog,
     private service : HomeServiceService,
-    private ngZone : NgZone
+    private ngZone : NgZone,
+    private localService : AuthServiceLocal
   ) { }
 
   
   ngOnInit() {
+
+    // user detail from local storage;
+    let data = this.localService.getUserDetails();
+    console.log(data)
+    if(!data){
+      
+      console.log("user not loged in");
+      this.router.navigateByUrl("/login")
+
+    } else {
+
+      this.aboutUser._id = data.userId;
+      this.aboutUser.name = data.name;
+      this.aboutUser.gender = data.gender;
+      this.aboutUser.phone = data.phone;
+    } 
+    console.log(this.aboutUser)
+
     this.service.consultationDoctorSelectedData.subscribe(result=>{
       console.log("from client server ", result);
       this.completeData = result
@@ -102,7 +121,7 @@ export class CheckOutComponent implements OnInit {
       "key": key, 
       "amount": response.amount, 
       "currency": response.currency,
-      "name": "Akash",
+      "name": this.aboutUser.name,
       "description": "Book Consultation",
       "order_id": response.id, 
       "handler":function(response1){
@@ -117,9 +136,8 @@ export class CheckOutComponent implements OnInit {
         })
       },
       "prefill": { 
-        "name" : "Akash",
-        "email" :"ab@gmail.com",
-        "contact": "9999999999"
+        "name" : this.aboutUser.name,
+        "contact": this.aboutUser.phone
       },
     };
     var rzp1 = new Razorpay(options);

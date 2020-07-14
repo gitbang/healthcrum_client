@@ -16,7 +16,6 @@ export class HomeServiceService {
     "Content-Type": "application/json",
   });
   option = { headers: this.headers };
-
   
 
   constructor( private http : HttpClient) {

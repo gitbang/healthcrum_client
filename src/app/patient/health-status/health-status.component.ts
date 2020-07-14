@@ -1,13 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import * as Chartist from "chartist";
-
+import {AuthServiceLocal} from '../../services/auth-service.service';
+import {Router} from '@angular/router'
 @Component({
   selector: "app-health-status",
   templateUrl: "./health-status.component.html",
   styleUrls: ["./health-status.component.scss"]
 })
 export class HealthStatusComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private router : Router,
+    private localService : AuthServiceLocal
+  ) {}
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
     seq = 0;
@@ -69,6 +73,10 @@ export class HealthStatusComponent implements OnInit {
     seq2 = 0;
   }
   ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
     const dataDailySalesChart: any = {

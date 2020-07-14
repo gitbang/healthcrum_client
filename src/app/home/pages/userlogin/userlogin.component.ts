@@ -55,7 +55,11 @@ export class UserloginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    let data = this.authLocal.getUserDetails()
+    console.log("details", data)
+  }
 
   signInWithGoogle(): void {
     this.authService
@@ -149,6 +153,8 @@ export class UserloginComponent implements OnInit {
         this.authLocal.saveTokenAndRole(data.userDetail)    
 
         // code here to add dashboard dynamically
+        let role = this.authLocal.getUserRole();
+        console.log("role is : ", role )
 
         if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
 

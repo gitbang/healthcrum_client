@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import {AuthServiceLocal} from '../../../services/auth-service.service'
+import {Router} from '@angular/router'
+
 declare var $: any;
 @Component({
   selector: "app-appointment",
@@ -118,9 +121,17 @@ export class AppointmentComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(
+    private localService : AuthServiceLocal,
+    private router : Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let role = this.localService.getUserRole();
+    if(role != 'doctor') {
+      this.router.navigateByUrl('/login')
+    }
+  }
 
   showNotification(from, align, type_no) {
     const type = ["", "info", "success", "warning", "danger"];
