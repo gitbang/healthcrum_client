@@ -10,17 +10,21 @@ import { EmployeeTrackingComponent } from "./pages/employee-tracking/employee-tr
 import { HealthAnalysisComponent } from "./pages/health-analysis/health-analysis.component";
 import { HealthStatusComponent } from "./pages/health-status/health-status.component";
 import { BookedAppointmentComponent } from "./pages/booked-appointment/booked-appointment.component";
+import { EmployeesTempComponent } from "./pages/employees-temp/employees-temp.component";
+import { MaintainanceComponent } from './maintainance/maintainance.component';
 
 export const CompanyRoutes: Routes = [
   { path: "", component: DashboardComponent },
-  { path: "event-article", component: EventsArticleComponent },
-  { path: "appointment", component: AppointmentComponent },
-  { path: "booked-appointment", component: BookedAppointmentComponent },
-  { path: "health-status", component: HealthStatusComponent },
-  { path: "employment-report", component: MedicalRecordComponent },
-  { path: "registration", component: EmployeeRegistrationComponent },
-  { path: "feedback", component: FeedbackComponent },
-  { path: "employee-tracking", component: EmployeeTrackingComponent },
-  { path: "health-analysis", component: HealthAnalysisComponent },
-  { path: "service", component: DashboardComponent },
+  { path: "event-article", component: MaintainanceComponent },
+  { path: "appointment", component: MaintainanceComponent },
+  { path: "booked-appointment", component: MaintainanceComponent },
+  { path: "health-status", component: MaintainanceComponent },
+  { path: "employment-report", component: MaintainanceComponent },
+  { path: "registration", component: MaintainanceComponent },
+  { path: "feedback", component: MaintainanceComponent },
+  { path: "employee-tracking", component: MaintainanceComponent },
+  { path: "health-analysis", component: MaintainanceComponent },
+  { path: "service", component: MaintainanceComponent },
+  { path: "employees-temp", component: EmployeesTempComponent },
+  { path: "employees-temp/:type", component: EmployeesTempComponent },
 ];

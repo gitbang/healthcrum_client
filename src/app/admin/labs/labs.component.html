@@ -104,14 +104,13 @@
                 <div class="card-body">
                   <form [formGroup]="labFormGroup">
 
-                    <div class="row form-top-line">
+                    <div class="row form-top-line my-4 py-4">
                       <p>Lab Basic Details</p>
                       <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="display: flex;justify-content: center;">
                           <div class="fileinput logofileinput fileinput-new text-center" data-provides="fileinput">
                             <div class="fileinput-new thumbnail img-raised">
-                              <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png"
-                                rel="nofollow" alt="...">
+                              <img src="../../../assets//img/logo-placeholder.png" rel="logo" alt="...">
                             </div>
                             <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
                             <div style="display:flex">
@@ -125,7 +124,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 my-auto">
                           <div class="row">
                             <div class="col-md-6">
                               <mat-form-field class="full-width">
@@ -160,37 +159,41 @@
                     </div>
 
 
-                    <div class="row form-top-line">
+                    <div class="row form-top-line my-4 py-4">
                       <p>Lab Address</p>
-                      <div class="col-md-3">
-                        <mat-form-field class="full-width">
-                          <mat-label>State</mat-label>
-                          <input matInput placeholder="Ex. Maharastra">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-3">
-                        <mat-form-field class="full-width">
-                          <mat-label>City</mat-label>
-                          <input matInput #postalCode placeholder="lab city">
-
-                        </mat-form-field>
-                      </div>
                       <div class="col-md-4">
-
-                        <mat-form-field class="full-width">
-                          <mat-label>Area name</mat-label>
-                          <textarea matInput></textarea>
-                        </mat-form-field>
-
+                        <div class="col-md-12">
+                          <mat-form-field class="full-width">
+                            <mat-label>City</mat-label>
+                            <input matInput #postalCode placeholder="lab_city" formControlName="lab_city" name="city">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                          <mat-form-field class="full-width">
+                            <mat-label>State</mat-label>
+                            <input matInput placeholder="Ex. Maharastra" formControlName="lab_state" name="lab_state">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                          <mat-form-field class="full-width">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput formControlName="lab_address" name="lab_address"></textarea>
+                          </mat-form-field>
+                        </div>
                       </div>
-                      <div class="col-md-2" style="align-self: flex-start;">
-                        <button class="btn btn-white btn-round btn-just-icon btn-lg" (click)="openMap()">
-                          <mat-icon class="text-danger">room</mat-icon>
-                        </button>
+
+                      <div class="col-md-8">
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+                          [zoomControl]="false" (mapClick)="mapClicked($event)" style="height:300px">
+                          <agm-marker (markerClick)="clickedMarker(marker.label, 1)" [latitude]="marker.lat"
+                            [longitude]="marker.lng" [label]="marker.label" [markerDraggable]="marker.draggable"
+                            (dragEnd)="markerDragEnd(marker, $event)"></agm-marker>
+                        </agm-map>
                       </div>
+
                     </div>
 
-                    <div class="row form-top-line">
+                    <div class="row form-top-line my-4 py-4">
                       <p>Lab Working day and time</p>
                       <div class="col-md-3">
                         <mat-form-field appearance="outline" class="full-width">
@@ -221,18 +224,33 @@
                         </mat-form-field>
                       </div>
                     </div>
+                    <div class="form-top-line my-4 py-4">
+                      <p>Lab Pictures</p>
+                      <div class="row">
+                        <div class="col-12">
+                          <nz-upload nzAction="http://localhost:3000/api/upload-single" nzListType="picture-card"
+                            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview"
+                            [nzMultiple]="true">
+                            <i class="material-icons">add</i>
+                            <div class="ant-upload-text">Upload</div>
+                          </nz-upload>
+                          <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                            (nzOnCancel)="previewVisible = false">
+                            <ng-template #modalContent>
+                              <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                            </ng-template>
+                          </nz-modal>
+                        </div>
+                      </div>
 
+                    </div>
                     <div class="row">
                       <div class="col-12 col-mb-5 mb-3">
                         <button class="btn btn-warning" (click)="bookappointment()"
-                          [disabled]="labFormGroup.invalid">Add
-                          Lab</button>
+                          [disabled]="labFormGroup.invalid">Add Lab</button>
                       </div>
                     </div>
                   </form>
-
-
-
                 </div>
 
               </div>

@@ -1,0 +1,273 @@
+<!--Templates-->
+<ng-template #template>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-with-icon">
+      <span class="ant-notification-notice-icon">
+        <i
+          *ngIf="success"
+          class="material-icons"
+          style="color: rgb(16, 142, 233);"
+          >mood</i
+        >
+        <i *ngIf="!success" class="material-icons text-danger"
+          >sentiment_very_dissatisfied</i
+        >
+      </span>
+      <div class="ant-notification-notice-message">{{notification_title}}</div>
+      <div class="ant-notification-notice-description">
+        {{notification_desc}}
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-primary">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a
+                      mat-button
+                      class="nav-link active text-white"
+                      href="#emp-temps"
+                      data-toggle="tab"
+                    >
+                      <i class="material-icons">people</i> Employees Temperature
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      mat-button
+                      class="nav-link text-white"
+                      href="#view-graph"
+                      data-toggle="tab"
+                    >
+                      <i class="material-icons">insert_chart_outlined</i> View
+                      Graph
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      mat-button
+                      class="nav-link text-white"
+                      href="#settings"
+                      data-toggle="tab"
+                    >
+                      <i class="material-icons">insert_chart_outlined</i>
+                      Settings
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="emp-temps">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row" style="align-items: center;">
+                        <div class="col-md-3">
+                          <nz-select
+                            class="full-width"
+                            nzShowSearch
+                            nzAllowClear
+                            nzPlaceHolder="Select corporate"
+                            [(ngModel)]="companySelected"
+                            (ngModelChange)="getBranches()"
+                          >
+                            <nz-option
+                              *ngFor="let option of companies"
+                              [nzLabel]="option.name"
+                              [nzValue]="option._id"
+                            >
+                            </nz-option>
+                          </nz-select>
+                        </div>
+                        <div class="col-md-3">
+                          <nz-select
+                            class="full-width"
+                            nzShowSearch
+                            nzAllowClear
+                            nzPlaceHolder="Select branch"
+                            [(ngModel)]="branchSelected"
+                            (ngModelChange)="branchSet()"
+                          >
+                            <nz-option
+                              *ngFor="let option of branches"
+                              [nzLabel]="option.branch_name"
+                              [nzValue]="option._id"
+                            >
+                            </nz-option>
+                          </nz-select>
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <button class="btn btn-primary" (click)="findData()">
+                            View Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row form-top-line mt-3 pt-4 mb-0">
+                        <p>Temerature Data</p>
+                        <div class="col-md-12">
+                          <div class="mt-3 mb-3">
+                            <mat-form-field>
+                              <mat-label>Filter by date</mat-label>
+                              <input
+                                [formControl]="date"
+                                matInput
+                                [matDatepicker]="picker"
+                                (dateChange)="dateChange()"
+                              />
+                              <mat-datepicker-toggle
+                                matSuffix
+                                [for]="picker"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker touchUi #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <nz-table
+                            class="mt-3"
+                            #temperatureTable
+                            nzBordered
+                            [nzData]="temperatureData"
+                            [nzLoading]="dataLoading"
+                          >
+                            <thead class="text-center">
+                              <tr style="text-align-last: center;">
+                                <th>EmpID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Temperature</th>
+                                <th>Added On</th>
+                                <th>Time</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody class="text-center">
+                              <tr *ngFor="let data of temperatureData">
+                                <td>
+                                  {{ data.empid }}
+                                </td>
+                                <td>
+                                  Employee Name
+                                </td>
+                                <td>{{ data.department }}</td>
+                                <td>
+                                  {{ data.temperature }}
+                                </td>
+                                <td>
+                                  {{data.createdAt | date : 'fullDate'}}
+                                </td>
+                                <td>
+                                  {{data.createdAt | date:'h:mm a'}}
+                                </td>
+                                <td class="td-actions text-right">
+                                  <button
+                                    mat-raised-button
+                                    type="button"
+                                    matTooltip="Edit Task"
+                                    [matTooltipPosition]="'above'"
+                                    class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                  >
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-danger btn-link btn-sm btn-just-icon"
+                                    nz-popconfirm
+                                    nzPopconfirmTitle="Sure to delete?"
+                                    (nzOnConfirm)="deleteRow(data._id)"
+                                  >
+                                    <i class="material-icons">close</i>
+                                  </button>
+                                </td>
+                                <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+                              </tr>
+                            </tbody>
+                          </nz-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="view-graph">
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <mat-form-field>
+                      <mat-label>Graph by date</mat-label>
+                      <input matInput [matDatepicker]="graph_picker" />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="graph_picker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #graph_picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12">
+                    <div style="display: block;">
+                      <canvas
+                        baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                      >
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="settings">
+                <div class="row">
+                  <div class="col-12">
+                    <h4>Weekly Questionnaire Setting</h4>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field class="full-width">
+                        <mat-label>Select Day</mat-label>
+                        <mat-select multiple [(ngModel)]="selectedDay" name="day">
+                          <mat-option  *ngFor="let day of days" [value]="day.value">
+                            {{day.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                   
+                    <div class="col-md-4">
+                      <button
+                        class="btn btn-success"
+                        (click)="saveWeeklySettings()"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div style="display: block;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

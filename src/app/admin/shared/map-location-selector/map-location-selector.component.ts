@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import * as $ from "jquery";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { HttpClient } from "@angular/common/http";
 declare const google: any;
 
 interface Marker {
@@ -16,9 +17,13 @@ interface Marker {
   styleUrls: ["./map-location-selector.component.scss"],
 })
 export class MapLocationSelectorComponent implements OnInit {
+  public lang: number;
+  public long: number;
+
   constructor(
     private dialogRef: MatDialogRef<MapLocationSelectorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private httpClient: HttpClient
   ) {
     dialogRef.disableClose = true;
     console.log("in pop up", data);
@@ -48,6 +53,11 @@ export class MapLocationSelectorComponent implements OnInit {
           });
           google.maps.event.addListener(marker, "dragend", function (event) {
             markerLocation();
+            var currentLocation = marker.getPosition();
+            // this.getAddressDetails(
+            //    currentLocation.lat(),
+            //   currentLocation.lng()
+            // );
           });
         } else {
           marker.setPosition(clickedLocation);
@@ -57,8 +67,16 @@ export class MapLocationSelectorComponent implements OnInit {
     }
     function markerLocation() {
       var currentLocation = marker.getPosition();
-      console.log(currentLocation);
+
+      console.log(currentLocation.lat(), currentLocation.lng());
     }
     initMap();
+  }
+
+  public getAddressDetails(lat, long) {
+    let url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=ef023180e56342a193ff4b658e2f02dd`;
+    this.httpClient.get(url).subscribe((res) => {
+      console.log(res);
+    });
   }
 }

@@ -1,0 +1,122 @@
+<!--Templates-->
+<ng-template #template>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-with-icon">
+      <span class="ant-notification-notice-icon">
+        <i *ngIf="success" class="material-icons" style="color: rgb(16, 142, 233);">mood</i>
+        <i *ngIf="!success" class="material-icons text-danger">sentiment_very_dissatisfied</i>
+      </span>
+      <div class="ant-notification-notice-message">{{notification_title}}</div>
+      <div class="ant-notification-notice-description">
+        {{notification_desc}}
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-primary">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active text-white" href="#emp-temps" data-toggle="tab">
+                      <i class="material-icons">people</i> Employees Temperature
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#view-graph" data-toggle="tab">
+                      <i class="material-icons">insert_chart_outlined</i> View Graph
+                    </a>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="emp-temps">
+                <div class="container">
+                  <div class="row">
+                    <div id="tempChart" class="ct-chart col-12"></div>
+                  </div>
+                  <div class="row">
+<div class="col-md-12">
+  <div class="table-responsive">
+    <table datatable [dtOptions]="dtOptions" class="row-border hover table">
+      <thead class="text-center">
+        <tr style="text-align-last: center;">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Temperature</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>View More</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="temperatureData?.length != 0" class="text-center">
+        <tr *ngFor="let temp of temperatureData">
+          <td>{{ temp.empId }}</td>
+          <td>{{ temp.empName }}</td>
+          <td>{{ temp.department}}</td>
+          <td *ngIf="temp.temperature != 0" [class]="temp.temperature > 98.5 ? 'bg-danger text-white' : ''">{{ temp.temperature }}</td>
+          <td *ngIf="temp.temperature == 0">No Entry</td>
+          <td *ngIf="temp.temperature != 0"> {{ temp.createdAt | date: 'MMM d, y'}} </td>
+          <td *ngIf="temp.temperature != 0"> {{ temp.createdAt | date: 'h:mm:ss a'}} </td>
+          <td *ngIf="temp.temperature == 0">Not available</td>
+          <td *ngIf="temp.temperature == 0">Not available</td>
+          <td>
+              <button class="btn btn-info btn-sm" (click)="showDetails(temp.user_id,temp.empName)">see more</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="temperatureData?.length == 0">
+        <tr>
+          <td colspan="3" class="no-data-available">No data!</td>
+        </tr>
+      <tbody>
+      </table>
+  
+  </div>
+</div>
+
+
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="tab-pane" id="view-graph">
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <mat-form-field>
+                      <mat-label>Graph by date</mat-label>
+                      <input matInput [matDatepicker]="graph_picker">
+                      <mat-datepicker-toggle matSuffix [for]="graph_picker"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #graph_picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12">
+                    <div style="display: block">
+                      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

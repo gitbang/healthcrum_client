@@ -1,0 +1,188 @@
+<h1 mat-dialog-title *ngIf="!anySelected">
+  Reason for being in <b>Danger zone</b>
+</h1>
+<h1 mat-dialog-title *ngIf="showAnswers">
+  Covid19 Survey Result of <b>{{data.empName}}</b>
+</h1>
+
+<h1 mat-dialog-title *ngIf="showData">
+  One Week Entry of <b>{{data.empName}}</b>
+</h1>
+<div mat-dialog-content *ngIf="!anySelected">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <mat-card class="my-3 mr-5" style="width: 270px; display: inline-block;">
+        <mat-card-header
+          style="
+            margin: -15px -15px 25px -16px;
+            display: flex;
+            justify-content: center;
+            color: #fff;
+          "
+          [class]="answerBG == 1 ? 'mat-card-header bg-danger' : answerBG == 2 ? 'mat-card-header bg-info' : 'mat-card-header bg-success'"
+        >
+          <mat-card-title>Survey Answers</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="min-height: 100px;">
+          <p>
+            Survey questions contains covid19 cause and preventive measures of
+            the employees.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            class="btn full-width"
+            (click)="setSelected(1)"
+            [class]="answerBG == 1 ? 'btn btn-danger' : answerBG == 2 ? 'btn btn-info' : 'btn btn-success'"
+          >
+            Show answers
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="my-3 mr-5" style="width: 270px; display: inline-block;">
+        <mat-card-header
+          style="
+            margin: -15px -15px 25px -16px;
+            display: flex;
+            justify-content: center;
+            color: #fff;
+          "
+          [class]="temperatureBG ? 'mat-card-header bg-danger' : 'mat-card-header bg-success'"
+        >
+          <mat-card-title>Employee Temperature</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="min-height: 100px;">
+          <p>
+            Employees Daily body temperature entry records upto one month
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            class="btn full-width"
+            (click)="setSelected(2)"
+            [class]="temperatureBG ? 'btn btn-danger' : 'btn btn-success'"
+          >
+            Show Temperatures
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div mat-dialog-content *ngIf="showAnswers">
+  <div class="row">
+    <div class="col-md-6 mb-5">
+      <h5 class="text-warning">Initial Questionnaires</h5>
+      <div *ngFor="let answer of covidAnswers;let i = index;" style="margin-bottom: 8px;">
+        <mat-card class="mb-2 p-2" *ngIf="answer.multiple">
+            <h5 class="mb-2">{{ answer.question}}</h5>
+            <div style="display: flex;" *ngFor="let option of answer.options">
+              <div *ngIf="option.ans">
+                <!-- <i class="material-icons text-success mr-3" *ngIf="!option.ans">check_circle</i> -->
+                <span class="text-danger mr-3" *ngIf="option.ans">YES</span>
+                {{ option.value }}
+              </div>
+            </div>
+        </mat-card>
+        <mat-card class="mb-2" *ngIf="!answer.multiple && answer.ans">
+          <h5 class="mb-2">{{ answer.question }}</h5>
+          <div *ngIf="answer.ans">
+            <!-- <i class="material-icons text-danger mr-3" *ngIf="answer.ans">highlight_off</i> -->
+           
+            <span class="text-danger mr-3" *ngIf="option.ans">YES</span>
+            {{ answer.question}}
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="col-md-6 mb-5">
+      <h5 class="text-warning">Bi-Weekly Questionnaires</h5>
+      <mat-card
+        *ngFor="let answer of weeklyAnswers;let i = index;"
+        class="mb-2 p-2"
+        style="margin-bottom: 8px;"
+      >
+        <h5 class="mb-2">{{i+1}}. {{ answer.question}}</h5>
+        <div style="display: flex;" *ngFor="let option of answer.options">
+          <div *ngIf="option.ans && answer.question == 'Basic Hygiene'">
+            <span class="text-danger mr-3" *ngIf="option.ans">NO</span>
+            <span>{{ option.value }}</span>
+          </div>
+          <div *ngIf="option.ans && answer.question != 'Basic Hygiene'">
+            <span class="text-success mr-3"
+              *ngIf="option.ans && option.value == 'None of the above'">NO</span>
+            <span class="text-danger mr-3"
+              *ngIf="option.ans && option.value != 'None of the above'">YES</span>
+              <span *ngIf="option.value == 'None of the above' && option.ans">No Issue</span>
+            <span *ngIf="option.value != 'None of the above'">{{ option.value }}</span>
+          </div>
+        </div>
+        
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div mat-dialog-content *ngIf="showData">
+  <div class="row">
+    <div class="col-4 mt-3 mb-3 ml-3">
+      <mat-form-field>
+        <mat-label>Result by date range</mat-label>
+        <input
+          matInput
+          placeholder="Choose date range"
+          [satDatepicker]="picker"
+          [value]="date"
+          (dateChange)="dateChange($event)"
+        />
+        <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+        <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover table">
+          <thead class="text-center">
+            <tr style="text-align-last: center;">
+              <th>Temperature</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="temperatureData?.length != 0" class="text-center">
+            <tr *ngFor="let temp of temperatureData">
+              <td
+                *ngIf="temp.temperature != 0"
+                [class]="temp.temperature > 98.5 ? 'bg-danger text-white' : ''"
+              >
+                {{ temp.temperature }}
+              </td>
+              <td *ngIf="temp.temperature == 0">No Entry</td>
+              <td *ngIf="temp.temperature != 0">
+                {{ temp.createdAt | date: 'MMM d, y'}}
+              </td>
+              <td *ngIf="temp.temperature != 0">
+                {{ temp.createdAt | date: 'h:mm:ss a'}}
+              </td>
+              <td *ngIf="temp.temperature == 0">Not available</td>
+              <td *ngIf="temp.temperature == 0">Not available</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="temperatureData?.length == 0">
+            <tr>
+              <td colspan="3" class="no-data-available">
+                No temperature entry found!
+              </td>
+            </tr>
+          </tbody>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions style="justify-content: flex-end;">
+  <button class="btn btn-danger" (click)="onNoClick()">Close</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

@@ -65,7 +65,10 @@ import { ShowResultComponent } from "./pages/health-analysis/show-result/show-re
 import { ShowListComponent } from "./pages/appointment/show-list/show-list.component";
 import { CommonTableComponent } from "./common-table/common-table.component";
 import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
-
+import { EmployeesTempComponent, EmployeeTemperatureDetailDailog } from "./pages/employees-temp/employees-temp.component";
+import { NzTableModule } from "ng-zorro-antd/table";
+import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
+import { MaintainanceComponent } from './maintainance/maintainance.component';
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -90,6 +93,9 @@ import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
     ShowResultComponent,
     ShowListComponent,
     CommonTableComponent,
+    EmployeesTempComponent,
+    EmployeeTemperatureDetailDailog,
+    MaintainanceComponent
   ],
   entryComponents: [
     RegisterationFormComponent,
@@ -99,6 +105,7 @@ import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
     NewReqFormComponent,
     ShowResultComponent,
     ShowListComponent,
+    EmployeeTemperatureDetailDailog
   ],
   imports: [
     CommonModule,
@@ -160,6 +167,9 @@ import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
     MatMenuModule,
     NgCircleProgressModule,
     MatSnackBarModule,
+    NzTableModule,
+    SatDatepickerModule, 
+    SatNativeDateModule
   ],
   providers: [
     CompanyService,

@@ -53,11 +53,18 @@ import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatTabsModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule,
+  MatCheckboxModule
 } from "@angular/material";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { ChartsModule } from "ng2-charts";
 import { SlickCarouselModule } from "ngx-slick-carousel";
-
+import { TemperatureEntryComponent } from "./temperature-entry/temperature-entry.component";
+import { NzTableModule } from "ng-zorro-antd/table";
+import { NzRadioModule } from "ng-zorro-antd/radio";
+import { NzResultModule } from "ng-zorro-antd/result";
+import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
+import { MaintainanceComponent } from './maintainance/maintainance.component';
 @NgModule({
   declarations: [
     PatientComponent,
@@ -79,6 +86,8 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
     PatientEhrComponent,
     MedecineDetailFillDialog,
     TestDetailFillDialog,
+    TemperatureEntryComponent,
+    MaintainanceComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +124,13 @@ import { SlickCarouselModule } from "ngx-slick-carousel";
     MatTabsModule,
     MatSnackBarModule,
     NgCircleProgressModule,
+    NzTableModule,
+    NzRadioModule,
+    MatProgressSpinnerModule,
+    NzResultModule,
+    MatCheckboxModule,
+    SatDatepickerModule, 
+    SatNativeDateModule
   ],
   entryComponents: [MedecineDetailFillDialog, TestDetailFillDialog],
   providers: [

@@ -11,19 +11,21 @@ import {
   faMedkit,
   faPills,
   faCrutch,
-  faShoppingCart
+  faShoppingCart,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 declare const $: any;
 
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.css"]
+  styleUrls: ["./sidebar.component.css"],
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   faBezierCurve = faBezierCurve;
   faHospital = faHospital;
+  faBuilding = faBuilding;
   faFlask = faFlask;
   faUserMd = faUserMd;
   faBoxOpen = faBoxOpen;

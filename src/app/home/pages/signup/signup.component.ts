@@ -22,6 +22,7 @@ import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { EventManager } from "@angular/platform-browser";
 import { SocialDetailsComponent } from "./social-details/social-details.component";
+import { HomeServiceService } from "app/home/home-service.service";
 
 @Component({
   selector: "app-signup",
@@ -49,12 +50,17 @@ export class SignupComponent implements OnInit {
   branchId :String
   departmentId :String
 
+  corporates:any[] = [];
+  branches:any[] = [];
+  departments:any[] = [];
+
   data : any;
   // save To db ;
   constructor(
     private authService: AuthService,
     private http: HttpClient,
     private authLocal: AuthServiceLocal,
+    private homeService: HomeServiceService,
     private router: Router,
     public dialog: MatDialog
   ) {
@@ -63,7 +69,7 @@ export class SignupComponent implements OnInit {
 
   fromGoogle : any;
   social : boolean = false
-  ngOnInit() {}
+  ngOnInit() { this.getCorporates(); }
 
   signupUser(): void {
     var data;
@@ -249,6 +255,31 @@ export class SignupComponent implements OnInit {
     console.log("Processing beforeunload...");
     //this.authService.signOut();
   }
+
+  getCorporates(){
+    this.homeService.getAllCorporate().subscribe((res:any)=>{
+      console.log(res);
+      if(res.success){
+        this.corporates = res.data;
+      }
+    })
+}
+getCompantBranches(){
+  let data = { corporate_id : this.companyId};
+  this.homeService.getBranchesByCorporate(data).subscribe((res:any)=>{
+    if(res.success){
+      this.branches = res.data;
+    }
+  });
+}
+getDepartments(){
+  let data = { corporate_id : this.companyId, branch_id: this.branchId};
+  this.homeService.getDepartmentByCorporate(data).subscribe((res:any)=>{
+    if(res.success){
+      this.departments = res.data;
+    }
+  });
+}
 }
 
 @Component({

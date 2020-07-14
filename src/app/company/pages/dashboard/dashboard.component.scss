@@ -13,11 +13,38 @@
 .green-title {
   color: #78c000;
 }
-
+.mat-card-title{
+  font-size: 1rem !important;
+}
+.bg-warning {
+  background-color: #edb71d !important;
+}
+.next-link{
+  color:#fff;
+  float: right;
+}
+.next-link:hover{
+  color: #e7e7e7;
+  background: #ffffff66;
+  border-radius: 50%;
+  padding: 4px;
+  margin: -6px 0;
+}
 // .showresult{
 //     background-image: linear-gradient(#FFA603, #FAD08B);
 // }
-
+.card-box{
+  max-height: 250px;
+    width: 185px;
+    text-align: center;
+}
+.circle-progress{
+  height: 160px;
+  position: relative;
+}
+.circle-progress >svg{
+  height: 160px;
+}
 .card-footer {
   padding: 10px;
   color: #ffffff;
@@ -25,4 +52,8 @@
 }
 .bg-purple {
   background-color: #7a67bb;
+}
+.covid-detail-box{
+  display:flex;
+  border-radius: 8px;flex-wrap:wrap;justify-content: space-evenly;background-position: left;align-items: center;
 }

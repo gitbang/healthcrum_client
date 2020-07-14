@@ -5,7 +5,7 @@ import {
   HttpErrorResponse,
 } from "@angular/common/http";
 import { catchError, retry } from "rxjs/operators";
-import { Observable, of, throwError } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -14,7 +14,7 @@ export class CompanyService {
   constructor(private http: HttpClient) {}
 
   userId = "5e8efa895b324a3e4c97a278";
-  url: String = "http://localhost:3000";
+  url: String = "http://localhost:3000";//"https://api.sftservices.com";
 
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -190,5 +190,40 @@ export class CompanyService {
       );
     }
     return "Something wrong happen try again later";
+  }
+
+  getRangeTemperatures(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/temperature/get-by-empid",
+      data
+    );
+  }
+
+  getEmpTodayTemperatures(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/temperature/get-by-corporate-user",
+      data
+    );
+  }
+  getAllTemperatures(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/temperature/emp-temp",
+      data
+    );
+  }
+
+
+  getCovidAnswers(data){
+    return this.http.post<any>(
+      this.url + "/api/covid-answer/get-all",
+      data
+    );
+  }
+
+  getEmpCovidAnswers(data){
+    return this.http.post<any>(
+      this.url + "/api/covid-answer/get-by-empid",
+      data
+    );
   }
 }

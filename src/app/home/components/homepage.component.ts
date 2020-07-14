@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import PerfectScrollbar from "perfect-scrollbar";
 import * as $ from "jquery";
 import { AuthService, SocialUser } from "angularx-social-login";
 import { AuthServiceLocal } from "../../services/auth-service.service";
@@ -23,19 +22,32 @@ export class HomepageComponent implements OnInit {
   youtube = faYoutube;
   insta = faInstagram;
   fb = faFacebook;
-
+  role:number = 0;
   constructor(
     private authService: AuthService,
     private authLocal: AuthServiceLocal
   ) {
     this.authService.authState.subscribe((user) => {
       if (!user) {
-        this.loggedIn = this.authLocal.isUserLoggedIn;
+        this.loggedIn = this.authLocal.isLoggedIn();
         this.user = new SocialUser();
+        console.log(this.loggedIn);
         if (this.loggedIn) {
-          this.user.name = this.authLocal.getUserData.name;
-          this.user.photoUrl = this.authLocal.getUserData.image;
-          this.user.id = this.authLocal.getUserData.id;
+          try{
+            let userData = this.authLocal.getUserDetails();
+             this.user.name = userData.name;
+             this.user.photoUrl = "/assets/img/avatar.png";
+             this.user.id = userData.healthcrumId;
+             if(userData.role == "hr"){
+               this.role = 2;
+             }else if(userData.role == "employee" || userData.role == "patient"){
+               this.role = 1;
+             }else if(userData.role =="admin"){
+               this.role = 4;
+             }
+          }catch(err){
+            this.loggedIn = false;
+          }
         } else {
           this.loggedIn = false;
         }

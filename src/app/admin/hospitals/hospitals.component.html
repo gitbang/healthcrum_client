@@ -101,8 +101,214 @@
                 </table>
               </div>
               <div class="tab-pane" id="add-hospital">
-                <form action="">
-                  <input class="input-control" type="text">
+                <form class="form" [formGroup]="register">
+                  <div class="container-fluid">
+
+                    <div class="form-top-line my-4 py-4">
+
+                      <p>Hospital Logo and Name</p>
+                      <div class="row">
+                        <div class="col-md-3 mx-auto">
+                          <nz-upload class="avatar-uploader" nzAction="http://localhost:3000/api/upload-single"
+                            nzName="file" nzListType="picture-card" [nzShowUploadList]="false"
+                            [nzBeforeUpload]="beforeUpload" (nzChange)="handleLogoChange($event)">
+                            <ng-container *ngIf="!avatarUrl">
+                              <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                              <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                          </nz-upload>
+                          <div>
+                            <h3 class="ml-3">Logo</h3>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="full-width">
+                                <mat-label>Hospital Name</mat-label>
+                                <input matInput placeholder="First Name" formControlName="name">
+                              </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                  <mat-form-field class="full-width">
+                                    <mat-label>Certification Type</mat-label>
+                                    <mat-select formControlName="certificationType">
+                                      <mat-option value="NABH">NABH</mat-option>
+                                      <mat-option value="NABL">NABL</mat-option>
+                                      <mat-option value="NONE">NONE</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div> -->
+                          </div>
+                          <div class="row">
+
+                            <!-- <div class="col-md-6">
+                                  <mat-form-field class="full-width">
+                                    <mat-label>Did on opd/ipd</mat-label>
+                                    <mat-select>
+                                      <mat-option value="yes">YES</mat-option>
+                                      <mat-option value="no">No</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div> -->
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-top-line my-4 py-4">
+                      <p>Hospital Address</p>
+                      <div class="row">
+                        <div class="col-md-4 my-auto">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <mat-form-field class="full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput placeholder="city" formControlName="city">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                              <mat-form-field class="full-width">
+                                <mat-label>State</mat-label>
+                                <input matInput placeholder="state" formControlName="state">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                              <mat-form-field class="full-width">
+                                <mat-label>Area name</mat-label>
+                                <textarea matInput formControlName="area" name="area"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+                            [zoomControl]="false" (mapClick)="mapClicked($event)" style="height:300px">
+                            <agm-marker (markerClick)="clickedMarker(marker.label, 1)" [latitude]="marker.lat"
+                              [longitude]="marker.lng" [label]="marker.label" [markerDraggable]="marker.draggable"
+                              (dragEnd)="markerDragEnd(marker, $event)"></agm-marker>
+                          </agm-map>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="form-top-line my-4 py-4">
+                      <p>Hospital Facilities</p>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="full-width">
+                            <mat-label>Facilities</mat-label>
+                            <mat-chip-list #chipList aria-label="Facility selection">
+                              <mat-chip *ngFor="let facility of facilitys" [selectable]="selectable"
+                                [removable]="removable" (removed)="remove(facility)">
+                                {{facility}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                              </mat-chip>
+                              <input placeholder="New facility..." #facilityInput formControlName="facility"
+                                name="facility" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)">
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                              <mat-option *ngFor="let facility of filteredFacilitys | async" [value]="facility">
+                                {{facility}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <mat-form-field class="full-width">
+                            <mat-label>Number of Beds</mat-label>
+                            <input matInput placeholder="Beds available" formControlName="beds">
+                          </mat-form-field>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <mat-form-field class="full-width">
+                            <mat-label>Speciality</mat-label>
+                            <input matInput placeholder="Speciality" formControlName="speciality">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <mat-slide-toggle class="mb-2" formControlName="surgeryProcedure">Surgery procedure
+                                available
+                              </mat-slide-toggle>
+                              <mat-slide-toggle formControlName="discount">Discount on LPAD
+                              </mat-slide-toggle>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+
+
+                    </div>
+
+                    <div class="form-top-line my-4 py-4">
+                      <p>Hospital Pictures</p>
+                      <div class="row">
+                        <!-- <div class="col-md-4" *ngFor="let frmctrl of pictures">
+                              <div class="fileinput text-center fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                  <img src="../../../assets/img/placeholder-image.png" alt="profile_img">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                  <span class="btn btn-info btn-round btn-file btn-sm">
+                                    <span class="fileinput-new">Add Picture</span>
+                                    <span class="fileinput-exists">Change picture</span>
+                                    <input type="hidden" value="" name="."><input type="file" name="doctor_image"
+                                      formControlName="frmctrl">
+                                    <div class="ripple-container"></div>
+                                  </span>
+                                  <a href="#" class="btn btn-danger btn-round fileinput-exists btn-sm"
+                                    data-dismiss="fileinput"><i class="fa fa-times"></i>Remove<div
+                                      class="ripple-container">
+                                      <div class="ripple-decorator ripple-on ripple-out"
+                                        style="left: 43.4125px; top: 30.9875px; background-color: rgb(255, 255, 255); transform: scale(15.5094);">
+                                      </div>
+                                    </div></a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 add-btn">
+                              <button class="btn btn-white btn-round btn-just-icon btn-lg" (click)="addMorePictures()">
+                                <mat-icon class="text-warning">add</mat-icon>
+                              </button>
+                            </div> -->
+                        <div class="clearfix">
+                          <nz-upload nzAction="http://localhost:3000/api/upload-single" nzListType="picture-card"
+                            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview"
+                            [nzMultiple]="true">
+                            <i class="material-icons">add</i>
+                            <div class="ant-upload-text">Upload</div>
+                          </nz-upload>
+                          <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                            (nzOnCancel)="previewVisible = false">
+                            <ng-template #modalContent>
+                              <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                            </ng-template>
+                          </nz-modal>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <button class="btn btn-warning">Add Hospital</button>
+                      </div>
+                    </div>
+
+                  </div>
                 </form>
               </div>
 

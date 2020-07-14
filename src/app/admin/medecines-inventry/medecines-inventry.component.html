@@ -1,0 +1,363 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-success btn-sm" (click)="goBack()" *ngIf="isAnySelected">
+        <mat-icon>arrow_back_io</mat-icon>
+        <span>back</span>
+      </button>
+    </div>
+    <div class="col-md-12">
+      <mat-card>
+        <mat-tab-group color="accent" backgroundColor="primary" class="mb-3">
+          <mat-tab label="Medecines Available">
+            <div class="table-responsive">
+
+              <table mat-table [dataSource]="data" class="table" matSort matSortActive="created" matSortDisableClear
+                matSortDirection="desc">
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Picture">
+                  <th mat-header-cell *matHeaderCellDef>Picture</th>
+                  <td mat-cell *matCellDef="let row">
+                    <img src="{{ row.picUrl }}" width="50" height="50">
+                  </td>
+                </ng-container>
+                <!-- Number Column -->
+                <ng-container matColumnDef="Name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let row">{{row.name}}</td>
+                </ng-container>
+
+                <!-- Title Column -->
+                <ng-container matColumnDef="Brand">
+                  <th mat-header-cell *matHeaderCellDef>Brand</th>
+                  <td mat-cell *matCellDef="let row">{{row.brand}}</td>
+                </ng-container>
+
+                <!-- State Column -->
+                <ng-container matColumnDef="Type">
+                  <th mat-header-cell *matHeaderCellDef>Type</th>
+                  <td mat-cell *matCellDef="let row">{{row.medicineType}}</td>
+                </ng-container>
+
+                <!-- Created Column -->
+                <ng-container matColumnDef="Size">
+                  <th mat-header-cell *matHeaderCellDef>
+                    Size
+                  </th>
+                  <td mat-cell *matCellDef="let row">{{row.packagingSize}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Price">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+                  <td mat-cell *matCellDef="let row">₹&nbsp;{{row.mrp}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+              </table>
+            </div>
+            <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+          </mat-tab>
+          <mat-tab label="Add Medecines">
+            <form class="form" [formGroup]="register">
+
+              <div class="row form-top-line mt-4 pt-4">
+                <p>Medecine Category</p>
+
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <mat-label>Category</mat-label>
+                    <mat-select>
+                      <mat-option>Option 1</mat-option>
+                      <mat-option>Option 2</mat-option>
+                      <mat-option>Option 3</mat-option>
+                      <mat-option>Option 4</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <mat-label>Sub Category</mat-label>
+                    <mat-select>
+                      <mat-option>Sub Option 1</mat-option>
+                      <mat-option>Sub Option 2</mat-option>
+                      <mat-option>Sub Option 3</mat-option>
+                      <mat-option>Sub Option 4</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <mat-label>Sub Category</mat-label>
+                    <mat-select>
+                      <mat-option>sub-option 1</mat-option>
+                      <mat-option>sub-option 2</mat-option>
+                      <mat-option>sub-option 3</mat-option>
+                      <mat-option>sub-option 4</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="rown form-top-line mt-1 pt-4 mb-0">
+                <p>Medecine Basic Details</p>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field class="full-width">
+                        <mat-label>Medecine Name</mat-label>
+                        <input matInput placeholder="name">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field class="full-width">
+                        <mat-label>Brand</mat-label>
+                        <input matInput placeholder="Ex. xyz">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field class="full-width">
+                        <mat-label>Medecine For</mat-label>
+                        <input matInput placeholder="Ex. sugar patient">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <mat-label>Medecine Price</mat-label>
+                    <input matInput #postalCode placeholder=" price">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <mat-label>Packaging Size</mat-label>
+                    <input matInput placeholder="Ex. 1 pcs">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <mat-label>Manufactured By</mat-label>
+                    <input matInput placeholder="Ex. xyz">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <mat-label>Quantity</mat-label>
+                    <input matInput placeholder="Ex. 100 mg">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Quantity Unit</mat-label>
+                    <mat-select>
+                      <mat-option>quantityPerStrip</mat-option>
+                      <mat-option>litre</mat-option>
+                      <mat-option>weight</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row form-top-line mt-2 pt-4">
+                <p>Medecine Images</p>
+                <div class="col-md-11">
+                  <div class="row">
+                    <div class="col-md-2 ml-2">
+                      <mat-card>
+                        <mat-card-content class="ml-1">
+                          <nz-upload class="avatar-uploader text-center"
+                            nzAction="http://localhost:3000/api/upload-single" nzName="file" nzListType="picture-card"
+                            [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload"
+                            (nzChange)="handleLogoChange($event)">
+                            <ng-container *ngIf="!avatarUrl">
+                              <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                              <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                          </nz-upload>
+                        </mat-card-content>
+                        <mat-card-actions class="text-center">
+                          Main Image
+                        </mat-card-actions>
+                      </mat-card>
+                    </div>
+                    <div class="col-md-8">
+                      <nz-upload nzAction="http://localhost:3000/api/upload-single" nzListType="picture-card"
+                        [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview"
+                        [nzMultiple]="true">
+                        <i class="material-icons">add</i>
+                        <div class="ant-upload-text">Upload</div>
+                      </nz-upload>
+                      <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                        (nzOnCancel)="previewVisible = false">
+                        <ng-template #modalContent>
+                          <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                        </ng-template>
+                      </nz-modal>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-12 col-mb-5 mb-3">
+                  <button class="btn btn-warning">Add Medecine</button>
+                </div>
+              </div>
+            </form>
+          </mat-tab>
+          <mat-tab label="Bulk add Medecines">
+            <div class="container">
+              <div class="row mt-4">
+                <div class="col-md-3" style="position: relative;">
+                  <label class="file-label ">Equipment details file</label>
+                  <input type="file" (change)="fileChange($event)" class="col-md-12" style="padding: 14px 5px 5px 5px;">
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-warning">Add</button>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Add Categories">
+            <div class="container">
+              <div class="row" style="border-bottom: 2px solid #dddddd;">
+                <div class="col-md-4" style="border-left: 2px solid #f3f3f3;border-right: 2px solid #efefef;">
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add New Category</p>
+                    <div class="col-12">
+                      <mat-form-field class="full-width">
+                        <mat-label>Category Name</mat-label>
+                        <input matInput type="text" placeholder="eg. surgical">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 text-center">
+                      <button class="btn btn-warning">Add</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add Sub Category</p>
+                    <div class="col-12">
+                      <mat-form-field class="full-width">
+                        <mat-label>Select Category</mat-label>
+                        <mat-select formControlName="branch_id">
+                          <mat-option value="prime">category 1</mat-option>
+                          <mat-option value="non-price">category 2</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <mat-form-field class="full-width">
+                        <mat-label>Sub Category Name</mat-label>
+                        <input matInput type="text" placeholder="eg. Shoulder">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 text-center">
+                      <button class="btn btn-warning">Add</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4" style="border-left: 2px solid #f3f3f3;border-right: 2px solid #efefef;">
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add Sub Sub Category</p>
+                    <div class="col-12">
+                      <mat-form-field class="full-width">
+                        <mat-label>Select Category</mat-label>
+                        <mat-select formControlName="branch_id">
+                          <mat-option value="prime">category 1</mat-option>
+                          <mat-option value="non-price">category 2</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <mat-form-field class="full-width">
+                        <mat-label>Select sub Category</mat-label>
+                        <mat-select formControlName="branch_id">
+                          <mat-option value="prime">sub category 1</mat-option>
+                          <mat-option value="non-price">sub category 2</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                      <mat-form-field class="full-width">
+                        <mat-label>Sub Sub Category</mat-label>
+                        <input matInput type="text" placeholder="eg.Face Care">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 text-center">
+                      <button class="btn btn-warning">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-top-line my-4 py-4">
+              <p>Added Categories</p>
+              <div class="col-md-12">
+                <nz-table class="mt-3 full-width" #medicinesTable nzBordered [nzData]="medicinesData"
+                  [nzLoading]="dataLoading">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Sub Category</th>
+                      <th>Sub Sub Category</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of medicinesTable.data" class="editable-row">
+                      <td> {{ data.name}}</td>
+                      <td>
+                        {{ data.manufacturedBy }}
+                      </td>
+                      <td>
+                        {{ data.medicineType }}
+                      </td>
+
+
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                          nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                      <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </div>
+  </div>
+</div>

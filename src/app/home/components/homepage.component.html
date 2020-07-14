@@ -19,24 +19,7 @@
         <ul id="top_access">
 
           <!-- <li ><a href="/login"><i class="pe-7s-add-user"></i></a></li> -->
-          <li *ngIf="loggedIn" class="dropdown nav-item">
-            <a href="#pablo" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
-              <img src="{{ user.photoUrl }}" style="width: 32px;border-radius: 50%;margin-right: 4px;">{{ user.name }}
-              <div class="ripple-container"></div>
-            </a>
-            <div class="dropdown-menu">
-              <!-- <h6 class="dropdown-header">Dropdown header</h6> -->
-              <a routerLink="/patient/dashboard" class="dropdown-item">
-                <i class="material-icons">account_circle</i>Dashboard
-              </a>
-
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item" (click)="signOutUser()">
-                <i class="material-icons">power_settings_new</i>SignOut
-              </a>
-
-            </div>
-          </li>
+         
 
         </ul>
         <div class="main-menu">
@@ -62,6 +45,32 @@
             <li routerLinkActive="active"><a routerLink="/aboutus">About us</a></li>
             <li routerLinkActive="active"><a routerLink="/contactus">Contact us</a></li>
             <li *ngIf="!loggedIn" routerLinkActive="active"><a routerLink="/login">Signin</a></li>
+            <li *ngIf="!loggedIn" routerLinkActive="active"><a routerLink="/hrlogin">HR Login</a></li>
+            
+            <li *ngIf="loggedIn" class="dropdown nav-item">
+              <a href="#pablo" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                <img src="{{ user.photoUrl }}" style="width: 32px;border-radius: 50%;margin-right: 4px;">{{ user.name }}
+                <div class="ripple-container"></div>
+              </a>
+              <div class="dropdown-menu">
+                <!-- <h6 class="dropdown-header">Dropdown header</h6> -->
+                <a *ngIf="role == 1" routerLink="/patient/dashboard" class="dropdown-item">
+                  <i class="material-icons">account_circle</i>Dashboard
+                </a>
+  
+                <a *ngIf="role == 2" routerLink="/company" class="dropdown-item">
+                  <i class="material-icons">account_circle</i>Dashboard
+                </a>
+                <a *ngIf="role == 3" routerLink="/admin" class="dropdown-item">
+                  <i class="material-icons">account_circle</i>Dashboard
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item" (click)="signOutUser()">
+                  <i class="material-icons">power_settings_new</i>SignOut
+                </a>
+  
+              </div>
+            </li>
           </ul>
         </div>
         <!-- /main-menu -->
@@ -135,7 +144,7 @@
     <!--/row-->
     <hr>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-8">
         <ul id="additional_links">
           <li><a href="#0">Terms and conditions</a></li>
           <li><a href="#0">Privacy</a></li>
@@ -143,9 +152,6 @@
       </div>
       <div class="col-md-4">
         <div id="copy">Copyright © 2020 Healthcrum. All Rights Reserved.</div>
-      </div>
-      <div class="col-md-4">
-        <div id="copy">Designed by DOTS pvt. ltd.</div>
       </div>
     </div>
   </div>

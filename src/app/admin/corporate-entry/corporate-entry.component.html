@@ -1,0 +1,791 @@
+<!--Templates-->
+<ng-template #template>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-with-icon">
+      <span class="ant-notification-notice-icon">
+        <i *ngIf="success" class="material-icons" style="color: rgb(16, 142, 233);">mood</i>
+        <i *ngIf="!success" class="material-icons text-danger">sentiment_very_dissatisfied</i>
+      </span>
+      <div class="ant-notification-notice-message">{{notification_title}}</div>
+      <div class="ant-notification-notice-description">
+        {{notification_desc}}
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-rose">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active text-white" href="#corporate-name" data-toggle="tab">
+                      <i class="material-icons">domain</i> Registred Corporates
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#corporate-branch" data-toggle="tab"
+                      (click)="getBranchData()">
+                      <i class="material-icons">add</i> Corporate Branchs
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#corporate-department" data-toggle="tab"
+                      (click)="getAllDepartments()">
+                      <i class="material-icons">add</i>Departments
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#corporate-package" data-toggle="tab">
+                      <i class="material-icons">add</i> Special Members
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#employee-checkup-type" data-toggle="tab">
+                      <i class="material-icons">add</i> Checkup Type
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#hr-management" data-toggle="tab" (click)="getAllHrs()">
+                      <i class="material-icons">group_add</i> Hr Management
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="corporate-name">
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>New Corporate Entry</p>
+                  <div class="col-md-2 ml-3 mt-3" style="display: flex;justify-content: center;">
+                    <nz-upload class="avatar-uploader text-center" nzAction="http://localhost:3000/api/upload-single"
+                      nzName="file" nzListType="picture-card" [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload"
+                      (nzChange)="handleLogoChange($event)">
+                      <ng-container *ngIf="!avatarUrl">
+                        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                        <div class="ant-upload-text">Upload</div>
+                      </ng-container>
+                      <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                    </nz-upload>
+                  </div>
+                  <div class="col-4 mt-4">
+                    <mat-form-field class="full-width">
+                      <mat-label>Corporate Name</mat-label>
+                      <input matInput placeholder="name" [(ngModel)]="corporate_name">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <button class="btn btn-warning" (click)="addCorporate(template)">Add Corporate</button>
+                  </div>
+                </div>
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>Our Members</p>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #corporatesTable nzBordered [nzData]="corporateData"
+                      [nzLoading]="dataLoading">
+                      <thead>
+                        <tr>
+                          <th>Logo</th>
+                          <th>Name</th>
+                          <th>Registered On</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of corporatesTable.data" class="editable-row">
+                          <td>
+                            <img src='{{ data.logo.url }}' width="45" alt="{{ data.name}} logo">
+                          </td>
+                          <td>{{ data.name}}
+
+                          </td>
+
+                          <td>
+                            {{data.createdAt | date : 'fullDate'}}
+                          </td>
+
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                        </tr>
+                      </tbody>
+                    </nz-table>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="corporate-branch">
+                <form class="form container" [formGroup]="branch">
+
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add Corporate Branch Details</p>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select formControlName="corporate_id">
+                            <mat-option [value]="corp._id" *ngFor="let corp of corporateData">{{corp.name}}</mat-option>
+
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Corporate Branch</mat-label>
+                          <input matInput type="text" formControlName="branch_name" name="branch_name"
+                            placeholder="Branch Name">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Email ID</mat-label>
+                          <input matInput type="text" formControlName="branch_email" name="branch_email"
+                            placeholder="example@example.com">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Contact Number</mat-label>
+                          <input matInput type="text" formControlName="branch_contact" name="branch_contact"
+                            placeholder="Contact Number">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>State</mat-label>
+                          <mat-select formControlName="branch_state">
+                            <mat-option value="{{data.state}}" *ngFor="let data of states">{{data.state}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>City</mat-label>
+                          <mat-select formControlName="branch_city">
+                            <mat-option value="{{data.city}}" *ngFor="let data of cities">{{data.city}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Address</mat-label>
+                          <textarea matInput formControlName="branch_address"></textarea>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Remarks</mat-label>
+                          <textarea matInput formControlName="branch_remark"></textarea>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Start date</mat-label>
+                          <input matInput [matDatepicker]="start_picker" formControlName="branch_start">
+                          <mat-datepicker-toggle matSuffix [for]="start_picker"></mat-datepicker-toggle>
+                          <mat-datepicker touchUi #start_picker></mat-datepicker>
+                        </mat-form-field>
+
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>End date</mat-label>
+                          <input matInput [matDatepicker]="end_picker" formControlName="branch_end">
+                          <mat-datepicker-toggle matSuffix [for]="end_picker"></mat-datepicker-toggle>
+                          <mat-datepicker touchUi #end_picker></mat-datepicker>
+                        </mat-form-field>
+
+                      </div>
+                      <!-- <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Member Type</mat-label>
+                          <mat-select>
+                            <mat-option value="prime">Prime</mat-option>
+                            <mat-option value="non-price">Non-Prime</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div> -->
+                    </div>
+
+                    <div class="col-12 text-center">
+                      <button class="btn btn-warning" (click)="addBranch(template)">Add Branch</button>
+                    </div>
+                  </div>
+                </form>
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>Registered Branches</p>
+                  <div class="col-md-3">
+                    <form [formGroup]="branchByCompany">
+                      <nz-select class="full-width" nzShowSearch nzAllowClear nzPlaceHolder="Filter By corporate"
+                        formControlName="companySelected">
+                        <nz-option *ngFor="let option of corporateData" [nzLabel]="option.name" [nzValue]="option._id">
+                        </nz-option>
+                      </nz-select>
+                    </form>
+                  </div>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #branchTable nzBordered [nzData]="branchData"
+                      [nzLoading]="branchDataLoading">
+                      <thead>
+                        <tr>
+                          <th>Corporate Name</th>
+                          <th>Branch Name</th>
+                          <th>Email</th>
+                          <th>Contact</th>
+                          <th>State</th>
+                          <th>Registered On</th>
+                          <th>Member Type</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of branchTable.data" class="editable-row">
+                          <td> {{ data.corporate_id.name}}</td>
+                          <td>
+                            {{ data.branch_name }}
+                          </td>
+                          <td>
+                            {{ data.email }}
+                          </td>
+                          <td>
+                            {{data.contact}}
+                          </td>
+                          <td>
+                            {{data.state}}
+                          </td>
+                          <td>
+                            {{data.createdAt}}
+                          </td>
+                          <td>
+                            Non-prime
+                          </td>
+
+
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                        </tr>
+                      </tbody>
+                    </nz-table>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="corporate-department">
+                <form class="form container" [formGroup]="department">
+
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add Department</p>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select formControlName="corporate_id">
+                            <mat-option [value]="corp._id" *ngFor="let corp of corporateData">{{corp.name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select formControlName="branch_id">
+                            <mat-option [value]="data._id" *ngFor="let data of branchData">{{ data.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Department Name</mat-label>
+                          <input matInput type="text" formControlName="name" name="name"
+                            placeholder="Department Name">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-12 text-center">
+                      <button class="btn btn-warning" (click)="addDepartment(template)">Add Department</button>
+                    </div>
+                  </div>
+                </form>
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>Saved Departments</p>
+                  <div class="col-md-8">
+                    <h4>Filter Result</h4>
+                    
+                     <div class="row">
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected" (selectionChange)="getBranchByCorporate(corporateSelected)">
+                            <mat-option [value]="corp._id" *ngFor="let corp of corporateData">{{corp.name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select [(ngModel)]="branchSelected" name="branchSelected">
+                            <mat-option [value]="data._id" *ngFor="let data of branchData">
+                              {{ data.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2 text-center">
+                        <button class="btn btn-warning" (click)="getDepartmentsByCorporate()">Filter Result</button>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #departmentTable nzBordered [nzData]="departmentData"
+                      [nzLoading]="departmentDataLoading">
+                      <thead>
+                        <tr style="text-align-last: center;">
+                          <th>Department</th>
+                          <th>Corporate Name</th>
+                          <th>Branch Name</th>
+                          <th>Registered On</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-center">
+                        <tr *ngFor="let data of departmentTable.data" class="editable-row">
+                          <td> {{ data.name }}</td>
+                          <td> {{ data.corporate_id.name}}</td>
+                          <td>
+                            {{ data.branch_id.branch_name }}
+                          </td>
+                          <td>
+                            {{data.createdAt | date : 'fullDate'}}
+                          </td>
+                        
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+                        </tr>
+                      </tbody>
+                    </nz-table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="corporate-package">
+                <form class="form" [formGroup]="member">
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add Special Member</p>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select>
+                            <mat-option value="prime">Corporate 1</mat-option>
+                            <mat-option value="non-price">Corporate 2</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Corporate Branch</mat-label>
+                          <input matInput type="text" formControlName="contact_number" name="contact_number"
+                            placeholder="Branch Name">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Member Type</mat-label>
+                          <mat-select>
+                            <mat-option value="prime">Prime</mat-option>
+                            <mat-option value="non-price">Non-Prime</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <!-- <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Contact Number</mat-label>
+                          <input matInput type="text" formControlName="contact_number" name="contact_number"
+                            placeholder="Contact Number">
+                        </mat-form-field>
+                      </div> -->
+
+
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Start Date</mat-label>
+                          <input matInput type="date" formControlName="contact_number" name="contact_number">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>End Date</mat-label>
+                          <input matInput type="date" formControlName="contact_number" name="contact_number">
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 text-center">
+                      <button class="btn btn-warning">Join Member</button>
+                    </div>
+                  </div>
+                </form>
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>Special Members</p>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #medecinesTable nzBordered [nzData]="specialMembers"
+                      [nzLoading]="dataLoading">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Corporate Name</th>
+                          <th>Branch Name</th>
+                          <th>Member Type</th>
+                          <th>Validity</th>
+
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of medecinesTable.data" class="editable-row">
+                          <td> {{ data.name}}</td>
+                          <td>
+                            {{ data.manufacturedBy }}
+                          </td>
+                          <td>
+                            {{ data.medicineType }}
+                          </td>
+                          <td>
+                            {{data.packagingSize}}
+                          </td>
+
+                          <td>
+                            {{data.packagingSize}}
+                          </td>
+                          <td>
+                            {{data.packagingSize}}
+                          </td>
+
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                        </tr>
+                      </tbody>
+                    </nz-table>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="employee-checkup-type">
+                <form class="form container-fluid" [formGroup]="checkup">
+
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add New Checkup</p>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select>
+                            <mat-option value="prime">Corporate 1</mat-option>
+                            <mat-option value="non-price">Corporate 2</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select>
+                            <mat-option value="prime">Corporate 1</mat-option>
+                            <mat-option value="non-price">Corporate 2</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Department</mat-label>
+                          <input matInput type="text" formControlName="contact_number" name="contact_number"
+                            placeholder="example@example.com">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>EMP ID</mat-label>
+                          <input matInput type="text" formControlName="contact_number" name="contact_number"
+                            placeholder="hrred342">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Name</mat-label>
+                          <input matInput type="text" formControlName="contact_number" name="contact_number"
+                            placeholder="Employee Name">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Checkup</mat-label>
+                          <input matInput type="text" formControlName="contact_number" name="contact_number"
+                            placeholder="Checkup (package/profile/test)">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-12 text-center">
+                        <button class="btn btn-warning">Add Checkup</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>Special Members</p>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #medecinesTable nzBordered [nzData]="medecinesData"
+                      [nzLoading]="dataLoading">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Corporate Name</th>
+                          <th>Branch Name</th>
+                          <th>Member Type</th>
+                          <th>Validity</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of medecinesTable.data" class="editable-row">
+                          <td> {{ data.name}}</td>
+                          <td>
+                            {{ data.manufacturedBy }}
+                          </td>
+                          <td>
+                            {{ data.medicineType }}
+                          </td>
+                          <td>
+                            {{data.packagingSize}}
+                          </td>
+
+                          <td>
+                            {{data.packagingSize}}
+                          </td>
+                          <td>
+                            {{data.packagingSize}}
+                          </td>
+
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                        </tr>
+                      </tbody>
+                    </nz-table>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="hr-management">
+                <form class="form container-fluid" [formGroup]="hr">
+
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Add New Corporate HR</p>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select formControlName="corporate_id">
+                            <mat-option [value]="data._id" *ngFor="let data of corporateData">{{data.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select formControlName="branch_id">
+                            <mat-option [value]="data._id" *ngFor="let data of branchData">{{ data.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+
+                      <div class="col-md-4"></div>
+
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>HR ID</mat-label>
+                          <input matInput type="text" formControlName="hr_id" placeholder="hrred342">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Name</mat-label>
+                          <input matInput type="text" formControlName="hr_name" placeholder="Hr Name">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Email ID</mat-label>
+                          <input matInput type="text" formControlName="hr_email" placeholder="example@example.com">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Contact Number</mat-label>
+                          <input matInput type="text" formControlName="hr_contact" placeholder="Contact Number">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>New password</mat-label>
+                          <input matInput [type]="phide ? 'password' : 'text'" formControlName="hr_password">
+                          <button mat-icon-button matSuffix (click)="phide = !phide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{phide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>confirm password</mat-label>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="hr_cpassword">
+                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-12 text-center">
+                        <button class="btn btn-warning" (click)="addHr(template)">Add HR</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>Registered HR's</p>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #hrsTable nzBordered [nzData]="hrData" [nzLoading]="dataLoading">
+                      <thead>
+                        <tr>
+                          <th>HR Name</th>
+                          <th>Corporate Name</th>
+                          <th>Branch</th>
+                          <th>Email</th>
+                          <th>Contact</th>
+                          <th>Last Logged In</th>
+                          <th>Registered On</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of hrsTable.data" class="editable-row">
+                          <td> {{ data.hr_name}}</td>
+                          <td>
+                            {{ data.corporate_id.name }}
+                          </td>
+                          <td>
+                            {{ data.branch_id.branch_name }}
+                          </td>
+                          <td>
+                            {{data.hr_email}}
+                          </td>
+                          <td>
+                            {{data.hr_contact}}
+                          </td>
+                          <td>
+                            Not Available
+                          </td>
+                          <td>
+                            {{data.createdAt | date : 'fullDate'}}
+                          </td>
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                        </tr>
+                      </tbody>
+                    </nz-table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

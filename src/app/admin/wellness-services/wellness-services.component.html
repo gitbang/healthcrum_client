@@ -1,0 +1,109 @@
+<div class="main-content" *ngIf="!isAnySelected" id="container">
+  <div class="container-fluid mb-5">
+    <div class="row">
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">Wellness</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/wellness.png" alt="Photo of wellness">
+
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openWellness()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">Yoga</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/yoga.jpg" alt="Photo of wellness">
+
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openYoga()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">GYM</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/gym.jpg" alt="Photo of wellness">
+
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openGym()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">SPA</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/spa.jpg" alt="Photo of wellness">
+
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openSpa()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">Zumba</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/zumba.jpg" alt="Photo of wellness">
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openZumba()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">Webinar</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/webinar.jpg" alt="Photo of wellness">
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openWebinar()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-md-3" style="cursor: pointer;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title class="text-center">Ditecian</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/img/Wellness-services/ditecian.webp" alt="Photo of wellness">
+          <mat-card-actions class="text-center">
+            <button class="btn btn-warning full-width" (click)="openDitecian()">manage</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-success btn-sm" (click)="goBack()" *ngIf="isAnySelected">
+        <mat-icon>arrow_back_io</mat-icon>
+        <span>back</span>
+      </button>
+    </div>
+    <div class="col-md-12">
+      <app-ditecian *ngIf="ditecianSelected"></app-ditecian>
+      <app-gym *ngIf="gymSelected"></app-gym>
+      <app-spa *ngIf=" spaSelected"></app-spa>
+      <app-webinar *ngIf="webinarSelected"></app-webinar>
+      <app-wellness *ngIf="wellnessSelected"></app-wellness>
+      <app-yoga *ngIf="yogaSelected"></app-yoga>
+      <app-zumba *ngIf="zumbaSelected"></app-zumba>
+
+    </div>
+  </div>
+</div>

@@ -20,6 +20,7 @@ import { MiddleWareComponent } from "./pages/middle-ware/middle-ware.component";
 import { CheckOutComponent } from "./pages/consultation/check-out/check-out.component";
 import { ERecieptComponent } from "./pages/consultation/e-reciept/e-reciept.component";
 import { LandingPageComponent } from "./pages/wellness/landing-page/landing-page.component";
+import { HrloginComponent } from "./pages/hrlogin/hrlogin.component";
 
 export const HomePageRoutes: Routes = [
   { path: "home", component: LandingpageComponent },
@@ -46,6 +47,6 @@ export const HomePageRoutes: Routes = [
   {path: "blood-test/viewdetails/:id", component: ViewDetailsComponent},
   {path: "blood-test/mycart/:hrId", component : BookTestComponent},
   {path : "blood-test/:hrId", component : BookTestComponent},
-
-  {path : "wellness", component : LandingPageComponent}
+  {path : "wellness", component : LandingPageComponent},
+  {path: "hrlogin", component: HrloginComponent}
 ];

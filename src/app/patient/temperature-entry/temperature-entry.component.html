@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="loading" *ngIf="loading">
+    <div class="row">
+      <div class="col-md-12 w-100" style="display: flex;justify-content: center;align-items: center;">
+        <mat-spinner [color]="color"></mat-spinner>
+      </div>
+    </div>
+  </div>
+  <div class="data" *ngIf="!loading">
+
+    <div class="row mt-5" *ngIf="askQuestion">
+      <div class="col-md-11 mx-auto">
+        <div class="covid19" style="position: relative;">
+          <img src="../../../assets/img/patient_page/virus.png" style="position: absolute; width: 100px;left: -20px;
+          top: -20px;" />
+          <div style="padding: 8px 80px;background: #80409a;color: #ffffff;font-size: 1.7rem;">
+            {{ title }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 mx-auto">
+        <div class="question-box" style="min-height: 400px;padding:20px 15px;" *ngIf="!questionEnd">
+          <p class="mb-3" style="font-size: 1.2rem;font-weight: 500;min-height:45px;">
+            <span style="font-size: 2rem;">{{ currentIndex+1 }}.</span>&nbsp;{{ currentQuestion.question}}</p>
+         <div *ngIf="!currentQuestion.multiple" >
+          <nz-radio-group class="mt-5" [(ngModel)]="currentQuestion.ans" (ngModelChange)="answerSelected(event)"
+          nzButtonStyle="solid" style="display: flex;flex-direction: column;padding: 0px 28px;">
+          <!-- <label nz-radio-button nzValue="{{ o.}}" class="mb-3 option-label"
+            *ngFor="let o of currentQuestion.options">
+            <span class="option-no">{{ o.label}}</span>
+            {{ o.value}}
+          </label> -->
+          <label nz-radio-button nzValue="Yes" class="mb-3 option-label" >
+            <span class="option-no">A</span>
+            Yes
+          </label>
+          <label nz-radio-button nzValue="No" class="mb-3 option-label" >
+            <span class="option-no">B</span>
+            No
+          </label>
+        </nz-radio-group>
+         </div>
+          <div *ngIf="currentQuestion.multiple" class="ml-5">
+            <ul>
+              <li *ngFor="let option of currentQuestion.options">
+                <mat-checkbox [(ngModel)]="option.ans">
+                  {{option.value}}
+                </mat-checkbox>
+              </li>
+            </ul>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-warning mt-4" (click)="goBack()" *ngIf="currentIndex > 0 && currentIndex !=0">previous</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-info mt-4" (click)="goNext()" *ngIf="currentQuestion.multiple">Next</button>
+            </div>
+          </div>
+        </div>
+        <div class="question-done" *ngIf="questionEnd">
+          <nz-result nzStatus="success" nzTitle="Thanks for your coopration.Now you can procced to temperature entry.">
+            <div nz-result-extra>
+              <button class="btn btn-success" (click)="questionDone()">Procced</button>
+            </div>
+          </nz-result>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!askQuestion">
+      <div class="col-md-12">
+        <div class="card pb-3 mt-0">
+          <div class="card-header card-header-text card-header-warning bg-pan-left">
+            <div class="card-text">
+              <h4 class="card-title">Temperature Entry</h4>
+              <p class="card-category">Please fill your body temperature.</p>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Temperature (in Fahrenheit)</mat-label>
+                  <input matInput placeholder="eg: 78 (in Fahrenheit)" [(ngModel)]="temperature" type="number">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3 text-center">
+                <button class="btn btn-primary" (click)="saveTemperature()">Add</button>
+              </div>
+            </div>
+            <div class="row form-top-line mt-3 pt-4 mb-0">
+              <p>Uploaded Temerature Data</p>
+              <div class="mt-3 mb-2 ml-3">
+             
+                <mat-form-field>
+                  <mat-label>Result by date</mat-label>
+                  
+                  <input matInput
+                      placeholder="Choose date range"
+                      [satDatepicker]="picker"
+                      [formControl]="date"
+                      [value]="date"
+                      (dateChange)="dateChange($event)">
+                  <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+                  <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12">
+                <nz-table class="mt-2" #temperatureTable nzBordered [nzData]="temperatureData"
+                  [nzLoading]="dataLoading">
+                  <thead class="text-center">
+                    <tr style="text-align-last: center;">
+                      <th>Temperature</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
+                    <tr *ngFor="let data of temperatureData">                     
+                      <td [class]="data.temperature > 98.5 ? 'bg-danger text-white' : ''">
+                        {{ data.temperature }}
+                      </td>
+                      <td>
+                        {{data.createdAt | date : 'fullDate'}}
+                      </td>
+                      <td>
+                        {{data.createdAt | date:'h:mm a'}}
+                      </td>
+                      <!-- 
+                      <td class="td-actions text-right">
+                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'"
+                          class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                          nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td> -->
+                      <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

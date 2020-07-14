@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthServiceLocal } from "../services/auth-service.service";
-import { SocialUser } from "angularx-social-login";
 import { Router } from "@angular/router";
 
 @Component({
@@ -18,6 +17,6 @@ export class PatientComponent implements OnInit {
     if(role == 'doctor') {
       this.router.navigateByUrl('/login')
     }
-    this.router.navigate(["/patient/hra-report-fill"]);
+    this.router.navigate(["/patient/temperature-entry"]);
   }
 }

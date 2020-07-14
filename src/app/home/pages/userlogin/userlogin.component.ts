@@ -277,7 +277,7 @@ export class UserloginComponent implements OnInit {
           this.alertOfOtpSend();
           this.otpSend = true;
         } else {
-          alert("something went wrong")
+          swal.fire("Error",result.message,"error");
         }
       })
   }
@@ -294,11 +294,10 @@ export class UserloginComponent implements OnInit {
       console.log("enter verify otp")
       var _this = this
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
-
         if(result.success){
           this.otpConfirmed = true
         } else{
-          alert("OTP did not match")
+          swal.fire("Error",result.message,"error");
         }
       })
     
@@ -316,7 +315,7 @@ export class UserloginComponent implements OnInit {
             console.log("otp verified ", result)
             this.saveAndAccess();                         // for dynamic routing
           } else{
-            alert("OTP did not match")
+            swal.fire("Error",result.message,"error");
           }
         })
       } else {
@@ -326,15 +325,14 @@ export class UserloginComponent implements OnInit {
           username : this.userEmail
         }
         this.authLocal.verifyOtpOfEmail(toSend).subscribe(result=>{
-          console.log("verify by email" ,result)
           if(result.success) {
-            if(result.idEmailVerified){
+            if(result.isEmailVerified){
               this.saveAndAccess();
             } else {
-              alert("Otp did not match")
+              swal.fire("Error",result.message,"error");
             }
           } else {
-            alert("Otp not matched")
+            swal.fire("Error",result.message,"error");
           }
         })
       }

@@ -10,7 +10,6 @@ import { PatientModule } from "./patient/patient.module";
 import { AdminLayoutModule } from "./admin/admin-layout.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ErrorpageComponent } from "./errorpage/errorpage.component";
-
 import { ChartsModule } from "ng2-charts";
 import { MapsComponent } from "./maps/maps.component";
 import {
@@ -23,7 +22,10 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from "angularx-social-login";
-
+import { registerLocaleData } from "@angular/common";
+import en from "@angular/common/locales/en";
+registerLocaleData(en);
+import { NZ_I18N, en_US } from "ng-zorro-antd/i18n";
 const fbLoginOptions: LoginOpt = {
   scope:
     "pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages",
@@ -76,7 +78,8 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    { provide: NZ_I18N, useValue: en_US }
   ],
 
   bootstrap: [AppComponent]

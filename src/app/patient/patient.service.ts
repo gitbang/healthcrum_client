@@ -7,7 +7,8 @@ import { Observable, of } from "rxjs";
 })
 export class PatientService {
   constructor(private http: HttpClient) {}
-  url: String = "http://localhost:3000/question/";
+  url: String = "http://localhost:3000";
+  // url: String = "https://api.sftservices.com/";
 
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -15,17 +16,85 @@ export class PatientService {
   options = { headers: this.headers };
 
   getQuestions(category: string) {
-    console.log(category);
-    console.log("service reached");
     return this.http.post(
       this.url + "fetchquestion",
       { category },
       this.options
     );
   }
+  getCovidAnswers(data:any) {
+    return this.http.post(
+      this.url + "/api/covid-answer/get-by-empid",
+      data,
+      this.options
+    );
+  }
   saveAns(ans) {
-    console.log("reached");
-    console.log(ans);
-    return this.http.post("http://localhost:3000/usersave", ans);
+    return this.http.post(this.url + "/usersave", ans);
+  }
+
+  saveTemperature(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/temperature/save",
+      data,
+      this.options
+    );
+  }
+  saveCovidAnswers(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/covid-answer/save",
+      data,
+      this.options
+    );
+  }
+  saveCovidWeeklyAnswers(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/covid-answer/save-weekly-ans",
+      data,
+      this.options
+    );
+  }
+  getTemperatures(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/temperature/get-all",
+      data,
+      this.options
+    );
+  }
+
+  getEmpTemperature(data): Observable<any> {
+    return this.http.post<any>(
+      this.url + "/api/temperature/get-by-empid",
+      data,
+      this.options
+    );
+  }
+  getCovidInitialQuestion(){
+    return this.http
+    .get<any>(
+      this.url + "/dummy/data",
+      this.options
+    );
+  }
+  getWeeklyQuestion(){
+    return this.http
+    .get<any>(
+      this.url + "/dummy/weekly-data",
+      this.options
+    );
+  }
+  needToAskQuestion(data){
+    return this.http.post<any>(
+      this.url + "/api/covid-answer/weekly/has-answered",
+      data,
+      this.options
+    );
+  }
+  getWeeklySettings(){
+    return this.http
+    .get<any>(
+      this.url + "/api/weekly-question/get",
+      this.options
+    );
   }
 }

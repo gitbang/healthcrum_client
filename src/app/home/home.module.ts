@@ -36,10 +36,8 @@ import {
   MatListModule,
 } from "@angular/material";
 import {AngularFittextModule} from 'angular-fittext';
-
 import { LandingpageComponent } from "./pages/landingpage/landingpage.component";
 import { UserloginComponent } from "./pages/userlogin/userlogin.component";
-
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   SignupComponent,
@@ -56,8 +54,6 @@ import { EquipmentsComponent } from "./pages/equipments/equipments.component";
 import { SingleEquipmentComponent } from "./pages/single-equipment/single-equipment.component";
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
-import { AfterSocialSignupComponent } from "./pages/after-social-signup/after-social-signup.component";
-import { AfterLocalSignupComponent } from "./pages/after-local-signup/after-local-signup.component";
 import { BookTestComponent } from "./pages/blood-test/book-test/book-test.component";
 import { ViewDetailsComponent } from "./pages/blood-test/view-details/view-details.component";
 import { HomeServiceService } from "./home-service.service";
@@ -75,7 +71,7 @@ import { UploadPrescriptionComponent } from './pages/medicines/upload-prescripti
 import {MatSliderModule} from '@angular/material/slider';
 import { SocialDetailsComponent } from './pages/signup/social-details/social-details.component';
 import { FlipModule } from 'ngx-flip';
-
+import { HrloginComponent } from './pages/hrlogin/hrlogin.component';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -106,6 +102,7 @@ import { FlipModule } from 'ngx-flip';
     NotFoundComponent,
     UploadPrescriptionComponent,
     SocialDetailsComponent,
+    HrloginComponent
   ],
   imports: [
     CommonModule,

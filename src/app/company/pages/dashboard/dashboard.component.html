@@ -1,5 +1,78 @@
-<div class="master container-fluid">
-  <div class="row m-auto">
+<div class="main-content mb-5">
+<div class="container">
+  
+  <div class="row form-top-line mt-5 pt-4 mb-4"> 
+    <p style="margin: 0;padding-top: 10px;font-weight: bold;color: orange;align-items: center;margin-top: -10px;">
+      <i>
+        <img src="../../../../assets/img/shield.png" style="margin-top: -5px; margin-left: -5px;width: 40px;height: 40px;">
+      </i>
+      Healthcrum Shield
+    </p>
+    
+    <div class="full-width mt-2">
+      <div class="covid-detail-box showresult pt-3 pb-2" style="background: url(../../../assets/img/covid19/Covid19.png);">
+        <div class="mb-2">
+          <mat-card class="card-box">
+            <mat-card-title class="purple-title text-center">Total Employees</mat-card-title>
+            <mat-card-footer class="card-footer bg-purple">{{covid19Data.total.v}} Employees
+              <a class="next-link" routerLink="/company/employees-temp/total">
+                <mat-icon>east</mat-icon>
+              </a>
+            </mat-card-footer>
+            <circle-progress class="mx-auto" [percent]="covid19Data.total.p" [radius]="50" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
+              [outerStrokeColor]="'#7A67BB'" [innerStrokeColor]="'#bac9f2'" [animation]="true" [animationDuration]="300"
+              [responsive]='false' [titleFontSize]="30" [showSubtitle]="false"></circle-progress>
+          </mat-card>
+        </div>
+        <div class="mb-2">
+          <mat-card class="card-box">
+            <mat-card-title class="red-title text-center">Danger Zone</mat-card-title>
+            <mat-card-footer class="card-footer bg-danger">{{covid19Data.danger.v}} Employees
+              <a class="next-link" routerLink="/company/employees-temp/danger">
+                <mat-icon>east</mat-icon>
+              </a>
+            </mat-card-footer>
+            <circle-progress class="circle-progress" [percent]="covid19Data.danger.p" [radius]="50" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
+              [outerStrokeColor]="'#f70707'" [innerStrokeColor]="'#edbdc4'" [animation]="true" [animationDuration]="300"
+              [responsive]='false' [titleFontSize]="30" [showSubtitle]="false"></circle-progress>
+          </mat-card>
+        </div>
+        <div class="mb-2">
+          <mat-card class="card-box">
+            <mat-card-title class="green-title text-center">Safe Zone</mat-card-title>
+            <mat-card-footer class="card-footer bg-success">{{covid19Data.safe.v}} Employees
+              <a class="next-link" routerLink="/company/employees-temp/safe">
+                <mat-icon>east</mat-icon>
+              </a>
+            </mat-card-footer>
+            <circle-progress class="circle-progress" [percent]="covid19Data.safe.p" [radius]="50" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
+              [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"
+              [responsive]='false' [titleFontSize]="30" [showSubtitle]="false"></circle-progress>
+          </mat-card>
+        </div>
+        <div class="mb-2">
+          <mat-card class="card-box">
+            <mat-card-title class="yellow-title text-center">No Entry yet</mat-card-title>
+            <mat-card-footer class="card-footer bg-warning">{{covid19Data.no_entry.v}} Employees
+              <a class="next-link" routerLink="/company/employees-temp/no-entry">
+                <mat-icon>east</mat-icon>
+              </a>
+            </mat-card-footer>
+            <circle-progress class="circle-progress" [percent]="covid19Data.no_entry.p" [radius]="50" [outerStrokeWidth]="8" [innerStrokeWidth]="4"
+              [outerStrokeColor]="'#FDB900'" [innerStrokeColor]="'#f9e8bb'" [animation]="true" [animationDuration]="300"
+              [responsive]='false' [titleFontSize]="30" [showSubtitle]="false"></circle-progress>
+          </mat-card>
+        </div>
+        
+        <button class="btn btn-white btn-round btn-just-icon mat-raised-button" (click)="reloadCovidDetails()" title="Reload data">
+          <i class="material-icons">replay</i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-top-line mt-5 pt-4 mb-0">
+    <p>Employees Health Data</p>
     <div class="col-3">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Select package</mat-label>
@@ -12,44 +85,45 @@
     </div>
   </div>
   <div class="row m-auto showresult">
-    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
-      <mat-card>
+    <div class="col-lg-3 col-sm-6  mb-4">
+      <mat-card class="card-box">
         <mat-card-title class="red-title text-center">Danger Zone</mat-card-title>
         <mat-card-footer class="card-footer bg-danger">{{currentData.red}} Employees</mat-card-footer>
-        <circle-progress [percent]="percentage.red" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+        <circle-progress class="circle-progress" [percent]="percentage.red" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
           [outerStrokeColor]="'#f70707'" [innerStrokeColor]="'#edbdc4'" [animation]="true" [animationDuration]="300"
           [responsive]='true' [titleFontSize]="50" [showSubtitle]="false"></circle-progress>
       </mat-card>
     </div>
-    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
-      <mat-card>
+    <div class="col-lg-3 col-sm-6 mb-4">
+      <mat-card class="card-box">
         <mat-card-title class="purple-title text-center">Need Attention</mat-card-title>
         <mat-card-footer class="card-footer bg-purple">{{currentData.purple}} Employees</mat-card-footer>
-        <circle-progress [percent]="percentage.purple" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+        <circle-progress class="circle-progress" [percent]="percentage.purple" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
           [outerStrokeColor]="'#7A67BB'" [innerStrokeColor]="'#bac9f2'" [animation]="true" [animationDuration]="300"
           [responsive]='true' [titleFontSize]="50" [showSubtitle]="false"></circle-progress>
       </mat-card>
     </div>
-    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
-      <mat-card>
+    <div class="col-lg-3 col-sm-6 mb-4">
+      <mat-card class="card-box">
         <mat-card-title class="yellow-title text-center">Border Line</mat-card-title>
         <mat-card-footer class="card-footer bg-warning">{{currentData.yellow}} Employees</mat-card-footer>
-        <circle-progress [percent]="percentage.yellow" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+        <circle-progress class="circle-progress" [percent]="percentage.yellow" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
           [outerStrokeColor]="'#FDB900'" [innerStrokeColor]="'#f9e8bb'" [animation]="true" [animationDuration]="300"
           [responsive]='true' [titleFontSize]="50" [showSubtitle]="false"></circle-progress>
       </mat-card>
     </div>
 
-    <div class="col-lg-3 col-sm-6 mt-4 mb-4">
-      <mat-card>
+    <div class="col-lg-3 col-sm-6 mb-4">
+      <mat-card class="card-box">
         <mat-card-title class="green-title text-center">Green Zone</mat-card-title>
         <mat-card-footer class="card-footer bg-success">{{currentData.green}} Employees</mat-card-footer>
-        <circle-progress [percent]="percentage.green" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+        <circle-progress class="circle-progress" [percent]="percentage.green" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
           [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"
           [responsive]='true' [titleFontSize]="50" [titleFontSize]="50" [showSubtitle]="false"></circle-progress>
       </mat-card>
     </div>
   </div>
+</div>
 
   <!--
   <div class="row mt-4 mat-elevation-z8 ml-2 mr-2 mb-4" >

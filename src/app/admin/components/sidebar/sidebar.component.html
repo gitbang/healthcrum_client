@@ -126,16 +126,22 @@
                             <span class="sidebar-normal"> Labs </span>
                         </a>
                     </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/doctors">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="faUserMd"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Doctors </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
 
         <li class="nav-item " routerLinkActive="active">
-            <a class="nav-link" routerLink="/admin/doctors">
-                <i>
-                    <fa-icon [icon]="faUserMd"></fa-icon>
-                </i>
-                <p> Doctors </p>
+            <a class="nav-link" routerLink="/admin/corporates">
+                <i class="material-icons">domain</i>
+                <p> Corporate Entry </p>
             </a>
         </li>
         <!-- <li class="nav-item " routerLinkActive="active">
@@ -205,7 +211,7 @@
             <div class="collapse" id="medecinesLink" routerLinkActive="show">
                 <ul class="nav">
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/admin/medecines">
+                        <a class="nav-link" routerLink="/admin/medecines-inventry">
                             <span class="sidebar-mini">
                                 <fa-icon [icon]="parameter"></fa-icon>
                             </span>
@@ -213,7 +219,7 @@
                         </a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/admin/sold-medecines">
+                        <a class="nav-link" routerLink="/admin/medecines-purchase">
                             <span class="sidebar-mini">
                                 <fa-icon [icon]="cart"></fa-icon>
                             </span>
@@ -244,7 +250,7 @@
             <div class="collapse" id="equipmentsLink" routerLinkActive="show">
                 <ul class="nav">
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/admin/equipments">
+                        <a class="nav-link" routerLink="/admin/equipment-inventry">
                             <span class="sidebar-mini">
                                 <fa-icon [icon]="parameter"></fa-icon>
                             </span>
@@ -252,7 +258,7 @@
                         </a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                        <a class="nav-link" routerLink="/admin/equipment--purchase">
                             <span class="sidebar-mini">
                                 <fa-icon [icon]="cart"></fa-icon>
                             </span>
@@ -260,25 +266,103 @@
                         </a>
                     </li>
 
-                    <!-- <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/admin/packages">
-                            <span class="sidebar-mini">
-                                <fa-icon [icon]="package"></fa-icon>
-                            </span>
-                            <span class="sidebar-normal"> Sold Equpments </span>
-                        </a>
-                    </li> -->
                 </ul>
             </div>
         </li>
-        <!-- <li class="nav-item " routerLinkActive="active">
-            <a class="nav-link" routerLink="/admin/medecines">
-                <i>
-                    <fa-icon [icon]="faUserMd"></fa-icon>
-                </i>
-                <p> Medecines </p>
+        <!-- <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" data-toggle="collapse" href="#wellnessLink">
+                <i class="material-icons">healing</i>
+                <p> Wellness Services
+                    <b class="caret"></b>
+                </p>
             </a>
+            <div class="collapse" id="equipmentsLink" routerLinkActive="show">
+                <ul class="nav">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Wellness </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/equipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="parameter"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Yoga </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Gym </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal">Ditecian </span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> SPA </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Zumba </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" routerLink="/admin/sold-eqipments">
+                            <span class="sidebar-mini">
+                                <fa-icon [icon]="cart"></fa-icon>
+                            </span>
+                            <span class="sidebar-normal"> Webinars </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li> -->
-
+        <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/locations">
+                <i class="material-icons">room
+                </i>
+                <p> Locations </p>
+            </a>
+        </li>
+        <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/employees-temp">
+                <i class="material-icons">biotech
+                </i>
+                <p> Employee Temperatures </p>
+            </a>
+        </li>
+        <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/wellness-services">
+                <i class="material-icons">healing</i>
+                <p> Wellness Services </p>
+            </a>
+        </li>
+        <li class="nav-item " routerLinkActive="active">
+            <a class="nav-link" routerLink="/admin/feedbacks">
+                <i class="material-icons">rate_review</i>
+                <p> Feedbacks </p>
+            </a>
+        </li>
     </ul>
 </div>

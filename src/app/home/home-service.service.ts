@@ -10,7 +10,8 @@ import { retry, catchError } from 'rxjs/operators';
 export class HomeServiceService {
 
 
-  url : string = 'http://localhost:3000'
+  url : string = 'http://localhost:3000';
+  // url: String = "https://api.sftservices.com/";
  
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -231,6 +232,36 @@ export class HomeServiceService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+  getAllCorporate(): Observable<any> {
+    return this.http
+      .get<any>(this.url + "/api/corporate/get-all", this.option);
+  }
 
+  getBranchesByCorporate(data): Observable<any> {
+    return this.http
+      .post<any>(
+        this.url + "/api/corporate/branch/by-corporate",
+        data,
+        this.option
+      );
+  }
+
+  getDepartmentByCorporate(data): Observable<any> {
+    return this.http
+      .post<any>(
+        this.url + "/api/corporate/department/by-corporate",
+        data,
+        this.option
+      );
+  }
+
+  hrLogin(data): Observable<any> {
+    return this.http
+      .post<any>(
+        this.url + "/api/corporate/hr/login",
+        data,
+        this.option
+      );
+  }
 
 } 

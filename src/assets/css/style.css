@@ -41,7 +41,7 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* 1.  SITE STRUCTURE and TYPOGRAPHY */
 /*============================================================================================*/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
-
+@import '~saturn-datepicker/bundle.css';
 /*-------------Akash-------------*/
 .flipper .front {
   position: relative !important;
@@ -106,7 +106,7 @@ position: relative !important;
   -webkit-box-align: center;
   align-items: center;
 }
-.form-top-line p {
+.form-top-line > p {
   position: absolute;
   top: -15px;
   left: 15px;
@@ -408,19 +408,6 @@ a.nav-link.cards.active img {
 64px= 4.57142857rem
 72px= 5.142857143rem
 */
-html * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  background: #fff;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  font-family: "Poppins", Helvetica, sans-serif;
-  color: #555;
-}
 
 main {
   background: #f5f8fa;

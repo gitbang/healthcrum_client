@@ -135,29 +135,37 @@
                   </div>
                 </div>
 
-                <div class="row" *ngIf="user_type == 'employee'">
+                <div class="row mt-3" *ngIf="user_type == 'employee'">
                   <div class="col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Employee Id</mat-label>
-                      <input matInput [(ngModel)]="employeeId" name="empId">
+                      <input matInput [(ngModel)]="employeeId" name="employeeId">
                     </mat-form-field>
                   </div>
                   <div class=" col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Organisation </mat-label>
-                      <input matInput [(ngModel)]="companyId" name="compId">
+                      <mat-select  [(ngModel)]="companyId" name="companyId" (selectionChange)="getCompantBranches()">
+                        <mat-option [value]="corp._id" *ngFor="let corp of corporates">{{corp.name}}</mat-option>
+                      
+                      </mat-select>
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Branch</mat-label>
-                      <input matInput [(ngModel)]="branchId" name="branchId">
+                      <mat-select  [(ngModel)]="branchId" name="branchId" (selectionChange)="getDepartments()">
+                        <mat-option [value]="branch._id" *ngFor="let branch of branches">{{branch.branch_name}}</mat-option>
+                      </mat-select>
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Department</mat-label>
-                      <input matInput [(ngModel)]="departmentId" name="deptId">
+                      <mat-select  [(ngModel)]="departmentId" name="deptId">
+                        <mat-option [value]="department._id" *ngFor="let department of departments">{{department.name}}</mat-option>
+                      </mat-select>
+                      
                     </mat-form-field>
                   </div>
                 </div>

@@ -36,7 +36,6 @@ export class SidebarComponent implements OnInit {
   weight = faWeight;
   report = faNotesMedical;
   prescription = faFileMedicalAlt;
-
   loggedIn: boolean;
   user: SocialUser;
 

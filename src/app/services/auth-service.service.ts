@@ -18,9 +18,10 @@ export class AuthServiceLocal {
   option = { headers: this.headers };
 
   baseurl: string = 'http://localhost:3000';
+  // url: String = "https://api.sftservices.com/";
 
   get isUserLoggedIn(): boolean {
-    let user = localStorage.getItem("user");
+    let user = JSON.parse(localStorage.getItem("userDetail"));
     if (!user) {
       return false;
     } else {
@@ -28,22 +29,19 @@ export class AuthServiceLocal {
     }
   }
 
-  get getUserData() {
-    try {
-      return JSON.parse(localStorage.getItem("user"));
-    } catch (err) {
-      return null;
-    }
-  }
-
   saveUser(user) {
-    localStorage.setItem("user", user);
+    localStorage.setItem("userDetail", user);
   }
 
   logoutUser() {
-    localStorage.removeItem("user");
-  }
+    try{
+      localStorage.removeItem("user");
+      localStorage.removeItem("userDetail");
+      localStorage.removeItem("token");
+    }catch(err){
 
+    }
+  }
   signUpUser(data) : Observable<any>{
     return this.http
             .post(this.baseurl + "/api//user/sign-up", data, this.option)
@@ -66,11 +64,16 @@ export class AuthServiceLocal {
   }
 
   getUserDetails(){
-      let data =  localStorage.getItem('userDetail');
-      console.log("data in user details" , JSON.parse(data) )
-      return JSON.parse(data)
+      return this.getUserData;
   }
 
+  get getUserData(){
+    try {
+      return JSON.parse(localStorage.getItem('userDetail'));
+    } catch(error){
+      return null
+    }
+  }
   getUserId(){
     try{
       let data = JSON.parse(localStorage.getItem('userDetail'));
@@ -123,6 +126,44 @@ export class AuthServiceLocal {
             .pipe(retry(2), catchError(this.handleError))
   }
 
+  get getUserID(){
+    return JSON.parse(localStorage.getItem("userDetail")).userId;
+  }
+ get getUserHealthcrumID(){
+    return JSON.parse(localStorage.getItem("userDetail")).healthcrumId;
+  }
+
+  get getUserCorporateID(){
+    return JSON.parse(localStorage.getItem("userDetail")).companyId;
+  }
+
+ get getUserBranchID(){
+    return JSON.parse(localStorage.getItem("userDetail")).branchId;
+  }
+
+ get getUserDepartmentID(){
+    return JSON.parse(localStorage.getItem("userDetail")).departmentId;
+  }
+
+  get getUserEmployeeID(){
+    return JSON.parse(localStorage.getItem("userDetail")).employeeId;
+  }
+
+  saveUserToken(token){
+    try{
+        localStorage.setItem("token",token);
+    }catch(err){
+
+    }
+  }
+
+getUserToken(){
+    return localStorage.getItem("token") ? localStorage.getItem("token") : "";
+}
+
+isLoggedIn(){
+  return localStorage.getItem("token") ? true : false;
+}
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

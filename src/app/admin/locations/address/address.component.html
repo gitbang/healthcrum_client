@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-8 mt-3 mb-3">
+
+    <div class="row" style="align-items: center;">
+      <div class="col-md-3">
+        <nz-select class="full-width" nzShowSearch nzAllowClear nzPlaceHolder="Select a state"
+          [(ngModel)]="stateSelected" (ngModelChange)="getCities($event)">
+          <nz-option *ngFor="let option of states" [nzLabel]="option.state" [nzValue]="option.state"></nz-option>
+        </nz-select>
+      </div>
+      <div class="col-md-3">
+        <nz-select class="full-width" nzShowSearch nzAllowClear nzPlaceHolder="Select a city"
+          [(ngModel)]="citySelected">
+          <nz-option *ngFor="let option of cities" [nzLabel]="option.city" [nzValue]="option.city"></nz-option>
+        </nz-select>
+      </div>
+      <div class="col-md-4">
+        <nz-input-group>
+          <input type="text" nz-input [(ngModel)]="address" placeholder="Enter address" />
+        </nz-input-group>
+      </div>
+
+      <div class="col-md-2 text-center">
+        <button class="btn btn-primary" (click)="addRow()">Add</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <nz-table #editRowTable nzBordered [nzData]="listOfStateData">
+      <thead>
+        <tr>
+          <th nzCustomFilter>
+            States
+            <button [(nzVisible)]="stateVisible" class="btn btn-link m-0 p-0" style="float:right" nz-button nz-dropdown
+              nzTrigger="click" [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+              <i class="material-icons">search</i>
+            </button>
+
+          </th>
+          <th>City
+            <button [(nzVisible)]="cityVisible" class="btn btn-link m-0 p-0" style="float:right" nz-button nz-dropdown
+              nzTrigger="click" [nzDropdownMenu]="menu2" nzPlacement="bottomRight">
+              <i class="material-icons">search</i>
+            </button>
+          </th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data" class="editable-row">
+          <td> {{ data.state}}</td>
+          <td>
+            {{ data.city }}
+          </td>
+          <td>
+            <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+              <span *ngIf=" data.address == ''" class="text-danger">Not Set</span>
+              <span *ngIf="data.address != ''">{{ data.address }}</span>
+            </div>
+            <input *ngIf="data.address != '' " [hidden]="editId !== data.id" type="text" nz-input
+              [(ngModel)]="data.address" (blur)="stopEdit()" class="col-md-6" />
+            <input *ngIf=" data.address == '' " [hidden]="editId !== data.id" type="text" nz-input
+              [(ngModel)]="data.address" (blur)="stopEdit()" class="col-md-6" placeholder="Not set" />
+          </td>
+          <td>
+            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+          <input type="text" nz-input placeholder="Search state" [(ngModel)]="searchValue" />
+          <button (click)="searchState()" class="btn btn-primary">
+            Search
+          </button>
+          <button class="btn btn-danger" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    </nz-dropdown-menu>
+    <nz-dropdown-menu #menu2="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+          <input type="text" nz-input placeholder="Search City" [(ngModel)]="searchCity" />
+          <button (click)="searchCities()" class="btn btn-primary">
+            Search
+          </button>
+          <button class="btn btn-danger" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    </nz-dropdown-menu>
+  </div>
+
+</div>
