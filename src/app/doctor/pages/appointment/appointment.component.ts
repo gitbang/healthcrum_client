@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import {AuthServiceLocal} from '../../../services/auth-service.service'
 import {Router} from '@angular/router'
+import {DoctorService} from '../../doctor.service'
+import Swal from "sweetalert2";
+import { FooterComponent } from "app/company/components/footer/footer.component";
 
 declare var $: any;
 @Component({
@@ -11,40 +14,13 @@ declare var $: any;
 export class AppointmentComponent implements OnInit {
   newAppointment: any[] = [
     {
-      appoint_id: "1102",
+      
       patient_name: "Amar Verma",
       location: "Delhi",
-      date: "12/04/2020",
-      time: "03:00 PM"
+      date: "2020-07-13T18:30:00.000Z",
+      time: "03:00 PM",
+      patientEmail : "abcd@gmail.com"
     },
-    {
-      appoint_id: "1103",
-      patient_name: "Sonu Yadav",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    },
-    {
-      appoint_id: "1112",
-      patient_name: "sonam Sharma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "02:00 PM"
-    },
-    {
-      appoint_id: "1114",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:30 PM"
-    },
-    {
-      appoint_id: "1119",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    }
   ];
   confirmedAppointment: any[] = [
     {
@@ -54,34 +30,6 @@ export class AppointmentComponent implements OnInit {
       date: "12/04/2020",
       time: "01:00 PM"
     },
-    {
-      appoint_id: "1106",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "05:50 PM"
-    },
-    {
-      appoint_id: "1109",
-      patient_name: "Sonu Yadav",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "02:00 PM"
-    },
-    {
-      appoint_id: "1110",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    },
-    {
-      appoint_id: "1111",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    }
   ];
   pastAppointment: any[] = [
     {
@@ -91,48 +39,47 @@ export class AppointmentComponent implements OnInit {
       date: "12/04/2020",
       time: "08:20 PM"
     },
-    {
-      appoint_id: "1107",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "06:00 PM"
-    },
-    {
-      appoint_id: "1105",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    },
-    {
-      appoint_id: "1098",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    },
-    {
-      appoint_id: "1108",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    }
   ];
 
   constructor(
     private localService : AuthServiceLocal,
-    private router : Router
+    private router : Router,
+    private doctorService : DoctorService
   ) {}
 
+  doctorId : string ;
   ngOnInit() {
     let role = this.localService.getUserRole();
     if(role != 'doctor') {
       this.router.navigateByUrl('/login')
     }
+    this.doctorId = this.localService.getUserId();
+    console.log("userId is : ", this.doctorId)
+
+    // get appointments details
+    this.doctorService.appointmentGetDetails(this.doctorId).subscribe(result=>{
+      console.log("fetch doctor appointments : ", result)
+      this.newAppointment = []
+      if(result.success){
+        for(let i = 0; i < result.data.length; i++) {
+          console.log("loop")
+          var add;
+          add = {
+            patient_name: result.userDetail[i].name,
+            date: result.data[i].orderDetails[0].dateOfCheckup,
+            time:  result.data[i].orderDetails[0].time,
+            patientEmail : result.userDetail[i].userId.email,
+            patientId : result.userDetail[i].userId._id
+          }
+          this.newAppointment.push(add)
+        }
+      } else {
+        Swal.fire("No data found")
+      }
+    })
   }
 
+  appointmentDetails : any;
   showNotification(from, align, type_no) {
     const type = ["", "info", "success", "warning", "danger"];
 

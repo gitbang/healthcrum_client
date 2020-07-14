@@ -104,7 +104,9 @@
                   <div *ngIf="otpSend">
                     <mat-form-field class="full-width" appearance="outline">
                       <mat-label>OTP</mat-label>
-                      <input type="number" matInput placeholder="Enter OTP" [(ngModel)]="myotp" required>
+                      <input type="number" matInput placeholder="Enter OTP" [(ngModel)]="myotp" required
+                        name="myotp"
+                      >
                     </mat-form-field>
                     <div class="form-group">
 

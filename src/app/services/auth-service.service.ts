@@ -66,7 +66,6 @@ export class AuthServiceLocal {
   }
 
   getUserDetails(){
-  
       let data =  localStorage.getItem('userDetail');
       console.log("data in user details" , JSON.parse(data) )
       return JSON.parse(data)
@@ -100,7 +99,29 @@ export class AuthServiceLocal {
     }
   }
 
+  loginOtpSend(data : any) :Observable <any> {
+    return this.http
+            .post(this.baseurl + "/api/user/login/verification", data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
+  verifyOtpOfPhone(data : any) :Observable <any> {
+    return this.http
+            .post(this.baseurl + "/verifyotp", data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  verifyOtpOfEmail(data : any) :Observable <any> {
+    return this.http
+            .post(this.baseurl + "/api/user/login/verification/email", data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  retryOtpToEmail(data : any) : Observable<any>{
+    return this.http
+            .post(this.baseurl + "/api/user/login/verification/retryOtpEmail", data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
   handleError(error) {
     let errorMessage = '';

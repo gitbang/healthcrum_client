@@ -319,7 +319,7 @@ export class ConsultationComponent implements OnInit {
       this.options = ["Heart", "skin", "Lungs", "Dentist"];
     }
     console.log(this.options)
-    this.autofilldoctor();
+   // this.autofilldoctor();
   }
 
   getStream(name : string) {

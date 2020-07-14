@@ -15,7 +15,7 @@
                 <tr>
                   <th>Appointment No.</th>
                   <th>Patient Name</th>
-                  <th>Patient's Location</th>
+                  <th>Patient Email</th>
                   <th>Appointment Date</th>
                   <th>Appoint. Time</th>
                   <th>Actions</th>
@@ -23,15 +23,15 @@
               </thead>
               <tbody>
                 <tr *ngFor="let appoint of newAppointment;index as i">
-                  <td>{{appoint.appoint_id}}</td>
+                  <td>{{i + 1}}</td>
                   <td>{{appoint.patient_name}}</td>
-                  <td>{{appoint.location}}</td>
-                  <td>{{appoint.date}}</td>
+                  <td>{{appoint.patientEmail}}</td>
+                  <td>{{appoint.date | date}}</td>
                   <td>{{appoint.time}}</td>
                   <td class="td-actions">
                     <button mat-raised-button type="button" matTooltip="Approve" [matTooltipPosition]="'above'"
                       class="btn btn-success btn-link btn-sm btn-just-icon" (click)="showNotification('top','right',2)">
-                      <i class="material-icons">done</i>
+                      <i class="material-icons" style="color : white">done</i>
                     </button>
                     <button mat-raised-button type="button" matTooltip="cancel" [matTooltipPosition]="'above'"
                       class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="showNotification('top','right',4)">

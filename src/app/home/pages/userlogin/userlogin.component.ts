@@ -130,7 +130,7 @@ export class UserloginComponent implements OnInit {
   completeData : any;
   loginLocal(): void {
     
-    
+    this.forgotPass = false
     if(!this.user_email) {
       swal.fire("Id required")
       return
@@ -149,21 +149,24 @@ export class UserloginComponent implements OnInit {
        console.log("local response",data)
       if(data.success) {
         this.completeData = data        // contains : loginToken , success , userDetail 
-       
-        this.authLocal.saveTokenAndRole(data.userDetail)    
 
-        // code here to add dashboard dynamically
-        let role = this.authLocal.getUserRole();
-        console.log("role is : ", role )
-
+        /*
+          userDetail = {
+            name : "",
+            email : "",
+            gender : "",
+            phone : "",
+            role : ""
+          }
+        */
         if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
+          
+          console.log("one method is verified");
+          this.saveAndAccess();
+          
 
-          this.forgotPass = false;
-          this.flip();
-
-          console.log("one method is verified")
         } else {
-          this.forgotPass = false
+          
           this.userMobile = data.userDetail.phone;
           this.userEmail = data.userDetail.email;
           this.flip();
@@ -200,9 +203,21 @@ export class UserloginComponent implements OnInit {
     }
   }
 
+  saveAndAccess(){
+    this.authLocal.saveTokenAndRole(this.completeData.userDetail)    
+    let role = this.authLocal.getUserRole();
+    console.log("role is : ", role )
+    if(role == "doctor") {
+      this.router.navigateByUrl('/doctor')
+    } else {
+      this.router.navigateByUrl('/patient');
+    } 
+    
+  }
+  
   sendOTP(){
-    this.otpSend = true
-    /*
+    //this.otpSend = true
+    var data;
     if(this.forgotPass) {
       if(this.bynumber) {
 
@@ -223,49 +238,44 @@ export class UserloginComponent implements OnInit {
       }
 
     } else {        
-      // if user want to verify the account by number
-      if(this.bynumber) {
-        console.log("send otp")
-        let data = {
-          input : this.userMobile,
-          type : "phone",
-          _id : this.completeData.userDetail.userId
+      
+      if(this.bynumber) { 
+        data = {
+          username : this.userMobile
         }
-        this.generateotp(data)
       } else {
-      // if user want to verify the account by email
-        let data = {
-          input : this.userEmail,
-          type : "phone",
-          _id : this.completeData.userDetail.userId
+         data = {
+          username : this.userEmail,   
         }
-        
-        this.generateotp(data)
       }
-    } */
+      this.generateotp(data)
+    } 
+    
   } 
 
+  alertOfOtpSend(){
+    swal.fire({
+      icon: 'success',
+      title: 'OTP send',
+      showConfirmButton: false,
+      timer: 1500,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
 
   generateotp(data){
     console.log(data)
-    this.service.consultationBookOtpcheck(data)
+    this.authLocal.loginOtpSend(data)      //  route changes as to verify otp
       .subscribe((result)=>{
         console.log(result)
         if(result.success) {
+          this.alertOfOtpSend();
           this.otpSend = true;
-          //this.flip();
-          swal.fire({
-            icon: 'success',
-            title: 'OTP send',
-            showConfirmButton: false,
-            timer: 1500,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
         } else {
           alert("something went wrong")
         }
@@ -275,48 +285,62 @@ export class UserloginComponent implements OnInit {
   myotp : number;
 
   verify(){
-    this.otpConfirmed = true
-     /*
+    var toSend;
     if(this.forgotPass){
-      var toSend = {
+      toSend = {
         otp : this.myotp,
         phone : this.forgotMobile
       }
       console.log("enter verify otp")
       var _this = this
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
-      
-        console.log(result)
 
         if(result.success){
-
           this.otpConfirmed = true
-          
         } else{
-
           alert("OTP did not match")
-
         }
       })
     
     } else {
 
-      toSend = {
-        otp : this.myotp,
-        phone : this.userMobile
+      if(this.bynumber) {
+        toSend = {
+          otp : this.myotp,
+          phone : this.userMobile
+        }
+
+        this.service.consultationChekOTP(toSend).subscribe((result)=>{
+          console.log(result)
+          if(result.success){
+            console.log("otp verified ", result)
+            this.saveAndAccess();                         // for dynamic routing
+          } else{
+            alert("OTP did not match")
+          }
+        })
+      } else {
+        // verify otp through email
+        toSend = {
+          otp : this.myotp,
+          username : this.userEmail
+        }
+        this.authLocal.verifyOtpOfEmail(toSend).subscribe(result=>{
+          console.log("verify by email" ,result)
+          if(result.success) {
+            if(result.idEmailVerified){
+              this.saveAndAccess();
+            } else {
+              alert("Otp did not match")
+            }
+          } else {
+            alert("Otp not matched")
+          }
+        })
       }
 
       var _this = this
-      this.service.consultationChekOTP(toSend).subscribe((result)=>{
-      
-        console.log(result)
-        if(result.success){
-          _this.router.navigateByUrl('/patient')    
-        } else{
-          alert("OTP did not match")
-        }
-      })
-    }  */
+    }  
   }
 
   forgotMobile : number; 

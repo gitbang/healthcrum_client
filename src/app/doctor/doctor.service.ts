@@ -58,6 +58,12 @@ export class DoctorService {
       )
   }
 
+  appointmentGetDetails(doctorId : string) : Observable<any> {
+    return this.http
+            .get(this.url + "/payment/fetch-appointment/doctor/" + doctorId, this.options)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
   private handleError(error : HttpErrorResponse){
     if(error.error instanceof ErrorEvent) {
       console.log('error occur : ', error.error.message);
