@@ -18,17 +18,19 @@
                   <th> Speciality</th>
                   <th>Type</th>
                   <th> Date</th>
+                  <th> Time</th>
                   <th>Fees(Rs)</th>
                 </tr>
               </thead>
               <tbody>
                 
-                <tr *ngFor= "let appointment of appointments">
+                <tr *ngFor= "let appointment of appointments; let i = index">
                   <td class="">{{i + 1}}</td>
                   <td class="">{{appointment.doctor_name}}</td>
                   <td class="">{{appointment.speciality}}</td>
                   <td class="">{{appointment.type}}</td>
                   <td class="">{{appointment.date | date}}</td>
+                  <td class="">{{appointment.time}}</td>
                   <td class="">{{appointment.fee  }}</td>
                   <td class="td-actions">
                     <button type="button" onclick="demo.showSwal('warning-message-and-confirmation')" rel="tooltip"

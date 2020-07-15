@@ -190,7 +190,7 @@ export class CheckOutComponent implements OnInit {
         productId : this.shownresultarrays[i]._id,
         type : this.shownresultarrays[i].type + "Consultation",
         dateOfCheckup : this.shownresultarrays[0].date,
-        time : this.shownresultarrays[0].timeslot,
+        timeOfCheckup : this.shownresultarrays[0].timeslot,
 
         forUser : true,
         // forMembers : this.testfor.value[i].others,

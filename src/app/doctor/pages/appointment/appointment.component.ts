@@ -67,7 +67,7 @@ export class AppointmentComponent implements OnInit {
           add = {
             patient_name: result.userDetail[i].name,   // done
             date: result.data[i].orderDetails[0].dateOfCheckup,  // done
-            time:  result.data[i].orderDetails[0].timeOfcheckup,
+            time:  result.data[i].orderDetails[0].timeOfCheckup,
             patientEmail : result.data[i].orderBy.email,
             patientId : result.userDetail[i].userId
           }
