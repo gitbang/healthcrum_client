@@ -30,7 +30,8 @@ export class AuthServiceLocal {
   }
 
   saveUser(user) {
-    localStorage.setItem("userDetail", user);
+    let users = JSON.stringify(user) 
+    localStorage.setItem("userDetail", users);
   }
 
   logoutUser() {
@@ -39,7 +40,6 @@ export class AuthServiceLocal {
       localStorage.removeItem("userDetail");
       localStorage.removeItem("token");
     }catch(err){
-
     }
   }
   signUpUser(data) : Observable<any>{
@@ -74,14 +74,14 @@ export class AuthServiceLocal {
       return null
     }
   }
-  getUserId(){
-    try{
-      let data = JSON.parse(localStorage.getItem('userDetail'));
-      return data.userId
-    } catch(error){
-      return null
-    }
-  }
+  // getUserId(){
+  //   try{
+  //     let data = JSON.parse(localStorage.getItem('userDetail'));
+  //     return data.userId
+  //   } catch(error){
+  //     return null
+  //   }
+  // }
 
   isLoggin(){
     let user = JSON.parse(localStorage.getItem('userDetail'));
@@ -92,11 +92,9 @@ export class AuthServiceLocal {
     }
   }
 
-  getUserRole(){
+  getUserRole() : string{
     try{
-      let data = JSON.parse(localStorage.getItem('userDetail'));
-      console.log("local storage data is : ", data)
-      return data.role
+      return JSON.parse(localStorage.getItem("userDetail")).role;
     } catch(error){
       return null
     }
@@ -126,10 +124,22 @@ export class AuthServiceLocal {
             .pipe(retry(2), catchError(this.handleError))
   }
 
+  loginForgotPasswordOtp(data : any): Observable<any>{
+    return this.http
+            .post(this.baseurl + "/api/user/forgot-password", data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  loginUpdatePassword(data : any):Observable<any>{
+    return this.http
+            .post(this.baseurl + "/api/user/fp/updatePassword", data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
   get getUserID(){
     return JSON.parse(localStorage.getItem("userDetail")).userId;
   }
- get getUserHealthcrumID(){
+  get getUserHealthcrumID(){
     return JSON.parse(localStorage.getItem("userDetail")).healthcrumId;
   }
 
@@ -137,11 +147,11 @@ export class AuthServiceLocal {
     return JSON.parse(localStorage.getItem("userDetail")).companyId;
   }
 
- get getUserBranchID(){
+  get getUserBranchID(){
     return JSON.parse(localStorage.getItem("userDetail")).branchId;
   }
 
- get getUserDepartmentID(){
+  get getUserDepartmentID(){
     return JSON.parse(localStorage.getItem("userDetail")).departmentId;
   }
 
@@ -157,13 +167,13 @@ export class AuthServiceLocal {
     }
   }
 
-getUserToken(){
-    return localStorage.getItem("token") ? localStorage.getItem("token") : "";
-}
+  getUserToken(){
+      return localStorage.getItem("token") ? localStorage.getItem("token") : "";
+  }
 
-isLoggedIn(){
-  return localStorage.getItem("token") ? true : false;
-}
+  isLoggedIn(){
+    return localStorage.getItem("token") ? true : false;
+  }
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

@@ -53,7 +53,7 @@ export class AppointmentComponent implements OnInit {
     if(role != 'doctor') {
       this.router.navigateByUrl('/login')
     }
-    this.doctorId = this.localService.getUserId();
+    this.doctorId = this.localService.getUserID;
     console.log("userId is : ", this.doctorId)
 
     // get appointments details
@@ -65,12 +65,13 @@ export class AppointmentComponent implements OnInit {
           console.log("loop")
           var add;
           add = {
-            patient_name: result.userDetail[i].name,
-            date: result.data[i].orderDetails[0].dateOfCheckup,
-            time:  result.data[i].orderDetails[0].time,
-            patientEmail : result.userDetail[i].userId.email,
-            patientId : result.userDetail[i].userId._id
+            patient_name: result.userDetail[i].name,   // done
+            date: result.data[i].orderDetails[0].dateOfCheckup,  // done
+            time:  result.data[i].orderDetails[0].timeOfcheckup,
+            patientEmail : result.data[i].orderBy.email,
+            patientId : result.userDetail[i].userId
           }
+          console.log("add is : ", add)
           this.newAppointment.push(add)
         }
       } else {

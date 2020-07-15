@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
+import { retry, catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -96,5 +97,11 @@ export class PatientService {
       this.url + "/api/weekly-question/get",
       this.options
     );
+  }
+
+  appointmentfetchAppointment(userId : string): Observable<any>{
+    return this.http
+      .get(this.url + "/payment/fetch-appointment/user/" + userId, this.options)
+      .pipe(retry(2))
   }
 }

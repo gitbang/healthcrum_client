@@ -4,7 +4,8 @@ import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { HomeServiceService } from 'app/home/home-service.service';
 import { MatStepper } from '@angular/material/stepper';
-import {AuthServiceLocal} from '../../../../services/auth-service.service'
+import {AuthServiceLocal} from '../../../../services/auth-service.service';
+
 
 @Component({
   selector: 'app-book-model',
@@ -111,15 +112,25 @@ export class BookModelComponent implements OnInit {
     if(this.secondFormGroup.valid){
       this.loading = true;
       let toSend = {
-        otp : this.secondFormGroup.get('otp').value,
-        phone : this.firstFormGroup.get('phoneNo').value,
+        otp : this.secondFormGroup.get('otp').value.toString(),
+        phone : this.firstFormGroup.get('phoneNo').value.toString(),
         role : "patient"
       }
       console.log("verify otp : ", toSend);
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
         this.loading = false;
-        console.log(result)
+        //console.log(result)
         if(result.success){
+
+          let userdetails = {
+            userId : result.data.userId._id,
+            name : result.data.name,
+            gender : result.data.gender,
+            role : result.data.userId.role
+          }
+         // console.log(userdetails)
+          this.localService.saveUser(userdetails)
+          console.log("final formGroup value :", this.firstFormGroup.value)
           this.dialog.close({success : true, data : this.data , userdata: this.firstFormGroup.value})
         } else{
           alert("OTP did not match")

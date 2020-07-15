@@ -99,8 +99,6 @@ export class UserloginComponent implements OnInit {
       image: user.photoUrl,
     };
     
-    // delete the following line when data start storing in database
-    // save the data in local storage which comes after login verified
     this.authLocal.saveUser(JSON.stringify(u));
 
     this.authLocal.loginUser({username : user.email, password : user.id})
@@ -109,6 +107,11 @@ export class UserloginComponent implements OnInit {
 
         if(response.success){
          console.log("data save ")
+         this.completeData = response
+         console.log(this.completeData)
+         this.saveAndAccess()
+        } else {
+          swal.fire("Email not found")
         }
       })
   }
@@ -123,13 +126,12 @@ export class UserloginComponent implements OnInit {
       type: "reset-link",
     };
     this.forgot_email = "";
-    // $("#forgotModal").hide();
     swal.fire("Success!", "Email sent successfully !", "success");
   }
 
   completeData : any;
+
   loginLocal(): void {
-    
     this.forgotPass = false
     if(!this.user_email) {
       swal.fire("Id required")
@@ -148,25 +150,14 @@ export class UserloginComponent implements OnInit {
     this.authLocal.loginUser(data).subscribe((data) => {
        console.log("local response",data)
       if(data.success) {
-        this.completeData = data        // contains : loginToken , success , userDetail 
+        this.completeData = data        
 
-        /*
-          userDetail = {
-            name : "",
-            email : "",
-            gender : "",
-            phone : "",
-            role : ""
-          }
-        */
         if(data.userDetail.isEmailVerified || data.userDetail.isPhoneVerified){
           
           console.log("one method is verified");
           this.saveAndAccess();
-          
-
         } else {
-          
+
           this.userMobile = data.userDetail.phone;
           this.userEmail = data.userDetail.email;
           this.flip();
@@ -176,8 +167,6 @@ export class UserloginComponent implements OnInit {
       }
     });
   }
-
-  // verificational portal
 
   flip(){
     this.otpSend = false;
@@ -216,27 +205,31 @@ export class UserloginComponent implements OnInit {
   }
   
   sendOTP(){
-    //this.otpSend = true
     var data;
     if(this.forgotPass) {
       if(this.bynumber) {
-
         if(this.forgotMobile.toString().length != 10) {
           swal.fire("Enter valid phone number")
           return
         }
-
-        console.log("send otp")
-        this.generateotp({phone : this.forgotMobile})
+        data = {
+          username : this.forgotMobile
+        }
       } else {
-        if(this.forgotEmail.length > 1) {
+        if(this.forgotEmail.length == 0) {
           swal.fire("Enter valid email")
           return
         }
-        // send link to the otp
-        let email = this.forgotEmail
+        data = {
+          username : this.forgotEmail,
+          forgotPassword : this.forgotPass
+        }
       }
-
+      this.authLocal.loginForgotPasswordOtp(data).subscribe((result)=>{
+        console.log(result)
+        this.alertOfOtpSend();
+        this.otpSend = true
+      })
     } else {        
       
       if(this.bynumber) { 
@@ -246,11 +239,11 @@ export class UserloginComponent implements OnInit {
       } else {
          data = {
           username : this.userEmail,   
+          forgotPassword : this.forgotPass
         }
       }
       this.generateotp(data)
     } 
-    
   } 
 
   alertOfOtpSend(){
@@ -287,19 +280,36 @@ export class UserloginComponent implements OnInit {
   verify(){
     var toSend;
     if(this.forgotPass){
-      toSend = {
-        otp : this.myotp,
-        phone : this.forgotMobile
-      }
-      console.log("enter verify otp")
-      var _this = this
-      this.service.consultationChekOTP(toSend).subscribe((result)=>{
-        if(result.success){
-          this.otpConfirmed = true
-        } else{
-          swal.fire("Error",result.message,"error");
+      if(this.bynumber) {
+        toSend = {
+          otp : this.myotp,
+          phone : this.forgotMobile
         }
-      })
+        console.log("enter verify otp")
+        var _this = this
+        this.service.consultationChekOTP(toSend).subscribe((result)=>{
+          if(result.success){
+            this.otpConfirmed = true
+          } else{
+            swal.fire("Error",result.message,"error");
+          }
+        })
+      } else {
+        toSend = {
+          otp : this.myotp,
+          username : this.forgotEmail
+        }
+
+        this.authLocal.verifyOtpOfEmail(toSend).subscribe((result)=>{
+          console.log("email verify : ", result)
+          if(result.success) {
+            console.log("entered")
+            this.otpConfirmed = true;
+
+          }
+          console.log("otp confirmed ", this.otpConfirmed)
+        })
+      }
     
     } else {
 
@@ -324,6 +334,7 @@ export class UserloginComponent implements OnInit {
           otp : this.myotp,
           username : this.userEmail
         }
+       // this.verifyOtpOfEmail(toSend);
         this.authLocal.verifyOtpOfEmail(toSend).subscribe(result=>{
           if(result.success) {
             if(result.isEmailVerified){
@@ -341,14 +352,26 @@ export class UserloginComponent implements OnInit {
     }  
   }
 
+  verifyOtpOfEmail(data) {
+    this.authLocal.verifyOtpOfEmail(data).subscribe(result=>{
+      if(result.success) {
+        if(result.isEmailVerified){
+          this.saveAndAccess();
+        } else {
+          swal.fire("Error",result.message,"error");
+        }
+      } else {
+        swal.fire("Error",result.message,"error");
+      }
+    })
+  }
+
   forgotMobile : number; 
   forgotEmail : string;
   otpConfirmed : boolean = false
   forgetpass(){
-    
     this.forgotPass = true
     this.flip()
-
   }
 
   newPassword : number;
@@ -367,11 +390,32 @@ export class UserloginComponent implements OnInit {
       swal.fire("Password not matched")
       return
     }
-
-    let data = {
-      _id : "",
-      password : this.newPassword
+    var data;
+    if(this.bynumber){
+      data = {
+        username : this.forgotMobile ,
+        password : this.newPassword
+      }
+    } else {
+      data = {
+        username : this.forgotEmail ,
+        password : this.newPassword
+      }
     }
+    
     console.log("data to change password is", data)
+
+    this.authLocal.loginUpdatePassword(data).subscribe((result)=>{
+      if(result.success){
+        swal.fire("Password update")
+        //this.router.navigateByUrl('/login')
+        this.forgotEmail = "";
+        this.forgotPass = false;
+        this.forgotEmail = "",
+        this.forgotMobile = null
+        this.flip()
+      }
+    })
+
   }
 }

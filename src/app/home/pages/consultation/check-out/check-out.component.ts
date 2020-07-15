@@ -40,7 +40,7 @@ export class CheckOutComponent implements OnInit {
       this.router.navigateByUrl("/login")
 
     } else {
-
+      console.log("data from local storage", data)
       this.aboutUser._id = data.userId;
       this.aboutUser.name = data.name;
       this.aboutUser.gender = data.gender;
@@ -55,7 +55,8 @@ export class CheckOutComponent implements OnInit {
         console.log("empty")
         this.router.navigateByUrl('/consultation')
       } else{
-        this.shownresultarrays[0]._id = result[0].doctor.doctor._id;
+        //this.shownresultarrays[0]._id = result[0].doctor.doctor._id;
+        this.shownresultarrays[0]._id = result[0].doctor.doctor.userId;
         this.shownresultarrays[0].docname = result[0].doctor.doctor.name;
         this.shownresultarrays[0].type = result[0].doctor.type;
         this.shownresultarrays[0].offerprice = result[0].doctor.fee;

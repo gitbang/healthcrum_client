@@ -123,9 +123,11 @@ export class DashboardComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
   ngOnInit() {
+    console.log("dashboard patient")
     let role = this.localService.getUserRole();
     console.log("role is ", role)
     if(role == 'doctor') {
+      
       this.router.navigateByUrl('/login')
     }
     this.getTestResults();
@@ -138,7 +140,7 @@ export class DashboardComponent implements OnInit {
       let data = this.randomize();
       this.lists[i].icon = this.getEmojies(data[data.length - 1]);
       let colors = this.getColors(data);
-
+      
       this.barChartData.push([
         {
           backgroundColor: colors,

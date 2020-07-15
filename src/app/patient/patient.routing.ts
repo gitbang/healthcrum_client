@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 // import { DashboardComponent } from "./dashboard/dashboard.component";
-// import { PatientApponitmentsComponent } from "./patient-apponitments/patient-apponitments.component";
+ import { PatientApponitmentsComponent } from "./patient-apponitments/patient-apponitments.component";
 // import { PatientProfileComponent } from "./patient-profile/patient-profile.component";
 // import { PatientTestsComponent } from "./patient-tests/patient-tests.component";
 // import { PatientreportsComponent } from "./patientreports/patientreports.component";
@@ -16,7 +16,7 @@ import { TemperatureEntryComponent } from "./temperature-entry/temperature-entry
 import { MaintainanceComponent } from './maintainance/maintainance.component';
 export const PatientRoutes: Routes = [
   { path: "dashboard", component: MaintainanceComponent },
-  { path: "appointment", component: MaintainanceComponent },
+  { path: "appointment", component: PatientApponitmentsComponent },
   { path: "profile", component: MaintainanceComponent },
   { path: "tests", component: MaintainanceComponent },
   { path: "reports", component: MaintainanceComponent },

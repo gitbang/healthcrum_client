@@ -136,7 +136,7 @@
                     <span>
                       <mat-icon> mobile_screen_share</mat-icon>
                       <!--<fa-icon [icon]="fb" class="fa-facebook-icon"></fa-icon>-->
-                    </span> <span>Get otp by Number</span>
+                    </span> <span>Get OTP by Number</span>
                   </button>
 
                   <button  class="btn btn-social btn-google w-75" 
@@ -145,7 +145,7 @@
                     <span>
                       <mat-icon> email</mat-icon>
                       <!--<fa-icon [icon]="google" class="fa-google-icon"></fa-icon>-->
-                    </span> <span>Link by Email</span></button>
+                    </span> <span>Send OTP by email</span></button>
                   <div class="form-group mt-3">
                     <a class="forgot" (click)="flip()" style="cursor : pointer">
                       <small>GO Back</small>
@@ -192,14 +192,15 @@
                 </div>
 
                 <div class="box_login last" *ngIf="otpConfirmed">
-                  <mat-form-field class="full-width" *ngIf="bynumber"
+
+                  <mat-form-field class="full-width" *ngIf="!bynumber"
                     appearance="outline">
                    
                     <input type="password" matInput [(ngModel)]="newPassword" name="newPass"
                       placeholder="Enter new password">
                   </mat-form-field>
 
-                  <mat-form-field class="full-width" *ngIf="bynumber"
+                  <mat-form-field class="full-width" *ngIf="!bynumber"
                     appearance="outline">
                    
                     <input type="password" matInput [(ngModel)]="newPasswordConfirm" name="newPassConfirm"
