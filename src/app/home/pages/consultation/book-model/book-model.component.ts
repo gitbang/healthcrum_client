@@ -72,28 +72,28 @@ export class BookModelComponent implements OnInit {
     phone : null
   }
   submitFirstForm(stepper : MatStepper){
-   
     this.firstFormGroup.get('timeslot').setValue(this.bookedslot)
     console.log(this.firstFormGroup.value);  
 
     if(this.firstFormGroup.valid){
       this.toCheck = {
         userId : "asdfghjk",
-        phone : this.firstFormGroup.get('phoneNo').value
+        phone : this.firstFormGroup.get('phoneNo').value.toString()
       }
       console.log(this.toCheck)
       this.generateotp(stepper);
     } else {
       alert("Invalid Inputs")
     }
-    
   }
   loading : boolean = false;
-  userotp : number
+  userotp : number;
+  generateButton : boolean = false
   generateotp( stepper : MatStepper){
-    
+    this.generateButton = true
     this.service.consultationBookOtpcheck(this.toCheck)
       .subscribe((result)=>{
+        this.generateButton = false
         console.log(result)
         if(result.success) {
           if(result.exists){
@@ -114,14 +114,17 @@ export class BookModelComponent implements OnInit {
       let toSend = {
         otp : this.secondFormGroup.get('otp').value.toString(),
         phone : this.firstFormGroup.get('phoneNo').value.toString(),
-        role : "patient"
+       // role : "patient"
       }
       console.log("verify otp : ", toSend);
       this.service.consultationChekOTP(toSend).subscribe((result)=>{
         this.loading = false;
-        //console.log(result)
+        console.log("data after otp verification",result)
         if(result.success){
-
+          if(result.data.userId.role == 'doctor') {
+            Swal.fire("Change your phone number")
+            return
+          }
           let userdetails = {
             userId : result.data.userId._id,
             name : result.data.name,
@@ -133,7 +136,7 @@ export class BookModelComponent implements OnInit {
           console.log("final formGroup value :", this.firstFormGroup.value)
           this.dialog.close({success : true, data : this.data , userdata: this.firstFormGroup.value})
         } else{
-          alert("OTP did not match")
+          Swal.fire(result.message)
         }
       })
     }

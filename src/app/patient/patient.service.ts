@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 
 @Injectable({
@@ -103,5 +103,24 @@ export class PatientService {
     return this.http
       .get(this.url + "/payment/fetch-appointment/user/" + userId, this.options)
       .pipe(retry(2))
+  }
+
+  bloodTestFetchDetails(userId : string): Observable<any>{
+    return this.http
+            .get(this.url + "/fetch-bloodTest/user/" + userId, this.options)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 }

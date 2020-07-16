@@ -64,6 +64,12 @@ export class DoctorService {
             .pipe(retry(2), catchError(this.handleError))
   }
 
+  appointmentsChangeStatus(orderId : string, data ):Observable<any>{
+    return this.http
+            .post(this.url + "/api/update/order/status/"+ orderId, data , this.options)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
   private handleError(error : HttpErrorResponse){
     if(error.error instanceof ErrorEvent) {
       console.log('error occur : ', error.error.message);

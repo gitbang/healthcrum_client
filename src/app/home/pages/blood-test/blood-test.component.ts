@@ -15,6 +15,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {HomeServiceService} from '../../home-service.service'
 import { TestBed } from "@angular/core/testing";
+import {AuthServiceLocal} from '../../../services/auth-service.service'
 
 export interface Fruit {
   name : string
@@ -54,7 +55,8 @@ export class BloodTestComponent implements OnInit {
     private matDialog : MatDialog,
     private snackbar : MatSnackBar,
     private service : HomeServiceService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private authlocalService : AuthServiceLocal
   ) {
 
 
@@ -72,12 +74,21 @@ export class BloodTestComponent implements OnInit {
 
   ngOnInit() {
     // this.getLocation();
-    this.isLogin= this.service.checkLogin();
-    
-    if(this.isLogin)
-      this.cartfromServer();
-    else
+    //this.isLogin= this.service.checkLogin();
+
+    this.isLogin = this.authlocalService.isLoggedIn()
+
+    if(!this.isLogin) {
       this.cartfromClient(); 
+    } else {
+
+      this.userId = this.authlocalService.getUserID
+      let role = this.authlocalService.getUserRole();
+      if(role == 'doctor') 
+        this.router.navigateByUrl('/login')
+      this.cartfromServer();
+    }
+  
 
     this.ratingArray = Array(5).fill(0);
     this.getIpClientLocation();

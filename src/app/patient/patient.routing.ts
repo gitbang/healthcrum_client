@@ -6,7 +6,7 @@ import { Routes } from "@angular/router";
 // import { PatientreportsComponent } from "./patientreports/patientreports.component";
 // import { HealthStatusComponent } from "./health-status/health-status.component";
 // import { PatientPerscriptionComponent } from "./patient-perscription/patient-perscription.component";
-// import { PatientOrdersComponent } from "./patient-orders/patient-orders.component";
+ import { PatientOrdersComponent } from "./patient-orders/patient-orders.component";
 // import { PatientServicesComponent } from "./patient-services/patient-services.component";
 // import { PatientFeedbackComponent } from "./patient-feedback/patient-feedback.component";
 // import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.component";
@@ -21,7 +21,7 @@ export const PatientRoutes: Routes = [
   { path: "tests", component: MaintainanceComponent },
   { path: "reports", component: MaintainanceComponent },
   { path: "ehr", component: MaintainanceComponent },
-  { path: "orders", component: MaintainanceComponent },
+  { path: "orders", component: PatientOrdersComponent },
   { path: "feedback", component: MaintainanceComponent },
   { path: "eligible-service", component: MaintainanceComponent },
   { path: "persciptions", component: MaintainanceComponent },

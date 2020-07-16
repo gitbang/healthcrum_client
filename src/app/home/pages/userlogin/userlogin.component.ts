@@ -57,8 +57,15 @@ export class UserloginComponent implements OnInit {
 
   ngOnInit() {
 
-    let data = this.authLocal.getUserDetails()
-    console.log("details", data)
+    let isLoggin = this.authLocal.isLoggin();
+    console.log("is login ",isLoggin)
+    if(isLoggin){
+      let role = this.authLocal.getUserRole();
+      this.dynamicRouting(role)
+    }
+    
+    // let data = this.authLocal.getUserDetails()
+    // console.log("details", data)
   }
 
   signInWithGoogle(): void {
@@ -196,12 +203,15 @@ export class UserloginComponent implements OnInit {
     this.authLocal.saveTokenAndRole(this.completeData.userDetail)    
     let role = this.authLocal.getUserRole();
     console.log("role is : ", role )
+    this.dynamicRouting(role)
+  }
+
+  dynamicRouting(role) {
     if(role == "doctor") {
       this.router.navigateByUrl('/doctor')
     } else {
       this.router.navigateByUrl('/patient');
     } 
-    
   }
   
   sendOTP(){

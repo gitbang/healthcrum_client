@@ -49,35 +49,55 @@ export class AppointmentComponent implements OnInit {
 
   doctorId : string ;
   ngOnInit() {
+
     let role = this.localService.getUserRole();
     if(role != 'doctor') {
       this.router.navigateByUrl('/login')
     }
     this.doctorId = this.localService.getUserID;
     console.log("userId is : ", this.doctorId)
+    this.getConsultation();
+  }
 
-    // get appointments details
+  getConsultation(){
     this.doctorService.appointmentGetDetails(this.doctorId).subscribe(result=>{
       console.log("fetch doctor appointments : ", result)
-      this.newAppointment = []
+      this.newAppointment = [];
+      this.confirmedAppointment = [];
+      this.pastAppointment = [];
       if(result.success){
-        for(let i = 0; i < result.data.length; i++) {
-          console.log("loop")
-          var add;
-          add = {
-            patient_name: result.userDetail[i].name,   // done
-            date: result.data[i].orderDetails[0].dateOfCheckup,  // done
-            time:  result.data[i].orderDetails[0].timeOfCheckup,
-            patientEmail : result.data[i].orderBy.email,
-            patientId : result.userDetail[i].userId
-          }
-          console.log("add is : ", add)
-          this.newAppointment.push(add)
-        }
+
+        this.getConfirmationStatusWise(result)
+        
       } else {
         Swal.fire("No data found")
       }
     })
+  }
+
+  getConfirmationStatusWise(result){
+
+    for(let i = 0; i < result.data.length; i++) {
+      console.log("loop")
+      var add;
+      add = {
+        patient_name: result.userDetail[i].name,   // done
+        date: result.data[i].orderDetails[0].dateOfCheckup,  // done
+        time:  result.data[i].orderDetails[0].timeOfCheckup,
+        patientEmail : result.data[i].orderBy.email,
+        patientId : result.userDetail[i].userId,
+        orderId : result.data[i]._id,
+        status : result.data[i].Orderstatus,
+        appointmentNum : result.data[i].appointmentNum
+      }
+      console.log("add is : ", add)
+      if( add.status == 'pending' || add.status == undefined )
+        this.newAppointment.push(add)
+      else if(add.status == 'accepted')
+        this.confirmedAppointment.push(add)
+      else if(add.status == 'completed')
+        this.pastAppointment.push(add)    
+    }
   }
 
   appointmentDetails : any;
@@ -117,4 +137,22 @@ export class AppointmentComponent implements OnInit {
       }
     );
   }
+
+  doAction(action : string, index : number){
+    let toSend = {
+      Orderstatus : action
+    }
+    console.log("index is : ", index)
+    console.log(this.newAppointment)
+    let orderId = this.newAppointment[index].orderId;
+    console.log("orderId is " , orderId)
+    this.doctorService.appointmentsChangeStatus( orderId, toSend).subscribe((result)=>{
+      console.log(result)
+      if(result.success){
+        this.getConsultation()
+      }
+    })
+  }
+
+  //"showNotification('top','right',2)"
 }

@@ -85,6 +85,7 @@ export class AuthServiceLocal {
 
   isLoggin(){
     let user = JSON.parse(localStorage.getItem('userDetail'));
+    console.log("auth services", user)
     if (!user) {
       return false;
     } else {
@@ -174,6 +175,7 @@ export class AuthServiceLocal {
   isLoggedIn(){
     return localStorage.getItem("token") ? true : false;
   }
+  
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

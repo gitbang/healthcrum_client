@@ -20,31 +20,35 @@
                   <th> Date</th>
                   <th> Time</th>
                   <th>Fees(Rs)</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 
                 <tr *ngFor= "let appointment of appointments; let i = index">
-                  <td class="">{{i + 1}}</td>
+                  <td class="">{{appointment.appointmentNum}}</td>
                   <td class="">{{appointment.doctor_name}}</td>
                   <td class="">{{appointment.speciality}}</td>
                   <td class="">{{appointment.type}}</td>
                   <td class="">{{appointment.date | date}}</td>
                   <td class="">{{appointment.time}}</td>
                   <td class="">{{appointment.fee  }}</td>
-                  <td class="td-actions">
-                    <button type="button" onclick="demo.showSwal('warning-message-and-confirmation')" rel="tooltip"
-                      class="btn btn-danger" data-original-title="" title="">
-                      <i class="material-icons">close</i>
-                    </button>
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
-                      data-original-title="" title="">
-                      <i class="material-icons">edit</i>
-                    </button>
-                  </td>
+                  <td class="">{{appointment.status}}</td>
 
+                  <!-- Edit and cancel option for patient
+                    <td class="td-actions">
+                      <button type="button" onclick="demo.showSwal('warning-message-and-confirmation')" rel="tooltip"
+                        class="btn btn-danger" data-original-title="" title="">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                    <td class="td-actions">
+                      <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
+                        data-original-title="" title="">
+                        <i class="material-icons">edit</i>
+                      </button>
+                    </td>
+                  -->
                 </tr>
                 
               </tbody>

@@ -44,7 +44,10 @@ export class PatientApponitmentsComponent implements OnInit {
             date : result.data[i].orderDetails[0].dateOfCheckup,
             fee :  result.data[i].amountDetails.amount,
             type : result.data[i].orderDetails[0].type,
-            time : result.data[i].orderDetails[0].timeOfCheckup
+            time : result.data[i].orderDetails[0].timeOfCheckup,
+            appointmentNum : result.data[i].appointmentNum,
+            status : result.data[i].Orderstatus
+
           }
           this.appointments.push(add)
         }
@@ -54,12 +57,16 @@ export class PatientApponitmentsComponent implements OnInit {
   }
   
   appointments = [ 
-    {number : "123456", 
-    doctor_name : "Mr meena", 
-    location : "Delhi", 
-    lab : "ABC laboratory", 
-    date : "12/10/20",
-     fee :"2000"}
+    {
+      number : "123456", 
+      doctor_name : "Mr meena", 
+      location : "Delhi", 
+      lab : "ABC laboratory", 
+      date : "12/10/20",
+      fee :"2000",
+      appointmentNum : "",
+      status : ""
+    }
   ]  
 
   appointmentsdone = [ 
