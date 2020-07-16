@@ -111,6 +111,12 @@ export class PatientService {
             .pipe(retry(2), catchError(this.handleError))
   }
 
+  ordersgetBloodTest(userId : string):Observable<any>{
+    return this.http
+            .get(this.url + '/payment/fetch-bloodTest/user/'+userId, this.options)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

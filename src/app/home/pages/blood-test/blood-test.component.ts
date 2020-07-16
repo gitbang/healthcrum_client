@@ -30,7 +30,7 @@ export class BloodTestComponent implements OnInit {
   myControl = new FormControl();
   isSearched: boolean = false;
   //userId : string = "1234";
-  userId : string = "5e8efa895b324a3e4c97a278";
+  userId : string //= "5e8efa895b324a3e4c97a278";
   city: string;
   cities: any = [];
   filteredCities: Observable<string[]>;
@@ -76,8 +76,8 @@ export class BloodTestComponent implements OnInit {
     // this.getLocation();
     //this.isLogin= this.service.checkLogin();
 
-    this.isLogin = this.authlocalService.isLoggedIn()
-
+    this.isLogin = this.authlocalService.isLoggin()
+    console.log("is login or not ", this.isLogin)
     if(!this.isLogin) {
       this.cartfromClient(); 
     } else {

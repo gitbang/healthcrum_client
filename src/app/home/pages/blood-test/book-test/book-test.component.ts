@@ -11,7 +11,7 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import Swal from 'sweetalert2';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ERecieptComponent} from "../../consultation/e-reciept/e-reciept.component";
-
+import {AuthServiceLocal} from '../../../../services/auth-service.service'
 
 export interface Member {
   name: string;
@@ -25,7 +25,7 @@ declare var Razorpay: any;
 export class BookTestComponent implements OnInit {
 
   //userId : string = "1234";
-  userId : string = "5e8efa895b324a3e4c97a278";
+  userId : string// = "5e8efa895b324a3e4c97a278";
   constructor(
     private router : Router,
     private service : HomeServiceService,
@@ -33,7 +33,8 @@ export class BookTestComponent implements OnInit {
     private fb : FormBuilder,
     private snackbar : MatSnackBar,
     private route: ActivatedRoute,
-    private ngZone : NgZone
+    private ngZone : NgZone,
+    private AuthService : AuthServiceLocal
   ) {
    }
    mycart ;
@@ -101,13 +102,22 @@ export class BookTestComponent implements OnInit {
 
   ngOnInit() {
 
-    this.isLogin= this.service.checkLogin();
+    //this.isLogin= this.service.checkLogin();
+    this.isLogin = this.AuthService.isLoggin();
 
-    this.getrelatives();
+    
 
     this.route.url.subscribe((result)=>{
       if(this.isLogin){
-
+        this.userId = this.AuthService.getUserID
+        this.myId = this.userId
+        let userDetails = this.AuthService.getUserDetails();
+        this.aboutUser._id = userDetails.userId;
+        this.aboutUser.gender = userDetails.gender;
+        this.aboutUser.name = userDetails.name;
+        this.aboutUser.phone = userDetails.phone;
+        this.getrelatives();
+        
         if(result[1].path == "mycart") {
           this.cartfromServer();
           this.fromCart = true;
@@ -117,7 +127,7 @@ export class BookTestComponent implements OnInit {
         }
 
       } else {
-
+        
         if(result[1].path == "mycart") {
           this.getUsercart();
           this.fromCart = true;
@@ -250,12 +260,25 @@ export class BookTestComponent implements OnInit {
     this.memberCtrl.setValue(null);
     
     console.log("event is : ", event)
-    
-    if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
-      this.testfor.value[index].otherlist.push(event.option.viewValue);      
-      this.allID.others.push(this.relativeData.members[index]._id)
+    console.log(index)
+    console.log(this.relativeData)
 
-      this.memberIDsTest.value[index].list.push(this.relativeData.members[index]._id)
+    if(!this.testfor.value[index].otherlist.includes(event.option.viewValue)) {
+
+      this.testfor.value[index].otherlist.push(event.option.viewValue);  
+
+      console.log("after name addes" , this.testfor)
+
+      let relativeIndex;
+      for(let i = 0; i < this.relativeData.members.length; i++) {
+        if(event.option.viewValue == this.relativeData.members[i].name) {
+          relativeIndex = i;
+          break
+        }
+      }
+      this.allID.others.push(this.relativeData.members[relativeIndex]._id)
+      
+      this.memberIDsTest.value[index].list.push(this.relativeData.members[relativeIndex]._id)
     }
 
    
@@ -290,7 +313,7 @@ export class BookTestComponent implements OnInit {
   userCompleteCart;
   show : boolean = false;
 
-  myId : string = "5e8efa895b324a3e4c97a278";
+  myId : string //= "5e8efa895b324a3e4c97a278";
 
   shownresultarrays =[
     { name : "Blood Test", 
@@ -380,7 +403,6 @@ export class BookTestComponent implements OnInit {
       }
     })
   }
-
   
   addMember(){
     if(this.isLogin) {
@@ -403,7 +425,8 @@ export class BookTestComponent implements OnInit {
         }
       })
     } else {
-      alert ("Login irst")
+      Swal.fire("Login irst")
+      this.router.navigateByUrl('/login')
     }
   }
 
@@ -484,22 +507,27 @@ export class BookTestComponent implements OnInit {
   discountPrice : number = 0;
   
   razorKeyGeneration(){
-    var razorOptions  = {
-      amount : this.effectivePrice,
-      currency : "INR"
-    }
-    this.service.RazorPayKeyGeneration(razorOptions).subscribe((response)=>{
-      console.log(response)
-      if(response.success){
-        console.log("proceed for success")
-
-        this.openRazorInterface(response.sub, response.key);
-
-      } else {
-        alert("Something went wront. Try again later")
-        console.log("something went wrong")
+    if(this.isLogin){
+      var razorOptions  = {
+        amount : this.effectivePrice,
+        currency : "INR"
       }
-    })
+      this.service.RazorPayKeyGeneration(razorOptions).subscribe((response)=>{
+        console.log(response)
+        if(response.success){
+          console.log("proceed for success")
+  
+          this.openRazorInterface(response.sub, response.key);
+  
+        } else {
+          alert("Something went wront. Try again later")
+          console.log("something went wrong")
+        }
+      })
+    } else {
+      this.router.navigateByUrl('/login')
+    }
+    
   }
 
   openRazorInterface(response, key){
@@ -581,7 +609,7 @@ export class BookTestComponent implements OnInit {
       ...response,
       ...response1,
       userId : this.aboutUser._id,
-      type : "BloodTest"
+      type : "bloodTest"
     }
     console.log("complete", complete)
 
