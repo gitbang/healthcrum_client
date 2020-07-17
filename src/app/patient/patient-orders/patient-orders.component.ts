@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {AuthServiceLocal} from '../../services/auth-service.service';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+import {PatientService} from '../patient.service'
 
 @Component({
   selector: "app-patient-orders",
@@ -13,15 +14,25 @@ export class PatientOrdersComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private localService : AuthServiceLocal
+    private localService : AuthServiceLocal,
+    private patientService : PatientService
   ) {
     this.initializeOrders();
   }
 
+  userId : string
   ngOnInit() {
+
+    let isLogin = this.localService.isLoggin();
+    if(!isLogin){
+      this.router.navigateByUrl('/login')
+    }
     let role = this.localService.getUserRole();
     if(role == 'doctor') {
       this.router.navigateByUrl('/login')
+    } else {
+      this.userId = this.localService.getUserID;
+      this.getBookedBloodTest()
     }
   }
 
@@ -54,4 +65,45 @@ export class PatientOrdersComponent implements OnInit {
         ? this.pendingOrders[index].product_qty - 1
         : 0;
   }
+
+  getBookedBloodTest(){
+    this.patientService.ordersgetBloodTest(this.userId).subscribe((result)=>{
+      console.log(result);
+      if(result.success){
+        console.log("success")
+        this.addBloodTest(result)
+      } else {
+        console.log("failure")
+      }
+    })
+  }
+
+  addBloodTest(result){
+    console.log(result.data.length)
+    this.bloodTests = []
+    for(let i = 0; i < result.data.length; i++) {
+      console.log("in loop")
+      let add;
+      add = {
+        orderId : result.data[i]._id,
+        totalamount : result.data[i].amountDetails.amount,
+        orderDetails :  result.data[i].orderDetails
+      }
+      this.bloodTests.push(add);
+    }
+    console.log(this.bloodTests)
+  }
+
+  bloodTests = [
+    {
+      orderId : "",
+      orderNum : "1234",
+      testName : "Blood Test",
+      type : "Package Test",
+      members : 4,
+      price : 2000,
+      totalamount : 8000,
+      orderDetails : []
+    }
+  ]
 }

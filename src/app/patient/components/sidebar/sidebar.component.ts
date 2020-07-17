@@ -16,14 +16,13 @@ import {
 import { AuthServiceLocal } from "../../../services/auth-service.service";
 import { SocialUser, AuthService } from "angularx-social-login";
 import { Router } from "@angular/router";
+import { PatientService } from "app/patient/patient.service";
 @Component({
   selector: "app-p-sidebar",
   templateUrl: "./sidebar.component.html",
   styleUrls: ["./sidebar.component.scss"]
 })
 export class SidebarComponent implements OnInit {
-  private name: String;
-  private image: String;
   faBezierCurve = faBezierCurve;
   faHospital = faHospital;
   faFlask = faFlask;
@@ -39,12 +38,15 @@ export class SidebarComponent implements OnInit {
   loggedIn: boolean;
   user: SocialUser;
   role:boolean = false;
-
+  userID:String = "";
+  blinking = false;
   constructor(
     private authService: AuthService,
     private authLocal: AuthServiceLocal,
-    private router: Router
+    private router: Router,
+    private patientService: PatientService,
   ) {
+    this.userID = this.authLocal.getUserID;
     this.loggedIn = this.authLocal.isUserLoggedIn;
     this.user = new SocialUser();
     if (this.loggedIn) {
@@ -65,7 +67,9 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.askWeeklyQuestion();
+  }
 
   getName(): String {
     return this.user.name;
@@ -89,5 +93,30 @@ export class SidebarComponent implements OnInit {
     this.user = null;
     this.loggedIn = false;
     this.router.navigate(["/login"]);
+  }
+
+  askWeeklyQuestion() {
+    this.patientService.getWeeklySettings().subscribe((res: any) => {
+      if (res.success) {
+        res = res.data[0];
+        let d = new Date();
+        if (res.days.filter((el) => el === d.getDay()).length > 0) {
+          this.needToAskQuestion();
+        } 
+      } 
+    });
+  }
+  needToAskQuestion() {
+    this.patientService
+      .needToAskQuestion({ user_id: this.userID })
+      .subscribe((res: any) => {
+        if (res.success) {
+          if (res.data.length == 0 || res.data.weeklyAns == "") {
+            this.blinking = true;
+          } else {
+            this.blinking = false;
+          }
+        }
+      });
   }
 }

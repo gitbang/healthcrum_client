@@ -69,7 +69,22 @@ export class SignupComponent implements OnInit {
 
   fromGoogle : any;
   social : boolean = false
-  ngOnInit() { this.getCorporates(); }
+  ngOnInit() { 
+    this.getCorporates(); 
+    let isLoggin = this.authLocal.isLoggin();
+    if(isLoggin){
+      let role = this.authLocal.getUserRole();
+      this.dynamicRouting(role)
+    }
+  }
+
+  dynamicRouting(role) {
+    if(role == "doctor") {
+      this.router.navigateByUrl('/doctor')
+    } else {
+      this.router.navigateByUrl('/patient');
+    } 
+  }
 
   signupUser(): void {
     var data;

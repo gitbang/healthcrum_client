@@ -75,7 +75,7 @@ export class ERecieptComponent implements OnInit {
 
       console.log("complete data",this.data.complete)
       fd.append("paymentDataPdf", data)
-      fd.append("data", JSON.stringify({...this.data.complete}) );
+      fd.append("data", JSON.stringify({...this.data.complete}));
 
       this.service.savePaymentDetails(fd).subscribe((result)=>{
         console.log("response is", result)

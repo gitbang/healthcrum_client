@@ -126,7 +126,6 @@ export class TemperatureEntryComponent implements OnInit {
     }
   }
   answerSelected(event) {
-    
     if (this.selectedAnswer == "yes") {
       this.questions[this.currentIndex].ans = true;
     } else {
@@ -155,6 +154,7 @@ export class TemperatureEntryComponent implements OnInit {
     this.getTemprature();
     this.questionEnd = true;
     this.askQuestion = false;
+    window.location.reload();
   }
 
   saveTemperature() {
