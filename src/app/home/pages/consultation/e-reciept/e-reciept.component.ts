@@ -21,6 +21,9 @@ export class ERecieptComponent implements OnInit {
     ) {
       this.dialogRef.disableClose = true
       console.log(data)
+      this.fromCart = data.fromCart;
+      this.userId = data.user._id;
+      console.log("from cart ", this.fromCart)
   }
   
   @ViewChild('content', {static : true}) content : ElementRef
@@ -30,6 +33,9 @@ export class ERecieptComponent implements OnInit {
       this.generatePDF();
     },1000);
   }
+
+  fromCart  : boolean;
+  userId : string;
 
   eData = {
     name : this.data.user.name,
@@ -54,6 +60,7 @@ export class ERecieptComponent implements OnInit {
   pdf :  jspdf
 
   generatePDF(){
+
     let element = this.content.nativeElement
     console.log("check-out")
     html2canvas(element, {scrollY : -window.scrollY}).then(canvas => {
@@ -85,6 +92,19 @@ export class ERecieptComponent implements OnInit {
           alert("Something went wrong")
         }
       })
+      if(this.fromCart) {
+        if(this.eData.type == 'bloodTest') {
+          this.service.bloodTestClearCart(this.userId, {type : "bloodTest"}).subscribe((result)=>{
+            console.log("clear cart result ", result)
+            if(result.success){
+              console.log("cart is cleared")
+            }
+          })
+        }
+        this.service.addCompleteDetailsToCart([])
+          this.service.changeMessage([])
+          this.service.deleteCartFromLocalStorage()
+      }
     })
   }
 

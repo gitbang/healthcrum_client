@@ -574,18 +574,35 @@ export class BookTestComponent implements OnInit {
         save : this.moneysaved,
         date : new Date,
         complete : complete,
-        serviceProvider : "HealthCrum"
+        serviceProvider : "HealthCrum",
+        fromCart : this.fromCart
       }
     })
     
     eRecipt.afterClosed().subscribe((result)=>{
       console.log(result)
+      if(result.success){
+        Swal.fire(
+          'Great!',
+          'You test is booked',
+          'success'
+        )
+      }
+      // if the test booking is from cart the send request to clear all the cart.
+      // if(this.fromCart){
+      //   //this.aboutUser._id
+      // } else {
+
+      // }
+      this.router.navigateByUrl('/blood-test')
     })
   }
   
   savePaymentData(response, response1){
 
     console.log("members id :", this.memberIDsTest.value)
+    console.log(this.shownresultarrays);
+    console.log(this.testfor)
 
     response.amount = response.amount / 100;
     let complete = {};
@@ -600,10 +617,13 @@ export class BookTestComponent implements OnInit {
         forMembers : this.testfor.value[i].others,
         //memberIds : this.allID.others,
         memberIds : this.memberIDsTest.value[i].list,
-        dateOfCheckup : ""
+        dateOfCheckup : "",
+        memberName : this.testfor.value[i].otherlist,
+        testName : this.shownresultarrays[i].name,
       }
       orderDetail.push(add)
     }
+    console.log("final order details ", orderDetail)
     complete = {
       orderDetails : orderDetail,
       ...response,
