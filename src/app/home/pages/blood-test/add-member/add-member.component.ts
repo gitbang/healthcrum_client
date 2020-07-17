@@ -13,6 +13,7 @@ export class AddMemberComponent implements OnInit {
 
   userId : string
   members : string[];
+  isLinear;
 
   constructor(
     @Inject (MAT_DIALOG_DATA) data : any,

@@ -171,7 +171,7 @@
       </div>
       <div formArrayName="medication">
 
-        <div *ngFor="let element of formSecond2.get('medication').controls; let i = index">
+        <div *ngFor="let element of formSecond2.get('medication'); let i = index">
           <div class="row mt-2" [formGroupName]="i">
             <div class="col-md-2">
               <mat-form-field class="full-width">
@@ -226,7 +226,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-md-1" *ngIf="formSecond2.get('medication').length > 1" style="align-self: center;">
+            <div class="col-md-1" *ngIf="formSecond2.get('medication') > 1" style="align-self: center;">
               <button class="btn btn-white btn-round btn-just-icon mat-raised-button btn-sm" title="Delete"
                 (click)="removeMedicineClick(i)">
                 <mat-icon class="material-icons text-danger">delete</mat-icon>

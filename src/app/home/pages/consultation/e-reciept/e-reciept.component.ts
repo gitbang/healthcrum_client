@@ -53,7 +53,7 @@ export class ERecieptComponent implements OnInit {
     // gstPercent : 18,
     // gstAmount : 180,
     total : this.data.amount,
-    //paymentMode : 'card',
+    paymentMode : 'card',
     status : 'confirmed'
   }
 

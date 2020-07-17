@@ -126,7 +126,6 @@ export class TemperatureEntryComponent implements OnInit {
     }
   }
   answerSelected(event) {
-    
     if (this.selectedAnswer == "yes") {
       this.questions[this.currentIndex].ans = true;
     } else {
@@ -155,6 +154,7 @@ export class TemperatureEntryComponent implements OnInit {
     this.getTemprature();
     this.questionEnd = true;
     this.askQuestion = false;
+    window.location.reload();
   }
 
   saveTemperature() {
@@ -272,7 +272,7 @@ export class TemperatureEntryComponent implements OnInit {
   dateChange(event) {
     let data = {
       user_id: this.userID,
-      filter_date: new Date(event.value).toLocaleDateString(),
+      filter_date: {begin: new Date(event.value.begin).toLocaleDateString(), end: new Date(event.value.end).toLocaleDateString()},
     };
     this.patientService.getEmpTemperature(data).subscribe((res: any) => {
       console.log(res);

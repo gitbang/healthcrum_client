@@ -37,7 +37,6 @@ export class RegisterationFormComponent implements OnInit {
     private service: CompanyService,
     @Inject(MAT_DIALOG_DATA) public info: any
   ) {
-    console.log(info);
     if (info.type == "update") {
       this.fillform(info.info);
       this.update = true;
@@ -74,7 +73,12 @@ export class RegisterationFormComponent implements OnInit {
     branch: ["", Validators.required],
     dept: ["", Validators.required],
   });
+
+  secondFormGroup = this._formBuilder.group({});
   matcher = new MyErrorStateMatcher();
+  isLinear;
+  minDate = new Date('1/01/1990');
+  maxDate = new Date();
 
   closeDialog() {
     Swal.fire({

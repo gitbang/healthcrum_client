@@ -29,10 +29,10 @@ export class DashboardComponent implements OnInit {
   }
 
   covid19Data = {
-    total : {v: 100 , p: 100},
-    danger: {v: 20 , p: 20},
+    total : {v: 0 , p: 0},
+    danger: {v: 0 , p: 0},
     no_entry: {v: 0 , p: 0},
-    safe: {v: 70 , p: 70}
+    safe: {v: 0 , p: 0}
   };
   covidAns = {};
   currentData: ZoneValue = {

@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 export class ViewDetailsComponent implements OnInit {
 
   constructor(
-   
-    
     private service  : HomeServiceService,
     private router : Router
   ) { }
@@ -50,6 +48,7 @@ export class ViewDetailsComponent implements OnInit {
       healcrumprice : 2500,
       offerprice : 2000,
       type : 'singleTest',
+      fasting: "no",
       recommendedFor : {
         male : true,
         female : true,

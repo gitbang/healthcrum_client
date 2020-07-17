@@ -47,13 +47,15 @@ export class SidebarComponent implements OnInit {
     this.user = new SocialUser();
     if (this.loggedIn) {
       try{
-        let userData = this.authLocal.getUserData();
-        if(userData.role == "employee"){
+        this.user.name = this.authLocal.getUserData.name;
+      // this.user.photoUrl = this.authLocal.getUserData.image;
+      this.user.id = this.authLocal.getUserData.id;
+      // this.user.id = this.authLocal.getUserData.healthcrumId;
+      let role = this.authLocal.getUserData.role;
+        if(role == "employee"){
           // this.router.navigate(["/patient"]);
         }
-        this.user.name = userData.name;
         this.user.photoUrl = "/assets/img/avatar.png";
-        this.user.id = userData.healthcrumId;
       }catch(err){
         this.loggedIn = false;
       }

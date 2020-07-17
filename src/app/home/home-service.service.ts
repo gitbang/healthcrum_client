@@ -10,8 +10,8 @@ import { retry, catchError } from 'rxjs/operators';
 export class HomeServiceService {
 
 
-  url : string = 'http://localhost:3000';
-  // url: String = "https://api.sftservices.com/";
+  // url : string = 'http://localhost:3000';
+  url: String = "https://api.sftservices.com";
  
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -83,18 +83,15 @@ export class HomeServiceService {
 
   bookSingleTest(testdata : string[]) : void {
     this.singleTest.next(testdata);
-    console.log("Detail selected");
   }
 
   bloodtestAddMember(userId : string, data : object) : Observable<any>{
-    console.log("in service , add member : ", data)
     return this.http
                 .post(this.url + '/savemember/' + userId, data, this.option)
                 .pipe(retry(2), catchError(this.handleError))
   }
 
   bloodTestFetchMember(userId : string) : Observable<any>{
-    console.log(userId)
     return this.http
                 .get(this.url + '/getfamilymembers/' + userId, this.option)
                 .pipe(retry(2), catchError(this.handleError))
@@ -115,7 +112,7 @@ export class HomeServiceService {
 
   bloodTestPromoCode(data) : Observable <any> {
     return this.http  
-              .post(this.url, + "/")
+              .post(this.url+ "/",data)
               .pipe(retry(2), catchError(this.handleError))
   }
 

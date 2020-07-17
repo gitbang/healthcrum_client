@@ -26,7 +26,7 @@
                     <th>Lunch to take</th>
                     <th>Dose Along</th>
                     <th>Medecine Duration</th>
-                    <th *ngIf="i > 0">Remove</th>
+                    <th>Remove</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let medecine of data.medecines;index as i">
@@ -124,7 +124,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-6">
-            <mat-form-field appearance="outline" [class]="full-width">
+            <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Recommended Diets</mat-label>
                 <mat-chip-list #chipList aria-label="Recommend selection">
                     <mat-chip *ngFor="let recommend of data.recommendations" [selectable]="true" [removable]="true"

@@ -26,6 +26,7 @@ export class NewReqFormComponent implements OnInit {
     reqDate : [''],
     city : ['']
   })
+  isLinear;
   search(){
     console.log(this.filter);
     this.service.trackingFilterSearch(this.filter.value).subscribe((result)=>{

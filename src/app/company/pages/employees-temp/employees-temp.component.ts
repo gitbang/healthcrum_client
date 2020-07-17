@@ -271,7 +271,7 @@ export class EmployeeTemperatureDetailDailog implements OnInit {
   dateChange(event){
     let data = {
       user_id: this.data.empId,
-      filter_date: new Date(event.value).toLocaleDateString(),
+      filter_date: {begin: new Date(event.value.begin).toLocaleDateString(), end: new Date(event.value.end).toLocaleDateString()}
     };
     this.corporateService.getRangeTemperatures(data).subscribe((res: any) => {
       this.temperatureData = [];
