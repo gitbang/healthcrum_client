@@ -41,7 +41,10 @@ export class MedicinesComponent implements OnInit {
   // items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   // i: number = 0;
   // isNext: boolean = false;
-
+  searchBarMain;
+  formatLabel;
+  discount;
+  isLinear;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -314,5 +317,15 @@ export class MedicinesComponent implements OnInit {
 
   
 
-  brands : string[] = ["Brand1", "Brand2"]
+  brands : string[] = ["Brand1", "Brand2"];
+
+  prescribeByHealthCrumDoctor(){
+    alert("TO be implemented soon");
+  }
+  onlineConsultation(){
+    alert("TO be implemented soon");
+  }
+  goNext(){
+    alert("TO be implemented soon");
+  }
 }

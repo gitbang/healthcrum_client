@@ -188,7 +188,7 @@ export class EmployeesTempComponent implements OnInit {
   branchSet() {
     this.dateEnabled = true;
   }
-  dateChange() {
+  dateChange(event) {
     if (!this.dateEnabled) {
       alert("Please select corporate and branch");
       return;
@@ -196,7 +196,7 @@ export class EmployeesTempComponent implements OnInit {
     let data = {
       corporate_id: this.companySelected,
       branch_id: this.branchSelected,
-      filter_date: new Date(this.date.value).toLocaleDateString(),
+      filter_date: {begin: new Date(event.value.begin).toLocaleDateString(), end: new Date(event.value.end).toLocaleDateString()},
     };
     this.adminService.getTemperatureByDate(data).subscribe((res: any) => {
       this.temperatureData = [];

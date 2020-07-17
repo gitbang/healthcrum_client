@@ -1,9 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { trigger, transition, style, animate, state} from '@angular/animations';
-import { display } from 'html2canvas/dist/types/css/property-descriptors/display';
-import { zIndex } from 'html2canvas/dist/types/css/property-descriptors/z-index';
 import {MatDialog} from "@angular/material"
-import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
 import {MatPaginator, MatTableDataSource} from '@angular/material'
 import {AuthServiceLocal} from '../../../services/auth-service.service'
 import {Router} from '@angular/router'
@@ -54,11 +50,15 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static : true}) paginator : MatPaginator
 
-  list = new MatTableDataSource(list1)
-  col : string[] = ['date', 'doctor',  'diagnosis', 'recommendation']
-  dashcol : string[]= ['date', 'id', 'testName', 'result']
-  dashboardList
-  dashlist
+  list = new MatTableDataSource(list1);
+  col : string[] = ['date', 'doctor',  'diagnosis', 'recommendation'];
+  dashcol : string[]= ['date', 'id', 'testName', 'result'];
+  dashboardList;
+  dashlist;
+  priscription;
+  
+  showProfile(){}
+
   public showPriscribtion = false;
 
   constructor( 

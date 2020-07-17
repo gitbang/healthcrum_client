@@ -31,6 +31,7 @@ export class EPrescriptionComponent implements OnInit {
   hraReasonAnswer : any
   expansionCard : any;
   date : string;
+  controls;
   sideExpansion = {
     disease : 'All about present disease',
     medicine : "all about present medicine",

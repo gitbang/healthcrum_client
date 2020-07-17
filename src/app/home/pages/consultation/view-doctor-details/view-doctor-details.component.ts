@@ -16,6 +16,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
     private router : Router,
     private matDialog : MatDialog
   ) { }
+  i=0;
 
   ngOnInit() {
 

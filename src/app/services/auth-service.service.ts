@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { AuthService, SocialUser } from "angularx-social-login";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
@@ -17,8 +16,8 @@ export class AuthServiceLocal {
   });
   option = { headers: this.headers };
 
-  baseurl: string = 'http://localhost:3000';
-  // url: String = "https://api.sftservices.com/";
+  // baseurl: string = 'http://localhost:3000';
+  baseurl: String = "https://api.sftservices.com";
 
   get isUserLoggedIn(): boolean {
     let user = JSON.parse(localStorage.getItem("userDetail"));
@@ -44,12 +43,12 @@ export class AuthServiceLocal {
   }
   signUpUser(data) : Observable<any>{
     return this.http
-            .post(this.baseurl + "/api//user/sign-up", data, this.option)
+            .post(this.baseurl + "/api/user/sign-up", data, this.option)
             .pipe(retry(2), catchError(this.handleError))
   }
 
   loginUser(data) : Observable<any> {
-    return this.http.post(this.baseurl + "/api//user/login", data, this.option)
+    return this.http.post(this.baseurl + "/api/user/login", data, this.option)
               .pipe(retry(2), catchError(this.handleError))
   }
 
@@ -95,7 +94,6 @@ export class AuthServiceLocal {
   getUserRole(){
     try{
       let data = JSON.parse(localStorage.getItem('userDetail'));
-      console.log("local storage data is : ", data)
       return data.role
     } catch(error){
       return null

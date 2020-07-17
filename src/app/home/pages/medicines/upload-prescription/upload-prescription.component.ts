@@ -9,7 +9,8 @@ import {FormBuilder, Form, Validators} from "@angular/forms"
 })
 export class UploadPrescriptionComponent implements OnInit {
 
-  isLogin : boolean = false
+  isLogin : boolean = false;
+  isLinear:boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data : any,

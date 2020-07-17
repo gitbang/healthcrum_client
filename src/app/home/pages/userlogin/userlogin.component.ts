@@ -225,16 +225,15 @@ export class UserloginComponent implements OnInit {
           swal.fire("Enter valid phone number")
           return
         }
-
-        console.log("send otp")
         this.generateotp({phone : this.forgotMobile})
       } else {
-        if(this.forgotEmail.length > 1) {
+        if(this.forgotEmail.length < 1) {
           swal.fire("Enter valid email")
           return
         }
         // send link to the otp
-        let email = this.forgotEmail
+        let email = this.forgotEmail;
+        this.generateotp({email : this.forgotEmail});
       }
 
     } else {        

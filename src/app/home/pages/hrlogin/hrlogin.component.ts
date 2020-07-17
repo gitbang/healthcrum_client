@@ -48,4 +48,5 @@ export class HrloginComponent implements OnInit {
         }
     })
   }
+  sendResetLink(){}
 }

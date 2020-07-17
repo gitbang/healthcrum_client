@@ -7,8 +7,8 @@ import { Observable, of } from "rxjs";
 })
 export class PatientService {
   constructor(private http: HttpClient) {}
-  url: String = "http://localhost:3000";
-  // url: String = "https://api.sftservices.com/";
+  // url: String = "http://localhost:3000";
+  url: String = "https://api.sftservices.com";
 
   headers = new HttpHeaders({
     "Content-Type": "application/json",

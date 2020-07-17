@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit {
   prescription = faFileMedicalAlt;
   loggedIn: boolean;
   user: SocialUser;
+  role:boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -47,9 +48,18 @@ export class SidebarComponent implements OnInit {
     this.loggedIn = this.authLocal.isUserLoggedIn;
     this.user = new SocialUser();
     if (this.loggedIn) {
-      this.user.name = this.authLocal.getUserData.name;
+      try{
+         this.user.name = this.authLocal.getUserData.name;
       this.user.photoUrl = this.authLocal.getUserData.image;
       this.user.id = this.authLocal.getUserData.id;
+      // this.user.id = this.authLocal.getUserData.healthcrumId;
+      let role = this.authLocal.getUserData.role;
+        if(role === "employee"){
+          this.role = true;
+        }
+      }catch(err){
+        this.loggedIn = false;
+      }
     } else {
       this.loggedIn = false;
     }
