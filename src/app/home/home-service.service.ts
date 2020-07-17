@@ -49,12 +49,9 @@ export class HomeServiceService {
 
   addCompleteDetailsToCart(data ) {
     this.cartSource.next(data)
-    //console.log("service reached ", this.cartSource.value)
-
-    localStorage.setItem("test", JSON.stringify(data) )
-    //let fetchtest =  JSON.parse(localStorage.getItem('test'));
-    //console.log("local",fetchtest)
+    localStorage.setItem("test", JSON.stringify(data))
   }
+  
   deleteCartFromLocalStorage(){
     localStorage.removeItem('test')
   }

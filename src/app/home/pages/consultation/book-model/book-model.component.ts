@@ -28,7 +28,7 @@ export class BookModelComponent implements OnInit {
     console.log(this.data.doctor.consultationTimingSlots);
     console.log(this.data.type)
     this.slots = this.data.doctor.consultationTimingSlots[this.data.type]
-    console.log("slots are", this.slots)
+    //console.log("slots are", this.slots)
    }
 
    isLinear = false;

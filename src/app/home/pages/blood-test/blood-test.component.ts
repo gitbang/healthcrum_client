@@ -111,13 +111,15 @@ export class BloodTestComponent implements OnInit {
     console.log("from client")
     this.service.currentCompleteCart.subscribe((result)=>{
       console.log("my cart in blood test",result);
-      this.myCartComplete = result;
-      this.mycart = []
-      result.forEach(test=>{
-        this.mycart.push(test._id)
-      })
-
-      this.addToSearchCart();
+      
+      if(result != null || result != undefined) {
+        this.myCartComplete = result;
+        this.mycart = []
+        result.forEach(test=>{
+          this.mycart.push(test._id)
+        })
+        this.addToSearchCart();
+      } 
     })
   }
 
