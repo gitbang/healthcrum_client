@@ -86,6 +86,7 @@ export class PatientOrdersComponent implements OnInit {
       let add;
       add = {
         orderId : result.data[i]._id,
+        orderNumber : result.data[i].orderNumber,
         totalamount : result.data[i].amountDetails.amount,
         orderDetails :  result.data[i].orderDetails
       }

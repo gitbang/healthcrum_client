@@ -21,7 +21,7 @@ export class HomeServiceService {
 
   constructor( private http : HttpClient) {
 
-    console.log("inside home service ");
+    console.log("inside home service ");  
     this.addCompleteDetailsToCart(JSON.parse(localStorage.getItem('test')))
   }
 
@@ -52,8 +52,11 @@ export class HomeServiceService {
     //console.log("service reached ", this.cartSource.value)
 
     localStorage.setItem("test", JSON.stringify(data) )
-    let fetchtest =  JSON.parse(localStorage.getItem('test'));
+    //let fetchtest =  JSON.parse(localStorage.getItem('test'));
     //console.log("local",fetchtest)
+  }
+  deleteCartFromLocalStorage(){
+    localStorage.removeItem('test')
   }
   //--cart from server--//
   bloodTestGetCartServer(userId : string) : Observable<any>{
@@ -114,6 +117,12 @@ export class HomeServiceService {
     return this.http  
               .post(this.url+ "/",data)
               .pipe(retry(2), catchError(this.handleError))
+  }
+
+  bloodTestClearCart(userId : string, data):Observable<any>{
+    return this.http
+            .post(this.url + "/cart/delete/allCart/" + userId, data, this.option)
+            .pipe(retry(2), catchError(this.handleError))
   }
 
   headerMulForm= new HttpHeaders({

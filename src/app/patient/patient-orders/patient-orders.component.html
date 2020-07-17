@@ -11,55 +11,46 @@
             <h4 class="card-title">Blood Test</h4>
           </div>
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-shopping ">
+            <div class="">
+              <table class="table table-striped ">
                 <thead>
                   <tr>
-                    <th class="th-description">Order Number</th>
-                    <th class="th-description">Test Name</th>
-                    <th class="th-description">Type</th>
-                    <th class="th-description">For me</th>
-                    <th class="th-description">Members</th>
-                    <!--<th class="text-right">Amount</th>-->
-                    <th class="th-description">Amount</th>
+                    <th class="">Order Number</th>
+                    <th class="">Test Name</th>
+                    <th class="">Type</th>
+                    <th class="">Test for</th>
+                    
+                    <th class="">Amount</th>
                   </tr>
                 </thead>
                 <tbody >
                   <tr *ngFor="let test of bloodTests;index as i;">
-                    <td class="table-data text-center"> {{i + 1}}
+                    <td class=" text-center"> {{test.orderNumber}}
+                    </td>
+                    <td class="">
+                      
+                        <div *ngFor="let order of test.orderDetails">
+                          {{order.testName }}
+                        </div>
                       
                     </td>
-                    <td class="table-data">
-                        
+                    <td class=""> 
                       <ul>
                         <li *ngFor="let order of test.orderDetails">
-                         <!-- {{order.name}}-->
-                         Blood Test
+                          {{order.type  }}
                         </li>
                       </ul>
                     </td>
-                    <td class="table-data"> 
-                      <ul>
-                        <li *ngFor="let order of test.orderDetails">
-                          {{order.type | titlecase }}
-                        </li>
-                      </ul>
+                    <td class="">
+                      <div *ngFor="let order of test.orderDetails">
+                        <span *ngIf = "order.forUser">Me, </span>
+                        <span *ngFor="let name of order.memberName">
+                          {{name | titlecase}},
+                        </span>
+                      </div>
                     </td>
-                    <td class="table-data">
-                      <ul>
-                        <li *ngFor="let order of test.orderDetails">
-                          {{order.forUser }}
-                        </li>
-                      </ul>
-                    </td>
-                    <td class="text-center">
-                      <ul>
-                        <li *ngFor="let order of test.orderDetails">
-                          {{order.memberIds.length}}
-                        </li>
-                      </ul>
-                    </td>
-                    <td class="table-data"> Rs. {{test.totalamount}}</td>
+
+                    <td class=""> Rs. {{test.totalamount}}</td>
                     <hr>
                   </tr>
                 </tbody>
@@ -86,8 +77,8 @@
                   <tr>
                     <th class="text-center"></th>
                     <th>Product</th>
-                    <th class="th-description">Type</th>
-                    <th class="th-description">Size</th>
+                    <th class="">Type</th>
+                    <th class="">Size</th>
                     <th class="text-right">Price</th>
                     <th class="text-right">Qty</th>
                     <th class="text-right">Amount</th>

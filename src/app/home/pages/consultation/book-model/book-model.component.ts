@@ -80,6 +80,7 @@ export class BookModelComponent implements OnInit {
         userId : "asdfghjk",
         phone : this.firstFormGroup.get('phoneNo').value.toString()
       }
+      //this.dialog.close({success : true, data : this.data , userdata: this.firstFormGroup.value})
       console.log(this.toCheck)
       this.generateotp(stepper);
     } else {
@@ -140,6 +141,14 @@ export class BookModelComponent implements OnInit {
         }
       })
     }
+  }
+
+  resend(stepper){
+    this.service.consultationResendOTP({phone :this.firstFormGroup.get('phoneNo').value.toString()})
+        .subscribe((result)=>{
+          console.log(result);
+          
+        })
   }
 
   closeDialog() {

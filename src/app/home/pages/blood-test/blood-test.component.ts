@@ -77,6 +77,7 @@ export class BloodTestComponent implements OnInit {
     //this.isLogin= this.service.checkLogin();
 
     this.isLogin = this.authlocalService.isLoggin()
+    
     console.log("is login or not ", this.isLogin)
     if(!this.isLogin) {
       this.cartfromClient(); 
