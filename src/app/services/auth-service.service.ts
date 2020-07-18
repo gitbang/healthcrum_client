@@ -163,7 +163,7 @@ export class AuthServiceLocal {
     try{
         localStorage.setItem("token",token);
     }catch(err){
-
+      alert("something went wrong")
     }
   }
 
@@ -173,6 +173,23 @@ export class AuthServiceLocal {
 
   isLoggedIn(){
     return localStorage.getItem("token") ? true : false;
+  }
+
+  redirectSaveUrl(url : string){
+    localStorage.setItem('url', url)
+  }
+
+  get redirectUrl(){
+    try{
+      const url = localStorage.getItem('url')
+      return url ? url : false
+    } catch(e){
+      return false
+    }
+  }
+
+  deleteRedirectUrl(){
+    localStorage.removeItem('url');
   }
   
   handleError(error) {

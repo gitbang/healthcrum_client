@@ -209,10 +209,16 @@ export class UserloginComponent implements OnInit {
   }
 
   dynamicRouting(role) {
-    if (role == "doctor") {
-      this.router.navigateByUrl("/doctor");
+    const url = this.authLocal.redirectUrl
+    if(url != false && url != null ) {
+      this.router.navigateByUrl(url)
+      this.authLocal.deleteRedirectUrl()
     } else {
-      this.router.navigateByUrl("/patient");
+      if (role == "doctor") {
+        this.router.navigateByUrl("/doctor");
+      } else {
+        this.router.navigateByUrl("/patient");
+      }
     }
   }
 

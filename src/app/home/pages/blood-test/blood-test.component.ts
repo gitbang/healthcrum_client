@@ -605,6 +605,7 @@ export class BloodTestComponent implements OnInit {
     this.singleTestComplete = []
     this.singleTestComplete.push(this.shownresultarray[index]);
     this.service.bookSingleTest(this.singleTestComplete);
+    // here add code to store data to local storage
     this.router.navigateByUrl('blood-test/' + this.shownresultarray[index]._id)
   }
 

@@ -50,10 +50,24 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* .flipper .back {
 position: relative !important;
 } */
+.blood-test-checkout .mat-expansion-panel{
+  padding: 0 !important;
+}
 
 .blood-test-checkout .mat-expansion-panel-header{
   color: white;
   height: 20px !important;
+  padding: 15px !important;
+  margin: 0px !important;
+}
+.blood-test-checkout .mat-expansion-panel-body {
+  padding: 10px !important;
+}
+.blood-test-checkout .mat-expansion-panel-header,
+.blood-test-checkout .mat-expansion-panel-header.mat-expanded,
+.blood-test-checkout .mat-expansion-panel-header.mat-expanded:hover,
+.blood-test-checkout .mat-expansion-panel-header.mat-expanded:focus {
+  background: linear-gradient(to right, rgb(82, 184, 113), #107d6e) !important;
 }
 .blood-test-checkout .mat-expansion-indicator::after{
   color: white;

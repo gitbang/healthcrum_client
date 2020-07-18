@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, NgZone } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute, RouterStateSnapshot} from '@angular/router';
 import {HomeServiceService} from '../../../home-service.service'
 import {MatDialog, MAT_DIALOG_DATA, MatChipInputEvent, MAT_HAMMER_OPTIONS} from '@angular/material'
 import { AddMemberComponent } from '../add-member/add-member.component';
@@ -34,7 +34,8 @@ export class BookTestComponent implements OnInit {
     private snackbar : MatSnackBar,
     private route: ActivatedRoute,
     private ngZone : NgZone,
-    private AuthService : AuthServiceLocal
+    private AuthService : AuthServiceLocal,
+   //private state: RouterStateSnapshot
   ) {
    }
    mycart ;
@@ -52,7 +53,7 @@ export class BookTestComponent implements OnInit {
       console.log("complete ", result);
       this.userCompleteCart = result;
       this.shownresultarrays = result
-  
+      // add code here to fetch local data
       if(this.userCompleteCart.length > 0) {
         this.balanceSide = true;
       } else {
@@ -425,9 +426,15 @@ export class BookTestComponent implements OnInit {
         }
       })
     } else {
-      Swal.fire("Login irst")
+      Swal.fire("Login first")
       this.router.navigateByUrl('/login')
+  
+      this.saveUrlLocally()
     }
+  }
+
+  saveUrlLocally(){
+    this.AuthService.redirectSaveUrl(this.router.routerState.snapshot.url)
   }
 
   testForMe(value, index) {

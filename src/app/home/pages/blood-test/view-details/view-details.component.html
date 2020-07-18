@@ -13,7 +13,7 @@
           </div>
           <div class="col-sm-4 col-md-2 offers">
             <h3 class="offer-percent">
-              {{(shownresult[0].offerprice/shownresult[0].marketprice) * 100}}% Off
+              {{(shownresult[0].offerprice/shownresult[0].marketprice) * 100 | number : '1.0-0'}}% Off
             </h3>
           </div>
           <div class="col-sm-6 col-md-2" >
@@ -182,8 +182,8 @@
 
       <div class="row mt-4" class="blood-test-checkout">
         <div class="col-12 mt-4" style="padding:0"  >
-          <mat-expansion-panel class="green-backgrouns">
-            <mat-expansion-panel-header style= "height : 20px">
+          <mat-expansion-panel >
+            <mat-expansion-panel-header style= "height : 20px" class="green-backgrouns">
               <mat-panel-title style="color : white" class="bottom-expansion-title">
                 About Test
               </mat-panel-title>
@@ -191,12 +191,13 @@
                
               </mat-panel-description>
             </mat-expansion-panel-header>
+
             {{shownresult[0].when}}
           </mat-expansion-panel>
         </div>
         <div class="col-12 mt-2" style="padding:0"  >
-          <mat-expansion-panel class="green-backgrouns">
-            <mat-expansion-panel-header style= "height : 20px">
+          <mat-expansion-panel >
+            <mat-expansion-panel-header style= "height : 20px"  class="green-backgrouns">
               <mat-panel-title style="color : white" class="bottom-expansion-title">
                 Why this test is done
               </mat-panel-title>
@@ -209,8 +210,8 @@
         </div>
         
         <div class="col-12 mt-2" style="padding:0"  >
-          <mat-expansion-panel class="green-backgrouns">
-            <mat-expansion-panel-header style= "height : 20px">
+          <mat-expansion-panel >
+            <mat-expansion-panel-header style= "height : 20px" class="green-backgrouns">
               <mat-panel-title style="color : white" class="bottom-expansion-title">
                 Finding of the result
               </mat-panel-title>
@@ -224,8 +225,8 @@
         
 
         <div class="col-12 mt-2" style="padding:0"  >
-          <mat-expansion-panel class="green-backgrouns">
-            <mat-expansion-panel-header style= "height : 20px">
+          <mat-expansion-panel >
+            <mat-expansion-panel-header style= "height : 20px" class="green-backgrouns">
               <mat-panel-title style="color : white" class="bottom-expansion-title">
                 Related Disease
               </mat-panel-title>
