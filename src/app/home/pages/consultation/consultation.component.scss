@@ -2,6 +2,18 @@ $bg : #eff4f7;
 $yellow :#E87528;
 $blue : #00A0A8;
 
+@mixin font-family {
+    font-family: serif;
+}
+
+@mixin sans-serif-font {
+    font-family: sans-serif;
+}
+
+.common-font {
+    @include font-family()
+}
+
 .city-box {
     display: flex;
     background: #1ba89b;
@@ -42,7 +54,7 @@ $blue : #00A0A8;
 
 .img-circle{
     border-radius: 50%;   
-    height: 200px;
+    height: 180px;
     width: 180px;
     margin-top: 5px;
 }
@@ -74,9 +86,6 @@ $blue : #00A0A8;
     margin-top: -15px;
     margin-left: -15px;
 }
-.doctor-image{
-   // margin-top: -10px;
-}
 
 @media screen and (min-width : 1200px) {
     .center{
@@ -105,9 +114,9 @@ $blue : #00A0A8;
 .doctor-name > h4 {
     color : $blue;
     text-align: center;
-    font-weight: 600;
+    //font-weight: 600;
     font-size: 20px;
-    font-family: cursive;
+   @include font-family()
 }
 .consultation-div{
     margin-top: -20px;
@@ -125,10 +134,7 @@ $blue : #00A0A8;
     }
 }
 
-.image-data{
-    color: black;
-    font-size: smaller;
-}
+
 .emergency-image {
     width: 80%;
 }
@@ -141,6 +147,7 @@ $blue : #00A0A8;
     width: 50px
 }
 .text-center{
+    //font-family: sans-serif;
     text-align: center;
 }
 
@@ -177,23 +184,34 @@ table{
 
 .consultation-port-new{
    background-color: $yellow;
-   margin: 5px;
-   border-radius: 10px;
-   padding: 5px;
-    .consultation-label-top{
-     //   color: white;
-        margin-left: 10px;
-    }
+   margin-bottom: 5px;
+   border-radius: 5px;
+  // padding: 5px
     label{
         color: white;
     }
 }
 .consultation-border{
     border: 1px solid black;
+    border-radius: 3px;
+    color: black;
+    .image-data{
+         color: inherit;
+         cursor: inherit;
+         //@include font-family();
+         @include sans-serif-font() ;
+         font-size: small;
+    }
+    &:hover {
+        color: white;
+        background: linear-gradient(to right, #17c0d3, #027e8e);
+        border: transparent;
+    }
 }
 .emergency-section{
     border: 1px solid black;
-    margin-top: 10px;
+    border-radius: 3px;
+    margin-top: 4px;
 }
 .normal-fee-heading{
     color: $yellow;
@@ -204,6 +222,11 @@ table{
     text-align: center;
     color: $yellow;
     font-weight: 600;
+    
+}
+.bookconsultation-div{
+    padding: 0;
+    padding-right: 3px;
     
 }
 
@@ -226,13 +249,14 @@ table{
 
 .bottom-view-details{
     color: #0C9DAE;
-    font-size: x-large;
-    font-family: serif;
+    font-size: large;
+ 
+   @include font-family();
     cursor: pointer;
 }
 .bottom-view-feedback{
     color: black;
-    font-family: cursive;
+    @include font-family();
     margin-top: 8px;
 }
 
@@ -245,9 +269,7 @@ table{
 }
 .cursor-pointer{
     cursor: pointer;
-    :hover{
-        background-color: $bg;
-    }
+    
 }
 
 .logo{

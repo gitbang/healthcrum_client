@@ -297,6 +297,7 @@ export class ConsultationComponent implements OnInit {
   
   filterDotor(){
     console.log("filters are : ", this.filters)
+    this.filters.location.city = this.filters.location.city.toLowerCase()
     this.service.consultationFilter(this.filters).subscribe((result)=>{
       console.log("in filterdoctor function ", result);
       if(result.success){

@@ -16,8 +16,8 @@ export class AuthServiceLocal {
   });
   option = { headers: this.headers };
 
-  // baseurl: string = 'http://localhost:3000';
-  baseurl: String = "https://api.sftservices.com";
+   baseurl: string = 'http://localhost:3000';
+  //baseurl: String = "https://api.sftservices.com";
 
   get isUserLoggedIn(): boolean {
     let user = JSON.parse(localStorage.getItem("userDetail"));

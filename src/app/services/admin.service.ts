@@ -7,8 +7,8 @@ import { catchError } from "rxjs/operators";
   providedIn: "root",
 })
 export class AdminService {
-  // url: String = "http://localhost:3000/";
-  url: String = "https://api.sftservices.com/";
+   url: String = "http://localhost:3000/";
+  //url: String = "https://api.sftservices.com/";
   constructor(private http: HttpClient) {}
   //Broadcaster ------------------------------------
   private stateData = new BehaviorSubject<any>(null);

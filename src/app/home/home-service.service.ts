@@ -10,8 +10,8 @@ import { retry, catchError } from 'rxjs/operators';
 export class HomeServiceService {
 
 
-  // url : string = 'http://localhost:3000';
-  url: String = "https://api.sftservices.com";
+   url : string = 'http://localhost:3000';
+  //url: String = "https://api.sftservices.com";
  
   headers = new HttpHeaders({
     "Content-Type": "application/json",

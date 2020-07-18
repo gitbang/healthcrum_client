@@ -121,6 +121,7 @@
         <mat-menu #genderMenu ="matMenu">
           <button mat-menu-item (click)="getGender('male')" >Male</button>
           <button mat-menu-item (click)="getGender('female')">Female</button>
+          <button mat-menu-item (click)="getGender('other')">Others</button>
         </mat-menu>
 
         <mat-menu #experienceMenu ="matMenu">
@@ -433,52 +434,40 @@
                       
                       <div class="col-12">
                         <div class="row">
-                          <div class="col-3 " (click)="openDialog('video', i)">
+                          <div class="col-3 bookconsultation-div" (click)="openDialog('video', i)">
                             <div class="consultation-border cursor-pointer text-center">
-                              <div class="center">
-                                <img
-                                  src="./assets/img/consulation/blood-test/video.png"
-                                  class="consultation-image-horizontal"
-                                >
+                              <div class="center consultation-icon">
+                                <mat-icon>videocam</mat-icon>
                               </div>
                               <label class="image-data">
                                 {{doctor.consultationTiming.video.from}} - {{doctor.consultationTiming.video.to}}
                               </label>
                             </div>
                           </div>
-                          <div class="col-3" (click)="openDialog('tele', i)">
+                          <div class="col-3 bookconsultation-div" (click)="openDialog('tele', i)">
                             <div  class="consultation-border cursor-pointer text-center">
-                              <div  class="center">
-                                <img
-                                  src="./assets/img/consulation/blood-test/telephone.jpg"
-                                  class="consultation-image-horizontal"
-                                >
+                              <div class="center consultation-icon">
+                                <mat-icon>perm_phone_msg</mat-icon>
                               </div>
                               <label class="image-data">
                                 {{doctor.consultationTiming.tele.from}} - {{doctor.consultationTiming.tele.to}}
                               </label>
                             </div>
                           </div>
-                          <div class="col-3" (click)="openDialog('physical', i)">
+                          <div class="col-3 bookconsultation-div" (click)="openDialog('physical', i)">
                             <div  class="consultation-border cursor-pointer text-center">
-                              <div class="center">
-                                <img
-                                  src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
-                                  class="consultation-image-horizontal"
-                                >
+                              <div class="center consultation-icon">
+                                <mat-icon>phone_android</mat-icon>
                               </div>
                               <label class="image-data">
                                 {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
                               </label>
                             </div>
                           </div>
-                          <div class="col-3" (click)="openDialog('chat', i)">
+                          <div class="col-3 bookconsultation-div" (click)="openDialog('chat', i)">
                             <div  class="consultation-border cursor-pointer text-center">
-                              <div class="center">
-                                <img
-                                  src="./assets/img/consulation/blood-test/phone.jpg"
-                                  class="consultation-image-horizontal"
-                                >
+                              <div class="center consultation-icon">
+                                <mat-icon>person_add</mat-icon>
                               </div>
                               <label class="image-data ">
                                 {{doctor.consultationTiming.chat.from}} - {{doctor.consultationTiming.chat.to}}
@@ -490,7 +479,7 @@
 
                       <div class="col-12 emergency-section">
                         <div class="row">
-                          <div class="col-7 cursor-pointer" (click)="openDialog('emergency', i)">
+                          <div class="col-12 cursor-pointer" (click)="openDialog('emergency', i)">
                             <div class="row cursor-pointer">
                               <div class="col-md-4 mt-1">
                                 <img
@@ -518,12 +507,12 @@
                 </div>
                 <mat-divider></mat-divider>
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-md-4 col-lg-3">
                     <div class="center">
                       <label class="bottom-view-details" (click)="knowMore(i)">View profile</label>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-md-4 col-lg-5">
                     <div class="center ">
                       <label class="bottom-view-feedback">40 Feedbacks</label>
                     </div>
