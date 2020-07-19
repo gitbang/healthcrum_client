@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { stringify } from "querystring";
 import { UserLocationModal } from "../../../models/userLocation";
 import { FormControl, FormBuilder } from "@angular/forms";
-import { startWith, map, single } from "rxjs/operators";
-import {MatAccordion} from '@angular/material/expansion';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ViewDetailsComponent } from "./view-details/view-details.component";
+import { startWith, map } from "rxjs/operators";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -77,8 +73,6 @@ export class BloodTestComponent implements OnInit {
     //this.isLogin= this.service.checkLogin();
 
     this.isLogin = this.authlocalService.isLoggin()
-    
-    console.log("is login or not ", this.isLogin)
     if(!this.isLogin) {
       this.cartfromClient(); 
     } else {
@@ -108,9 +102,9 @@ export class BloodTestComponent implements OnInit {
   }
   //--------fetch cart info---------//
   cartfromClient(){
-    console.log("from client")
+    // console.log("from client")
     this.service.currentCompleteCart.subscribe((result)=>{
-      console.log("my cart in blood test",result);
+      // console.log("my cart in blood test",result);
       
       if(result != null || result != undefined) {
         this.myCartComplete = result;
@@ -143,7 +137,7 @@ export class BloodTestComponent implements OnInit {
        // console.log("cart from backend", result)
         result.data.forEach(test =>{
           //console.log("lab id",test.labId)
-          let add;
+          
           let offerprice = test.offerPrice;
           let marketprice = test.mrp
           let offers  = test.offerPrice / test.mrp * 100;
@@ -154,7 +148,7 @@ export class BloodTestComponent implements OnInit {
              parameters = test.individualTests.length;
           } 
          
-          add = {...test, offer : offers, parameters :parameters,
+          let add = {...test, offer : offers, parameters :parameters,
              offerprice : offerprice, marketprice  : marketprice, labId : test.labId }
           this.myCartComplete.push(add)
           this.mycart.push(test._id)
@@ -318,10 +312,10 @@ export class BloodTestComponent implements OnInit {
   comparison(x : string){
     let index : number
     this.shownresultarray.forEach((value, i)=>{
-      console.log(x , value.name)
+      // console.log(x , value.name)
       if(value.name.toLowerCase() == x.toLowerCase()){
         index = i;
-        console.log(index)
+        // console.log(index)
       }
     })
     return index
@@ -331,7 +325,6 @@ export class BloodTestComponent implements OnInit {
     //console.log("main drop down")
     let index = this.comparison(x);
     
-    console.log("index is : ", index)
     if(this.searchcart.includes(x)) {
       this.searchcart = this.searchcart.filter((i)=> i != x)
       this.removeFromcart(index);
@@ -449,7 +442,7 @@ export class BloodTestComponent implements OnInit {
 
   fetchbloodtest(){
     this.service.bloodTestFetchAllTest({city : this.myControl.value.toLowerCase()}).subscribe((result)=>{
-      console.log("initial fetch", result)
+      // console.log("initial fetch", result)
       if(result.success) {
         this.datafound = true
         this.fromdatabase = result
@@ -457,7 +450,7 @@ export class BloodTestComponent implements OnInit {
         this.insertFetchedData(result)
       } else {
         this.datafound = false;
-        console.log("no data found")
+        // console.log("no data found")
       }
     })
   }
