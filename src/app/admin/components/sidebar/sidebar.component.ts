@@ -14,6 +14,7 @@ import {
   faShoppingCart,
   faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
+import { Router } from "@angular/router";
 declare const $: any;
 
 @Component({
@@ -37,7 +38,7 @@ export class SidebarComponent implements OnInit {
   crutch = faCrutch;
   cart = faShoppingCart;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     // this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -47,5 +48,10 @@ export class SidebarComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  
+  signOutUser() {
+    this.router.navigate(["/login"]);
   }
 }

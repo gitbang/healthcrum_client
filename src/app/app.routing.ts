@@ -1,6 +1,4 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { BrowserModule } from "@angular/platform-browser";
 import { Route, Routes, RouterModule, UrlSegment } from "@angular/router";
 import { AdminLayoutComponent } from "./admin/admin-layout.component";
 import { HomepageComponent } from "./home/components/homepage.component";
@@ -82,14 +80,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    BrowserModule,
     RouterModule.forRoot(routes,
 {
+useHash: true,
     initialNavigation: 'enabled'
 })
   ],
-  exports: [],
+  exports: [RouterModule],
   providers: [
     {
       provide: "canLoadAdminSection",

@@ -193,6 +193,7 @@ export class EmployeesTempComponent implements OnInit {
       alert("Please select corporate and branch");
       return;
     }
+    console.log(event);
     let data = {
       corporate_id: this.companySelected,
       branch_id: this.branchSelected,

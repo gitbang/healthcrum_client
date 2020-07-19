@@ -14,7 +14,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {HomeServiceService} from '../../home-service.service'
-import { TestBed } from "@angular/core/testing";
+// import { TestBed } from "@angular/core/testing";
 import {AuthServiceLocal} from '../../../services/auth-service.service'
 
 export interface Fruit {
@@ -51,8 +51,8 @@ export class BloodTestComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private renderer: Renderer2,
-    private matDialog : MatDialog,
+    // private renderer: Renderer2,
+    // private matDialog : MatDialog,
     private snackbar : MatSnackBar,
     private service : HomeServiceService,
     private fb : FormBuilder,
@@ -396,7 +396,7 @@ export class BloodTestComponent implements OnInit {
   getIpClientLocation() {
     this.http
       .jsonp(
-        "http://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK",
+        "https://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK",
         "callback"
       )
       .subscribe((res: any) => {
@@ -406,7 +406,7 @@ export class BloodTestComponent implements OnInit {
   }
 
   getLocationName(ip: string) {
-    let url = "http://ip-api.com/json/" + ip;
+    let url = "https://ipapi.co/json";
     this.http.get(url).subscribe((res: UserLocationModal) => {
       // console.log(res);
       this.city = res.city;

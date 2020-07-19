@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
 })
 export class AdminService {
    url: String = "http://localhost:3000/";
-  //url: String = "https://api.sftservices.com/";
+  // url: String = "https://api.sftservices.com/";
   constructor(private http: HttpClient) {}
   //Broadcaster ------------------------------------
   private stateData = new BehaviorSubject<any>(null);
@@ -245,6 +245,32 @@ export class AdminService {
     )
     .pipe(catchError(this.handleError<any>("getLocationError", {})));
   }
+
+  getHRById(data){
+    return this.http
+    .post<any>(
+      this.url + "api/corporate/hr/get-by-id",
+      data,
+      this.options
+    );
+  }
+  updateHRById(data){
+    return this.http
+    .post<any>(
+      this.url + "api/corporate/hr/update-by-id",
+      data,
+      this.options
+    );
+  }
+
+  deleteHRById(_id){
+    return this.http
+    .delete<any>(
+      this.url + "api/corporate/hr/delete/"+_id,
+      this.options
+    );
+  }
+
   getWeeklySettings(){
     return this.http
     .get<any>(

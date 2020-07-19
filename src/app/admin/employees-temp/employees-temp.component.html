@@ -121,17 +121,17 @@
                           <div class="mt-3 mb-3">
                             <mat-form-field>
                               <mat-label>Filter by date</mat-label>
+                            
                               <input
-                                [formControl]="date"
-                                matInput
-                                [matDatepicker]="picker"
-                                (dateChange)="dateChange($event)"
-                              />
-                              <mat-datepicker-toggle
-                                matSuffix
-                                [for]="picker"
-                              ></mat-datepicker-toggle>
-                              <mat-datepicker touchUi #picker></mat-datepicker>
+                              [formControl]="date"
+          matInput
+          placeholder="Choose date range"
+          [satDatepicker]="picker"
+          [value]="date"
+          (dateChange)="dateChange($event)"
+        />
+        <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+        <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
                             </mat-form-field>
                           </div>
                         </div>

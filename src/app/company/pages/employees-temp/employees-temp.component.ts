@@ -294,7 +294,7 @@ export class EmployeeTemperatureDetailDailog implements OnInit {
         if(res.success){
           if(res.data.length > 0){
         let surveyAnswer = JSON.parse(res.data[0].answers);
-        let weeklyAnswer = JSON.parse(res.data[0].weeklyAns);
+        let weeklyAnswer = res.data[0].weeklyAns !="" ? JSON.parse(res.data[0].weeklyAns) : {};
         this.covidAnswers = surveyAnswer.answers;
         this.weeklyAnswers = weeklyAnswer.answers;
         if(surveyAnswer.status == "danger" || weeklyAnswer.status == "danger")
