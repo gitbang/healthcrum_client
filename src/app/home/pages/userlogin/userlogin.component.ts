@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { HomeServiceService } from "../../home-service.service";
+import { DataSource } from "@angular/cdk/table";
 // import * as $ from "bootstrap";
 // declare var $ : any
 @Component({
@@ -208,12 +209,19 @@ export class UserloginComponent implements OnInit {
             this.isEmailVerifies = true;
             this.isPhoneVerified = false;
             this.SwalCustom('mobile number')
-            
             this.resetVariables()
           }
         }
       } else {
-        Swal.fire(data.message)
+        Swal.fire({
+          title : data.message,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+          })
       }
     });
   }
