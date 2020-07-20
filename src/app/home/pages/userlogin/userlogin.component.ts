@@ -107,20 +107,9 @@ export class UserloginComponent implements OnInit {
 
     this.authLocal.saveUser(JSON.stringify(u));
 
-    this.authLocal
-      .loginUser({ username: user.email, password: user.id })
-      .subscribe((response) => {
-        console.log("response after user login save", response);
-
-        if (response.success) {
-          console.log("data save ");
-          this.completeData = response;
-          console.log(this.completeData);
-          this.saveAndAccess();
-        } else {
-          swal.fire("Email not found");
-        }
-      });
+    let data = { username: user.email, password: user.id }
+    this.userDetail = data
+    this.sendRequestToCheckLogin(data)
   }
 
   signOut(): void {
@@ -135,8 +124,11 @@ export class UserloginComponent implements OnInit {
     this.forgot_email = "";
     swal.fire("Success!", "Email sent successfully !", "success");
   }
-
+  userDetail ;
   completeData: any;
+  hasEmail : boolean ;
+  isPhoneVerified : boolean = false;
+  isEmailVerifies : boolean = false;
 
   loginLocal(): void {
     this.forgotPass = false;
@@ -153,25 +145,69 @@ export class UserloginComponent implements OnInit {
       username: this.user_email,
       password: this.user_pass,
     };
+    this.userDetail = data
+    this.sendRequestToCheckLogin(data)
+  }
 
+  sendRequestToCheckLogin(data){
     this.authLocal.loginUser(data).subscribe((data) => {
       console.log("local response", data);
       if (data.success) {
         this.completeData = data;
 
-        if (
-          data.userDetail.isEmailVerified ||
-          data.userDetail.isPhoneVerified
-        ) {
-          console.log("one method is verified");
+        if(!data.userDetail.email || data.userDetail.email == null ||  data.userDetail.email == undefined){
+          this.hasEmail = false
+          console.log("no email")
+          if(data.userDetail.isPhoneVerified) {
+            this.isPhoneVerified = true;
+            this.userMobile = data.userDetail.phone;
+            this.saveAndAccess()
+          } else {
+            swal.fire("Please verify phone number to proceed")
+            this.userMobile = data.userDetail.phone;
+            this.flip();
+          }
+        } else if ( data.userDetail.isEmailVerified && data.userDetail.isPhoneVerified ) {
+          this.hasEmail = true;
+          this.isPhoneVerified = true;
+          this.isEmailVerifies = true;
+          console.log("Both method is verified");
+          // call the method which leads to dashboard
           this.saveAndAccess();
-        } else {
+        } else{                   // user have both , but any one or both are  not verified
+          this.hasEmail = true
           this.userMobile = data.userDetail.phone;
           this.userEmail = data.userDetail.email;
-          this.flip();
+
+          if(!data.userDetail.isEmailVerified && !data.userDetail.isPhoneVerified ) {
+            this.isEmailVerifies = false;
+            this.isPhoneVerified = false;
+            
+            this.flipDiv = true;
+            this.resetVariables()
+           
+          } else if(!data.userDetail.isEmailVerified){
+            this.isEmailVerifies = false;
+            this.isPhoneVerified = true;
+            this.bynumber = false
+            
+            this.resetVariables()
+            swal.fire("Please verify your email to proceed").then(ok=>{
+              this.flipDiv = true;
+            })
+          } else {
+            this.bynumber = true;
+            this.isEmailVerifies = true;
+            this.isPhoneVerified = false;
+            swal.fire("Please verify your mobile number to proceed").then(ok=>{
+              this.flipDiv = true;
+            })
+            this.resetVariables()
+          }
         }
       } else {
-        alert("No data found");
+        console.log("something went wrong")
+        swal.fire(data.message);
       }
     });
   }
@@ -180,6 +216,10 @@ export class UserloginComponent implements OnInit {
     this.otpSend = false;
     this.otpConfirmed = false;
     this.flipDiv = !this.flipDiv;
+  }
+  resetVariables(){
+    this.otpSend = false;
+    this.otpConfirmed = false;
   }
 
   userMobile: number;
@@ -204,8 +244,17 @@ export class UserloginComponent implements OnInit {
     this.authLocal.saveTokenAndRole(this.completeData.userDetail);
     this.authLocal.saveUserToken(this.completeData.loginToken);
     let role = this.authLocal.getUserRole();
-    console.log("role is : ", role);
-    this.dynamicRouting(role);
+    
+    if(role != 'patient') {
+      if(this.completeData.isUserVerified) {
+        this.dynamicRouting(this.completeData.role)
+      } else {
+        swal.fire("Your account is not verified by admin yet")
+      }
+    } else{
+      console.log("role is : ", role);
+      this.dynamicRouting(role);
+    }
   }
 
   dynamicRouting(role) {
@@ -251,12 +300,12 @@ export class UserloginComponent implements OnInit {
     } else {
       if (this.bynumber) {
         data = {
-          username: this.userMobile,
+          username: this.userMobile.toString(),
         };
       } else {
         data = {
           username: this.userEmail,
-          forgotPassword: this.forgotPass,
+          //forgotPassword: this.forgotPass,
         };
       }
       this.generateotp(data);
@@ -330,15 +379,16 @@ export class UserloginComponent implements OnInit {
     } else {
       if (this.bynumber) {
         toSend = {
-          otp: this.myotp,
-          phone: this.userMobile,
+          otp: this.myotp.toString(),
+          phone: this.userMobile.toString(),
         };
 
         this.service.consultationChekOTP(toSend).subscribe((result) => {
           console.log(result);
           if (result.success) {
             console.log("otp verified ", result);
-            this.saveAndAccess(); // for dynamic routing
+            //this.saveAndAccess(); // for dynamic routing
+            this.sendRequestToCheckLogin(this.userDetail)
           } else {
             swal.fire("Error", result.message, "error");
           }
@@ -353,7 +403,8 @@ export class UserloginComponent implements OnInit {
         this.authLocal.verifyOtpOfEmail(toSend).subscribe((result) => {
           if (result.success) {
             if (result.isEmailVerified) {
-              this.saveAndAccess();
+              this.sendRequestToCheckLogin(this.userDetail)
+              //this.saveAndAccess();
             } else {
               swal.fire("Error", result.message, "error");
             }
@@ -362,24 +413,12 @@ export class UserloginComponent implements OnInit {
           }
         });
       }
-
+      console.log("user details are : ", this.userDetail)
+      
       var _this = this;
     }
   }
-
-  verifyOtpOfEmail(data) {
-    this.authLocal.verifyOtpOfEmail(data).subscribe((result) => {
-      if (result.success) {
-        if (result.isEmailVerified) {
-          this.saveAndAccess();
-        } else {
-          swal.fire("Error", result.message, "error");
-        }
-      } else {
-        swal.fire("Error", result.message, "error");
-      }
-    });
-  }
+  // password change portal
 
   forgotMobile: number;
   forgotEmail: string;

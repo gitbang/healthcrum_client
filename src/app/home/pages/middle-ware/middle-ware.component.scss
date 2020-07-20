@@ -1,45 +1,7 @@
-
-
-// .main-background{
-//    background-color: $bg;
-//    background: linear-gradient(to right, #2193b0 , #6dd5ed);
-//    border-radius: 15px;
-//    padding-top: 5px;
-//    label{
-//        color: white;
-//    }
-// }
-
-// .adjust-it{
-//     position: absolute;
-//     top: 80px;
-//     left:25%;
-//     .upper-label{
-//         color: white;
-//         padding: 5px;  
-//         font-size: x-large;
-//     }
-// }
-// .upper{
-//     background: linear-gradient(to right, #17c0d3, #027e8e);
-//     border-radius: 10px;
-// }
-// .bottom{
-//     background: linear-gradient(to right, green, darkgreen);
-//     border-radius: 10px;
-// }
-// .bottom-label{
-//     color: white;
-//     padding: 5px;  
-//     font-size: x-large;
-// }
-// .white-icon{
-//     color: white;
-//     vertical-align: sub;
-// }
-// .no-padding{
-//     padding: 10px;
-// }
+.container-fluid{
+    height: 100vh;
+    margin-top: -56px;
+}
 .center{
     display: block;
     margin-left: auto;
@@ -71,6 +33,7 @@ $blue : #00A0A8;
 .action-part{
     padding: 0;
     margin: 0;
-    margin-top: 5px;
 }
-
+.main-row{
+    margin-top: 10%;
+}

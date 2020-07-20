@@ -427,9 +427,8 @@ export class BookTestComponent implements OnInit {
       })
     } else {
       Swal.fire("Login first")
-      this.router.navigateByUrl('/login')
-  
       this.saveUrlLocally()
+      this.router.navigateByUrl('/login')
     }
   }
 
@@ -532,6 +531,8 @@ export class BookTestComponent implements OnInit {
         }
       })
     } else {
+      Swal.fire('Login first')
+      this.saveUrlLocally();
       this.router.navigateByUrl('/login')
     }
     

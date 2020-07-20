@@ -184,7 +184,7 @@ table{
 
 .consultation-port-new{
    background-color: $yellow;
-   margin-bottom: 5px;
+  // margin-bottom: 5px;
    border-radius: 5px;
   // padding: 5px
     label{
@@ -192,8 +192,8 @@ table{
     }
 }
 .consultation-border{
-    border: 1px solid black;
-    border-radius: 3px;
+    // border: 1px solid black;
+    // border-radius: 3px;
     color: black;
     .image-data{
          color: inherit;
@@ -209,9 +209,15 @@ table{
     }
 }
 .emergency-section{
-    border: 1px solid black;
+    //border: 1px solid black;
     border-radius: 3px;
     margin-top: 4px;
+    transition: 0.2 ease-in;
+    cursor: pointer;
+    &:hover {
+        transform: scale(0.9);
+    }
+    
 }
 .normal-fee-heading{
     color: $yellow;
@@ -290,4 +296,9 @@ table{
     padding: 10px;
     background-color: white;
     margin-top: 25px;
+}
+
+.book-appointment-row{
+    background-color: #eaeff2;
+    padding: 5px 0px;
 }

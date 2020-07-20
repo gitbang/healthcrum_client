@@ -67,7 +67,7 @@
                     </span> <span>Verify by number</span>
                   </button>
 
-                  <button  class="btn btn-social btn-google w-75" 
+                  <button *ngIf="hasEmail" class="btn btn-social btn-google w-75" 
                   [ngClass]="!bynumber ? 'btn-email-click' : 'btn-email'"
                   (click)="verifyByEmail()">
                     <span>
@@ -87,18 +87,36 @@
                     appearance="outline">
                    
                     <input type="text" matInput [(ngModel)]="userMobile" name="user_number"
-                      placeholder="Phone Number" >
+                      placeholder="Phone Number" [readonly]="true">
                   </mat-form-field>
+
+                  <div *ngIf="bynumber">
+                    <div class="form-group" *ngIf="!otpSend && !isPhoneVerified">
+                      <input class="btn btn-success" type="submit" value="Send OTP" (click)="sendOTP()">
+                    </div>
+                    <div *ngIf="isPhoneVerified">
+                        Verified
+                       <img src="./assets/img/login/verify2.png" class="verified">
+                    </div>
+                  </div>
 
                   <mat-form-field class="full-width" *ngIf="!bynumber"
                     appearance="outline">
                    
                     <input type="text" matInput [(ngModel)]="userEmail" name="user_email"
-                      placeholder="Email" >
+                      placeholder="Email" [readonly]="true">
                   </mat-form-field>
                   
-                  <div class="form-group" *ngIf="!otpSend">
-                    <input class="btn btn-success" type="submit" value="Send OTP" (click)="sendOTP()">
+                  <div *ngIf="!bynumber">
+                    <div class="form-group" *ngIf="!otpSend && !isEmailVerifies">
+                      <input class="btn btn-success" type="submit" value="Send OTP" (click)="sendOTP()">
+                    </div>
+                    <div *ngIf="isEmailVerifies">
+                      Verified
+                       <img src="./assets/img/login/verify2.png"
+                        class="verified"
+                       >
+                    </div>
                   </div>
 
                   <div *ngIf="otpSend">
@@ -152,7 +170,6 @@
                     </a>
                   </div>
                 </div>
-                
                 
                 <div class="box_login last" *ngIf="!otpConfirmed">
 

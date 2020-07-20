@@ -96,10 +96,10 @@ export class SignupComponent implements OnInit {
       swal.fire("Please enter your full name");
       return;
     }
-    if (this.user_email == "" || this.user_email == undefined) {
-      swal.fire("Please enter your email address");
-      return;
-    }
+    // if (this.user_email == "" || this.user_email == undefined) {
+    //   swal.fire("Please enter your email address");
+    //   return;
+    // }
     if (this.user_mob == "" || this.user_mob == undefined ||
        this.user_mob.toString().length != 10) {
       swal.fire("Please enter Valid Phone Number");

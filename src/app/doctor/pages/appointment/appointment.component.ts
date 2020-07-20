@@ -81,14 +81,14 @@ export class AppointmentComponent implements OnInit {
       console.log("loop")
       var add;
       add = {
-        patient_name: result.userDetail[i].name,   // done
-        date: result.data[i].orderDetails[0].dateOfCheckup,  // done
-        time:  result.data[i].orderDetails[0].timeOfCheckup,
-        patientEmail : result.data[i].orderBy.email,
-        patientId : result.userDetail[i].userId,
-        orderId : result.data[i]._id,
-        status : result.data[i].Orderstatus,
-        appointmentNum : result.data[i].appointmentNum
+        patient_name: result.data[i].userDetail.name,   // done
+        date: result.data[i].orderDetail.orderDetails[0].dateOfCheckup,  // done
+        time:  result.data[i].orderDetail.orderDetails[0].timeOfCheckup,
+        patientEmail : result.data[i].orderDetail.orderBy.email,
+        patientId : result.data[i].userDetail.userId,
+        orderId : result.data[i].orderDetail.orderDetails._id,
+        status : result.data[i].orderDetail.Orderstatus,
+        appointmentNum : result.data[i].orderDetail.appointmentNum
       }
       console.log("add is : ", add)
       if( add.status == 'pending' || add.status == undefined )

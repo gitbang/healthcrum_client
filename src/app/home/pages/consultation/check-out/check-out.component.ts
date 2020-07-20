@@ -87,7 +87,7 @@ export class CheckOutComponent implements OnInit {
   ]
   placeorder(){
     console.log("place order go to gateway")
-
+    
     this.razorKeyGeneration()
     
     let data = {
