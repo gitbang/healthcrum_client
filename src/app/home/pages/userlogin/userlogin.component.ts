@@ -14,7 +14,7 @@ import {
   FacebookLoginProvider,
   GoogleLoginProvider,
 } from "angularx-social-login";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { HomeServiceService } from "../../home-service.service";
@@ -74,11 +74,11 @@ export class UserloginComponent implements OnInit {
         if (user) {
           this.afterSocialLogin(user);
         } else {
-          swal.fire("Error", "Google Authentication Failed !", "error");
+          Swal.fire("Error", "Google Authentication Failed !", "error");
         }
       })
       .catch((err) => {
-        swal.fire("Error!", "Login Failed", "error");
+        Swal.fire("Error!", "Login Failed", "error");
       });
   }
 
@@ -89,11 +89,11 @@ export class UserloginComponent implements OnInit {
         if (user) {
           this.afterSocialLogin(user);
         } else {
-          swal.fire("Error", "Facebook Authentication Failed !", "error");
+          Swal.fire("Error", "Facebook Authentication Failed !", "error");
         }
       })
       .catch((err) => {
-        swal.fire("Error!", "Login Failed", "error");
+        Swal.fire("Error!", "Login Failed", "error");
       });
   }
 
@@ -122,7 +122,7 @@ export class UserloginComponent implements OnInit {
       type: "reset-link",
     };
     this.forgot_email = "";
-    swal.fire("Success!", "Email sent successfully !", "success");
+    Swal.fire("Success!", "Email sent successfully !", "success");
   }
   userDetail ;
   completeData: any;
@@ -133,11 +133,11 @@ export class UserloginComponent implements OnInit {
   loginLocal(): void {
     this.forgotPass = false;
     if (!this.user_email) {
-      swal.fire("Id required");
+      Swal.fire("Id required");
       return;
     }
     if (!this.user_pass) {
-      swal.fire("Password required");
+      Swal.fire("Password required");
       return;
     }
 
@@ -163,7 +163,16 @@ export class UserloginComponent implements OnInit {
             this.userMobile = data.userDetail.phone;
             this.saveAndAccess()
           } else {
-            swal.fire("Please verify phone number to proceed")
+            Swal.fire({
+              title : "Please verify phone number to proceed",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            }
+            )
             this.userMobile = data.userDetail.phone;
             this.flip();
           }
@@ -182,8 +191,17 @@ export class UserloginComponent implements OnInit {
           if(!data.userDetail.isEmailVerified && !data.userDetail.isPhoneVerified ) {
             this.isEmailVerifies = false;
             this.isPhoneVerified = false;
-            
-            this.flipDiv = true;
+            Swal.fire({
+              title : "Please verify your mobile number to proceed",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+          }).then(ok=>{
+              this.flipDiv = true;
+            })
             this.resetVariables()
            
           } else if(!data.userDetail.isEmailVerified){
@@ -192,14 +210,30 @@ export class UserloginComponent implements OnInit {
             this.bynumber = false
             
             this.resetVariables()
-            swal.fire("Please verify your email to proceed").then(ok=>{
+            Swal.fire({
+              title : "Please verify your email to proceed", 
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+          }).then(ok=>{
               this.flipDiv = true;
             })
           } else {
             this.bynumber = true;
             this.isEmailVerifies = true;
             this.isPhoneVerified = false;
-            swal.fire("Please verify your mobile number to proceed").then(ok=>{
+            Swal.fire({
+              title : "Please verify your mobile number to proceed",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            }).then(ok=>{
               this.flipDiv = true;
             })
             this.resetVariables()
@@ -207,9 +241,23 @@ export class UserloginComponent implements OnInit {
         }
       } else {
         console.log("something went wrong")
-        swal.fire(data.message);
+        Swal.fire(data.message);
       }
     });
+  }
+
+  SwalCustom(toverify) {
+    Swal.fire({
+      title : `Please verify your ${toverify} to proceed`,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+      }).then(ok=>{
+          this.flipDiv = true;
+      })
   }
 
   flip() {
@@ -241,23 +289,34 @@ export class UserloginComponent implements OnInit {
   }
 
   saveAndAccess() {
-    this.authLocal.saveTokenAndRole(this.completeData.userDetail);
-    this.authLocal.saveUserToken(this.completeData.loginToken);
-    let role = this.authLocal.getUserRole();
+    
+    let role = this.completeData.role;
     
     if(role != 'patient') {
       if(this.completeData.approvedUser) {
+       
         this.dynamicRouting(this.completeData.role)
       } else {
-        swal.fire("Your account is not verified by admin yet")
+        Swal.fire({title : `Your phone number and email bith are verified now.
+         Admin will approve your account then you will able to login. Thanks`,
+         showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+        })
       }
     } else{
       console.log("role is : ", role);
+     
       this.dynamicRouting(role);
     }
   }
 
   dynamicRouting(role) {
+    this.authLocal.saveTokenAndRole(this.completeData.userDetail);
+    this.authLocal.saveUserToken(this.completeData.loginToken);
     const url = this.authLocal.redirectUrl
     if(url != false && url != null ) {
       this.router.navigateByUrl(url)
@@ -276,7 +335,7 @@ export class UserloginComponent implements OnInit {
     if (this.forgotPass) {
       if (this.bynumber) {
         if (this.forgotMobile.toString().length != 10) {
-          swal.fire("Enter valid phone number");
+          Swal.fire("Enter valid phone number");
           return;
         }
         data = {
@@ -284,7 +343,7 @@ export class UserloginComponent implements OnInit {
         };
       } else {
         if (this.forgotEmail.length == 0) {
-          swal.fire("Enter valid email");
+          Swal.fire("Enter valid email");
           return;
         }
         data = {
@@ -313,7 +372,7 @@ export class UserloginComponent implements OnInit {
   }
 
   alertOfOtpSend() {
-    swal.fire({
+    Swal.fire({
       icon: "success",
       title: "OTP send",
       showConfirmButton: false,
@@ -337,7 +396,7 @@ export class UserloginComponent implements OnInit {
           this.alertOfOtpSend();
           this.otpSend = true;
         } else {
-          swal.fire("Error", result.message, "error");
+          Swal.fire("Error", result.message, "error");
         }
       });
   }
@@ -358,7 +417,7 @@ export class UserloginComponent implements OnInit {
           if (result.success) {
             this.otpConfirmed = true;
           } else {
-            swal.fire("Error", result.message, "error");
+            Swal.fire("Error", result.message, "error");
           }
         });
       } else {
@@ -390,7 +449,7 @@ export class UserloginComponent implements OnInit {
             //this.saveAndAccess(); // for dynamic routing
             this.sendRequestToCheckLogin(this.userDetail)
           } else {
-            swal.fire("Error", result.message, "error");
+            Swal.fire("Error", result.message, "error");
           }
         });
       } else {
@@ -406,10 +465,10 @@ export class UserloginComponent implements OnInit {
               this.sendRequestToCheckLogin(this.userDetail)
               //this.saveAndAccess();
             } else {
-              swal.fire("Error", result.message, "error");
+              Swal.fire("Error", result.message, "error");
             }
           } else {
-            swal.fire("Error", result.message, "error");
+            Swal.fire("Error", result.message, "error");
           }
         });
       }
@@ -432,15 +491,15 @@ export class UserloginComponent implements OnInit {
   newPasswordConfirm: number;
   changePassword() {
     if (!this.newPassword) {
-      swal.fire("Enter password");
+      Swal.fire("Enter password");
       return;
     }
     if (!this.newPasswordConfirm) {
-      swal.fire("Confirm password");
+      Swal.fire("Confirm password");
       return;
     }
     if (this.newPassword !== this.newPasswordConfirm) {
-      swal.fire("Password not matched");
+      Swal.fire("Password not matched");
       return;
     }
     var data;
@@ -460,7 +519,7 @@ export class UserloginComponent implements OnInit {
 
     this.authLocal.loginUpdatePassword(data).subscribe((result) => {
       if (result.success) {
-        swal.fire("Password update");
+        Swal.fire("Password update");
         //this.router.navigateByUrl('/login')
         this.forgotEmail = "";
         this.forgotPass = false;
