@@ -10,11 +10,10 @@ mat-card-title{
 .test-heading{
     background-color: #00a0a8;
     color: white;
-   // border-radius: 20px;
-   // padding-left: 5px;
-    padding-right: 5px;
+    display:inline-block;
+    box-shadow: 4px 2px 2px 0px #bebebe;
     margin-left: -15px;
-    padding: 3px;
+    padding: 5px 10px;
 }
 
 .package-detils{

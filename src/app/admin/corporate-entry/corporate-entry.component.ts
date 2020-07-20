@@ -80,6 +80,8 @@ export class CorporateEntryComponent implements OnInit {
     hr_password: new FormControl(),
     hr_cpassword: new FormControl(),
   });
+  hr_update_activated = false;
+  hr_update:any = {};
   constructor(
     private fb: FormBuilder,
     private httpClient: HttpClient,
@@ -250,20 +252,57 @@ export class CorporateEntryComponent implements OnInit {
     });
   }
 
+  setHrUpdate(id){
+    this.getHRById(id);
+  }
+
+  cancelHRUpdate(template: TemplateRef<{}>){
+    this.hr_update = {};
+    this.hr_update_activated = false;
+    this.showError(template,"Hr Detail update cancelled !");
+  }
+
+  updateHrDetails(template: TemplateRef<{}>){
+    
+    if(this.hr_update_activated){
+      let data = this.hr.value;
+    this.top_loading = true;
+      data["healthcrumId"] = this.hr_update.healthcrumId;
+      data["id"] = this.hr_update.id;
+      this.adminService.updateHRById(data).subscribe((res:any)=>{
+        console.log(res);
+        try{
+          if(res.success){
+            this.getAllHrs();
+          this.hr.reset();
+          this.showSuccess(template,"Hr details updated Successfully");
+          }
+        else
+            this.showError(template,res.message);
+        }catch(err){
+          this.showError(template,err);
+        }
+      });
+    }
+  }
+
   addHr(template: TemplateRef<{}>) {
     let data = this.hr.value;
     this.top_loading = true;
-
-    this.adminService.addCorporateHR(data).subscribe((res:any)=>{
-      try{
-        if(res.success)
-          this.showSuccess(template,"Hr Added Successfully");
-      else
-          this.showError(template,res.message);
-      }catch(err){
-        this.showError(template,err);
-      }
-    })
+  
+      this.adminService.addCorporateHR(data).subscribe((res:any)=>{
+        try{
+          if(res.success){
+            this.showSuccess(template,"Hr Added Successfully");
+            this.getAllHrs();
+          }
+        else
+            this.showError(template,res.message);
+        }catch(err){
+          this.showError(template,err);
+        }
+      })
+    
   }
 
   getAllHrs(){
@@ -365,6 +404,39 @@ export class CorporateEntryComponent implements OnInit {
           this.branchData = res.data;
         }
       });
+  }
+
+
+  getHRById(_id){
+    let data = { id: _id};
+    this.adminService.getHRById(data).subscribe((res:any)=>{
+      if(res.success){
+        this.hr_update_activated = true;
+        this.hr.get("corporate_id").setValue(res.data.corporate_id);
+        this.hr.get("branch_id").setValue(res.data.branch_id);
+        this.hr.get("hr_id").setValue(res.data.hr_id);
+        this.hr.get("hr_name").setValue(res.data.ht_name);
+        this.hr.get("hr_contact").setValue(res.data.contact);
+        this.hr.get("hr_email").setValue(res.data.hr_email);
+        this.hr.get("hr_password").setValue("");
+        this.hr.get("hr_cpassword").setValue("");
+        this.hr_update["healthcrunId"] = res.data.healthcrunId;
+        this.hr_update["id"] = res.data._id;
+        window.scrollTo({top:0});
+      }
+    });
+  }
+
+  deleteHrById(_id,template: TemplateRef<{}>){
+    this.adminService.deleteHRById(_id).subscribe((res:any)=>{
+      console.log(res);
+        if(res.success){
+          this.showSuccess(template,"Hr Deleted successfully !");
+          this.getAllHrs();
+        }else{
+          this.showError(template,"Failed to delete HR");
+        }
+    })
   }
 }
 

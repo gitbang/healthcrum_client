@@ -31,7 +31,6 @@ export class HomepageComponent implements OnInit {
       if (!user) {
         this.loggedIn = this.authLocal.isLoggedIn();
         this.user = new SocialUser();
-        console.log(this.loggedIn);
         if (this.loggedIn) {
           try{
             let userData = this.authLocal.getUserDetails();

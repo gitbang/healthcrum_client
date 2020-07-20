@@ -100,32 +100,36 @@ export class DashboardComponent implements OnInit {
        let danger = 0;
        let safe = 0;
        let no_entry = 0;
-       let tempdata = {};
         if (res.success) {
+          let tempdata = {};
           this.covid19Data.total.v = res.data.length;
+          this.covid19Data.total.p = 100;
           res.temperature.forEach((temp) => {
-            if( ! tempdata[temp.user_id] == undefined){
+            if( tempdata[temp.user_id] != undefined){
               if( tempdata[temp.user_id] < temp.temperature){
                 tempdata[temp.user_id] = temp.temperature;
               }
             }
             tempdata[temp.user_id] = temp.temperature;
           });
-
+          
           for(let i=0; i<res.data.length;i++){
-            if(tempdata[res.data[i].userId] > 98.5 || this.covidAns[res.data[i].userId]){
+
+            if(( tempdata[res.data[i].userId] !== undefined && tempdata[res.data[i].userId] >= 98.5 ) || this.covidAns[res.data[i].userId]){
+              console.log(res.data[i].userId,tempdata[res.data[i].userId]);
+              this.covidAns[res.data[i].userId] = false;
               danger = danger + 1;
-            }else if(tempdata[res.data[i].userId] < 98.5){
+            }else if(tempdata[res.data[i].userId] != undefined  && tempdata[res.data[i].userId] < 98.5 ){
               safe = safe + 1;
             }
             else{
-             no_entry = no_entry + 1;
+             no_entry = no_entry + 1; 
             }
           }
           this.covid19Data.danger.v = danger;
           this.covid19Data.safe.v = safe;
           this.covid19Data.no_entry.v = no_entry;
-          this.covid19Data.no_entry.v = this.covid19Data.total.v - (danger + safe);
+          // this.covid19Data.no_entry.v = this.covid19Data.total.v - (danger + safe);
           this.covid19Data.danger.p = Math.round((danger/this.covid19Data.total.v) * 100);
           this.covid19Data.safe.p = Math.round((this.covid19Data.safe.v/this.covid19Data.total.v ) * 100);
           this.covid19Data.no_entry.p = Math.round((this.covid19Data.no_entry.v/this.covid19Data.total.v) * 100);
@@ -146,8 +150,9 @@ export class DashboardComponent implements OnInit {
           if(inititalans.status == "danger" || inititalans.status == "purple") status = true;
           if(weeklyans.status == "danger" || weeklyans.status == "purple") status = true;
           this.covidAns[el.user_id] = status;
-          this.getAllTemperature();
+          
           });
+          this.getAllTemperature();
         }
     })
   }

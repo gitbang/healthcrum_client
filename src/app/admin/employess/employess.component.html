@@ -1,0 +1,218 @@
+<!--Templates-->
+<ng-template #template>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-with-icon">
+      <span class="ant-notification-notice-icon">
+        <i *ngIf="success" class="material-icons" style="color: rgb(16, 142, 233);">mood</i>
+        <i *ngIf="!success" class="material-icons text-danger">sentiment_very_dissatisfied</i>
+      </span>
+      <div class="ant-notification-notice-message">{{notification_title}}</div>
+      <div class="ant-notification-notice-description">
+        {{notification_desc}}
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-rose">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+              
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white active" href="#new-employees" data-toggle="tab">
+                      <i class="material-icons">group_add</i>Departments
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                 
+              
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#registered-employees" data-toggle="tab">
+                      <i class="material-icons">people_outline</i> Registered Employees
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+            
+              
+              <div class="tab-pane active" id="new-employees">
+                <div class="row form-top-line mt-4 pt-4">
+                  <p>New Registered Employees</p>
+                  <div class="col-md-8">
+                    <h4>Filter Result</h4>
+                    
+                     <div class="row">
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected" (selectionChange)="getBranchByCorporate(corporateSelected)">
+                            <mat-option [value]="corp._id" *ngFor="let corp of corporateData">{{corp.name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select [(ngModel)]="branchSelected" name="branchSelected">
+                            <mat-option [value]="data._id" *ngFor="let data of branchData">
+                              {{ data.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2 text-center">
+                        <button class="btn btn-warning" (click)="getDepartmentsByCorporate()">Filter Result</button>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="col-12">
+                    <nz-table class="mt-3" #newEmployeeTable nzBordered [nzData]="departmentData"
+                      [nzLoading]="newEmployeeRegistration">
+                      <thead>
+                        <tr style="text-align-last: center;">
+                          <th>Department</th>
+                          <th>Corporate Name</th>
+                          <th>Branch Name</th>
+                          <th>Registered On</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-center">
+                        <tr *ngFor="let data of newEmployeeTable.data" class="editable-row">
+                          <td> {{ data.name }}</td>
+                          <td> {{ data.corporate_id.name}}</td>
+                          <td>
+                            {{ data.branch_id.branch_name }}
+                          </td>
+                          <td>
+                            {{data.createdAt | date : 'fullDate'}}
+                          </td>
+                        
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" 
+                               class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to disapprove?" (nzOnConfirm)="disApproveEmployee(data._id)">
+                              <!-- <i class="material-icons">edit</i> -->
+                              Disapprove
+                            </button>
+                            <button type="button" class="btn btn-success btn-link btn-sm btn-just-icon" [matTooltipPosition]="'above'"
+                            matTooltip="Approve Employee">
+                              <!-- <i class="material-icons">close</i> -->
+                              Approve
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+                        </tr>
+                      </tbody>
+                    </nz-table>
+                  </div>
+                </div>
+              </div>
+              
+             
+              <div class="tab-pane" id="registered-employees">
+
+                  <div class="row form-top-line my-4 py-4">
+                    <p>Registered Employees</p>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected" (selectionChange)="getBranchByCorporate(corporateSelected)">
+                            <mat-option [value]="data._id" *ngFor="let data of corporateData">{{data.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select [(ngModel)]="branchSelected" name="branchSelected">
+                            <mat-option [value]="data._id" *ngFor="let data of branchData">{{ data.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4"></div>
+                      <div class="col-12 text-center">
+                        <button class="btn btn-warning" (click)="getRegisteredEmployees()">Filter Result</button>
+                      </div>
+                    </div>
+                    <nz-table class="mt-3" #registredEmployeesTable nzBordered [nzData]="hrData" [nzLoading]="dataLoading">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Corporate Name</th>
+                          <th>Branch</th>
+                          <th>Email</th>
+                          <th>Contact</th>
+                          <th>Last Logged In</th>
+                          <th>Registered On</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of registredEmployeesTable.data" class="editable-row">
+                          <td> {{ data.hr_name}}</td>
+                          <td>
+                            {{ data.corporate_id.name }}
+                          </td>
+                          <td>
+                            {{ data.branch_id.branch_name }}
+                          </td>
+                          <td>
+                            {{data.hr_email}}
+                          </td>
+                          <td>
+                            {{data.hr_contact}}
+                          </td>
+                          <td>
+                            Not Available
+                          </td>
+                          <td>
+                            {{data.createdAt | date : 'fullDate'}}
+                          </td>
+                          <td class="td-actions text-right">
+                            <button mat-raised-button type="button" matTooltip="Edit Task"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="setHrUpdate(data._id)">
+                              <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteHrById(data._id,template)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                          <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+
+                        </tr>
+                      </tbody>
+                    </nz-table>
+
+                  </div>
+          
+       
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

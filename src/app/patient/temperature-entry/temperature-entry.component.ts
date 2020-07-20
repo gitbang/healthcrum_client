@@ -154,7 +154,7 @@ export class TemperatureEntryComponent implements OnInit {
     this.getTemprature();
     this.questionEnd = true;
     this.askQuestion = false;
-    window.location.reload();
+    // window.location.reload();
   }
 
   saveTemperature() {

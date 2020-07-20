@@ -88,6 +88,8 @@ import { MedecinesInventryComponent } from "./medecines-inventry/medecines-inven
 import { FeedbacksComponent } from "./feedbacks/feedbacks.component";
 import { EmployeesTempComponent } from "./employees-temp/employees-temp.component";
 import { ChartsModule } from "ng2-charts";
+import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
+import { EmployessComponent } from './employess/employess.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -138,6 +140,8 @@ import { ChartsModule } from "ng2-charts";
     NzDropDownModule,
     NzNotificationModule,
     ChartsModule,
+    SatDatepickerModule, 
+    SatNativeDateModule
   ],
   declarations: [
     AdminLayoutComponent,
@@ -174,6 +178,7 @@ import { ChartsModule } from "ng2-charts";
     MedecinesInventryComponent,
     FeedbacksComponent,
     EmployeesTempComponent,
+    EmployessComponent,
   ],
   exports: [RouterModule],
   bootstrap: [AdminLayoutComponent],

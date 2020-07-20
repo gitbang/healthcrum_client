@@ -720,11 +720,13 @@
                       </div>
 
                       <div class="col-12 text-center">
-                        <button class="btn btn-warning" (click)="addHr(template)">Add HR</button>
+                        <button *ngIf="hr_update_activated" class="btn btn-danger" (click)=" cancelHRUpdate(template)">Cancel</button>
+                        <button *ngIf="hr_update_activated" class="btn btn-success" (click)="updateHrDetails(template)">Update Details</button>
+                        <button *ngIf="!hr_update_activated" class="btn btn-warning" (click)="addHr(template)">Add HR</button>
                       </div>
                     </div>
                   </div>
-                </form>
+                </form> 
                 <div class="row form-top-line mt-4 pt-4">
                   <p>Registered HR's</p>
                   <div class="col-12">
@@ -736,7 +738,7 @@
                           <th>Branch</th>
                           <th>Email</th>
                           <th>Contact</th>
-                          <th>Last Logged In</th>
+                          <!-- <th>Last Logged In</th> -->
                           <th>Registered On</th>
                           <th>Actions</th>
                         </tr>
@@ -756,19 +758,19 @@
                           <td>
                             {{data.hr_contact}}
                           </td>
-                          <td>
+                          <!-- <td>
                             Not Available
-                          </td>
+                          </td> -->
                           <td>
                             {{data.createdAt | date : 'fullDate'}}
                           </td>
                           <td class="td-actions text-right">
                             <button mat-raised-button type="button" matTooltip="Edit Task"
-                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="setHrUpdate(data._id)">
                               <i class="material-icons">edit</i>
                             </button>
                             <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
-                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteHrById(data._id,template)">
                               <i class="material-icons">close</i>
                             </button>
                           </td>
