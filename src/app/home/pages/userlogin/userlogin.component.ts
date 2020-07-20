@@ -191,17 +191,7 @@ export class UserloginComponent implements OnInit {
           if(!data.userDetail.isEmailVerified && !data.userDetail.isPhoneVerified ) {
             this.isEmailVerifies = false;
             this.isPhoneVerified = false;
-            Swal.fire({
-              title : "Please verify your mobile number to proceed",
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              }
-          }).then(ok=>{
-              this.flipDiv = true;
-            })
+            this.SwalCustom('mobile number')
             this.resetVariables()
            
           } else if(!data.userDetail.isEmailVerified){
@@ -210,32 +200,13 @@ export class UserloginComponent implements OnInit {
             this.bynumber = false
             
             this.resetVariables()
-            Swal.fire({
-              title : "Please verify your email to proceed", 
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              }
-          }).then(ok=>{
-              this.flipDiv = true;
-            })
+            this.SwalCustom('email')
           } else {
             this.bynumber = true;
             this.isEmailVerifies = true;
             this.isPhoneVerified = false;
-            Swal.fire({
-              title : "Please verify your mobile number to proceed",
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              }
-            }).then(ok=>{
-              this.flipDiv = true;
-            })
+            this.SwalCustom('mobile number')
+            
             this.resetVariables()
           }
         }
