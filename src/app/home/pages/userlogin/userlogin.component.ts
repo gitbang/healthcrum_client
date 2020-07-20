@@ -150,11 +150,14 @@ export class UserloginComponent implements OnInit {
   }
 
   sendRequestToCheckLogin(data){
+
     this.authLocal.loginUser(data).subscribe((data) => {
       console.log("local response", data);
       if (data.success) {
         this.completeData = data;
-
+        this.dynamicRouting(this.completeData.userDetail.role);
+      } else if(data.userDetail){
+        this.completeData = data;
         if(!data.userDetail.email || data.userDetail.email == null ||  data.userDetail.email == undefined){
           this.hasEmail = false
           console.log("no email")
@@ -171,8 +174,7 @@ export class UserloginComponent implements OnInit {
               hideClass: {
                 popup: 'animate__animated animate__fadeOutUp'
               }
-            }
-            )
+            })
             this.userMobile = data.userDetail.phone;
             this.flip();
           }
@@ -211,8 +213,7 @@ export class UserloginComponent implements OnInit {
           }
         }
       } else {
-        console.log("something went wrong")
-        Swal.fire(data.message);
+        Swal.fire(data.message)
       }
     });
   }
@@ -239,6 +240,7 @@ export class UserloginComponent implements OnInit {
   resetVariables(){
     this.otpSend = false;
     this.otpConfirmed = false;
+    this.myotp = null
   }
 
   userMobile: number;
@@ -261,7 +263,7 @@ export class UserloginComponent implements OnInit {
 
   saveAndAccess() {
     
-    let role = this.completeData.role;
+    let role = this.completeData.userDetail.role;
     
     if(role != 'patient') {
       if(this.completeData.approvedUser) {
