@@ -246,7 +246,7 @@ export class UserloginComponent implements OnInit {
     let role = this.authLocal.getUserRole();
     
     if(role != 'patient') {
-      if(this.completeData.isUserVerified) {
+      if(this.completeData.approvedUser) {
         this.dynamicRouting(this.completeData.role)
       } else {
         swal.fire("Your account is not verified by admin yet")
