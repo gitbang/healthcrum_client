@@ -119,54 +119,42 @@
                       </div>
                     </div> 
                   </div>
-                  <div class="col-12" style="padding-bottom : 10px ; padding-top : 10px">
-                    <div class="row" >
-                      <div class="col-3 ">
+                  <div class="col-12" style="padding-bottom : 0px ; padding-top : 0px">
+                    <div class="row book-appointment-row" >
+                      <div class="col-3 padding-none">
                         <div class="consultation-border cursor-pointer text-center" (click)="openDialog('video', i)">
                           <div class="center">
-                            <img
-                              src="./assets/img/consulation/blood-test/video.png"
-                              class="consultation-image-horizontal"
-                            >
+                            <mat-icon>videocam</mat-icon>
                           </div>
                           <label class="image-data">
                             {{doctor.consultationTiming.video.from}}-{{doctor.consultationTiming.video.to}}
                           </label>
                         </div>
                       </div>
-                      <div class="col-3 ">
+                      <div class="col-3 padding-none">
                         <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('telephone', i)">
                           <div  class="center">
-                            <img
-                              src="./assets/img/consulation/blood-test/telephone.jpg"
-                              class="consultation-image-horizontal"
-                            >
+                            <mat-icon>perm_phone_msg</mat-icon>
                           </div>
                           <label class="image-data">
                             {{doctor.consultationTiming.tele.from}}-{{doctor.consultationTiming.tele.to}}
                           </label>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3 padding-none">
                         <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('physical', i)">
                           <div class="center">
-                            <img
-                              src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
-                              class="consultation-image-horizontal"
-                            >
+                            <mat-icon>phone_android</mat-icon>
                           </div>
                           <label class="image-data">
                             {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
                           </label>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3 padding-none">
                         <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('chat', i)">
                           <div class="center">
-                            <img
-                              src="./assets/img/consulation/blood-test/phone.jpg"
-                              class="consultation-image-horizontal"
-                            >
+                            <mat-icon>person_add</mat-icon>
                           </div>
                           <label class="image-data ">
                             8am-6pm
