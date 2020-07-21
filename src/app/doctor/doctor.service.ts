@@ -10,8 +10,8 @@ export class DoctorService {
 
   constructor(private http : HttpClient) { }
   
-  //url: String = "https://api.sftservices.com";
-  url: String = "http://localhost:3000";
+  url: String = "https://api.sftservices.com";
+  // url: String = "http://localhost:3000";
   // user id for temporary purpose
   userId = "5e8efa895b324a3e4c97a278";
 

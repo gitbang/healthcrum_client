@@ -7,8 +7,8 @@ import { catchError } from "rxjs/operators";
   providedIn: "root",
 })
 export class AdminService {
-   url: String = "http://localhost:3000/";
-  // url: String = "https://api.sftservices.com/";
+  //  url: String = "http://localhost:3000/";
+  url: String = "https://api.sftservices.com/";
   constructor(private http: HttpClient) {}
   //Broadcaster ------------------------------------
   private stateData = new BehaviorSubject<any>(null);
@@ -279,6 +279,59 @@ export class AdminService {
     )
     .pipe(catchError(this.handleError<any>("getLocationError", {})));
   }
+
+  getNonVerifiedEmployees(){
+    return this.http
+    .post<any>(
+      this.url + "api/employee/non-verified-user/get-all",
+      {},
+      this.options
+    );
+  }
+  verifyNonVerifiedEmployee(data){
+    return this.http
+    .post<any>(
+      this.url + "api/employee/non-verified-user/verify",
+      data,
+      this.options
+    );
+  }
+
+  verifyBulkNonVerifiedEmployee(data){
+    return this.http
+    .post<any>(
+      this.url + "api/employee/non-verified-user/verify-bulk",
+      data,
+      this.options
+    );
+  }
+
+  getAllVerifiedEmployees(){
+    return this.http
+    .post<any>(
+      this.url + "api/employee/verified-user/get-all",
+      {},
+      this.options
+    );
+  }
+
+  getVerifiedEmployeesByCorporate(data){
+    return this.http
+    .post<any>(
+      this.url + "api/employee/verified-user/get-by-company",
+      data,
+      this.options
+    );
+  }
+
+  bulkEmployeeRegistration(data){
+    return this.http
+    .post<any>(
+      this.url + "api/multiple-employee/register",
+      data
+    );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

@@ -15,6 +15,7 @@ export class CompanyService {
 
   userId = "5e8efa895b324a3e4c97a278";
   url: String = "https://api.sftservices.com";
+  // url: String = "http://localhost:3000";
 
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -223,6 +224,22 @@ export class CompanyService {
   getEmpCovidAnswers(data){
     return this.http.post<any>(
       this.url + "/api/covid-answer/get-by-empid",
+      data
+    );
+  }
+
+  getVerifiedEmployeesByCorporate(data){
+    return this.http
+    .post<any>(
+      this.url + "/api/employee/verified-user/get-by-company",
+      data
+    );
+  }
+
+  bulkEmployeeRegistration(data){
+    return this.http
+    .post<any>(
+      this.url + "/api/multiple-employee/register",
       data
     );
   }

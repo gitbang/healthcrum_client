@@ -43,6 +43,7 @@ import {
   MatTabsModule,
   MatSlideToggleModule,
   MatPaginatorModule,
+  MatProgressBarModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from "@angular/material";
 
@@ -121,6 +122,7 @@ import { EmployessComponent } from './employess/employess.component';
     MatCardModule,
     MatTabsModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     NgWizardModule.forRoot(ngWizardConfig),
     AgmCoreModule.forRoot({
       apiKey: "YOUR_GOOGLE_MAPS_API_KEY",

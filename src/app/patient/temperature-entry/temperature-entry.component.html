@@ -43,7 +43,7 @@
           <div *ngIf="currentQuestion.multiple" class="ml-5">
             <ul>
               <li *ngFor="let option of currentQuestion.options">
-                <mat-checkbox [(ngModel)]="option.ans">
+                <mat-checkbox [(ngModel)]="option.ans" (change)="optionChecked($event.checked,option.value)">
                   {{option.value}}
                 </mat-checkbox>
               </li>
