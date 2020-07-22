@@ -1,115 +1,126 @@
-<main>
+<div>
   <div class="container">
     <div class="doctor-view">
-      <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <img *ngIf="type==1" src="../../../../assets/img/tablet.png" class="w-50 mt-5">
-          <img *ngIf="type==2" src="../../../../assets/img/capsule.png" class="w-50 mt-5">
-          <img *ngIf="type==3" src="../../../../assets/img/syrup.png" class="w-50 mt-5">
-
+      <div class="row heading-row">
+        <div class="col-12">
           <div class="row">
-            <div class="col-12">
-              <!-- <h3>Address</h3>
-              <p>#203,First floor Amrawati apartment,
-                <br>Mohali phase-8, Mohali Punjab<br>
-                PIN - 120430
-              </p> -->
+            <div class="col-2"></div>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-12 text-center medicine-name-div">
+                  <h2 class="title medicine-name"> Medicine Name </h2>
+                  <div class="medicine-brand-div">
+                    <span class="medicine-brand"> Brand name | In stock </span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="col-2"></div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6">
-          <h2 class="title"> Medecine Name </h2>
-          <h3 class="main-price" style="color: #38c0d7;">Price : ₹ 250</h3>
-          <div id="accordion" role="tablist">
-            <div class="card card-collapse">
-              <div class="card-header p-2" role="tab" id="headingOne">
-                <h5 class="mb-0">
-                  <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Product Details
-                    <i class="material-icons">keyboard_arrow_down</i>
-                  </a>
-                </h5>
-              </div>
-              <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <table class="table">
-                    <tr>
-                      <td>Brand</td>
-                      <td>Any</td>
-                    </tr>
-                    <tr>
-                      <td>Packaging Size</td>
-                      <td>50 tablets</td>
-                    </tr>
-                    <tr>
-                      <td>Form</td>
-                      <td>Tablets</td>
-                    </tr>
-                    <tr>
-                      <td>Dosage Form</td>
-                      <td>tablet</td>
-                    </tr>
-                    <tr>
-                      <td>Manufactured by</td>
-                      <td>Himalya</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="card card-collapse">
-              <div class="card-header p-2" role="tab" id="specialityTab">
-                <h5 class="mb-0">
-                  <a class="collapsed" data-toggle="collapse" href="#speciality" aria-expanded="false"
-                    aria-controls="speciality">
-                    Medecine Contains
-                    <i class="material-icons">keyboard_arrow_down</i>
-                  </a>
-                </h5>
-              </div>
-              <div id="speciality" class="collapse" role="tabpanel" aria-labelledby="specialityTab"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, aperiam.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card card-collapse">
-              <div class="card-header p-2" role="tab" id="avaibilityTab">
-                <h5 class="mb-0">
-                  <a class="collapsed" data-toggle="collapse" href="#avaibility" aria-expanded="false"
-                    aria-controls="avaibility">
-                    Doctor Avaibility
-                    <i class="material-icons">keyboard_arrow_down</i>
-                  </a>
-                </h5>
-              </div>
-              <div id="avaibility" class="collapse" role="tabpanel" aria-labelledby="avaibilityTab"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <!-- <h5 class="main-price">₹ 250</h5> -->
-                </div>
-              </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-5">
+          <div class="text-center">
+            <img *ngIf="type==1" src="../../../../assets/img/tablet.png" class=" mt-5 medicine-image">
+            <img *ngIf="type==2" src="../../../../assets/img/capsule.png" class="medicine-image mt-5">
+            <img *ngIf="type==3" src="../../../../assets/img/syrup.png" class="medicine-image mt-5">
+          </div>
+        </div>
+        <div class="col-md-7 col-sm-6">
+          <!--
+          <div class="row">
+            <div class="col-12">
+              <h2 class="title"> Medicine Name </h2>
             </div>
           </div>
-          <!-- <h5 class="mt-2 main-price" style="color: #38c0d7;">Price : ₹ 250</h5> -->
-          <div class="row pick-size mt-4 mb-3">
-            <div class="col-md-6 col-sm-6">
-              <mat-form-field>
-                <mat-label>Quantity</mat-label>
-                <input matInput type="number" name="qty">
-              </mat-form-field>
+          -->
+          <div class="row">
+            <div class="col-6">
+              <table class="table top-table">
+                <tr>
+                  <td>Package size : </td>
+                  <td> 10 pieces</td>
+                </tr>
+                <tr>
+                  <td>Form : </td>
+                  <td>Tablet</td>
+                </tr>
+              </table>
             </div>
-            <div class="col-md-6 col-sm-6">
-              <button class="btn btn-warning">Buy Now</button>
+          </div>
+          <h3 class="div-price" style="color: #38c0d7;">HealthCrum Price : ₹ 150</h3>
+          
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="comparison-div" *ngFor="let company of affilication; index as i">
+                  <img
+                    src="{{company.src}}"
+                    class="comparison-img"
+                  >
+                  <div class="font-large text-center" style="background-color : white">
+                    Rs. {{company.price}}
+                  </div>
+                  <div class="go-store font-large text-center" (click)="goTOstore(i)" >
+                      Go to store 
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="row mt-4 mb-2">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+           Medicine aims to promote and maintain health and wellbeing.Conventional modern medicine is sometimes 
+          called allopathic medicine.
+          It involves the use of drugs or surgery, often supported by counseling and lifestyle measures.
+          Alternative and complementary types of medicine include acupuncture, homeopathy, herbal medicine, 
+          art therapy, traditional Chinese medicine, and many more.
+        </div>
+      </div>
+    </div>
+    <div class="book-section mt-2 mb-2">
+      <div class="row">
+        <div class="col-12 text-center">
+          <button class="btn btn-info">Order Now</button>
+          <button class="btn btn-custom">Add to cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="single-medicine-bottom-section mb-2">
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            
+              Description about medicine
+            
+          </mat-expansion-panel-header>
+            Medicine aims to promote and maintain health and wellbeing.Conventional modern medicine is sometimes 
+            called allopathic medicine.
+             It involves the use of drugs or surgery, often supported by counseling and lifestyle measures.
+             Alternative and complementary types of medicine include acupuncture, homeopathy, herbal medicine, 
+             art therapy, traditional Chinese medicine, and many more.
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="mt-2">
+          <mat-expansion-panel-header>
+            
+             Review
+            
+          </mat-expansion-panel-header>
+            Medicine aims to promote and maintain health and wellbeing.Conventional modern medicine is sometimes 
+            called allopathic medicine.
+             It involves the use of drugs or surgery, often supported by counseling and lifestyle measures.
+             Alternative and complementary types of medicine include acupuncture, homeopathy, herbal medicine, 
+             art therapy, traditional Chinese medicine, and many more.
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
-</main>
+</div>
 
 <!-- Classic Modal -->
 <div class="modal fade" id="myLogin" tabindex="-1" role="dialog" style="overflow:none;">

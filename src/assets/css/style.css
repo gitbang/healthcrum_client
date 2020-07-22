@@ -43,8 +43,31 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
 @import '~saturn-datepicker/bundle.css';
 /*-------------Akash-------------*/
+
+.medicine-drop-down  .dropdown-content{
+  padding: 6px 3px !important;
+}
 .flipper .front {
   position: relative !important;
+}
+.single-medicine-bottom-section .mat-expansion-panel-header{
+  color: white !important;
+  height: 20px !important;
+  padding: 20px !important;
+  margin: 0px !important;
+}
+.single-medicine-bottom-section .mat-expansion-panel-body {
+  padding: 10px !important;
+}
+.single-medicine-bottom-section .mat-expansion-indicator::after{
+  color: white;
+}
+
+.single-medicine-bottom-section .mat-expansion-panel-header,
+.single-medicine-bottom-section .mat-expansion-panel-header.mat-expanded,
+.single-medicine-bottom-section .mat-expansion-panel-header.mat-expanded:hover,
+.single-medicine-bottom-section .mat-expansion-panel-header.mat-expanded:focus {
+  background: linear-gradient(to right, #17c0d3, #027e8e) !important;
 }
 
 /* .flipper .back {
@@ -54,10 +77,11 @@ position: relative !important;
   padding: 0 !important;
 }
 
+
 .blood-test-checkout .mat-expansion-panel-header{
   color: white;
   height: 20px !important;
-  padding: 15px !important;
+  padding: 20px !important;
   margin: 0px !important;
 }
 .blood-test-checkout .mat-expansion-panel-body {

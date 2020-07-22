@@ -1,0 +1,61 @@
+$blue : #00aec5;
+.doctor-view{
+    background-color: #F5F8FA;
+    color: black;
+    border: 2px solid $blue;
+}
+.medicine-image{
+    width: 180px;
+}
+@mixin green-gradient {
+    background: linear-gradient(to right, #17c0d3, #027e8e);
+}
+.heading-row{
+    margin: 0;
+    @include green-gradient()
+}
+.comparison-div{
+    width: 120px;
+    height: auto;
+    margin-right: 5px;
+}
+.top-table{
+    td {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.comparison-img{
+    width: inherit;
+}
+.div-price{
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.font-large {
+    font-size: large;
+}
+.go-store{
+    cursor: pointer;
+    color: white;
+    @include green-gradient()
+}
+.text-center {
+    text-align: center;
+}
+.btn-custom{
+    color: #00aec5;
+    background-color: white;
+    border: 1px solid #00aec5;
+}
+.medicine-name{
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: white;
+}
+.medicine-brand-div{
+    margin-bottom: 5px;
+    .medicine-brand{
+        color: white;
+    }
+}

@@ -304,6 +304,26 @@ export class MedicinesComponent implements OnInit {
       },
       {name : "sub2"}
     ]},
+    {name : "category1", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
+    {name : "category8", 
+    subcategory : [
+      {
+        name : "sub1", 
+        subcategory : [
+          {name :"subsub1" }
+        ]
+      },
+      {name : "sub2"}
+    ]},
   ]
 
   tablet = [
