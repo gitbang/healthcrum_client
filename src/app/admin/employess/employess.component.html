@@ -24,46 +24,50 @@
               <div class="nav-tabs-wrapper">
 
                 <ul class="nav nav-tabs" data-tabs="tabs">
-              
+
                   <li class="nav-item">
                     <a mat-button class="nav-link text-white active" href="#new-employees" data-toggle="tab">
-                      <i class="material-icons">group_add</i>Departments
+                      <i class="material-icons">group_add</i>New Employees
                       <div class="ripple-container"></div>
                     </a>
                   </li>
-                 
-              
                   <li class="nav-item">
                     <a mat-button class="nav-link text-white" href="#registered-employees" data-toggle="tab">
                       <i class="material-icons">people_outline</i> Registered Employees
                       <div class="ripple-container"></div>
                     </a>
                   </li>
-
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#bulk-register" data-toggle="tab">
+                      <i class="material-icons">people_outline</i> Bulk Register
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="card-body">
             <div class="tab-content">
-            
-              
               <div class="tab-pane active" id="new-employees">
                 <div class="row form-top-line mt-4 pt-4">
                   <p>New Registered Employees</p>
+                  
+                  
                   <div class="col-md-8">
-                    <h4>Filter Result</h4>
-                    
-                     <div class="row">
-                      <div class="col-md-3">
+                    <h4>Approve Employees</h4>
+
+                    <div class="row">
+                      <div class="col-md-4">
                         <mat-form-field class="full-width">
                           <mat-label>Select Corporate</mat-label>
-                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected" (selectionChange)="getBranchByCorporate(corporateSelected)">
+                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected"
+                            (selectionChange)="getBranchByCorporate(corporateSelected)">
                             <mat-option [value]="corp._id" *ngFor="let corp of corporateData">{{corp.name}}</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-4">
                         <mat-form-field class="full-width">
                           <mat-label>Select Branch</mat-label>
                           <mat-select [(ngModel)]="branchSelected" name="branchSelected">
@@ -73,46 +77,49 @@
                           </mat-select>
                         </mat-form-field>
                       </div>
-                      <div class="col-md-2 text-center">
-                        <button class="btn btn-warning" (click)="getDepartmentsByCorporate()">Filter Result</button>
+                      <div class="col-md-3 text-center">
+                        <button class="btn btn-warning" (click)="approveEmployee()">Approve Selected</button>
                       </div>
                     </div>
-                    
+
                   </div>
                   <div class="col-12">
-                    <nz-table class="mt-3" #newEmployeeTable nzBordered [nzData]="departmentData"
+                    <nz-table class="mt-3" #newEmployeeTable nzBordered [nzData]="nonVerifiedEMployeeData"
                       [nzLoading]="newEmployeeRegistration">
                       <thead>
                         <tr style="text-align-last: center;">
-                          <th>Department</th>
-                          <th>Corporate Name</th>
+                          <th>Select</th>
+                          <th>EMP-ID</th>
+                          <th>Employee Name</th>
+                          <th>Company Name</th>
                           <th>Branch Name</th>
                           <th>Registered On</th>
-                          <th>Actions</th>
+                          <th>Dis Approve</th>
                         </tr>
                       </thead>
                       <tbody class="text-center">
                         <tr *ngFor="let data of newEmployeeTable.data" class="editable-row">
-                          <td> {{ data.name }}</td>
-                          <td> {{ data.corporate_id.name}}</td>
                           <td>
-                            {{ data.branch_id.branch_name }}
+                            <mat-checkbox (change)="employeeToApprove($event.checked,data.userId)"></mat-checkbox>
+
+                          </td>
+                          <td> {{ data.employeeId}}</td>
+                          <td> {{ data.name }}</td>
+                          <td>
+                            {{ data.companyName }}
+                          </td>
+                          <td>
+                            {{ data.branchName }}
                           </td>
                           <td>
                             {{data.createdAt | date : 'fullDate'}}
                           </td>
-                        
+
                           <td class="td-actions text-right">
-                            <button mat-raised-button type="button" 
-                               class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                            <button mat-raised-button type="button" class="btn btn-danger btn-link btn-sm" nz-popconfirm
                               nzPopconfirmTitle="Sure to disapprove?" (nzOnConfirm)="disApproveEmployee(data._id)">
                               <!-- <i class="material-icons">edit</i> -->
-                              Disapprove
-                            </button>
-                            <button type="button" class="btn btn-success btn-link btn-sm btn-just-icon" [matTooltipPosition]="'above'"
-                            matTooltip="Approve Employee">
-                              <!-- <i class="material-icons">close</i> -->
-                              Approve
+                              Dis-Approve
                             </button>
                           </td>
                           <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
@@ -122,18 +129,20 @@
                   </div>
                 </div>
               </div>
-              
-             
+
+
               <div class="tab-pane" id="registered-employees">
 
-                  <div class="row form-top-line my-4 py-4">
-                    <p>Registered Employees</p>
+                <div class="row form-top-line my-4 py-4">
+                  <p>Registered Employees</p>
 
+                  <div class="col-12">
                     <div class="row">
                       <div class="col-md-4">
                         <mat-form-field class="full-width">
                           <mat-label>Select Corporate</mat-label>
-                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected" (selectionChange)="getBranchByCorporate(corporateSelected)">
+                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected"
+                            (selectionChange)="getBranchByCorporate(corporateSelected)">
                             <mat-option [value]="data._id" *ngFor="let data of corporateData">{{data.name}}
                             </mat-option>
                           </mat-select>
@@ -148,66 +157,130 @@
                           </mat-select>
                         </mat-form-field>
                       </div>
-
-                      <div class="col-md-4"></div>
-                      <div class="col-12 text-center">
-                        <button class="btn btn-warning" (click)="getRegisteredEmployees()">Filter Result</button>
+                      <div class="col-3 text-center">
+                        <button class="btn btn-warning" (click)="getAllVerifiedEmployeesByCorporate()">Filter
+                          Result</button>
                       </div>
                     </div>
-                    <nz-table class="mt-3" #registredEmployeesTable nzBordered [nzData]="hrData" [nzLoading]="dataLoading">
+                  </div>
+
+                  <div class="col-12">
+                    <nz-table class="mt-3" #registredEmployeesTable nzBordered [nzData]="verifiedEmployeeData"
+                      [nzLoading]="registeredEmployeeLoading">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Corporate Name</th>
-                          <th>Branch</th>
+                          <th>EMP-ID</th>
+                          <th>Employee Name</th>
                           <th>Email</th>
                           <th>Contact</th>
-                          <th>Last Logged In</th>
+                          <th>HealthcrumID</th>
                           <th>Registered On</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let data of registredEmployeesTable.data" class="editable-row">
-                          <td> {{ data.hr_name}}</td>
                           <td>
-                            {{ data.corporate_id.name }}
+                            {{ data.employeeId }}
+                          </td>
+                          <td> {{ data.name}}</td>
+                          <td>
+                            {{ data.userId.email }}
                           </td>
                           <td>
-                            {{ data.branch_id.branch_name }}
+                            {{data.userId.phone}}
                           </td>
                           <td>
-                            {{data.hr_email}}
-                          </td>
-                          <td>
-                            {{data.hr_contact}}
-                          </td>
-                          <td>
-                            Not Available
+                            {{data.userId.healthcrumId}}
                           </td>
                           <td>
                             {{data.createdAt | date : 'fullDate'}}
                           </td>
                           <td class="td-actions text-right">
                             <button mat-raised-button type="button" matTooltip="Edit Task"
-                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="setHrUpdate(data._id)">
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                               <i class="material-icons">edit</i>
                             </button>
                             <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
-                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteHrById(data._id,template)">
+                              nzPopconfirmTitle="Sure to delete?">
                               <i class="material-icons">close</i>
                             </button>
                           </td>
                           <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
-
                         </tr>
                       </tbody>
                     </nz-table>
-
                   </div>
-          
-       
+                </div>
               </div>
+              <div class="tab-pane" id="bulk-register">
+
+                <div class="row form-top-line my-4 py-4">
+                  <p>Bulk Register Employees</p>
+                  <a href="https://api.sftservices.com/dummy/bulk-sample.csv" style="position: absolute;right: 25px;top: -12px;z-index: 99999999999;background: #fff;" target="_blank">
+                    <span class="material-icons">
+                      system_update_alt
+                      </span>
+                    Download sample CSV</a>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Corporate</mat-label>
+                          <mat-select [(ngModel)]="corporateSelected" name="corporateSelected"
+                            (selectionChange)="getBranchByCorporate(corporateSelected)">
+                            <mat-option [value]="data._id" *ngFor="let data of corporateData">{{data.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="full-width">
+                          <mat-label>Select Branch</mat-label>
+                          <mat-select [(ngModel)]="branchSelected" name="branchSelected">
+                            <mat-option [value]="data._id" *ngFor="let data of branchData">{{ data.branch_name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                  
+                      <div class="col-md-3" style="position: relative;">
+                        <label class="file-label ">CSV File</label>
+                        <input type="file" [(ngModel)]="employeeRegisterFile" (change)="uploadFileChange($event)" accept="csv"
+                          class="col-md-12" style="padding: 14px 5px 5px 5px;">
+                      </div>
+                      <div class="col-3 text-center">
+                        <button class="btn btn-warning" (click)="bulkRegisterEmployees()">Register All</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <mat-progress-bar mode="indeterminate" *ngIf="bulkEmployeeLoading"></mat-progress-bar>
+                    <h4 style="color:#ff0044" *ngIf="message">{{message}}</h4>
+                    <div *ngIf="bulkData" class="table-responsive">
+                      
+                      <nz-table class="mt-3" #bulkTable nzBordered [nzData]="bulkData" [nzLoading]="bulkEmployeeLoading">
+                        <thead>
+                          <tr>
+                            <th *ngFor="let tl of bulkTitle">{{ tl }}</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="bulkData">
+                          <tr *ngFor="let data of bulkData" [ngClass]="rejected ? 'bg-danger': ''">
+                            <td *ngFor="let d of data"  >
+                              {{ d }}
+                            </td>
+                            <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                    </div>
+                 
+                  </div>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>

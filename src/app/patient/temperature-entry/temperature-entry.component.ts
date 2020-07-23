@@ -349,4 +349,23 @@ export class TemperatureEntryComponent implements OnInit {
 
     return status;
   }
+
+  optionChecked(checked,option){
+    if(checked && option == "None"){
+      let opt = [];
+      for(let i = 0;i<this.currentQuestion.options.length ; i++){
+        if(this.currentQuestion.options[i].value != option){
+          this.currentQuestion.options[i].ans = false;
+        }
+      }
+    }else{
+      for(let i = 0;i<this.currentQuestion.options.length ; i++){
+        if(this.currentQuestion.options[i].value == "None"){
+          this.currentQuestion.options[i].ans = false;
+        }
+      }
+    }
+    console.log(checked,option);
+    console.log(this.currentQuestion);
+  }
 }

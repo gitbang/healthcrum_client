@@ -69,6 +69,7 @@ import { EmployeesTempComponent, EmployeeTemperatureDetailDailog } from "./pages
 import { NzTableModule } from "ng-zorro-antd/table";
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import { MaintainanceComponent } from './maintainance/maintainance.component';
+import { EmployessComponent } from './pages/employess/employess.component';
 @NgModule({
   declarations: [
     CompanyComponent,
@@ -95,7 +96,8 @@ import { MaintainanceComponent } from './maintainance/maintainance.component';
     CommonTableComponent,
     EmployeesTempComponent,
     EmployeeTemperatureDetailDailog,
-    MaintainanceComponent
+    MaintainanceComponent,
+    EmployessComponent
   ],
   entryComponents: [
     RegisterationFormComponent,

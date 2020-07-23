@@ -12,7 +12,7 @@ import { HealthStatusComponent } from "./pages/health-status/health-status.compo
 import { BookedAppointmentComponent } from "./pages/booked-appointment/booked-appointment.component";
 import { EmployeesTempComponent } from "./pages/employees-temp/employees-temp.component";
 import { MaintainanceComponent } from './maintainance/maintainance.component';
-
+import { EmployessComponent } from './pages/employess/employess.component';
 export const CompanyRoutes: Routes = [
   { path: "", component: DashboardComponent },
   { path: "event-article", component: MaintainanceComponent },
@@ -20,7 +20,7 @@ export const CompanyRoutes: Routes = [
   { path: "booked-appointment", component: MaintainanceComponent },
   { path: "health-status", component: MaintainanceComponent },
   { path: "employment-report", component: MaintainanceComponent },
-  { path: "registration", component: MaintainanceComponent },
+  { path: "employees", component: EmployessComponent },
   { path: "feedback", component: MaintainanceComponent },
   { path: "employee-tracking", component: MaintainanceComponent },
   { path: "health-analysis", component: MaintainanceComponent },
