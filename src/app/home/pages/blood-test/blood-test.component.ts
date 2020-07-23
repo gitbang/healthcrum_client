@@ -455,6 +455,7 @@ export class BloodTestComponent implements OnInit {
     })
   }
   insertFetchedData(result) {
+    console.log(result)
     this.shownresultarray = [],
       this.resultFromApi = result
       if(result.PackageTests.length > 0){
@@ -687,7 +688,13 @@ export class BloodTestComponent implements OnInit {
     this.singleTestComplete = []
     this.singleTestComplete.push(this.shownresultarray[index]);
     this.service.bookSingleTest(this.singleTestComplete);
-    this.router.navigateByUrl("blood-test/viewdetails/"+ this.shownresultarray[index]._id)
+    console.log("detail of test", this.shownresultarray[index])
+    this.router.navigate( ["blood-test/viewdetails/"+ this.shownresultarray[index]._id], {
+      queryParams : {
+        labId : this.shownresultarray[index].labId,
+        type : this.shownresultarray[index].type
+      }
+    })
   }
 
 

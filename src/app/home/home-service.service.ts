@@ -109,10 +109,10 @@ export class HomeServiceService {
                 .pipe( retry(2), catchError(this.handleError))
   }
   
-  bloodtestDetailById(id : string, type : object) : Observable<any> {
-    console.log("in service ",type)
+  bloodtestDetailById(id : string, data : object) : Observable<any> {
+    console.log("in service ",data)
     return this.http
-              .post(this.url + '/gettestbyid/' + id, type, this.option)
+              .post(this.url + '/gettestbyid/' + id, data, this.option)
               .pipe(retry(2), catchError(this.handleError))
   }
 

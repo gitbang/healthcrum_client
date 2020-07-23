@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HomeServiceService } from 'app/home/home-service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-view-details',
   templateUrl: './view-details.component.html',
@@ -11,25 +11,39 @@ export class ViewDetailsComponent implements OnInit {
 
   constructor(
     private service  : HomeServiceService,
-    private router : Router
+    private router : Router,
+    private route : ActivatedRoute
   ) { }
 
   ratingArray : Array<number>
-
+    testId : string = '5e747a28f65e736454e98050'
+    testType : string = 'packageTest'
+    labId : string = "5ec7a931a63d80ed24ad49be"
   ngOnInit() {
-    this.ratingArray = Array(5).fill(0);
-    this.service.currentTest.subscribe((result)=>{
-      this.data1 = result[0];
-      console.log("single test fetch details from client ",result[0])
-      if(result){
-        let add ;
-       this.shownresult = []
-        add = {...result[0]}
-        this.shownresult.push(add)
-        console.log("shown result", this.shownresult);
+    this.route.paramMap.subscribe((result)=>{ 
+      this.testId = result['params'].id
+    })
+    this.route.queryParamMap.subscribe((result)=>{
+      console.log("query parameters map: ", result)
+      this.testType = result['params'].type;
+      this.labId = result['params'].labId;
+    })
+    let data = {
+      type : this.testType,
+      labId : this.labId
+    }
+    console.log("data is : ", data)
+    this.service.bloodtestDetailById(this.testId , data).subscribe((result)=>{
+      console.log(result)
+      if(result.success){
+        this.insertFetchedData(result.data, result.lab)
+      } else {
+        console.log("something went wrong")
+        this.router.navigateByUrl('/blood-test')
       }
     })
-    //this.service.bloodtestDetailById()
+
+    this.ratingArray = Array(5).fill(0);
   }
   
   fromServer = {
@@ -99,10 +113,134 @@ export class ViewDetailsComponent implements OnInit {
   booknow() {
     console.log("book package")
    // this.service.bookSingleTest(this.data1);
-    this.router.navigateByUrl('blood-test/12345')
+   this.singleTestComplete = []
+   this.singleTestComplete.push(this.shownresult[0]);
+   this.service.bookSingleTest(this.singleTestComplete);
+   // here add code to store data to local storage
+   this.router.navigateByUrl('blood-test/' + this.shownresult[0])
   }
 
   getCall(){
     console.log("get call")
+  }
+  insertFetchedData(result : any[], lab: any) {
+    
+      console.log("reached")
+      console.log("lab is : ", lab)
+      console.log(result)
+      if(this.testType == 'packageTest'){
+        console.log("entered")
+        let add 
+        let list : Array<string> = []
+        result.forEach((pack)=>{
+          console.log("in for each")
+          list.push(pack.name)
+          let offers  = pack.offerPrice / pack.mrp * 100;
+          offers = 100 - Math.round(offers)
+          add = {
+            _id         : pack._id,
+            name        : pack.name,
+            labLogo     : lab[0].logo,
+            parameters  : pack.individualTests.length,
+            marketprice : pack.mrp,
+            offerprice  : pack.offerPrice,
+            rating      : lab[0].rating,
+            type        : this.testType,
+            fasting     : pack.fasting,
+            reportTAT   : pack.reportingTime.within,
+            recommendedFor : {
+              ...pack.recommended_for
+            },
+            recommendedage : {
+              ...pack.recommended_age
+            },
+            what : pack.what,
+            why : pack.why,
+            when : pack.when,
+            offer : offers,
+            labId : lab[0]._id,
+            additional_Info : pack.additional_Info,
+            relatedDiseases : pack.relatedDiseases,
+          }
+        })
+        this.shownresult = [];
+        this.shownresult.push(add)
+        console.log("final shown result", this.shownresult)
+        //this.packageTest = list
+      }
+      if(this.testType == 'singleTest') {   
+        let add ;
+        let list : Array<string> = []
+        result.forEach((pack)=>{
+          // this.getRating(pack.lab.rating);
+          list.push(pack.name)
+          let offers  = pack.offerPrice / pack.mrp * 100;
+          offers = 100 - Math.round(offers)
+          add = {
+            _id         : pack._id,
+            name        : pack.name,
+            labLogo     : lab[0].logo,
+            parameters  : 1,
+            marketprice : pack.mrp,
+            offerprice  : pack.offerPrice,
+            rating      : lab[0].rating,
+            type        : 'singleTest',
+            fasting     : pack.fasting,
+            reportTAT : pack.reportingTime.within,
+            recommendedFor : {
+              ...pack.recommended_for
+            },
+            recommendedage : {
+              ...pack.recommended_age
+            },
+            what : pack.what,
+            why : pack.why,
+            when : pack.when,
+            offer : offers,
+            labId : lab[0]._id,
+            additional_Info : pack.additional_Info,
+            relatedDiseases : pack.relatedDiseases
+          }
+        })
+        this.shownresult.push(add)
+        //this.singleTest = list
+      } 
+      if(this.testType == 'profileTest') {
+        let add ;
+        let list : Array<string> = []
+        result.forEach((pack)=>{
+          list.push(pack.name)
+          let offers  = pack.offerPrice / pack.mrp * 100;
+          offers = 100 - Math.round(offers)
+          add = {
+            _id : pack._id,
+            name : pack.name,
+            labLogo : lab[0].logo,
+            parameters : pack.individualTests.length,
+            marketprice : pack.mrp,
+            offerprice : pack.offerPrice,
+            rating : lab[0].rating,
+            type : 'profileTest',
+            fasting : pack.fasting,
+            reportTAT : pack.reportingTime.within,
+            recommendedFor : {
+              ...pack.recommended_for
+            },
+            recommendedage : {
+              ...pack.recommended_age
+            },
+            what : pack.what,
+            why : pack.why,
+            when : pack.when,
+            offer : offers,
+            labId : lab[0]._id,
+            additional_Info : pack.additional_Info,
+            relatedDiseases : pack.relatedDiseases
+          }
+        })
+        this.shownresult.push(add)
+        //this.profileTest = list
+      }
+    // this.afterFetch();
   }
 }
