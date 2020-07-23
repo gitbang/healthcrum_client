@@ -10,8 +10,8 @@ import { retry, catchError } from 'rxjs/operators';
 export class HomeServiceService {
 
 
-  //  url : string = 'http://localhost:3000';
-  url: String = "https://api.sftservices.com";
+    url : string = 'http://localhost:3000';
+  //url: String = "https://api.sftservices.com";
  
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -66,6 +66,12 @@ export class HomeServiceService {
               .post(this.url + "/cart/save/test/" + userId, data)
               .pipe(retry(2), catchError(this.handleError))
   }
+  bloodTestSaveMultiToCart(userId : string, data ) : Observable<any>{
+    return this.http
+              .post(this.url + "/cart/save/multi-test/" + userId,data)
+              .pipe(retry(2), catchError(this.handleError))
+  }
+
   bloodTestDeleteCartServer(userId : string, packId : string ) : Observable<any>{
     return this.http
               .post(this.url + "/cart/delete/test/" + userId, {testId : packId})
@@ -214,7 +220,12 @@ export class HomeServiceService {
               .post(this.url + ' /saveappointement/' + userId, data ,this.option)
               .pipe(retry(2), catchError(this.handleError))
   }
-
+  // consultation view details
+  consultationViewDetails(userId : string) : Observable<any>{
+    return this.http
+              .get(this.url + "/api/doctor/doctor-profile/"+ userId, this.option)
+              .pipe(retry(2), catchError(this.handleError))
+  }
 
   //------------- Medicine ----------//
 

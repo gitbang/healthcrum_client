@@ -43,6 +43,9 @@ $blue : #00A0A8;
     background-color: $blue;
   }
 }
+.custom-width{
+  width: 70%;
+}
 
 @media only screen and (max-width : 500px) {
   .otp-img{

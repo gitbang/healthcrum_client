@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+
 
 @Component({
   selector: "app-single-medicine",
@@ -8,7 +9,9 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class SingleMedicineComponent implements OnInit {
   type: number;
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private router : Router) {
     this.type = parseInt(this.route.snapshot.paramMap.get("id"));
   }
 
@@ -19,5 +22,36 @@ export class SingleMedicineComponent implements OnInit {
     //   paneContainer: paneContainer,
     //   inlinePane: false,
     // });
+  }
+
+  affilication =[
+    {
+      src : "../../../../assets/img/Equipments/amazon2.png",
+      price : 180,
+      link : "https://www.amazon.com"
+    },
+    {
+      src : "../../../../assets/img/Equipments/amazon2.png",
+      price : 170,
+      link : "https://www.amazon.com"
+    },
+    {
+      src : "../../../../assets/img/Equipments/amazon2.png",
+      price : 200,
+      link : "https://www.amazon.com"
+    },
+    {
+      src : "../../../../assets/img/Equipments/amazon2.png",
+      price : 220,
+      link : "https://www.amazon.com"
+    },
+    {
+      src : "../../../../assets/img/Equipments/amazon2.png",
+      price : 180,
+      link : "https://www.amazon.com"
+    },
+  ]
+  goTOstore(index : number){
+    window.location.href = this.affilication[index].link
   }
 }

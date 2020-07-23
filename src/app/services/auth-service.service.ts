@@ -188,6 +188,20 @@ export class AuthServiceLocal {
     }
   }
 
+  userTest(){
+    try{
+      const test = localStorage.getItem('test')
+      this.deleteUserTest();
+      return test ? test : []
+    } catch(e) {
+      return []
+    }
+  } 
+
+  deleteUserTest(){
+    localStorage.removeItem('test')
+  }
+
   deleteRedirectUrl(){
     localStorage.removeItem('url');
   }
@@ -204,4 +218,6 @@ export class AuthServiceLocal {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+
+  
 }

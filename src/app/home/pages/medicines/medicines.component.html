@@ -117,16 +117,16 @@
       </div>
     </div>
 
-    <div class="row display-in-block" style="justify-content : center">
+    <div class="medicine-drop-down row category-menu display-in-block" style="justify-content : center">
       <div *ngFor="let category of menuBar; let i = index" class="dropdown-main">
         <div class="dropdown">
-          <div class="row no-margin">
+          <div class="row no-margin hover-effect">
             <div>
-              <button class="dropbtn">{{category.name | titlecase}} </button>
+              <span><button class="dropbtn">{{category.name | titlecase}}
+               <mat-icon class="drop-down-arrow dropbtn">arrow_drop_down_circle</mat-icon></button> </span>
+              
             </div>
-            <div style="padding : 0" class="drop-down-arrow-div" >
-              <mat-icon class="drop-down-arrow">arrow_drop_down_circle</mat-icon>
-            </div>
+            
           </div>
           
           <div class="dropdown-content">
@@ -143,6 +143,7 @@
 
     <div class="row mt-4">
       <div class="col-md-12 padding-null" >   
+        <!--
         <mat-toolbar class="top-navbar padding-null">
           <div class="col-sm-3 col-lg-2 mt-1 p-0">
             <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="priceMenu">Price <mat-icon>keyboard_arrow_down</mat-icon></button>
@@ -157,11 +158,6 @@
             <button class="filter btn btn-link" mat-flat-button [matMenuTriggerFor]="discountMenu">Discount<mat-icon>keyboard_arrow_down</mat-icon></button>
           </div>
           <mat-menu #priceMenu ="matMenu">
-            <!--
-            <button mat-menu-item (click)="price(100)">Below rs.100</button>
-            <button mat-menu-item (click)="price(200)">Rs.100 - Rs.200</button>
-            <button mat-menu-item (click)="price()">Above Rs.200</button>
-            -->
             <div class="col-12">
               <mat-slider
                 thumbLabel
@@ -199,6 +195,7 @@
           </mat-menu>
 
         </mat-toolbar>
+        -->
       </div>
     </div>
 
@@ -331,10 +328,10 @@
                       </div>
                     </div>
                     <div class="col-4 justify-content-center">
-                      <div>
+                      <div style="float : right" > 
                         <button class="btn btn-common btn-cart">Add to cart</button>
                       </div>
-                      <div class="mt-3">
+                      <div class="mt-3" style="float : right">
                         <button class="btn btn-common btn-detail">View Details</button>
                       </div>
                     </div>

@@ -75,29 +75,42 @@
   </div>
 
   <div class="row mt-4">
-    <div class="col-md-12">   
-      <mat-toolbar color="primary" class="top-navbar">
+    <div class="col-md-12 consultation-main">   
+      <mat-toolbar color="primary" class="top-navbar" style="min-width : 1130px">
         <!--<div class="col-12">
           <div class="row"> -->
-            <div class="col-sm-3 col-lg-2 mt-1">
-              <button class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
+            <div class=" mt-1">
+              <button  *ngIf="filters.stream == null" class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
+              <button *ngIf="filters.stream != null" class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">
+                {{filters.stream}} <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
             </div>
-            <div class="col-sm-3 col-lg-2 mt-1">
+            <div class=" mt-1">
               <button class="filter" mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
             </div>
-            <div class="col-sm-3 col-lg-2 mt-1">
-              <button  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
+            <div class=" mt-1">
+              <button *ngIf="filters.gender == null"  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
+              <button *ngIf="filters.gender != null"  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">
+                {{filters.gender}} <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
             </div>
-            <div class="col-sm-3 col-lg-2 mt-1">
+            <div class=" mt-1">
               <button class="filter" mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
             </div>
-            <div class="col-sm-3 col-lg-2 mt-1">
-              <button class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
+            <div class=" mt-1">
+              <button *ngIf="filters.fromHealthcrum == null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
+              <button *ngIf="filters.fromHealthcrum != null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">
+                {{filters.fromHealthcrum ? 'Healthcrum Doc' : 'Non Healthcrum' }} 
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
             </div>
-            <div class="col-sm-3 col-lg-2 mt-1">
-              <button class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
+            <div class=" mt-1">
+              <button  *ngIf="consFilterLength == 0" class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
+              <button  *ngIf="consFilterLength != 0" class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">
+                {{consultationToshow | titlecase}} <span *ngIf="consFilterLength > 1"> + {{consFilterLength - 1}}</span>
+               <mat-icon>keyboard_arrow_down</mat-icon></button>
             </div>
-            <div class="col-sm-3 col-lg-2 mt-1">
+            <div class=" mt-1">
               <button  class="filter" mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
             </div>
             <!--
@@ -122,6 +135,13 @@
           <button mat-menu-item (click)="getGender('male')" >Male</button>
           <button mat-menu-item (click)="getGender('female')">Female</button>
           <button mat-menu-item (click)="getGender('other')">Others</button>
+        <!--
+          <mat-radio-group aria-label="Select an option" class="example-radio-group">
+            <mat-radio-button class="example-radio-button" value="1">Male</mat-radio-button>
+            <mat-radio-button  class="example-radio-button" value="2">Female</mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="3">Others</mat-radio-button>
+          </mat-radio-group>
+        -->
         </mat-menu>
 
         <mat-menu #experienceMenu ="matMenu">
@@ -136,10 +156,22 @@
         </mat-menu>
 
         <mat-menu #consultationMenu ="matMenu">
+          <div clas="col-12">
+            <div clas="row" style="padding-left : 10px">
+              <div clas="col-md-6">
+                <mat-checkbox (change)="getConsultation($event, 'tele')">Telephonic consultation</mat-checkbox>
+                <mat-checkbox (change)="getConsultation($event, 'video')">Video consultation</mat-checkbox>
+                <mat-checkbox (change)="getConsultation($event, 'physical')">Physical consultation</mat-checkbox>
+                <mat-checkbox (change)="getConsultation($event, 'emergency')">Emergency consultation</mat-checkbox>
+              </div>
+            </div>
+          </div>
+          <!--
           <button mat-menu-item (click)="getConsultation('tele')">Telephonic consultation</button>
           <button mat-menu-item (click)="getConsultation('video')">Video consultation</button>
           <button mat-menu-item (click)="getConsultation('physical')">Physical consultation</button>
           <button mat-menu-item (click)="getConsultation('emergency')">Emergency consultation</button>
+          -->
         </mat-menu>
 
         <mat-menu #ratingMenu ="matMenu">
@@ -269,7 +301,7 @@
                                 >
                               </div>
                               <label class="image-data">
-                                8am-6pm
+                                {{doctor.consultationTiming.chat.from}} - {{doctor.consultationTiming.chat.to}}
                               </label>
                             </div>
                           </div>
@@ -368,7 +400,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-4 col-ld-5">
+                  <div class="col-md-4">
                     <div class="row mt-0">
                       <div class="col-md-12 doctor-name mt-0">
                         <h4 class=" m-0 ">{{doctor.name }}</h4>

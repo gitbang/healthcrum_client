@@ -29,6 +29,7 @@ export class ViewDetailsComponent implements OnInit {
         console.log("shown result", this.shownresult);
       }
     })
+    //this.service.bloodtestDetailById()
   }
   
   fromServer = {
