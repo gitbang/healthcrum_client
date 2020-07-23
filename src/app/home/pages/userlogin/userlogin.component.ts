@@ -61,7 +61,8 @@ export class UserloginComponent implements OnInit {
     console.log("is login ", isLoggin);
     if (isLoggin) {
       let role = this.authLocal.getUserRole();
-      this.dynamicRouting(role);
+      console.log("role is : ", role)
+      this.sendToUrl(role);
     }
 
     // let data = this.authLocal.getUserDetails()
@@ -298,6 +299,41 @@ export class UserloginComponent implements OnInit {
   dynamicRouting(role) {
     this.authLocal.saveTokenAndRole(this.completeData.userDetail);
     this.authLocal.saveUserToken(this.completeData.loginToken);
+    let userId = this.authLocal.getUserID
+
+    // get user cart from the local storage
+    var testCart = this.authLocal.userTest()
+    console.log(testCart)
+    let toSend = [];
+    
+      if(testCart.length > 0 && role != 'doctor') {
+        for(let i = 0; i < testCart.length; i++){
+          let add = {
+            labId : testCart[i].labId,
+            type : testCart[i].type,
+            _id : testCart[i]._id
+          }
+          toSend.push(add)
+        }
+
+        this.service.bloodTestSaveMultiToCart(userId, toSend).subscribe((response)=>{
+          if(response.success){
+            console.log("data saved")
+            this.sendToUrl(role)
+          } else {
+            console.log("something went wrong")
+          }
+        })
+
+      } else {
+        this.authLocal.deleteUserTest();
+        //this.sendToUrl(role)
+      } 
+    
+    this.sendToUrl(role)
+  }
+
+  sendToUrl(role: string){
     const url = this.authLocal.redirectUrl
     if(url != false && url != null ) {
       this.router.navigateByUrl(url)

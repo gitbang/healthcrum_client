@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import {Router} from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { BookModelComponent } from '../book-model/book-model.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-view-doctor-details',
   templateUrl: './view-doctor-details.component.html',
@@ -14,27 +15,43 @@ export class ViewDoctorDetailsComponent implements OnInit {
   constructor(
     private service : HomeServiceService,
     private router : Router,
-    private matDialog : MatDialog
+    private matDialog : MatDialog,
+    private route: ActivatedRoute
   ) { }
-  i=0;
 
+  id : string;
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = params['id']; // (+) converts string 'id' to a number
+      console.log(this.id)
+      // In a real app: dispatch action to load the details here.
+      this.service.consultationViewDetails(this.id).subscribe((result)=>{
+        console.log("result is ", result)
+        if(result.success){
+          this.doctor = result.doctorData;
+          console.log("doctor is : ", this.doctor)
+        } else {
+          console.log("doctor not found")
+        }
+      })
+   });
 
+    
     this.ratingArray = Array(5).fill(0);
 
-    this.service.currendoctor.subscribe((result)=>{
-      console.log("doctor detail :", result)
-      //this.doctor = null
-      if(result) {
-        this.doctor = result[0];
-      }
-      console.log(this.doctor)
-    })
+    // this.service.currendoctor.subscribe((result)=>{
+    //   console.log("doctor detail :", result)
+    //   //this.doctor = null
+    //   if(result) {
+    //     this.doctor = result[0];
+    //   }
+    //   console.log(this.doctor)
+    // })
   }
   rating : number = 3
   ratingArray : Array<number>; 
   doctor = {
-    profilepic : './assets/img/faces/doctor.png',    // profile picture
+    profilepic : '',    // profile picture
     name : 'DR. PANKAJ MANORIA',  
     experience : 10 ,                            // add + years
     speciality : 'Heart', 
@@ -66,7 +83,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
     distance : 5,  
     fromHealthcrum : false,
     gender : 'male',
-    pictures : ["./assets/img/partners/p1-omron.png", "./assets/img/partners/p1-omron.png"],
+    pictures : ["", ""],
     qualification : ['MBBS'],
     registrationNumber : '12345',
     stream : 'ayurveda',
@@ -74,7 +91,8 @@ export class ViewDoctorDetailsComponent implements OnInit {
       emergency: {from: "8 am", to: "2 pm"},
       physical: {from: "8 am", to : "6pm"},
       tele: {from: "8 am", to: "2 pm"},
-      video: {from: "8 am", to: "2 pm"}
+      video: {from: "8 am", to: "2 pm"},
+      chat : {from : "8 am", to :"2 pm"}
     },
     //availableDays : ["Monday", "Tuesday", "Wednesday", "Thursday","Friday"]       use days instead
   }

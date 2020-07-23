@@ -43,6 +43,9 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
 @import '~saturn-datepicker/bundle.css';
 /*-------------Akash-------------*/
+.consultation-main .filter{
+  margin-right: 2rem !important;
+}
 
 .medicine-drop-down  .dropdown-content{
   padding: 6px 3px !important;

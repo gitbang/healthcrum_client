@@ -62,5 +62,11 @@ export class UploadPrescriptionComponent implements OnInit {
       }
     }
   }
+  verify(){
+    console.log("verify click")
+  }
 
+  uploadFile(){
+    console.log("upload file called")
+  }
 }

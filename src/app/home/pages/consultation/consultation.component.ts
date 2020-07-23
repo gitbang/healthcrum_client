@@ -120,7 +120,8 @@ export class ConsultationComponent implements OnInit {
   doctorType : string;
   changeRoute(){
     console.log("in changeroute",this.myControl.value)
-    this.location.replaceState("/consultation/"+ this.category + '/'+ this.myControl.value);
+    //this.location.replaceState("/consultation/"+ this.category + '/'+ this.myControl.value);
+    this.location.replaceState("/consultation/" + this.filters.stream + '/' + this.filters.location.city)
   }
 
   setCurrentLocation() {
@@ -173,7 +174,8 @@ export class ConsultationComponent implements OnInit {
         char :{from: "8 am", to: "2 pm"}
       },
       chat : '8am - 6pm',
-      logo : "./assets/img/consulation/logo.png"
+      logo : "./assets/img/consulation/logo.png",
+      userId : ""
     },
   ]
 
@@ -185,7 +187,7 @@ export class ConsultationComponent implements OnInit {
     let doc = [];
     doc.push(this.doctors[index])
     this.service.changedoctor(doc)
-    this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index]._id)
+    this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index].userId)
   }
 
   private _filter(value: string): string[] {
@@ -300,7 +302,9 @@ export class ConsultationComponent implements OnInit {
     this.filters.location.city = this.filters.location.city.toLowerCase()
     this.service.consultationFilter(this.filters).subscribe((result)=>{
       console.log("in filterdoctor function ", result);
+      this.changeRoute();
       if(result.success){
+       
         this.doctors = result.data
         this.autofilldata();
         this.containDoctor = true;
@@ -354,9 +358,20 @@ export class ConsultationComponent implements OnInit {
     this.filterDotor()
   }
   
-  getConsultation(type : string){
-    this.filters.consultation = {};
-    this.filters.consultation[type] = true;
+  consFilterLength : number = 0;
+  consultationToshow : string 
+  getConsultation(event,type : string){
+    console.log(event)
+    if(event.checked){
+      this.filters.consultation[type] = true;
+    } else {
+      delete this.filters.consultation[type]
+    }
+    
+    this.consFilterLength = Object.keys(this.filters.consultation).length;
+    this.consultationToshow = Object.keys(this.filters.consultation)[0];
+    console.log("to show ", this.consultationToshow)
+    console.log("filters consultation ", this.filters.consultation)
     this.filterDotor()
   }
 

@@ -304,3 +304,12 @@ table{
     background-color: #eaeff2;
     //padding: 5px 0px;
 }
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+.example-radio-button {
+    margin: 5px;
+}
