@@ -45,7 +45,6 @@ $blue : #00A0A8;
 .container-fluid{
     background-color: $bg;
     overflow: scroll;
-    height: 80%;
 }
 .example-full-width{
     width: 100%;
@@ -312,4 +311,10 @@ table{
 }
 .example-radio-button {
     margin: 5px;
+}
+.filter-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    
 }

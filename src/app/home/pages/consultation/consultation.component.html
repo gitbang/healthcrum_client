@@ -77,118 +77,144 @@
   <div class="row mt-4">
     <div class="col-md-12 consultation-main">   
       <mat-toolbar color="primary" class="top-navbar" style="min-width : 1270px">
-        <!--<div class="col-12">
-          <div class="row"> -->
-            <div class=" mt-1">
-              <button  *ngIf="filters.stream == null" class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
-              <button *ngIf="filters.stream != null" class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">
-                {{filters.stream}} <mat-icon>keyboard_arrow_down</mat-icon>
-              </button>
-            </div>
-            <div class=" mt-1">
-              <button class="filter" mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
-            </div>
-            <div class=" mt-1">
-              <button *ngIf="filters.gender == null"  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
-              <button *ngIf="filters.gender != null"  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">
-                {{filters.gender}} <mat-icon>keyboard_arrow_down</mat-icon>
-              </button>
-            </div>
-            <div class=" mt-1">
-              <button class="filter" mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
-            </div>
-            <div class=" mt-1">
-              <button *ngIf="filters.fromHealthcrum == null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
-              <button *ngIf="filters.fromHealthcrum != null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">
-                {{filters.fromHealthcrum ? 'Healthcrum Doc' : 'Non Healthcrum' }} 
-                <mat-icon>keyboard_arrow_down</mat-icon>
-              </button>
-            </div>
-            <div class=" mt-1">
-              <button  *ngIf="consFilterLength == 0" class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
-              <button  *ngIf="consFilterLength != 0" class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">
-                {{consultationToshow | titlecase}} <span *ngIf="consFilterLength > 1"> + {{consFilterLength - 1}}</span>
-               <mat-icon>keyboard_arrow_down</mat-icon></button>
-            </div>
+        
+        <div class=" mt-1">
+          <button  *ngIf="filters.stream.length == 0" class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">Stream <mat-icon>keyboard_arrow_down</mat-icon></button>
+          
+          <button *ngIf="filters.stream.length != 0" class="filter" mat-flat-button [matMenuTriggerFor]="streamMenu">
+            {{filters.stream[0]}} <span *ngIf="filters.stream.length > 1">+ {{filters.stream.length - 1}}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          
+        </div>
+        <div class=" mt-1">
+          <button *ngIf="filters.speciality.length == 0" class="filter" mat-flat-button [matMenuTriggerFor]="specialityMenu">Speciality <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button *ngIf="filters.speciality.length != 0" class="filter" mat-flat-button [matMenuTriggerFor]="specialityMenu">
+            {{filters.speciality[0]}} <span *ngIf="filters.speciality.length > 1">+ {{filters.speciality.length - 1}}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <div class=" mt-1">
+          <button *ngIf="filters.gender.length == 0"  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">Gender <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button *ngIf="filters.gender.length != 0"  class="filter" mat-flat-button [matMenuTriggerFor]="genderMenu">
+            {{filters.gender[0]}} <span *ngIf='filters.gender.length > 1'> + {{filters.gender.length - 1}}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <div class=" mt-1">
+          <button class="filter" mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
+        </div>
+        <div class=" mt-1">
+          <button *ngIf="filters.fromHealthcrum == null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button *ngIf="filters.fromHealthcrum != null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">
+            {{filters.fromHealthcrum ? 'Healthcrum Doc' : 'Non Healthcrum' }} 
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <div class=" mt-1">
+          <button  *ngIf="consFilterLength == 0" class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">consultation <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button  *ngIf="consFilterLength != 0" class="filter" mat-flat-button [matMenuTriggerFor]="consultationMenu">
+            {{consultationToshow | titlecase}} <span *ngIf="consFilterLength > 1"> + {{consFilterLength - 1}}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon></button>
+        </div>
+        
+        <div class=" mt-1">
+          <button *ngIf="filters.rating.length == 0"  class="filter" mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button *ngIf="filters.rating.length != 0"  class="filter" mat-flat-button [matMenuTriggerFor]="ratingMenu">
+            {{filters.rating[0]}} star <span *ngIf="filters.rating.length > 1"> + {{filters.rating.length - 1}}</span>
+           <mat-icon>keyboard_arrow_down</mat-icon></button>
+        </div>
+        <div class=" mt-1">
+          <button  *ngIf="!sorting" class="filter" mat-flat-button [matMenuTriggerFor]="sortMenu">Sort By
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          <button  *ngIf="sorting" class="filter" mat-flat-button [matMenuTriggerFor]="sortMenu">{{sortDisplay}}
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
             
-            <div class=" mt-1">
-              <button  class="filter" mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
-            </div>
-            <div class=" mt-1">
-              <button  *ngIf="!sorting" class="filter" mat-flat-button [matMenuTriggerFor]="sortMenu">Sort By
-                <mat-icon>keyboard_arrow_down</mat-icon>
-              </button>
-              <button  *ngIf="sorting" class="filter" mat-flat-button [matMenuTriggerFor]="sortMenu">{{sortDisplay}}
-                <mat-icon>keyboard_arrow_down</mat-icon>
-              </button>
-            </div>
-            <!--
-          </div>
-        </div>-->
         
         
         <mat-menu #streamMenu ="matMenu">
+          <!--
           <button mat-menu-item (click)="getStream('Ayurveda')" >Ayurvedic</button>
           <button mat-menu-item (click)="getStream('Allopathic')">Allopathic</button>
           <button mat-menu-item (click)="getStream('Homeophathic')">Homeophathic</button>
+          -->
+          <div class="filter-checkbox">
+            <mat-checkbox  (change)="getStream('Ayurveda')">Ayurveda</mat-checkbox>
+            <mat-checkbox (change)="getStream('Allopathic')">Allopathic</mat-checkbox>
+            <mat-checkbox (change)="getStream('Homeophathic')">Homeophathic</mat-checkbox>
+          </div>
+            
         </mat-menu>
         
         <mat-menu #specialityMenu ="matMenu">
+          <!--
           <button mat-menu-item (click)="getSpeciality('Heart')">Heart Specialist</button>
           <button mat-menu-item (click)="getSpeciality('skin')">Skin Speciality</button>
           <button mat-menu-item (click)="getSpeciality('lung')">Lungs Speciality</button>
           <button mat-menu-item (click)="getSpeciality('dentist')">Dentist</button>
+          -->
+          <div class="filter-checkbox">
+            
+            <mat-checkbox  (change)="getSpeciality('Heart')">Heart</mat-checkbox>
+            <mat-checkbox (change)="getSpeciality('skin')">Skin</mat-checkbox>
+            <mat-checkbox (change)="getSpeciality('lung')">Lungs</mat-checkbox>
+            <mat-checkbox (change)="getSpeciality('dentist')">Liver</mat-checkbox>
+          
+          </div>
         </mat-menu>
 
         <mat-menu #genderMenu ="matMenu">
-          <button mat-menu-item (click)="getGender('male')" >Male</button>
-          <button mat-menu-item (click)="getGender('female')">Female</button>
-          <button mat-menu-item (click)="getGender('other')">Others</button>
-        <!--
-          <mat-radio-group aria-label="Select an option" class="example-radio-group">
-            <mat-radio-button class="example-radio-button" value="1">Male</mat-radio-button>
-            <mat-radio-button  class="example-radio-button" value="2">Female</mat-radio-button>
-            <mat-radio-button class="example-radio-button" value="3">Others</mat-radio-button>
-          </mat-radio-group>
-        -->
+          <div class="filter-checkbox">
+            <mat-checkbox  (change)="getGender('male')">Male</mat-checkbox>
+            <mat-checkbox (change)="getGender('female')">Female</mat-checkbox>
+            <mat-checkbox (change)="getGender('others')">Others</mat-checkbox>
+              
+          </div>
         </mat-menu>
 
         <mat-menu #experienceMenu ="matMenu">
-          <button mat-menu-item (click)="getExperience(2)">Below 2 years</button>
-          <button mat-menu-item (click)="getExperience(5)">2 years to 5 years</button>
-          <button mat-menu-item (click)="getExperience(10)">Above 5 years</button>
+          <button mat-menu-item (click)="getExperience(0 ,2, 'Below 2 years')">Below 2 years</button>
+          <button mat-menu-item (click)="getExperience(2 , 5, '2 years to 5 years')">2 years to 5 years</button>
+          <button mat-menu-item (click)="getExperience(5 , 10, '5 years to 10 years')">5 years to 10 years</button>
+          <button mat-menu-item (click)="getExperience(10 , 100, 'Above 10 years')">Above 10 years</button>
         </mat-menu>
 
         <mat-menu #healthcrumMenu ="matMenu">
-          <button mat-menu-item (click)="getDoctorType(true)">Healthcrum Doctor</button>
-          <button mat-menu-item (click)="getDoctorType(false)">Other doctors</button>
+          
+          <div class="filter-checkbox">
+            
+            <mat-checkbox [(ngModel)]='filterHealthcrum1' (change)="getDoctorType(true)">Healthcrum Doctor</mat-checkbox>
+            <mat-checkbox [(ngModel)]='filterHealthcrum2' (change)="getDoctorType(false)">Other Doctor</mat-checkbox>
+            
+          
+          </div>
         </mat-menu>
 
         <mat-menu #consultationMenu ="matMenu">
-          <div clas="col-12">
-            <div clas="row" style="padding-left : 10px">
-              <div clas="col-md-6">
-                <mat-checkbox (change)="getConsultation($event, 'tele')">Telephonic consultation</mat-checkbox>
-                <mat-checkbox (change)="getConsultation($event, 'video')">Video consultation</mat-checkbox>
-                <mat-checkbox (change)="getConsultation($event, 'physical')">Physical consultation</mat-checkbox>
-                <mat-checkbox (change)="getConsultation($event, 'emergency')">Emergency consultation</mat-checkbox>
-              </div>
-            </div>
+          <div class="filter-checkbox">
+       
+            <mat-checkbox (change)="getConsultation($event, 'tele')">Telephonic consultation</mat-checkbox>
+            <mat-checkbox (change)="getConsultation($event, 'video')">Video consultation</mat-checkbox>
+            <mat-checkbox (change)="getConsultation($event, 'physical')">Physical consultation</mat-checkbox>
+            <mat-checkbox (change)="getConsultation($event, 'emergency')">Emergency consultation</mat-checkbox>
+              
           </div>
-          <!--
-          <button mat-menu-item (click)="getConsultation('tele')">Telephonic consultation</button>
-          <button mat-menu-item (click)="getConsultation('video')">Video consultation</button>
-          <button mat-menu-item (click)="getConsultation('physical')">Physical consultation</button>
-          <button mat-menu-item (click)="getConsultation('emergency')">Emergency consultation</button>
-          -->
+
         </mat-menu>
 
         <mat-menu #ratingMenu ="matMenu">
-          <button mat-menu-item (click)="getRating(1)">1 stars</button>
-          <button mat-menu-item (click)="getRating(2)">2 stars</button>
-          <button mat-menu-item (click)="getRating(3)">3 stars</button>
-          <button mat-menu-item (click)="getRating(4)">4 stars</button>
-          <button mat-menu-item (click)="getRating(5)">5 stars</button>
+          <div class="filter-checkbox">
+       
+            <mat-checkbox (change)="getRating(1)">1 start</mat-checkbox>
+            <mat-checkbox (change)="getRating(2)">2 start</mat-checkbox>
+            <mat-checkbox (change)="getRating(3)">3 start</mat-checkbox>
+            <mat-checkbox (change)="getRating(4)">4 start</mat-checkbox>
+            <mat-checkbox (change)="getRating(5)">5 start</mat-checkbox>
+
+          </div>
         </mat-menu>
 
         <mat-menu #sortMenu ="matMenu">

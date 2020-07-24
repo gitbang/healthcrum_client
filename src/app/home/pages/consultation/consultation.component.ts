@@ -70,7 +70,7 @@ export class ConsultationComponent implements OnInit {
     this.route.params.subscribe(result=>{
       console.log("params are : ",result)
       this.category = result.type;
-      this.filters.stream = result.type;
+     // this.filters.stream = result.type;
       if(result.city && result.city != undefined){
         console.log("city is : ", result.city)
         this.myControl.setValue(result.city)
@@ -121,7 +121,7 @@ export class ConsultationComponent implements OnInit {
   changeRoute(){
     console.log("in changeroute",this.myControl.value)
     //this.location.replaceState("/consultation/"+ this.category + '/'+ this.myControl.value);
-    this.location.replaceState("/consultation/" + this.filters.stream + '/' + this.filters.location.city)
+   // this.location.replaceState("/consultation/" + this.filters.stream + '/' + this.filters.location.city)
   }
 
   setCurrentLocation() {
@@ -282,13 +282,13 @@ export class ConsultationComponent implements OnInit {
   }
 
   filters = {
-    stream : null,
-    speciality : null,
+    stream : [],
+    speciality : [],
     fromHealthcrum :null,
     consultation : {},
-    rating  : null,
-    experience : null,
-    gender : null,
+    rating  : [],
+    experience : [],
+    gender : [],
     name : null,
     location : {
       city : null
@@ -329,32 +329,76 @@ export class ConsultationComponent implements OnInit {
   }
 
   getStream(name : string) {
-    this.filters.stream = name.toLowerCase()
+    //this.filters.stream = name.toLowerCase()
+    let index = -1;
+    index = this.filters.stream.indexOf(name.toLowerCase())
+    if(index >= 0){ 
+      this.filters.stream.splice(index, 1)
+    } else {
+      this.filters.stream.push(name.toLowerCase())
+    }
+    console.log("filters are : ", this.filters)
     this.filterDotor();
   }
   
   getSpeciality(name : string) {
-    this.filters.speciality = name
-    this.filterDotor();
+    let index = -1;
+    index = this.filters.speciality.indexOf(name)
+    if(index >= 0){ 
+      this.filters.speciality.splice(index, 1)
+    } else {
+      this.filters.speciality.push(name)
+    }
+    //console.log("filters are : ", this.filters)
+    this.filterDotor()
   }
   
   getRating(rating : number) {
-    this.filters.rating = rating
+    let index = -1;
+    index = this.filters.rating.indexOf(rating)
+    if(index >= 0){ 
+      this.filters.rating.splice(index, 1)
+    } else {
+      this.filters.rating.push(rating)
+    }
+    //console.log("filters are : ", this.filters)
+    this.filterDotor()
+  }
+  
+  getExperience(from : number, to : number, desc : string) {
+   // this.filters.experience = experience
+    let index = this.filters.experience.map((e)=>{
+      return e.from
+    }).indexOf(from)
+    console.log(index)
+    console.log(this.filters)
+   //this.filterDotor();
+  }
+  
+  getGender(name : string) {
+    let index = -1;
+    index = this.filters.gender.indexOf(name)
+    if(index >= 0){ 
+      this.filters.gender.splice(index, 1)
+    } else {
+      this.filters.gender.push(name)
+    }
     this.filterDotor();
   }
   
-  getExperience(experience : number) {
-    this.filters.experience = experience
-    this.filterDotor();
-  }
+  filterHealthcrum1 : boolean = false;
+  filterHealthcrum2 : boolean = false
+  getDoctorType(type : boolean, event){
   
-  getGender(gen : string) {
-    this.filters.gender = gen
-    this.filterDotor();
-  }
-  
-  getDoctorType(type : boolean){
-    this.filters.fromHealthcrum = type;
+    console.log(this.filterHealthcrum1, this.filterHealthcrum2)
+    if( (this.filterHealthcrum1 == true && this.filterHealthcrum2 == true) ||  (this.filterHealthcrum1 == false && this.filterHealthcrum2 == false)) {
+      this.filters.fromHealthcrum = null;
+    } else if(this.filterHealthcrum1 == true && this.filterHealthcrum2 == false){
+      this.filters.fromHealthcrum = true;
+    } else {
+      this.filters.fromHealthcrum = false;
+    }
+    console.log(this.filters)
     this.filterDotor()
   }
 
@@ -409,14 +453,15 @@ export class ConsultationComponent implements OnInit {
     if(this.searchBarMain.length !=0) {
       if(this.byname) {
         this.filters.name = this.searchBarMain.toLowerCase();
-        this.filters.speciality = null;
+        //this.filters.speciality = null;
       } else{
-        this.filters.speciality = this.searchBarMain.toLowerCase();
+        //this.filters.speciality this.searchBarMain.toLowerCase();
+        //this.filters.speciality.push(this.searchBarMain.toLowerCase())
         this.filters.name = null;
       }
     } else {
-      this.filters.name = null;
-      this.filters.speciality = null;
+       this.filters.name = null;
+      //  this.filters.speciality = null;
     }
     this.filters.location.city = this.myControl.value
     
