@@ -46,6 +46,12 @@ Author URI: http://themeforest.net/user/Ansonika/
 .consultation-main .filter{
   margin-right: 2rem !important;
 }
+@media screen and (min-width : 1300px) {
+  .consultation-main .filter{
+    margin-right: 3.5rem !important;
+  }
+}
+
 
 .medicine-drop-down  .dropdown-content{
   padding: 6px 3px !important;

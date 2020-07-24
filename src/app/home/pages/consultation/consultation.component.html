@@ -76,7 +76,7 @@
 
   <div class="row mt-4">
     <div class="col-md-12 consultation-main">   
-      <mat-toolbar color="primary" class="top-navbar" style="min-width : 1130px">
+      <mat-toolbar color="primary" class="top-navbar" style="min-width : 1270px">
         <!--<div class="col-12">
           <div class="row"> -->
             <div class=" mt-1">
@@ -110,8 +110,17 @@
                 {{consultationToshow | titlecase}} <span *ngIf="consFilterLength > 1"> + {{consFilterLength - 1}}</span>
                <mat-icon>keyboard_arrow_down</mat-icon></button>
             </div>
+            
             <div class=" mt-1">
               <button  class="filter" mat-flat-button [matMenuTriggerFor]="ratingMenu">Rating <mat-icon>keyboard_arrow_down</mat-icon></button>
+            </div>
+            <div class=" mt-1">
+              <button  *ngIf="!sorting" class="filter" mat-flat-button [matMenuTriggerFor]="sortMenu">Sort By
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+              <button  *ngIf="sorting" class="filter" mat-flat-button [matMenuTriggerFor]="sortMenu">{{sortDisplay}}
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
             </div>
             <!--
           </div>
@@ -181,6 +190,12 @@
           <button mat-menu-item (click)="getRating(4)">4 stars</button>
           <button mat-menu-item (click)="getRating(5)">5 stars</button>
         </mat-menu>
+
+        <mat-menu #sortMenu ="matMenu">
+          <button mat-menu-item (click)="sort(true)">Low to high</button>
+          <button mat-menu-item (click)="sort(false)">High to low</button>
+         
+        </mat-menu> 
 
       </mat-toolbar>
     </div>

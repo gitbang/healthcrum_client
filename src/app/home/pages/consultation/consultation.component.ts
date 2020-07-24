@@ -357,7 +357,23 @@ export class ConsultationComponent implements OnInit {
     this.filters.fromHealthcrum = type;
     this.filterDotor()
   }
-  
+
+  sorting : boolean = false
+  sortDisplay : string = ""
+  sort(ascending : boolean){
+    this.sorting = true;
+    if(ascending){
+      this.sortDisplay = "Low to high"
+      this.doctors.sort((a,b)=>{
+        return a.consultationFees - b.consultationFees
+      })
+    } else {
+      this.sortDisplay = "High to low"
+      this.doctors.sort((a,b)=>{
+        return b.consultationFees - a.consultationFees
+      })
+    }
+  }
   consFilterLength : number = 0;
   consultationToshow : string 
   getConsultation(event,type : string){
