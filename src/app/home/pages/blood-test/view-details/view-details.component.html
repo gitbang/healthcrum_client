@@ -30,7 +30,7 @@
                 <tbody>
                     <tr>
                       <td>Includes :</td>
-                      <td>{{shownresult[0].parameters}}</td>
+                      <td>{{shownresult[0].parameter}}</td>
                     </tr>
                     <tr>
                       <td>Report Available in :</td>
@@ -161,14 +161,14 @@
         -->
       </div>
       <div class="row mt-2" *ngIf="shownresult[0].type != 'singleTest'">
-        <div class="col-12" *ngFor="let profile of profiles">
+        <div class="col-12" *ngFor="let profile of shownresult[0].parameters">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{profile.name}}
               </mat-panel-title>
               <mat-panel-description>
-                {{profile.parameters}}
+                {{profile.tests.length}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <ul type>

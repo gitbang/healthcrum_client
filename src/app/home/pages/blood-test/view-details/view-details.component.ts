@@ -24,7 +24,6 @@ export class ViewDetailsComponent implements OnInit {
       this.testId = result['params'].id
     })
     this.route.queryParamMap.subscribe((result)=>{
-      console.log("query parameters map: ", result)
       this.testType = result['params'].type;
       this.labId = result['params'].labId;
     })
@@ -32,7 +31,6 @@ export class ViewDetailsComponent implements OnInit {
       type : this.testType,
       labId : this.labId
     }
-    console.log("data is : ", data)
     this.service.bloodtestDetailById(this.testId , data).subscribe((result)=>{
       console.log(result)
       if(result.success){
@@ -55,7 +53,8 @@ export class ViewDetailsComponent implements OnInit {
   data1 : any;
   shownresult = [
     { _id : "", name : "Blood Test",
-      parameters : "Thyroid Profile-Total + 73 parameters", 
+      parameter : "Thyroid Profile-Total + 73 parameters", 
+      parameters : [],
       reportTAT : "24 hrs",
       totaltest : 12, 
       rating : 3,
@@ -117,7 +116,7 @@ export class ViewDetailsComponent implements OnInit {
    this.singleTestComplete.push(this.shownresult[0]);
    this.service.bookSingleTest(this.singleTestComplete);
    // here add code to store data to local storage
-   this.router.navigateByUrl('blood-test/' + this.shownresult[0])
+   this.router.navigateByUrl('blood-test/' + this.shownresult[0]._id)
   }
 
   getCall(){
@@ -141,7 +140,8 @@ export class ViewDetailsComponent implements OnInit {
             _id         : pack._id,
             name        : pack.name,
             labLogo     : lab[0].logo,
-            parameters  : pack.individualTests.length,
+            parameter   : pack.individualTests.length,
+            parameters  : pack.parameters, 
             marketprice : pack.mrp,
             offerprice  : pack.offerPrice,
             rating      : lab[0].rating,
@@ -180,7 +180,7 @@ export class ViewDetailsComponent implements OnInit {
             _id         : pack._id,
             name        : pack.name,
             labLogo     : lab[0].logo,
-            parameters  : 1,
+            parameter   : 1,
             marketprice : pack.mrp,
             offerprice  : pack.offerPrice,
             rating      : lab[0].rating,
@@ -202,6 +202,7 @@ export class ViewDetailsComponent implements OnInit {
             relatedDiseases : pack.relatedDiseases
           }
         })
+        this.shownresult = [];
         this.shownresult.push(add)
         //this.singleTest = list
       } 
@@ -216,7 +217,8 @@ export class ViewDetailsComponent implements OnInit {
             _id : pack._id,
             name : pack.name,
             labLogo : lab[0].logo,
-            parameters : pack.individualTests.length,
+            parameter : pack.individualTests.length,
+            parameters  : pack.parameters,
             marketprice : pack.mrp,
             offerprice : pack.offerPrice,
             rating : lab[0].rating,
@@ -238,9 +240,11 @@ export class ViewDetailsComponent implements OnInit {
             relatedDiseases : pack.relatedDiseases
           }
         })
+        this.shownresult = [];
         this.shownresult.push(add)
         //this.profileTest = list
       }
+      console.log("final shown result is : ", this.shownresult)
     // this.afterFetch();
   }
 }
