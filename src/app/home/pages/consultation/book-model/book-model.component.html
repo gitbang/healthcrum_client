@@ -30,17 +30,18 @@
                 </div>  
                 <div class="col-md-5  ">
                   <div class="image-div ">
-                    <div class="">
+                    <div class="mat-elevation-z4" style="border-radius : 15px">
                       <img src={{data.doctor.profilepic}} 
                         alt="loading..."                         
-                        class="center img-doctor mat-elevation-z4"
+                        class="center img-doctor" 
                       >
+                      <div class="doctor-name mt-2">
+                        <label class="name-label">
+                          {{data.doctor.name}}
+                        </label>
+                      </div>
                     </div>
-                    <div class="doctor-name mat-elevation-z4 mt-2">
-                      <label class="name-label">
-                        {{data.doctor.name}}
-                      </label>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="col-md-6 pr-4 pb-4 ">

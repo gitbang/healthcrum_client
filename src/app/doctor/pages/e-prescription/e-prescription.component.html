@@ -48,8 +48,9 @@
 
   <mat-sidenav-container>
     <mat-sidenav mode="side" [(opened)]="showPriscribtion" position="end">
-
+      <!--
       <app-investigation></app-investigation>
+      -->
     </mat-sidenav>
     <div class="master appoint container-fluid main-container">
       <div class="row mt-3">
@@ -150,9 +151,12 @@
                 </td>
               </tr>
             </table>
+            <!--
             <button class="btn btn-primary btn-sm" [disabled]='!formFirst.valid '
               (click)="submitFirstForm()">Submit</button>
+              -->
           </div>
+
         </form>
       </div>
     </div>
@@ -161,7 +165,7 @@
     <form [formGroup]="formSecond2">
       <div class="row">
         <div class="col-10">
-          <label>
+          <label> 
             <h4>Recommendation For patient</h4>
           </label>
         </div>
@@ -170,8 +174,8 @@
         </div>
       </div>
       <div formArrayName="medication">
-
-        <div *ngFor="let element of formSecond2.get('medication'); let i = index">
+       
+        <div *ngFor="let element of formSecond2.controls.medication.controls; let i = index">
           <div class="row mt-2" [formGroupName]="i">
             <div class="col-md-2">
               <mat-form-field class="full-width">
@@ -182,7 +186,7 @@
             <div class="col-md-2">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Morning Dose</mat-label>
-                <!-- <input matInput [(ngModel)]="medecine.morning_dose"> -->
+                
                 <mat-select formControlName='dose'>
                   <mat-option value="quater">1/4</mat-option>
                   <mat-option value="half">1/2</mat-option>
@@ -234,6 +238,7 @@
             </div>
           </div>
         </div>
+        
       </div>
       <hr>
       <div class="row mt-2">
@@ -253,21 +258,18 @@
           </mat-form-field>
         </div>
       </div>
+      <!--
       <div>
         <button mat-raised-button class="btn btn-primary" [disabled]='!formSecond2.valid'
           (click)="submitSecondForm()">Submit</button>
       </div>
+      -->
     </form>
   </div>
 
 
   <div class="analysis-menu mt-4">
 
-    <!-- <div class="analysis-button  row">
-      <div>
-        <button class="btn btn-info" mat-raised-button (click)="analysisPart()">Select Zone for User</button>
-      </div>
-    </div> -->
     <div class="card ">
       <div class="card-header card-header-warning card-header-text">
         <div class="card-icon">
@@ -295,7 +297,11 @@
     </div>
 
   </div>
-
+  <div class="row">
+    <div class="col-12" style="text-align : center">
+      <button class="btn btn-info" (click)="finalSubmit()">Submit</button>
+    </div>
+  </div>
   <!--
   <div class="analysis-menu zone-part-bottom">
    

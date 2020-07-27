@@ -116,7 +116,13 @@ export class EPrescriptionComponent implements OnInit {
 
   addmedicineButtonClick(): void {
     (<FormArray>this.formSecond2.get('medication')).push(this.addmedicine())
-    console.log(this.formSecond2.value)
+    //console.log(this.formSecond2.value)
+    // console.log(this.formSecond2.controls.medication)
+    // console.log(this.formSecond2.get('medication'))
+    console.log((<FormGroup>this.formSecond2.controls.medication).controls)
+    for(let i = 0; i < this.formSecond2.get('medication').value.length; i++){
+      console.log("in loop")
+    }
   }
 
   removeMedicineClick(i : number) : void {
@@ -156,6 +162,7 @@ export class EPrescriptionComponent implements OnInit {
     this.userZone = event.value;
   }
 
+  // show user dashboard
   showprofile(){
   //  console.log("profile reached")
     const dialogRef  = this.dialog.open(CommonDashboardComponent, {  
@@ -177,7 +184,6 @@ export class EPrescriptionComponent implements OnInit {
     this.analysis = true
   }
 
-
   onTabChanges(event){  
     //this.analysis = true;
     console.log(event);
@@ -197,9 +203,11 @@ export class EPrescriptionComponent implements OnInit {
       })
       dialogRef.afterClosed().subscribe(result => {
         console.log("result is : " , result.data);
-        this.service.reasonFromHra(result).subscribe((result)=>{
-          //console.log(result);
-        })
+        this.hraReasonAnswer = result.data
+        // this.service.reasonFromHra(result).subscribe((result)=>{
+        //   //console.log(result);
+        //   ;
+        // })
 
       })
     }
@@ -222,8 +230,20 @@ export class EPrescriptionComponent implements OnInit {
     })
     
     dialogRef.afterClosed().subscribe(result => {
-     // console.log(`Dialog box closed`, result);
-      this.hraReasonAnswer = result;
+     console.log(`Dialog box closed`, result);
+      
     })
+  }
+
+  finalSubmit(){
+    console.log(this.formFirst.value);
+    console.log(this.formSecond2.value);
+    console.log(this.hraReasonAnswer)
+    var allData = {
+      ...this.formFirst.value,
+      ...this.formSecond2.value,
+      ...this.hraReasonAnswer
+    }
+    console.log("all data is ", allData)
   }
 }

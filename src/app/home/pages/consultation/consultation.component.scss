@@ -95,12 +95,12 @@ $blue : #00A0A8;
     }
 }
 @media screen and (max-width : 1199px) {
-    .center{
-        width: 80%;
-    }
-    .consultation-image {
-        width: 80%;
-    }
+    // .center{
+    //     width: 80%;
+    // }
+    // .consultation-image {
+    //     width: 80%;
+    // }
 }
 .center{
     display: block;
@@ -125,7 +125,8 @@ $blue : #00A0A8;
 
 .consultation-div-horizontal, .consultation-div {
    
-    margin-top : -15px;
+    margin-top : 5px;
+    margin-right: 20px !important;
     .consultation-heading{
         color: white;
         background: linear-gradient(to right, #17c0d3, #027e8e);
@@ -167,6 +168,7 @@ table{
     width: 100%;
 }
 .consultation-horizontal{
+    padding: 0;
     padding-right: 0;
     margin-top: 2px;
 }
@@ -186,7 +188,7 @@ table{
 .consultation-port-new{
    background-color: $yellow;
   // margin-bottom: 5px;
-   border-radius: 2px 2px 0 0;
+   border-radius: 5px 5px 0 0;
   // padding: 5px
     label{
         color: white;
@@ -257,7 +259,8 @@ table{
 .bottom-view-details{
     color: #0C9DAE;
     font-size: large;
- 
+    margin-bottom: 0;
+    margin-top: 4px;
    @include font-family();
     cursor: pointer;
 }
@@ -282,7 +285,7 @@ table{
 .logo{
     width: 25px;
     position: absolute;
-    right: 0;
+    right: 25px;
     top: 0;
     margin-right: 5px;
 }
@@ -317,4 +320,55 @@ table{
     flex-direction: column;
     margin: 0 10px;
     
+}
+.filter-div{
+    justify-content: center;
+    margin: 0;
+}
+#navbarSupportedContent{
+    .navbar-nav{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+a {
+    cursor: pointer;
+}
+.before-filter{
+    justify-content: center;
+}
+.navbar{
+    padding: 0;
+    justify-content: space-evenly;
+    width: 100%;
+}
+#navbarSupportedContent{
+    width: 100%;
+    ul {
+        width: inherit;
+        justify-content: space-evenly !important;
+    }
+}
+.dropdown-menu{
+    background-color: white !important;
+    //  display: flex !important;
+    // flex-direction: column;
+    height: auto !important;
+    padding: 10px;
+}
+.before-filter{
+    font-size: inherit;
+}
+.after-filter{
+    font-weight: bold !important;
+}
+.sort-div{
+    padding: 0;
+    .hover-effect{
+        margin: 0;
+        &:hover{
+            color: white;
+        }
+    }
 }

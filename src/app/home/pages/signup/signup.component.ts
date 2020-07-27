@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
   company = faBuilding;
   doctor = faUserMd;
 
-  user_email: String;
+  user_email: String = "";
   user_pass: String;
   user_name: String;
   user_cpass: String;
@@ -88,7 +88,7 @@ export class SignupComponent implements OnInit {
       this.router.navigateByUrl('/patient');
     } 
   }
-
+  loading : boolean = false;
   signupUser(): void {
     var data;
 
@@ -153,18 +153,19 @@ export class SignupComponent implements OnInit {
       }
       data = {
         name: this.user_name,
-        email: this.user_email,
+        email: this.user_email.length > 1 ? this.user_email : "",
         password: this.user_pass,
         phone: this.user_mob,
         gender: this.user_gender,
         role: this.user_type,
         employeeId : this.employeeId,
-        companyId : this.companyId,
-        branchId : this.branchId,
-        departmentId : this.departmentId,
+        companyName : this.companyId,
+        branchName : this.branchId,
+        departmentName : this.departmentId,
         method : this.data
       };
       
+
     } else {
       data = {
         name: this.user_name,
@@ -176,20 +177,22 @@ export class SignupComponent implements OnInit {
         method : this.data
       };
     }
-
+    if(this.user_email == undefined || this.user_email == null || this.user_email.length == 0 ){
+      delete data.email
+    }
     
-
     console.log("final data :" , data)
+    this.loading = true;
     this.authLocal.signUpUser(data).subscribe((result)=>{
-      
+      this.loading = false;
       if(result.success){
         swal.fire("success!", "Registration successfull", "success");
         this.router.navigateByUrl('/login')
       } else {
-        swal.fire(result.error)
+        console.log(result)
+        swal.fire("Something went wrong. Try again later.")
       }
     })
-    
   }
 
   setUserType(type : string) {

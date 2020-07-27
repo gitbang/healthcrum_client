@@ -697,10 +697,10 @@ export class BloodTestComponent implements OnInit {
     })
   }
 
-
   //-------------code for top filters-------------------//
-
+  sorting = null;
   sortPackage(ascending : boolean) {
+    this.sorting = true
     if(ascending) {
       this.shownresultarray.sort((a,b)=> {
         return a.offerprice - b.offerprice
@@ -714,18 +714,29 @@ export class BloodTestComponent implements OnInit {
   }
 
   filterToSend = {
-    men : false,
-    women : false,
+    male : false,   // male
+    female : false, // female
     senior : false,
-    kids : false
+    kid : false,
+    location : null
   }
+  inFilters : string[]  = [];
   filterChanges(event, toapply){
     console.log(event.checked)
+
+    if(event.checked){
+      this.inFilters.push(toapply)
+    } else {
+      let index = this.inFilters.indexOf(toapply)
+      this.inFilters.splice(index, 1);
+    }
     this.filterToSend[toapply] = event.checked;
     console.log(this.filterToSend)
-    this.applyFilters();
+    //this.applyFilters();
   }
   applyFilters(){
+    this.filterToSend.location = this.myControl.value;
+    console.log("final filters are : ", this.filterToSend)
     this.service.bloodTestApplyFilters(this.filterToSend).subscribe((response)=>{
       console.log("filter search" ,response)
       if(response.success){

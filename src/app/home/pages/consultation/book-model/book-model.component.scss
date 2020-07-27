@@ -3,7 +3,7 @@ $bg : #1BA89B;
 .img-doctor {
     width: 220px;
     height: 220px;
-    border-radius: 15px;
+    border-radius: 15px 15px 0 0;
 }
 
 .image-div{
@@ -12,9 +12,7 @@ $bg : #1BA89B;
 }
 
 .bg-greenMix{
-   // background: linear-gradient(to right,#30e8d5, #1BA89B);
-   // background: linear-gradient(to right, #fdfbfb , #ebedee);
-   
+  
    border-radius: 20px;
 }
 
@@ -226,7 +224,7 @@ $bg : #1BA89B;
     display: inline-block;
     overflow: hidden;
     background: #ffffff;
-    left: 40%;
+    left: 30%;
     top: 50%;
     position: absolute;
   }

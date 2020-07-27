@@ -72,6 +72,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { SocialDetailsComponent } from './pages/signup/social-details/social-details.component';
 import { FlipModule } from 'ngx-flip';
 import { HrloginComponent } from './pages/hrlogin/hrlogin.component';
+import { Ng5SliderModule } from 'ng5-slider';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -144,7 +145,8 @@ import { HrloginComponent } from './pages/hrlogin/hrlogin.component';
     MatTabsModule,
     AngularFittextModule,
     MatSliderModule,
-    FlipModule
+    FlipModule,
+    Ng5SliderModule
   ],
   entryComponents: [
     DialogContentExampleDialog,

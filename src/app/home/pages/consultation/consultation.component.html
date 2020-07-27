@@ -1,21 +1,5 @@
 <div class="container-fluid p-3" #main>
 
-  <!--
-  <div class="col-md-2"></div>
-  <div class="mt-4 col-md-9">
-    <div class="row">
-      <div class="col-8">
-        <form class="example-form">
-          <mat-form-field class="example-full-width">
-            <mat-label>Search Doctor</mat-label>
-            <input matInput class="bg-white" >
-            <mat-icon matSuffix style="align-self: center;">search</mat-icon>
-          </mat-form-field>
-        </form>
-      </div>
-    </div>
-  </div>
-  -->
   <div class="row">
     <div class="col-2"></div>
     <div class="col-md-7 ">
@@ -73,9 +57,10 @@
       </div>   
     </div>
   </div>
-
+  <!--  
   <div class="row mt-4">
-    <div class="col-md-12 consultation-main">   
+    <div class="col-md-12 consultation-main"> 
+      
       <mat-toolbar color="primary" class="top-navbar" style="min-width : 1270px">
         
         <div class=" mt-1">
@@ -102,10 +87,20 @@
           </button>
         </div>
         <div class=" mt-1">
-          <button class="filter" mat-flat-button [matMenuTriggerFor]="experienceMenu">Experience <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button *ngIf="filters.experience.length == 0" class="filter" mat-flat-button [matMenuTriggerFor]="experienceMenu">
+            Experience 
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          <button *ngIf="filters.experience.length != 0" class="filter"  mat-flat-button [matMenuTriggerFor]="experienceMenu">
+            {{stringToShow[0]}} <span *ngIf="filters.experience.length > 1">+ {{filters.experience.length - 1}} </span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
         </div>
         <div class=" mt-1">
-          <button *ngIf="filters.fromHealthcrum == null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">Type of doctor <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button *ngIf="filters.fromHealthcrum == null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">
+            Type of doctor 
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
           <button *ngIf="filters.fromHealthcrum != null" class="filter" mat-flat-button [matMenuTriggerFor]="healthcrumMenu">
             {{filters.fromHealthcrum ? 'Healthcrum Doc' : 'Non Healthcrum' }} 
             <mat-icon>keyboard_arrow_down</mat-icon>
@@ -136,11 +131,6 @@
         
         
         <mat-menu #streamMenu ="matMenu">
-          <!--
-          <button mat-menu-item (click)="getStream('Ayurveda')" >Ayurvedic</button>
-          <button mat-menu-item (click)="getStream('Allopathic')">Allopathic</button>
-          <button mat-menu-item (click)="getStream('Homeophathic')">Homeophathic</button>
-          -->
           <div class="filter-checkbox">
             <mat-checkbox  (change)="getStream('Ayurveda')">Ayurveda</mat-checkbox>
             <mat-checkbox (change)="getStream('Allopathic')">Allopathic</mat-checkbox>
@@ -150,19 +140,10 @@
         </mat-menu>
         
         <mat-menu #specialityMenu ="matMenu">
-          <!--
-          <button mat-menu-item (click)="getSpeciality('Heart')">Heart Specialist</button>
-          <button mat-menu-item (click)="getSpeciality('skin')">Skin Speciality</button>
-          <button mat-menu-item (click)="getSpeciality('lung')">Lungs Speciality</button>
-          <button mat-menu-item (click)="getSpeciality('dentist')">Dentist</button>
-          -->
+  
           <div class="filter-checkbox">
             
-            <mat-checkbox  (change)="getSpeciality('Heart')">Heart</mat-checkbox>
-            <mat-checkbox (change)="getSpeciality('skin')">Skin</mat-checkbox>
-            <mat-checkbox (change)="getSpeciality('lung')">Lungs</mat-checkbox>
-            <mat-checkbox (change)="getSpeciality('dentist')">Liver</mat-checkbox>
-          
+            <mat-checkbox *ngFor="let special of specialistList" (change)="getSpeciality(special)">{{special}}</mat-checkbox>
           </div>
         </mat-menu>
 
@@ -176,10 +157,15 @@
         </mat-menu>
 
         <mat-menu #experienceMenu ="matMenu">
-          <button mat-menu-item (click)="getExperience(0 ,2, 'Below 2 years')">Below 2 years</button>
-          <button mat-menu-item (click)="getExperience(2 , 5, '2 years to 5 years')">2 years to 5 years</button>
-          <button mat-menu-item (click)="getExperience(5 , 10, '5 years to 10 years')">5 years to 10 years</button>
-          <button mat-menu-item (click)="getExperience(10 , 100, 'Above 10 years')">Above 10 years</button>
+          <div class="filter-checkbox">
+            
+            <mat-checkbox (change)="getExperience(0 ,2, 'Below 2 years')">0 - 2 years</mat-checkbox>
+            <mat-checkbox (change)="getExperience(2 ,5, '2 - 5 years')">2 - 5 years</mat-checkbox>
+            <mat-checkbox (change)="getExperience(5 ,10, '5 - 10 years')">5 - 10 years</mat-checkbox>
+            <mat-checkbox (change)="getExperience(10 ,100, 'above 10 years')">above 10 years</mat-checkbox>
+
+          </div>
+
         </mat-menu>
 
         <mat-menu #healthcrumMenu ="matMenu">
@@ -188,8 +174,6 @@
             
             <mat-checkbox [(ngModel)]='filterHealthcrum1' (change)="getDoctorType(true)">Healthcrum Doctor</mat-checkbox>
             <mat-checkbox [(ngModel)]='filterHealthcrum2' (change)="getDoctorType(false)">Other Doctor</mat-checkbox>
-            
-          
           </div>
         </mat-menu>
 
@@ -224,7 +208,177 @@
         </mat-menu> 
 
       </mat-toolbar>
+     
     </div>
+  </div>
+   -->
+  <div class="row filter-div mt-4">
+    <nav class="navbar navbar-expand navbar-light bg-light">  
+
+      <div id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          
+          <li class="nav-item dropdown">
+            <a *ngIf="filters.stream.length == 0"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Stream
+            </a>
+            <a *ngIf="filters.stream.length != 0"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{filters.stream[0]}} <span *ngIf="filters.stream.length > 1">+ {{filters.stream.length - 1}}</span>
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox (change)="getStream('Ayurveda')">Ayurveda</mat-checkbox>
+              <mat-checkbox (change)="getStream('Allopathic')">Allopathic</mat-checkbox>
+              <mat-checkbox (change)="getStream('Homeophathic')">Homeophathic</mat-checkbox>
+              <!--
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+              -->
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a *ngIf="filters.speciality.length == 0"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Speciality
+            </a>
+            <a *ngIf="filters.speciality.length != 0"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+              {{filters.speciality[0]}} <span *ngIf="filters.speciality.length > 1">+ {{filters.speciality.length - 1}}</span>
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox *ngFor="let special of specialistList" (change)="getSpeciality(special)">{{special}}</mat-checkbox>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a *ngIf="filters.gender.length == 0"  
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Gender
+            </a>
+            <a *ngIf="filters.gender.length != 0"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{filters.gender[0]}} <span *ngIf='filters.gender.length > 1'> + {{filters.gender.length - 1}}</span>
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox  (change)="getGender('male')">Male</mat-checkbox>
+              <mat-checkbox (change)="getGender('female')">Female</mat-checkbox>
+              <mat-checkbox (change)="getGender('others')">Others</mat-checkbox>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a *ngIf="filters.experience.length == 0"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Experience
+            </a>
+            <a *ngIf="filters.experience.length != 0"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+              {{stringToShow[0]}} <span *ngIf="filters.experience.length > 1">+ {{filters.experience.length - 1}} </span>
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox (change)="getExperience(0 ,2, 'Below 2 years')">0 - 2 years</mat-checkbox>
+              <mat-checkbox (change)="getExperience(2 ,5, '2 - 5 years')">2 - 5 years</mat-checkbox>
+              <mat-checkbox (change)="getExperience(5 ,10, '5 - 10 years')">5 - 10 years</mat-checkbox>
+              <mat-checkbox (change)="getExperience(10 ,100, 'above 10 years')">above 10 years</mat-checkbox>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a *ngIf="filters.fromHealthcrum == null && (filterHealthcrum1 != true || filterHealthcrum2 != true)"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Type of doctor
+            </a>
+            <a *ngIf="filters.fromHealthcrum != null"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{filters.fromHealthcrum ? 'Healthcrum Doc' : 'Non Healthcrum' }} 
+            </a>
+            <a *ngIf="filters.fromHealthcrum == null && filterHealthcrum1 == true && filterHealthcrum2 == true"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Healthcrum Doc + 1
+            </a>
+
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox [(ngModel)]='filterHealthcrum1' (change)="getDoctorType(true)">Healthcrum Doctor</mat-checkbox>
+              <mat-checkbox [(ngModel)]='filterHealthcrum2' (change)="getDoctorType(false)">Other Doctor</mat-checkbox>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a *ngIf="consFilterLength == 0" 
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Consultation
+            </a>
+            <a *ngIf="consFilterLength != 0" 
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {{consultationToshow | titlecase}} consultation<span *ngIf="consFilterLength > 1"> + {{consFilterLength - 1}}</span>
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox (change)="getConsultation($event, 'tele')">Telephonic consultation</mat-checkbox>
+              <mat-checkbox (change)="getConsultation($event, 'video')">Video consultation</mat-checkbox>
+              <mat-checkbox (change)="getConsultation($event, 'physical')">Physical consultation</mat-checkbox>
+              <mat-checkbox (change)="getConsultation($event, 'emergency')">Emergency consultation</mat-checkbox>
+              
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a *ngIf="filters.rating.length == 0"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Rating
+            </a>
+            <a *ngIf="filters.rating.length != 0"  
+              class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{filters.rating[0]}} star <span *ngIf="filters.rating.length > 1"> + {{filters.rating.length - 1}}</span>
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <mat-checkbox (change)="getRating(1)">1 start</mat-checkbox>
+              <mat-checkbox (change)="getRating(2)">2 start</mat-checkbox>
+              <mat-checkbox (change)="getRating(3)">3 start</mat-checkbox>
+              <mat-checkbox (change)="getRating(4)">4 start</mat-checkbox>
+              <mat-checkbox (change)="getRating(5)">5 start</mat-checkbox>
+
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a  *ngIf="!sorting"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sort By
+            </a>
+            <a  *ngIf="sorting"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{sortDisplay}}
+            </a>
+            <div class="dropdown-menu sort-div filter-checkbox" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item hover-effect" (click)="sort(true)">Low to high</a>
+              <a class="dropdown-item hover-effect" (click)="sort(false)">High to low</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a  *ngIf="!priceShow"
+            class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Price Filter
+            </a>
+            <a  *ngIf="priceShow"
+            class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{priceDisplay}}
+            </a>
+            <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+              <ng5-slider [(value)]="value" 
+                [(highValue)]="highValue" (userChange)="priceFilter()" (userChangeEnd)="priceFilterEnd()"
+                [options]="priceOption"></ng5-slider>
+            </div>
+          </li>
+        </ul  >
+      </div>
+    </nav>
   </div>
 
   <div class="row">
@@ -274,6 +428,21 @@
                     
                       {{doctor.experience}}+</div>
                     </div>
+                    <div class="row mt-2">
+                      <div class="col-4 text-center">
+                        {{doctor.location.city | titlecase}}
+                      </div>
+                      <div class="col-4 text-center">
+                        <img
+                          src="./assets/img/consulation/blood-test/location.jpg"
+                          class="doctor-location-image"
+                        >
+                      </div>
+                      <mat-divider [vertical]="true"></mat-divider>
+                      <div class="col-3 text-center text-center">
+                        5 KM
+                      </div>
+                    </div>
                     <div class="row mt-1 ml-1 mr-1">
 
                       <div class="col-12 consultation-port-new">
@@ -281,6 +450,9 @@
                           <div class="col-12">
                             <label class="consultation-label-top">
                               BOOK APPOINTMENT
+                            </label>
+                            <label style="float : right">
+                            Rs.{{doctor.consultationFees}}/-
                             </label>
                           </div>
                           <div class="col-12">
@@ -292,13 +464,10 @@
                       </div>
                       <div class="col-12">
                         <div class="row">
-                          <div class="col-3 cursor-pointer" style="padding : 0">
-                            <div class="cursor-pointer" (click)="openDialog('video', i)">
-                              <div>
-                                <img
-                                  src="./assets/img/consulation/blood-test/video.png"
-                                  class="consultation-image-horizontal "
-                                >
+                          <div class="col-3 cursor-pointer text-center" style="padding : 0">
+                            <div class="cursor-pointer consultation-border" (click)="openDialog('video', i)">
+                              <div class="center consultation-icon">
+                                <mat-icon>videocam</mat-icon>
                               </div>
                               <div>
                                 <label class="image-data">
@@ -307,39 +476,30 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-3 cursor-pointer" style="padding : 0">
-                            <div  class=" cursor-pointer" (click)="openDialog('tele', i)">
-                              <div>
-                                <img
-                                  src="./assets/img/consulation/blood-test/telephone.jpg"
-                                  class="consultation-image-horizontal center"
-                                >
+                          <div class="col-3 cursor-pointer  text-center" style="padding : 0">
+                            <div  class=" cursor-pointer consultation-border" (click)="openDialog('tele', i)">
+                              <div class="center consultation-icon">
+                                <mat-icon>perm_phone_msg</mat-icon>
                               </div>
                               <label class="image-data">
                                 {{doctor.consultationTiming.tele.from}} - {{doctor.consultationTiming.tele.to}}
                               </label>
                             </div>
                           </div>
-                          <div class="col-3 cursor-pointer" style="padding : 0">
-                            <div  class=" cursor-pointer" (click)="openDialog('physical', i)">
-                              <div>
-                                <img
-                                  src="./assets/img/consulation/blood-test/physicalMeeting.jpg"
-                                  class="consultation-image-horizontal center"
-                                >
+                          <div class="col-3 cursor-pointer text-center" style="padding : 0">
+                            <div  class=" cursor-pointer consultation-border" (click)="openDialog('physical', i)">
+                              <div class="center consultation-icon">
+                                <mat-icon>phone_android</mat-icon>
                               </div>
                               <label class="image-data">
                                 {{doctor.consultationTiming.physical.from}} - {{doctor.consultationTiming.physical.to}}
                               </label>
                             </div>
                           </div>
-                          <div class="col-3 cursor-pointer"style="padding : 0">
-                            <div class=" cursor-pointer" (click)="openDialog('chat', i)">
-                              <div>
-                                <img
-                                  src="./assets/img/consulation/blood-test/phone.jpg"
-                                  class="consultation-image-horizontal center"
-                                >
+                          <div class="col-3  cursor-pointer text-center" style="padding : 0">
+                            <div class=" cursor-pointer consultation-border" (click)="openDialog('chat', i)">
+                              <div class="center consultation-icon">
+                                <mat-icon>person_add</mat-icon>
                               </div>
                               <label class="image-data">
                                 {{doctor.consultationTiming.chat.from}} - {{doctor.consultationTiming.chat.to}}
@@ -350,6 +510,7 @@
                       </div>
                       <div class="col-12 emergency-section">
                         <div class="row">
+                          <!--
                           <div class="col-5">
                             <div class="row mt-1">
                               <div class="col-md-12" style="padding : 0">
@@ -364,7 +525,8 @@
                             </div>
                           </div>
                           <mat-divider [vertical]="true"></mat-divider>
-                          <div class="col-6">
+                          -->
+                          <div class="col-12">
                             <div class="row ">
                               <div class="col-5 mt-1" style="padding : 0">
                                 <img
@@ -390,6 +552,7 @@
                     
                     <div class="row">
                       <div class="col-12">
+                        <!--
                         <div class="row">
                           <div class="col-6 mt-3">
                             <label style="color : black">City  : {{doctor.location.city | titlecase}}</label>
@@ -408,6 +571,7 @@
                             </div>
                           </div>
                         </div>
+                        -->
                       </div>
                     </div>
                     <div class="row">
@@ -423,8 +587,8 @@
         </div>
 
         <div *ngIf="horizontal">
-          <div class="row horizontal-port mt-4" *ngFor="let doctor of doctors; let i = index"> 
-            <div class="col-12">
+          <div class="row horizontal-port" *ngFor="let doctor of doctors; let i = index"> 
+            <div class="col-12" style="padding : 0">
               <mat-card  class=" doctor-card">  
                 <div class="row ">
                   <div class="col-md-4 col-lg-3">
@@ -480,7 +644,7 @@
                     </div>
                   </div>
 
-                  <div class="col-5 consultation-horizontal">
+                  <div class="col-5 consultation-horizontal" >
                     <div class="row consultation-div-horizontal ml-4 mr-1">
                       
                       <div class="col-12 consultation-port-new">
@@ -605,8 +769,8 @@
       </div>
     </div>
     <div class="col-md-1"></div>
-    <div class="not-found col-md-10" *ngIf="!containDoctor">
-      <h3>Thanks for showing interest in HealthCrum. Currently we do not have any specialist at your location and we 
+    <div class="not-found col-md-10" style="margin-top : 0" *ngIf="!containDoctor">
+      <h3 style="font-size : large">Thanks for showing interest in HealthCrum. Currently we do not have any specialist at your location and we 
       promise to reach at every corner of this country as soon as possible.
       </h3>
     </div>

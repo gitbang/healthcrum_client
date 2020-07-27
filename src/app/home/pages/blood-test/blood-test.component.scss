@@ -1,5 +1,8 @@
 $yellow : #f27d27;
 $blue : #1a9ca6;
+.container-fluid{
+  overflow: scroll;
+}
 body {
   display: flex;
   min-height: 110vh;
@@ -358,7 +361,11 @@ a{
 }
 
 .filterbox{
-  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  .mat-checkbox{
+    margin: 0 10px;
+  }
 }
 
 .not-found{

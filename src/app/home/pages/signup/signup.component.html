@@ -4,6 +4,9 @@
       <div class="main main-raised m-auto">
         <div class="row m-0">
           <div class="card card-login m-0">
+            <div *ngIf="loading" class="loadingio-spinner-spinner-4o1nzyijdek"><div class="ldio-bz74ojoebh">
+              <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div></div>
             <form class="form">
               <div class="text-center p-2">
                 <h3 class="py-1 text-center mt-1 heading-title">Join Healthcrum</h3>
@@ -38,13 +41,14 @@
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Full Name</mat-label>
-                      <input type="text" matInput placeholder="Full Name" [(ngModel)]="user_name" name="user_name">
+                      <input type="text" required matInput placeholder="Full Name" [(ngModel)]="user_name" name="user_name">
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Email Address</mat-label>
-                      <input type="email" matInput placeholder="example@example.com" [(ngModel)]="user_email"
+                      <input type="email" 
+                       matInput placeholder="example@example.com" [(ngModel)]="user_email"
                         name="user_email">
                     </mat-form-field>
 
@@ -55,7 +59,7 @@
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Phone Numer</mat-label>
-                      <input type="tel" matInput placeholder="9823xxxxxx" 
+                      <input type="tel" required matInput placeholder="9823xxxxxx" 
                       [(ngModel)]="user_mob" name="user_mob" pattern="[1-9]{1}[0-9]{9}">
                     </mat-form-field>
 
@@ -64,7 +68,7 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Select your Gender</mat-label>
 
-                      <mat-select (selectionChange)="selectGender($event.value)">
+                      <mat-select  required (selectionChange)="selectGender($event.value)">
                         <mat-option value="male">Male</mat-option>
                         <mat-option value="female">Female</mat-option>
                         <mat-option value="other">Other</mat-option>
@@ -76,14 +80,14 @@
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Password</mat-label>
-                      <input type="password" matInput [(ngModel)]="user_pass" name="user_pass">
+                      <input required type="password" matInput [(ngModel)]="user_pass" name="user_pass">
                     </mat-form-field>
 
                   </div>
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Confirm Password</mat-label>
-                      <input type="password" matInput [(ngModel)]="user_cpass" name="user_cpass">
+                      <input required type="password" matInput [(ngModel)]="user_cpass" name="user_cpass">
                     </mat-form-field>
 
                   </div>
@@ -93,7 +97,7 @@
 
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Date of Birth</mat-label>
-                      <input matInput 
+                      <input matInput  required
                       [matDatepicker]="picker" 
                       [formControl]="user_dob"
                       [max]="maxDate"
@@ -143,25 +147,25 @@
                   <div class="col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Employee Id</mat-label>
-                      <input matInput [(ngModel)]="employeeId" name="employeeId">
+                      <input matInput  required [(ngModel)]="employeeId" name="employeeId">
                     </mat-form-field>
                   </div>
                   <div class=" col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Organisation </mat-label>
-                      <input matInput [(ngModel)]="companyId" name="companyId">
+                      <input matInput required [(ngModel)]="companyId" name="companyId">
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Branch</mat-label>
-                      <input matInput [(ngModel)]="branchId" name="branchId">
+                      <input matInput required [(ngModel)]="branchId" name="branchId">
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                      <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Department</mat-label>
-                      <input matInput [(ngModel)]="departmentId" name="deptId">
+                      <input matInput required [(ngModel)]="departmentId" name="deptId">
                      
                     </mat-form-field>
                   </div>

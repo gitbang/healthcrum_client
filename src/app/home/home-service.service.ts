@@ -226,6 +226,11 @@ export class HomeServiceService {
               .get(this.url + "/api/doctor/doctor-profile/"+ userId, this.option)
               .pipe(retry(2), catchError(this.handleError))
   }
+  consultationGetSpecialistList(): Observable<any>{
+    return this.http
+            .get(this.url + '/getAll/doctor-speciality', this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
   //------------- Medicine ----------//
 

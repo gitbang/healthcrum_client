@@ -5,13 +5,13 @@ import { Routes } from "@angular/router";
 // import { PatientTestsComponent } from "./patient-tests/patient-tests.component";
 // import { PatientreportsComponent } from "./patientreports/patientreports.component";
 // import { HealthStatusComponent } from "./health-status/health-status.component";
-// import { PatientPerscriptionComponent } from "./patient-perscription/patient-perscription.component";
+ import { PatientPerscriptionComponent } from "./patient-perscription/patient-perscription.component";
  import { PatientOrdersComponent } from "./patient-orders/patient-orders.component";
 // import { PatientServicesComponent } from "./patient-services/patient-services.component";
 // import { PatientFeedbackComponent } from "./patient-feedback/patient-feedback.component";
 // import { HraStoryBoardComponent } from "./hra-story-board/hra-story-board.component";
 // import { ViewDoctorComponent } from "./view-doctor/view-doctor.component";
-// import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
+ import { PatientEhrComponent } from "./patient-ehr/patient-ehr.component";
 import { TemperatureEntryComponent } from "./temperature-entry/temperature-entry.component";
 import { MaintainanceComponent } from './maintainance/maintainance.component';
 export const PatientRoutes: Routes = [
@@ -20,11 +20,11 @@ export const PatientRoutes: Routes = [
   { path: "profile", component: MaintainanceComponent },
   { path: "tests", component: MaintainanceComponent },
   { path: "reports", component: MaintainanceComponent },
-  { path: "ehr", component: MaintainanceComponent },
+  { path: "ehr", component: PatientEhrComponent },
   { path: "orders", component: PatientOrdersComponent },
   { path: "feedback", component: MaintainanceComponent },
   { path: "eligible-service", component: MaintainanceComponent },
-  { path: "persciptions", component: MaintainanceComponent },
+  { path: "persciptions", component: PatientPerscriptionComponent },
   { path: "health-status", component: MaintainanceComponent },
   { path: "hra-report-fill", component: MaintainanceComponent },
   { path: "view-doctor/:id", component: MaintainanceComponent },

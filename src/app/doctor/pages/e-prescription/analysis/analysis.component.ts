@@ -96,6 +96,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   submit(){
+    console.log(this.formReasonObj)
     this.dialogRef.close({event : 'close', data : this.formReasonObj})
   }
 }

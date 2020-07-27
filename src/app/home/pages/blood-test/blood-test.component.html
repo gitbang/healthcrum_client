@@ -100,42 +100,47 @@
         <div class="row mt-4">
           <div class="col-md-1"></div>
           <div class="col-md-10"> 
-            <mat-toolbar  class="top-navbar">
+            <mat-toolbar  class="top-navbar" style="min-width : 630px">
+            
+              <div class="col-md-3 filter-property">
+                <button *ngIf="sorting == null"   mat-flat-button [matMenuTriggerFor]="priceSort">Sort by price <mat-icon>keyboard_arrow_down</mat-icon></button>
+                <button *ngIf="sorting != null" mat-flat-button [matMenuTriggerFor]="priceSort">
+                  {{sorting ? 'Low to high' : 'High to low'}}
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+              </div>
+              <div class="col-md-3 filter-property">
+                <button *ngIf="inFilters.length == 0" mat-flat-button [matMenuTriggerFor]="filter">Filters <mat-icon>keyboard_arrow_down</mat-icon></button>
+                <button *ngIf="inFilters.length != 0" mat-flat-button [matMenuTriggerFor]="filter">
+                  {{inFilters[0]}} <span *ngIf="inFilters.length > 1">+ {{inFilters.length - 1}}</span>
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+              </div>
+              <div class="col-md-3 filter-property">
+                <button mat-flat-button [matMenuTriggerFor]="habbitFilter">Habbits <mat-icon>keyboard_arrow_down</mat-icon></button>
+              </div>
+              <div class="col-md-3 filter-property">
+                <button mat-flat-button [matMenuTriggerFor]="conditionFilter">Conditions<mat-icon>keyboard_arrow_down</mat-icon></button>
+              </div>
               <mat-menu #priceSort ="matMenu">
                 <button mat-menu-item (click)="sortPackage(true)">From low to high</button>
                 <button mat-menu-item (click)="sortPackage(false)">From high to low</button>
               </mat-menu>
               <mat-menu #filter ="matMenu">
-                <!--
-                  <button mat-menu-item>Men</button>
-                  <button mat-menu-item>Women</button>
-                  <button mat-menu-item>Kids</button>
-                  <button mat-menu-item>Senior citizen male</button>
-                  <button mat-menu-item>Senior citizen female</button>
-                -->
-                <div class="col-12">
-                  <div class="row filterbox" >
-                    <div class="col-12">
-                      <mat-checkbox (change)="filterChanges($event, 'men')">
-                        Men
-                      </mat-checkbox>
-                    </div>
-                    <div class="col-12">
-                      <mat-checkbox (change)="filterChanges($event, 'women')">
-                        women
-                      </mat-checkbox>
-                    </div>
-                    <div class="col-12">
-                      <mat-checkbox (change)="filterChanges($event, 'kids')">
-                        Kids
-                      </mat-checkbox>
-                    </div>
-                    <div class="col-12">
-                      <mat-checkbox (change)="filterChanges($event, 'senior')">
-                        Senior Citizen
-                      </mat-checkbox>
-                    </div>
-                  </div>
+                
+                <div class="filterbox" >
+                  <mat-checkbox (change)="filterChanges($event, 'men')">
+                    Men
+                  </mat-checkbox>
+                  <mat-checkbox (change)="filterChanges($event, 'women')">
+                    women
+                  </mat-checkbox>
+                  <mat-checkbox (change)="filterChanges($event, 'kids')">
+                    Kids
+                  </mat-checkbox>
+                  <mat-checkbox (change)="filterChanges($event, 'senior')">
+                    Senior Citizen
+                  </mat-checkbox>
                 </div>
               </mat-menu>
               <mat-menu #habbitFilter ="matMenu">
@@ -144,18 +149,7 @@
               <mat-menu #conditionFilter ="matMenu">
                <button mat-menu-item disabled>Coming soon</button>
               </mat-menu>
-                <div class="col-md-3 filter-property">
-                  <button mat-flat-button [matMenuTriggerFor]="priceSort">Sort by price <mat-icon>keyboard_arrow_down</mat-icon></button>
-                </div>
-                <div class="col-md-3 filter-property">
-                  <button mat-flat-button [matMenuTriggerFor]="filter">Filters <mat-icon>keyboard_arrow_down</mat-icon></button>
-                </div>
-                <div class="col-md-3 filter-property">
-                  <button mat-flat-button [matMenuTriggerFor]="habbitFilter">Habbits <mat-icon>keyboard_arrow_down</mat-icon></button>
-                </div>
-                <div class="col-md-3 filter-property">
-                  <button mat-flat-button [matMenuTriggerFor]="conditionFilter">Conditions<mat-icon>keyboard_arrow_down</mat-icon></button>
-                </div>
+                
             </mat-toolbar>
           </div>
         </div>

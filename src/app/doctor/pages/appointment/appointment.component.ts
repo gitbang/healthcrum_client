@@ -60,6 +60,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   getConsultation(){
+    console.log("function reached")
     this.doctorService.appointmentGetDetails(this.doctorId).subscribe(result=>{
       console.log("fetch doctor appointments : ", result)
       this.newAppointment = [];
@@ -154,5 +155,9 @@ export class AppointmentComponent implements OnInit {
     })
   }
 
+  goToEprescription(){
+    console.log("go to eprescription")
+    this.router.navigateByUrl('/doctor/e-prescription')
+  }
   //"showNotification('top','right',2)"
 }

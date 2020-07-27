@@ -44,6 +44,7 @@ export class UserloginComponent implements OnInit {
   ) {
     // $(document).ready(() => {});
   }
+  loading : boolean = false;
   signInCallback(authResult) {
     if (authResult.code) {
       $.post("/auth/google/callback", { code: authResult.code }).done(function (
@@ -152,9 +153,10 @@ export class UserloginComponent implements OnInit {
   }
 
   sendRequestToCheckLogin(data){
-
+    this.loading = true
     this.authLocal.loginUser(data).subscribe((data) => {
       console.log("local response", data);
+      this.loading = false;
       if (data.success) {
         this.completeData = data;
         this.dynamicRouting(this.completeData.userDetail.role);
@@ -214,6 +216,7 @@ export class UserloginComponent implements OnInit {
           }
         }
       } else {
+        this.flipDiv = false
         Swal.fire({
           title : data.message,
           showClass: {
@@ -455,8 +458,8 @@ export class UserloginComponent implements OnInit {
     } else {
       if (this.bynumber) {
         toSend = {
-          otp: this.myotp.toString(),
-          phone: this.userMobile.toString(),
+          otp: this.myotp,
+          phone: this.userMobile,
         };
 
         this.service.consultationChekOTP(toSend).subscribe((result) => {

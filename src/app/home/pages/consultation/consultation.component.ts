@@ -11,6 +11,8 @@ import { startWith, map } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { BookModelComponent } from './book-model/book-model.component';
 import { element } from 'protractor';
+import { Options, LabelType } from 'ng5-slider';
+import { SrvRecord } from 'dns';
 
 @Component({
   selector: 'app-consultation',
@@ -98,6 +100,18 @@ export class ConsultationComponent implements OnInit {
     if(window.innerWidth < 1000){
       this.horizontal = false;
     }
+
+    this.getSpecialistList()
+  }
+
+  specialistList : string[] = []
+  getSpecialistList(){
+    this.service.consultationGetSpecialistList().subscribe(result=>{
+      console.log("specialidy list is : ", result)
+      if(result.success){
+        this.specialistList = result.data
+      }
+    })
   }
 
   autofilldoctor(){
@@ -110,11 +124,7 @@ export class ConsultationComponent implements OnInit {
   private doctorFilter(value: string): string[] {
     const filterValue = value.toLowerCase();
     var x : string[] =  this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-    x = x.map(elem =>{
-      return "Dr " + elem
-    })
     return x;
-    //return  this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   
   doctorType : string;
@@ -292,6 +302,10 @@ export class ConsultationComponent implements OnInit {
     name : null,
     location : {
       city : null
+    },
+    consultationFees : {
+      from : 0,
+      to : 1000000
     }
   }
 
@@ -322,7 +336,7 @@ export class ConsultationComponent implements OnInit {
       })
       this.options = list;
     } else {
-      this.options = ["Heart", "skin", "Lungs", "Dentist"];
+      this.options = this.specialistList
     }
     console.log(this.options)
     this.autofilldoctor();
@@ -364,15 +378,21 @@ export class ConsultationComponent implements OnInit {
     //console.log("filters are : ", this.filters)
     this.filterDotor()
   }
-  
+  stringToShow : string[] = [];
   getExperience(from : number, to : number, desc : string) {
-   // this.filters.experience = experience
-    let index = this.filters.experience.map((e)=>{
+    let index = -1;
+    index = this.filters.experience.map((e)=>{
       return e.from
     }).indexOf(from)
     console.log(index)
-    console.log(this.filters)
-   //this.filterDotor();
+    if(index == -1){
+      this.filters.experience.push({from , to})
+      this.stringToShow.push(desc)
+    } else {
+      this.filters.experience.splice(index, 1);
+      this.stringToShow.splice(index, 1);
+    }
+    this.filterDotor();
   }
   
   getGender(name : string) {
@@ -398,7 +418,6 @@ export class ConsultationComponent implements OnInit {
     } else {
       this.filters.fromHealthcrum = false;
     }
-    console.log(this.filters)
     this.filterDotor()
   }
 
@@ -430,9 +449,41 @@ export class ConsultationComponent implements OnInit {
     
     this.consFilterLength = Object.keys(this.filters.consultation).length;
     this.consultationToshow = Object.keys(this.filters.consultation)[0];
-    console.log("to show ", this.consultationToshow)
-    console.log("filters consultation ", this.filters.consultation)
     this.filterDotor()
+  }
+  value: number = 50;
+  highValue : number = 160;
+  priceOption: Options = {
+    floor: 100,
+    ceil: 2000,
+    /*
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '<b>Min price:</b> Rs' + value;
+        case LabelType.High:
+          return '<b>Max price:</b> Rs' + value;
+        default:
+          return '$' + value;
+      }
+    }*/
+  }
+
+  priceShow : boolean = false;
+  priceDisplay : string = "";
+  priceFilter(){
+    this.priceShow = true;
+    this.priceShow = true;
+    console.log(this.value, this.highValue)
+    this.priceDisplay = `Rs ${this.value} - Rs ${this.highValue}`
+  }
+  
+  priceFilterEnd(){
+    //this.priceDisplay = `Rs ${this.value} - Rs ${this.highValue}`
+    this.filters.consultationFees.from = this.value;
+    this.filters.consultationFees.to = this.highValue
+    console.log("scroll stop")
+    this.filterDotor()  
   }
 
   searchBy : string = 'name';
@@ -455,8 +506,7 @@ export class ConsultationComponent implements OnInit {
         this.filters.name = this.searchBarMain.toLowerCase();
         //this.filters.speciality = null;
       } else{
-        //this.filters.speciality this.searchBarMain.toLowerCase();
-        //this.filters.speciality.push(this.searchBarMain.toLowerCase())
+        
         this.filters.name = null;
       }
     } else {
@@ -466,7 +516,7 @@ export class ConsultationComponent implements OnInit {
     this.filters.location.city = this.myControl.value
     
     this.filterDotor();
-    this.changeRoute();
+    //this.changeRoute();
   }
 
   openDialog(typeCons : string, index : number){
