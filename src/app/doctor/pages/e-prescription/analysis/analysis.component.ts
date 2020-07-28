@@ -20,7 +20,9 @@ export class AnalysisComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<hrainter>,
      @Inject(MAT_DIALOG_DATA) public data: any
-    ) { }
+    ) {
+      this.dialogRef.disableClose = true;
+     }
 
   userZone : string
   ngOnInit() {
@@ -29,38 +31,37 @@ export class AnalysisComponent implements OnInit {
     // assign this.data.question to hra according to the output required //
 
     this.userZone = this.data.zone;
-    console.log("userzone is :" , this.userZone)
-    console.log("current length",   this.currentdata.length)
+    this.userclass = this.userZone == "Red" ? "btn-danger" : (this.userZone =="Border" ? "btn-warning" : (this.userZone == "Below"  ? "btn-info" : "btn-success"))
   }
 
   //sample questions
   hra : hrainter = {
     physical :  [
       {
-        question : "DO you drink alcohol ?",
+        ques : "DO you drink alcohol ?",
         ans : "yes"
       },
       {
-        question : "Do YOU exercise daily ?",
+        ques : "Do YOU exercise daily ?",
         ans : "yes"
       }
     ],
     lifestyle :  [{
-      question : "Do YOU exercise daily ?",
+      ques : "Do YOU exercise daily ?",
       ans : "yes"
     }],
     family :  [{
-      question : "Any family problem ?",
+      ques : "Any family problem ?",
       ans : "yes"
     }],
     others :  [{
-      question : "Peer pressure?",
+      ques : "Peer pressure?",
       ans : "yes"
     }]
   }
-  // sample questions end 
+  // sample quess end 
 
-  userclass = this.userZone == "Red" ? "btn-danger" : (this.userZone =="Green" ? "btn-success" : (this.userZone == "Yellow" ? "btn-warning" : "btn-primary"))
+  userclass = this.userZone == "Red" ? "btn-danger" : (this.userZone =="Border" ? "btn-warning" : (this.userZone == "Below"  ? "btn-info" : "btn-success"))
   showcategory : string
   currentdata = [ ]
   getdetails(category) {
@@ -77,26 +78,38 @@ export class AnalysisComponent implements OnInit {
     others : []
   }
 
-   checkCheckBoxvalue(quest, ans, event){
+  allanswer= []
+
+  checkCheckBoxvalue(quest, ans, event){
     
     console.log("ques is : ", quest);
     console.log("ans is ", ans);
     console.log("event is ", event);
     var obj = {
-      question : quest,
-      answer : ans
+      ques : quest,
+      ans : ans
     }
+
+    
+
     if(event == true) {
+
+      this.allanswer.push(obj)
+
       this.formReasonObj[this.showcategory].push(obj)
+      
     }
     else{
-      this.formReasonObj[this.showcategory] = this.formReasonObj[this.showcategory].filter((x)=> x.question != quest)
+      this.allanswer = this.allanswer.filter(x=>x.ques != quest)
+
+      this.formReasonObj[this.showcategory] = this.formReasonObj[this.showcategory].filter((x)=> x.ques != quest)
     }
-    console.log(this.formReasonObj)
+    //console.log(this.formReasonObj)
+    console.log(this.allanswer)
   }
 
   submit(){
     console.log(this.formReasonObj)
-    this.dialogRef.close({event : 'close', data : this.formReasonObj})
+    this.dialogRef.close({success : true ,event : 'close', data : this.formReasonObj, allcombine : this.allanswer})
   }
 }

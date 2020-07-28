@@ -1,6 +1,7 @@
 
 <div class="ml-2" style="text-content : center" class="row mat-elevation-z8">
-  <button class="col-12 btn " [ngClass] = 'userZone == "Red" ? "btn-danger" : (userZone =="Green" ? "btn-success" : (userZone == "Yellow" ? "btn-warning" : "btn-primary")) ' mat-raised-button>Reason to put in {{userZone}}</button>
+ <button class="col-12 btn " [ngClass] = "userclass"
+   mat-raised-button>Reason to put in {{userZone}}</button>
 </div>
 
 <div class="row mt-4">
@@ -17,8 +18,8 @@
   <div class="col-7 mt-3">
     <div *ngFor='let value of currentdata; let i = index'> 
       <mat-checkbox labelPosition="before" 
-      (change)="checkCheckBoxvalue(value.question, value.ans, $event.checked)">
-      {{i + 1}} : {{value.question}}  {{value.ans}}</mat-checkbox>
+      (change)="checkCheckBoxvalue(value.quest, value.ans, $event.checked)">
+      {{i + 1}} : {{value.ques}}  {{value.ans}}</mat-checkbox>
     </div>
     <div *ngIf = 'currentdata.length > 0' class="button-class">
       <button class="btn btn-primary btn-sm last-button"  (click)="submit()">Submit</button>

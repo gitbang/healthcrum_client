@@ -38,27 +38,45 @@ export class EPrescriptionComponent implements OnInit {
     allergy : 'all about present allergy',
     others : "other hazardous factors"
   }
+
+  doctorId: string = "";
   ngOnInit() {
 
     let role = this.localService.getUserRole();
     if(role != 'doctor') {
       this.router.navigateByUrl('/login')
+      return
     }
-
+    // get doctor Id 
+    this.getDoctorId()
+    
     // get hra details//
+    this.getHraDetails()
+    
+    //expansioncard dedtils
+    this.getExpansionCardDetails()
+
+    let date = new Date();
+    this.date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
+  }
+
+  getDoctorId(){
+    this.doctorId = this.localService.getUserID
+    console.log("doctorId is", this.doctorId)
+  }
+
+  getHraDetails(){
     this.service.hradetails().subscribe((result) => {
       this.hraReasonBox = result
       console.log(this.hraReasonBox);
     })
-    
+  }
+
+  getExpansionCardDetails(){
     this.service.getDataForExpansionCard().subscribe((result)=>{
       this.expansionCard = result;
-      
       console.log(this.expansionCard);
     })
-
-    let date = new Date();
-    this.date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
   }
 
   objectKeys = Object.keys;
@@ -113,16 +131,27 @@ export class EPrescriptionComponent implements OnInit {
     recommendation : ['', Validators.required],
     date : ['']
   })
+  newDoseForm = this.fb.group({
+    recommendationForPatient : this.fb.array([
+      this.addNewDoseForm()
+    ])
+  })
 
   addmedicineButtonClick(): void {
-    (<FormArray>this.formSecond2.get('medication')).push(this.addmedicine())
-    //console.log(this.formSecond2.value)
-    // console.log(this.formSecond2.controls.medication)
-    // console.log(this.formSecond2.get('medication'))
-    console.log((<FormGroup>this.formSecond2.controls.medication).controls)
-    for(let i = 0; i < this.formSecond2.get('medication').value.length; i++){
-      console.log("in loop")
-    }
+
+    (<FormArray>this.formSecond2.get('medication')).push(this.addmedicine());
+
+    (<FormArray>this.newDoseForm.get('recommendationForPatient')).push(this.addNewDoseForm());
+  }
+
+  addNewDoseForm() : FormGroup{
+    return this.fb.group({
+      medicineName : [''],
+      morningDose: [''],
+      noonDose : [''],
+      nightOtherDose : [''],
+      conditionForDose : ['']
+    })
   }
 
   removeMedicineClick(i : number) : void {
@@ -136,25 +165,26 @@ export class EPrescriptionComponent implements OnInit {
       duration : ['', Validators.required]
     })
   }
+  addnew
   submitFirstForm(){
    // console.log(this.formFirst.value);
     this.formFirst.get('date').setValue(this.date);
-    this.service.submitFirstForm(this.formFirst).subscribe(
-      (result) =>  console.log(result),
-      (err : any) => console.log(err)
-    )
+    // this.service.submitFirstForm(this.formFirst).subscribe(
+    //   (result) =>  console.log(result),
+    //   (err : any) => console.log(err)
+    // )
   }
   submitSecondForm(){
     //console.log(this.formSecond2.value);
     this.formSecond2.get('date').setValue(this.date);
-    this.service.submitSecondForm(this.formSecond2).subscribe(
-      (result) => {
-        if(result.message) {
-          alert("Form Not submitted")
-        }
-      },
-      (err : any) => console.log(err)
-    )
+    // this.service.submitSecondForm(this.formSecond2).subscribe(
+    //   (result) => {
+    //     if(result.message) {
+    //       alert("Form Not submitted")
+    //     }
+    //   },
+    //   (err : any) => console.log(err)
+    // )
   }
   
   togglefun(event) {
@@ -179,6 +209,7 @@ export class EPrescriptionComponent implements OnInit {
     console.log("priscription reached")
     this.showPriscribtion = !this.showPriscribtion
   }
+
   analysisPart(){
     console.log("analysis");
     this.analysis = true
@@ -202,23 +233,22 @@ export class EPrescriptionComponent implements OnInit {
         }
       })
       dialogRef.afterClosed().subscribe(result => {
-        console.log("result is : " , result.data);
-        this.hraReasonAnswer = result.data
-        // this.service.reasonFromHra(result).subscribe((result)=>{
-        //   //console.log(result);
-        //   ;
-        // })
-
+        if(result.success) {
+          this.hraReasonAnswer = result
+        }
       })
     }
   }
+
   lraSection() {
     console.log("lra reached")
   }
+
   analysisSection(section: string){
     this.analysisPort = section;
     console.log(this.analysisPort)
   }
+
   check(temp :any){
     console.log(temp.value.property )
   }
@@ -236,14 +266,23 @@ export class EPrescriptionComponent implements OnInit {
   }
 
   finalSubmit(){
-    console.log(this.formFirst.value);
-    console.log(this.formSecond2.value);
-    console.log(this.hraReasonAnswer)
     var allData = {
       ...this.formFirst.value,
-      ...this.formSecond2.value,
-      ...this.hraReasonAnswer
+      ...this.newDoseForm.value,
+      selectZone : {
+        zone : this.userZone,
+        hra : this.hraReasonAnswer.allcombine
+      }
     }
     console.log("all data is ", allData)
+    this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
+      console.log("response : ", result)
+      if(result.success){
+        console.log("data saved")
+      }
+    },
+    (err : any)=> console.log(err)
+    )
+    
   }
 }

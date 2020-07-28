@@ -21,13 +21,11 @@ export class DoctorService {
   options = { headers: this.headers };
 
 // e-prescription 
-  submitFirstForm(form1) : Observable<any> {
+  submitFirstForm(alldata, doctorId : string) : Observable<any> {
     //console.log("reached first form");
     return this.http
-        .post(this.url + '/saveprescriptionfirst/'+ this.userId, form1.value, this.options)
-          .pipe(
-            retry(2),
-            catchError(this.handleError)
+        .post(this.url + '/saveprescriptionfirst/'+ doctorId, alldata, this.options)
+          .pipe( retry(2), catchError(this.handleError)
           )
   }
   submitSecondForm(form2) : Observable<any> {
