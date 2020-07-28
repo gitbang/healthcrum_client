@@ -11,12 +11,23 @@ import {Router,  ActivatedRoute} from '@angular/router'
 import {DoctorService} from '../../doctor.service'
 import Swal from "sweetalert2";
 import {HomeServiceService} from '../../../home/home-service.service'
+import { Observable } from "rxjs";
+import { startWith, map } from "rxjs/operators";
+
+export interface test {
+  name : string,
+  testId : string,
+  testType : string
+}
 
 @Component({
   selector: "app-e-prescription",
   templateUrl: "./e-prescription.component.html",
   styleUrls: ["./e-prescription.component.scss"],
 })
+
+
+
 export class EPrescriptionComponent implements OnInit {
   //tabBackground = "primary";
   
@@ -64,6 +75,7 @@ export class EPrescriptionComponent implements OnInit {
     this.getFormGroup();
 
     // get all blood test; 
+    this.fetchBloodtest()
 
     //expansioncard dedtils
     //this.getExpansionCardDetails()
@@ -71,20 +83,58 @@ export class EPrescriptionComponent implements OnInit {
     let date = new Date();
     this.date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
   }
+ 
 
   formFirst : FormGroup;
   formSecond2 : FormGroup;
   newDoseForm : FormGroup;
+  patientId : string;
+  orderId : string;
+  bloodTestControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  bloodTestFilters: Observable<string[]>;
+  bloodTestFilters2: Observable<object[]>;
 
   getquertParameters(){
+
     this.route.queryParams.subscribe((result)=>{
       console.log("query parameters", result)
+      if(result.patientId && result.orderId){
+        this.patientId = result.patientId;
+        this.orderId = result.orderId
+      } else {
+        this.router.navigate(['/doctor/appointments'])
+      }
     })
   }
 
   fetchBloodtest(){
-   // this.homeService.bloodTestFetchAllTest().subscribe()
+    this.service.eprescriptionFetchTest().subscribe(result=>{
+      console.log(result);
+      if(result.success){
+        this.getRequiredValuesOfBloodTest(result.data.packageTest, "packageTest")
+        this.getRequiredValuesOfBloodTest(result.data.profileTest, "profileTest")
+        this.getRequiredValuesOfBloodTest(result.data.singleTest, "singleTest")
+      }
+    },
+    (error : any)=> alert("Something went wrong"))
   }
+
+  testList : test[] = []
+  getRequiredValuesOfBloodTest(testList: any[], testType: string){
+    let add: { name: any; testId: any; testType: string; } 
+    testList.forEach(test => {
+      add = {
+        name : test.name,
+        testId : test._id,
+        testType
+      }
+      this.testList.push(add)
+    });
+    console.log("final test list is : ", this.testList)
+    this.bloodTestAutoCOmplete()
+  }
+
   getFormGroup(){
     this.formFirst = this.fb.group({
       problems : this.fb.group({
@@ -116,7 +166,10 @@ export class EPrescriptionComponent implements OnInit {
     })
     this.newDoseForm = this.fb.group({
       investigation : ['', Validators.required],
-      recommendation : ['', Validators.required],
+      recommendTest : this.fb.group({
+        testId : [''],
+        testType : ['']
+      }),
       recommendationForPatient : this.fb.array([
         this.addNewDoseForm()
       ])
@@ -314,7 +367,9 @@ export class EPrescriptionComponent implements OnInit {
       selectZone : {
         zone : this.userZone,
         hra : this.hraReasonAnswer
-      }
+      },
+      userId : this.patientId,
+      orderId : this.orderId
     }
     console.log("all data is ", allData)
     this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
@@ -325,5 +380,30 @@ export class EPrescriptionComponent implements OnInit {
     },
     (err : any)=> console.log(err)
     )
+  }
+
+  testSelectes(event ,testId, i){
+
+    if(event.isUserInput){
+      console.log("index is ",i)
+      this.newDoseForm.controls.recommendTest.get('testId').patchValue(this.testList[i].testId)
+      this.newDoseForm.controls.recommendTest.get('testType').patchValue(this.testList[i].testType)
+      console.log(this.newDoseForm.value)
+    }
+    
+  }
+
+  bloodTestAutoCOmplete(){
+
+    this.bloodTestFilters2 = this.bloodTestControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.testFilters(value))
+    )
+  }
+
+  private testFilters(value : string) : object[]{
+    const filterValue = value.toLowerCase();
+
+    return this.testList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0)
   }
 }

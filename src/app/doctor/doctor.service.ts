@@ -47,6 +47,13 @@ export class DoctorService {
     console.log("reason service reached");
     return this.http.post('', reason);
   }
+
+  eprescriptionFetchTest():Observable<any>{
+    return this.http
+              .get(this.url + "/getAll/recommendedTest", this.options)
+              .pipe(retry(2), catchError(this.handleError))
+  }
+
   getDataForExpansionCard(): Observable<any> {
     console.log("data for expansion card reached");
     return this.http.get(this.url + '/getlatestreport', this.options)
@@ -67,6 +74,8 @@ export class DoctorService {
             .post(this.url + "/api/update/order/status/"+ orderId, data , this.options)
             .pipe(retry(2), catchError(this.handleError))
   }
+
+  
 
   private handleError(error : HttpErrorResponse){
     if(error.error instanceof ErrorEvent) {

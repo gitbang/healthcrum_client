@@ -19,7 +19,7 @@
       <!-- <button class="btn btn-warning"></button> -->
       <mat-card class="example-card mat-card text-center">
         <mat-card-header>
-          <mat-card-title>Condition/Symptemic</mat-card-title>
+          <mat-card-title>Condition/ Symptemic</mat-card-title>
         </mat-card-header>
       </mat-card>
     </div>
@@ -251,11 +251,38 @@
           </mat-form-field>
         </div>
         <div class="col-md-1"></div>
+
+        <!--
         <div class="col-md-6">
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Recommendations</mat-label>
 
-            <input matInput formControlName='recommendation' placeholder="eg: Test1, Diet maintainance">
+            
+
+            <mat-select (selectionChange)="testSelectes($event)">
+              <mat-option *ngFor="let test of testList; index as i" 
+                [value]='i'>{{test.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        -->
+
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input type="text"
+                  placeholder="Pick one"
+                  aria-label="Number"
+                  matInput
+                  [formControl]="bloodTestControl"
+                  [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option (onSelectionChange)="testSelectes($event, option.testId, i)"
+                 *ngFor="let option of bloodTestFilters2 | async; let i = index" [value]="option.name"
+               
+              >
+                {{option.name}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
         </div>
       </div>

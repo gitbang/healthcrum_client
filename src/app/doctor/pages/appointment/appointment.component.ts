@@ -88,7 +88,7 @@ export class AppointmentComponent implements OnInit {
         time:  result.data[i].orderDetail.orderDetails[0].timeOfCheckup,
         patientEmail : result.data[i].orderDetail.orderBy.email,
         patientId : result.data[i].userDetail.userId,
-        orderId : result.data[i].orderDetail.orderDetails._id,
+        orderId : result.data[i].orderDetail.orderDetails[0]._id,
         status : result.data[i].orderDetail.Orderstatus,
         appointmentNum : result.data[i].orderDetail.appointmentNum
       }
@@ -160,8 +160,9 @@ export class AppointmentComponent implements OnInit {
     console.log("go to eprescription")
     console.log(this.confirmedAppointment[index])
     this.router.navigate(['/doctor/e-prescription'], {queryParams : {
-      patient : this.confirmedAppointment[index].patientId
+      patientId : this.confirmedAppointment[index].patientId,
+      orderId : this.confirmedAppointment[index].orderId
     }})
-  }
+  } 
   //"showNotification('top','right',2)"
 }
