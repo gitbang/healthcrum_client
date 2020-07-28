@@ -4,6 +4,7 @@ import {Router} from '@angular/router'
 import {DoctorService} from '../../doctor.service'
 import Swal from "sweetalert2";
 import { FooterComponent } from "app/company/components/footer/footer.component";
+import { query } from "chartist";
 
 declare var $: any;
 @Component({
@@ -155,9 +156,12 @@ export class AppointmentComponent implements OnInit {
     })
   }
 
-  goToEprescription(){
+  goToEprescription(index : number){
     console.log("go to eprescription")
-    this.router.navigateByUrl('/doctor/e-prescription')
+    console.log(this.confirmedAppointment[index])
+    this.router.navigate(['/doctor/e-prescription'], {queryParams : {
+      patient : this.confirmedAppointment[index].patientId
+    }})
   }
   //"showNotification('top','right',2)"
 }

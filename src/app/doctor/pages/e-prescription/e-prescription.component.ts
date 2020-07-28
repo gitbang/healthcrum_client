@@ -6,9 +6,11 @@ import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angul
 import {LastConsultantComponent} from './last-consultant/last-consultant.component'
 import { AnalysisComponent } from "./analysis/analysis.component";
 import {AuthServiceLocal} from '../../../services/auth-service.service'
-import {Router} from '@angular/router'
+import {Router,  ActivatedRoute} from '@angular/router'
 // import {LastConsultantComponent} from 'pages/e-prescription/last-consultant/last-consultant.component4
 import {DoctorService} from '../../doctor.service'
+import Swal from "sweetalert2";
+import {HomeServiceService} from '../../../home/home-service.service'
 
 @Component({
   selector: "app-e-prescription",
@@ -24,7 +26,9 @@ export class EPrescriptionComponent implements OnInit {
     private fb : FormBuilder, 
     private service : DoctorService,
     private localService : AuthServiceLocal,
-    private router : Router
+    private router : Router,
+    private route : ActivatedRoute,
+    private homeService : HomeServiceService
     ) {}
 
   hraReasonBox : any;
@@ -49,15 +53,74 @@ export class EPrescriptionComponent implements OnInit {
     }
     // get doctor Id 
     this.getDoctorId()
-    
+
+    //get query parameters
+    this.getquertParameters()
+
     // get hra details//
-    this.getHraDetails()
+    //this.getHraDetails()
     
+    // generate form group
+    this.getFormGroup();
+
+    // get all blood test; 
+
     //expansioncard dedtils
-    this.getExpansionCardDetails()
+    //this.getExpansionCardDetails()
 
     let date = new Date();
     this.date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
+  }
+
+  formFirst : FormGroup;
+  formSecond2 : FormGroup;
+  newDoseForm : FormGroup;
+
+  getquertParameters(){
+    this.route.queryParams.subscribe((result)=>{
+      console.log("query parameters", result)
+    })
+  }
+
+  fetchBloodtest(){
+   // this.homeService.bloodTestFetchAllTest().subscribe()
+  }
+  getFormGroup(){
+    this.formFirst = this.fb.group({
+      problems : this.fb.group({
+        description : ['', Validators.required],
+        remarks : ['', Validators.required]
+      }),
+      symptoms : this.fb.group({
+        description : ['',Validators.required],
+        remarks : ['', Validators.required]
+      }),
+      finding: this.fb.group({
+        description : ['', Validators.required],
+        remarks : ['', Validators.required]
+      }),
+      recommendation : this.fb.group({
+        description : ['', Validators.required],
+        remarks : ['', Validators.required]
+      }),
+      date : [this.date]
+    })
+  
+    this.formSecond2 = this.fb.group({
+      medication : this.fb.array([
+        this.addmedicine()
+      ]),
+      investigation : ['', Validators.required],
+      recommendation : ['', Validators.required],
+      date : ['']
+    })
+    this.newDoseForm = this.fb.group({
+      investigation : ['', Validators.required],
+      recommendation : ['', Validators.required],
+      recommendationForPatient : this.fb.array([
+        this.addNewDoseForm()
+      ])
+    })
   }
 
   getDoctorId(){
@@ -100,42 +163,6 @@ export class EPrescriptionComponent implements OnInit {
  
 
   @ViewChild('togglegroup', {static : false}) toggle : ElementRef
-    // form builder of this page
-  
-
-  formFirst = this.fb.group({
-    problems : this.fb.group({
-      description : ['', Validators.required],
-      remarks : ['', Validators.required]
-    }),
-    symptoms : this.fb.group({
-      description : ['',Validators.required],
-      remarks : ['', Validators.required]
-    }),
-    finding: this.fb.group({
-      description : ['', Validators.required],
-      remarks : ['', Validators.required]
-    }),
-    recommendation : this.fb.group({
-      description : ['', Validators.required],
-      remarks : ['', Validators.required]
-    }),
-    date : [this.date]
-  })
-
-  formSecond2 = this.fb.group({
-    medication : this.fb.array([
-      this.addmedicine()
-    ]),
-    investigation : ['', Validators.required],
-    recommendation : ['', Validators.required],
-    date : ['']
-  })
-  newDoseForm = this.fb.group({
-    recommendationForPatient : this.fb.array([
-      this.addNewDoseForm()
-    ])
-  })
 
   addmedicineButtonClick(): void {
 
@@ -146,17 +173,20 @@ export class EPrescriptionComponent implements OnInit {
 
   addNewDoseForm() : FormGroup{
     return this.fb.group({
-      medicineName : [''],
-      morningDose: [''],
-      noonDose : [''],
-      nightOtherDose : [''],
-      conditionForDose : ['']
+      medicineName : ['', Validators.required],
+      morningDose: ['', Validators.required],
+      noonDose : ['', Validators.required],
+      nightOtherDose : ['', Validators.required],
+      conditionForDose : ['', Validators.required]
     })
   }
 
   removeMedicineClick(i : number) : void {
     (<FormArray>this.formSecond2.get('medication')).removeAt(i);
+
+    (<FormArray>this.newDoseForm.get('recommendationForPatient')).removeAt(i)
   }
+
   addmedicine() : FormGroup{
     return this.fb.group({
       medicine : ['', Validators.required],
@@ -165,6 +195,7 @@ export class EPrescriptionComponent implements OnInit {
       duration : ['', Validators.required]
     })
   }
+
   addnew
   submitFirstForm(){
    // console.log(this.formFirst.value);
@@ -174,6 +205,7 @@ export class EPrescriptionComponent implements OnInit {
     //   (err : any) => console.log(err)
     // )
   }
+
   submitSecondForm(){
     //console.log(this.formSecond2.value);
     this.formSecond2.get('date').setValue(this.date);
@@ -216,11 +248,13 @@ export class EPrescriptionComponent implements OnInit {
   }
 
   onTabChanges(event){  
+    this.hraReasonAnswer = []
     //this.analysis = true;
     console.log(event);
     if(event.index == 0) {
       this.analysis = false;
-      this.analysisPort = "none"
+      this.analysisPort = "none";
+      
     }  
     else{
       this.userZone = event.tab.textLabel;
@@ -233,8 +267,8 @@ export class EPrescriptionComponent implements OnInit {
         }
       })
       dialogRef.afterClosed().subscribe(result => {
-        if(result.success) {
-          this.hraReasonAnswer = result
+        if(result && result.success) {
+          this.hraReasonAnswer = result.allcombine
         }
       })
     }
@@ -266,12 +300,20 @@ export class EPrescriptionComponent implements OnInit {
   }
 
   finalSubmit(){
+    if(this.formFirst.invalid){
+      Swal.fire("Invalid result form")
+      return
+    }
+    if(this.newDoseForm.invalid){
+      Swal.fire("Incomplete medicine form")
+      return
+    }
     var allData = {
       ...this.formFirst.value,
       ...this.newDoseForm.value,
       selectZone : {
         zone : this.userZone,
-        hra : this.hraReasonAnswer.allcombine
+        hra : this.hraReasonAnswer
       }
     }
     console.log("all data is ", allData)
@@ -283,6 +325,5 @@ export class EPrescriptionComponent implements OnInit {
     },
     (err : any)=> console.log(err)
     )
-    
   }
 }

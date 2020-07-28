@@ -162,7 +162,7 @@
     </div>
   </mat-sidenav-container>
   <div class="mt-4 recommendation-bottom">
-    <form [formGroup]="formSecond2">
+    <form [formGroup]="newDoseForm">
       <div class="row">
         <div class="col-10">
           <label> 
@@ -170,24 +170,24 @@
           </label>
         </div>
         <div>
-          <button class="btn btn-warning btn-sm" (click)="addmedicineButtonClick()">Add Fields</button>
+          <button class="btn btn-warning btn-sm" (click)=" addmedicineButtonClick()">Add Fields</button>
         </div>
       </div>
-      <div formArrayName="medication">
+      <div formArrayName="recommendationForPatient">
        
-        <div *ngFor="let element of formSecond2.controls.medication.controls; let i = index">
+        <div *ngFor="let element of newDoseForm.controls.recommendationForPatient.controls; let i = index">
           <div class="row mt-2" [formGroupName]="i">
             <div class="col-md-2">
               <mat-form-field class="full-width">
                 <mat-label>Medicine Name</mat-label>
-                <input matInput class="example-full-width" formControlName='medicine'>
+                <input matInput class="example-full-width" formControlName='medicineName'>
               </mat-form-field>
             </div>
             <div class="col-md-2">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Morning Dose</mat-label>
                 
-                <mat-select formControlName='dose'>
+                <mat-select formControlName='morningDose'>
                   <mat-option value="quater">1/4</mat-option>
                   <mat-option value="half">1/2</mat-option>
                   <mat-option value="one">1</mat-option>
@@ -197,9 +197,10 @@
 
             </div>
             <div class="col-md-2">
-              <mat-form-field appearance="outline" class="full-width">
+              <mat-form-field appearance="outline" class="full-width" 
+                >
                 <mat-label>Noon Dose</mat-label>
-                <mat-select formControlName='timing'>
+                <mat-select formControlName='noonDose'>
                   <mat-option value="quater">1/4</mat-option>
                   <mat-option value="half">1/2</mat-option>
                   <mat-option value="one">1</mat-option>
@@ -211,7 +212,7 @@
             <div class="col-md-2">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Night/Other Dose</mat-label>
-                <mat-select formControlName='duration'>
+                <mat-select formControlName='nightOtherDose'>
                   <mat-option value="quater">1/4</mat-option>
                   <mat-option value="half">1/2</mat-option>
                   <mat-option value="one">1</mat-option>
@@ -223,14 +224,14 @@
             <div class="col-md-3">
               <mat-form-field appearance="outline" [hideRequiredMarker]="true">
                 <mat-label>Condition for Dose</mat-label>
-                <mat-select>
+                <mat-select formControlName='conditionForDose'>
                   <mat-option value="before_lunch">Before Luch</mat-option>
                   <mat-option value="after_lunch">After Lunch</mat-option>
                   <mat-option value="not_required">Not Required</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-md-1" *ngIf="formSecond2.get('medication') > 1" style="align-self: center;">
+            <div class="col-md-1" *ngIf="newDoseForm.get('recommendationForPatient').length > 1" style="align-self: center;">
               <button class="btn btn-white btn-round btn-just-icon mat-raised-button btn-sm" title="Delete"
                 (click)="removeMedicineClick(i)">
                 <mat-icon class="material-icons text-danger">delete</mat-icon>

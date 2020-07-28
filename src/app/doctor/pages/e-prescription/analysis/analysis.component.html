@@ -18,7 +18,7 @@
   <div class="col-7 mt-3">
     <div *ngFor='let value of currentdata; let i = index'> 
       <mat-checkbox labelPosition="before" 
-      (change)="checkCheckBoxvalue(value.quest, value.ans, $event.checked)">
+      (change)="checkCheckBoxvalue(value.ques, value.ans, $event.checked)">
       {{i + 1}} : {{value.ques}}  {{value.ans}}</mat-checkbox>
     </div>
     <div *ngIf = 'currentdata.length > 0' class="button-class">
