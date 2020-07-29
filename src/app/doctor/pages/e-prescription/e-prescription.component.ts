@@ -14,6 +14,11 @@ import {HomeServiceService} from '../../../home/home-service.service'
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 export interface test {
   name : string,
   testId : string,
@@ -352,34 +357,185 @@ export class EPrescriptionComponent implements OnInit {
     })
   }
 
+  // finalSubmit(){
+  //   if(this.formFirst.invalid){
+  //     Swal.fire("Invalid result form")
+  //     return
+  //   }
+  //   if(this.newDoseForm.invalid){
+  //     Swal.fire("Incomplete medicine form")
+  //     return
+  //   }
+  //   var allData = {
+  //     ...this.formFirst.value,
+  //     ...this.newDoseForm.value,
+  //     selectZone : {
+  //       zone : this.userZone,
+  //       hra : this.hraReasonAnswer
+  //     },
+  //     userId : this.patientId,
+  //     orderId : this.orderId
+  //   }
+  //   console.log("all data is ", allData)
+  //   this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
+  //     console.log("response : ", result)
+  //     if(result.success){
+  //       console.log("data saved")
+  //     }
+  //   },
+  //   (err : any)=> console.log(err)
+  //   )
+  // }
+  data = [
+    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
+    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
+    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
+    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
+  ]
+
+  simple : ["abcd", "full", "half", "half", "others"]
   finalSubmit(){
-    if(this.formFirst.invalid){
-      Swal.fire("Invalid result form")
-      return
+
+    let tableData = [];
+    for(let i = 0; i < this.data.length; i++){
+      tableData.push([this.data[i].name , 
+        this.data[i].morningDose,
+        this.data[i].morningDose,
+        this.data[i].morningDose,
+        this.data[i].morningDose,
+        this.data[i].morningDose])
     }
-    if(this.newDoseForm.invalid){
-      Swal.fire("Incomplete medicine form")
-      return
-    }
-    var allData = {
-      ...this.formFirst.value,
-      ...this.newDoseForm.value,
-      selectZone : {
-        zone : this.userZone,
-        hra : this.hraReasonAnswer
-      },
-      userId : this.patientId,
-      orderId : this.orderId
-    }
-    console.log("all data is ", allData)
-    this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
-      console.log("response : ", result)
-      if(result.success){
-        console.log("data saved")
+    console.log(tableData)
+    console.log("table data is ", ...tableData)
+
+    console.log("pdf maker called")
+    var dd = {
+      watermark: {text :'Healthcrum', opacity : 0.1, color : 'green'},
+      content: [
+        {
+          columns: [
+          {  
+           // image: require('assets/img/doctors/verma.jpg'),
+            // width: 150
+          },
+          {
+            columns : [
+              {
+                stack : [
+                  {text: [
+                      {svg: '<svg width="300" height="200" viewBox="0 0 300 200"></svg>'},
+                      'Location'
+                  ]},
+                
+                  {text : "Phone no" , margin : [0,10,0,0]},
+                ]
+              },
+              {
+                stack : [
+                    {text : "Email" },
+                    {text : "website link" , margin : [0,10,0,0]},
+                ]
+              }
+            ]
+          }
+          ],
+          columnGap : 80
+        },
+        {
+          columns : [
+            {  text : [
+                {text : 'User name :  ', style : "topDetails"},  'Akash'
+              ]
+            },  
+            {  text : [
+                {text : 'Doc name :  ', style : "topDetails"},  'Meena'
+              ]
+            },
+            {  text : [
+                {text : 'Appointment Number :  ', style : "topDetails"},  '123456'
+              ]
+            },
+              
+          ], 
+          style : 'marginT', margin : [0,30,0,10]
+        },
+        
+          {
+          
+          table: {
+                widths: [ '*', 200, '*'],
+            body: [
+              [ '', '', 'remarks'],
+              [ {text : 'Problem', bold : true}, 'problem writem by doctor', "value 1"],
+              [ {text : 'Symptoms', bold : true}, 'Symptoms writem by doctor', "value 2"],
+              [ {text : 'Investigation', bold : true}, 'Investigation writem by doctor', "value 3"],
+              [ {text : 'Recommendation', bold : true}, 'Recommendation writem by doctor', "value 4"],
+            ]
+          },
+          style : 'marginT',
+        },
+        {
+          text : "Recommended medicine", style : "marginT" , bold :true,
+          fontSize : 15 , decoration: 'underline',
+        },
+        
+        {
+          table: {
+                widths: [30, '*', '*', '*', '*', '*'],
+            body: [
+              [   {text : 'S.No' , bold : true}, 
+                  {text : 'Medicie Name', bold : true}, 
+                  {text :'Morning Dose' , bold : true},
+                  {text : 'Noon Dose', bold : true},
+                  {text :'Night Dose' , bold : true},
+                  {text : 'Others', bold : true}],
+                  
+              [{text : "1", alignment : 'center'},  'Medicine 1', 'Full',
+              "Half", "Quarter", "Before lunch"],
+              [{text : "2", alignment : 'center'},  'Medicine 2', 'Full',
+              "Half", "Quarter", "Before lunch"],
+              [{text : "3", alignment : 'center'},  'Medicine 3', 'Full',
+              "Half", "Quarter", "Before lunch"],
+              ...tableData
+
+            ],
+          },
+          style : 'marginT'
+        },
+        {
+          columns : [
+            {
+              text: [
+                  { text: 'Investigation :  ', fontSize: 12, bold : true },
+                  'My all investigation'
+                ],
+                style : 'marginT'
+              },
+              {
+                text: [
+                { text:  'Recommended Test : ', fontSize: 12, bold : true },
+                'My all investigation'
+                ],
+                style : 'marginT'
+              },
+          ],  
+        },
+        
+          
+      ],
+      
+      styles : {
+          marginT :{
+              margin : [0 , 20, 0 , 0]
+          },
+          topDetails : {
+              bold : true,
+              color : 'green'
+          }
       }
-    },
-    (err : any)=> console.log(err)
-    )
+    }
+
+    pdfMake.createPdf(dd).download();
   }
 
   testSelectes(event ,testId, i){

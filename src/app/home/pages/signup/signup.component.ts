@@ -190,7 +190,7 @@ export class SignupComponent implements OnInit {
         this.router.navigateByUrl('/login')
       } else {
         console.log(result)
-        swal.fire("Something went wrong. Try again later.")
+        swal.fire(result.message)
       }
     })
   }
@@ -284,23 +284,23 @@ export class SignupComponent implements OnInit {
         this.corporates = res.data;
       }
     })
-}
-getCompantBranches(){
-  let data = { corporate_id : this.companyId};
-  this.homeService.getBranchesByCorporate(data).subscribe((res:any)=>{
-    if(res.success){
-      this.branches = res.data;
-    }
-  });
-}
-getDepartments(){
-  let data = { corporate_id : this.companyId, branch_id: this.branchId};
-  this.homeService.getDepartmentByCorporate(data).subscribe((res:any)=>{
-    if(res.success){
-      this.departments = res.data;
-    }
-  });
-}
+  }
+  getCompantBranches(){
+    let data = { corporate_id : this.companyId};
+    this.homeService.getBranchesByCorporate(data).subscribe((res:any)=>{
+      if(res.success){
+        this.branches = res.data;
+      }
+    });
+  }
+  getDepartments(){
+    let data = { corporate_id : this.companyId, branch_id: this.branchId};
+    this.homeService.getDepartmentByCorporate(data).subscribe((res:any)=>{
+      if(res.success){
+        this.departments = res.data;
+      }
+    });
+  }
 }
 
 @Component({

@@ -22,9 +22,7 @@
                   <th>
                     Doctor Name
                   </th>
-                  <th>
-                    Lab
-                  </th>
+                  
                   <th>
                     Appointment No.
                   </th>
@@ -37,27 +35,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    11be45
-                  </td>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Doc_1
-                  <td>
-                    Lab-Name
-                  </td>
-                  <td>
-                    3738
-                  </td>
+                <tr *ngFor = "let pres of prescriptionTOshow; index as i">
+                  <td>{{i + 1}}</td>
+                  <td>{{pres.patientName}}</td>
+                  <td>{{pres.doctorName}}</td>
+                  <td> {{pres.appointmentNum}}</td>
                   <td class="td-actions">
                     <button type="button" class="btn btn-info">
                       <div class="up">
                         <!-- <span class="btn btn-info btn-file"> -->
                         <span class="fileinput-new up"><i class="material-icons">arrow_downward</i></span>
-
                       </div>
                     </button>
                   </td>
@@ -69,102 +56,7 @@
                     </button>
                   </td>
                 </tr>
-                <tr>
-                  <td>
-                    109e45
-                  </td>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Doc_2
-                  </td>
-                  <td>
-                    Lab-Name
-                  </td>
-                  <td>
-                    2789
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" class="btn btn-info">
-                      <div class="up">
-                        <!-- <span class="btn btn-info btn-file"> -->
-                        <span class="fileinput-new up"><i class="material-icons">arrow_downward</i></span>
-
-                      </div>
-                    </button>
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
-                      data-original-title="Add Note" title="">
-                      <i class="material-icons">edit</i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    20984
-                  </td>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Doc_3
-                  </td>
-                  <td>
-                    Lab-Name
-                  </td>
-                  <td>
-                    5642
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" class="btn btn-info">
-                      <div class="up">
-                        <!-- <span class="btn btn-info btn-file"> -->
-                        <span class="fileinput-new up"><i class="material-icons">arrow_downward</i></span>
-
-                      </div>
-                    </button>
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
-                      data-original-title="Add Note" title="">
-                      <i class="material-icons">edit</i>
-                    </button>
-                  </td>
-
-                </tr>
-                <tr>
-                  <td>
-                    980065
-                  </td>
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Doc_4
-                  </td>
-                  <td>
-                    Lab-Name
-                  </td>
-                  <td>
-                    3800
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" class="btn btn-info">
-                      <div class="up">
-                        <!-- <span class="btn btn-info btn-file"> -->
-                        <span class="fileinput-new up"><i class="material-icons">arrow_downward</i></span>
-                      </div>
-                    </button>
-                  </td>
-                  <td class="td-actions">
-                    <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
-                      data-original-title="Add Note" title="">
-                      <i class="material-icons">edit</i>
-                    </button>
-                  </td>
-                </tr>
+                
               </tbody>
             </table>
           </div>

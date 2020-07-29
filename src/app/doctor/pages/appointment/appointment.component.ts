@@ -88,7 +88,7 @@ export class AppointmentComponent implements OnInit {
         time:  result.data[i].orderDetail.orderDetails[0].timeOfCheckup,
         patientEmail : result.data[i].orderDetail.orderBy.email,
         patientId : result.data[i].userDetail.userId,
-        orderId : result.data[i].orderDetail.orderDetails[0]._id,
+        orderId : result.data[i].orderDetail._id,
         status : result.data[i].orderDetail.Orderstatus,
         appointmentNum : result.data[i].orderDetail.appointmentNum
       }

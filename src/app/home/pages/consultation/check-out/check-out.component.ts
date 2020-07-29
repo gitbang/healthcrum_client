@@ -7,9 +7,9 @@ import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import {AuthServiceLocal} from '../../../../services/auth-service.service'
 
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// import pdfMake from "pdfmake/build/pdfmake";
+// import pdfFonts from "pdfmake/build/vfs_fonts";
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var Razorpay: any; 
 @Component({

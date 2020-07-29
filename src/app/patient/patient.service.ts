@@ -8,8 +8,8 @@ import { retry, catchError } from "rxjs/operators";
 })
 export class PatientService {
   constructor(private http: HttpClient) {}
-  //  url: String = "http://localhost:3000";
-  url: String = "https://api.sftservices.com";
+    url: String = "http://localhost:3000";
+  //url: String = "https://api.sftservices.com";
 
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -114,6 +114,12 @@ export class PatientService {
   ordersgetBloodTest(userId : string):Observable<any>{
     return this.http
             .get(this.url + '/payment/fetch-bloodTest/user/'+userId, this.options)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  prescriptionGetall(userId : string):Observable<any>{
+    return this.http
+            .get(this.url + '/getUserPrescription/'+ userId, this.options)
             .pipe(retry(2), catchError(this.handleError))
   }
 

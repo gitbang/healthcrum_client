@@ -159,6 +159,10 @@ export class AuthServiceLocal {
     return JSON.parse(localStorage.getItem("userDetail")).employeeId;
   }
 
+  get getUserName(){
+    return JSON.parse(localStorage.getItem("userDetail")).name;
+  }
+
   saveUserToken(token){
     try{
         localStorage.setItem("token",token);

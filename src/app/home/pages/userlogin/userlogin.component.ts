@@ -469,7 +469,7 @@ export class UserloginComponent implements OnInit {
             //this.saveAndAccess(); // for dynamic routing
             this.sendRequestToCheckLogin(this.userDetail)
           } else {
-            Swal.fire("Error", result.message, "error");
+            Swal.fire( result.message, "error");
           }
         });
       } else {
