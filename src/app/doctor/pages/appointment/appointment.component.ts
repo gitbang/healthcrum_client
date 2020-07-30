@@ -5,6 +5,7 @@ import {DoctorService} from '../../doctor.service'
 import Swal from "sweetalert2";
 import { FooterComponent } from "app/company/components/footer/footer.component";
 import { query } from "chartist";
+import {PatientService} from '../../../patient/patient.service'
 
 declare var $: any;
 @Component({
@@ -45,7 +46,8 @@ export class AppointmentComponent implements OnInit {
   constructor(
     private localService : AuthServiceLocal,
     private router : Router,
-    private doctorService : DoctorService
+    private doctorService : DoctorService,
+    private patientService : PatientService
   ) {}
 
   doctorId : string ;
@@ -165,4 +167,23 @@ export class AppointmentComponent implements OnInit {
     }})
   } 
   //"showNotification('top','right',2)"
+
+ 
+  getPdf(orderId : string){
+    console.log(orderId)
+    this.patientService.appointmentFetchPDF(orderId).subscribe((result=>{
+      console.log(result);
+      if(result.success){
+        this.completeImageUrl(result.data)
+      } else {
+        alert("something went wrong")
+      }
+    }),
+    (err)=> console.log("something went wrong", err))
+  }
+
+  completeImageUrl(pdfUrl){
+    let url = this.patientService.completeURl(pdfUrl)
+    window.open(url,  '_blank')
+  }
 }

@@ -53,6 +53,13 @@ export class DoctorService {
               .get(this.url + "/getAll/recommendedTest", this.options)
               .pipe(retry(2), catchError(this.handleError))
   }
+  
+  eprescriptionSavePDF(orderID : string, data: FormData):Observable<any>{
+    console.log("pdf service reached")
+    return this.http
+            .post(this.url + '/savePrescription/pdf/'+ orderID, data)
+            .pipe(retry(2))
+  }
 
   getDataForExpansionCard(): Observable<any> {
     console.log("data for expansion card reached");
@@ -74,6 +81,16 @@ export class DoctorService {
             .post(this.url + "/api/update/order/status/"+ orderId, data , this.options)
             .pipe(retry(2), catchError(this.handleError))
   }
+  appointmentPatientReport(orderId : any):Observable<any>{
+    return this.http
+            .get(this.url + '/getUser/prescriptionFile/'+ orderId)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  healthCrumLogoInBase64() : Observable<any>{
+    return  this.http.get('./assets/img/consulation/downloadpdf/logo1.png', { responseType: 'blob' })
+  }
+
 
   private handleError(error : HttpErrorResponse){
     if(error.error instanceof ErrorEvent) {

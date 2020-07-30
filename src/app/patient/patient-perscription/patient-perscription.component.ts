@@ -45,7 +45,6 @@ export class PatientPerscriptionComponent implements OnInit {
     this.getAllPrescription();
   }
 
-
   saveAllPrescription : any[] = []
   prescriptionTOshow : any[] = [];
   getAllPrescription(){
@@ -63,13 +62,34 @@ export class PatientPerscriptionComponent implements OnInit {
     for(let i = 0; i < data.length; i++) {
       let add ;
       add = {
+        date : data[i].orderId.orderDetails[0].dateOfCheckup,
         doctorName : data[i].doctorName,
         appointmentNum : data[i].orderId.appointmentNum,
-        patientName : this.patientName
+        patientName : this.patientName,
+        orderId : data[i].orderId._id
       }
       console.log("add ", add)
       this.prescriptionTOshow.push(add)
     }
     console.log(this.prescriptionTOshow)
+  }
+
+  currentPDF : string = "";
+  getPdf(orderId : string){
+    console.log(orderId)
+    this.patientService.appointmentFetchPDF(orderId).subscribe((result=>{
+      console.log(result);
+      if(result.success){
+        this.completeImageUrl(result.data)
+      } else {
+        alert("something went wrong")
+      }
+    }),
+    (err)=> console.log("something went wrong", err))
+  }
+
+  completeImageUrl(pdfUrl){
+    let url = this.patientService.completeURl(pdfUrl)
+    window.open(url,  '_blank')
   }
 }

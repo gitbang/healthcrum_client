@@ -42,21 +42,16 @@
                   <td> {{pres.appointmentNum}}</td>
                   <td class="td-actions">
                     <button type="button" class="btn btn-info">
-                      <div class="up">
+                      <div class="up" (click)="getPdf(pres.orderId)">
                         <!-- <span class="btn btn-info btn-file"> -->
-                        <span class="fileinput-new up"><i class="material-icons">arrow_downward</i></span>
+                        <span class="fileinput-new up">
+                        <i class="material-icons">
+                          arrow_downward
+                        </i></span>
                       </div>
                     </button>
                   </td>
-
-                  <td class="td-actions">
-                    <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
-                      data-original-title="Add Note" title="">
-                      <i class="material-icons">edit</i>
-                    </button>
-                  </td>
                 </tr>
-                
               </tbody>
             </table>
           </div>

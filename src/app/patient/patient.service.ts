@@ -123,6 +123,29 @@ export class PatientService {
             .pipe(retry(2), catchError(this.handleError))
   }
 
+  appointmentFetchPDF(orderId : string): Observable<any>{
+    return this.http
+            .get(this.url + '/getUser/prescriptionFile/'+ orderId)
+            .pipe(retry(2), catchError(this.handleError))
+  }
+
+  healthCrumLogoInBase64() : Observable<any>{
+    return  this.http.get('./assets/img/consultation/downloadpdf/logo1.png', { responseType: 'blob' })
+  }
+
+  // downloadPDF(url): any {
+  //   const options = { responseType: ResponseContentType.Blob  };
+  //   return this.http.get(url, options).map(
+  //   (res) => {
+  //       return new Blob([res.blob()], { type: 'application/pdf' });
+  //   });
+  // }
+
+  completeURl(url : string){
+    return  'http://localhost:3000/'+ url;
+    
+  }
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

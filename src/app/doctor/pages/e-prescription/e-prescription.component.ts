@@ -85,6 +85,9 @@ export class EPrescriptionComponent implements OnInit {
     //expansioncard dedtils
     //this.getExpansionCardDetails()
 
+    // get image in base64
+    this.healthCrumLogo()
+
     let date = new Date();
     this.date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
   }
@@ -173,7 +176,8 @@ export class EPrescriptionComponent implements OnInit {
       investigation : ['', Validators.required],
       recommendTest : this.fb.group({
         testId : [''],
-        testType : ['']
+        testType : [''],
+        testName : ['']
       }),
       recommendationForPatient : this.fb.array([
         this.addNewDoseForm()
@@ -357,35 +361,38 @@ export class EPrescriptionComponent implements OnInit {
     })
   }
 
-  // finalSubmit(){
-  //   if(this.formFirst.invalid){
-  //     Swal.fire("Invalid result form")
-  //     return
-  //   }
-  //   if(this.newDoseForm.invalid){
-  //     Swal.fire("Incomplete medicine form")
-  //     return
-  //   }
-  //   var allData = {
-  //     ...this.formFirst.value,
-  //     ...this.newDoseForm.value,
-  //     selectZone : {
-  //       zone : this.userZone,
-  //       hra : this.hraReasonAnswer
-  //     },
-  //     userId : this.patientId,
-  //     orderId : this.orderId
-  //   }
-  //   console.log("all data is ", allData)
-  //   this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
-  //     console.log("response : ", result)
-  //     if(result.success){
-  //       console.log("data saved")
-  //     }
-  //   },
-  //   (err : any)=> console.log(err)
-  //   )
-  // }
+  finalSubmit(){
+    if(this.formFirst.invalid){
+      Swal.fire("Invalid result form")
+      return
+    }
+    if(this.newDoseForm.invalid){
+      Swal.fire("Incomplete medicine form")
+      return
+    }
+    var allData = {
+      ...this.formFirst.value,
+      ...this.newDoseForm.value,
+      selectZone : {
+        zone : this.userZone,
+        hra : this.hraReasonAnswer
+      },
+      userId : this.patientId,
+      orderId : this.orderId
+    }
+    console.log("all data is ", allData)
+    this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
+      console.log("response : ", result)
+      if(result.success){
+        console.log("data saved")
+        this.getDataForPDF(result);
+      }
+    },
+    (err : any)=> console.log(err)
+    )
+  }
+
+
   data = [
     {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
     {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
@@ -394,134 +401,183 @@ export class EPrescriptionComponent implements OnInit {
   ]
 
   simple : ["abcd", "full", "half", "half", "others"]
-  finalSubmit(){
 
-    let tableData = [];
-    for(let i = 0; i < this.data.length; i++){
-      tableData.push([this.data[i].name , 
-        this.data[i].morningDose,
-        this.data[i].morningDose,
-        this.data[i].morningDose,
-        this.data[i].morningDose,
-        this.data[i].morningDose])
+  forPDF : any;
+  getDataForPDF(response){
+    
+    this.forPDF = {
+      ...response.data,
+      date  : response.orderDetail.orderDetails[0].dateOfCheckup,
+      appointmentNo : response.orderDetail.appointmentNum,
+      patientName : response.userProfile.name,
+      gender : response.userProfile.gender,
+      age : 19
     }
-    console.log(tableData)
-    console.log("table data is ", ...tableData)
+    console.log(this.forPDF)
+    this.afterfinalSubmit();
+  }
+  logohealthcrum : any;
+  healthCrumLogo(){
+    console.log("logo reach")
+    this.service.healthCrumLogoInBase64().subscribe((res)=>{
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        var base64data = reader.result;                
+            console.log( "resulr" , base64data);
+            this.logohealthcrum = base64data
+      }
+      reader.readAsDataURL(res); 
+    })
+  }
+
+  afterfinalSubmit(){
+
+    let medicineData = [];
+    for(let i = 0; i < this.forPDF.recommendationForPatient.length; i++){
+      medicineData.push([
+        i + 1,
+        this.forPDF.recommendationForPatient[i].medicineName,
+        this.forPDF.recommendationForPatient[i].morningDose,
+        this.forPDF.recommendationForPatient[i].noonDose,
+        this.forPDF.recommendationForPatient[i].nightOtherDose,
+        this.forPDF.recommendationForPatient[i].conditionForDose,
+      ])
+    }
+    console.log(medicineData)
+    console.log("table data is ", ...medicineData)
 
     console.log("pdf maker called")
+    
     var dd = {
       watermark: {text :'Healthcrum', opacity : 0.1, color : 'green'},
       content: [
-        {
-          columns: [
-          {  
-           // image: require('assets/img/doctors/verma.jpg'),
-            // width: 150
-          },
-          {
-            columns : [
+        
+      {
+      columns: [
+      {
+      
+      image: this.logohealthcrum,
+      width: 150
+      },
+      {
+      
+          columns : [
               {
-                stack : [
-                  {text: [
-                      {svg: '<svg width="300" height="200" viewBox="0 0 300 200"></svg>'},
-                      'Location'
-                  ]},
-                
-                  {text : "Phone no" , margin : [0,10,0,0]},
-                ]
+                  stack : [
+                      {text: [
+                          {svg: '<svg width="300" height="200" viewBox="0 0 300 200"></svg>'},
+                          'Bhopal, MP'
+                      ]},
+                    
+                      {text : "+91 9755552909" , margin : [0,10,0,0]},
+              ]
               },
               {
-                stack : [
-                    {text : "Email" },
-                    {text : "website link" , margin : [0,10,0,0]},
-                ]
+                  stack : [
+                      {text : "support@healthcrum.com" },
+                      {text : "www.healthcrum.in" , margin : [0,10,0,0]},
+                  ]
               }
-            ]
-          }
           ],
-          columnGap : 80
-        },
-        {
+          columnGap : 0
+      }
+      ],
+      columnGap : 80
+      },
+      {
           columns : [
-            {  text : [
-                {text : 'User name :  ', style : "topDetails"},  'Akash'
-              ]
-            },  
-            {  text : [
-                {text : 'Doc name :  ', style : "topDetails"},  'Meena'
-              ]
-            },
-            {  text : [
-                {text : 'Appointment Number :  ', style : "topDetails"},  '123456'
-              ]
-            },
-              
-          ], 
-          style : 'marginT', margin : [0,30,0,10]
-        },
-        
+              {  text : [
+                  {text : 'Date :  ', style : "topDetails", alignment : 'left'},  this.forPDF.date
+                ]
+              },  
+              {  text : [
+                  {text : 'Appointment Number :  ', style : "topDetails", alignment : 'right'}, this.forPDF.appointmentNo
+                ]
+              },  
+            
+                  ],
+                    "style" : 'marginT', margin : [0,30,0,10]
+      },
+      {
+          columns : [
+              {  text : [
+                  {text : 'Patient name :  ', style : "topDetails", alignment : 'left'},  this.forPDF.patientName
+                ]
+              },  
+              {  text : [
+                  {text : 'Age  :  ', style : "topDetails"},  this.forPDF.age
+                ]
+              },
+              {  text : [
+                  {text : 'Gender :  ', style : "topDetails"},  this.forPDF.gender
+                ]
+              },              
+          ],
+          "style" : 'marginT', margin : [0,10,0,10]
+      },
+      {  text : [
+        {text : 'Doctor name :  ', style : "doctorName"},  this.localService.getUserName
+        ]
+      },
+      
           {
-          
-          table: {
-                widths: [ '*', 200, '*'],
-            body: [
-              [ '', '', 'remarks'],
-              [ {text : 'Problem', bold : true}, 'problem writem by doctor', "value 1"],
-              [ {text : 'Symptoms', bold : true}, 'Symptoms writem by doctor', "value 2"],
-              [ {text : 'Investigation', bold : true}, 'Investigation writem by doctor', "value 3"],
-              [ {text : 'Recommendation', bold : true}, 'Recommendation writem by doctor', "value 4"],
-            ]
-          },
-          style : 'marginT',
-        },
-        {
+      
+      table: {
+          widths: [ '*', 200, '*'],
+      body: [
+      [{text : 'Category', style : 'upperTH'},
+        {text : 'Description', style : 'upperTH'},
+        {text : 'Remarks', style : 'upperTH'},
+      ],
+      [ {text : 'Problem', bold : true}, this.forPDF.problems.description,this.forPDF.problems.remarks],
+      [ {text : 'Symptoms', bold : true}, this.forPDF.symptoms.description,this.forPDF.symptoms.remarks],
+      [ {text : 'Finding', bold : true}, this.forPDF.finding.description,this.forPDF.finding.remarks],
+      [ {text : 'Recommendation', bold : true}, this.forPDF.recommendation.description,this.forPDF.recommendation.remarks],
+      ]
+      },
+      style : 'marginT'
+      },
+      {
           text : "Recommended medicine", style : "marginT" , bold :true,
           fontSize : 15 , decoration: 'underline',
-        },
-        
-        {
-          table: {
-                widths: [30, '*', '*', '*', '*', '*'],
-            body: [
-              [   {text : 'S.No' , bold : true}, 
-                  {text : 'Medicie Name', bold : true}, 
-                  {text :'Morning Dose' , bold : true},
-                  {text : 'Noon Dose', bold : true},
-                  {text :'Night Dose' , bold : true},
-                  {text : 'Others', bold : true}],
-                  
-              [{text : "1", alignment : 'center'},  'Medicine 1', 'Full',
-              "Half", "Quarter", "Before lunch"],
-              [{text : "2", alignment : 'center'},  'Medicine 2', 'Full',
-              "Half", "Quarter", "Before lunch"],
-              [{text : "3", alignment : 'center'},  'Medicine 3', 'Full',
-              "Half", "Quarter", "Before lunch"],
-              ...tableData
-
-            ],
-          },
-          style : 'marginT'
-        },
-        {
-          columns : [
-            {
-              text: [
-                  { text: 'Investigation :  ', fontSize: 12, bold : true },
-                  'My all investigation'
-                ],
-                style : 'marginT'
-              },
-              {
+      },
+      
+      {
+      
+      table: {
+          widths: [30, '*', '*', '*', '*', '*'],
+      body: [
+      [   {text : 'S.No' , bold : true, style : 'upperTH'},
+          {text : 'Medicie Name', bold : true, style : 'upperTH'},
+          {text :'Morning Dose' , bold : true, style : 'upperTH'},
+          {text : 'Noon Dose', bold : true, style : 'upperTH'},
+          {text :'Night Dose' , bold : true, style : 'upperTH'},
+          {text : 'Others', bold : true, style : 'upperTH'}],
+      ...medicineData
+      ]
+      },
+      style : 'marginT'
+      },
+      {
+        columns : [
+          {
                 text: [
-                { text:  'Recommended Test : ', fontSize: 12, bold : true },
-                'My all investigation'
-                ],
-                style : 'marginT'
-              },
-          ],  
-        },
+                      { text: 'Investigation :  ', fontSize: 12, bold : true },
+                      this.forPDF.investigation
+                    ],
+                    style : 'marginT'
+            },
+            {
+                      text: [
+                      { text:  'Recommended Test : ', fontSize: 12, bold : true },
+                        this.forPDF.recommendTest.testType
+                      ],
+                      style : 'marginT'
+                  },
+        ],  
+      },
+      
         
-          
       ],
       
       styles : {
@@ -530,12 +586,46 @@ export class EPrescriptionComponent implements OnInit {
           },
           topDetails : {
               bold : true,
-              color : 'green'
-          }
+              color : '#269693',
+              alignment : 'center'
+          },
+          upperTH : {
+              bold : true,
+              italics : true,
+              fontSize: 13
+          },
+          lowerTH : {
+              bold : true,
+              italics : true,
+          },
+          doctorName : {
+            bold : true,
+            color : '#269693',
+            fontSize : 14,
+        }
+          
       }
-    }
+      
+      }
 
-    pdfMake.createPdf(dd).download();
+    //pdfMake.createPdf(dd).download('prescription_pdf');
+    const myPdf = pdfMake.createPdf(dd)
+    myPdf.download('prescription_pdf')
+    // this.sendPDfToBackEnd(myPdf)
+    console.log(myPdf)
+    myPdf.getBlob((blob)=>{
+      console.log("blob is ", blob)
+      this.sendPDfToBackEnd(blob)
+    })
+  }
+
+  sendPDfToBackEnd(myPDF){
+    console.log("reached")
+    let x : FormData  = new FormData();
+    x.append('prescription_pdf', myPDF)
+    this.service.eprescriptionSavePDF(this.orderId, x).subscribe((result)=>{
+      console.log("after pdf save : ", result)
+    })
   }
 
   testSelectes(event ,testId, i){
@@ -544,6 +634,7 @@ export class EPrescriptionComponent implements OnInit {
       console.log("index is ",i)
       this.newDoseForm.controls.recommendTest.get('testId').patchValue(this.testList[i].testId)
       this.newDoseForm.controls.recommendTest.get('testType').patchValue(this.testList[i].testType)
+      this.newDoseForm.controls.recommendTest.get('testName').patchValue(this.testList[i].name)
       console.log(this.newDoseForm.value)
     }
     
