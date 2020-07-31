@@ -43,6 +43,13 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
 @import '~saturn-datepicker/bundle.css';
 /*-------------Akash-------------*/
+th.mat-header-cell:first-of-type {
+  padding: 0 !important;
+}
+.mat-cell {
+  padding: 0 15px 0 0 !important;
+}
+
 .consultation-main .filter{
   margin-right: 2rem !important;
 }
@@ -51,7 +58,6 @@ Author URI: http://themeforest.net/user/Ansonika/
     margin-right: 3.5rem !important;
   }
 }
-
 
 .medicine-drop-down  .dropdown-content{
   padding: 6px 3px !important;

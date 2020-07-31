@@ -392,16 +392,6 @@ export class EPrescriptionComponent implements OnInit {
     )
   }
 
-
-  data = [
-    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
-    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
-    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
-    {name : "Abcd", morningDose : "full", eveningDose : "Half", noonDose : "full", other :"myothers"},
-  ]
-
-  simple : ["abcd", "full", "half", "half", "others"]
-
   forPDF : any;
   getDataForPDF(response){
     
@@ -570,7 +560,7 @@ export class EPrescriptionComponent implements OnInit {
             {
                       text: [
                       { text:  'Recommended Test : ', fontSize: 12, bold : true },
-                        this.forPDF.recommendTest.testType
+                        this.forPDF.recommendTest.testName
                       ],
                       style : 'marginT'
                   },
@@ -625,6 +615,20 @@ export class EPrescriptionComponent implements OnInit {
     x.append('prescription_pdf', myPDF)
     this.service.eprescriptionSavePDF(this.orderId, x).subscribe((result)=>{
       console.log("after pdf save : ", result)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result)=>{
+        this.formFirst.reset();
+        this.formSecond2.reset();
+        this.newDoseForm.reset();
+        this.hraReasonAnswer = {};
+        this.hraReasonBox = {}
+        this.router.navigateByUrl('/doctor/appointments')
+      })
     })
   }
 

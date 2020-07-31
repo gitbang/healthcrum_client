@@ -11,49 +11,68 @@
               <h4 class="card-title ">Upcoming Appointments</h4>
             </div>
             <div class="card-body">
+              <div class="example-header">
+                <mat-form-field>
+                  <mat-label>Filter Appointments</mat-label>
+                  <input matInput (keyup)="filternew($event.target.value)" >
+                </mat-form-field>
+              </div>
               <div class="table-responsive">
-                <table class="table">
-                  <thead class=" text-primary">
-                    <tr>
-                      <th>Appointment No.</th>
-                      <th>Patient Name</th>
-                      <th>Patient Email</th>
-                      <th>Appointment Date</th>
-                      <th>Appoint Time</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let appoint of newAppointment;index as i">
-                      <td>{{appoint.appointmentNum}}</td>
-                      <td>{{appoint.patient_name}}</td>
-                      <td>{{appoint.patientEmail}}</td>
-                      <td>{{appoint.date | date}}</td>
-                      <td>{{appoint.time}}</td>
-                      <td class="td-actions">
-                        <button mat-raised-button type="button" matTooltip="Approve" [matTooltipPosition]="'above'"
-                          class="btn btn-success btn-link btn-sm btn-just-icon" (click)="doAction('accepted', i)">
-                          <i class="material-icons" style="color : white">done</i>
-                        </button>
-                        <button mat-raised-button type="button" matTooltip="cancel" [matTooltipPosition]="'above'"
-                          class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="doAction('rejected', i)">
-                          <i class="material-icons">close</i>
-                        </button>
-                        <!--
-                        <button mat-raised-button type="button" matTooltip="view" [matTooltipPosition]="'above'"
-                          class="btn btn-info btn-link btn-sm btn-just-icon" (click)="showNotification('top','right',1)">
-                          <i class="material-icons">visibility</i>
-                        </button>
-                        -->
-                      </td>
-                    </tr>
-                  </tbody>
+          
+                <table mat-table [dataSource]="newTableData">
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="appointmentNum">
+                    <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="patient_name">
+                    <th mat-header-cell *matHeaderCellDef>Patient Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="patientEmail">
+                    <th mat-header-cell *matHeaderCellDef> Patient Email</th>
+                    <td mat-cell *matCellDef="let element"> {{element.patientEmail}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Appointment Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef>Appointment time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="others">
+                    <th mat-header-cell *matHeaderCellDef>Give Prescription </th>
+                    <td mat-cell *matCellDef="let element; index as i"> 
+                      <button mat-raised-button type="button" matTooltip="Approve" [matTooltipPosition]="'above'"
+                        class="btn btn-success btn-link btn-sm btn-just-icon" (click)="doAction('accepted', i)">
+                        <i class="material-icons" style="color : white">done</i>
+                      </button>
+                      <button mat-raised-button type="button" matTooltip="cancel" [matTooltipPosition]="'above'"
+                        class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="doAction('rejected', i)">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <mat-paginator #newAppointments [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
               </div>
             </div>
           </div>
         </div>
       </mat-tab>
+
       <mat-tab label="Confirmed appointments"> 
         <div class="col-md-12">
           <div class="card">
@@ -64,42 +83,61 @@
               <h4 class="card-title">Confirmed Appointments</h4>
             </div>
             <div class="card-body">
+              <div class="example-header">
+                <mat-form-field>
+                  <mat-label>Filter Appointments</mat-label>
+                  <input matInput (keyup)="filterConfirm($event.target.value)" >
+                </mat-form-field>
+              </div>
               <div class="table-responsive">
-                <table class="table">
-                  <thead class=" text-primary">
-                    <tr>
-                      <th>Appointment No.</th>
-                      <th>Patient Name</th>
-                      <th>Patient Email</th>
-                      <th>Appointment Date</th>
-                      <th>Appoint Time</th>
-                      <th>E-prescription</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let appoint of confirmedAppointment;index as i">
-                      <td>{{appoint.appointmentNum}}</td>
-                      <td>{{appoint.patient_name}}</td>
-                      <td>{{appoint.patientEmail}}</td>
-                      <td>{{appoint.date | date}}</td>
-                      <td>{{appoint.time}}</td>
-                      <td class="td-actions">
-                        <!--
-                        <button mat-raised-button type="button" matTooltip="remove" [matTooltipPosition]="'above'"
-                          class="btn btn-danger btn-link btn-sm btn-just-icon">
-                          <i class="material-icons">close</i>
-                        </button>
-                        -->
-                        <button mat-raised-button type="button" 
+                
+
+                <table mat-table [dataSource]="confirmTableData">
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="appointmentNum">
+                    <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="patient_name">
+                    <th mat-header-cell *matHeaderCellDef>Patient Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="patientEmail">
+                    <th mat-header-cell *matHeaderCellDef> Patient Email</th>
+                    <td mat-cell *matCellDef="let element"> {{element.patientEmail}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Appointment Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef>Appointment time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="others">
+                    <th mat-header-cell *matHeaderCellDef>Give Prescription </th>
+                    <td mat-cell *matCellDef="let element; index as i"> 
+                      <button mat-raised-button type="button" 
                         matTooltip="Give prescription" [matTooltipPosition]="'above'"
                         (click)="goToEprescription(i)"
                           class="btn btn-info btn-link btn-sm btn-just-icon">
                           <mat-icon>input</mat-icon>
                         </button>
-                      </td>
-                    </tr>
-                  </tbody>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <mat-paginator #confirmeAppointments [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
               </div>
             </div>
           </div>
@@ -115,42 +153,59 @@
               <h4 class="card-title ">Past Appointments</h4>
             </div>
             <div class="card-body">
+              <div class="example-header">
+                <mat-form-field>
+                  <mat-label>Filter Appointments</mat-label>
+                  <input matInput (keyup)="filterpast($event.target.value)" >
+                </mat-form-field>
+              </div>
               <div class="table-responsive">
-                <table class="table">
-                  <thead class=" text-primary">
-                    <tr>
-                      <th>Appointment No.</th>
-                      <th>Patient Name</th>
-                      <th>Patient Email</th>
-                      <th>Appointment Date</th>
-                      <th>Appoint Time</th>
-                      <th>View prescription</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let appoint of pastAppointment;index as i">
-                      <td>{{appoint.appointmentNum}}</td>
-                      <td>{{appoint.patient_name}}</td>
-                      <td>{{appoint.patientEmail}}</td>
-                      <td>{{appoint.date | date}}</td>
-                      <td>{{appoint.time}}</td>
-                      <td class="td-actions">
-                        <!--
-                        <button mat-raised-button type="button" matTooltip="remove" [matTooltipPosition]="'above'"
-                          class="btn btn-danger btn-link btn-sm btn-just-icon">
-                          <i class="material-icons">close</i>
-                        </button>
-                        -->
-                        <button mat-raised-button 
+                <table mat-table [dataSource]="pastTableData">
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="appointmentNum">
+                    <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="patient_name">
+                    <th mat-header-cell *matHeaderCellDef>Patient Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="patientEmail">
+                    <th mat-header-cell *matHeaderCellDef> Patient Email</th>
+                    <td mat-cell *matCellDef="let element"> {{element.patientEmail}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Appointment Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef>Appointment time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="others">
+                    <th mat-header-cell *matHeaderCellDef>Give Prescription </th>
+                    <td mat-cell *matCellDef="let element; index as i"> 
+                      <button mat-raised-button 
                           (click)="getPdf(appoint.orderId)"
                           type="button" matTooltip="view" [matTooltipPosition]="'above'"
                           class="btn btn-info btn-link btn-sm btn-just-icon">
                           <i class="material-icons">visibility</i>
                         </button>
-                      </td>
-                    </tr>
-                  </tbody>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <mat-paginator #pastAppointments [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
               </div>
             </div>
           </div>

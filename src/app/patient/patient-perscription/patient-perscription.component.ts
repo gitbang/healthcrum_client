@@ -1,7 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {AuthServiceLocal} from '../../services/auth-service.service';
 import {Router} from '@angular/router';
 import {PatientService} from '../patient.service'
+import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material'
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+export interface prescription {
+  date : Date;
+  doctorName :string;
+  appointmentNum :string;
+  patientName : string;
+  orderId : string;
+}
+
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+// ];
 
 @Component({
   selector: 'app-patient-perscription',
@@ -10,6 +38,9 @@ import {PatientService} from '../patient.service'
 })
 export class PatientPerscriptionComponent implements OnInit {
 
+  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  // dataSource = ELEMENT_DATA;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(
     private router : Router,
     private localService : AuthServiceLocal,
@@ -70,10 +101,16 @@ export class PatientPerscriptionComponent implements OnInit {
       }
       console.log("add ", add)
       this.prescriptionTOshow.push(add)
+      
     }
+    this.presCriptionDataSource = new MatTableDataSource(this.prescriptionTOshow);
     console.log(this.prescriptionTOshow)
+    this.presCriptionDataSource.paginator = this.paginator
+    console.log("prescription data source is  :", this.presCriptionDataSource)
   }
 
+  presCriptionDataSource : MatTableDataSource<prescription[]>;
+  displayedColumn: string[] = ['Prescription No.', 'Patient Name', 'Doctor Name', 'Appointment Number', "Download Prescription"];
   currentPDF : string = "";
   getPdf(orderId : string){
     console.log(orderId)
@@ -89,7 +126,13 @@ export class PatientPerscriptionComponent implements OnInit {
   }
 
   completeImageUrl(pdfUrl){
-    let url = this.patientService.completeURl(pdfUrl)
-    window.open(url,  '_blank')
+    let myurl = this.patientService.completeURl(pdfUrl)
+    console.log("complete url is : ", myurl)
+
+    window.open(myurl ,  "_blank")
+  }
+
+  applyFilter(filterText: string){
+    this.presCriptionDataSource.filter = filterText.trim( ).toLowerCase()
   }
 }

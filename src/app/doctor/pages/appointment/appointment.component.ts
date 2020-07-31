@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {AuthServiceLocal} from '../../../services/auth-service.service'
 import {Router} from '@angular/router'
 import {DoctorService} from '../../doctor.service'
@@ -6,7 +6,18 @@ import Swal from "sweetalert2";
 import { FooterComponent } from "app/company/components/footer/footer.component";
 import { query } from "chartist";
 import {PatientService} from '../../../patient/patient.service'
+import {MatSort, MatTableDataSource, MatPaginator} from "@angular/material"
 
+export interface appointments{
+  patient_name: string;
+  date: Date;
+  time: string;
+  patientEmail : string;
+  patientId : string;
+  orderId : string;
+  status : string;
+  appointmentNum : string;
+}
 declare var $: any;
 @Component({
   selector: "app-appointment",
@@ -42,7 +53,13 @@ export class AppointmentComponent implements OnInit {
       time: "08:20 PM"
     },
   ];
+  displayedColumns : string[]= ["appointmentNum", "patient_name", "patientEmail",
+                    "date", "time", "others"]
 
+  @ViewChild('confirmeAppointments', {static: true}) paginatorConfirm: MatPaginator;
+  @ViewChild('pastAppointments', {static: true}) paginatorPast: MatPaginator;
+  @ViewChild('newAppointments', {static: true}) paginatornew: MatPaginator;
+  
   constructor(
     private localService : AuthServiceLocal,
     private router : Router,
@@ -50,6 +67,9 @@ export class AppointmentComponent implements OnInit {
     private patientService : PatientService
   ) {}
 
+  confirmTableData : MatTableDataSource<appointments>
+  newTableData : MatTableDataSource<appointments>
+  pastTableData : MatTableDataSource<appointments>
   doctorId : string ;
   ngOnInit() {
 
@@ -102,6 +122,14 @@ export class AppointmentComponent implements OnInit {
       else if(add.status == 'completed')
         this.pastAppointment.push(add)    
     }
+
+    this.confirmTableData = new MatTableDataSource(this.confirmedAppointment)
+    this.newTableData = new MatTableDataSource(this.newAppointment)
+    this.pastTableData = new MatTableDataSource(this.pastAppointment)
+
+    this.confirmTableData.paginator = this.paginatorConfirm;
+    this.pastTableData.paginator = this.paginatorPast;
+    this.newTableData.paginator = this.paginatornew;
   }
 
   appointmentDetails : any;
@@ -185,5 +213,16 @@ export class AppointmentComponent implements OnInit {
   completeImageUrl(pdfUrl){
     let url = this.patientService.completeURl(pdfUrl)
     window.open(url,  '_blank')
+  }
+
+  filterConfirm(value : string){
+    this.confirmTableData.filter = value.trim().toLowerCase();
+  }
+
+  filterpast(value: string) {
+    this.pastTableData.filter = value.trim().toLowerCase();
+  }
+  filternew(value : string) {
+    this.newTableData.filter = value.trim().toLowerCase();
   }
 }

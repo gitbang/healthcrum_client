@@ -93,7 +93,7 @@ export class SignupComponent implements OnInit {
     var data;
 
     if (this.user_name == "" || this.user_name == undefined) {
-      swal.fire("Please enter your full name");
+      swal.fire({text :"Please enter your full name"});
       return;
     }
     // if (this.user_email == "" || this.user_email == undefined) {
@@ -102,35 +102,35 @@ export class SignupComponent implements OnInit {
     // }
     if (this.user_mob == "" || this.user_mob == undefined ||
        this.user_mob.toString().length != 10) {
-      swal.fire("Please enter Valid Phone Number");
+      swal.fire({text :"Please enter Valid Phone Number"});
       return;
     }
     if (this.user_gender == "none" || this.user_gender == undefined) {
-      swal.fire("Please select your gender");
+      swal.fire({text :"Please select your gender"});
       return;
     }
     if(!this.social) {
       this.data = 'local'
       if (this.user_pass == "" || this.user_pass == undefined) {
-        swal.fire("Please enter password for account");
+        swal.fire({text :"Please enter password for account"});
         return;
       }
       if (this.user_cpass == "" || this.user_cpass == undefined) {
-        swal.fire("Please confirm password");
+        swal.fire({text : "Please confirm password"});
         return;
       }
       if (this.user_pass != this.user_cpass) {
-        swal.fire("password doesn't matches");
+        swal.fire({text : "password doesn't matches"});
         return;
       }
     } 
 
     if (!this.user_type) {
-      swal.fire("Please choose user type");
+      swal.fire({text : "Please choose user type"});
       return;
     }
     if (!this.agree) {
-      swal.fire("please accept terms and conditions");
+      swal.fire({text : "please accept terms and conditions"});
       return;
     }
     
@@ -190,7 +190,7 @@ export class SignupComponent implements OnInit {
         this.router.navigateByUrl('/login')
       } else {
         console.log(result)
-        swal.fire(result.message)
+        swal.fire({title : result.message})
       }
     })
   }

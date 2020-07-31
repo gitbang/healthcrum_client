@@ -136,11 +136,11 @@ export class UserloginComponent implements OnInit {
   loginLocal(): void {
     this.forgotPass = false;
     if (!this.user_email) {
-      Swal.fire("Id required");
+      Swal.fire({text :"Id required"});
       return;
     }
     if (!this.user_pass) {
-      Swal.fire("Password required");
+      Swal.fire({text : "Password required"});
       return;
     }
 
@@ -171,7 +171,7 @@ export class UserloginComponent implements OnInit {
             this.saveAndAccess()
           } else {
             Swal.fire({
-              title : "Please verify phone number to proceed",
+              text : "Please verify phone number to proceed",
               showClass: {
                 popup: 'animate__animated animate__fadeInDown'
               },
@@ -218,7 +218,7 @@ export class UserloginComponent implements OnInit {
       } else {
         this.flipDiv = false
         Swal.fire({
-          title : data.message,
+          text : data.message,
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
@@ -232,7 +232,7 @@ export class UserloginComponent implements OnInit {
 
   SwalCustom(toverify) {
     Swal.fire({
-      title : `Please verify your ${toverify} to proceed`,
+      text : `Please verify your ${toverify} to proceed`,
       showClass: {
         popup: 'animate__animated animate__fadeInDown'
       },
@@ -282,7 +282,7 @@ export class UserloginComponent implements OnInit {
        
         this.dynamicRouting(this.completeData.role)
       } else {
-        Swal.fire({title : `Your phone number and email bith are verified now.
+        Swal.fire({text : `Your phone number and email bith are verified now.
          Admin will approve your account then you will able to login. Thanks`,
          showClass: {
           popup: 'animate__animated animate__fadeInDown'
@@ -355,7 +355,7 @@ export class UserloginComponent implements OnInit {
     if (this.forgotPass) {
       if (this.bynumber) {
         if (this.forgotMobile.toString().length != 10) {
-          Swal.fire("Enter valid phone number");
+          Swal.fire({text : "Enter valid phone number"});
           return;
         }
         data = {
@@ -363,7 +363,7 @@ export class UserloginComponent implements OnInit {
         };
       } else {
         if (this.forgotEmail.length == 0) {
-          Swal.fire("Enter valid email");
+          Swal.fire( {text :"Enter valid email"});
           return;
         }
         data = {
@@ -416,7 +416,7 @@ export class UserloginComponent implements OnInit {
           this.alertOfOtpSend();
           this.otpSend = true;
         } else {
-          Swal.fire("Error", result.message, "error");
+          Swal.fire({title : "Error", text : result.message, icon :"error"});
         }
       });
   }
@@ -437,7 +437,7 @@ export class UserloginComponent implements OnInit {
           if (result.success) {
             this.otpConfirmed = true;
           } else {
-            Swal.fire("Error", result.message, "error");
+            Swal.fire({title : "Error", text : result.message, icon :"error"});
           }
         });
       } else {
@@ -469,7 +469,7 @@ export class UserloginComponent implements OnInit {
             //this.saveAndAccess(); // for dynamic routing
             this.sendRequestToCheckLogin(this.userDetail)
           } else {
-            Swal.fire( result.message, "error");
+            Swal.fire({title : "Error", text : result.message, icon :"error"});
           }
         });
       } else {
@@ -485,10 +485,10 @@ export class UserloginComponent implements OnInit {
               this.sendRequestToCheckLogin(this.userDetail)
               //this.saveAndAccess();
             } else {
-              Swal.fire("Error", result.message, "error");
+              Swal.fire({title : "Error", text : result.message, icon :"error"});
             }
           } else {
-            Swal.fire("Error", result.message, "error");
+            Swal.fire({title : "Error", text : result.message, icon :"error"});
           }
         });
       }
@@ -511,15 +511,15 @@ export class UserloginComponent implements OnInit {
   newPasswordConfirm: number;
   changePassword() {
     if (!this.newPassword) {
-      Swal.fire("Enter password");
+      Swal.fire({text :"Enter password"});
       return;
     }
     if (!this.newPasswordConfirm) {
-      Swal.fire("Confirm password");
+      Swal.fire({text : "Confirm password"});
       return;
     }
     if (this.newPassword !== this.newPasswordConfirm) {
-      Swal.fire("Password not matched");
+      Swal.fire( {text :"Password not matched"});
       return;
     }
     var data;
@@ -539,7 +539,10 @@ export class UserloginComponent implements OnInit {
 
     this.authLocal.loginUpdatePassword(data).subscribe((result) => {
       if (result.success) {
-        Swal.fire("Password update");
+        Swal.fire(
+          'Password updated!',
+          'success'
+        )
         //this.router.navigateByUrl('/login')
         this.forgotEmail = "";
         this.forgotPass = false;

@@ -54,7 +54,8 @@ import {
   MatTabsModule,
   MatSnackBarModule,
   MatProgressSpinnerModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatPaginatorModule
 } from "@angular/material";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { ChartsModule } from "ng2-charts";
@@ -130,7 +131,8 @@ import { MaintainanceComponent } from './maintainance/maintainance.component';
     NzResultModule,
     MatCheckboxModule,
     SatDatepickerModule, 
-    SatNativeDateModule
+    SatNativeDateModule,
+    MatPaginatorModule
   ],
   entryComponents: [MedecineDetailFillDialog, TestDetailFillDialog],
   providers: [

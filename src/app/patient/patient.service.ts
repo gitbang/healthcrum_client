@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, } from "@angular/common/http";
+import {ResponseContentType } from "@angular/http"
 import { Observable, of, throwError } from "rxjs";
-import { retry, catchError } from "rxjs/operators";
+import { retry, catchError, map } from "rxjs/operators";
+
 
 @Injectable({
   providedIn: "root",
@@ -133,12 +135,16 @@ export class PatientService {
     return  this.http.get('./assets/img/consultation/downloadpdf/logo1.png', { responseType: 'blob' })
   }
 
-  // downloadPDF(url): any {
-  //   const options = { responseType: ResponseContentType.Blob  };
-  //   return this.http.get(url, options).map(
-  //   (res) => {
+  // downloadPDF(pdfLink): any {
+  //   const optionsmy = { responseType: 'Blob'  };
+  //   return this.http.get(pdfLink, optionsmy)
+  //   .pipe(
+  //     map(res=> {
+  //       //return new Blob([res.blob()], {type : 'application/pdf'})
   //       return new Blob([res.blob()], { type: 'application/pdf' });
-  //   });
+  //     })
+  //   )
+
   // }
 
   completeURl(url : string){
