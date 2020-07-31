@@ -1,5 +1,5 @@
 <div class="container-fluid">
-
+  
   <div class="row hra-details pb-4">
     <div class="col-md-2 col-sm-4 mt-4">
       <mat-card class="example-card mat-card text-center" (click)="showlastconsultant()">
@@ -180,7 +180,7 @@
             <div class="col-md-2">
               <mat-form-field class="full-width">
                 <mat-label>Medicine Name</mat-label>
-                <input matInput class="example-full-width" formControlName='medicineName'>
+                <input matInput  formControlName='medicineName'>
               </mat-form-field>
             </div>
             <div class="col-md-2">
@@ -267,8 +267,8 @@
         </div>
         -->
 
-        <div class="col-md-6">
-          <mat-form-field class="example-full-width">
+        <div class="col-md-6" formGroupName="recommendTest">
+          <mat-form-field *ngIf="!otherTest" style= "width : 60%">
             <mat-label>Recommended Test</mat-label>
             <input type="text"
                   
@@ -285,6 +285,14 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
+
+          <mat-form-field *ngIf="otherTest" appearance="outline" class="example-full-width">
+            <mat-label>Other Test</mat-label>
+            <input matInput formControlName='testName'>
+          </mat-form-field>
+
+          <mat-checkbox class="ml-4" 
+            value="Others" (change)="otherTestFunction($event)">Others</mat-checkbox>
         </div>
       </div>
       <!--
@@ -310,13 +318,13 @@
       </div>
       <div class="card-body ">
         <div class="analysis-tab" #analysisZone>
-          <div class=" row ml-5  zone-select mt-3">
+          <div class=" row ml-5  mt-3" [ngClass]="className">
             <mat-tab-group #tabRef (selectedTabChange)="onTabChanges($event)">
-              <mat-tab label="None"></mat-tab>
-              <mat-tab label="Red"></mat-tab>
-              <mat-tab label="Border"></mat-tab>
-              <mat-tab label="Below"></mat-tab>
-              <mat-tab label="Safe"></mat-tab>
+              <mat-tab class="none" label="None"></mat-tab>
+              <mat-tab class="red" label="Red"></mat-tab>
+              <mat-tab class="border" label="Border"></mat-tab>
+              <mat-tab class="below" label="Below"></mat-tab>
+              <mat-tab class="safe" label="Safe"></mat-tab>
             </mat-tab-group>
           </div>
         </div>
@@ -326,7 +334,11 @@
     </div>
 
   </div>
+  
   <div class="row">
+    <div *ngIf="loading" class="loadingio-spinner-spinner-4o1nzyijdek"><div class="ldio-bz74ojoebh">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div></div>
     <div class="col-12" style="text-align : center">
       <button class="btn btn-info" (click)="finalSubmit()">Submit</button>
     </div>

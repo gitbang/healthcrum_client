@@ -43,6 +43,22 @@ Author URI: http://themeforest.net/user/Ansonika/
 /* @import "@angular/material/prebuilt-themes/purple-green.css"; */
 @import '~saturn-datepicker/bundle.css';
 /*-------------Akash-------------*/
+
+
+
+.zone-select-red .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: red !important;
+}
+.zone-select-border .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: purple !important;
+}
+.zone-select-below .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #EDB71D !important;
+}
+.zone-select-safe .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #4CAF50 !important;
+}
+
 th.mat-header-cell:first-of-type {
   padding: 0 !important;
 }

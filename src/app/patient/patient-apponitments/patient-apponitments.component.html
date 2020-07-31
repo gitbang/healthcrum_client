@@ -6,10 +6,17 @@
           <div class="card-icon shad ">
             <i class="material-icons">assignment</i>
           </div>
-          <h4 class="card-title ">Upcoming Appointments</h4>
+          <h4 class="card-title ">Your Appointments</h4>
         </div>
         <div class="card-body">
+          <div class="example-header">
+            <mat-form-field>
+              <mat-label>Apply Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event.target.value)">
+            </mat-form-field>
+          </div>
           <div class="table-responsive">
+            <!--
             <table class="table">
               <thead class=" text-primary">
                 <tr>
@@ -34,25 +41,62 @@
                   <td class="">{{appointment.time}}</td>
                   <td class="">{{appointment.fee  }}</td>
                   <td class="">{{appointment.status}}</td>
-
-                  <!-- Edit and cancel option for patient
-                    <td class="td-actions">
-                      <button type="button" onclick="demo.showSwal('warning-message-and-confirmation')" rel="tooltip"
-                        class="btn btn-danger" data-original-title="" title="">
-                        <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                    <td class="td-actions">
-                      <button type="button" onclick="demo.showSwal('input-field')" rel="tooltip" class="btn btn-info"
-                        data-original-title="" title="">
-                        <i class="material-icons">edit</i>
-                      </button>
-                    </td>
-                  -->
                 </tr>
                 
               </tbody>
             </table>
+            -->
+             <table mat-table [dataSource]="appointmentTableData">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="appointmentNum">
+                  <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="doctor_name">
+                  <th mat-header-cell *matHeaderCellDef>Doctor name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.doctor_name | titlecase}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="speciality">
+                  <th mat-header-cell *matHeaderCellDef> Speciality </th>
+                  <td mat-cell *matCellDef="let element"> {{element.speciality | titlecase}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef> Type </th>
+                  <td mat-cell *matCellDef="let element"> {{element.type | titlecase}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="time">
+                  <th mat-header-cell *matHeaderCellDef> Time </th>
+                  <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fee">
+                  <th mat-header-cell *matHeaderCellDef> Fees </th>
+                  <td mat-cell *matCellDef="let element"> {{element.fee}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status</th>
+                  <td mat-cell *matCellDef="let element"> {{element.status | titlecase}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
           </div>
         </div>
       </div>

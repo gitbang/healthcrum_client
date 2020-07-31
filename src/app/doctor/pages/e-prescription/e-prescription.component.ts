@@ -212,13 +212,14 @@ export class EPrescriptionComponent implements OnInit {
     this.zonearea.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
   }
 
+  loading : boolean = false;
   public userZone : string
   public showPriscribtion = false;
   public analysis;
   public userZones : string[] = ["Red", "Purple", "Yellow", "Green"]
   // public analysisInvestigation : string[] = ["Reason 1","Reason 2","Reason 3","Reason 4","Reason 5"]
   // public analysisLRA : string[] = ["Reason 1","Reason 2","Reason 3","Reason 4","Reason 5"]
-   public analysisPort : string 
+  public analysisPort : string 
   public investigationCheckbox : any;
   
   public lraFromOfUser =  { "Family History" : '15'}
@@ -309,31 +310,34 @@ export class EPrescriptionComponent implements OnInit {
     this.analysis = true
   }
 
+  className : string 
   onTabChanges(event){  
     this.hraReasonAnswer = []
     //this.analysis = true;
+    this.className = `zone-select-${event.tab.textLabel.toLowerCase()}`
+    console.log(this.className)
     console.log(event);
     if(event.index == 0) {
       this.analysis = false;
       this.analysisPort = "none";
       
     }  
-    else{
-      this.userZone = event.tab.textLabel;
-      const dialogRef = this.dialog.open(AnalysisComponent, {
-        height : '80%',
-        width : "500px",
-        data : {
-          zone : this.userZone,
-          question : this.hraReasonBox
-        }
-      })
-      dialogRef.afterClosed().subscribe(result => {
-        if(result && result.success) {
-          this.hraReasonAnswer = result.allcombine
-        }
-      })
-    }
+    // else{
+    //   this.userZone = event.tab.textLabel;
+    //   const dialogRef = this.dialog.open(AnalysisComponent, {
+    //     height : '80%',
+    //     width : "500px",
+    //     data : {
+    //       zone : this.userZone,
+    //       question : this.hraReasonBox
+    //     }
+    //   })
+    //   dialogRef.afterClosed().subscribe(result => {
+    //     if(result && result.success) {
+    //       this.hraReasonAnswer = result.allcombine
+    //     }
+    //   })
+    // }
   }
 
   lraSection() {
@@ -381,6 +385,7 @@ export class EPrescriptionComponent implements OnInit {
       orderId : this.orderId
     }
     console.log("all data is ", allData)
+    this.loading = true;
     this.service.submitFirstForm(allData, this.doctorId).subscribe((result)=>{
       console.log("response : ", result)
       if(result.success){
@@ -407,6 +412,7 @@ export class EPrescriptionComponent implements OnInit {
     this.afterfinalSubmit();
   }
   logohealthcrum : any;
+
   healthCrumLogo(){
     console.log("logo reach")
     this.service.healthCrumLogoInBase64().subscribe((res)=>{
@@ -602,6 +608,7 @@ export class EPrescriptionComponent implements OnInit {
     const myPdf = pdfMake.createPdf(dd)
     myPdf.download('prescription_pdf')
     // this.sendPDfToBackEnd(myPdf)
+    this.loading = false
     console.log(myPdf)
     myPdf.getBlob((blob)=>{
       console.log("blob is ", blob)
@@ -652,9 +659,20 @@ export class EPrescriptionComponent implements OnInit {
     )
   }
 
+  otherTest : boolean = false
+  otherTestFunction(event){
+    if(event.checked)
+      this.otherTest = true
+    else  
+      this.otherTest = false
+    this.newDoseForm.get('recommendTest').reset();
+    this.bloodTestControl.reset();
+  }
+
   private testFilters(value : string) : object[]{
     const filterValue = value.toLowerCase();
 
     return this.testList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0)
   }
+
 }

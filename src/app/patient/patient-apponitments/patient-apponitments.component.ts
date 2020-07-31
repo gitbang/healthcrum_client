@@ -1,7 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {AuthServiceLocal} from '../../services/auth-service.service';
-import {Router} from '@angular/router'
-import {PatientService} from '../patient.service'
+import {Router} from '@angular/router';
+import {PatientService} from '../patient.service';
+import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material"
+
+export interface appointmentsInter {
+  doctor_name : string;
+  speciality : string;
+  date : Date;
+  fee :  number;
+  type : string;
+  time : string;
+  appointmentNum : string;
+  status : string;
+}
 
 @Component({
   selector: 'app-patient-apponitments',
@@ -17,6 +29,7 @@ export class PatientApponitmentsComponent implements OnInit {
   ) { }
 
   userId : string
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
 
@@ -28,9 +41,7 @@ export class PatientApponitmentsComponent implements OnInit {
     
 
     this.userId =   this.localService.getUserID;
-    
-    // retrive _id from data and then fetch the required data using that id
- 
+  
     this.service.appointmentfetchAppointment(this.userId).subscribe((result)=>{
       console.log(result)
 
@@ -52,24 +63,16 @@ export class PatientApponitmentsComponent implements OnInit {
           this.appointments.push(add)
         }
         console.log("data is : ", this.appointments)
+        this.appointmentTableData = new MatTableDataSource(this.appointments)
+        this.appointmentTableData.paginator = this.paginator
       }
     })
   }
-  
-  appointments = [ 
-    {
-      number : "123456", 
-      doctor_name : "Mr meena", 
-      location : "Delhi", 
-      lab : "ABC laboratory", 
-      date : "12/10/20",
-      fee :"2000",
-      appointmentNum : "",
-      status : ""
-    }
-  ]  
 
-  appointmentsdone = [ 
-    {number : "123456", doctor_name : "Mr meena", location : "Delhi", lab : "ABC laboratory", date : "12/10/20", fee :"2000"}
-  ]  
+  appointmentTableData : MatTableDataSource<appointmentsInter[]>
+  displayedColumns : string[] = ["appointmentNum","doctor_name", "speciality", "type", "date", "time", "fee", "status"]
+  appointments : any[]= []  
+  applyFilter(value : string){
+    this.appointmentTableData.filter = value.trim().toLowerCase();
+  }
 }
