@@ -180,7 +180,6 @@ export class AppointmentComponent implements OnInit {
   } 
   //"showNotification('top','right',2)"
 
- 
   getPdf(orderId : string){
     console.log(orderId)
     this.patientService.appointmentFetchPDF(orderId).subscribe((result=>{

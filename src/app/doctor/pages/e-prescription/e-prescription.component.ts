@@ -13,6 +13,9 @@ import Swal from "sweetalert2";
 import {HomeServiceService} from '../../../home/home-service.service'
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
@@ -174,11 +177,9 @@ export class EPrescriptionComponent implements OnInit {
     })
     this.newDoseForm = this.fb.group({
       investigation : ['', Validators.required],
-      recommendTest : this.fb.group({
-        testId : [''],
-        testType : [''],
-        testName : ['']
-      }),
+      recommendTest : this.fb.array([
+        
+      ]),
       recommendationForPatient : this.fb.array([
         this.addNewDoseForm()
       ])
@@ -366,8 +367,9 @@ export class EPrescriptionComponent implements OnInit {
   }
 
   finalSubmit(){
+    
     if(this.formFirst.invalid){
-      Swal.fire("Invalid result form")
+      Swal.fire("Invalid First form")
       return
     }
     if(this.newDoseForm.invalid){
@@ -397,12 +399,12 @@ export class EPrescriptionComponent implements OnInit {
     )
   }
 
-  forPDF : any;
+  forPDF : any; 
   getDataForPDF(response){
     
     this.forPDF = {
       ...response.data,
-      date  : response.orderDetail.orderDetails[0].dateOfCheckup,
+      date  : response.orderDetail.orderDetails[0].dateOfCheckup.slice(0,10),
       appointmentNo : response.orderDetail.appointmentNum,
       patientName : response.userProfile.name,
       gender : response.userProfile.gender,
@@ -639,24 +641,36 @@ export class EPrescriptionComponent implements OnInit {
     })
   }
 
-  testSelectes(event ,testId, i){
-
-    if(event.isUserInput){
-      console.log("index is ",i)
-      this.newDoseForm.controls.recommendTest.get('testId').patchValue(this.testList[i].testId)
-      this.newDoseForm.controls.recommendTest.get('testType').patchValue(this.testList[i].testType)
-      this.newDoseForm.controls.recommendTest.get('testName').patchValue(this.testList[i].name)
-      console.log(this.newDoseForm.value)
-    }
+  recommendedTestOther : string = "";
+  // testSelectes(event ,testId, i){
+  //   console.log("event is ", event)
+    // console.log( "from list", this.testList[i].name)
+    // console.log("form control",this.bloodTestControl.value)
+    // console.log("recommended other", this.recommendedTestOther)
     
+    // if(event.isUserInput){
+    //   console.log("index is ",i)
+    //   this.newDoseForm.controls.recommendTest.get('testId').patchValue(this.testList[i].testId)
+    //   this.newDoseForm.controls.recommendTest.get('testType').patchValue(this.testList[i].testType)
+    //   this.newDoseForm.controls.recommendTest.get('testName').patchValue(this.testList[i].name)
+    //   console.log(this.newDoseForm.value)
+    // }
+  //}
+
+  testSelecteChips(event){
+    console.log(event)
   }
 
   bloodTestAutoCOmplete(){
-
     this.bloodTestFilters2 = this.bloodTestControl.valueChanges.pipe(
       startWith(''),
       map(value => this.testFilters(value))
     )
+
+
+    // this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+    //   startWith(null),
+    //   map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
   }
 
   otherTest : boolean = false
@@ -675,4 +689,62 @@ export class EPrescriptionComponent implements OnInit {
     return this.testList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0)
   }
 
+
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruitCtrl = new FormControl();
+  filteredFruits: Observable<string[]>;
+  fruits: string[] = ['Lemon'];
+  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+
+  @ViewChild('fruitInput', {static : true}) fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static : true}) matAutocomplete: MatAutocomplete;
+
+  // add(event: MatChipInputEvent): void {
+  //   console.log("add event : ", event)
+  //   const input = event.input;
+  //   const value = event.value;
+
+   
+  //   if ((value || '').trim()) {
+  //     this.fruits.push(value.trim());
+  //   }
+
+   
+  //   if (input) {
+  //     input.value = '';
+  //   }
+
+  //   this.fruitCtrl.setValue(null);
+  // }
+
+  remove(testId: string, index : number): void {
+    if(index >= 0) {
+      
+      (<FormArray>this.newDoseForm.get('recommendTest')).removeAt(index)
+      
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event)
+
+    let index = this.testList.map((x)=>{return x.testId}).indexOf(event.option.value)
+    
+    console.log(index);
+    
+    let newGroup = this.fb.group({
+      testId : [this.testList[index].testId],
+      testType : [this.testList[index].testType],
+      testName : [this.testList[index].name]
+    });
+
+    (<FormArray>this.newDoseForm.get('recommendTest')).push(
+      newGroup
+    )
+    console.log("new form group is :", this.newDoseForm)
+  }
 }

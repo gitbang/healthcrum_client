@@ -136,19 +136,19 @@ export class SignupComponent implements OnInit {
     
     if(this.user_type == 'employee'){
       if(!this.employeeId){
-        swal.fire("please enter employeeId");
+        swal.fire({text :"please enter employeeId"});
         return
       }
       if(!this.companyId){
-        swal.fire("please enter companyId");
+        swal.fire({text : "please enter companyId"});
         return
       }
       if(!this.branchId){
-        swal.fire("please enter branchId");
+        swal.fire({text : "please enter branchId"});
         return
       }
       if(!this.departmentId){
-        swal.fire("please enter departmentId");
+        swal.fire({text : "please enter departmentId"});
         return
       }
       data = {
@@ -192,7 +192,7 @@ export class SignupComponent implements OnInit {
         this.router.navigateByUrl('/login')
       } else {
         console.log(result)
-        swal.fire({title : result.message})
+        swal.fire({text : result.message})
       }
     })
   }
