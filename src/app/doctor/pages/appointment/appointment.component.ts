@@ -47,6 +47,7 @@ export class AppointmentComponent implements OnInit {
   newTableData : MatTableDataSource<appointments>
   pastTableData : MatTableDataSource<appointments>
   doctorId : string ;
+  loading : boolean = true;
   ngOnInit() {
 
     let role = this.localService.getUserRole();
@@ -62,17 +63,18 @@ export class AppointmentComponent implements OnInit {
     console.log("function reached")
     this.doctorService.appointmentGetDetails(this.doctorId).subscribe(result=>{
       console.log("fetch doctor appointments : ", result)
+      this.loading = false
       this.newAppointment = [];
       this.confirmedAppointment = [];
       this.pastAppointment = [];
       if(result.success){
-
         this.getConfirmationStatusWise(result)
         
       } else {
         Swal.fire("No data found")
       }
-    })
+    }),
+    (err=>{this.loading = false})
   }
 
   getConfirmationStatusWise(result){
@@ -155,12 +157,17 @@ export class AppointmentComponent implements OnInit {
     console.log(this.newAppointment)
     let orderId = this.newAppointment[index].orderId;
     console.log("orderId is " , orderId)
+    this.loading = true
     this.doctorService.appointmentsChangeStatus( orderId, toSend).subscribe((result)=>{
       console.log(result)
       if(result.success){
         this.getConsultation()
+      } else {
+        Swal.fire({text : "Something went wrong"})
+        this.loading = false
       }
-    })
+    }),
+    (err=>{this.loading = false})
   }
 
   goToEprescription(index : number){

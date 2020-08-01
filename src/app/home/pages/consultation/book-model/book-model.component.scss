@@ -223,9 +223,11 @@ $bg : #1BA89B;
     height: 200px;
     display: inline-block;
     overflow: hidden;
-    background: #ffffff;
-    left: 30%;
+    background: transparent;
+    left: 50%;
     top: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
     position: absolute;
   }
   .ldio-bz74ojoebh {
