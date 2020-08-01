@@ -406,9 +406,9 @@ export class EPrescriptionComponent implements OnInit {
       appointmentNo : response.orderDetail.appointmentNum,
       patientName : response.userProfile.name,
       gender : response.userProfile.gender,
-      age : 19
+      age : response.userProfile.age
     }
-    console.log(this.forPDF)
+    console.log(this.forPDF);
     this.afterfinalSubmit();
   }
   logohealthcrum : any;
