@@ -445,7 +445,10 @@ export class EPrescriptionComponent implements OnInit {
     console.log("table data is ", ...medicineData)
 
     console.log("pdf maker called")
-    
+    let recommendedList = "";
+    this.forPDF.recommendTest.forEach(element => {
+      recommendedList  += element.testName + ", "
+    });
     var dd = {
       watermark: {text :'Healthcrum', opacity : 0.1, color : 'green'},
       content: [
@@ -568,7 +571,7 @@ export class EPrescriptionComponent implements OnInit {
             {
                       text: [
                       { text:  'Recommended Test : ', fontSize: 12, bold : true },
-                        this.forPDF.recommendTest.testName
+                        recommendedList
                       ],
                       style : 'marginT'
                   },

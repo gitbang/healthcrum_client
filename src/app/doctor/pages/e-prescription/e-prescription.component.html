@@ -294,7 +294,7 @@
                 *ngFor="let test of newDoseForm.get('recommendTest').value; index as i"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(test.testId, index as i)">
+                (removed)="remove(test.testId, i)">
                 {{test.testName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
