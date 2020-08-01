@@ -162,7 +162,8 @@ export class SignupComponent implements OnInit {
         companyName : this.companyId,
         branchName : this.branchId,
         departmentName : this.departmentId,
-        method : this.data
+        method : this.data,
+        dob : this.user_dob.value
       };
       
 
@@ -174,7 +175,8 @@ export class SignupComponent implements OnInit {
         phone: this.user_mob,
         gender: this.user_gender,
         role: this.user_type,
-        method : this.data
+        method : this.data,
+        dob : this.user_dob.value
       };
     }
     if(this.user_email == undefined || this.user_email == null || this.user_email.length == 0 ){

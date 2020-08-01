@@ -17,6 +17,7 @@ export interface appointments{
   orderId : string;
   status : string;
   appointmentNum : string;
+  appointmentType : string
 }
 declare var $: any;
 @Component({
@@ -25,35 +26,10 @@ declare var $: any;
   styleUrls: ["./appointment.component.scss"]
 })
 export class AppointmentComponent implements OnInit {
-  newAppointment: any[] = [
-    {
-      
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "2020-07-13T18:30:00.000Z",
-      time: "03:00 PM",
-      patientEmail : "abcd@gmail.com"
-    },
-  ];
-  confirmedAppointment: any[] = [
-    {
-      appoint_id: "1104",
-      patient_name: "Amar Verma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "01:00 PM"
-    },
-  ];
-  pastAppointment: any[] = [
-    {
-      appoint_id: "1101",
-      patient_name: "Sonam Sharma",
-      location: "Delhi",
-      date: "12/04/2020",
-      time: "08:20 PM"
-    },
-  ];
-  displayedColumns : string[]= ["appointmentNum", "patient_name", "patientEmail",
+  newAppointment: any[] = [];
+  confirmedAppointment: any[] = [];
+  pastAppointment: any[] = [];
+  displayedColumns : string[]= ["appointmentNum", "patient_name", "patientEmail", "appointmentType",
                     "date", "time", "others"]
 
   @ViewChild('confirmeAppointments', {static: true}) paginatorConfirm: MatPaginator;
@@ -112,7 +88,8 @@ export class AppointmentComponent implements OnInit {
         patientId : result.data[i].userDetail.userId,
         orderId : result.data[i].orderDetail._id,
         status : result.data[i].orderDetail.Orderstatus,
-        appointmentNum : result.data[i].orderDetail.appointmentNum
+        appointmentNum : result.data[i].orderDetail.appointmentNum,
+        appointmentType : result.data[i].orderDetail.orderDetails[0].type
       }
       console.log("add is : ", add)
       if( add.status == 'pending' || add.status == undefined )

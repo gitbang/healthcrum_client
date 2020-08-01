@@ -108,7 +108,7 @@ export class AuthServiceLocal {
 
   verifyOtpOfPhone(data : any) :Observable <any> {
     return this.http
-            .post(this.baseurl + "/verifyotp", data, this.option)
+            .post(this.baseurl + "/login/phone/verifyotp", data, this.option)
             .pipe(retry(2), catchError(this.handleError))
   }
 

@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {AuthServiceLocal} from '../../services/auth-service.service';
 import {Router} from '@angular/router';
 import {PatientService} from '../patient.service'
-import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material'
+import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
+import { saveAs } from 'file-saver';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -112,12 +113,14 @@ export class PatientPerscriptionComponent implements OnInit {
   presCriptionDataSource : MatTableDataSource<prescription[]>;
   displayedColumn: string[] = ['Prescription No.', 'Patient Name', 'Doctor Name', 'Appointment Number', "Download Prescription"];
   currentPDF : string = "";
-  getPdf(orderId : string){
+
+  getPdf(orderId : string, action : string){
     console.log(orderId)
     this.patientService.appointmentFetchPDF(orderId).subscribe((result=>{
       console.log(result);
       if(result.success){
-        this.completeImageUrl(result.data)
+
+        this.completeImageUrl(result.data, action)
       } else {
         alert("something went wrong")
       }
@@ -125,11 +128,19 @@ export class PatientPerscriptionComponent implements OnInit {
     (err)=> console.log("something went wrong", err))
   }
 
-  completeImageUrl(pdfUrl){
+  completeImageUrl(pdfUrl, action :string){
     let myurl = this.patientService.completeURl(pdfUrl)
     console.log("complete url is : ", myurl)
-
-    window.open(myurl ,  "_blank")
+    if(action == 'view'){
+      console.log("if")
+      window.open(myurl ,  '_blank')
+    } else {
+      console.log("else")
+      this.patientService.getPDFAsBlob(myurl).subscribe((result)=>{
+        var blob = new Blob([result], {type: 'application/pdf'});
+        saveAs(blob, "myPrescription");
+      })
+    }
   }
 
   applyFilter(filterText: string){

@@ -322,22 +322,22 @@ export class EPrescriptionComponent implements OnInit {
       this.analysisPort = "none";
       
     }  
-    // else{
-    //   this.userZone = event.tab.textLabel;
-    //   const dialogRef = this.dialog.open(AnalysisComponent, {
-    //     height : '80%',
-    //     width : "500px",
-    //     data : {
-    //       zone : this.userZone,
-    //       question : this.hraReasonBox
-    //     }
-    //   })
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     if(result && result.success) {
-    //       this.hraReasonAnswer = result.allcombine
-    //     }
-    //   })
-    // }
+    else{
+      this.userZone = event.tab.textLabel;
+      const dialogRef = this.dialog.open(AnalysisComponent, {
+        height : '80%',
+        width : "500px",
+        data : {
+          zone : this.userZone,
+          question : this.hraReasonBox
+        }
+      })
+      dialogRef.afterClosed().subscribe(result => {
+        if(result && result.success) {
+          this.hraReasonAnswer = result.allcombine
+        }
+      })
+    }
   }
 
   lraSection() {

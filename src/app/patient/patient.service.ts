@@ -135,20 +135,14 @@ export class PatientService {
     return  this.http.get('./assets/img/consultation/downloadpdf/logo1.png', { responseType: 'blob' })
   }
 
-  // downloadPDF(pdfLink): any {
-  //   const optionsmy = { responseType: 'Blob'  };
-  //   return this.http.get(pdfLink, optionsmy)
-  //   .pipe(
-  //     map(res=> {
-  //       //return new Blob([res.blob()], {type : 'application/pdf'})
-  //       return new Blob([res.blob()], { type: 'application/pdf' });
-  //     })
-  //   )
-
-  // }
+  getPDFAsBlob(url) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get(url, { headers: headers, responseType: 'blob' });
+}
 
   completeURl(url : string){
-    return  'http://localhost:3000/'+ url;
+    return  this.url + '/'+ url;
     
   }
 

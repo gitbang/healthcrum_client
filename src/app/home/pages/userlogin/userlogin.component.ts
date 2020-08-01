@@ -462,11 +462,11 @@ export class UserloginComponent implements OnInit {
           phone: this.userMobile,
         };
 
-        this.service.consultationChekOTP(toSend).subscribe((result) => {
+        this.authLocal.verifyOtpOfPhone(toSend).subscribe((result)=>{
           console.log(result);
           if (result.success) {
             console.log("otp verified ", result);
-            //this.saveAndAccess(); // for dynamic routing
+            
             this.sendRequestToCheckLogin(this.userDetail)
           } else {
             Swal.fire({title : "Error", text : result.message, icon :"error"});

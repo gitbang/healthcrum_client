@@ -39,17 +39,24 @@
               </ng-container>
 
               <ng-container matColumnDef="Download Prescription">
-                <th mat-header-cell *matHeaderCellDef> Download Prescription</th>
+                <th mat-header-cell *matHeaderCellDef> My Prescription</th>
                 <td mat-cell *matCellDef="let element"> 
-                  <button type="button" class="btn btn-info btn-sm" 
-                    >
-                      <div class="up" (click)="getPdf(element.orderId)">
-                        <span class="fileinput-new up">
-                        <i class="material-icons">
-                          arrow_downward
-                        </i></span>
-                      </div>
-                    </button>
+                  <button type="button" mat-raised-button 
+                  class="btn btn-info btn-link btn-sm btn-just-icon" 
+                  (click)="getPdf(element.orderId, 'download')"
+                  matTooltip="download" [matTooltipPosition]="'above'" >
+                    
+                    <i class="material-icons">
+                      arrow_downward
+                    </i>
+                  
+                  </button>
+                  <button mat-raised-button 
+                    (click)="getPdf(element.orderId, 'view')"
+                    type="button" matTooltip="view" [matTooltipPosition]="'above'"
+                    class="btn btn-info btn-link btn-sm btn-just-icon">
+                    <i class="material-icons">visibility</i>
+                  </button>
                 </td>
               </ng-container>
 

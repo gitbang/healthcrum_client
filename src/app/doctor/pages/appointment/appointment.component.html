@@ -21,25 +21,26 @@
           
                 <table mat-table [dataSource]="newTableData">
 
-                  <!-- Position Column -->
                   <ng-container matColumnDef="appointmentNum">
                     <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
                     <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
                   </ng-container>
 
-                  <!-- Name Column -->
                   <ng-container matColumnDef="patient_name">
                     <th mat-header-cell *matHeaderCellDef>Patient Name </th>
                     <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
                   </ng-container>
 
-                  <!-- Weight Column -->
                   <ng-container matColumnDef="patientEmail">
                     <th mat-header-cell *matHeaderCellDef> Patient Email</th>
                     <td mat-cell *matCellDef="let element"> {{element.patientEmail}} </td>
                   </ng-container>
 
-                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="appointmentType">
+                    <th mat-header-cell *matHeaderCellDef>Appointment Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.appointmentType}} </td>
+                  </ng-container>
+
                   <ng-container matColumnDef="date">
                     <th mat-header-cell *matHeaderCellDef>Appointment Date </th>
                     <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
@@ -50,7 +51,7 @@
                     <td mat-cell *matCellDef="let element"> {{element.time}} </td>
                   </ng-container>
                   <ng-container matColumnDef="others">
-                    <th mat-header-cell *matHeaderCellDef>Give Prescription </th>
+                    <th mat-header-cell *matHeaderCellDef>Action </th>
                     <td mat-cell *matCellDef="let element; index as i"> 
                       <button mat-raised-button type="button" matTooltip="Approve" [matTooltipPosition]="'above'"
                         class="btn btn-success btn-link btn-sm btn-just-icon" (click)="doAction('accepted', i)">
@@ -94,25 +95,26 @@
 
                 <table mat-table [dataSource]="confirmTableData">
 
-                  <!-- Position Column -->
                   <ng-container matColumnDef="appointmentNum">
                     <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
                     <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
                   </ng-container>
 
-                  <!-- Name Column -->
                   <ng-container matColumnDef="patient_name">
                     <th mat-header-cell *matHeaderCellDef>Patient Name </th>
                     <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
                   </ng-container>
 
-                  <!-- Weight Column -->
                   <ng-container matColumnDef="patientEmail">
                     <th mat-header-cell *matHeaderCellDef> Patient Email</th>
                     <td mat-cell *matCellDef="let element"> {{element.patientEmail}} </td>
                   </ng-container>
 
-                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="appointmentType">
+                    <th mat-header-cell *matHeaderCellDef>Appointment Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.appointmentType}} </td>
+                  </ng-container>
+
                   <ng-container matColumnDef="date">
                     <th mat-header-cell *matHeaderCellDef>Appointment Date </th>
                     <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
@@ -162,25 +164,26 @@
               <div class="table-responsive">
                 <table mat-table [dataSource]="pastTableData">
 
-                  <!-- Position Column -->
                   <ng-container matColumnDef="appointmentNum">
                     <th mat-header-cell *matHeaderCellDef> Appointment No. </th>
                     <td mat-cell *matCellDef="let element"> {{element.appointmentNum}} </td>
                   </ng-container>
 
-                  <!-- Name Column -->
                   <ng-container matColumnDef="patient_name">
                     <th mat-header-cell *matHeaderCellDef>Patient Name </th>
                     <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
                   </ng-container>
 
-                  <!-- Weight Column -->
                   <ng-container matColumnDef="patientEmail">
                     <th mat-header-cell *matHeaderCellDef> Patient Email</th>
                     <td mat-cell *matCellDef="let element"> {{element.patientEmail}} </td>
                   </ng-container>
 
-                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="appointmentType">
+                    <th mat-header-cell *matHeaderCellDef>Appointment Type </th>
+                    <td mat-cell *matCellDef="let element"> {{element.appointmentType}} </td>
+                  </ng-container>
+
                   <ng-container matColumnDef="date">
                     <th mat-header-cell *matHeaderCellDef>Appointment Date </th>
                     <td mat-cell *matCellDef="let element"> {{element.date | date}} </td>
@@ -191,10 +194,10 @@
                     <td mat-cell *matCellDef="let element"> {{element.time}} </td>
                   </ng-container>
                   <ng-container matColumnDef="others">
-                    <th mat-header-cell *matHeaderCellDef>Give Prescription </th>
+                    <th mat-header-cell *matHeaderCellDef>Given Prescription </th>
                     <td mat-cell *matCellDef="let element; index as i"> 
                       <button mat-raised-button 
-                          (click)="getPdf(appoint.orderId)"
+                          (click)="getPdf(element.orderId)"
                           type="button" matTooltip="view" [matTooltipPosition]="'above'"
                           class="btn btn-info btn-link btn-sm btn-just-icon">
                           <i class="material-icons">visibility</i>
