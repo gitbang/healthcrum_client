@@ -79,33 +79,24 @@
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <mat-label>Category</mat-label>
-                    <mat-select>
-                      <mat-option>Option 1</mat-option>
-                      <mat-option>Option 2</mat-option>
-                      <mat-option>Option 3</mat-option>
-                      <mat-option>Option 4</mat-option>
+                    <mat-select formControlName="category" (change)="getSubCategory">
+                      <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <mat-label>Sub Category</mat-label>
-                    <mat-select>
-                      <mat-option>Sub Option 1</mat-option>
-                      <mat-option>Sub Option 2</mat-option>
-                      <mat-option>Sub Option 3</mat-option>
-                      <mat-option>Sub Option 4</mat-option>
+                    <mat-select formControlName="subcategory" (change)="getSubSubCategory">
+                      <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory">{{subcategory}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <mat-label>Sub Category</mat-label>
-                    <mat-select>
-                      <mat-option>sub-option 1</mat-option>
-                      <mat-option>sub-option 2</mat-option>
-                      <mat-option>sub-option 3</mat-option>
-                      <mat-option>sub-option 4</mat-option>
+                    <mat-select formControlName="subcategory" >
+                      <mat-option *ngFor="let subsubcategory of subsubcategories" [value]="subsubcategory">{{subsubcategory}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -117,19 +108,19 @@
                     <div class="col-md-4">
                       <mat-form-field class="full-width">
                         <mat-label>Medecine Name</mat-label>
-                        <input matInput placeholder="name">
+                        <input matInput placeholder="name" formControlName="name">
                       </mat-form-field>
                     </div>
                     <div class="col-md-4">
                       <mat-form-field class="full-width">
                         <mat-label>Brand</mat-label>
-                        <input matInput placeholder="Ex. xyz">
+                        <input matInput placeholder="Ex. xyz" formControlName="brand">
                       </mat-form-field>
                     </div>
                     <div class="col-md-4">
                       <mat-form-field class="full-width">
                         <mat-label>Medecine For</mat-label>
-                        <input matInput placeholder="Ex. sugar patient">
+                        <input matInput placeholder="Ex. sugar patient" formControlName="for">
                       </mat-form-field>
                     </div>
                   </div>
@@ -140,19 +131,19 @@
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <mat-label>Medecine Price</mat-label>
-                    <input matInput #postalCode placeholder=" price">
+                    <input matInput placeholder=" price" formControlName="mrp">
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <mat-label>Packaging Size</mat-label>
-                    <input matInput placeholder="Ex. 1 pcs">
+                    <input matInput placeholder="Ex. 1 pcs" formControlName="packagingSize">
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <mat-label>Manufactured By</mat-label>
-                    <input matInput placeholder="Ex. xyz">
+                    <input matInput placeholder="Ex. xyz" formControlName="manufacturedBy">
                   </mat-form-field>
                 </div>
               </div>
@@ -160,11 +151,11 @@
                 <div class="col-md-5">
                   <mat-form-field>
                     <mat-label>Quantity</mat-label>
-                    <input matInput placeholder="Ex. 100 mg">
+                    <input matInput placeholder="Ex. 100 mg" formControlName="inStock">
                   </mat-form-field>
                   <mat-form-field>
                     <mat-label>Quantity Unit</mat-label>
-                    <mat-select>
+                    <mat-select formControlName="variations_type">
                       <mat-option>quantityPerStrip</mat-option>
                       <mat-option>litre</mat-option>
                       <mat-option>weight</mat-option>
@@ -175,7 +166,7 @@
                 <div class="col-md-6">
                   <mat-form-field class="full-width">
                     <mat-label>Description</mat-label>
-                    <textarea matInput></textarea>
+                    <textarea matInput formControlName="contents"></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -187,7 +178,7 @@
                       <mat-card>
                         <mat-card-content class="ml-1">
                           <nz-upload class="avatar-uploader text-center"
-                            nzAction="http://localhost:3000/api/upload-single" nzName="file" nzListType="picture-card"
+                            nzAction="https://api.sftservices.com/api/upload-single" nzName="file" nzListType="picture-card"
                             [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload"
                             (nzChange)="handleLogoChange($event)">
                             <ng-container *ngIf="!avatarUrl">
@@ -203,7 +194,7 @@
                       </mat-card>
                     </div>
                     <div class="col-md-8">
-                      <nz-upload nzAction="http://localhost:3000/api/upload-single" nzListType="picture-card"
+                      <nz-upload nzAction="https://api.sftservices.com/api/upload-single" nzListType="picture-card"
                         [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview"
                         [nzMultiple]="true">
                         <i class="material-icons">add</i>

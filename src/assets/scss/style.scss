@@ -26,9 +26,6 @@ $client-theme: mat-light-theme($client-primary, $client-accent, $client-warn);
 // that you are using.
 @include angular-material-theme($client-theme);
 
-// @import "~ng-wizard/themes/ng_wizard.min.css";
-@import "~ng-wizard/themes/ng_wizard_theme_dots.min.css";
-
 .cards:hover .grow {
   transform: scale(1.2);
 }

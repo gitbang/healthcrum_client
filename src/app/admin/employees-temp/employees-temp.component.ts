@@ -57,16 +57,16 @@ export class EmployeesTempComponent implements OnInit {
           empId[emp.userId] = {
             employeeId : emp.employeeId,
             name : emp.name,
-            dept_name: emp.departmentId.name
+            dept_name: emp.departmentName
           }
         });
         let keys = Object.keys(empId);
         res.temperature.forEach((temp) => {
           this.temperatureData.push({
             temperature: temp.temperature,
-            empName: empId[temp.userId].name,
-            empid: empId[temp.userId].employeeID,
-            department: empId[temp.userId].dept_name,
+            empName: empId[temp.user_id].name,
+            empid: empId[temp.user_id].employeeId,
+            department: empId[temp.user_id].dept_name,
             createdAt: temp.createdAt,
           });
           if(temp.temeperature > 98.5)
@@ -107,16 +107,16 @@ export class EmployeesTempComponent implements OnInit {
           empId[emp.userId] = {
             employeeId : emp.employeeId,
             name : emp.name,
-            dept_name: emp.departmentId.name
+            dept_name: emp.departmentName
           }
         });
         let keys = Object.keys(empId);
         res.temperature.forEach((temp) => {
           this.temperatureData.push({
             temperature: temp.temperature,
-            empName: empId[temp.userId].name,
-            empid: empId[temp.userId].employeeID,
-            department: empId[temp.userId].dept_name,
+            empName: empId[temp.user_id].name,
+            empid: empId[temp.user_id].employeeId,
+            department: empId[temp.user_id].dept_name,
             createdAt: temp.createdAt,
           });
           if(temp.temeperature > 98.5)
@@ -189,11 +189,11 @@ export class EmployeesTempComponent implements OnInit {
     this.dateEnabled = true;
   }
   dateChange(event) {
+    console.log(event);
     if (!this.dateEnabled) {
       alert("Please select corporate and branch");
       return;
     }
-    console.log(event);
     let data = {
       corporate_id: this.companySelected,
       branch_id: this.branchSelected,
@@ -208,16 +208,16 @@ export class EmployeesTempComponent implements OnInit {
           empId[emp.userId] = {
             employeeId : emp.employeeId,
             name : emp.name,
-            dept_name: emp.departmentId.name
+            dept_name: emp.departmentName
           }
         });
         let keys = Object.keys(empId);
         res.temperature.forEach((temp) => {
           this.temperatureData.push({
             temperature: temp.temperature,
-            empName: empId[temp.userId].name,
-            empid: empId[temp.userId].employeeID,
-            department: empId[temp.userId].dept_name,
+            empName: empId[temp.user_id].name,
+            empid: empId[temp.user_id].employeeId,
+            department: empId[temp.user_id].dept_name,
             createdAt: temp.createdAt,
           });
           if(temp.temeperature > 98.5)

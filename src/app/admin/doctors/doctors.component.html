@@ -8,10 +8,18 @@
               <div class="nav-tabs-wrapper">
                 <ul class="nav nav-tabs" data-tabs="tabs">
                   <li class="nav-item">
-                    <a mat-button class="nav-link active text-white" href="#Labs" data-toggle="tab">
+                    <a mat-button class="nav-link active text-white" href="#unverified" data-toggle="tab" (click)="getUnverifiedDoctors()">
                       <i class="material-icons">
                         <fa-icon [icon]="doc_icon"></fa-icon>
-                      </i> Registred Doctors
+                      </i> Un-Approved Doctors
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link text-white" href="#verified" data-toggle="tab" (click)="getVerifiedDoctors()">
+                      <i class="material-icons">
+                        <fa-icon [icon]="doc_icon"></fa-icon>
+                      </i> Approved Doctors
                       <div class="ripple-container"></div>
                     </a>
                   </li>
@@ -30,7 +38,7 @@
           </div>
           <div class="card-body">
             <div class="tab-content">
-              <div class="tab-pane active" id="Labs">
+              <div class="tab-pane active" id="unverified">
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header card-header-info card-header-icon">
@@ -39,87 +47,135 @@
                           <fa-icon [icon]="doc_icon"></fa-icon>
                         </i>
                       </div>
-                      <h4 class="card-title">Doctors</h4>
+                      <h4 class="card-title">Un-verified Doctors</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="approve-doctor">
+                        <button nz-button nzType="info" [disabled]="setOfCheckedId.size === 0" [nzLoading]="loadingUnverified" (click)="ApproveDoctors()">
+                          Approve Doctors
+                        </button>
+                        <span>Selected {{ setOfCheckedId.size }} items</span>
+                      </div>
+                      <div class="table-responsive">
+                        <nz-table class="mt-3" #unverifiedTable nzShowPagination nzShowSizeChanger nzBordered [nzData]="unverifiedDoctorData"
+                        [nzLoading]="loadingUnverified" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+                        <thead>
+                          <tr>
+
+                            <th>
+                          <mat-checkbox
+          [(ngModel)]="checked"
+          [(indeterminate)]="indeterminate"
+          (change)="onAllChecked($event.checked)"
+          color="primary">
+      </mat-checkbox>
+                        </th>
+                         
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>HealthcrumID</th>
+                            <th>Registered On</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of unverifiedTable.data">
+                            <td >
+                              <mat-checkbox
+                              [checked]="setOfCheckedId.has(data.userId._id)"
+                              (change)="onItemChecked(data.userId._id,$event.checked)" color="primary">
+                          </mat-checkbox>
+                            </td>
+                            <td> {{ data.name}}</td>
+                            <td>
+                              {{ data.userId.email }}
+                            </td>
+                            <td>
+                              {{data.userId.phone}}
+                            </td>
+                            <td>
+                              {{data.userId.healthcrumId}}
+                            </td>
+                            <td>
+                              {{data.createdAt | date : 'fullDate'}}
+                            </td>
+                            <td class="td-actions text-right">
+                              <button mat-raised-button type="button" matTooltip="view doctor profile"
+                                [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon mt-2">
+                                <i class="material-icons">visibility</i>
+                              </button>
+                             
+                              <button type="button" matTooltip="disapprove doctor" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                              [matTooltipPosition]="'above'" nzPopconfirmTitle="Sure to disapprove?">
+                                <i class="material-icons">close</i>
+                              </button>
+                            </td>
+                            <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane" id="verified">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">
+                          <fa-icon [icon]="doc_icon"></fa-icon>
+                        </i>
+                      </div>
+                      <h4 class="card-title">Verified Doctors</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th class="text-center">#</th>
-                              <th>Name</th>
-                              <th>Speciality</th>
-                              <th>Experience</th>
-                              <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>1023</td>
-                              <td>Dr. Test Doctor</td>
-                              <td>Dentist</td>
-                              <td>8 year</td>
-                              <td class="td-actions text-right">
-                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">edit</i>
-                                </button>
-                                <button mat-raised-button type="button" matTooltip="Remove"
-                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">close</i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1023</td>
-                              <td>Dr. Test Doctor</td>
-                              <td>Dentist</td>
-                              <td>4.5 year</td>
-                              <td class="td-actions text-right">
-                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">edit</i>
-                                </button>
-                                <button mat-raised-button type="button" matTooltip="Remove Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">close</i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1023</td>
-                              <td>Dr. Test Doctor</td>
-                              <td>Dentist</td>
-                              <td>5 year</td>
-                              <td class="td-actions text-right">
-                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">edit</i>
-                                </button>
-                                <button mat-raised-button type="button" matTooltip="Remove Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">close</i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1023</td>
-                              <td>Dr. Test Doctor</td>
-                              <td>Dentist</td>
-                              <td>4 year</td>
-                              <td class="td-actions text-right">
-                                <button mat-raised-button type="button" matTooltip="Edit Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">edit</i>
-                                </button>
-                                <button mat-raised-button type="button" matTooltip="Remove Doctor"
-                                  [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">close</i>
-                                </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <nz-table class="mt-3" #verifiedTable nzBordered [nzData]="verifiedDoctorData"
+                        [nzLoading]="loadingVerified">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>HealthcrumID</th>
+                            <th>Registered On</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of verifiedTable.data" class="editable-row">
+                            
+                            <td> {{ data.name}}</td>
+                            <td>
+                              {{ data.userId.email }}
+                            </td>
+                            <td>
+                              {{data.userId.phone}}
+                            </td>
+                            <td>
+                              {{data.userId.healthcrumId}}
+                            </td>
+                            <td>
+                              {{data.createdAt | date : 'fullDate'}}
+                            </td>
+                            <td class="td-actions text-right">
+                              <button mat-raised-button type="button" matTooltip="Edit Task"
+                                [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                <i class="material-icons">edit</i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                                nzPopconfirmTitle="Sure to delete?">
+                                <i class="material-icons">close</i>
+                              </button>
+                            </td>
+                            <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">Delete</a> -->
+                          </tr>
+                        </tbody>
+                      </nz-table>
                       </div>
                     </div>
                   </div>
@@ -128,11 +184,11 @@
               </div>
               <div class="tab-pane" id="add-Lab">
                 <div class="container-fluid">
-                  <form [formGroup]="register">
-                    <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
-
-                      <ng-wizard-step [title]="'Step 1'" [description]="'Personal Informations'">
-                        <div class="container mt-3">
+                  <mat-horizontal-stepper  #stepper>
+                    <mat-step [stepControl]="firstFormGroup" errorMessage="Fill the required fields" editable> 
+                      <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Personal Informations</ng-template>
+                        <div class="container mt-5 mb-4">
                           <div class="row">
                             <div class="col-md-3 m-auto">
                               <div class="fileinput text-center fileinput-new" data-provides="fileinput">
@@ -144,7 +200,8 @@
                                   <div class="btn btn-info btn-round btn-file">
                                     <div class="fileinput-new">Doctor Image</div>
                                     <div class="fileinput-exists">Change</div>
-                                    <input type="hidden" value="" name="."><input type="file" name="doctor_image">
+                                    <input type="hidden" value="" name=".">
+                                    <input type="file" (change)="logoUpload($event)">
                                     <div class="ripple-container"></div>
                                   </div>
                                   <a href="#" class="btn btn-danger btn-round fileinput-exists"
@@ -162,7 +219,7 @@
                                 <div class="col-md-6">
                                   <mat-form-field class="full-width">
                                     <mat-label>Doctor Name</mat-label>
-                                    <input matInput placeholder="First Name" formControlName="name">
+                                    <input matInput placeholder="Full Name" formControlName="name">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
@@ -177,16 +234,28 @@
                               </div>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <mat-form-field class="full-width">
-                                    <mat-label>Registration Number</mat-label>
-                                    <input matInput placeholder="First Name" formControlName="registrationNumber">
-                                  </mat-form-field>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <mat-form-field class="full-width">
+                                        <mat-label>Registration Number</mat-label>
+                                        <input matInput placeholder="Registration Number" formControlName="registrationNumber">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-12">
+                                      <mat-form-field class="full-width">
+                                        <mat-label>Choose a DOB</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="dob">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker touchUi #picker></mat-datepicker>
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
                                 </div>
-
+                                
                                 <div class="col-md-6">
                                   <mat-form-field class="full-width">
                                     <mat-label>About Doctor</mat-label>
-                                    <textarea matInput placeholder="About doctor" rows="4"></textarea>
+                                    <textarea matInput placeholder="About doctor" rows="4" formControlName="about"></textarea>
                                   </mat-form-field>
                                 </div>
                               </div>
@@ -194,10 +263,15 @@
                             </div>
                           </div>
                         </div>
-                      </ng-wizard-step>
-
-                      <ng-wizard-step [title]="'Step 2'" [description]="'Doctor Address'">
-                        <div class="mt-3">
+                        <div>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" errorMessage="Fill the required fields" editable>
+                      <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Doctor Address</ng-template>
+                        <div class="container mt-5 mb-4">
                           <div class="row mt-3">
                             <div class="col-md-4 my-auto">
                               <div class="row">
@@ -231,209 +305,248 @@
                             </div>
                           </div>
                         </div>
-                      </ng-wizard-step>
-
-                      <ng-wizard-step [title]="'Step 2'" [description]="'Qualification and Experience'">
-                        <div class="mt-3">
-                          <div class="row">
-                            <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Doctor Qualification</mat-label>
-                                <input matInput placeholder="Doctor Qualification" formControlName="qualification">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Doctor Speciality</mat-label>
-                                <input matInput placeholder="Doctor Speciality" formControlName="qualification">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Experience</mat-label>
-                                <input matInput placeholder="Experience" formControlName="experience">
-                              </mat-form-field>
-                            </div>
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext>Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="thirdFormGroup" errorMessage="Fill the required fields" editable>
+                      <form [formGroup]="thirdFormGroup">
+                      <ng-template matStepLabel>Qualification and Experience</ng-template>
+                      <div class="container mt-5 mb-4">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Doctor Qualification</mat-label>
+                              <input matInput placeholder="Doctor Qualification" formControlName="qualification">
+                            </mat-form-field>
                           </div>
-                          <div class="row">
-
-                            <!-- <div class=" col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Teleconsultation timing</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time">
-                              </mat-form-field>
-                            </div> -->
-                            <!-- 
-                            <div class=" col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Physical consultation timing </mat-label>
-                                <input matInput placeholder="consultation timing" type="time">
-                              </mat-form-field>
-                            </div> -->
-
-                            <div class=" col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Language</mat-label>
-                                <mat-select multiple formControlName="languages">
-                                  <mat-option value="english">English</mat-option>
-                                  <mat-option value="hindi">Hindi</mat-option>
-                                  <mat-option value="tamil">Tamil</mat-option>
-                                  <mat-option value="Bengoli">Bengoli</mat-option>
-                                  <mat-option value="urdu">Urdu</mat-option>
-                                  <mat-option value="santhali">Santhali</mat-option>
-                                  <mat-option value="gujrati">Gujrati</mat-option>
-                                </mat-select>
-                              </mat-form-field>
-                            </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Doctor Speciality</mat-label>
+                              <input matInput placeholder="Doctor Speciality" formControlName="speciality">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Experience</mat-label>
+                              <input matInput placeholder="Experience" formControlName="experience">
+                            </mat-form-field>
                           </div>
                         </div>
-                      </ng-wizard-step>
-                      <ng-wizard-step [title]="'Step 2'" [description]="'Consultation and Timing'">
-                        <div class="mt-3">
-                          <div class="row">
-                            <div class="col-md-4 my-auto">
-                              <mat-slide-toggle formControlName="video">Video COnsultation
-                              </mat-slide-toggle>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.video">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available From</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="video_from">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.video">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available to</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="video_to">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-4 my-auto">
-                              <mat-slide-toggle formControlName="chat">Chat Consultation</mat-slide-toggle>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.chat">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available From</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="chat_from">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.chat">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available to</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="chat_to">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-4 my-auto">
-                              <mat-slide-toggle>Tele Consultation</mat-slide-toggle>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.tele">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available From</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="tele_from">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.tele">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available to</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="tele_to">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-4 my-auto">
-                              <mat-slide-toggle formControlName="physical">Physical Consultation</mat-slide-toggle>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.physical">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available From</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="physical_from">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.physical">
-                              <mat-form-field class="full-width">
-                                <mat-label>Available to</mat-label>
-                                <input matInput placeholder="Teleconsultation  timing" type="time"
-                                  formControlName="physical_to">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class=" col-md-4 my-auto">
-                              <mat-slide-toggle formControlName="emergency">Emergency consultation</mat-slide-toggle>
-                            </div>
-                            <div class="col-md-4" *ngIf="register.value.emergency">
-                              <mat-form-field class="full-width">
-                                <mat-label>Emergency consultation Fee</mat-label>
-                                <input matInput placeholder="Emergency Fee" type="number"
-                                  formControlName="emergencyFees">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="row mt-3">
-                            <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Consultation Fee</mat-label>
-                                <input matInput placeholder="Consultation Fee" type="number"
-                                  formControlName="consultationFees">
-                              </mat-form-field>
-                            </div>
-                          </div>
+                        <div class="row">
 
-                        </div>
-                      </ng-wizard-step>
-                      <ng-wizard-step [title]="'Step 4'" [description]="'Account Details'">
-                        <div class="container mt-3">
-                          <h5 class="text-info">Account Credentials</h5>
-                          <div class="row">
-                            <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Doctor Email ID</mat-label>
-                                <input matInput placeholder="Email ID">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>Contact Number</mat-label>
-                                <input matInput placeholder="Contact Number" required>
-                              </mat-form-field>
-                            </div>
+                          <div class=" col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Language</mat-label>
+                              <mat-select multiple formControlName="languages">
+                                <mat-option value="english">English</mat-option>
+                                <mat-option value="hindi">Hindi</mat-option>
+                                <mat-option value="tamil">Tamil</mat-option>
+                                <mat-option value="Bengoli">Bengoli</mat-option>
+                                <mat-option value="urdu">Urdu</mat-option>
+                                <mat-option value="santhali">Santhali</mat-option>
+                                <mat-option value="gujrati">Gujrati</mat-option>
+                              </mat-select>
+                            </mat-form-field>
                           </div>
-                          <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>New password</mat-label>
-                                <input matInput [type]="phide ? 'password' : 'text'">
-                                <button mat-icon-button matSuffix (click)="phide = !phide"
-                                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                  <mat-icon>{{phide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                              </mat-form-field>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                              <mat-form-field class="full-width">
-                                <mat-label>confirm password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
-                                <button mat-icon-button matSuffix (click)="hide = !hide"
-                                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                              </mat-form-field>
-                            </div>
+                          <div class=" col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Stream</mat-label>
+                              <mat-select formControlName="stream">
+                                <mat-option value="Ayurveda">Ayurveda</mat-option>
+                                <mat-option value="Allopathic">Allopathic</mat-option>
+                                <mat-option value="Homeophathic">Homeophathic</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4 my-auto">
+                            <mat-slide-toggle formControlName="fromHealthcrum">From Healthcrum ?
+                            </mat-slide-toggle>
                           </div>
                         </div>
-                      </ng-wizard-step>
-                    </ng-wizard>
-                  </form>
+                      </div>
+
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                      </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="fourthFormGroup" errorMessage="Fill the required fields" editable>
+                      <form [formGroup]="fourthFormGroup">
+                      <ng-template matStepLabel>Consultation and Timing</ng-template>
+                      <div class="container mt-5 mb-4">
+                        <div class="row">
+                          <div class="col-md-4 my-auto">
+                            <mat-slide-toggle formControlName="video">Video Consultation
+                            </mat-slide-toggle>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.video">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available From</mat-label>
+                              <input matInput  type="time"
+                                formControlName="video_from">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.video">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available to</mat-label>
+                              <input matInput  type="time"
+                                formControlName="video_to">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 my-auto">
+                            <mat-slide-toggle formControlName="chat">Chat Consultation</mat-slide-toggle>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.chat">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available From</mat-label>
+                              <input matInput  type="time"
+                                formControlName="chat_from">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.chat">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available to</mat-label>
+                              <input matInput  type="time"
+                                formControlName="chat_to">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 my-auto">
+                            <mat-slide-toggle formControlName="tele">Tele Consultation</mat-slide-toggle>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.tele">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available From</mat-label>
+                              <input matInput  type="time"
+                                formControlName="tele_from">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.tele">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available to</mat-label>
+                              <input matInput  type="time"
+                                formControlName="tele_to">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 my-auto">
+                            <mat-slide-toggle formControlName="physical">Physical Consultation</mat-slide-toggle>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.physical">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available From</mat-label>
+                              <input matInput  type="time"
+                                formControlName="physical_from">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.physical">
+                            <mat-form-field class="full-width">
+                              <mat-label>Available to</mat-label>
+                              <input matInput  type="time"
+                                formControlName="physical_to">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class=" col-md-4 my-auto">
+                            <mat-slide-toggle formControlName="emergency">Emergency consultation</mat-slide-toggle>
+                          </div>
+                          <div class="col-md-4" *ngIf="fourthFormGroup.value.emergency">
+                            <mat-form-field class="full-width">
+                              <mat-label>Emergency consultation Fee</mat-label>
+                              <input matInput placeholder="Emergency Fee" type="number"
+                                formControlName="emergencyFees">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Consultation Fee</mat-label>
+                              <input matInput placeholder="Consultation Fee" type="number"
+                                formControlName="consultationFees">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Select Working Days</mat-label>
+                              <mat-select multiple formControlName="days" name="days">
+                                <mat-option  *ngFor="let day of daysName" [value]="day.value">
+                                  {{day.name}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                      </div>
+                    </form>
+                    </mat-step>
+                    <mat-step [stepControl]="fifthFormGroup" errorMessage="Fill the required fields" editable>
+                      <form [formGroup]="fifthFormGroup">
+                      <ng-template matStepLabel>Account Details</ng-template>
+                      <div class="container mt-5 mb-4">
+                        <h5 class="text-info">Account Credentials</h5>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Doctor Email ID</mat-label>
+                              <input matInput placeholder="Email ID" formControlName="email" required>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>Contact Number</mat-label>
+                              <input matInput placeholder="Contact Number" formControlName="contact" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>New password</mat-label>
+                              <input matInput [type]="phide ? 'password' : 'text'" formControlName="password">
+                              <button mat-icon-button matSuffix (click)="phide = !phide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{phide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4 col-md-4">
+                            <mat-form-field class="full-width">
+                              <mat-label>confirm password</mat-label>
+                              <input matInput [type]="hide ? 'password' : 'text'" formControlName="cpassword">
+                              <button mat-icon-button matSuffix (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button (click)="addDoctor()">Submit</button>
+                      </div>
+                      </form>
+                    </mat-step>
+                   
+                  </mat-horizontal-stepper>
+                  
                 </div>
               </div>
 

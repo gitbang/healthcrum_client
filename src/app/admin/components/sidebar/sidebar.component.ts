@@ -52,6 +52,10 @@ export class SidebarComponent implements OnInit {
 
   
   signOutUser() {
-    this.router.navigate(["/login"]);
+    localStorage.removeItem('logged_in_ip');
+    localStorage.removeItem('id');
+    localStorage.removeItem('passcode');
+    localStorage.removeItem('role');
+    this.router.navigate(["/"]);
   }
 }

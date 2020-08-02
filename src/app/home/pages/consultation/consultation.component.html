@@ -393,7 +393,7 @@
                   <mat-card  class=" doctor-card" style="padding-top : 0">  
                     <div class="row feedback-horizontal">
                       <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                      *ngFor="let star of ratingArray; let i = index">grade</i>
+                      *ngFor="let star of ratingArray;index as i">grade</i>
                       <div class="logo-div">
                         <img
                           src="{{doctor.logo}}"

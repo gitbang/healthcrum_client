@@ -175,7 +175,7 @@
       </div>
       <div formArrayName="recommendationForPatient">
        
-        <div *ngFor="let element of newDoseForm.controls.recommendationForPatient.controls; let i = index">
+        <div *ngFor="let element of newDoseForm.get('recommendationForPatient')['controls']; let i = index">
           <div class="row mt-2" [formGroupName]="i">
             <div class="col-md-2">
               <mat-form-field class="full-width">

@@ -106,17 +106,15 @@ export class DashboardComponent implements OnInit {
           this.covid19Data.total.p = 100;
           res.temperature.forEach((temp) => {
             if( tempdata[temp.user_id] != undefined){
-              if( tempdata[temp.user_id] < temp.temperature){
+              if( parseFloat(tempdata[temp.user_id]) < parseFloat(temp.temperature)){
                 tempdata[temp.user_id] = temp.temperature;
               }
-            }
-            tempdata[temp.user_id] = temp.temperature;
+            }else
+                tempdata[temp.user_id] = parseFloat(temp.temperature);
           });
           
           for(let i=0; i<res.data.length;i++){
-
             if(( tempdata[res.data[i].userId] !== undefined && tempdata[res.data[i].userId] >= 98.5 ) || this.covidAns[res.data[i].userId]){
-              console.log(res.data[i].userId,tempdata[res.data[i].userId]);
               this.covidAns[res.data[i].userId] = false;
               danger = danger + 1;
             }else if(tempdata[res.data[i].userId] != undefined  && tempdata[res.data[i].userId] < 98.5 ){

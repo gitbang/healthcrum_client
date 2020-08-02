@@ -332,6 +332,35 @@ export class AdminService {
     );
   }
 
+  getAllUnverifiedDoctors(){
+    return this.http
+    .get<any>(
+      this.url + "api/admin/unverified/doctor"
+    );
+  }
+
+  getAllVerifiedDoctors(){
+    return this.http
+    .get<any>(
+      this.url + "api/admin/verified/doctor"
+    );
+  }
+
+  registerDoctor(data){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/add/newDoctor",
+      data
+    );
+  }
+
+  approveDoctor(data){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/approved/doctor",
+      data
+    );
+  }
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
