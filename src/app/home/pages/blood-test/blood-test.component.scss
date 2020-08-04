@@ -379,3 +379,32 @@ a{
   font-weight: 600;
   text-decoration: underline !important;
 }
+
+.dropdown-menu{
+  display: flex;
+  flex-direction: column;
+  
+  padding:  5px 10px;
+  background: white !important;
+  height: auto !important;
+  overflow: auto !important;
+}
+.remove-margin{
+  margin: 0;
+  padding: 0;
+  a{
+    margin: 0;
+    //padding: 0;
+  }
+}
+.navbar-nav{
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.navbar{
+  padding: 0;
+  li {
+    padding: 0;
+  }
+}

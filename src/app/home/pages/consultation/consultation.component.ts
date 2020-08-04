@@ -66,6 +66,8 @@ export class ConsultationComponent implements OnInit {
   ngOnInit() {
 
     this.getIpClientLocation();
+
+    this.fetchAllCities();
     
     this.ratingArray = Array(5).fill(0)
 
@@ -94,7 +96,7 @@ export class ConsultationComponent implements OnInit {
 
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
-      map((value) => this._filter(value))
+      map((value) => this._filterCity(value))
     );
     
     if(window.innerWidth < 1000){
@@ -103,6 +105,31 @@ export class ConsultationComponent implements OnInit {
 
     this.getSpecialistList()
   }
+  cityList1 : string[] = []
+  fetchAllCities(){
+    console.log("fetch all cities")
+    this.service.consultationFetchCities().subscribe((result)=>{
+      console.log(result)
+      if(result.success){
+        result.data.forEach(element => {
+          this.cityList1.push(element.city)
+        });
+        console.log("All cities are : ", this.cityList1)
+      }
+    })
+  }
+  getCity(event){
+    let city = event.option.value
+    this.filters.location.city = city.toLowerCase();
+    this.filterDotor()
+  }
+  private _filterCity(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.cityList1.filter(
+      (city) => city.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
 
   specialistList : string[] = []
   getSpecialistList(){
@@ -200,12 +227,6 @@ export class ConsultationComponent implements OnInit {
     this.router.navigateByUrl('/consultation/view-doctor-details/'+ this.doctors[index].userId)
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.stateList.filter(
-      (city) => city.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
 
   showNext() {
     this.items = [];
@@ -237,10 +258,13 @@ export class ConsultationComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  getCities(value) {
-    if (value.length > 2) {
+  getCities() {
+    console.log("get cities")
+    
+    if (true) {
+
       let url =
-        "https://indian-cities-api-nocbegfhqg.now.sh/cities?City_like=" + value;
+        "https://indian-cities-api-nocbegfhqg.now.sh/cities";
       this.http.get(url).subscribe((res: any[]) => {
         this.cities = [];
         this.stateList = [];
@@ -249,6 +273,8 @@ export class ConsultationComponent implements OnInit {
         });
         this.cities.push(res);
       });
+      console.log(this.stateList);
+      console.log(this.cities)
     }
   }
 

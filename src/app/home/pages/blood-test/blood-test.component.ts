@@ -699,8 +699,10 @@ export class BloodTestComponent implements OnInit {
 
   //-------------code for top filters-------------------//
   sorting = null;
+  ascending : boolean = null
   sortPackage(ascending : boolean) {
     this.sorting = true
+    this.ascending = ascending
     if(ascending) {
       this.shownresultarray.sort((a,b)=> {
         return a.offerprice - b.offerprice

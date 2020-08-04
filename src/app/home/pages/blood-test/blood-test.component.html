@@ -100,6 +100,8 @@
         <div class="row mt-4">
           <div class="col-md-1"></div>
           <div class="col-md-10"> 
+          
+          <!--
             <mat-toolbar  class="top-navbar" style="min-width : 630px">
             
               <div class="col-md-3 filter-property">
@@ -151,6 +153,79 @@
               </mat-menu>
                 
             </mat-toolbar>
+          -->
+            <nav class="navbar navbar-expand navbar-light bg-light">
+              
+
+              <div class="" id="navbarSupportedContent" style="width : 100%">
+                <ul class="navbar-nav mr-auto">
+                  
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filter by price
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Action</a>
+                      
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a *ngIf="sorting == null"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Sort by price
+                    </a>
+                    <a *ngIf="sorting != null"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ascending ? 'Low to high' : 'High to low'}}
+                    </a>
+                    <div class="dropdown-menu remove-margin" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" (click)="sortPackage(true)" >From low to high</a>
+                      <a class="dropdown-item" (click)="sortPackage(false)">From high to low</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a *ngIf="inFilters.length == 0" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filters
+                    </a>
+                    <a *ngIf="inFilters.length != 0" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{inFilters[0]}} <span *ngIf="inFilters.length > 1">+ {{inFilters.length - 1}}</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <mat-checkbox (change)="filterChanges($event, 'men')">
+                        Men
+                      </mat-checkbox>
+                      <mat-checkbox (change)="filterChanges($event, 'women')">
+                        women
+                      </mat-checkbox>
+                      <mat-checkbox (change)="filterChanges($event, 'kids')">
+                        Kids
+                      </mat-checkbox>
+                      <mat-checkbox (change)="filterChanges($event, 'senior')">
+                        Senior Citizen
+                      </mat-checkbox>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Habbites
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" disabled href="#">Coming soon</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Conditions
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" disabled href="#">Coming soon</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </nav>
           </div>
         </div>
       </div>

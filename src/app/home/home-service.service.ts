@@ -207,6 +207,11 @@ export class HomeServiceService {
                 .post(this.url + '/retryotp', data)
                 .pipe(retry(2), catchError(this.handleError))
   }
+  consultationFetchCities():Observable<any>{
+    return this.http
+            .get(this.url + "/getalldoctor/location", this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
   private consultationdoctorForAppointment = new BehaviorSubject([]);
   consultationDoctorSelectedData = this.consultationdoctorForAppointment.asObservable();

@@ -8,8 +8,11 @@
           <mat-icon matPrefix style="align-self: center;color: #e7e7e7;margin-right: 5px;cursor: pointer;"
             (click)="setCurrentLocation()">room</mat-icon>
           <div class="input-group no-border city">
-            <input type="text" placeholder="city" matInput [formControl]="myControl" [matAutocomplete]="autoCity">
-            <mat-autocomplete #autoCity="matAutocomplete">
+            <input type="text"
+             placeholder="city"
+              matInput [formControl]="myControl" 
+              [matAutocomplete]="autoCity">
+            <mat-autocomplete #autoCity="matAutocomplete" (optionSelected)='getCity($event)'>
               <mat-option *ngFor="let option of filteredCities | async" [value]="option">
                 {{option}}
               </mat-option>
