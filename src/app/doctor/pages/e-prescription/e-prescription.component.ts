@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import {MatDialog} from "@angular/material"
 import { CommonDashboardComponent } from 'app/shared/common-dashboard/common-dashboard.component';
-import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
+// import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 import {FormBuilder, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LastConsultantComponent} from './last-consultant/last-consultant.component'
 import { AnalysisComponent } from "./analysis/analysis.component";
@@ -14,7 +14,7 @@ import {HomeServiceService} from '../../../home/home-service.service'
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
+// import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';

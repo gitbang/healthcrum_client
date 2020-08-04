@@ -1,0 +1,18 @@
+.login-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.error-box{
+    color: #fff;
+    background: #ff4700;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.error>h4{
+    margin-bottom: 0;
+    margin-top: 4px;
+    margin-left: 10px;
+    color: #fff;
+}

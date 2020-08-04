@@ -6,7 +6,6 @@ import {
 } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { map, startWith } from "rxjs/operators";
-import { NgWizardConfig, THEME } from "ng-wizard";
 import {
   faUserMd,
   faUserEdit,
@@ -35,11 +34,6 @@ export class HospitalsComponent implements OnInit {
   name: string;
   age: string;
   gender: string;
-
-  config: NgWizardConfig = {
-    selected: 0,
-    theme: THEME.dots,
-  };
 
   fileList: UploadFile[] = [];
   logo_image: any;

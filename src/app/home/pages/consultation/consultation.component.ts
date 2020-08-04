@@ -281,7 +281,7 @@ export class ConsultationComponent implements OnInit {
   getIpClientLocation() {
     this.http
       .jsonp(
-        "http://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK",
+        "https://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK",
         "callback"
       )
       .subscribe((res: any) => {
@@ -291,7 +291,7 @@ export class ConsultationComponent implements OnInit {
   }
 
   getLocationName(ip: string) {
-    let url = "http://ip-api.com/json/" + ip;
+    let url = "https://ipapi.co/json";
     this.http.get(url).subscribe((res: UserLocationModal) => {
        console.log("response of city",res);
       this.city = res.city;
@@ -434,7 +434,7 @@ export class ConsultationComponent implements OnInit {
   
   filterHealthcrum1 : boolean = false;
   filterHealthcrum2 : boolean = false
-  getDoctorType(type : boolean, event){
+  getDoctorType(type : boolean){
   
     console.log(this.filterHealthcrum1, this.filterHealthcrum2)
     if( (this.filterHealthcrum1 == true && this.filterHealthcrum2 == true) ||  (this.filterHealthcrum1 == false && this.filterHealthcrum2 == false)) {
@@ -546,7 +546,7 @@ export class ConsultationComponent implements OnInit {
   }
 
   openDialog(typeCons : string, index : number){
-    console.log(typeCons, index);
+    // console.log(typeCons, index);
     let activeFee = 0;
     if(typeCons == "emergency"){
       activeFee = this.doctors[index].emergencyFees

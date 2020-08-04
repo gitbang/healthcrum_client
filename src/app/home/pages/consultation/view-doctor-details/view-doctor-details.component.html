@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-md-4 col-lg-3  card-icon mt-1  header-icon ">
                 <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                *ngFor="let star of ratingArray; let i = index">grade</i>
+                *ngFor="let star of ratingArray;">grade</i>
               </div>  
               <div class="col-md-8 col-lg-7 doctor-name">
                 <h2>{{doctor.name}} (Reg.No.{{doctor.registrationNumber}})</h2>
@@ -30,7 +30,7 @@
               width="220px" 
               class="center img-circle">
               <div class="col-12 mt-4">
-              <button class="btn btn-book-appointment" (click)="openDialog('video', i)">
+              <button class="btn btn-book-appointment" (click)="openDialog('video')">
                 Book Appointment
                 <mat-icon style= "font-size: x-large;">arrow_drop_down_circle</mat-icon>  
               </button>
@@ -122,7 +122,7 @@
                   <div class="col-12" style="padding-bottom : 0px ; padding-top : 0px">
                     <div class="row book-appointment-row" >
                       <div class="col-3 padding-none">
-                        <div class="consultation-border cursor-pointer text-center" (click)="openDialog('video', i)">
+                        <div class="consultation-border cursor-pointer text-center" (click)="openDialog('video')">
                           <div class="center">
                             <mat-icon>videocam</mat-icon>
                           </div>
@@ -132,7 +132,7 @@
                         </div>
                       </div>
                       <div class="col-3 padding-none">
-                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('telephone', i)">
+                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('telephone')">
                           <div  class="center">
                             <mat-icon>perm_phone_msg</mat-icon>
                           </div>
@@ -142,7 +142,7 @@
                         </div>
                       </div>
                       <div class="col-3 padding-none">
-                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('physical', i)">
+                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('physical')">
                           <div class="center">
                             <mat-icon>phone_android</mat-icon>
                           </div>
@@ -152,7 +152,7 @@
                         </div>
                       </div>
                       <div class="col-3 padding-none">
-                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('chat', i)">
+                        <div  class="consultation-border cursor-pointer text-center" (click)="openDialog('chat')">
                           <div class="center">
                             <mat-icon>person_add</mat-icon>
                           </div>
@@ -164,7 +164,7 @@
                     </div>
                   </div>
                   <mat-divider></mat-divider>
-                  <div class="col-12 emergency-section" (click)="openDialog('emergency', i)">
+                  <div class="col-12 emergency-section" (click)="openDialog('emergency')">
                     <div class="row" >
                       <div class="col-12">
                         <div class="row ">

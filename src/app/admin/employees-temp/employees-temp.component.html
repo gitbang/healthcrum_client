@@ -160,10 +160,10 @@
                                   {{ data.empid }}
                                 </td>
                                 <td>
-                                  Employee Name
+                                  {{data.empName}}
                                 </td>
                                 <td>{{ data.department }}</td>
-                                <td>
+                                <td [class]="data.temperature > 98.5 ? 'bg-danger text-white' : ''">
                                   {{ data.temperature }}
                                 </td>
                                 <td>

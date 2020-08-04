@@ -65,13 +65,12 @@ export class EmployeesTempComponent implements OnInit {
       branch_id: this.authLocal.getUserBranchID,
     };
     this.corporateService.getAllTemperatures(data).subscribe((res:any)=>{
-      console.log(res);
         if (res.success) {
           res.data.forEach(emp => {
             this.empIDs[emp.userId] = {
               employeeId : emp.employeeId,
               name : emp.name,
-              dept_name: emp.departmentId.name
+              dept_name: emp.departmentName
             }
           });
           res.temperature.forEach((temp) => {
@@ -127,7 +126,7 @@ export class EmployeesTempComponent implements OnInit {
           temp.push({
           user_id: keys[i],
           empId : this.empIDs[keys[i]].employeeId,
-          department : this.empIDs[keys[i]].departmentId.name,
+          department : this.empIDs[keys[i]].departmentName,
           empName: this.empIDs[keys[i]].name,
           temperature : 0,
           createdAt: 0
@@ -137,7 +136,7 @@ export class EmployeesTempComponent implements OnInit {
           temp.push({
           user_id: keys[i],
           empId : this.empIDs[keys[i]].employeeId,
-          department : this.empIDs[keys[i]].dept_name,
+          department : this.empIDs[keys[i]].departmentName,
           empName: this.empIDs[keys[i]].name,
           temperature : 0,
           createdAt: 0

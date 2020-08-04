@@ -13,12 +13,8 @@ import { DoctorsComponent } from "./doctors/doctors.component";
 import { PackagesComponent } from "./packages/packages.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TestsComponent } from "./tests/tests.component";
-import { NgWizardModule, NgWizardConfig, THEME } from "ng-wizard";
 import { TestProfilesComponent } from "./test-profiles/test-profiles.component";
 import { DataTablesModule } from "angular-datatables";
-const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.dots,
-};
 
 import {
   MatButtonModule,
@@ -44,6 +40,7 @@ import {
   MatSlideToggleModule,
   MatPaginatorModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from "@angular/material";
 
@@ -64,6 +61,8 @@ import { CityComponent } from "./locations/city/city.component";
 import { StateComponent } from "./locations/state/state.component";
 import { NzCardModule } from "ng-zorro-antd/card";
 import { NzTabsModule } from "ng-zorro-antd/tabs";
+import { NzButtonModule } from "ng-zorro-antd/button";
+// import { NzCheckboxModule } from "ng-zorro-antd/table";
 import { NzTableModule } from "ng-zorro-antd/table";
 import { NzPopconfirmModule } from "ng-zorro-antd/popconfirm";
 import { NzInputModule } from "ng-zorro-antd/input";
@@ -123,7 +122,7 @@ import { EmployessComponent } from './employess/employess.component';
     MatTabsModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    NgWizardModule.forRoot(ngWizardConfig),
+    MatProgressSpinnerModule,
     AgmCoreModule.forRoot({
       apiKey: "YOUR_GOOGLE_MAPS_API_KEY",
     }),
@@ -138,6 +137,7 @@ import { EmployessComponent } from './employess/employess.component';
     NzTableModule,
     NzPopconfirmModule,
     NzInputModule,
+    NzButtonModule,
     NzSelectModule,
     NzDropDownModule,
     NzNotificationModule,

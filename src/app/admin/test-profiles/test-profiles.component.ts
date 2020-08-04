@@ -1,8 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 
 import { HttpClient } from "@angular/common/http";
 import { AdminService } from "app/services/admin.service";
 import Swal from "sweetalert2";
+import { FormControl } from "@angular/forms";
+import { Observable } from "rxjs";
+import { ENTER, COMMA } from "@angular/cdk/keycodes";
+import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from "@angular/material";
+import { startWith, map } from "rxjs/operators";
 @Component({
   selector: "app-test-profiles",
   templateUrl: "./test-profiles.component.html",
@@ -35,7 +40,27 @@ export class TestProfilesComponent implements OnInit {
   offer_price: string;
   healthcrum_price: string;
 
-  constructor(private http: HttpClient, private adminService: AdminService) {}
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  testCtrl = new FormControl();
+  filteredTests: Observable<any[]>;
+  allTests: any[] = [];
+  tests: any[] = [];
+  
+  @ViewChild("testInput", null) testInput: ElementRef<HTMLInputElement>;
+  @ViewChild("testAuto", null) testMatAutocomplete: MatAutocomplete;
+  
+  constructor(private http: HttpClient, private adminService: AdminService) {
+    this.filteredTests = this.testCtrl.valueChanges.pipe(
+      startWith(null),
+      map((test: string | null | any) =>
+        test ? this._filterTest(test) : this.allTests.slice()
+      )
+    );
+  }
 
   ngOnInit() {
     this.getProfileTestList();
@@ -43,9 +68,50 @@ export class TestProfilesComponent implements OnInit {
       if (res.success) {
         res.data.forEach((element) => {
           this.todo.push(element);
+          this.allTests.push(element);
         });
       }
     });
+  }
+
+  addTest(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    // Add our fruit
+    
+    if ((value || "").trim()) {
+      this.tests.push(value.trim());
+    }
+    // Reset the input value
+    if (input) {
+      input.value = "";
+    }
+    this.testCtrl.setValue(null);
+  }
+
+  removeTest(test: string): void {
+    const index = this.tests.indexOf(test);
+    if (index >= 0) {
+      this.tests.splice(index, 1);
+    }
+  }
+
+  selectedTest(event: MatAutocompleteSelectedEvent): void {
+    this.tests.push(event.option.value);
+    this.testInput.nativeElement.value = "";
+    this.testCtrl.setValue(null);
+  }
+  
+  private _filterTest(value: any): any[] {
+    try{
+    const filterValue = value.toLowerCase();
+    return this.allTests.filter(
+      (test) => test.name.toLowerCase().indexOf(filterValue) === 0
+    );
+    }catch(e){
+      return this.allTests.filter(
+        (test) => test.name.toLowerCase().indexOf(value.name.toLowerCase()) === 0);
+    }
   }
 
   changeFastingYes() {

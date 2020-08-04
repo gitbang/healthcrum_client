@@ -27,10 +27,10 @@ export class PackagesComponent implements OnInit {
   testCtrl = new FormControl();
   filteredProfiles: Observable<string[]>;
   filteredTests: Observable<any[]>;
-  profiles: string[] = [];
+  profiles: any[] = [];
   tests: any[] = [];
   allTests: any[] = [];
-  allProfiles: string[] = [];
+  allProfiles: any[] = [];
 
   @ViewChild("profileInput", null) profileInput: ElementRef<HTMLInputElement>;
   @ViewChild("auto", null) matAutocomplete: MatAutocomplete;
@@ -62,16 +62,16 @@ export class PackagesComponent implements OnInit {
   healthcrum_price: string;
 
   constructor(private adminService: AdminService) {
-    this.filteredProfiles = this.testCtrl.valueChanges.pipe(
+    this.filteredProfiles = this.profileCtrl.valueChanges.pipe(
       startWith(null),
-      map((profile: string | null) =>
+      map((profile: string | null|any) =>
         profile ? this._filter(profile) : this.allProfiles.slice()
       )
     );
 
     this.filteredTests = this.testCtrl.valueChanges.pipe(
       startWith(null),
-      map((test: string | null) =>
+      map((test: string | null|any) =>
         test ? this._filterTest(test) : this.allTests.slice()
       )
     );
@@ -91,7 +91,7 @@ export class PackagesComponent implements OnInit {
       if (res.success) {
         res.data.forEach((element) => {
           this.stodo.push(element);
-          this.allTests.push(element.name);
+          this.allTests.push(element);
         });
       }
     });
@@ -102,7 +102,7 @@ export class PackagesComponent implements OnInit {
     const value = event.value;
     // Add our fruit
     if ((value || "").trim()) {
-      this.profiles.push(value.trim());
+      this.profiles.push(value);
     }
     // Reset the input value
     if (input) {
@@ -116,7 +116,7 @@ export class PackagesComponent implements OnInit {
     const value = event.value;
     // Add our fruit
     if ((value || "").trim()) {
-      this.tests.push(value.trim());
+      this.tests.push(value);
     }
     // Reset the input value
     if (input) {
@@ -140,28 +140,38 @@ export class PackagesComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.profiles.push(event.option.viewValue);
+    this.profiles.push(event.option.value);
     this.profileInput.nativeElement.value = "";
     this.profileCtrl.setValue(null);
   }
   selectedTest(event: MatAutocompleteSelectedEvent): void {
-    this.tests.push(event.option.viewValue);
+    this.tests.push(event.option.value);
     this.testInput.nativeElement.value = "";
     this.testCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: any): any[] {
+    try{
     const filterValue = value.toLowerCase();
     return this.allProfiles.filter(
-      (profile) => profile.toLowerCase().indexOf(filterValue) === 0
+      (profile) => profile.name.toLowerCase().indexOf(filterValue) === 0
     );
+  }catch(e){
+    return this.allProfiles.filter(
+      (test) => test.name.toLowerCase().indexOf(value.name.toLowerCase()) === 0);
+  }
   }
 
-  private _filterTest(value: string): string[] {
+  private _filterTest(value: any): any[] {
+    try{
     const filterValue = value.toLowerCase();
     return this.allTests.filter(
-      (test) => test.toLowerCase().indexOf(filterValue) === 0
+      (test) => test.name.toLowerCase().indexOf(filterValue) === 0
     );
+    }catch(e){
+      return this.allTests.filter(
+        (test) => test.name.toLowerCase().indexOf(value.name.toLowerCase()) === 0);
+    }
   }
 
   getProfileTestList() {
@@ -169,7 +179,7 @@ export class PackagesComponent implements OnInit {
       if (res.success) {
         res.data.forEach((element) => {
           this.todo.push(element);
-          this.allProfiles.push(element.name);
+          this.allProfiles.push(element);
         });
       }
     });
@@ -179,10 +189,10 @@ export class PackagesComponent implements OnInit {
     if (this.validateForm()) {
       let test_ids = [];
       let profile_ids = [];
-      this.done.forEach((el) => {
+      this.profiles.forEach((el) => {
         profile_ids.push(el._id);
       });
-      this.sdone.forEach((el) => {
+      this.tests.forEach((el) => {
         test_ids.push(el._id);
       });
       let data = {
@@ -257,7 +267,7 @@ export class PackagesComponent implements OnInit {
       this.showError("Enter provide repoting close time");
       return false;
     }
-    if (this.done.length < 1 && this.sdone.length < 1) {
+    if (this.profiles.length < 1 || this.tests.length < 1) {
       this.showError("Drag some tests to package");
       return false;
     }

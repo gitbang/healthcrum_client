@@ -8,8 +8,6 @@ import { AdminService } from "app/services/admin.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { startWith, switchMap, map, catchError } from "rxjs/operators";
 // import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 interface DataItem {
   name: string;
@@ -54,11 +52,12 @@ export class MedecinesInventryComponent implements OnInit, AfterViewInit {
 
   dataLoading: boolean = true;
   logo_image: any;
-  cities: any[] = [];
-  address: any[] = [];
-  areas: any[] = [];
   primary = "primary";
   medicinesData: any[];
+  categories = [];
+  subcategories = [];
+  subsubcategories = [];
+
   register = this.fb.group({
     category: new FormControl(),
     subcategory: new FormControl(),
@@ -70,9 +69,6 @@ export class MedecinesInventryComponent implements OnInit, AfterViewInit {
     packagingSize: new FormControl(),
     manufacturedBy: new FormControl(),
     contents: new FormControl(),
-    picUrl: new FormControl(),
-    picName: new FormControl(),
-    pictures: new FormControl(),
     inStock: new FormControl(),
     variations: new FormControl(),
     variations_type: new FormControl(),
@@ -236,8 +232,16 @@ export class MedecinesInventryComponent implements OnInit, AfterViewInit {
           lines.push(tarr);
         }
       }
-      // all rows in the csv file
-      console.log(">>>>>>>>>>>>>>>>>", lines);
     };
+  }
+
+  getCategory(){
+      
+  }
+  getSubCategory(){
+
+  }
+  getSubSubCategory(){
+
   }
 }

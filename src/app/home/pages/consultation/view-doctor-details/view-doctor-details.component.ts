@@ -119,8 +119,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
     { img: "./assets/img/partners/p8-dots.png" }
   ];
 
-  openDialog(typeCons : string, index : number){
-    console.log(typeCons, index);
+  openDialog(typeCons : string){
     let activeFee = 0;
     if(typeCons == "emergency"){
      // console.log("in emergency")
