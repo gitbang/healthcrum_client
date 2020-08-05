@@ -73,6 +73,7 @@ import { SocialDetailsComponent } from './pages/signup/social-details/social-det
 import { FlipModule } from 'ngx-flip';
 import { HrloginComponent } from './pages/hrlogin/hrlogin.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { TimeFormat } from "app/convertTIme";
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -103,7 +104,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     NotFoundComponent,
     UploadPrescriptionComponent,
     SocialDetailsComponent,
-    HrloginComponent
+    HrloginComponent,
+    TimeFormat
   ],
   imports: [
     CommonModule,
@@ -164,5 +166,6 @@ import { Ng5SliderModule } from 'ng5-slider';
     },
     HomeServiceService,
   ],
+  exports : [TimeFormat]
 })
 export class HomeModule {}

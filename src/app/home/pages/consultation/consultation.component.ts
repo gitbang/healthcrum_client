@@ -13,7 +13,6 @@ import { BookModelComponent } from './book-model/book-model.component';
 import { element } from 'protractor';
 import { Options, LabelType } from 'ng5-slider';
 import { SrvRecord } from 'dns';
-
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.component.html',
@@ -73,7 +72,12 @@ export class ConsultationComponent implements OnInit {
 
     this.route.params.subscribe(result=>{
       console.log("params are : ",result)
-      this.category = result.type;
+      if(result.type){
+        this.category = result.type;
+        this.filters.stream = []
+        this.filters.stream.push(result.type)
+      }
+     
      // this.filters.stream = result.type;
       if(result.city && result.city != undefined){
         console.log("city is : ", result.city)
@@ -82,12 +86,6 @@ export class ConsultationComponent implements OnInit {
         this.filters.location.city= result.city.toLowerCase();
         console.log("city in filter", this.filters.location.city);
         console.log("filters object : ", this.filters);
-        // this.service.consultationFilter(this.filters).subscribe(result=>{
-        //   console.log("from server in ngonInit",result)
-        //   if(result.success){
-        //     this.doctors = result.data
-        //   }
-        // })
         this.filterDotor();
       } else{
         //this.getIpClientLocation();
@@ -344,7 +342,7 @@ export class ConsultationComponent implements OnInit {
       console.log("in filterdoctor function ", result);
       this.changeRoute();
       if(result.success){
-       
+        
         this.doctors = result.data
         this.autofilldata();
         this.containDoctor = true;
@@ -358,6 +356,8 @@ export class ConsultationComponent implements OnInit {
     let list : string[]= []
     if(this.byname){
       this.doctors.forEach(element=>{
+        element.profilepic = this.service.completeUrl(element.profilepic)
+        console.log("image complete url is : ", element.profilepic)
         list.push(element.name)
       })
       this.options = list;
@@ -380,14 +380,21 @@ export class ConsultationComponent implements OnInit {
     console.log("filters are : ", this.filters)
     this.filterDotor();
   }
+
+  checkStream(value : string){
+    if(this.filters.stream.includes(value.toLowerCase()))
+      return true
+    else 
+      return false
+  }
   
   getSpeciality(name : string) {
     let index = -1;
-    index = this.filters.speciality.indexOf(name)
+    index = this.filters.speciality.indexOf(name.toLowerCase())
     if(index >= 0){ 
       this.filters.speciality.splice(index, 1)
     } else {
-      this.filters.speciality.push(name)
+      this.filters.speciality.push(name.toLowerCase())
     }
     //console.log("filters are : ", this.filters)
     this.filterDotor()
@@ -423,11 +430,11 @@ export class ConsultationComponent implements OnInit {
   
   getGender(name : string) {
     let index = -1;
-    index = this.filters.gender.indexOf(name)
+    index = this.filters.gender.indexOf(name.toLowerCase())
     if(index >= 0){ 
       this.filters.gender.splice(index, 1)
     } else {
-      this.filters.gender.push(name)
+      this.filters.gender.push(name.toLowerCase())
     }
     this.filterDotor();
   }
@@ -448,7 +455,7 @@ export class ConsultationComponent implements OnInit {
   }
 
   sorting : boolean = false
-  sortDisplay : string = ""
+  sortDisplay : string = "" 
   sort(ascending : boolean){
     this.sorting = true;
     if(ascending){
@@ -482,17 +489,6 @@ export class ConsultationComponent implements OnInit {
   priceOption: Options = {
     floor: 100,
     ceil: 2000,
-    /*
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '<b>Min price:</b> Rs' + value;
-        case LabelType.High:
-          return '<b>Max price:</b> Rs' + value;
-        default:
-          return '$' + value;
-      }
-    }*/
   }
 
   priceShow : boolean = false;

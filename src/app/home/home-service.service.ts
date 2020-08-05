@@ -10,8 +10,8 @@ import { retry, catchError } from 'rxjs/operators';
 export class HomeServiceService {
 
 
-    // url : string = 'http://localhost:3000';
-  url: String = "https://api.sftservices.com";
+     url : string = 'http://localhost:3000';
+  //url: String = "https://api.sftservices.com";
  
   headers = new HttpHeaders({
     "Content-Type": "application/json",
@@ -25,6 +25,10 @@ export class HomeServiceService {
     this.addCompleteDetailsToCart(JSON.parse(localStorage.getItem('test')))
   }
 
+  // complete image or file url
+  completeUrl(url : string) : string{
+    return this.url + '/' + url
+  }
 
   //----------check login------------//
   checkLogin() {
