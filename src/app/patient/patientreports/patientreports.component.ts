@@ -3,6 +3,7 @@ import {AuthServiceLocal} from '../../services/auth-service.service';
 import {Router} from '@angular/router';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material'
 import { data } from 'app/company/pages/employee-tracking/show-detail/show-detail.component';
+import {PatientService} from "../patient.service"
 
 export interface tableData {
   healthcrumId : string;
@@ -23,43 +24,73 @@ export class PatientreportsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(
     private router : Router,
+    private patientService : PatientService,
     private localService : AuthServiceLocal
   ) { }
 
-  testToShow : any[] = []
-  displayedColumns: string[] = ["healthcrumId", "testName", "location", "labName", "cost", "reportDate", "status", "downloadReport"];
+  userId : string;
+  displayedColumns: string[] = ["healthcrumId", "testName",  "labName", "cost", "reportDate", "status", "downloadReport"];
+  
   ngOnInit() {
     let role = this.localService.getUserRole();
     if(role == 'doctor') {
       this.router.navigateByUrl('/login')
       return
     }
-    this.assignBloodTest();
-   
+    this.userId = this.localService.getUserID;
+    console.log(this.userId)
+    this.fetchAllReport()
   }
 
-  assignBloodTest(){
-    let add = {
-      healthcrumId : "123456",
-      testName : "Blood Test",
-      location : "ludhiana",
-      labName : "Abcdef",
-      cost : 2000,
-      reportDate : "12/12/2020",
-      status : 'Completed'
-    }
-    this.testToShow.push(add)
-    this.bloodTestTableData = new MatTableDataSource(this.testToShow)
-    this.bloodTestTableData.paginator = this.paginator
-  }
-
-  getReport(orderId : string, action :string){
+  getReport(index : number, action :string){
+    console.log(index)
+    console.log(this.testToShowNew)
+    let url = this.testToShowNew[index].ziplink
     console.log("download report reached")
+    console.log(url)
+    window.open(url)
   }
 
-  bloodTestTableData : MatTableDataSource<tableData[]>
+  reportNewData : MatTableDataSource<any[]>
+  testToShowNew : any[] = []
 
   applyFilter(filterText: string){
-    this.bloodTestTableData.filter = filterText.trim( ).toLowerCase()
+    console.log(filterText)
+  
+    this.reportNewData.filter = filterText.trim().toLowerCase();
+  }
+
+  fetchAllReport(){
+    this.patientService.reportFetchAll(this.userId).subscribe((result)=>{
+      console.log(result)
+      if(result.success){
+        this.addBloodTest(result)
+      }
+    })
+  }
+
+  addBloodTest(result){
+    console.log(result.data.length)
+    for(let i = 0; i < result.data.length; i++) {
+      console.log("in loop")
+      let add;
+      add = {
+        orderId : result.data[i]._id,
+        orderNumber : result.data[i].orderNumber,
+        totalamount : result.data[i].amountDetails.amount,
+        orderDetails :  result.data[i].orderDetails,
+        createdAt : result.data[i].createdAt,
+        updateAt : result.data[i].updatedAt,               // here display updateAt when status is completed
+        status : result.data[i].Orderstatus,
+        ziplink : (result.data[i].Orderstatus == 'completed' ? 
+                      this.patientService.completeURl(result.data[i].report_file) : null)
+      }
+      console.log(add)
+      this.testToShowNew.push(add)
+     // this.bloodTests.push(add);
+    }
+    this.reportNewData = new MatTableDataSource(this.testToShowNew)
+    this.reportNewData.paginator = this.paginator
+    console.log("mat paginator data is  : ", this.reportNewData)
   }
 }

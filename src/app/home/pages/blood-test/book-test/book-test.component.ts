@@ -80,7 +80,7 @@ export class BookTestComponent implements OnInit {
 
   getSingleTest(){
     this.service.currentTest.subscribe(result => {
-     // console.log("single test", result)
+      console.log("single test", result)
       this.sumAfteroffer = 0;
       this.totalsum = 0;
       this.userCompleteCart= result
@@ -90,6 +90,7 @@ export class BookTestComponent implements OnInit {
       this.balanceSide = true;
     } else {
       this.fireAlert();
+      return
     }
     this.totalsum += this.shownresultarrays[0].marketprice;
     this.sumAfteroffer += this.shownresultarrays[0].offerprice;
@@ -320,8 +321,14 @@ export class BookTestComponent implements OnInit {
     { name : "Blood Test", 
     _id : "",
     type : "",
-    includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)", reportIn : "24 hrs", 
-    totaltest : 12, marketprize : 4200, marketprice : 2500, offerprice : 2000},
+    includes : "Thyroid Profile-Total (T3, T4 & TSH Ultra-sensitive)",
+     reportIn : "24 hrs", 
+    totaltest : 12, 
+    marketprize : 4200, 
+    marketprice : 2500, 
+    offerprice : 2000,
+    labId : ""  
+  },
   ]
 
   balanceSide : boolean = false
@@ -628,6 +635,7 @@ export class BookTestComponent implements OnInit {
         dateOfCheckup : "",
         memberName : this.testfor.value[i].otherlist,
         testName : this.shownresultarrays[i].name,
+        labId : this.shownresultarrays[i].labId
       }
       orderDetail.push(add)
     }

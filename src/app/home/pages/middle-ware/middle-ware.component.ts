@@ -20,9 +20,9 @@ export class MiddleWareComponent implements OnInit {
   }
   
   data = [
-    {name : "Allopathy", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/allopathy.jpg"},
-    {name : "Homeopathy", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/homeopathy.jpg"},
-    {name : "Ayurveda", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/ayurvedic.jpg"},
+    {name : "allopathic", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/allopathy.jpg"},
+    {name : "homeophathic", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/homeopathy.jpg"},
+    {name : "ayurveda", totalDoctors : 50, onlineDoctors : 30, img : "./assets/img/consulation/middle-ware/ayurvedic.jpg"},
   ]
 
   typeSelected(name : string) {

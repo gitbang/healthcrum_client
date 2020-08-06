@@ -163,7 +163,7 @@ table{
     }
     .image-data{
         color: inherit;
-        font-size: unset;
+        font-size: small;
         cursor: pointer;
     }
 }
@@ -223,6 +223,9 @@ table{
 }
 
 .doctor-points {
-    font-size: large;
-    
+    font-size: large;   
+}
+.padding-top{
+    padding-top: 5px;
+    height: 100%;
 }

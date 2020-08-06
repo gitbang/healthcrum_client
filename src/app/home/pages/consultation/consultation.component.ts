@@ -119,6 +119,7 @@ export class ConsultationComponent implements OnInit {
   getCity(event){
     let city = event.option.value
     this.filters.location.city = city.toLowerCase();
+    this.filters.location.area = city.toLowerCase();
     this.filterDotor()
   }
   private _filterCity(value: string): string[] {
@@ -325,7 +326,8 @@ export class ConsultationComponent implements OnInit {
     gender : [],
     name : null,
     location : {
-      city : null
+      city : null,
+      area : null
     },
     consultationFees : {
       from : 0,
@@ -336,8 +338,11 @@ export class ConsultationComponent implements OnInit {
   containDoctor : boolean = false
   
   filterDotor(){
-    console.log("filters are : ", this.filters)
-    this.filters.location.city = this.filters.location.city.toLowerCase()
+    // console.log("filters are : ", this.filters)
+    // this.filters.location.city = this.filters.location.city.toLowerCase()
+    this.filters.location.city = this.myControl.value.toLowerCase()
+    this.filters.location.area = this.myControl.value.toLowerCase()
+    console.log(this.filters)
     this.service.consultationFilter(this.filters).subscribe((result)=>{
       console.log("in filterdoctor function ", result);
       this.changeRoute();

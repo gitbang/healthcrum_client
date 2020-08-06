@@ -131,6 +131,11 @@ export class HomeServiceService {
             .post(this.url + "/cart/delete/allCart/" + userId, data, this.option)
             .pipe(retry(2), catchError(this.handleError))
   }
+  bloodTestFetchCities():Observable<any>{
+    return this.http
+            .get(this.url + "/bloodtest/getAllTest/location", this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
   headerMulForm= new HttpHeaders({
     'Content-Type': 'multipart/form-data',
@@ -240,6 +245,7 @@ export class HomeServiceService {
             .get(this.url + '/getAll/doctor-speciality', this.option)
             .pipe(retry(2), catchError(this.handleError))
   }
+  
 
   //------------- Medicine ----------//
 

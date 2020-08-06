@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 @Pipe({name: 'convertFrom24To12Format'})
 export class TimeFormat implements PipeTransform {
     transform(time: any): any {

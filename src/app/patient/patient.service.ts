@@ -10,13 +10,17 @@ import { retry, catchError, map } from "rxjs/operators";
 })
 export class PatientService {
   constructor(private http: HttpClient) {}
-    // url: String = "http://localhost:3000";
-  url: String = "https://api.sftservices.com";
+     url: String = "http://localhost:3000";
+  //url: String = "https://api.sftservices.com";
 
   headers = new HttpHeaders({
     "Content-Type": "application/json",
   });
   options = { headers: this.headers };
+
+  completeUrl(url : string) : string{
+    return this.url + "/" + url
+  }
 
   getQuestions(category: string) {
     return this.http.post(
@@ -25,6 +29,7 @@ export class PatientService {
       this.options
     );
   }
+
   getCovidAnswers(data:any) {
     return this.http.post(
       this.url + "/api/covid-answer/get-by-empid",
@@ -32,6 +37,7 @@ export class PatientService {
       this.options
     );
   }
+  
   saveAns(ans) {
     return this.http.post(this.url + "/usersave", ans);
   }
@@ -139,11 +145,15 @@ export class PatientService {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
     return this.http.get(url, { headers: headers, responseType: 'blob' });
-}
+  }
+  reportFetchAll(userId : string): Observable<any>{
+    return this.http
+            .get(this.url + "/payment/fetch-bloodTest/user/" + userId, this.options)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
   completeURl(url : string){
     return  this.url + '/'+ url;
-    
   }
 
   handleError(error) {

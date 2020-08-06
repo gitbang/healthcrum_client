@@ -12,6 +12,7 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import {HomeServiceService} from '../../home-service.service'
 // import { TestBed } from "@angular/core/testing";
 import {AuthServiceLocal} from '../../../services/auth-service.service'
+import { Options } from "ng5-slider";
 
 export interface Fruit {
   name : string
@@ -87,19 +88,25 @@ export class BloodTestComponent implements OnInit {
 
     this.ratingArray = Array(5).fill(0);
     this.getIpClientLocation();
+
     this.filteredCities = this.myControl.valueChanges.pipe(
       startWith(""),
-      map((value) => this._filter(value))
+      map((value) => this._filterCity(value))
     );
   
-    //this.fetchbloodtest();   call this function after the fetch of blood Test
+    //this.fetchbloodtest();   call this function after the fetch of location
 
     // this.ratingArray = Array(5).fill(0)
     
     if(window.innerWidth < 1200){
       this.horizontal = false;
     }
+
+    // fetch all current cities
+    this.fetchAllCities()
   }
+  
+
   //--------fetch cart info---------//
   cartfromClient(){
     // console.log("from client")
@@ -281,14 +288,26 @@ export class BloodTestComponent implements OnInit {
     } else {
       this.isSearched = false
     }
-   
   }
-
-  /*--------------------------top search close-----------------------------*/
   
-  private _filter(value: string): string[] {
+  /*--------------------------top search close-----------------------------*/
+
+  myCityList : string[] = []
+
+  fetchAllCities(){
+    this.service.bloodTestFetchCities().subscribe((result)=>{
+      console.log("all cities are : ", result)
+      if(result.success){
+        this.myCityList = [];
+        result.data.forEach(element => {
+          this.myCityList.push(element.city)
+        });
+      }
+    })
+  }
+  private _filterCity(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.stateList.filter(
+    return this.myCityList.filter(
       (city) => city.toLowerCase().indexOf(filterValue) === 0
     );
   }
@@ -406,7 +425,8 @@ export class BloodTestComponent implements OnInit {
       this.search_city = this.city;
       this.myControl.setValue(this.city);
 
-      this.fetchbloodtest();  // fetch blood test according to city
+     // this.fetchbloodtest();  // fetch blood test according to city
+      this.applyFilters()
     });
   }
   
@@ -424,6 +444,7 @@ export class BloodTestComponent implements OnInit {
   }
   horizontal : boolean = true;
   @HostListener('window : resize',['$event'])
+
   onResize(event) {
     //console.log("event :" , event)
     //console.log(window.innerWidth);
@@ -442,7 +463,6 @@ export class BloodTestComponent implements OnInit {
 
   fetchbloodtest(){
     this.service.bloodTestFetchAllTest({city : this.myControl.value.toLowerCase()}).subscribe((result)=>{
-      // console.log("initial fetch", result)
       if(result.success) {
         this.datafound = true
         this.fromdatabase = result
@@ -454,7 +474,11 @@ export class BloodTestComponent implements OnInit {
       }
     })
   }
+
   insertFetchedData(result) {
+    this.packageTest = [];
+    this.singleTest = [];
+    this.profileTest = []
     console.log(result)
     this.shownresultarray = [],
       this.resultFromApi = result
@@ -642,10 +666,12 @@ export class BloodTestComponent implements OnInit {
       this.pushtoService();
     }
   }
+
   pushtoService(){
     this.service.changeMessage(this.mycart);
     this.service.addCompleteDetailsToCart(this.myCartComplete);
   }
+
   removeFromcart(index : number) {
 
     if(this.isLogin) {
@@ -716,28 +742,70 @@ export class BloodTestComponent implements OnInit {
   }
 
   filterToSend = {
-    male : false,   // male
-    female : false, // female
-    senior : false,
-    kid : false,
-    location : null
+    male : null,   // male
+    female : null, 
+    senior : null,
+    kids : null,
+    location : {
+      city : null,
+      area : null,
+    },
+    bloodTestPrice : {
+      from : 0,
+      to : 100000
+    }
   }
+
   inFilters : string[]  = [];
+  searchTest(){
+    this.applyFilters();
+    //this.fetchbloodtest()
+  }
+
+  areaFilter(event){
+    console.log(event)
+    console.log("area reached")
+    this.filterToSend.location.city = event.option.value.toLowerCase();
+    this.filterToSend.location.area = event.option.value.toLowerCase();
+  }
+
   filterChanges(event, toapply){
     console.log(event.checked)
-
     if(event.checked){
       this.inFilters.push(toapply)
     } else {
       let index = this.inFilters.indexOf(toapply)
       this.inFilters.splice(index, 1);
     }
-    this.filterToSend[toapply] = event.checked;
-    console.log(this.filterToSend)
-    //this.applyFilters();
+    this.filterToSend[toapply] = event.checked ? event.checked : null;
+    this.applyFilters();
   }
+
+  value: number = 50;
+  highValue : number = 160;
+  priceOption: Options = {
+    floor: 0,
+    ceil: 5000,
+  }
+
+  priceShow : boolean = false;
+  priceDisplay : string = "";
+  priceFilter(){
+    this.priceShow = true;
+    this.priceShow = true;
+    console.log(this.value, this.highValue)
+    this.priceDisplay = `Rs ${this.value} - Rs ${this.highValue}`
+  }
+  
+  priceFilterEnd(){ 
+    this.filterToSend.bloodTestPrice.from = this.value;
+    this.filterToSend.bloodTestPrice.to = this.highValue;
+    this.applyFilters()
+  }
+
   applyFilters(){
-    this.filterToSend.location = this.myControl.value;
+    this.filterToSend.location.area = this.myControl.value.toLowerCase();
+    this.filterToSend.location.city = this.myControl.value.toLowerCase();
     console.log("final filters are : ", this.filterToSend)
     this.service.bloodTestApplyFilters(this.filterToSend).subscribe((response)=>{
       console.log("filter search" ,response)

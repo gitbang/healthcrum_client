@@ -20,12 +20,13 @@ export class ERecieptComponent implements OnInit {
     private service : HomeServiceService
     ) {
       this.dialogRef.disableClose = true
-      console.log(data)
+      console.log("data in e-receipt", data)
       this.fromCart = data.fromCart;
       this.userId = data.user._id;
       console.log("from cart ", this.fromCart)
   }
   
+  showPdf : boolean = false;
   @ViewChild('content', {static : true}) content : ElementRef
   ngOnInit() {
 
@@ -87,24 +88,26 @@ export class ERecieptComponent implements OnInit {
       this.service.savePaymentDetails(fd).subscribe((result)=>{
         console.log("response is", result)
         if(result.success){
+          this.showPdf = true
           console.log("data is saved")
+          if(this.fromCart) {
+            if(this.eData.type == 'bloodTest') {
+              this.service.bloodTestClearCart(this.userId, {type : "bloodTest"}).subscribe((result)=>{
+                console.log("clear cart result ", result)
+                if(result.success){
+                  console.log("cart is cleared")
+                }
+              })
+            }
+            this.service.addCompleteDetailsToCart([])
+              this.service.changeMessage([])
+              this.service.deleteCartFromLocalStorage()
+          }
         } else {
           alert("Something went wrong")
         }
       })
-      if(this.fromCart) {
-        if(this.eData.type == 'bloodTest') {
-          this.service.bloodTestClearCart(this.userId, {type : "bloodTest"}).subscribe((result)=>{
-            console.log("clear cart result ", result)
-            if(result.success){
-              console.log("cart is cleared")
-            }
-          })
-        }
-        this.service.addCompleteDetailsToCart([])
-          this.service.changeMessage([])
-          this.service.deleteCartFromLocalStorage()
-      }
+      
     })
   }
 

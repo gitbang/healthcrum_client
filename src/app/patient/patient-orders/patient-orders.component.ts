@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import {AuthServiceLocal} from '../../services/auth-service.service';
 import {Router} from '@angular/router';
 import {PatientService} from '../patient.service'
-import { MatTableDataSource , MatPaginator} from "@angular/material";
+import { MatTableDataSource , MatPaginator, MatSort} from "@angular/material";
 
 export interface bloodTest {
   orderId : string;
@@ -32,7 +32,7 @@ export class PatientOrdersComponent implements OnInit {
   userId : string
   bloodTestdataSource : MatTableDataSource<bloodTest[]>
   @ViewChild('bloodpaginator', {static: true}) bloodpaginator: MatPaginator;
-  displayedColumns: string[] = [ 'orderNumber', 'testname', 'totalamount', 'forme'];
+  displayedColumns: string[] = [ 'orderNumber', 'testname', 'testType', 'members', 'totalamount',];
   ngOnInit() {
 
     let isLogin = this.localService.isLoggin();
@@ -100,7 +100,8 @@ export class PatientOrdersComponent implements OnInit {
         orderId : result.data[i]._id,
         orderNumber : result.data[i].orderNumber,
         totalamount : result.data[i].amountDetails.amount,
-        orderDetails :  result.data[i].orderDetails
+        orderDetails :  result.data[i].orderDetails,
+        createdAt : result.data[i].createdAt
       }
       this.bloodTests.push(add);
     }
@@ -108,17 +109,8 @@ export class PatientOrdersComponent implements OnInit {
     this.bloodTestdataSource = new MatTableDataSource(this.bloodTests);
     this.bloodTestdataSource.paginator = this.bloodpaginator
   }
+  
   bloodTests : any[];
-  // bloodTests = [
-  //   {
-  //     orderId : "",
-  //     orderNum : "1234",
-  //     testName : "Blood Test",
-  //     type : "Package Test",
-  //     members : 4,
-  //     price : 2000,
-  //     totalamount : 8000,
-  //     orderDetails : []
-  //   }
-  // ]
+
+
 }

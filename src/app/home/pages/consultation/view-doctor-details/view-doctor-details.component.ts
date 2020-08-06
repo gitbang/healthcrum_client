@@ -20,17 +20,22 @@ export class ViewDoctorDetailsComponent implements OnInit {
   ) { }
 
   id : string;
+  isDataAvailable : boolean = false
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.id = params['id']; // (+) converts string 'id' to a number
+      this.id = params['id']; 
       console.log(this.id)
       // In a real app: dispatch action to load the details here.
+      this.doctor = {}
       this.service.consultationViewDetails(this.id).subscribe((result)=>{
         console.log("result is ", result)
         if(result.success){
+          this.isDataAvailable = true
           this.doctor = result.doctorData;
+          this.doctor.profilepic = this.service.completeUrl(this.doctor.profilepic)
           console.log("doctor is : ", this.doctor)
         } else {
+          this.router.navigateByUrl('/consultation')
           console.log("doctor not found")
         }
       })
@@ -50,7 +55,7 @@ export class ViewDoctorDetailsComponent implements OnInit {
   }
   rating : number = 3
   ratingArray : Array<number>; 
-  doctor = {
+  doctor : any = {
     profilepic : '',    // profile picture
     name : 'DR. PANKAJ MANORIA',  
     experience : 10 ,                            // add + years

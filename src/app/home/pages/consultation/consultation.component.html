@@ -12,6 +12,16 @@
              placeholder="city"
               matInput [formControl]="myControl" 
               [matAutocomplete]="autoCity">
+              <!--
+              <mat-form-field appearance="fill">
+                <mat-label>Choose an option</mat-label>
+                <mat-select [disabled]="disableSelect.value">
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              -->
             <mat-autocomplete #autoCity="matAutocomplete" (optionSelected)='getCity($event)'>
               <mat-option *ngFor="let option of filteredCities | async" [value]="option">
                 {{option}}
@@ -253,10 +263,12 @@
             <a *ngIf="filters.speciality.length != 0"
             class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               
-              {{filters.speciality[0]}} <span *ngIf="filters.speciality.length > 1">+ {{filters.speciality.length - 1}}</span>
+              {{filters.speciality[0] | titlecase}} <span *ngIf="filters.speciality.length > 1">+ {{filters.speciality.length - 1}}</span>
             </a>
             <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
-              <mat-checkbox *ngFor="let special of specialistList" (change)="getSpeciality(special)">{{special}}</mat-checkbox>
+              <mat-checkbox *ngFor="let special of specialistList" (change)="getSpeciality(special)">
+                {{special | titlecase}}
+              </mat-checkbox>
             </div>
           </li>
 
@@ -398,8 +410,8 @@
               <div class="col-12 ">
                   <mat-card  class=" doctor-card" style="padding-top : 0">  
                     <div class="row feedback-horizontal">
-                      <i class="material-icons" [ngClass]="i < rating ? 'active-feedback' : 'passive-feedback' " 
-                      *ngFor="let star of ratingArray;index as i">grade</i>
+                      <i class="material-icons" [ngClass]="ind < doctor.rating ? 'active-feedback' : 'passive-feedback' " 
+                      *ngFor="let star of ratingArray;index as ind">grade</i>
                       <div class="logo-div">
                         <img
                           src="{{doctor.logo}}"
@@ -472,15 +484,15 @@
                         <div class="row">
                           <div class="col-3 cursor-pointer text-center" style="padding : 0">
                             <div class="padding-top"
-                             [ngClass]="doctor.consultationTiming.video ? 'consultation-border cursor-pointer text-center' : ''"
+                             [ngClass]="doctor.consultationTiming.video ? 'consultation-border cursor-pointer ' : 'disabled'"
                               (click)="openDialog('video', i)">
                               <div class="center consultation-icon">
                                 <mat-icon>videocam</mat-icon>
                               </div>
                               <div>
                                 <label class="image-data" *ngIf="doctor.consultationTiming.video">
-                                  {{doctor.consultationTiming.video.from | convertFrom24To12Format}} - 
-                                  {{doctor.consultationTiming.video.to | convertFrom24To12Format}}
+                                  {{doctor.consultationTiming.video.from }} - 
+                                  {{doctor.consultationTiming.video.to }}
                                 </label>
                                 <label class="image-data" *ngIf="!doctor.consultationTiming.video">
                                   Not available
@@ -490,14 +502,14 @@
                           </div>
                           <div class="col-3 cursor-pointer  text-center" style="padding : 0">
                             <div  class="padding-top"
-                             [ngClass]="doctor.consultationTiming.tele ? 'consultation-border cursor-pointer text-center' : ''"
+                             [ngClass]="doctor.consultationTiming.tele ? 'consultation-border cursor-pointer ' : 'disabled'"
                               (click)="openDialog('tele', i)">
                               <div class="center consultation-icon">
                                 <mat-icon>perm_phone_msg</mat-icon>
                               </div>
                               <label class="image-data" *ngIf="doctor.consultationTiming.tele">
-                                {{doctor.consultationTiming.tele.from | convertFrom24To12Format}} - 
-                                {{doctor.consultationTiming.tele.to | convertFrom24To12Format}}
+                                {{doctor.consultationTiming.tele.from }} - 
+                                {{doctor.consultationTiming.tele.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.tele">
                                 Not available
@@ -506,14 +518,14 @@
                           </div>
                           <div class="col-3 cursor-pointer text-center" style="padding : 0">
                             <div  class="padding-top"
-                              [ngClass]="doctor.consultationTiming.physical ? 'consultation-border cursor-pointer text-center' : ''"
+                              [ngClass]="doctor.consultationTiming.physical ? 'consultation-border cursor-pointer ' : 'disabled'"
                               (click)="openDialog('physical', i)">
                               <div class="center consultation-icon">
                                 <mat-icon>phone_android</mat-icon>
                               </div>
-                              <label class="image-data" *ngIf="!doctor.consultationTiming.physical">
-                                {{doctor.consultationTiming.physical.from | convertFrom24To12Format}} - 
-                                {{doctor.consultationTiming.physical.to | convertFrom24To12Format}}
+                              <label class="image-data" *ngIf="doctor.consultationTiming.physical">
+                                {{doctor.consultationTiming.physical.from }} - 
+                                {{doctor.consultationTiming.physical.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.physical">
                                 Not available
@@ -522,14 +534,14 @@
                           </div>
                           <div class="col-3  cursor-pointer text-center" style="padding : 0">
                             <div class="padding-top"
-                             [ngClass]="doctor.consultationTiming.chat ? 'consultation-border cursor-pointer text-center' : ''"
+                             [ngClass]="doctor.consultationTiming.chat ? 'consultation-border cursor-pointer ' : 'disabled'"
                               (click)="openDialog('chat', i)">
                               <div class="center consultation-icon">
                                 <mat-icon>person_add</mat-icon>
                               </div>
                               <label class="image-data" *ngIf="doctor.consultationTiming.chat">
-                                {{doctor.consultationTiming.chat.from | convertFrom24To12Format}} - 
-                                {{doctor.consultationTiming.chat.to | convertFrom24To12Format}}
+                                {{doctor.consultationTiming.chat.from }} - 
+                                {{doctor.consultationTiming.chat.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.chat">
                                 Not available
@@ -623,7 +635,7 @@
                 <div class="row ">
                   <div class="col-md-4 col-lg-3">
                     <div class="row feedback-horizontal">
-                      <i class="material-icons" [ngClass]="ind <= rating ? 'active-feedback' : 'passive-feedback' " 
+                      <i class="material-icons" [ngClass]="ind < doctor.rating ? 'active-feedback' : 'passive-feedback' " 
                       *ngFor="let star of ratingArray let ind = index">grade</i> 
                     </div>
                     <div class="row">
@@ -638,7 +650,7 @@
                   <div class="col-md-4">
                     <div class="row mt-0">
                       <div class="col-md-12 doctor-name mt-0">
-                        <h4 class=" m-0 ">{{doctor.name }}</h4>
+                        <h4 class=" m-0 ">{{doctor.name | titlecase}}</h4>
                       </div>
                     </div>
                     <div class="row mt-4">
@@ -702,14 +714,15 @@
                       <div class="col-12">
                         <div class="row book-appointment-row">
                           <div class="col-3 bookconsultation-div" (click)="openDialog('video', i)">
-                            <div class="padding-top"
-                             [ngClass]="doctor.consultationTiming.video ? 'consultation-border cursor-pointer text-center' : ''">
+                            <div class="padding-top text-center"
+                             [ngClass]="doctor.consultationTiming.video ? 'consultation-border 
+                                cursor-pointer text-center' : 'disabled'">
                               <div class="center consultation-icon">
                                 <mat-icon>videocam</mat-icon>
                               </div>
                               <label class="image-data" *ngIf="doctor.consultationTiming.video">
-                                {{doctor.consultationTiming.video.from | convertFrom24To12Format }} -
-                                 {{doctor.consultationTiming.video.to | convertFrom24To12Format}}
+                                {{doctor.consultationTiming.video.from  }} -
+                                 {{doctor.consultationTiming.video.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.video">
                                 Not available
@@ -717,14 +730,14 @@
                             </div>
                           </div>
                           <div class="col-3 bookconsultation-div" (click)="openDialog('tele', i)">
-                            <div  class="padding-top"
-                             [ngClass]="doctor.consultationTiming.tele ? 'consultation-border cursor-pointer text-center' : ''">
+                            <div  class="padding-top text-center"
+                             [ngClass]="doctor.consultationTiming.tele ? 'consultation-border cursor-pointer text-center' : 'disabled'">
                               <div class="center consultation-icon">
                                 <mat-icon>perm_phone_msg</mat-icon>
                               </div>
                               <label class="image-data" *ngIf="doctor.consultationTiming.tele">
-                                {{doctor.consultationTiming.tele.from | convertFrom24To12Format}} - 
-                                {{doctor.consultationTiming.tele.to | convertFrom24To12Format}}
+                                {{doctor.consultationTiming.tele.from }} - 
+                                {{doctor.consultationTiming.tele.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.tele">
                                 Not available
@@ -732,14 +745,14 @@
                             </div>
                           </div>
                           <div class="col-3 bookconsultation-div" (click)="openDialog('physical', i)">
-                            <div class="padding-top"
-                             [ngClass]="doctor.consultationTiming.physical ? 'consultation-border cursor-pointer text-center' : ''">
+                            <div class="padding-top text-center"
+                             [ngClass]="doctor.consultationTiming.physical ? 'consultation-border cursor-pointer ' : 'disabled'">
                               <div class="center consultation-icon">
                                 <mat-icon>phone_android</mat-icon>
                               </div>
                               <label class="image-data" *ngIf="doctor.consultationTiming.physical">
-                                {{doctor.consultationTiming.physical.from | convertFrom24To12Format}} - 
-                                {{doctor.consultationTiming.physical.to | convertFrom24To12Format}}
+                                {{doctor.consultationTiming.physical.from }} - 
+                                {{doctor.consultationTiming.physical.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.physical">
                                 Not available
@@ -747,14 +760,14 @@
                             </div>
                           </div>
                           <div class="col-3 bookconsultation-div" (click)="openDialog('chat', i)">
-                            <div  class="padding-top"
-                             [ngClass]="doctor.consultationTiming.chat ? 'consultation-border cursor-pointer text-center' : ''">
+                            <div  class="padding-top text-center"
+                             [ngClass]="doctor.consultationTiming.chat ? 'consultation-border cursor-pointer text-center' : 'disabled'">
                               <div class="center consultation-icon">
                                 <mat-icon>person_add</mat-icon>
                               </div>
-                              <label class="image-data" *ngIf="!doctor.consultationTiming.chat">
-                                {{doctor.consultationTiming.chat.from | convertFrom24To12Format}} -
-                                {{doctor.consultationTiming.chat.to | convertFrom24To12Format}}
+                              <label class="image-data" *ngIf="doctor.consultationTiming.chat">
+                                {{doctor.consultationTiming.chat.from }} -
+                                {{doctor.consultationTiming.chat.to }}
                               </label>
                               <label class="image-data" *ngIf="!doctor.consultationTiming.chat">
                                 Not available

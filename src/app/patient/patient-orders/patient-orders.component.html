@@ -12,6 +12,7 @@
           </div>
           <div class="card-body">
             <div class="">
+              <!--
               <table class="table table-striped ">
                 <thead>
                   <tr>
@@ -28,9 +29,13 @@
                     <td class=" "> {{test.orderNumber}}
                     </td>
                     <td class="">
-
-                      <div *ngFor="let order of test.orderDetails">
-                        {{order.testName }}
+                      <div >
+                        <ul>
+                          <li *ngFor="let order of test.orderDetails">
+                            {{order.testName }}
+                          </li>
+                        </ul>
+                        
                       </div>
 
                     </td>
@@ -42,11 +47,15 @@
                       </ul>
                     </td>
                     <td class="">
-                      <div *ngFor="let order of test.orderDetails">
-                        <span *ngIf = "order.forUser">Me, </span>
-                        <span *ngFor="let name of order.memberName">
-                          {{name | titlecase}},
-                        </span>
+                      <div>
+                        <ul>
+                          <li *ngFor="let order of test.orderDetails">
+                            <span *ngIf = "order.forUser">Me, </span>
+                            <span *ngFor="let name of order.memberName">
+                              {{name | titlecase}},
+                            </span>
+                          </li>
+                        </ul>
                       </div>
                     </td>
                     
@@ -55,9 +64,8 @@
                   </tr>
                 </tbody>
               </table>
-
-              <!--
-              <table mat-table [dataSource]="bloodTestdataSource" class="mat-elevation-z8">
+              -->
+              <table mat-table [dataSource]="bloodTestdataSource" >
 
                
                 <ng-container matColumnDef="orderNumber">
@@ -65,29 +73,60 @@
                   <td mat-cell *matCellDef="let element"> {{element.orderNumber}} </td>
                 </ng-container>
 
-               
                 <ng-container matColumnDef='testname'>
                   <th mat-header-cell *matHeaderCellDef> testname </th>
-                  <td mat-cell *matCellDef="let element"> </td>
+                  <td mat-cell *matCellDef="let element"> 
+                    <div >
+                        <ul>
+                          <li *ngFor="let order of element.orderDetails">
+                            {{order.testName }}
+                          </li>
+                        </ul>
+                        
+                      </div>
+                  </td>
                 </ng-container>
 
+                <ng-container matColumnDef="testType">
+                  <th mat-header-cell *matHeaderCellDef> Type </th>
+                  <td mat-cell *matCellDef="let element"> 
+                  <div>  
+                   
+                      <li *ngFor="let order of element.orderDetails">
+                        {{order.type  }}
+                      </li>
+                    
+                    </div>
+                  </td>
+                </ng-container>
                
-                <ng-container matColumnDef="totalamountt">
-                  <th mat-header-cell *matHeaderCellDef> Weight </th>
-                  <td mat-cell *matCellDef="let element"> {{element.totalamount}} </td>
+                <ng-container matColumnDef="members">
+                  <th mat-header-cell *matHeaderCellDef> Test For </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <div>
+                      <li *ngFor="let order of element.orderDetails">
+                        <span *ngIf = "order.forUser">Me, </span>
+                        <span *ngFor="let name of order.memberName">
+                          {{name | titlecase}},
+                        </span>
+                      </li>
+                    
+                    </div>
+                  </td>
                 </ng-container>
 
-                  <ng-container matColumnDef="symbol">
-                  <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                <ng-container matColumnDef="totalamount">
+                  <th mat-header-cell *matHeaderCellDef> Amount </th>
+                  <td mat-cell *matCellDef="let element"> Rs. {{element.totalamount}} </td>
                 </ng-container>
+
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 
               </table>
-              <mat-paginator #bloodpaginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-              -->
+              <mat-paginator #bloodpaginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+             
             </div>
           </div>
         </div>

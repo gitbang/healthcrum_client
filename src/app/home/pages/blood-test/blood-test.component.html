@@ -11,7 +11,7 @@
             <div class="input-group no-border city">
               <input type="text" placeholder="city" style="color : white"
                 matInput [formControl]="myControl" [matAutocomplete]="autoCity">
-              <mat-autocomplete #autoCity="matAutocomplete">
+              <mat-autocomplete #autoCity="matAutocomplete" (optionSelected)="areaFilter($event)">
                 <mat-option *ngFor="let option of filteredCities | async" [value]="option">
                   {{option}}
                 </mat-option>
@@ -83,7 +83,7 @@
                 </mat-autocomplete>
              
             </div>
-            <mat-icon matSuffix style="align-self: center; cursor : pointer" (click)="fetchbloodtest()">search</mat-icon>
+            <mat-icon matSuffix style="align-self: center; cursor : pointer" (click)="searchTest()">search</mat-icon>
           </div>
         </div>
       </div>
@@ -161,11 +161,18 @@
                 <ul class="navbar-nav mr-auto">
                   
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Filter by price
+                    <a  *ngIf="!priceShow"
+                    class="nav-link dropdown-toggle before-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Price Filter
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Action</a>
+                    <a  *ngIf="priceShow"
+                    class="nav-link dropdown-toggle after-filter" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{priceDisplay}}
+                    </a>
+                    <div class="dropdown-menu filter-checkbox" aria-labelledby="navbarDropdown">
+                      <ng5-slider [(value)]="value" 
+                        [(highValue)]="highValue" (userChange)="priceFilter()" (userChangeEnd)="priceFilterEnd()"
+                        [options]="priceOption"></ng5-slider>
                     </div>
                   </li>
 
@@ -173,7 +180,9 @@
                     <a *ngIf="sorting == null"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Sort by price
                     </a>
-                    <a *ngIf="sorting != null"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a *ngIf="sorting != null"  class="nav-link dropdown-toggle after-filter" 
+                    href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" 
+                    aria-expanded="false">
                       {{ascending ? 'Low to high' : 'High to low'}}
                     </a>
                     <div class="dropdown-menu remove-margin" aria-labelledby="navbarDropdown">
@@ -186,7 +195,9 @@
                     <a *ngIf="inFilters.length == 0" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Filters
                     </a>
-                    <a *ngIf="inFilters.length != 0" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a *ngIf="inFilters.length != 0" class="nav-link dropdown-toggle after-filter" 
+                      href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
                       {{inFilters[0]}} <span *ngIf="inFilters.length > 1">+ {{inFilters.length - 1}}</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
