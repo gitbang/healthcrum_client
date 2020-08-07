@@ -125,10 +125,16 @@ export class BloodTestComponent implements OnInit {
   }
 
   addToSearchCart(){
-    //console.log("add to search cart complete",this.myCartComplete)
+    console.log("add to search cart complete",this.myCartComplete)
+    console.log("shown result : ", this.shownresultarray)
     this.searchcart = []
     this.myCartComplete.forEach(test=>{
-      this.searchcart.push(test.name)
+      for(let i = 0; i < this.shownresultarray.length; i++) {
+        if(this.shownresultarray[i].name == test.name) {
+          this.searchcart.push(test.name)
+          break;
+        }
+      }
     })
     //console.log("search cart0 ", this.searchcart)
   }
@@ -424,8 +430,6 @@ export class BloodTestComponent implements OnInit {
       this.city = res.city;
       this.search_city = this.city;
       this.myControl.setValue(this.city);
-
-     // this.fetchbloodtest();  // fetch blood test according to city
       this.applyFilters()
     });
   }
@@ -492,7 +496,7 @@ export class BloodTestComponent implements OnInit {
           add = {
             _id         : pack._id,
             name        : pack.name,
-            labLogo     : pack.lab.logo,
+            labLogo     :(pack.lab.logo) ? this.service.completeUrl(pack.lab.logo) : "",
             parameters  : pack.individualTests.length,
             marketprice : pack.mrp,
             offerprice  : pack.offerPrice,
@@ -514,8 +518,9 @@ export class BloodTestComponent implements OnInit {
             additional_Info : pack.additional_Info,
             relatedDiseases : pack.relatedDiseases
           }
+          this.shownresultarray.push(add)
         })
-        this.shownresultarray.push(add)
+        
         this.packageTest = list
       }
       if(result.SingleTests.length > 0) {   
@@ -529,7 +534,7 @@ export class BloodTestComponent implements OnInit {
           add = {
             _id         : pack._id,
             name        : pack.name,
-            labLogo     : pack.lab.logo,
+            labLogo     : (pack.lab.logo) ? this.service.completeUrl(pack.lab.logo) : "",
             parameters  : 1,
             marketprice : pack.mrp,
             offerprice  : pack.offerPrice,
@@ -551,8 +556,9 @@ export class BloodTestComponent implements OnInit {
             additional_Info : pack.additional_Info,
             relatedDiseases : pack.relatedDiseases
           }
+          this.shownresultarray.push(add)
         })
-        this.shownresultarray.push(add)
+        
         this.singleTest = list
       } 
       if(result.ProfileTests.length > 0) {
@@ -565,7 +571,7 @@ export class BloodTestComponent implements OnInit {
           add = {
             _id : pack._id,
             name : pack.name,
-            labLogo : pack.lab.logo,
+            labLogo : (pack.lab.logo) ? this.service.completeUrl(pack.lab.logo) : "",
             parameters : pack.individualTests.length,
             marketprice : pack.mrp,
             offerprice : pack.offerPrice,
@@ -587,11 +593,13 @@ export class BloodTestComponent implements OnInit {
             additional_Info : pack.additional_Info,
             relatedDiseases : pack.relatedDiseases
           }
+          this.shownresultarray.push(add)
         })
-        this.shownresultarray.push(add)
+        
         this.profileTest = list
       }
     this.afterFetch();
+    this.addToSearchCart();
   }
 
   resultFromApi : any
@@ -763,10 +771,9 @@ export class BloodTestComponent implements OnInit {
   }
 
   areaFilter(event){
-    console.log(event)
-    console.log("area reached")
     this.filterToSend.location.city = event.option.value.toLowerCase();
     this.filterToSend.location.area = event.option.value.toLowerCase();
+    this.applyFilters();
   }
 
   filterChanges(event, toapply){
@@ -806,14 +813,16 @@ export class BloodTestComponent implements OnInit {
   applyFilters(){
     this.filterToSend.location.area = this.myControl.value.toLowerCase();
     this.filterToSend.location.city = this.myControl.value.toLowerCase();
+    this.shownresultarray = []
     console.log("final filters are : ", this.filterToSend)
     this.service.bloodTestApplyFilters(this.filterToSend).subscribe((response)=>{
       console.log("filter search" ,response)
       if(response.success){
-        this.datafound = true;
+        this.datafound = true;  
         this.insertFetchedData(response)
       } else {
-        this.datafound = false
+        this.datafound = false;
+        this.addToSearchCart()
         console.log("no data found")
       }
     })

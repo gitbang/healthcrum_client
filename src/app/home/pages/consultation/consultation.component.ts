@@ -476,7 +476,8 @@ export class ConsultationComponent implements OnInit {
     }
   }
   consFilterLength : number = 0;
-  consultationToshow : string 
+  consultationToshow : string ;
+  
   getConsultation(event,type : string){
     console.log(event)
     if(event.checked){

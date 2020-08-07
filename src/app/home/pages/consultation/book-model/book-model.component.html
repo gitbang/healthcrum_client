@@ -35,9 +35,9 @@
                         alt="loading..."                         
                         class="center img-doctor" 
                       >
-                      <div class="doctor-name mt-2">
+                      <div class="doctor-name ">
                         <label class="name-label">
-                          {{data.doctor.name}}
+                          {{data.doctor.name | titlecase}}
                         </label>
                       </div>
                     </div>
@@ -59,7 +59,9 @@
                       <label style="color : black; margin-right : 4px">Select Date : </label>
                       <mat-form-field>
                         <mat-label>Select Date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="date" [min]="toDayDate ">
+                        <input matInput [matDatepicker]="picker" formControlName="date" [min]="toDayDate"
+                          (dateChange)="dateChange($event)"
+                        >
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
@@ -73,7 +75,8 @@
                               (click) = "bookslot(slot)"
                               *ngFor= "let slot of slots" 
                               class="btn ml-1 slot-button "
-                              [ngClass] = "selected(slot) ? 'btn-danger' : 'default'"  
+                              [ngClass] = "selected(slot) ? 'btn-danger' : 'default'" 
+                              [disabled] = "checkSlot(slot)" 
                             >
                               {{slot}}
                             </button>
@@ -86,9 +89,10 @@
               </div>
             </div>
           </div>
+
           <div class="row lowerpart">
             <div class="col-12 mt-4">
-              <div class="row book-consultation-dialog mt-4">
+              <div class="row book-consultation-dialog mt-4" *ngIf="!isLoggin">
                 <div class="col-md-2"></div>
                 <div class="col-md-6 col-lg-3 ">
                   <mat-form-field>
@@ -112,15 +116,18 @@
                   </button>
                 </div>
               </div>
+
+              <div class="row" *ngIf="isLoggin">
+                <div class="col-md-5"></div>
+                <div class="col-md-7">
+                  <button class="btn btn-success"  (click)="submitFirstForm(stepper)">Submit</button>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
       </div>
-      <!--
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-      -->
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
@@ -133,25 +140,6 @@
         <div class="row ">
           <div class="col-12 bg-greenMix mat-elevation-z3">
             <div class="row mt-4">
-            <!--
-              <div class="col-12 otp-main-div">
-                <div>
-                  <img
-                    src="./assets/img/consulation/dialog_box/OTP1.png"
-                    class="otp-image"
-                  >
-                </div>
-                <div class="book-consultation-dialog">
-                  <mat-form-field>
-                    <mat-label>Phone number</mat-label>
-                    <input matInput type="number">  
-                  </mat-form-field> 
-                </div>
-                <button class="btn btn-success" mat-button matStepperNext>
-                  Submit
-                </button>
-              </div>
-            -->
               <div class="col-md-4"></div>
               <div class="col-md-8">
                 <div class="row">  

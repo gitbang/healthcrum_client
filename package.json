@@ -61,7 +61,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "3.5.1",
     "jspdf": "^1.5.3",
-    "moment": "2.24.0",
+    "moment": "^2.24.0",
     "ng-circle-progress": "^1.5.1",
     "ng-zorro-antd": "^8.5.2",
     "ng2-charts": "^2.3.0",

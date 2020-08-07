@@ -245,7 +245,11 @@ export class HomeServiceService {
             .get(this.url + '/getAll/doctor-speciality', this.option)
             .pipe(retry(2), catchError(this.handleError))
   }
-  
+  consultationGetBookedSlot(userId : string): Observable<any>{
+    return this.http
+            .get(this.url + "/api/doctor/getBooked/consultation/dateTimeSlot/"+ userId, this.option)
+            .pipe(retry(2), catchError(this.handleError))
+  }
 
   //------------- Medicine ----------//
 
