@@ -627,20 +627,26 @@ export class EPrescriptionComponent implements OnInit {
     x.append('prescription_pdf', myPDF)
     this.service.eprescriptionSavePDF(this.orderId, x).subscribe((result)=>{
       console.log("after pdf save : ", result)
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      }).then((result)=>{
-        this.formFirst.reset();
-        this.formSecond2.reset();
-        this.newDoseForm.reset();
-        this.hraReasonAnswer = {};
-        this.hraReasonBox = {}
-        this.router.navigateByUrl('/doctor/appointments')
-      })
+      if(result.success){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result)=>{
+          this.formFirst.reset();
+          this.formSecond2.reset();
+          this.newDoseForm.reset();
+          this.hraReasonAnswer = {};
+          this.hraReasonBox = {}
+          this.router.navigateByUrl('/doctor/appointments')
+        })
+      } else {
+        Swal.fire({text :"try again"})
+      }
+    }),(error=>{
+      Swal.fire({text : "Something went wrong"})
     })
   }
 

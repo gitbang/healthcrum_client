@@ -23,7 +23,7 @@ export class BookModelComponent implements OnInit {
     private dialog: MatDialogRef<BookModelComponent>,
     private localService : AuthServiceLocal
   ) {
-    Date.prototype.toJSON = function(){ return moment(this).format(); }
+    //Date.prototype.toJSON = function(){ return moment(this).format(); }
     this.data = data  
     this.dialog.disableClose = true;
     console.log(this.data.doctor.consultationTimingSlots);
@@ -88,6 +88,7 @@ export class BookModelComponent implements OnInit {
   dateChange(event){
     let dateString = event.value.toJSON();
     this.currentDate = dateString.slice(0 ,10);
+    console.log("current date : ", this.currentDate)
     this.firstFormGroup.get('timeslot').patchValue('')
     this.bookedslot = ''
   }
@@ -99,7 +100,7 @@ export class BookModelComponent implements OnInit {
 
     let index = this.data2.map((element)=> {return element.date.slice(0,10)}).indexOf(this.currentDate)
 
-    console.log(index)
+    //console.log(index)
     if(index != -1) {
       let bookedSlotes = this.data2[index].bookedslotes;
       if(bookedSlotes.includes(slot)) 
@@ -108,9 +109,8 @@ export class BookModelComponent implements OnInit {
         return false
     } else 
       return false
-    
   }
-  myDate = "2020-08-10T18:30:00.000Z"
+  //myDate = "2020-08-10T18:30:00.000Z"
   bookedslot : string;
   selected(slot){
   
@@ -123,7 +123,7 @@ export class BookModelComponent implements OnInit {
   bookslot(slot){
     if(this.firstFormGroup.get('date').valid){
      
-      console.log(this.myDate)
+      
      
       this.bookedslot = slot
     } else {

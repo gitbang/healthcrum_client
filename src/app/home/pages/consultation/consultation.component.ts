@@ -124,11 +124,11 @@ export class ConsultationComponent implements OnInit {
   }
   private _filterCity(value: string): string[] {
     const filterValue = value.toLowerCase();
+    console.log("city list : ", this.cityList1)
     return this.cityList1.filter(
-      (city) => city.toLowerCase().indexOf(filterValue) === 0
-    );
+      (city) =>(city ? city.toLowerCase().indexOf(filterValue) === 0 : '' ) 
+    );  
   }
-
 
   specialistList : string[] = []
   getSpecialistList(){

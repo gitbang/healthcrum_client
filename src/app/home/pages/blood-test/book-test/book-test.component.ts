@@ -578,7 +578,7 @@ export class BookTestComponent implements OnInit {
     console.log("works");
   }
   
-  generatePDf(complete){
+  generatePDf(complete, orderId : string){
     
     const eRecipt = this.dialog.open(ERecieptComponent, {
       height : "90vh",
@@ -590,7 +590,8 @@ export class BookTestComponent implements OnInit {
         date : new Date,
         complete : complete,
         serviceProvider : "HealthCrum",
-        fromCart : this.fromCart
+        fromCart : this.fromCart,
+        orderId
       }
     })
     
@@ -603,12 +604,6 @@ export class BookTestComponent implements OnInit {
           'success'
         )
       }
-      // if the test booking is from cart the send request to clear all the cart.
-      // if(this.fromCart){
-      //   //this.aboutUser._id
-      // } else {
-
-      // }
       this.router.navigateByUrl('/blood-test')
     })
   }
@@ -649,8 +644,22 @@ export class BookTestComponent implements OnInit {
     }
     console.log("complete", complete)
 
-    setTimeout(() => {
-      this.generatePDf(complete)
-    });
+    let fd = {
+      data : JSON.stringify(complete)
+    }
+    console.log("form data", fd)
+    this.service.savePaymentDetails(fd).subscribe((result)=>{
+      console.log("response : ", result)
+      if(result.success){
+        console.log("data is saved")
+        setTimeout(() => {
+          this.generatePDf(complete, result.orderId)
+        });
+      } else {
+        Swal.fire({text : "Something went wrong"})
+      }
+    })
+
+    
   }
 }

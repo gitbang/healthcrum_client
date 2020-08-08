@@ -6,6 +6,8 @@ import { HomeServiceService } from 'app/home/home-service.service';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import {AuthServiceLocal} from '../../../../services/auth-service.service'
+import Swal from 'sweetalert2';
+import { JsonPipe } from '@angular/common';
 
 // import pdfMake from "pdfmake/build/pdfmake";
 // import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -146,7 +148,7 @@ export class CheckOutComponent implements OnInit {
     console.log("works");
   }
   
-  generatePDf(complete){
+  generatePDf(complete, orderId : string){
     this.ngZone.run(()=>{
       const dialog = this.dialog.open(ERecieptComponent, {
         height : "90vh",
@@ -157,7 +159,8 @@ export class CheckOutComponent implements OnInit {
           save : null,
           date : new Date,
           serviceProvider : this.shownresultarrays[0].docname,
-          complete : complete
+          complete : complete,
+          orderId
         }
       })
   
@@ -181,6 +184,8 @@ export class CheckOutComponent implements OnInit {
     console.log("shown result array",this.shownresultarrays)
 
     response.amount = response.amount / 100;
+    response.amount_due = response.amount_due / 100;
+    response.amount_paid = response.amount_paid / 100;
     let complete = {};
     let orderDetail = []
     for(var i = 0; i < this.shownresultarrays.length; i++) {
@@ -206,7 +211,20 @@ export class CheckOutComponent implements OnInit {
       type : "consultation"
     }
     console.log("complete", complete)
-
-    this.generatePDf(complete)
+    // let fd;
+    // fd.append("data", JSON.stringify(complete));
+    let fd = {
+      data : JSON.stringify(complete)
+    }
+    console.log("form data : ", fd)
+    this.service.savePaymentDetails(fd).subscribe((result)=>{
+      console.log("response : ", result)
+      if(result.success){
+        console.log("data is saved")
+        this.generatePDf(complete, result.orderId)
+      } else {
+        Swal.fire({text : "Something went wrong"})
+      }
+    })
   }
 }

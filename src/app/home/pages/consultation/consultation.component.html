@@ -228,7 +228,7 @@
   </div>
    -->
   <div class="row filter-div mt-4">
-    <nav class="navbar navbar-expand navbar-light bg-light">  
+    <nav class="navbar navbar-expand navbar-light bg-light" style="margin : 0">  
 
       <div id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -629,7 +629,7 @@
         </div>
 
         <div *ngIf="horizontal">
-          <div class="row horizontal-port" *ngFor="let doctor of doctors; let i = index"> 
+          <div class="row horizontal-port mt-2" *ngFor="let doctor of doctors; let i = index"> 
             <div class="col-12" style="padding : 0">
               <mat-card  class=" doctor-card">  
                 <div class="row ">
@@ -832,7 +832,7 @@
       </div>
     </div>
     <div class="col-md-1"></div>
-    <div class="not-found col-md-10" style="margin-top : 0" *ngIf="!containDoctor">
+    <div class="not-found col-md-10 mt-2" style="margin-top : 0" *ngIf="!containDoctor">
       <h3 style="font-size : large">Thanks for showing interest in HealthCrum. Currently we do not have any specialist at your location and we 
       promise to reach at every corner of this country as soon as possible.
       </h3>

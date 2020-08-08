@@ -10,7 +10,7 @@ import { retry, catchError } from 'rxjs/operators';
 export class HomeServiceService {
 
 
-     url : string = 'http://localhost:3000';
+  url : string = 'http://localhost:3000';
   //url: String = "https://api.sftservices.com";
  
   headers = new HttpHeaders({
@@ -148,9 +148,9 @@ export class HomeServiceService {
               .pipe(retry(2), catchError(this.handleError))
   }
 
-  savePaymentPdf(data) : Observable<any>{
+  saveBilPaymentPdf(orderId : string, data) : Observable<any>{
     return this.http
-              .post(this.url +"/payment/getPaymentStatus", data)
+              .post(this.url +"/payment/getPaymentStatus/billPdfUpload/" + orderId, data)
               .pipe(retry(2), catchError(this.handleError))
   }
 

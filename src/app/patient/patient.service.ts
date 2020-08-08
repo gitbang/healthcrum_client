@@ -146,6 +146,7 @@ export class PatientService {
     headers = headers.set('Accept', 'application/pdf');
     return this.http.get(url, { headers: headers, responseType: 'blob' });
   }
+  
   reportFetchAll(userId : string): Observable<any>{
     return this.http
             .get(this.url + "/payment/fetch-bloodTest/user/" + userId, this.options)

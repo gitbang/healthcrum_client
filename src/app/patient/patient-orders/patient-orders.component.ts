@@ -32,7 +32,7 @@ export class PatientOrdersComponent implements OnInit {
   userId : string
   bloodTestdataSource : MatTableDataSource<bloodTest[]>
   @ViewChild('bloodpaginator', {static: true}) bloodpaginator: MatPaginator;
-  displayedColumns: string[] = [ 'orderNumber', 'testname', 'testType', 'members', 'totalamount',];
+  displayedColumns: string[] = [ 'orderNumber', 'testname', 'testType','members', 'totalamount',];
   ngOnInit() {
 
     let isLogin = this.localService.isLoggin();
@@ -110,6 +110,10 @@ export class PatientOrdersComponent implements OnInit {
     this.bloodTestdataSource.paginator = this.bloodpaginator
   }
   
+  applyFilter(value){
+    const filteValue = value.toLowerCase();
+    this.bloodTestdataSource.filter = filteValue.trim();
+  }
   bloodTests : any[];
 
 

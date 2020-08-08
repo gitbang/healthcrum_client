@@ -91,7 +91,8 @@ export class AppointmentComponent implements OnInit {
         orderId : result.data[i].orderDetail._id,
         status : result.data[i].orderDetail.Orderstatus,
         appointmentNum : result.data[i].orderDetail.appointmentNum,
-        appointmentType : result.data[i].orderDetail.orderDetails[0].type
+        appointmentType : result.data[i].orderDetail.orderDetails[0].type,
+
       }
       console.log("add is : ", add)
       if( add.status == 'pending' || add.status == undefined )
@@ -164,7 +165,7 @@ export class AppointmentComponent implements OnInit {
         this.getConsultation()
       } else {
         Swal.fire({text : "Something went wrong"})
-        this.loading = false
+        this.loading = false;
       }
     }),
     (err=>{this.loading = false})
@@ -175,7 +176,7 @@ export class AppointmentComponent implements OnInit {
     console.log(this.confirmedAppointment[index])
     this.router.navigate(['/doctor/e-prescription'], {queryParams : {
       patientId : this.confirmedAppointment[index].patientId,
-      orderId : this.confirmedAppointment[index].orderId
+      orderId : this.confirmedAppointment[index].orderId,
     }})
   } 
   //"showNotification('top','right',2)"
@@ -185,6 +186,7 @@ export class AppointmentComponent implements OnInit {
     this.patientService.appointmentFetchPDF(orderId).subscribe((result=>{
       console.log(result);
       if(result.success){
+        console.log("url is :")
         this.completeImageUrl(result.data)
       } else {
         alert("something went wrong")

@@ -23,6 +23,7 @@ export class ERecieptComponent implements OnInit {
       console.log("data in e-receipt", data)
       this.fromCart = data.fromCart;
       this.userId = data.user._id;
+      this.orderId = data.orderId;
       console.log("from cart ", this.fromCart)
   }
   
@@ -40,7 +41,7 @@ export class ERecieptComponent implements OnInit {
 
   eData = {
     name : this.data.user.name,
-    billno : this.data.razorpay_order_id,
+    billno : this.data.orderId,
     gender : this.data.user.gender,
     fshplId : this.data.razorpay_payment_id,
     requestDate : this.data.date,
@@ -57,7 +58,7 @@ export class ERecieptComponent implements OnInit {
     paymentMode : 'card',
     status : 'confirmed'
   }
-
+  orderId : string;
   pdf :  jspdf
 
   generatePDF(){
@@ -81,15 +82,13 @@ export class ERecieptComponent implements OnInit {
     
       let fd = new FormData();
 
-      console.log("complete data",this.data.complete)
+      //console.log("complete data",this.data.complete)
       fd.append("paymentDataPdf", data)
-      fd.append("data", JSON.stringify({...this.data.complete}));
-
-      this.service.savePaymentDetails(fd).subscribe((result)=>{
-        console.log("response is", result)
-        if(result.success){
-          this.showPdf = true
-          console.log("data is saved")
+     
+      this.service.saveBilPaymentPdf(this.orderId, fd).subscribe((result)=>{
+        console.log(result);
+       if(result.success){
+          console.log("PDF is saved")
           if(this.fromCart) {
             if(this.eData.type == 'bloodTest') {
               this.service.bloodTestClearCart(this.userId, {type : "bloodTest"}).subscribe((result)=>{
@@ -100,8 +99,8 @@ export class ERecieptComponent implements OnInit {
               })
             }
             this.service.addCompleteDetailsToCart([])
-              this.service.changeMessage([])
-              this.service.deleteCartFromLocalStorage()
+            this.service.changeMessage([])
+            this.service.deleteCartFromLocalStorage()
           }
         } else {
           alert("Something went wrong")
