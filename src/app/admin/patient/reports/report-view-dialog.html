@@ -1,0 +1,274 @@
+<h1 mat-dialog-title cdkFocusInitial>Patient Test Details</h1>
+<hr>
+<div mat-dialog-content>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">User Detail</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Name</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.userDetail.name}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Gender</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.userDetail.gender}}</div>
+                                </td>
+                            </tr>
+                          
+                            <tr>
+                                <td>
+                                    <div class="td_head">Employee Id</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.userDetail.employeeId}}</div>
+                                </td>
+                            </tr>
+                         
+                            <tr>
+                                <td>
+                                    <div class="td_head">Created At</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.userDetail.createdAt | date : 'fullDate'}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Updated At</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.userDetail.updatedAt | date : 'fullDate'}}</div>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">Order Detail</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="td_head">Amount Details</div>
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">Amount</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.amountDetails.amout}}</div>
+                                                </td>
+                                            </tr>
+                                           
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">Amount Paid</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.amountDetails.amout_paid}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">Currency</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.amountDetails.currency}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Order Status</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.orderDetail.Orderstatus}}</div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <div class="td_head">orderBy</div>
+                                    <table style="width:100%">
+                                        <tbody>
+                                           
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">Role</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.orderBy.role}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">Email</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.orderBy.email}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">Phone</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.orderBy.phone}}</div>
+                                                </td>
+                                            </tr>
+                                          
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">healthcrumId</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{data.orderDetail.orderBy.healthcrumId}}</div>
+                                                </td>
+                                            </tr>
+                                          
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Razorpay Payment Id</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.orderDetail.razorpay_payment_id}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Razorpay Order Id</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.orderDetail.razorpay_order_id}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Razorpay Signature</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">
+                                        {{data.orderDetail.razorpay_signature}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">type</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.orderDetail.type}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="td_head">Order Details</div>
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                               
+                                                <td>
+                                                    <div class="td_head">For User</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_head">For Members</div>
+                                                </td>
+                                              
+                                                <td>
+                                                    <div class="td_head">Product Id</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_head">Type</div>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr *ngFor="let member of data.orderDetail.orderDetails">
+                                             
+                                                <td class="td_row_even">
+                                                    <div class="td_row_even">{{member.forUser}}</div>
+                                                </td>
+                                                <td class="td_row_even">
+                                                    <div class="td_row_even">{{member.forMembers}}</div>
+                                                </td>
+                                                
+                                                <td class="td_row_even">
+                                                    <div class="td_row_even">{{member.productId}}</div>
+                                                </td>
+                                                <td class="td_row_even">
+                                                    <div class="td_row_even">{{member.type}}</div>
+                                                </td>
+                                               
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Bill Pdf File</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">
+                                        <a href="{{ data.orderDetail.bil_pdf_file }}.pdf" target="_blank">
+                                        <i class="material-icons">cloud_download</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="td_head">Created At</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.orderDetail.created_at | date : 'fullDate' }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Entity</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.orderDetail.order }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">Receipt</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.orderDetail.receipt }}</div>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Close</button>
+  </div>

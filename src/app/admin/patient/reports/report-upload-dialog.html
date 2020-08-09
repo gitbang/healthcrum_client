@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Upload Lab Report.</h1>
+<hr>
+<div mat-dialog-content>
+    <nz-spin [nzSpinning]="loadingUnapproved" >
+    <div class="row">
+        <div class="col-6">Name</div>
+        <div class="col-6">{{ name }}</div>
+    </div>
+    
+    <div class="row">
+        <div class="col-6">HealthcrumId</div>
+        <div class="col-6">{{ hid }}</div>
+    </div>
+    <br/>
+    <hr>
+  <p>Upload the Test Report File Here.</p>
+  <div class="col-md-12" style="position: relative;">
+    <label class="lab-contract-file-label "></label>
+    <input type="file" (change)="fileContractChange($event)"
+      class="col-md-12" style="padding: 14px 5px 5px 5px;" placeholder="eg. report_file.zip">
+  </div>
+  <!-- <mat-form-field>
+    <mat-label>Report File</mat-label>
+    <input matInput  >
+  </mat-form-field> -->
+  </nz-spin>
+  <br/>
+  <hr>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn btn-danger" (click)="onNoClick()">cancel</button>
+  <button mat-button class="btn btn-primary" (click)="uploadReport()">Upload</button>
+</div>

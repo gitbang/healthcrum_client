@@ -21,7 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./admin-layout.component.scss"]
 })
 export class AdminLayoutComponent implements OnInit {
-  BASE_URL:string = "https://api.sftservices.com";
+  BASE_URL:string = 'http://localhost:3000'; //"https://api.sftservices.com";
   facog = faHospital;
   isLoggedIn = false;
   adminId = new FormControl('',[Validators.required]);

@@ -1,0 +1,421 @@
+<h1 mat-dialog-title cdkFocusInitial>Doctor Details</h1>
+<hr>
+<div mat-dialog-content>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <img src="{{ data.userId.profile_image }}" width="200px" height="200px">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">name</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.name}}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">age</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.age }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">gender</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.gender}}</div>
+                </td>
+            </tr>
+     
+            <tr>
+                <td>
+                    <div class="td_head">created At</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.createdAt}}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">updated At</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.updatedAt}}</div>
+                </td>
+            </tr>
+    
+            <tr>
+                <td>
+                    <div class="td_head">about</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.about}}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">address</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.address }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">consultation Fees</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.consultationFees }}</div>
+                </td>
+            </tr>
+          
+            <tr>
+                <td>
+                    <div class="td_head">emergency Fees</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.emergencyFees }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">experience</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.experience }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">from Healthcrum</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.fromHealthcrum }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">rating</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.rating}}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">languages</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr *ngFor="let lang of data.languages">
+                                <td class="td_row_even">
+                                    <div class="td_row_even">{{lang}}</div>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">days</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr *ngFor="let day of data.days">
+                                <td class="td_row_even">
+                                    <div class="td_row_even">{{day}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">feedback</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.feedback}}</div>
+                </td>
+            </tr>
+     
+           
+            <tr>
+                <td>
+                    <div class="td_head">registration Number</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.registrationNumber }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">speciality</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.speciality }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">stream</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.stream }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">userId</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="td_head">method</div>
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">local</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{ data.userId.method.local}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">google</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{ data.userId.method.google}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">facebook</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{ data.userId.method.facebook}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">is Email Verified</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.isEmailVerified}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">is Phone Verified</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.isPhoneVerified}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">verified by</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.verified_by }}</div>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td>
+                                    <div class="td_head">role</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.role }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">email</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.email }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">phone</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.phone }}</div>
+                                </td>
+                            </tr>
+                            
+                       
+                            <tr>
+                                <td>
+                                    <div class="td_head">healthcrumId</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.userId.healthcrunId }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">location</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="td_head">city</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.location.city }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">state</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.location.state }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">consultation Timing</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr *ngFor="let cons of data.consultationTiming | keyvalue">
+                                <td colspan="2">
+                                    <div class="td_head">{{ cons.key }}</div>
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">from</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{cons.value.from}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="td_head">to</div>
+                                                </td>
+                                                <td>
+                                                    <div class="td_row_even">{{ cons.value.to }}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+          
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">consultation</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="td_head">emergency</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.consultation.emergency }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">video</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.consultation.video }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">tele</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.consultation.tele }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">physical</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.consultation.physical }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">chat</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{data.consultation.chat }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">pictures</div>
+                </td>
+                <td>
+                    <div class="td_row_even">image-pic</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">approvedUser</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{data.approvedUser }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">qualification</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr *ngFor="let qua of data.qualification">
+                                <td class="td_row_even">
+                                    <div class="td_row_even">{{ qua }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+  
+        </tbody>
+    </table>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Close</button>
+</div>

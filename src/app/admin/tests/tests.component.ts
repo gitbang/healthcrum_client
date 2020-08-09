@@ -33,6 +33,7 @@ export class TestsComponent implements OnInit {
   mrp: string;
   offer_price: string;
   healthcrum_price: string;
+  testAddingLoader:boolean = false;
 
   constructor(private adminService: AdminService) {}
 
@@ -62,11 +63,13 @@ export class TestsComponent implements OnInit {
 
   saveSingleTest() {
     if (this.validateForm()) {
+      this.testAddingLoader = true;
       let data = {
         name: this.test_name,
         what: this.what,
         why: this.why,
         when: this.when,
+        prescribed_range: {range_from:this.range_from, range_to: this.range_to},
         requiredSamples: this.sample_required ? this.sample : "no",
         recommended_age: this.recommended_age,
         fasting: this.fasting ? this.fasting_time : "not required",
@@ -85,6 +88,7 @@ export class TestsComponent implements OnInit {
       };
 
       this.adminService.saveSingleTest(data).subscribe(res => {
+        this.testAddingLoader = false;
         if (res.success) {
           Swal.fire({
             position: "top-end",
@@ -119,6 +123,10 @@ export class TestsComponent implements OnInit {
     }
     if (!this.why) {
       this.showError("Write why patient dp this test");
+      return false;
+    }
+    if (!this.range_from && ! this.range_to) {
+      this.showError("Provide prescribed test ranges");
       return false;
     }
     if (this.sample_required && !this.sample) {

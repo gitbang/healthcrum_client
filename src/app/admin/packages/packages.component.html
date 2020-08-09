@@ -43,6 +43,7 @@
                       <td>{{package.name}}</td>
                       <td>
                         <mat-chip-list style="justify-content: center;display: flex;">
+                          <p *ngIf="package.profileTests == []">No Profile Test</p>
                           <mat-chip *ngFor="let test of package.profileTests">
                             {{test.name}}
                           </mat-chip>
@@ -50,7 +51,8 @@
                       </td>
                       <td>
                         <mat-chip-list style="justify-content: center;display: flex;">
-                          <mat-chip *ngFor="let test of package.indivisualTests">
+                          <p *ngIf="package.individualTests == []">No Single Test</p>
+                          <mat-chip *ngFor="let test of package.individualTests">
                             {{test.name}}
                           </mat-chip>
                         </mat-chip-list>
@@ -72,14 +74,15 @@
               </div>
               <div class="tab-pane" id="add-Test">
                 <div class="container-fluid">
+                  <nz-spin [nzSpinning]="packageAddingLoader">
                   <form class="form" method="" action="">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-lg-4 col-md-6">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Package Name</label>
-                            <input type="text" id="fname" class="form-control" [(ngModel)]="test_name" name="test_name">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Package Name</mat-label>
+                            <input matInput type="text" [(ngModel)]="test_name" name="test_name" required>
+                          </mat-form-field>
                         </div>
                       </div>
 
@@ -98,28 +101,27 @@
 
                       <div class="row">
                         <div class="col-lg-4 col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Recommended Age</label>
-                            <input type="text" class="form-control" [(ngModel)]="recommended_age"
-                              name="recommended_age">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Recommended Age</mat-label>
+                            <input matInput type="text" [(ngModel)]="recommended_age" name="recommended_age" required>
+                          </mat-form-field>
                         </div>
                         <div class="col-lg-8 col-md-8">
                           <div class="row">
                             <div class="col-md-3"><label class="bmd-label-floating">Reporting Time</label></div>
                             <div class="col-md-4">
-                              <div class="form-group bmd-form-group">
-                                <input type="time" class="form-control" [(ngModel)]="reporting_from"
-                                  name="reporting_from">
-                              </div>
+                              <mat-form-field class="full-width">
+                                <mat-label>From</mat-label>
+                                <input matInput type="text" [(ngModel)]="reporting_from" name="reporting_from" required>
+                              </mat-form-field>
                             </div>
-                            <div class="col-md-1">
-                              <p>To</p>
-                            </div>
+                           
                             <div class="col-md-4">
-                              <div class="form-group bmd-form-group">
-                                <input type="time" class="form-control" [(ngModel)]="reporting_to" name="reporting_to">
-                              </div>
+                              <mat-form-field class="full-width">
+                                <mat-label>To</mat-label>
+                                <input matInput type="text" [(ngModel)]="reporting_to" name="reporting_to" required>
+                              </mat-form-field>
+                              
                             </div>
                           </div>
                         </div>
@@ -187,23 +189,25 @@
                       <hr>
                       <div class="row mt-4">
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">MRP</label>
-                            <input type="number" class="form-control" [(ngModel)]="mrp" name="mrp">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>MRP</mat-label>
+                            <input matInput type="number" [(ngModel)]="mrp" name="mrp" required>
+                          </mat-form-field>
+                      
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Offer Price</label>
-                            <input type="number" class="form-control" [(ngModel)]="offer_price" name="offer_price">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Offer Price</mat-label>
+                            <input matInput type="number" [(ngModel)]="offer_price" name="offer_price" required>
+                          </mat-form-field>
+                          
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Healthcrum Price</label>
-                            <input type="number" class="form-control" [(ngModel)]="healthcrum_price"
-                              name="healthcrum_price">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Healthcrum Price</mat-label>
+                            <input matInput type="number" [(ngModel)]="healthcrum_price" name="healthcrum_price" required>
+                          </mat-form-field>
+                         
                         </div>
                       </div>
                     </div>
@@ -211,6 +215,7 @@
                       <button class="btn btn-primary btn-round" (click)="savePackage()">Save Package</button>
                     </div>
                   </form>
+                </nz-spin>
                 </div>
               </div>
 

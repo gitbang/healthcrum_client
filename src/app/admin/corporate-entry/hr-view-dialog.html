@@ -1,0 +1,193 @@
+<h1 mat-dialog-title cdkFocusInitial>Doctor Details</h1>
+<hr>
+<div mat-dialog-content>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="td_head">hr name</div>
+                </td>
+                <td>
+                    <div class="td_row_even"> {{ data.hr_name }}                         
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">hr contact</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.hr_contact }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">hr email</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.hr_email }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">hr password</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.hr_password }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">healthcrumId</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.healthcrumId }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">hr id</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.hr_id }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="td_head">created At</div>
+                </td>
+                <td>
+                    <div class="td_row_even">{{ data.createdAt }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">corporate id</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <img src="{{ data.corporate_id.logo.thumbUrl }}" width="200" height="200"/>
+                                    <div class="td_head">logo</div>
+                                </td>
+                            </tr>
+                           
+                            <tr>
+                                <td>
+                                    <div class="td_head">name</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.corporate_id.name}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">created At</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.corporate_id.createdAt }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="td_head">branch id</div>
+                    <table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="td_head">address</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.address }}                           
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">city</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.city }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">contact</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.contact }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">email</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.email }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">end_date</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.end_date }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">branch_name</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.branch_name }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">remark</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.remark }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">start date</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.start_date }}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="td_head">state</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.state }}</div>
+                                </td>
+                            </tr>
+                           
+                            <tr>
+                                <td>
+                                    <div class="td_head">created At</div>
+                                </td>
+                                <td>
+                                    <div class="td_row_even">{{ data.branch_id.createdAt }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btn btn-warning" (click)="onNoClick()">Close</button>
+</div>

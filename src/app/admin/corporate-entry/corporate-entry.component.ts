@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, OnInit, TemplateRef, Inject } from "@angular/core";
 // import { MapLocationSelectorComponent } from "../shared/map-location-selector/map-location-selector.component";
 import { FormBuilder, FormControl } from "@angular/forms";
 // import { MatDialog } from "@angular/material";
@@ -9,6 +9,7 @@ import { UploadFile } from "ng-zorro-antd/upload";
 import { Observable, Observer } from "rxjs";
 import { AdminService } from "app/services/admin.service";
 import { NzNotificationService } from "ng-zorro-antd/notification";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
 @Component({
   selector: "app-corporate-entry",
   templateUrl: "./corporate-entry.component.html",
@@ -21,9 +22,13 @@ export class CorporateEntryComponent implements OnInit {
   departmentData:any[] = [];
   specialMembers: any[] = [];
   hrData: any[] = [];
+  hrDataLoading:boolean = false;
   dataLoading: boolean = true;
   branchDataLoading: boolean = true;
   departmentDataLoading: boolean = true;
+  registeringCorporateLoader:boolean = false;
+  registeringBranchLoader:boolean = false;
+  registeringHrLoader:boolean = false;
   notification_title: String;
   notification_desc: String;
   top_loading: boolean = false;
@@ -87,7 +92,8 @@ export class CorporateEntryComponent implements OnInit {
     private httpClient: HttpClient,
     private msg: NzMessageService,
     private adminService: AdminService,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    public dialog: MatDialog
   ) {
     adminService.stateData$.subscribe((states) => {
       this.states = states;
@@ -205,9 +211,9 @@ export class CorporateEntryComponent implements OnInit {
         url: this.logo.url,
       },
     };
-    this.top_loading = true;
+    this.registeringCorporateLoader = true;
     this.adminService.addCorporate(data).subscribe((res) => {
-      this.top_loading = false;
+      this.registeringCorporateLoader = false;
 
       if (res.success) {
         this.getAllCorporates();
@@ -225,9 +231,9 @@ export class CorporateEntryComponent implements OnInit {
   }
   addBranch(template: TemplateRef<{}>) {
     let data = this.branch.value;
-    this.top_loading = true;
+    this.registeringBranchLoader = true;
     this.adminService.addBranch(data).subscribe((res: any) => {
-      this.top_loading = false;
+      this.registeringBranchLoader = false;
       if (res.success) {
         this.showSuccess(template, "Branch added successfully !");
         this.branchData.push(res.data);
@@ -289,8 +295,9 @@ export class CorporateEntryComponent implements OnInit {
   addHr(template: TemplateRef<{}>) {
     let data = this.hr.value;
     this.top_loading = true;
-  
+    this.registeringHrLoader = true;
       this.adminService.addCorporateHR(data).subscribe((res:any)=>{
+        this.registeringHrLoader = false;
         try{
           if(res.success){
             this.showSuccess(template,"Hr Added Successfully");
@@ -306,8 +313,11 @@ export class CorporateEntryComponent implements OnInit {
   }
 
   getAllHrs(){
+    this.hrDataLoading = true;
     let data = {};
     this.adminService.getCorporateHr(data).subscribe((res:any)=>{
+      this.hrDataLoading = false;
+      console.log(res);
       if(res.success){
         this.hrData = [];
         this.hrData = res.data;
@@ -351,7 +361,6 @@ export class CorporateEntryComponent implements OnInit {
   getAllBranches() {
     this.branchDataLoading = true;
     this.adminService.getAllBranches().subscribe((res: any) => {
-      console.log(res);
       this.branchDataLoading = false;
       if (res.success) {
         this.branchData = res.data;
@@ -410,6 +419,7 @@ export class CorporateEntryComponent implements OnInit {
   getHRById(_id){
     let data = { id: _id};
     this.adminService.getHRById(data).subscribe((res:any)=>{
+      console.log(res);
       if(res.success){
         this.hr_update_activated = true;
         this.hr.get("corporate_id").setValue(res.data.corporate_id);
@@ -427,16 +437,45 @@ export class CorporateEntryComponent implements OnInit {
     });
   }
 
+  deleteCorporate(_id,template: TemplateRef<{}>){
+    this.adminService.deleteCorporateById(_id).subscribe((res:any)=>{
+      if(res.success){
+        this.showSuccess(template,"Corporate removed successfully !");
+        this.getAllCorporates();
+      }else{
+        this.showError(template,"Failed to remove Corporate");
+      }
+  })
+  }
+
+  deleteBranch(_id,template: TemplateRef<{}>){
+    this.adminService.deleteBranchById(_id).subscribe((res:any)=>{
+      if(res.success){
+        this.showSuccess(template,"Branch deleted successfully !");
+        this.getAllBranches();
+      }else{
+        this.showError(template,"Failed to delete branch");
+      }
+  })
+  }
+
+
   deleteHrById(_id,template: TemplateRef<{}>){
     this.adminService.deleteHRById(_id).subscribe((res:any)=>{
-      console.log(res);
         if(res.success){
-          this.showSuccess(template,"Hr Deleted successfully !");
+          this.showSuccess(template,"Hr deleted successfully !");
           this.getAllHrs();
         }else{
           this.showError(template,"Failed to delete HR");
         }
     })
+  }
+
+  openDialog(i){
+    this.dialog.open(HrViewDialog, {
+      minWidth: '80vw',
+      data: this.hrData[i]
+    });
   }
 }
 
@@ -446,4 +485,21 @@ interface marker {
   lng: number;
   label?: string;
   draggable: boolean;
+}
+
+@Component({
+  selector: 'hr-view-dialog',
+  styleUrls: ["./corporate-entry.component.scss"],
+  templateUrl: 'hr-view-dialog.html',
+})
+export class HrViewDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<HrViewDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

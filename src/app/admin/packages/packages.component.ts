@@ -60,6 +60,7 @@ export class PackagesComponent implements OnInit {
   mrp: string;
   offer_price: string;
   healthcrum_price: string;
+  packageAddingLoader:boolean = false;
 
   constructor(private adminService: AdminService) {
     this.filteredProfiles = this.profileCtrl.valueChanges.pipe(
@@ -177,6 +178,7 @@ export class PackagesComponent implements OnInit {
   getProfileTestList() {
     this.adminService.getProfileTest().subscribe((res: any) => {
       if (res.success) {
+        console.log(res);
         res.data.forEach((element) => {
           this.todo.push(element);
           this.allProfiles.push(element);
@@ -187,6 +189,7 @@ export class PackagesComponent implements OnInit {
 
   savePackage() {
     if (this.validateForm()) {
+      this.packageAddingLoader = true;
       let test_ids = [];
       let profile_ids = [];
       this.profiles.forEach((el) => {
@@ -218,6 +221,7 @@ export class PackagesComponent implements OnInit {
       };
 
       this.adminService.savePackage(data).subscribe((res) => {
+        this.packageAddingLoader = false;
         if (res.success) {
           Swal.fire({
             position: "top-end",

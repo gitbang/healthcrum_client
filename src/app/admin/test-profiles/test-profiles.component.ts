@@ -49,6 +49,7 @@ export class TestProfilesComponent implements OnInit {
   filteredTests: Observable<any[]>;
   allTests: any[] = [];
   tests: any[] = [];
+  profileAddingLoader:boolean = false;
   
   @ViewChild("testInput", null) testInput: ElementRef<HTMLInputElement>;
   @ViewChild("testAuto", null) testMatAutocomplete: MatAutocomplete;
@@ -139,6 +140,7 @@ export class TestProfilesComponent implements OnInit {
 
   saveProfileTest() {
     if (this.validateForm()) {
+      this.profileAddingLoader = true;
       let test_ids = [];
       this.done.forEach((el) => {
         test_ids.push(el._id);
@@ -167,6 +169,7 @@ export class TestProfilesComponent implements OnInit {
       };
 
       this.adminService.saveProfileTest(data).subscribe((res) => {
+        this.profileAddingLoader = false;
         if (res.success) {
           Swal.fire({
             position: "top-end",

@@ -25,7 +25,7 @@
 
                 <ul class="nav nav-tabs" data-tabs="tabs">
                   <li class="nav-item">
-                    <a mat-button class="nav-link active text-white" href="#corporate-name" data-toggle="tab">
+                    <a mat-button class="nav-link active text-white" href="#corporate-name" data-toggle="tab" (click)="getAllCorporates()">
                       <i class="material-icons">domain</i> Registred Corporates
                       <div class="ripple-container"></div>
                     </a>
@@ -70,6 +70,7 @@
           <div class="card-body">
             <div class="tab-content">
               <div class="tab-pane active" id="corporate-name">
+                <nz-spin [nzSpinning]="registeringCorporateLoader">
                 <div class="row form-top-line mt-4 pt-4">
                   <p>New Corporate Entry</p>
                   <div class="col-md-2 ml-3 mt-3" style="display: flex;justify-content: center;">
@@ -93,6 +94,7 @@
                     <button class="btn btn-warning" (click)="addCorporate(template)">Add Corporate</button>
                   </div>
                 </div>
+              </nz-spin>
                 <div class="row form-top-line mt-4 pt-4">
                   <p>Our Members</p>
                   <div class="col-12">
@@ -125,7 +127,7 @@
                               <i class="material-icons">edit</i>
                             </button>
                             <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
-                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteCorporate(data._id,template)">
                               <i class="material-icons">close</i>
                             </button>
                           </td>
@@ -139,6 +141,7 @@
                 </div>
               </div>
               <div class="tab-pane" id="corporate-branch">
+                <nz-spin [nzSpinning]="registeringBranchLoader">
                 <form class="form container" [formGroup]="branch">
 
                   <div class="row form-top-line my-4 py-4">
@@ -238,6 +241,7 @@
                     </div>
                   </div>
                 </form>
+              </nz-spin>
                 <div class="row form-top-line mt-4 pt-4">
                   <p>Registered Branches</p>
                   <div class="col-md-3">
@@ -260,13 +264,13 @@
                           <th>Contact</th>
                           <th>State</th>
                           <th>Registered On</th>
-                          <th>Member Type</th>
+                          <!-- <th>Member Type</th> -->
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let data of branchTable.data" class="editable-row">
-                          <td> {{ data.corporate_id.name}}</td>
+                          <td> {{ data.corporate_id ? data.corporate_id.name : "Not Available"}}</td>
                           <td>
                             {{ data.branch_name }}
                           </td>
@@ -282,9 +286,9 @@
                           <td>
                             {{data.createdAt}}
                           </td>
-                          <td>
+                          <!-- <td>
                             Non-prime
-                          </td>
+                          </td> -->
 
 
                           <td class="td-actions text-right">
@@ -293,7 +297,7 @@
                               <i class="material-icons">edit</i>
                             </button>
                             <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
-                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteBranch(data._id,template)">
                               <i class="material-icons">close</i>
                             </button>
                           </td>
@@ -402,7 +406,7 @@
                               <i class="material-icons">edit</i>
                             </button>
                             <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
-                              nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data._id)">
+                              nzPopconfirmTitle="Sure to delete?">
                               <i class="material-icons">close</i>
                             </button>
                           </td>
@@ -646,6 +650,7 @@
                 </div>
               </div>
               <div class="tab-pane" id="hr-management">
+                <nz-spin [nzSpinning]="registeringHrLoader" >
                 <form class="form container-fluid" [formGroup]="hr">
 
                   <div class="row form-top-line my-4 py-4">
@@ -726,11 +731,12 @@
                       </div>
                     </div>
                   </div>
-                </form> 
+                </form>
+              </nz-spin> 
                 <div class="row form-top-line mt-4 pt-4">
                   <p>Registered HR's</p>
                   <div class="col-12">
-                    <nz-table class="mt-3" #hrsTable nzBordered [nzData]="hrData" [nzLoading]="dataLoading">
+                    <nz-table class="mt-3" #hrsTable nzBordered [nzData]="hrData" [nzLoading]="hrDataLoading">
                       <thead>
                         <tr>
                           <th>HR Name</th>
@@ -744,13 +750,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let data of hrsTable.data" class="editable-row">
+                        <tr *ngFor="let data of hrsTable.data;index as i" class="editable-row">
                           <td> {{ data.hr_name}}</td>
                           <td>
-                            {{ data.corporate_id.name }}
+                            {{ data.corporate_id ? data.corporate_id.name : "Not Available"}}
                           </td>
-                          <td>
-                            {{ data.branch_id.branch_name }}
+                          <td> {{ data.branch_id ? data.branch_id.name : "Not Available"}}
                           </td>
                           <td>
                             {{data.hr_email}}
@@ -765,11 +770,18 @@
                             {{data.createdAt | date : 'fullDate'}}
                           </td>
                           <td class="td-actions text-right">
-                            <button mat-raised-button type="button" matTooltip="Edit Task"
-                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="setHrUpdate(data._id)">
+                            <button mat-raised-button type="button" matTooltip="Hr Detail"
+                                  [matTooltipPosition]="'above'" (click)="openDialog(i)"
+                                  class="btn btn-info btn-link btn-just-icon">
+                                  <i class="material-icons">visibility</i>
+                                </button>
+                                &nbsp;
+                            <button mat-raised-button type="button" matTooltip="Edit Hr Profile"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-just-icon" (click)="setHrUpdate(data._id)">
                               <i class="material-icons">edit</i>
                             </button>
-                            <button type="button" class="btn btn-danger btn-link btn-sm btn-just-icon" nz-popconfirm
+                            &nbsp;
+                            <button type="button" class="btn btn-danger btn-link btn-just-icon" nz-popconfirm
                               nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteHrById(data._id,template)">
                               <i class="material-icons">close</i>
                             </button>

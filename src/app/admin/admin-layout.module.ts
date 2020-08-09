@@ -9,7 +9,7 @@ import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { HospitalsComponent } from "./hospitals/hospitals.component";
 import { LabsComponent } from "./labs/labs.component";
 import { TableListComponent } from "./table-list/table-list.component";
-import { DoctorsComponent } from "./doctors/doctors.component";
+import { DoctorsComponent,DoctorViewDialog } from "./doctors/doctors.component";
 import { PackagesComponent } from "./packages/packages.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TestsComponent } from "./tests/tests.component";
@@ -47,7 +47,7 @@ import {
 import { AdminLayoutComponent } from "./admin-layout.component";
 import { MapLocationSelectorComponent } from "./shared/map-location-selector/map-location-selector.component";
 import { AgmCoreModule } from "@agm/core";
-import { CorporateEntryComponent } from "./corporate-entry/corporate-entry.component";
+import { CorporateEntryComponent,HrViewDialog } from "./corporate-entry/corporate-entry.component";
 import { NzUploadModule } from "ng-zorro-antd/upload";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { NzModalModule } from "ng-zorro-antd/modal";
@@ -90,6 +90,8 @@ import { EmployeesTempComponent } from "./employees-temp/employees-temp.componen
 import { ChartsModule } from "ng2-charts";
 import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 import { EmployessComponent } from './employess/employess.component';
+import { AppointmentsComponent,AppointmentViewDialog } from './patient/appointments/appointments.component';
+import { ReportsComponent,ReportUploadDialog,ReportViewDialog } from './patient/reports/reports.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -181,10 +183,17 @@ import { EmployessComponent } from './employess/employess.component';
     FeedbacksComponent,
     EmployeesTempComponent,
     EmployessComponent,
+    AppointmentsComponent,
+    ReportsComponent,
+    ReportUploadDialog,
+    ReportViewDialog,
+    AppointmentViewDialog,
+    DoctorViewDialog,
+    HrViewDialog
   ],
   exports: [RouterModule],
   bootstrap: [AdminLayoutComponent],
-  entryComponents: [MapLocationSelectorComponent],
+  entryComponents: [MapLocationSelectorComponent,ReportUploadDialog,ReportViewDialog,AppointmentViewDialog,DoctorViewDialog,HrViewDialog],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

@@ -19,6 +19,8 @@ import { MedecinesInventryComponent } from "./medecines-inventry/medecines-inven
 import { FeedbacksComponent } from "./feedbacks/feedbacks.component";
 import { EmployeesTempComponent } from "./employees-temp/employees-temp.component";
 import { EmployessComponent } from './employess/employess.component';
+import { AppointmentsComponent } from './patient/appointments/appointments.component';
+import { ReportsComponent } from './patient/reports/reports.component';
 export const AdminLayoutRoutes: Routes = [
   { path: "", component: DashboardComponent },
   {
@@ -45,4 +47,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "feedbacks", component: FeedbacksComponent },
   { path: "employees-temp", component: EmployeesTempComponent },
   { path: "employees", component: EmployessComponent },
+  { path: "patient-appointment", component: AppointmentsComponent },
+  { path: "patient-reports", component: ReportsComponent },
 ];

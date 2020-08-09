@@ -55,15 +55,16 @@
               </div>
               <div class="tab-pane" id="add-Test">
                 <div class="container-fluid">
+                  <nz-spin [nzSpinning]="testAddingLoader">
                   <form class="form">
                     <div class="card-body">
                       <div class="row" style="justify-content: space-between;">
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Test Name</label>
-                            <input type="text" id="fname" class="form-control" [(ngModel)]="test_name" name="test_name"
-                              required>
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Test Name</mat-label>
+                            <input matInput id="fname" [(ngModel)]="test_name" name="test_name" required>
+                          </mat-form-field>
+                         
                         </div>
                         <div class="col-md-6">
 
@@ -71,18 +72,18 @@
                             <div class="col-4" style="display:flex;"><b style="align-self:center">Prescribed
                                 Range</b></div>
                             <div class="col-4">
-                              <div class="form-group bmd-form-group">
-                                <label class="bmd-label-floating">From</label>
-                                <input type="text" id="from" class="form-control" [(ngModel)]="range_from"
-                                  name="range_from">
-                              </div>
+                              <mat-form-field class="full-width">
+                                <mat-label>From</mat-label>
+                                <input matInput id="range_from"  [(ngModel)]="range_from"  name="range_from" required>
+                              </mat-form-field>
+                             
                             </div>
                             <div class="col-4">
-                              <div class="form-group bmd-form-group">
-                                <label class="bmd-label-floating">To</label>
-                                <input type="text" id="to" class="form-control" [(ngModel)]="range_to" name="range_to"
-                                  required>
-                              </div>
+                              <mat-form-field class="full-width">
+                                <mat-label>To</mat-label>
+                                <input matInput id="range_to"  [(ngModel)]="range_to"  name="range_to" required>
+                              </mat-form-field>
+                              
                             </div>
                           </div>
                         </div>
@@ -90,22 +91,25 @@
 
                       <div class="row">
                         <div class="col-lg-4 col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">When get tested ? </label>
-                            <textarea class="form-control" rows="4" [(ngModel)]="when" name="when"></textarea>
-                          </div>
+                         
+                          <mat-form-field class="full-width">
+                            <mat-label>When get tested ?</mat-label>
+                            <textarea matInput rows="4" [(ngModel)]="when" name="when" required></textarea>
+                          </mat-form-field>
                         </div>
                         <div class="col-lg-4 col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Why Get Tested ? </label>
-                            <textarea class="form-control" rows="4" [(ngModel)]="why" name="why"></textarea>
-                          </div>
+                         
+                          <mat-form-field class="full-width">
+                            <mat-label>Why Get Tested ?</mat-label>
+                            <textarea matInput rows="4" [(ngModel)]="why" name="why" required></textarea>
+                          </mat-form-field>
                         </div>
                         <div class="col-lg-4 col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">What will be tested ? </label>
-                            <textarea class="form-control" rows="4" [(ngModel)]="what" name="what"></textarea>
-                          </div>
+                         
+                          <mat-form-field class="full-width">
+                            <mat-label>What will be tested ?</mat-label>
+                            <textarea matInput rows="4" [(ngModel)]="what" name="what" required></textarea>
+                          </mat-form-field>
                         </div>
                       </div>
 
@@ -120,10 +124,11 @@
                           </mat-radio-group>
                         </div>
                         <div class="col-md-4" *ngIf="sample_required">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Sample Of ? </label>
-                            <textarea class="form-control" rows="2" [(ngModel)]="sample" name="sample"></textarea>
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Sample Of ?</mat-label>
+                            <textarea matInput rows="4" [(ngModel)]="sample" name="sample"></textarea>
+                          </mat-form-field>
+                         
                         </div>
                       </div>
 
@@ -140,11 +145,11 @@
                         </div>
 
                         <div *ngIf="fasting" class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Times (in Hrs.)</label>
-                            <input type="num" id="fname" class="form-control" [(ngModel)]="fasting_time"
-                              name="fasting_time">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Times (in Hrs.)</mat-label>
+                            <input matInput  [(ngModel)]="fasting_time" name="fasting_time">
+                          </mat-form-field>
+                       
                         </div>
                       </div>
 
@@ -165,29 +170,31 @@
 
                       <div class="row mt-5">
                         <div class="col-lg-4 col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Recommended Age</label>
-                            <input type="text" class="form-control" [(ngModel)]="recommended_age"
-                              name="recommended_age">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Recommended Age</mat-label>
+                            <input matInput  [(ngModel)]="recommended_age" name="recommended_age" required>
+                          </mat-form-field>
+                         
                         </div>
                         <div class="col-lg-8 col-md-8">
 
                           <div class="row">
                             <div class="col-md-3"><label class="bmd-label-floating">Reporting Time</label></div>
                             <div class="col-md-4">
-                              <div class="form-group bmd-form-group">
-                                <input type="time" class="form-control" [(ngModel)]="reporting_from"
-                                  name="reporting_from">
-                              </div>
+                              <mat-form-field class="full-width">
+                                <mat-label>From</mat-label>
+                                <input matInput type="time" [(ngModel)]="reporting_from"
+                                name="reporting_from" required>
+                              </mat-form-field>
+                              
                             </div>
-                            <div class="col-md-1">
-                              <p>To</p>
-                            </div>
+                            
                             <div class="col-md-4">
-                              <div class="form-group bmd-form-group">
-                                <input type="time" class="form-control" [(ngModel)]="reporting_to" name="reporting_to">
-                              </div>
+                              <mat-form-field class="full-width">
+                                <mat-label>To</mat-label>
+                                <input matInput type="time" [(ngModel)]="reporting_to" name="reporting_to" required>
+                              </mat-form-field>
+                             
                             </div>
                           </div>
                         </div>
@@ -195,30 +202,33 @@
                       <!-- <hr> -->
                       <div class="row mt-5">
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">MRP</label>
-                            <input type="number" class="form-control" [(ngModel)]="mrp" name="mrp">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>MRP</mat-label>
+                            <input matInput type="number" [(ngModel)]="mrp" name="mrp" required>
+                          </mat-form-field>
+                      
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Offer Price</label>
-                            <input type="number" class="form-control" [(ngModel)]="offer_price" name="offer_price">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Offer Price</mat-label>
+                            <input matInput type="number" [(ngModel)]="offer_price" name="offer_price" required>
+                          </mat-form-field>
+                          
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">Healthcrum Price</label>
-                            <input type="number" class="form-control" [(ngModel)]="healthcrum_price"
-                              name="healthcrum_price">
-                          </div>
+                          <mat-form-field class="full-width">
+                            <mat-label>Healthcrum Price</mat-label>
+                            <input matInput type="number" [(ngModel)]="healthcrum_price" name="healthcrum_price" required>
+                          </mat-form-field>
+                         
                         </div>
                       </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                      <button class="btn btn-info" (click)="saveSingleTest()">Add Test</button>
+                      <button  class="btn btn-info" (click)="saveSingleTest()">Add Test</button>
                     </div>
                   </form>
+                </nz-spin>
                 </div>
               </div>
 

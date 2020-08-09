@@ -7,8 +7,8 @@ import { catchError } from "rxjs/operators";
   providedIn: "root",
 })
 export class AdminService {
-  //  url: String = "http://localhost:3000/";
-  url: String = "https://api.sftservices.com/";
+   url: String = "http://localhost:3000/";
+  // url: String = "https://api.sftservices.com/";
   constructor(private http: HttpClient) {}
   //Broadcaster ------------------------------------
   private stateData = new BehaviorSubject<any>(null);
@@ -263,6 +263,22 @@ export class AdminService {
     );
   }
 
+  deleteCorporateById(_id){
+    return this.http
+    .delete<any>(
+      this.url + "api/corporate/corporate/delete/"+_id,
+      this.options
+    );
+  }
+
+  deleteBranchById(_id){
+    return this.http
+    .delete<any>(
+      this.url + "api/corporate/branch/delete/"+_id,
+      this.options
+    );
+  }
+
   deleteHRById(_id){
     return this.http
     .delete<any>(
@@ -361,6 +377,61 @@ export class AdminService {
       data
     );
   }
+
+  updateDoctorInformation(data,userID){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/edit-profile/"+userID,
+      data
+    );
+  }
+
+  getAllPendingConsultations(data){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/consultation/getAll/pendingByAdmin",
+      data
+    );
+  }
+
+  updatePendingConsultations(data,ord_id){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/consultation/changeStatus/"+ord_id,
+      data
+    );
+  }
+  getAllApprovedConsultations(data){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/consultation/getAll/acceptedByAdmin",
+      data
+    );
+  }
+
+  getAllPendingReports(data){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/bloodTest/getAll/pendingReport",
+      data
+    );
+  }
+
+  updatePendingReports(data,ord_id){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/bloodTest/uploadReport/"+ord_id,
+      data
+    );
+  }
+  getAllApprovedReports(data){
+    return this.http
+    .post<any>(
+      this.url + "api/admin/bloodTest/getAll/completedReport",
+      data
+    );
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
